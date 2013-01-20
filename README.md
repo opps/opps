@@ -1,4 +1,3 @@
-opps
-====
+# Opps CMS
 
-Opps CMS websites magazines and high-traffic
+Websites magazines and high-traffic
