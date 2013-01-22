@@ -26,7 +26,7 @@ except:
     long_description = opps.__description__
 
 setup(name='opps',
-    version = opps.__versi__on,
+    version = opps.__version__,
     description = opps.__description__,
     long_description = long_description,
     classifiers = classifiers,
