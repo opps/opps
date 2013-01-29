@@ -7,7 +7,12 @@ import opps
 
 
 
-install_requires = ["Django>=1.4", "south>=0.7"]
+install_requires = ["Django>=1.5",
+                    "south>=0.7",
+                    "Pillow==1.7.8",
+                    "django-filebrowser==3.5.1",
+                    "django-redis",
+                    "django-redactor"]
 
 classifiers = ["Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
