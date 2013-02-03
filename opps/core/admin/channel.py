@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
 from django.contrib import admin
 
 from opps.core.models import Channel
