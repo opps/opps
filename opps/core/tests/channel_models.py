@@ -28,3 +28,4 @@ class ChannelModelTest(TestCase):
         """
         home = Channel.objects.filter(slug=u'home').get()
         self.assertFalse(home.is_published())
+        self.assertEqual(home.is_published(), home.published)
