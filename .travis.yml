@@ -2,9 +2,7 @@ language: python
 python:
   - "2.7"
 install:
-   - "if [[ $DJANGO == '1.5.x' ]]; then pip install https://github.com/django/django/archive/stable/1.5.x.zip#egg=Django; else pip install Django==$DJANGO --use-mirrors; fi"
    - python setup.py develop
 env:
-  - DJANGO="1.5.x"
   - DJANGO="1.4.x"
 script: make test
