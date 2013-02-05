@@ -1,6 +1,6 @@
 
 .PHONY: test
-test: install
+test:
 	@echo ""
 	@echo ".. RUN TEST OPPS CMS"
 	DJANGO_SETTINGS_MODULE=dev_settings \
