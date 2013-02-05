@@ -21,3 +21,10 @@ class ChannelModelTest(TestCase):
         home = Channel.objects.filter(slug=u'home').get()
         self.assertTrue(home)
         self.assertEqual(home, self.channel)
+
+    def test_not_is_published(self):
+        """
+        is_published false on home channel
+        """
+        home = Channel.objects.filter(slug=u'home').get()
+        self.assertFalse(home.is_published())
