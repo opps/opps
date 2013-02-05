@@ -3,8 +3,8 @@ python:
   - "2.7"
 install:
    - "if [[ $DJANGO == '1.5.x' ]]; then pip install https://github.com/django/django/archive/stable/1.5.x.zip#egg=Django; else pip install Django==$DJANGO --use-mirrors; fi"
-   - pip install -r dev_requirements.txt --use-mirrors
    - python setup.py develop
 env:
   - DJANGO="1.5.x"
-script: python setup.py test
+  - DJANGO="1.4.x"
+script: make test
