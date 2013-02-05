@@ -14,7 +14,7 @@ class ChannelModelTest(TestCase):
         self.channel = Channel.objects.create(name=u'Home', slug=u'home',
                 description=u'home page', site=self.site)
 
-    def test_check_home_channel(self):
+    def test_check_create_home(self):
         """
         Check exist channel home, create on setup class
         """
