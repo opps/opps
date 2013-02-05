@@ -7,7 +7,7 @@ import opps
 
 
 
-install_requires = ["Django>=1.5",
+install_requires = ["Django<=1.5",
                     "south>=0.7",
                     "Pillow==1.7.8",
                     "django-filebrowser==3.5.1",
