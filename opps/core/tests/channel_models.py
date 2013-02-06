@@ -3,6 +3,7 @@
 
 from datetime import datetime
 
+from django.db import IntegrityError
 from django.test import TestCase
 from django.contrib.sites.models import Site
 
@@ -80,3 +81,15 @@ class ChannelModelTest(TestCase):
         self.assertTrue(subhome.is_published())
         self.assertEqual(subhome.is_published(), subhome.published)
         self.assertEqual(subhome.is_published(), subhome.is_published())
+
+    def test_duplicate_channel_name(self):
+        """
+        create 2 channel with same name
+        """
+        subchannel = Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
+                description=u'sub home page', site=self.site,
+                channel=self.channel)
+
+        self.assertRaises(IntegrityError, Channel.objects.create,
+                name=u'Sub Home', slug=u'sub-home', description=u'sub home page',
+                site=self.site, channel=self.channel)
