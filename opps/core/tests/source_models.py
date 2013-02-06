@@ -21,3 +21,11 @@ class SourceModelTest(TestCase):
         self.assertTrue(source)
         self.assertEqual(source, self.source)
 
+    def test_not_register_url(self):
+        """
+        url not registered
+        """
+        source = Source.objects.filter(slug='test-site').get()
+        self.assertFalse(self.source.url)
+        self.assertEqual(self.source.url, source.url)
+
