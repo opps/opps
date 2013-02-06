@@ -43,3 +43,11 @@ class ChannelModelTest(TestCase):
         home = Channel.objects.filter(slug=u'home').get()
         self.assertTrue(home.is_published())
         self.assertEqual(home.is_published(), home.published)
+
+    def test_create_sub_channel_home(self):
+        channel = Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
+                description=u'sub home page', site=self.site,
+                channel=self.channel)
+
+        self.assertTrue(channel)
+        self.assertEqual(channel.channel, self.channel)
