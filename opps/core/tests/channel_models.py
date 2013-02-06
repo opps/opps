@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from datetime import datetime
+
 from django.test import TestCase
 from django.contrib.sites.models import Site
 
@@ -28,4 +30,16 @@ class ChannelModelTest(TestCase):
         """
         home = Channel.objects.filter(slug=u'home').get()
         self.assertFalse(home.is_published())
+        self.assertEqual(home.is_published(), home.published)
+
+    def test_is_published(self):
+        """
+        is_published true on home channel
+        """
+        self.channel.published = True
+        self.channel.date_available = datetime(2013, 01, 01)
+        self.channel.save()
+
+        home = Channel.objects.filter(slug=u'home').get()
+        self.assertTrue(home.is_published())
         self.assertEqual(home.is_published(), home.published)
