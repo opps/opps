@@ -64,3 +64,19 @@ class ChannelModelTest(TestCase):
         self.assertFalse(subhome.is_published())
         self.assertEqual(subhome.is_published(), subhome.published)
         self.assertEqual(subhome.is_published(), subchannel.is_published())
+
+    def test_is_published_sub_channel(self):
+        """
+        is_published true on home sub channel
+        """
+        subchannel = Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
+                description=u'sub home page', site=self.site,
+                channel=self.channel)
+        subchannel.published = True
+        subchannel.date_available = datetime(2013, 01, 01)
+        subchannel.save()
+
+        subhome = Channel.objects.filter(slug=u'sub-home').get()
+        self.assertTrue(subhome.is_published())
+        self.assertEqual(subhome.is_published(), subhome.published)
+        self.assertEqual(subhome.is_published(), subhome.is_published())
