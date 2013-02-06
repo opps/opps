@@ -39,3 +39,10 @@ class SourceModelTest(TestCase):
         source = Source.objects.filter(slug='test-site').get()
         self.assertTrue(self.source.url)
         self.assertEqual(self.source.url, source.url)
+
+    def test_duplicate_source_slug(self):
+        """
+        create 2 source with same slug
+        """
+        self.assertRaises(IntegrityError, Source.objects.create,
+                name=u'test site', slug=u'test-site')
