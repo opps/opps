@@ -86,7 +86,7 @@ class ChannelModelTest(TestCase):
         """
         create 2 channel with same name
         """
-        subchannel = Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
+        Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
                 description=u'sub home page', site=self.site,
                 channel=self.channel)
 
