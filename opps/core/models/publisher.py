@@ -27,7 +27,8 @@ class Publisher(models.Model):
         abstract = True
 
     def is_published(self):
-        return self.published and self.date_available <= datetime.now()
+        return self.published and \
+                self.date_available.replace(tzinfo=None) <= datetime.now()
 
     def save(self, *args, **kwargs):
         self.date_update = datetime.now()
