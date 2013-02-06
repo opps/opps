@@ -29,3 +29,13 @@ class SourceModelTest(TestCase):
         self.assertFalse(self.source.url)
         self.assertEqual(self.source.url, source.url)
 
+    def test_register_url(self):
+        """
+        url registered
+        """
+        self.source.url = u"http://example.com/"
+        self.source.save()
+
+        source = Source.objects.filter(slug='test-site').get()
+        self.assertTrue(self.source.url)
+        self.assertEqual(self.source.url, source.url)
