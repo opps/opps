@@ -6,6 +6,5 @@ from django.conf.urls import include
 
 
 
-urlpatterns = patterns('opps.cores',
-    url(r'^$', include('urls')),
+urlpatterns = patterns('',
 )
