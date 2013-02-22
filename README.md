@@ -21,6 +21,6 @@ https://github.com/avelino/opps/issues
 
 # License
 
-Copyright 2013 YACOWS. and other contributors
+Copyright 2013 [YACOWS](http://yacows.com.br/). and other contributors
 
 Licensed under the [MIT License](http://github.com/avelino/opps/raw/master/LICENSE)
