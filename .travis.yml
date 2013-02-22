@@ -6,3 +6,5 @@ install:
 env:
   - DJANGO="1.4.x"
 script: make test
+notifications:
+  irc: "irc.freenode.org#opps"
