@@ -14,9 +14,7 @@ https://github.com/YACOWS/opps/issues
 
 # Author
 
-**Thiago Avelino**
-
-+ http://github.com/avelino
+[Thiago Avelino](http://github.com/avelino)
 
 
 # License
