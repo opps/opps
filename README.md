@@ -15,6 +15,7 @@ https://github.com/YACOWS/opps/issues
 # Author
 
 [Thiago Avelino](http://github.com/avelino)
+[Sergio Oliveira](https://github.com/seocam)
 
 
 # License
