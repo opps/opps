@@ -9,7 +9,7 @@ Websites magazines and high-traffic
 
 Have a bug/feature request? Please create an issue here on GitHub!
 
-https://github.com/avelino/opps/issues
+https://github.com/YACOWS/opps/issues
 
 
 # Author
@@ -23,4 +23,4 @@ https://github.com/avelino/opps/issues
 
 Copyright 2013 [YACOWS](http://yacows.com.br/). and other contributors
 
-Licensed under the [MIT License](http://github.com/avelino/opps/raw/master/LICENSE)
+Licensed under the [MIT License](http://github.com/YACOWS/opps/raw/master/LICENSE)
