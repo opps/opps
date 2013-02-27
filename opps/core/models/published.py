@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 
-class PublisherMnager(models.Manager):
+class PublishedMnager(models.Manager):
     def all_published(self):
         return super(PublisherMnager, self).get_query_set().filter(
                 date_available__lte=datetime.now(), published=True)
@@ -18,7 +18,7 @@ class Published(models.Model):
             default=datetime.now, null=True)
     published = models.BooleanField(_(u"Published"), default=False)
 
-    objects = PublisherMnager()
+    objects = PublishedMnager()
 
     class Meta:
         abstract = True
