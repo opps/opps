@@ -10,7 +10,7 @@ from datetime import datetime
 
 
 
-class PublishedMnager(models.Manager):
+class PublishableMnager(models.Manager):
     def all_published(self):
         return super(PublisherMnager, self).get_query_set().filter(
                 date_available__lte=datetime.now(), published=True)
