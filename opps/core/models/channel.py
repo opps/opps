@@ -22,7 +22,7 @@ class Channel(Published, Date):
             null=True, blank=True)
 
     class Meta:
-        app_label = 'opps'
+        app_label = 'core'
 
     def __unicode__(self):
         if self.channel:

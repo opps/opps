@@ -16,4 +16,4 @@ class Date(models.Model):
 
     def save(self, *args, **kwargs):
         self.date_update = datetime.now()
-        super(Publisher, self).save(*args, **kwargs)
+        super(Date, self).save(*args, **kwargs)
