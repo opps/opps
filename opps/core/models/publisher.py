@@ -14,14 +14,11 @@ class PublisherMnager(models.Manager):
 
 class Publisher(models.Model):
 
-    date_insert = models.DateTimeField(_(u"Date insert"), auto_now_add=True)
-    date_update = models.DateTimeField(_(u"Date update"), auto_now=True)
     date_available = models.DateTimeField(_(u"Date available"),
             default=datetime.now, null=True)
     published = models.BooleanField(_(u"Published"), default=False)
 
     objects = PublisherMnager()
-    kero = models.Manager()
 
     class Meta:
         abstract = True
@@ -29,7 +26,3 @@ class Publisher(models.Model):
     def is_published(self):
         return self.published and \
                 self.date_available.replace(tzinfo=None) <= datetime.now()
-
-    def save(self, *args, **kwargs):
-        self.date_update = datetime.now()
-        super(Publisher, self).save(*args, **kwargs)
