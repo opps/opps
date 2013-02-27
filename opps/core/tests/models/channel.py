@@ -6,6 +6,7 @@ from datetime import datetime
 from django.db import IntegrityError
 from django.test import TestCase
 from django.contrib.sites.models import Site
+from django.contrib.auth.models import User
 
 from opps.core.models.channel import Channel
 
@@ -13,9 +14,10 @@ from opps.core.models.channel import Channel
 class ChannelModelTest(TestCase):
 
     def setUp(self):
+        self.user = User.objects.create(username=u'test', password='test')
         self.site = Site.objects.filter(name=u'example.com').get()
         self.channel = Channel.objects.create(name=u'Home', slug=u'home',
-                description=u'home page', site=self.site)
+                description=u'home page', site=self.site, user=self.user)
 
     def test_check_create_home(self):
         """
