@@ -22,7 +22,7 @@ class Article(Published, Date):
     headline = models.TextField(_(u"Headline"), blank=True)
     channel = models.ForeignKey(Channel, verbose_name=_(u"Channel"))
 
-    content = models.TextField(_(u"Content"), blank=True)
+    content = models.TextField(_(u"Content"))
 
     tags = TagField(null=True, verbose_name=_(u"Tags"))
 
