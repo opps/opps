@@ -27,7 +27,9 @@ class Article(Published, Date):
 
     images = models.ManyToManyField(Image, through='ArticleImage',
             related_name='article_images')
-
+    main_image = models.ForeignKey(Image, verbose_name=_(u'Main Image'),
+            blank=False, null=True, on_delete=models.SET_NULL,
+            related_name='article_main_image')
 
     tags = TagField(null=True, verbose_name=_(u"Tags"))
 
