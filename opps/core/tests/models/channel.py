@@ -61,7 +61,7 @@ class ChannelModelTest(TestCase):
         """
         subchannel = Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
                 description=u'sub home page', site=self.site,
-                channel=self.channel)
+                channel=self.channel, user=self.user)
 
         subhome = Channel.objects.filter(slug=u'sub-home').get()
         self.assertFalse(subhome.is_published())
