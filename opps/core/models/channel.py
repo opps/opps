@@ -4,11 +4,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 
 from opps.core.models.published import Published
-from opps.core.models.date import Date
 
 
 
-class Channel(Published, Date):
+class Channel(Published):
 
     name = models.CharField(_(u"Name"), max_length=60, unique=True)
     slug = models.SlugField(u"URL", max_length=150, unique=True,

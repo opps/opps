@@ -3,11 +3,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from opps.core.models.published import Published
-from opps.core.models.date import Date
 
 
 
-class Image(Published, Date):
+class Image(Published):
 
     title = models.CharField(_(u"Title"), max_length=140)
     slug = models.SlugField(_(u"Slug"), max_length=150, blank=True)
