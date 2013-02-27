@@ -74,7 +74,7 @@ class ChannelModelTest(TestCase):
         """
         subchannel = Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
                 description=u'sub home page', site=self.site,
-                channel=self.channel)
+                channel=self.channel, user=self.user)
         subchannel.published = True
         subchannel.date_available = datetime(2013, 01, 01)
         subchannel.save()
