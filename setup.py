@@ -10,7 +10,7 @@ import opps
 install_requires = ["Django<=1.5",
                     "south>=0.7",
                     "Pillow==1.7.8",
-                    "sorl-thumbnail==11.12",
+                    "thumbor",
                     "django-tagging==0.3.1",
                     "django-redis",
                     "django-redactor"]
