@@ -14,7 +14,7 @@ class Source(models.Model):
 
 
     class Meta:
-        app_label = 'core'
+        app_label = 'opps'
 
     def __unicode__(self):
         return self.slug
