@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from opps.core.models.published import Published
 from opps.core.models.date import Date
 from opps.core.models.channel import Channel
+from opps.core.models.image import Image
 
 from tagging.models import Tag
 from tagging.fields import TagField
@@ -23,6 +24,10 @@ class Article(Published, Date):
     channel = models.ForeignKey(Channel, verbose_name=_(u"Channel"))
 
     content = models.TextField(_(u"Content"))
+
+    images = models.ManyToManyField(Image, through='ArticleImage',
+            related_name='article_images')
+
 
     tags = TagField(null=True, verbose_name=_(u"Tags"))
 
