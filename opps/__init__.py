@@ -11,4 +11,4 @@ __author__ = u"Thiago Avelino"
 __credits__ = []
 __email__ = u"opps-developers@googlegroups.com"
 __license__ = u"BSD"
-__copyright__ = u"Copyright 2013, Opps Project"
+__copyright__ = u"Copyright 2013, YACOWS"
