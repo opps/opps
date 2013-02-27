@@ -12,7 +12,7 @@ from datetime import datetime
 
 class PublishableMnager(models.Manager):
     def all_published(self):
-        return super(PublisherMnager, self).get_query_set().filter(
+        return super(PublishableMnager, self).get_query_set().filter(
                 date_available__lte=datetime.now(), published=True)
 
 
@@ -22,9 +22,9 @@ class Publishable(Date):
     site = models.ForeignKey(Site, default=0)
     date_available = models.DateTimeField(_(u"Date available"),
             default=datetime.now, null=True)
-    publisher = models.BooleanField(_(u"Publisher"), default=False)
+    published = models.BooleanField(_(u"Published"), default=False)
 
-    objects = PublishedMnager()
+    objects = PublishableMnager()
 
     class Meta:
         abstract = True

@@ -2,11 +2,11 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from opps.core.models.published import Published
+from opps.core.models.publishable import Publishable
 
 
 
-class Image(Published):
+class Image(Publishable):
 
     title = models.CharField(_(u"Title"), max_length=140)
     slug = models.SlugField(_(u"Slug"), max_length=150, blank=True)
@@ -20,4 +20,4 @@ class Image(Published):
         return self.title
 
     class Meta:
-    	app_label = 'core'
+        app_label = 'core'
