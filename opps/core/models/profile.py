@@ -12,7 +12,7 @@ class Profile(models.Model):
             null=True)
 
     class Meta:
-        app_label = 'core'
+        app_label = 'opps'
 
     def __unicode__(self):
         return self.user
