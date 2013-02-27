@@ -5,4 +5,4 @@ from django.conf import settings
 
 
 trans_app_label = _('Image')
-settings.INSTALLED_APPS += ('sorl.thumbnail',)
+settings.INSTALLED_APPS += ('thumbor',)
