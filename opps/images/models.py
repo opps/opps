@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-from opps.core.models.publisher import Publisher
+from opps.core.models.published import Published
 
 from sorl.thumbnail import ImageField, get_thumbnail
 
