@@ -90,7 +90,7 @@ class ChannelModelTest(TestCase):
         """
         Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
                 description=u'sub home page', site=self.site,
-                channel=self.channel)
+                channel=self.channel, user=self.user)
 
         self.assertRaises(IntegrityError, Channel.objects.create,
                 name=u'Sub Home', slug=u'sub-home', description=u'sub home page',
