@@ -4,7 +4,7 @@ python:
 install:
    - python setup.py develop
 env:
-  - DJANGO="1.4.x"
+  - DJANGO="1.5.x"
 script: make test
 notifications:
   irc: "irc.freenode.org#opps"
