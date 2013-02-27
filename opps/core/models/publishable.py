@@ -16,13 +16,13 @@ class PublishedMnager(models.Manager):
                 date_available__lte=datetime.now(), published=True)
 
 
-class Published(Date):
+class Publishable(Date):
 
     user = models.ForeignKey(User)
     site = models.ForeignKey(Site, default=0)
     date_available = models.DateTimeField(_(u"Date available"),
             default=datetime.now, null=True)
-    published = models.BooleanField(_(u"Published"), default=False)
+    publisher = models.BooleanField(_(u"Publisher"), default=False)
 
     objects = PublishedMnager()
 
