@@ -12,7 +12,7 @@ class PublisherMnager(models.Manager):
                 date_available__lte=datetime.now(), published=True)
 
 
-class Publisher(models.Model):
+class Published(models.Model):
 
     date_available = models.DateTimeField(_(u"Date available"),
             default=datetime.now, null=True)
