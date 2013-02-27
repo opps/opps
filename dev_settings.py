@@ -63,6 +63,8 @@ INSTALLED_APPS = (
     'opps.core',
 
     'tagging',
+
+    'south',
 )
 
 LOGGING = {
