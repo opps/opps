@@ -33,3 +33,10 @@ class Article(Published, Date):
     def __unicode__(self):
         return "{0}/{1}".format(self.site.name, self.slug)
 
+
+class Post(Article):
+
+    credit = models.CharField(_("Credit"), blank=True, max_length=255)
+
+    class Meta:
+        app_label = 'core'
