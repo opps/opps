@@ -25,8 +25,6 @@ class Article(Published, Date):
 
     content = models.TextField(_(u"Content"))
 
-    images = models.ManyToManyField(Image, through='ArticleImage',
-            related_name='article_images')
     main_image = models.ForeignKey(Image, verbose_name=_(u'Main Image'),
             blank=False, null=True, on_delete=models.SET_NULL,
             related_name='article_main_image')
@@ -43,6 +41,8 @@ class Article(Published, Date):
 
 class Post(Article):
 
+    images = models.ManyToManyField(Image, through='PostImage',
+            related_name='post_images')
     credit = models.CharField(_("Credit"), blank=True, max_length=255)
 
     class Meta:
