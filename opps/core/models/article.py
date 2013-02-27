@@ -41,7 +41,7 @@ class Article(Published, Date):
 
 class Post(Article):
 
-    images = models.ManyToManyField(Image, through='PostImage',
+    images = models.ManyToManyField(Image, null=True, blank=True,
             related_name='post_images')
     credit = models.CharField(_("Credit"), blank=True, max_length=255)
 
