@@ -4,6 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
+from opps.core.models.date import Date
+
 from datetime import datetime
 
 
@@ -14,7 +16,7 @@ class PublishedMnager(models.Manager):
                 date_available__lte=datetime.now(), published=True)
 
 
-class Published(models.Model):
+class Published(Date):
 
     user = models.ForeignKey(User)
     site = models.ForeignKey(Site, default=0)
