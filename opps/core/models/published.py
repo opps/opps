@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import User
 
 from datetime import datetime
 
@@ -14,6 +15,7 @@ class PublishedMnager(models.Manager):
 
 class Published(models.Model):
 
+    user = models.ForeignKey(User, related_name='users')
     date_available = models.DateTimeField(_(u"Date available"),
             default=datetime.now, null=True)
     published = models.BooleanField(_(u"Published"), default=False)
