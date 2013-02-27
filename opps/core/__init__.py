@@ -5,4 +5,4 @@ from django.conf import settings
 
 
 trans_app_label = _('Opps')
-settings.INSTALLED_APPS += ('redactor',)
+settings.INSTALLED_APPS += ('redactor', 'tagging',)
