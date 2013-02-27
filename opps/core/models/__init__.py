@@ -3,3 +3,4 @@ from opps.core.models.channel import *
 from opps.core.models.profile import *
 from opps.core.models.source import *
 from opps.core.models.published import *
+from opps.core.models.article import *
