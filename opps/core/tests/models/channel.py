@@ -50,7 +50,7 @@ class ChannelModelTest(TestCase):
     def test_create_sub_channel_home(self):
         channel = Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
                 description=u'sub home page', site=self.site,
-                channel=self.channel)
+                channel=self.channel, user=self.user)
 
         self.assertTrue(channel)
         self.assertEqual(channel.channel, self.channel)
