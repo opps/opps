@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.contrib.sites.models import Site
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 
@@ -17,7 +16,6 @@ class Channel(Published, Date):
     description = models.CharField(_(u"Description"),
             max_length=255, null=True, blank=True)
     position = models.IntegerField(_(u"Position"), default=1)
-    site = models.ForeignKey(Site, related_name='site')
     channel = models.ForeignKey('self', related_name='subchannel',
             null=True, blank=True)
 
