@@ -41,8 +41,22 @@ class Article(Publishable):
 class Post(Article):
 
     images = models.ManyToManyField(Image, null=True, blank=True,
-            related_name='post_images')
+            related_name='post_images', through='PostImage')
     credit = models.CharField(_("Credit"), blank=True, max_length=255)
+
+    class Meta:
+        app_label = 'core'
+
+
+class PostImage(models.Model):
+    post = models.ForeignKey(Post, verbose_name=_(u'Post'), null=True,
+            related_name='postimage_post', on_delete=models.SET_NULL)
+    image = models.ForeignKey(Image, verbose_name=_(u'Image'), null=True,
+            related_name='postimage_image', on_delete=models.SET_NULL)
+    order = models.PositiveIntegerField(_(u'Order'), default=0)
+
+    def __unicode__(self):
+        return self.image.title
 
     class Meta:
         app_label = 'core'
