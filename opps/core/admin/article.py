@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.contrib.sites.models import Site
 from django.contrib import admin
 from django import forms
 
@@ -28,6 +29,14 @@ class PostAdmin(admin.ModelAdmin):
     form = PostAdminForm
     prepopulated_fields = {"slug": ("title",)}
     inlines = [PostImageInline]
+
+    fieldsets = (
+            (None, {'fields': ('title', 'short_title', 'headline', 'channel',
+                'content',)
+            }),
+            (None, {'fields': ('main_image', 'credit', 'slug',)})
+    )
+    exclude = ('user',)
 
     def save_model(self, request, obj, form, change):
         if not obj.user:
