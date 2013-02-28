@@ -10,7 +10,7 @@ class Image(Publishable):
 
     title = models.CharField(_(u"Title"), max_length=140)
     slug = models.SlugField(_(u"Slug"), max_length=150, blank=True)
-    image = models.ImageField(upload_to="opps_images/")
+    image = models.ImageField(upload_to="uploads/")
     description = models.CharField(_(u"Description"), max_length=255,
             null=True, blank=True)
 
