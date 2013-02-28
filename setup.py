@@ -13,7 +13,7 @@ install_requires = ["Django==1.5",
                     "thumbor==3.7.1",
                     "django-tagging==0.3.1",
                     "django-redis==3.1.7",
-                    "django-redactor==0.2"]
+                    "django-wysiwyg-redactor==0.3.0"]
 
 classifiers = ["Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
