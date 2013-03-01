@@ -1,7 +1,5 @@
-fabric
 flake8
 ipdb
-jinja2
 nose
 mock
 coverage
