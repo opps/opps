@@ -9,7 +9,7 @@ Websites magazines and high-traffic
 
 Have a bug/feature request? Please create an issue here on GitHub!
 
-https://github.com/YACOWS/opps/issues
+https://github.com/oppsproject/opps/issues
 
 
 # Author
