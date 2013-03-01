@@ -1,6 +1,6 @@
 # Opps CMS
 
-[![Build Status](https://travis-ci.org/YACOWS/opps.png)](https://travis-ci.org/YACOWS/opps)
+[![Build Status](https://travis-ci.org/oppsproject/opps.png)](https://travis-ci.org/oppsproject/opps)
 
 Websites magazines and high-traffic
 
