@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-from django.contrib.sites.models import Site
 from django.contrib import admin
 from django import forms
 
 from opps.core.models import Post, PostImage
-from opps.core.models import Image
 
 from redactor.widgets import RedactorEditor
 
