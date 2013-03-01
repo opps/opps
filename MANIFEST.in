@@ -1,0 +1,3 @@
+prune dist
+prune build
+recursive-include opps *.template
