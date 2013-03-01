@@ -22,4 +22,4 @@ https://github.com/YACOWS/opps/issues
 
 Copyright 2013 [YACOWS](http://yacows.com.br/). and other contributors
 
-Licensed under the [MIT License](http://github.com/YACOWS/opps/raw/master/LICENSE)
+Licensed under the [MIT License](http://github.com/oppsproject/opps/raw/master/LICENSE)
