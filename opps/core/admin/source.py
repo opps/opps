@@ -3,6 +3,7 @@ from django.contrib import admin
 
 from opps.core.models import Source
 
+
 class SourceAdmin(admin.ModelAdmin):
     pass
 
