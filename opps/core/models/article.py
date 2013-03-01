@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.core.exceptions import ValidationError, ObjectDoesNotExist
 
 from opps.core.models.publishable import Publishable
 from opps.core.models.channel import Channel
 from opps.core.models.image import Image
 
-from tagging.models import Tag
 from tagging.fields import TagField
 
 
