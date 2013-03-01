@@ -60,6 +60,8 @@ INSTALLED_APPS = (
     'south',
 )
 
+TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
