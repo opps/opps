@@ -20,7 +20,7 @@ class PostImageInline(admin.TabularInline):
 class PostAdminForm(forms.ModelForm):
     class Meta:
         model = Post
-        widgets = {'content': RedactorEditor(),}
+        widgets = {'content': RedactorEditor()}
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -30,8 +30,7 @@ class PostAdmin(admin.ModelAdmin):
 
     fieldsets = (
             (None, {'fields': ('title', 'short_title', 'headline', 'channel',
-                'content',)
-            }),
+                'content',)}),
             (None, {'fields': ('main_image', 'credit', 'slug',)})
     )
 
