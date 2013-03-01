@@ -36,7 +36,6 @@ class PostAdmin(admin.ModelAdmin):
             }),
             (None, {'fields': ('main_image', 'credit', 'slug',)})
     )
-    exclude = ('user',)
 
     def save_model(self, request, obj, form, change):
         if not obj.user:
