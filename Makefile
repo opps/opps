@@ -11,4 +11,4 @@ install:
 
 .PHONY: pep8
 pep8:
-	@flake8 . --ignore=E501
+	@flake8 . --ignore=E501,F403,E128,E303
