@@ -10,9 +10,9 @@ import opps
 install_requires = ["Django==1.5",
                     "south>=0.7",
                     "Pillow==1.7.8",
-                    "thumbor==3.7.1",
+                    #"thumbor==3.7.1",
                     "django-tagging==0.3.1",
-                    "django-redis==3.1.7",
+                    #"django-redis==3.1.7",
                     "django-wysiwyg-redactor==0.3.0"]
 
 classifiers = ["Development Status :: 4 - Beta",
