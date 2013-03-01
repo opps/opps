@@ -2,9 +2,10 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from opps.core.models.publishable import Publishable
 
 
-class Source(models.Model):
+class Source(Publishable):
 
     name = models.CharField(_(u"Name"), max_length=255)
     slug = models.SlugField(_(u"Slug"), max_length=140, unique=True,
