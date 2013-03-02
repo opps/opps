@@ -16,6 +16,7 @@ class PostImageInline(admin.TabularInline):
     extra = 1
     fieldsets = [(None, {'fields': ('image', 'order')})]
 
+
 class PostSourceInline(admin.TabularInline):
     model = PostSource
     fk_name = 'post'
