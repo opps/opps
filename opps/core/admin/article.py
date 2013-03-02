@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django import forms
 
-from opps.core.models import Post, PostImage
+from opps.core.models import Post, PostImage, PostSource
 
 from redactor.widgets import RedactorEditor
 
@@ -16,6 +16,16 @@ class PostImageInline(admin.TabularInline):
     extra = 1
     fieldsets = [(None, {'fields': ('image', 'order')})]
 
+class PostSourceInline(admin.TabularInline):
+    model = PostSource
+    fk_name = 'post'
+    raw_id_fields = ['source']
+    actions = None
+    extra = 1
+    fieldsets = [(None, {
+        'classes': ('collapse',),
+        'fields': ('source', 'order')})]
+
 
 class PostAdminForm(forms.ModelForm):
     class Meta:
@@ -26,12 +36,12 @@ class PostAdminForm(forms.ModelForm):
 class PostAdmin(admin.ModelAdmin):
     form = PostAdminForm
     prepopulated_fields = {"slug": ("title",)}
-    inlines = [PostImageInline]
+    inlines = [PostImageInline, PostSourceInline]
 
     fieldsets = (
             (None, {'fields': ('title', 'short_title', 'headline', 'channel',
                 'content',)}),
-            (None, {'fields': ('main_image', 'credit', 'slug',)})
+            (None, {'fields': ('main_image', 'slug',)})
     )
 
     def save_model(self, request, obj, form, change):
