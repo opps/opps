@@ -5,6 +5,6 @@ from opps.core.models import Source
 
 
 class SourceAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Source, SourceAdmin)
