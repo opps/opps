@@ -4,14 +4,19 @@
 from django.db import IntegrityError
 from django.test import TestCase
 
+from django.contrib.sites.models import Site
+from django.contrib.auth.models import User
+
 from opps.core.models.source import Source
 
 
 class SourceModelTest(TestCase):
 
     def setUp(self):
+        self.user = User.objects.create(username=u'test', password='test')
+        self.site = Site.objects.filter(name=u'example.com').get()
         self.source = Source.objects.create(name=u'Test site',
-                slug=u'test-site')
+                slug=u'test-site', user=self.user, site=self.site)
 
     def test_check_create_test_site(self):
         """
