@@ -75,4 +75,3 @@ class PostSource(models.Model):
 
     class Meta:
         app_label = 'core'
-
