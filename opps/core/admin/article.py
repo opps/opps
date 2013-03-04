@@ -48,7 +48,6 @@ class PostAdmin(admin.ModelAdmin):
     )
 
     def save_model(self, request, obj, form, change):
-        import pdb; pdb.set_trace()
         try:
             obj.site = obj.channel.site
             if obj.user:
