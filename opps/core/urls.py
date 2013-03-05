@@ -10,5 +10,6 @@ from opps.core.views import OppsDetail
 
 urlpatterns = patterns('',
         url(r'^redactor/', include('redactor.urls')),
-        url(r'^(?P<channel__slug_name>[0-9A-Za-z-_.//]+)/(?P<slug>[\w-]+)$', OppsDetail.as_view(), name='home'),
+        url(r'^(?P<channel__slug_name>[0-9A-Za-z-_.//]+)/(?P<slug>[\w-]+)$',
+            OppsDetail.as_view(), name='home'),
 )
