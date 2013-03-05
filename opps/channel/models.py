@@ -12,6 +12,8 @@ class Channel(Publishable):
     name = models.CharField(_(u"Name"), max_length=60, unique=True)
     slug = models.SlugField(u"URL", max_length=150, unique=True,
             db_index=True)
+    long_slug = models.SlugField(_(u"Path name"), max_length=250, unique=True,
+            db_index=True)
     description = models.CharField(_(u"Description"),
             max_length=255, null=True, blank=True)
     homepage = models.BooleanField(_(u"Is home page?"), default=False)
