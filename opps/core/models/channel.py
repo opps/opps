@@ -21,6 +21,9 @@ class Channel(Publishable):
     class Meta:
         app_label = 'core'
 
+    def slug_name(self):
+        return "{0}/{1}".format(self.channel, self.slug).replace(self.site.domain, '')
+
     def __unicode__(self):
         if self.channel:
             return "%s/%s" % (self.channel, self.slug)

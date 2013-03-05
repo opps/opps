@@ -37,7 +37,7 @@ class Article(Publishable):
         abstract = True
 
     def __unicode__(self):
-        return "{0}/{1}".format(self.site.name, self.slug)
+        return "{0}/{1}".format(self.channel, self.slug)
 
 
 class Post(Article):
