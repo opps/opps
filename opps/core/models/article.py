@@ -3,8 +3,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from opps.core.models import Publishable
-from opps.core.models import Channel
-from opps.core.models.image import Image
+from opps.channel.models import Channel
+from opps.image.models import Image
 from opps.core.models import Source
 
 from tagging.fields import TagField
