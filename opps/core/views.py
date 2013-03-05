@@ -3,7 +3,7 @@
 
 from django.views.generic.detail import DetailView
 
-from opps.core.models.article import Post
+from opps.article.models import Post
 
 
 class OppsDetail(DetailView):
