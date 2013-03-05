@@ -8,6 +8,7 @@ trans_app_label = _('Opps')
 settings.INSTALLED_APPS += ('opps.article',
         'opps.image',
         'opps.channel',
+        'opps.source',
         'redactor',
         'tagging',)
 
