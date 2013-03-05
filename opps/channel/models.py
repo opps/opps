@@ -14,6 +14,7 @@ class Channel(Publishable):
             db_index=True)
     description = models.CharField(_(u"Description"),
             max_length=255, null=True, blank=True)
+    homepage = models.BooleanField(_(u"Is home page?"), default=False)
     position = models.IntegerField(_(u"Position"), default=1)
     channel = models.ForeignKey('self', related_name='subchannel',
             null=True, blank=True)
@@ -31,13 +32,13 @@ class Channel(Publishable):
         try:
             channel_exist_domain = Channel.objects.filter(slug=self.slug,
                     site__domain=self.site.domain)
-            channel_home = Channel.objects.filter(site__domain=self.site.domain,
-                    channel=None, published=True)
+            channel_is_home = Channel.objects.filter(homepage=True,
+                    published=True).all()
         except ObjectDoesNotExist:
             return False
 
         if len(channel_exist_domain) >= 1 and not self.pk:
             raise ValidationError('Slug exist in domain!')
 
-        if not self.channel and len(channel_home) >= 1 and not self.pk:
-            raise ValidationError('Exist home channel published!')
+        if self.homepage and len(channel_is_home) >= 1:
+            raise ValidationError('Exist home page!')
