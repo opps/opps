@@ -3,4 +3,4 @@ from django.utils.translation import ugettext_lazy as _
 
 
 
-trans_app_label = _('Opps')
+trans_app_label = _('Source')

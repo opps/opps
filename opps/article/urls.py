@@ -4,7 +4,7 @@
 from django.conf.urls.defaults import patterns, url
 from django.conf.urls import include
 
-from opps.core.views import OppsDetail
+from opps.article.views import OppsDetail
 
 
 

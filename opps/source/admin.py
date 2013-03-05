@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from opps.core.models import Source
+from opps.source.models import Source
 
 
 class SourceAdmin(admin.ModelAdmin):

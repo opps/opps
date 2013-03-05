@@ -7,5 +7,5 @@ from django.conf.urls import include
 
 
 urlpatterns = patterns('',
-        url(r'', include('opps.core.urls', namespace='opps_core')),
+        url(r'', include('opps.article.urls', namespace='opps_article')),
 )

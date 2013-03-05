@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from opps.core.models import Publishable
-from opps.core.models import Source
+from opps.source.models import Source
 
 
 

@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from opps.core.models import Article
 from opps.image.models import Image
-from opps.core.models import Source
+from opps.source.models import Source
 
 
 

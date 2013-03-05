@@ -7,7 +7,7 @@ from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 
-from opps.core.models.source import Source
+from opps.source.models import Source
 
 
 class SourceModelTest(TestCase):
