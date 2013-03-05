@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 
 from opps.core.models import Publishable
+from opps.channel.utils import generate_long_slug
 
 
 
@@ -46,3 +47,11 @@ class Channel(Publishable):
 
         if self.homepage and len(channel_is_home) >= 1:
             raise ValidationError('Exist home page!')
+
+    def save(self, *args, **kwargs):
+
+        if not self.long_slug:
+            self.long_slug = generate_long_slug(self.channel, self.slug,
+                    self.site.domain)
+
+        super(Channel, self).save(*args, **kwargs)
