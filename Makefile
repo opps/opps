@@ -2,7 +2,7 @@
 .PHONY: test
 test: pep8
 	DJANGO_SETTINGS_MODULE=dev_settings \
-	django-admin.py test core
+	django-admin.py test core channel
 
 .PHONY: install
 install:
