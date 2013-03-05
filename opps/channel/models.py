@@ -34,6 +34,8 @@ class Channel(Publishable):
                     site__domain=self.site.domain)
             channel_is_home = Channel.objects.filter(homepage=True,
                     published=True).all()
+            if self.pk:
+                channel_is_home = channel_is_home.exclude(pk=self.pk)
         except ObjectDoesNotExist:
             return False
 
