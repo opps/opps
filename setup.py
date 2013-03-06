@@ -17,7 +17,7 @@ install_requires = ["Django==1.5",
 
 classifiers = ["Development Status :: 4 - Beta",
                "Intended Audience :: Developers",
-               "License :: OSI Approved :: BSD License",
+               "License :: OSI Approved :: MIT License",
                "Operating System :: OS Independent",
                "Framework :: Django",
                'Programming Language :: Python',
