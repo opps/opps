@@ -11,11 +11,17 @@ settings.INSTALLED_APPS += ('opps.article',
         'opps.channel',
         'opps.source',
         'django.contrib.redirects',
+        'django_thumbor',
         'redactor',
         'tagging',)
 
 settings.MIDDLEWARE_CLASSES += (
         'django.contrib.redirects.middleware.RedirectFallbackMiddleware',)
 
+# redactor
 settings.REDACTOR_OPTIONS = {'lang': 'en'}
 settings.REDACTOR_UPLOAD = 'uploads/'
+
+# thumbor
+settings.THUMBOR_SERVER = 'http://localhost:8888'
+settings.THUMBOR_MEDIA_URL = 'http://localhost:8000/media'
