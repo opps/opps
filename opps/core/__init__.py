@@ -10,8 +10,12 @@ settings.INSTALLED_APPS += ('opps.article',
         'opps.image',
         'opps.channel',
         'opps.source',
+        'django.contrib.redirects',
         'redactor',
         'tagging',)
+
+settings.MIDDLEWARE_CLASSES += (
+        'django.contrib.redirects.middleware.RedirectFallbackMiddleware',)
 
 settings.REDACTOR_OPTIONS = {'lang': 'en'}
 settings.REDACTOR_UPLOAD = 'uploads/'
