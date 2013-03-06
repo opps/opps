@@ -22,9 +22,6 @@ class Channel(Publishable):
     channel = models.ForeignKey('self', related_name='subchannel',
             null=True, blank=True)
 
-    def slug_name(self):
-        return "{0}/{1}".format(self.channel, self.slug).replace(self.site.domain, '')
-
     def __unicode__(self):
         if self.channel:
             return "%s/%s" % (self.channel, self.slug)
