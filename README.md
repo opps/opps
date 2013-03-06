@@ -14,8 +14,9 @@ https://github.com/oppsproject/opps/issues
 
 # Author
 
-* [Thiago Avelino](http://github.com/avelino)
+* [Thiago Avelino](https://github.com/avelino)
 * [Sergio Oliveira](https://github.com/seocam)
+* [Guilherme Gondim](https://github.com/semente)
 
 
 # License
