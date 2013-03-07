@@ -8,11 +8,10 @@ from opps.source.models import Source
 
 class SourceAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ['name',]
+    list_display = ['name']
     list_filter = ['date_available', 'published']
     exclude = ('user',)
 
-    
     fieldsets = (
         (_(u'Identification'), {
             'fields': ('site', 'name', 'slug')}),
