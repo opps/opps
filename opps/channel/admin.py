@@ -9,22 +9,22 @@ from opps.channel.utils import generate_long_slug
 
 class ChannelAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ['name', 'channel', 'date_available', 'homepage', 
+    list_display = ['name', 'channel', 'date_available', 'homepage',
         'position', 'published']
     list_filter = ['date_available', 'published', 'homepage', 'channel']
-    search_fields = ['name',]
+    search_fields = ['name']
     exclude = ('user', 'long_slug')
-    raw_id_fields = ['channel',]
+    raw_id_fields = ['channel']
 
 
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('site', 'channel', 'name', 'slug', 'description', 
+            'fields': ('site', 'channel', 'name', 'slug', 'description',
                 'position', 'homepage')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
-    )    
+    )
 
 
     def save_model(self, request, obj, form, change):
