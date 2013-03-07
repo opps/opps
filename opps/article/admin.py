@@ -40,7 +40,7 @@ class PostAdmin(admin.ModelAdmin):
     form = PostAdminForm
     prepopulated_fields = {"slug": ["title"]}
     list_display = ['title', 'channel', 'date_available', 'published']
-    list_filter = ['published', 'date_available', 'channel']
+    list_filter = ['date_available', 'published', 'channel']
     search_fields = ['title', 'headline']
     inlines = [PostImageInline, PostSourceInline]
     exclude = ('user',)
