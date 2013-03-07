@@ -10,8 +10,8 @@ class ImagesAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     list_display = ['title', 'source', 'date_available', 'published']
     list_filter = ['date_available', 'published', 'source']
-    search_fields = ['title',]
-    raw_id_fields = ['source',]
+    search_fields = ['title']
+    raw_id_fields = ['source']
     exclude = ('user',)
 
 
@@ -24,7 +24,7 @@ class ImagesAdmin(admin.ModelAdmin):
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
     )
-    
+
 
     def save_model(self, request, obj, form, change):
         try:
