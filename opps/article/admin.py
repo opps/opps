@@ -38,7 +38,7 @@ class PostAdminForm(forms.ModelForm):
 
 class PostAdmin(admin.ModelAdmin):
     form = PostAdminForm
-    prepopulated_fields = {"slug": ["title",]}
+    prepopulated_fields = {"slug": ["title"]}
     list_display = ['title', 'channel', 'date_available', 'published']
     list_filter = ['published', 'date_available', 'channel']
     search_fields = ['title', 'headline']
@@ -50,7 +50,7 @@ class PostAdmin(admin.ModelAdmin):
         (_(u'Identification'), {
             'fields': ('title', 'slug',)}),
         (_(u'Content'), {
-            'fields': ('short_title', 'headline', 'content', 
+            'fields': ('short_title', 'headline', 'content',
                 'main_image')}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
