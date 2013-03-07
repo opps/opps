@@ -19,9 +19,10 @@ settings.MIDDLEWARE_CLASSES += (
         'django.contrib.redirects.middleware.RedirectFallbackMiddleware',)
 
 # redactor
-settings.REDACTOR_OPTIONS = {'lang': 'en'}
-settings.REDACTOR_UPLOAD = 'uploads/'
+getattr(settings, 'REDACTOR_OPTIONS', {'lang': 'en'})
+getattr(settings, 'REDACTOR_UPLOAD', 'uploads/')
 
 # thumbor
-settings.THUMBOR_SERVER = 'http://localhost:8888'
-settings.THUMBOR_MEDIA_URL = 'http://localhost:8000/media'
+getattr(settings, 'THUMBOR_SERVER', 'http://localhost:8888')
+getattr(settings, 'THUMBOR_MEDIA_URL', 'http://localhost:8000/media')
+getattr(settings, 'THUMBOR_SECURITY_KEY', '')
