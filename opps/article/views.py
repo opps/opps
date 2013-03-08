@@ -14,8 +14,11 @@ class OppsList(ListView):
 
     @property
     def template_name(self):
-        homepage = Channel.objects.filter(homepage=True).get()
-        long_slug = self.kwargs.get('channel__long_slug', homepage.long_slug)
+        homepage = Channel.objects.get_homepage()
+        if not homepage:
+            return None
+        long_slug = self.kwargs.get('channel__long_slug',
+                homepage.long_slug)
         return 'channel/{0}.html'.format(long_slug)
 
     @property
