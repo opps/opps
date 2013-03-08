@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from django.db import models
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
 from opps.core.models.date import Date
@@ -18,7 +18,7 @@ class PublishableMnager(models.Manager):
 
 class Publishable(Date):
 
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     site = models.ForeignKey(Site, default=0)
     date_available = models.DateTimeField(_(u"Date available"),
             default=datetime.now, null=True)
