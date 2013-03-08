@@ -16,6 +16,7 @@ class ChannelManager(models.Manager):
         except Channel.DoesNotExist:
             return None
 
+
 class Channel(Publishable):
 
     name = models.CharField(_(u"Name"), max_length=60, unique=True)
