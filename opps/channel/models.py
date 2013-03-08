@@ -7,6 +7,14 @@ from opps.core.models import Publishable
 from opps.channel.utils import generate_long_slug
 
 
+class ChannelManager(models.Manager):
+
+    def get_homepage(self):
+        try:
+            return super(ChannelManager, self).get_query_set().filter(
+                    homepage=True, published=True).get()
+        except Channel.DoesNotExist:
+            return None
 
 class Channel(Publishable):
 
@@ -21,6 +29,8 @@ class Channel(Publishable):
     position = models.IntegerField(_(u"Position"), default=1)
     channel = models.ForeignKey('self', related_name='subchannel',
             null=True, blank=True)
+
+    objects = ChannelManager()
 
     def __unicode__(self):
         if self.channel:
