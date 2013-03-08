@@ -32,5 +32,11 @@ class Article(Publishable):
     class Meta:
         abstract = True
 
-    def __unicode__(self):
+    def __absolute_url(self):
         return "{0}/{1}".format(self.channel, self.slug)
+
+    def get_absolute_url(self):
+        return "http://{0}".format(self.__absolute_url())
+
+    def __unicode__(self):
+        return self.__absolute_url()
