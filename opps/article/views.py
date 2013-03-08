@@ -17,6 +17,8 @@ class OppsList(ListView):
 
     @property
     def queryset(self):
+        if not self.kwargs.get('channel__long_slug'):
+            return Post.objects.filter(channel__homepage=True).all()
         return Post.objects.filter(
                 channel__long_slug=self.kwargs['channel__long_slug']).all()
 
