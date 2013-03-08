@@ -35,6 +35,6 @@ class OppsDetail(DetailView):
 
     @property
     def queryset(self):
-        return Post.objects.filter(
-                channel__long_slug=self.kwargs['channel__long_slug'],
+        long_slug = self.kwargs.get('channel__long_slug', 'home')
+        return Post.objects.filter(channel__long_slug=long_slug,
                 slug=self.kwargs['slug']).all()
