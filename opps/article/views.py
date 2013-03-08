@@ -5,6 +5,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
 from opps.article.models import Post
+from opps.channel.models import Channel
 
 
 class OppsList(ListView):
@@ -13,7 +14,8 @@ class OppsList(ListView):
 
     @property
     def template_name(self):
-        long_slug = self.kwargs.get('channel__long_slug', 'home')
+        homepage = Channel.objects.filter(homepage=True).get()
+        long_slug = self.kwargs.get('channel__long_slug', homepage.long_slug)
         return 'channel/{0}.html'.format(long_slug)
 
     @property
@@ -30,11 +32,13 @@ class OppsDetail(DetailView):
 
     @property
     def template_name(self):
-        long_slug = self.kwargs.get('channel__long_slug', 'home')
+        homepage = Channel.objects.filter(homepage=True).get()
+        long_slug = self.kwargs.get('channel__long_slug', homepage.long_slug)
         return 'article/{0}/{1}.html'.format(long_slug, self.kwargs['slug'])
 
     @property
     def queryset(self):
-        long_slug = self.kwargs.get('channel__long_slug', 'home')
+        homepage = Channel.objects.filter(homepage=True).get()
+        long_slug = self.kwargs.get('channel__long_slug', homepage.long_slug)
         return Post.objects.filter(channel__long_slug=long_slug,
                 slug=self.kwargs['slug']).all()
