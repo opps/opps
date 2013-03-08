@@ -12,6 +12,10 @@ class OppsList(ListView):
     context_object_name = "context"
 
     @property
+    def template_name(self):
+        return 'channel/{0}.html'.format(self.kwargs['channel__long_slug'])
+
+    @property
     def queryset(self):
         return Post.objects.filter(
                 channel__long_slug=self.kwargs['channel__long_slug']).all()
