@@ -13,7 +13,8 @@ class OppsList(ListView):
 
     @property
     def template_name(self):
-        return 'channel/{0}.html'.format(self.kwargs['channel__long_slug'])
+        long_slug = self.kwargs.get('channel__long_slug', 'home')
+        return 'channel/{0}.html'.format(long_slug)
 
     @property
     def queryset(self):
