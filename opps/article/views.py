@@ -35,7 +35,9 @@ class OppsDetail(DetailView):
 
     @property
     def template_name(self):
-        homepage = Channel.objects.filter(homepage=True).get()
+        homepage = Channel.objects.get_homepage()
+        if not homepage:
+            return None
         long_slug = self.kwargs.get('channel__long_slug', homepage.long_slug)
         return 'article/{0}/{1}.html'.format(long_slug, self.kwargs['slug'])
 
