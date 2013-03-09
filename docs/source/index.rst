@@ -1,3 +1,4 @@
+.. image:: _static/opps.jpg
 ====
 Opps
 ====
