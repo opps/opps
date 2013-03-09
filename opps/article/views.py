@@ -3,6 +3,7 @@
 
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.shortcuts import get_object_or_404
 
 from opps.article.models import Post
 from opps.channel.models import Channel
@@ -25,6 +26,7 @@ class OppsList(ListView):
     def queryset(self):
         if not self.kwargs.get('channel__long_slug'):
             return Post.objects.filter(channel__homepage=True).all()
+        get_object_or_404(Channel, long_slug=self.kwargs['channel__long_slug'])
         return Post.objects.filter(
                 channel__long_slug=self.kwargs['channel__long_slug']).all()
 
