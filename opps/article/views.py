@@ -26,9 +26,9 @@ class OppsList(ListView):
     def queryset(self):
         if not self.kwargs.get('channel__long_slug'):
             return Post.objects.filter(channel__homepage=True).all()
-        get_object_or_404(Channel, long_slug=self.kwargs['channel__long_slug'])
-        return Post.objects.filter(
-                channel__long_slug=self.kwargs['channel__long_slug']).all()
+        long_slug = self.kwargs['channel__long_slug'][:-1]
+        get_object_or_404(Channel, long_slug=long_slug)
+        return Post.objects.filter(channel__long_slug=long_slug).all()
 
 
 class OppsDetail(DetailView):
