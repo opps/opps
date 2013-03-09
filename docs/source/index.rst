@@ -13,6 +13,7 @@ Opps CMS websites **magazines** and **high-traffic**
    :maxdepth: 2
 
    intro
+   installation
 
 
 License
