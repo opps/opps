@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-from django.conf.urls.defaults import patterns, url
-from django.conf.urls import include
+from django.conf.urls import patterns, url, include
 
 from opps.article.views import OppsDetail, OppsList
 
