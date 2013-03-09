@@ -10,8 +10,8 @@ from opps.article.views import OppsDetail, OppsList
 urlpatterns = patterns('',
         url(r'^redactor/', include('redactor.urls')),
         url(r'^$', OppsList.as_view(), name='home'),
-        url(r'^(?P<channel__long_slug>[\w//-]+)/(?P<slug>[\w-]+)$',
+        url(r'^(?P<channel__long_slug>.*)/(?P<slug>[\w-]+)$',
             OppsDetail.as_view(), name='open'),
-        url(r'^(?P<channel__long_slug>[\w//-]+)$',
+        url(r'^(?P<channel__long_slug>.*)$',
             OppsList.as_view(), name='channel'),
 )
