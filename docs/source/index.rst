@@ -1,19 +1,20 @@
 .. image:: _static/opps.jpg
-====
-Opps
-====
-
 .. image:: https://travis-ci.org/oppsproject/opps.png
     :target: https://travis-ci.org/oppsproject/opps
 
-Opps CMS websites **magazines** and **high-traffic**
+
+About
+=====
+
+Opps CMS is an CMS for the **magazine** websites and **high-traffic**, using Django Framework.
 `View source <https://github.com/oppsproject/opps>`_
+
 
 .. toctree::
    :maxdepth: 2
 
-   intro
    installation
+   contributing
 
 
 License
