@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from datetime import datetime
+from datetime import timedelta
 
 from django.db import IntegrityError
 from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 from opps.channel.models import Channel
 
@@ -41,7 +42,7 @@ class ChannelModelTest(TestCase):
         is_published true on home channel
         """
         self.channel.published = True
-        self.channel.date_available = datetime(2013, 01, 01)
+        self.channel.date_available = timezone.now() - timedelta(hours=1)
         self.channel.save()
 
         home = Channel.objects.filter(slug=u'home').get()
@@ -80,7 +81,7 @@ class ChannelModelTest(TestCase):
                                             site=self.site, user=self.user,
                                             channel=self.channel)
         subchannel.published = True
-        subchannel.date_available = datetime(2013, 01, 01)
+        subchannel.date_available = timezone.now() - timedelta(hours=1)
         subchannel.save()
 
         subhome = Channel.objects.filter(slug=u'sub-home').get()
