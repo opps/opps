@@ -18,6 +18,7 @@ https://github.com/oppsproject/opps/issues
 * [Sergio Oliveira](https://github.com/seocam)
 * [Guilherme Gondim](https://github.com/semente)
 * [Gilson Filho](https://github.com/gilsondev)
+* [Davi Oliveira](https://github.com/arloc)
 
 
 # License
