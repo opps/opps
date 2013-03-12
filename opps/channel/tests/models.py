@@ -17,7 +17,8 @@ class ChannelModelTest(TestCase):
         self.user = User.objects.create(username=u'test', password='test')
         self.site = Site.objects.filter(name=u'example.com').get()
         self.channel = Channel.objects.create(name=u'Home', slug=u'home',
-                description=u'home page', site=self.site, user=self.user)
+                                              description=u'home page',
+                                              site=self.site, user=self.user)
 
     def test_check_create_home(self):
         """
@@ -49,8 +50,9 @@ class ChannelModelTest(TestCase):
 
     def test_create_sub_channel_home(self):
         channel = Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
-                description=u'sub home page', site=self.site,
-                channel=self.channel, user=self.user)
+                                         description=u'sub home page',
+                                         site=self.site, channel=self.channel,
+                                         user=self.user)
 
         self.assertTrue(channel)
         self.assertEqual(channel.channel, self.channel)
@@ -60,8 +62,9 @@ class ChannelModelTest(TestCase):
         is_published false on home sub channel
         """
         subchannel = Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
-                description=u'sub home page', site=self.site,
-                channel=self.channel, user=self.user)
+                                            description=u'sub home page',
+                                            site=self.site, user=self.user,
+                                            channel=self.channel)
 
         subhome = Channel.objects.filter(slug=u'sub-home').get()
         self.assertFalse(subhome.is_published())
@@ -73,8 +76,9 @@ class ChannelModelTest(TestCase):
         is_published true on home sub channel
         """
         subchannel = Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
-                description=u'sub home page', site=self.site,
-                channel=self.channel, user=self.user)
+                                            description=u'sub home page',
+                                            site=self.site, user=self.user,
+                                            channel=self.channel)
         subchannel.published = True
         subchannel.date_available = datetime(2013, 01, 01)
         subchannel.save()
@@ -89,9 +93,10 @@ class ChannelModelTest(TestCase):
         create 2 channel with same name
         """
         Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
-                description=u'sub home page', site=self.site,
-                channel=self.channel, user=self.user)
+                               description=u'sub home page', site=self.site,
+                               channel=self.channel, user=self.user)
 
         self.assertRaises(IntegrityError, Channel.objects.create,
-                name=u'Sub Home', slug=u'sub-home', description=u'sub home page',
-                site=self.site, channel=self.channel)
+                          name=u'Sub Home', slug=u'sub-home',
+                          description=u'sub home page', site=self.site,
+                          channel=self.channel)

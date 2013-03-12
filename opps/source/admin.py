@@ -22,7 +22,6 @@ class SourceAdmin(admin.ModelAdmin):
             'fields': ('published', 'date_available')}),
     )
 
-
     def save_model(self, request, obj, form, change):
         try:
             if obj.user:

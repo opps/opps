@@ -14,7 +14,6 @@ class ImagesAdmin(admin.ModelAdmin):
     raw_id_fields = ['source']
     exclude = ('user',)
 
-
     fieldsets = (
         (_(u'Identification'), {
             'fields': ('site', 'title', 'slug', 'image')}),
@@ -25,7 +24,6 @@ class ImagesAdmin(admin.ModelAdmin):
             'fields': ('published', 'date_available')}),
     )
 
-
     def save_model(self, request, obj, form, change):
         try:
             if obj.user:
@@ -34,7 +32,6 @@ class ImagesAdmin(admin.ModelAdmin):
             obj.user = request.user
 
         super(ImagesAdmin, self).save_model(request, obj, form, change)
-
 
 
 admin.site.register(Image, ImagesAdmin)

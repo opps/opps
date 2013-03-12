@@ -19,7 +19,7 @@ class OppsList(ListView):
         if not homepage:
             return None
         long_slug = self.kwargs.get('channel__long_slug',
-                homepage.long_slug)
+                                    homepage.long_slug)
         return 'channel/{0}.html'.format(long_slug)
 
     @property
@@ -48,4 +48,4 @@ class OppsDetail(DetailView):
         homepage = Channel.objects.get_homepage()
         long_slug = self.kwargs.get('channel__long_slug', homepage.long_slug)
         return Post.objects.filter(channel__long_slug=long_slug,
-                slug=self.kwargs['slug']).all()
+                                   slug=self.kwargs['slug']).all()

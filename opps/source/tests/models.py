@@ -16,7 +16,8 @@ class SourceModelTest(TestCase):
         self.user = User.objects.create(username=u'test', password='test')
         self.site = Site.objects.filter(name=u'example.com').get()
         self.source = Source.objects.create(name=u'Test site',
-                slug=u'test-site', user=self.user, site=self.site)
+                                            slug=u'test-site', user=self.user,
+                                            site=self.site)
 
     def test_check_create_test_site(self):
         """
@@ -50,4 +51,4 @@ class SourceModelTest(TestCase):
         create 2 source with same slug
         """
         self.assertRaises(IntegrityError, Source.objects.create,
-                name=u'test site', slug=u'test-site')
+                          name=u'test site', slug=u'test-site')

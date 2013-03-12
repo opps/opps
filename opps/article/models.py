@@ -7,20 +7,20 @@ from opps.image.models import Image
 from opps.source.models import Source
 
 
-
 class Post(Article):
 
     images = models.ManyToManyField(Image, null=True, blank=True,
-            related_name='post_images', through='PostImage')
+                                    related_name='post_images',
+                                    through='PostImage')
 
 
 class PostImage(models.Model):
     post = models.ForeignKey(Post, verbose_name=_(u'Post'), null=True,
-            blank=True, related_name='postimage_post',
-            on_delete=models.SET_NULL)
+                             blank=True, related_name='postimage_post',
+                             on_delete=models.SET_NULL)
     image = models.ForeignKey(Image, verbose_name=_(u'Image'), null=True,
-            blank=True, related_name='postimage_image',
-            on_delete=models.SET_NULL)
+                              blank=True, related_name='postimage_image',
+                              on_delete=models.SET_NULL)
     order = models.PositiveIntegerField(_(u'Order'), default=1)
 
     def __unicode__(self):
@@ -29,11 +29,11 @@ class PostImage(models.Model):
 
 class PostSource(models.Model):
     post = models.ForeignKey(Post, verbose_name=_(u'Post'), null=True,
-            blank=True, related_name='postsource_post',
-            on_delete=models.SET_NULL)
+                             blank=True, related_name='postsource_post',
+                             on_delete=models.SET_NULL)
     source = models.ForeignKey(Source, verbose_name=_(u'Source'), null=True,
-            blank=True, related_name='postsource_source',
-            on_delete=models.SET_NULL)
+                               blank=True, related_name='postsource_source',
+                               on_delete=models.SET_NULL)
     order = models.PositiveIntegerField(_(u'Order'), default=1)
 
     def __unicode__(self):

@@ -5,7 +5,6 @@ from django.utils.translation import ugettext_lazy as _
 from datetime import datetime
 
 
-
 class Date(models.Model):
 
     date_insert = models.DateTimeField(_(u"Date insert"), auto_now_add=True)

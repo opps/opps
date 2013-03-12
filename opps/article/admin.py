@@ -9,7 +9,6 @@ from opps.article.models import Post, PostImage, PostSource
 from redactor.widgets import RedactorEditor
 
 
-
 class PostImageInline(admin.TabularInline):
     model = PostImage
     fk_name = 'post'
@@ -50,8 +49,7 @@ class PostAdmin(admin.ModelAdmin):
         (_(u'Identification'), {
             'fields': ('title', 'slug',)}),
         (_(u'Content'), {
-            'fields': ('short_title', 'headline', 'content',
-                'main_image')}),
+            'fields': ('short_title', 'headline', 'content', 'main_image')}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
         (_(u'Publication'), {

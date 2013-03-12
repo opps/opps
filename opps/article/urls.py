@@ -6,7 +6,6 @@ from django.conf.urls import patterns, url, include
 from opps.article.views import OppsDetail, OppsList
 
 
-
 urlpatterns = patterns('',
         url(r'^redactor/', include('redactor.urls')),
         url(r'^$', OppsList.as_view(), name='home'),
