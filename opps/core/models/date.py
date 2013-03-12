@@ -2,8 +2,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from datetime import datetime
-
 
 class Date(models.Model):
 
@@ -12,7 +10,3 @@ class Date(models.Model):
 
     class Meta:
         abstract = True
-
-    def save(self, *args, **kwargs):
-        self.date_update = datetime.now()
-        super(Date, self).save(*args, **kwargs)
