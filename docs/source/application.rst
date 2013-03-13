@@ -5,6 +5,9 @@ Application
 Opps Base
 ---------
 
+.. image:: https://travis-ci.org/oppsproject/opps.png
+    :target: https://travis-ci.org/oppsproject/opps
+
 * `opps.core <https://github.com/oppsproject/opps/tree/master/opps/core>`_
 * `opps.article <https://github.com/oppsproject/opps/tree/master/opps/article>`_
 * `opps.channel <https://github.com/oppsproject/opps/tree/master/opps/channel>`_
