@@ -32,6 +32,7 @@ Quick links
    :maxdepth: 2
 
    installation
+   application
    contributing
 * `Source (github) <https://github.com/oppsproject/opps>`_
 * `Mailing list <http://groups.google.com/group/opps-developers>`_
