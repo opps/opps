@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 from opps.article.models import Post, PostImage, PostSource
+from opps.article.models import ArticleBox, ArticleBoxPost
 
 from redactor.widgets import RedactorEditor
 
@@ -29,6 +30,14 @@ class PostSourceInline(admin.TabularInline):
         'fields': ('source', 'order')})]
 
 
+class ArticleBoxPostInline(admin.TabularInline):
+    model = ArticleBoxPost
+    fk_name = 'articlebox'
+    raw_id_fields = ['post']
+    actions = None
+    extra = 1
+
+
 class PostAdminForm(forms.ModelForm):
     class Meta:
         model = Post
@@ -43,7 +52,7 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ['title', 'headline']
     inlines = [PostImageInline, PostSourceInline]
     exclude = ('user',)
-    raw_id_fields = ['main_image', 'channel']
+    raw_id_fields = ['main_image', 'channel', 'articlebox']
 
     fieldsets = (
         (_(u'Identification'), {
@@ -51,7 +60,7 @@ class PostAdmin(admin.ModelAdmin):
         (_(u'Content'), {
             'fields': ('short_title', 'headline', 'content', 'main_image')}),
         (_(u'Relationships'), {
-            'fields': ('channel',)}),
+            'fields': ('channel', 'articlebox',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
@@ -68,4 +77,19 @@ class PostAdmin(admin.ModelAdmin):
         super(PostAdmin, self).save_model(request, obj, form, change)
 
 
+class ArticleBoxAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ["name"]}
+    inlines = [ArticleBoxPostInline]
+    exclude = ('user',)
+
+    def save_model(self, request, obj, form, change):
+        try:
+            if obj.user:
+                pass
+        except User.DoesNotExist:
+            obj.user = request.user
+
+        super(ArticleBoxAdmin, self).save_model(request, obj, form, change)
+
 admin.site.register(Post, PostAdmin)
+admin.site.register(ArticleBox, ArticleBoxAdmin)
