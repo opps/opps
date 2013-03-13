@@ -27,7 +27,7 @@ class Channel(Publishable):
     description = models.CharField(_(u"Description"),
                                    max_length=255, null=True, blank=True)
     homepage = models.BooleanField(_(u"Is home page?"), default=False)
-    position = models.IntegerField(_(u"Position"), default=1)
+    position = models.IntegerField(_(u"Position"), default=0)
     channel = models.ForeignKey('self', related_name='subchannel',
                                 null=True, blank=True)
 
