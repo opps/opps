@@ -4,7 +4,7 @@ Application
 Opps Base
 ---------
 
-* opps.core
+* `opps.core <https://github.com/oppsproject/opps/tree/master/opps/core>`_
 * opps.article
 * opps.channel
 * opps.source
@@ -12,4 +12,4 @@ Opps Base
 Opps Application
 ----------------
 
-* `opps.poll <https://github.com/oppsproject/opps.poll>`_
+* `opps.poll <https://github.com/oppsproject/opps.poll>`_ in dev
