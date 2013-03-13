@@ -5,7 +5,7 @@ Opps Base
 ---------
 
 * `opps.core <https://github.com/oppsproject/opps/tree/master/opps/core>`_
-* opps.article
+* `opps.article <https://github.com/oppsproject/opps/tree/master/opps/article>`_
 * opps.channel
 * opps.source
 
