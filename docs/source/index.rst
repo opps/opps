@@ -8,11 +8,6 @@
 
 An *Open Source Content Management Platform* for the **magazine** websites and **high-traffic**, using the Django Framework.
 
-Version
-=======
-
-**0.1.2**
-
 .. image:: https://travis-ci.org/oppsproject/opps.png
     :target: https://travis-ci.org/oppsproject/opps
 
