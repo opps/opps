@@ -69,4 +69,4 @@ class ArticleBoxPost(models.Model):
 
 
     def __unicode__(self):
-        return self.articlebox.name
+        return "{0}-{1}".format(self.articlebox.slug, self.post.slug)
