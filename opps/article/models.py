@@ -13,6 +13,12 @@ class Post(Article):
     images = models.ManyToManyField(Image, null=True, blank=True,
                                     related_name='post_images',
                                     through='PostImage')
+    articlebox = models.ForeignKey(
+            'article.ArticleBox',
+            verbose_name=_(u"Article Box"),
+            null=True,
+            blank=True,
+            on_delete=models.SET_NULL)
 
 
 class PostImage(models.Model):
@@ -63,4 +69,4 @@ class ArticleBoxPost(models.Model):
 
 
     def __unicode__(self):
-        return self.post.slug
+        return self.articlebox.name
