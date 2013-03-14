@@ -52,7 +52,7 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ['title', 'headline']
     inlines = [PostImageInline, PostSourceInline]
     exclude = ('user',)
-    raw_id_fields = ['main_image', 'channel', 'articlebox']
+    raw_id_fields = ['main_image', 'channel']
 
     fieldsets = (
         (_(u'Identification'), {
@@ -60,7 +60,7 @@ class PostAdmin(admin.ModelAdmin):
         (_(u'Content'), {
             'fields': ('short_title', 'headline', 'content', 'main_image')}),
         (_(u'Relationships'), {
-            'fields': ('channel', 'articlebox',)}),
+            'fields': ('channel',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
