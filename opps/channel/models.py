@@ -31,14 +31,6 @@ class Channel(Publishable):
     channel = models.ForeignKey('self', related_name='subchannel',
                                 null=True, blank=True)
 
-    articlebox = models.ForeignKey(
-            'article.ArticleBox',
-            verbose_name=_(u"Article Box"),
-            null=True,
-            blank=True,
-            on_delete=models.SET_NULL)
-
-
     objects = ChannelManager()
 
     def __unicode__(self):
