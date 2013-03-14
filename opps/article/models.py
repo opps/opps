@@ -46,6 +46,10 @@ class ArticleBox(Publishable):
     name = models.CharField(_(u"Box name"), max_length=140)
     slug = models.SlugField(_(u"Slug"), max_length=150,
                             unique=True, db_index=True)
+    post = models.ForeignKey(Post, null=True, blank=True,
+                             on_delete=models.SET_NULL)
+    channel = models.ForeignKey(Channel, null=True, blank=True,
+                             on_delete=models.SET_NULL)
     posts = models.ManyToManyField(Post, null=True, blank=True,
                                    related_name='articlebox_post',
                                    through='ArticleBoxPost')
