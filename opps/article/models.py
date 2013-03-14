@@ -6,6 +6,7 @@ from opps.core.models import Article
 from opps.core.models import Publishable
 from opps.image.models import Image
 from opps.source.models import Source
+from opps.channel.models import Channel
 
 
 class Post(Article):
@@ -13,12 +14,6 @@ class Post(Article):
     images = models.ManyToManyField(Image, null=True, blank=True,
                                     related_name='post_images',
                                     through='PostImage')
-    articlebox = models.ForeignKey(
-            'article.ArticleBox',
-            verbose_name=_(u"Article Box"),
-            null=True,
-            blank=True,
-            on_delete=models.SET_NULL)
 
 
 class PostImage(models.Model):
