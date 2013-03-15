@@ -13,6 +13,7 @@ Opps Base
 * `opps.channel <https://github.com/oppsproject/opps/tree/master/opps/channel>`_
 * `opps.source <https://github.com/oppsproject/opps/tree/master/opps/source>`_
 * `opps.image <https://github.com/oppsproject/opps/tree/master/opps/image>`_
+* `opps.sitemaps <https://github.com/oppsproject/opps/tree/master/opps/sitemaps>`_
 
 
 Opps Application
