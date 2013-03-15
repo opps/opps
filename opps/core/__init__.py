@@ -12,11 +12,16 @@ settings.INSTALLED_APPS += (
     'opps.source',
     'django.contrib.redirects',
     'django_thumbor',
+    'googl',
     'redactor',
     'tagging',)
 
 settings.MIDDLEWARE_CLASSES += (
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',)
+
+# Opps
+getattr(settings, 'OPPS_SHORT', 'googl')
+getattr(settings, 'OPPS_SHORT_URL', 'googl.short.GooglUrlShort')
 
 # redactor
 getattr(settings, 'REDACTOR_OPTIONS', {'lang': 'en'})
