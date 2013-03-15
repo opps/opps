@@ -14,6 +14,7 @@ settings.INSTALLED_APPS += (
     'django_thumbor',
     'googl',
     'redactor',
+    'static_sitemaps',
     'tagging',)
 
 settings.MIDDLEWARE_CLASSES += (
@@ -22,6 +23,10 @@ settings.MIDDLEWARE_CLASSES += (
 # Opps
 getattr(settings, 'OPPS_SHORT', 'googl')
 getattr(settings, 'OPPS_SHORT_URL', 'googl.short.GooglUrlShort')
+
+# Sitemap
+if not hasattr(settings, 'STATICSITEMAPS_ROOT_SITEMAP'):
+    settings.STATICSITEMAPS_ROOT_SITEMAP = 'opps.sitemaps.feed.sitemaps'
 
 # redactor
 getattr(settings, 'REDACTOR_OPTIONS', {'lang': 'en'})
