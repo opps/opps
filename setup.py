@@ -14,6 +14,7 @@ install_requires = ["Django==1.5",
                     'django-thumbor==0.2',
                     "django-tagging==0.3.1",
                     "django-googl==0.1",
+                    "django-static-sitemaps==1.5.1",
                     "django-wysiwyg-redactor==0.3.1"]
 
 classifiers = ["Development Status :: 4 - Beta",
