@@ -51,12 +51,13 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ['date_available', 'published', 'channel']
     search_fields = ['title', 'headline']
     inlines = [PostImageInline, PostSourceInline]
+    readonly_fields = ('get_absolute_url', 'short_url',)
     exclude = ('user',)
     raw_id_fields = ['main_image', 'channel']
 
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('title', 'slug',)}),
+            'fields': ('title', 'slug', 'get_absolute_url', 'short_url',)}),
         (_(u'Content'), {
             'fields': ('short_title', 'headline', 'content', 'main_image')}),
         (_(u'Relationships'), {
