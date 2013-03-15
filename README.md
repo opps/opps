@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/oppsproject/opps.png)](https://travis-ci.org/oppsproject/opps)
 
-Websites magazines and high-traffic
+An Open Source Content Management Platform for the magazine websites and high-traffic, using the Django Framework.
 
 
 # Issues
@@ -12,13 +12,7 @@ Have a bug/feature request? Please create an issue here on GitHub!
 https://github.com/oppsproject/opps/issues
 
 
-# Author
-
-* [Thiago Avelino](https://github.com/avelino)
-* [Sergio Oliveira](https://github.com/seocam)
-* [Guilherme Gondim](https://github.com/semente)
-* [Gilson Filho](https://github.com/gilsondev)
-* [Davi Oliveira](https://github.com/arloc)
+# [Opps Team](http://www.oppsproject.org/en/latest/contributing.html#the-team)
 
 
 # License
