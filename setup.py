@@ -3,8 +3,8 @@
 
 from setuptools import setup, find_packages
 
+import os
 import opps
-
 
 
 install_requires = ["Django==1.5",
@@ -16,6 +16,9 @@ install_requires = ["Django==1.5",
                     "django-googl==0.1",
                     "django-static-sitemaps==1.5.1",
                     "django-wysiwyg-redactor==0.3.1"]
+
+if 'DJANGO' in os.environ:
+    install_requires = ["Django==1.5", "django-tagging==0.3.1"]
 
 classifiers = ["Development Status :: 4 - Beta",
                "Intended Audience :: Developers",
