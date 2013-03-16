@@ -16,9 +16,13 @@ install_requires = ["Django==1.5",
                     "django-googl==0.1",
                     "django-static-sitemaps==1.5.1",
                     "django-wysiwyg-redactor==0.3.1"]
-
-if 'DJANGO' in os.environ:
-    install_requires = ["Django==1.5", "django-tagging==0.3.1"]
+if 'OPPS_TRAVIS' in os.environ:
+    install_requires = ["Django==1.5",
+                        "django-tagging==0.3.1",
+                        "django-googl==0.1",
+                        "django-static-sitemaps==1.5.1"
+                        "django-thumbor==0.2",
+                        "django-wysiwyg-redactor==0.3.1"]
 
 classifiers = ["Development Status :: 4 - Beta",
                "Intended Audience :: Developers",

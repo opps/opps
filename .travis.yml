@@ -3,7 +3,7 @@ python:
   - "2.7"
   - "2.6"
 install:
-   - make install
+   - make travis
 env:
   - DJANGO="1.5.x"
 script: make test

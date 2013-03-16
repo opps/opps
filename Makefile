@@ -4,6 +4,12 @@ test: pep8
 	DJANGO_SETTINGS_MODULE=dev_settings \
 	django-admin.py test core channel source
 
+.PHONY: travis
+travis:
+	pip install -r requirements.txt --use-mirrors
+	export OPPS_TRAVIS=True
+	python setup.py develop 
+
 .PHONY: install
 install:
 	pip install -r requirements.txt --use-mirrors
