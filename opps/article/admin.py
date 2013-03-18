@@ -80,8 +80,21 @@ class PostAdmin(admin.ModelAdmin):
 
 class ArticleBoxAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["name"]}
+    list_display = ['name', 'date_available', 'published']
+    list_filter = ['date_available', 'published']
     inlines = [ArticleBoxPostInline]
     exclude = ('user',)
+    raw_id_fields = ['channel', 'posts']
+
+    fieldets = (
+        (_(u'Identification'), {
+            'fields': ('site', 'name', 'slug')}),
+        (_(u'Relationships'), {
+            'fields': ('channel', 'posts')}),
+        (_(u'Publication'), {
+            'classes': ('extrapretty'),
+            'fields': ('published', 'date_available')}),
+    )
 
     def save_model(self, request, obj, form, change):
         try:
