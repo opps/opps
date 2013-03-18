@@ -12,7 +12,7 @@ from opps.source.models import Source
 
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
-    filename = "{0}-{1}.{2}".format(uuid.uuid4(), instance.title, ext)
+    filename = "{0}-{1}.{2}".format(uuid.uuid4(), instance.slug, ext)
     d = datetime.now()
     folter = d.strftime("images/%Y/%m/%d/")
     return os.path.join(folter, filename)
