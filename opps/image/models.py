@@ -17,6 +17,7 @@ def get_file_path(instance, filename):
     folter = d.strftime("images/%Y/%m/%d/")
     return os.path.join(folter, filename)
 
+
 class Image(Publishable):
 
     title = models.CharField(_(u"Title"), max_length=140)
