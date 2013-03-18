@@ -23,12 +23,10 @@ class Article(Publishable):
 
     main_image = models.ForeignKey('image.Image',
                                    verbose_name=_(u'Main Image'), blank=False,
-                                   null=True, on_delete=models.SET_NULL,
-                                   related_name='article_main_image')
+                                   null=True, on_delete=models.SET_NULL)
 
     sources = models.ManyToManyField('source.Source', null=True, blank=True,
-                                     related_name='post_sources',
-                                     through='PostSource')
+                            through=models.get_model('source', 'PostSource'))
 
     tags = TagField(null=True, verbose_name=_(u"Tags"))
 
