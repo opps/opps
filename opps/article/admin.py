@@ -84,13 +84,13 @@ class ArticleBoxAdmin(admin.ModelAdmin):
     list_filter = ['date_available', 'published']
     inlines = [ArticleBoxPostInline]
     exclude = ('user',)
-    raw_id_fields = ['channel', 'posts']
+    raw_id_fields = ['channel', 'post']
 
     fieldets = (
         (_(u'Identification'), {
             'fields': ('site', 'name', 'slug')}),
         (_(u'Relationships'), {
-            'fields': ('channel', 'posts')}),
+            'fields': ('channel', 'post')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
