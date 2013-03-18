@@ -2,7 +2,7 @@
 .PHONY: test
 test: pep8
 	DJANGO_SETTINGS_MODULE=dev_settings \
-	django-admin.py test channel source
+	django-admin.py test core channel source
 
 .PHONY: travis
 travis:
