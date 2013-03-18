@@ -16,4 +16,4 @@ class Image(Publishable):
     source = models.ForeignKey(Source, null=True, blank=True)
 
     def __unicode__(self):
-        return self.title
+        return "{0}-{1}".format(self.id, self.slug)
