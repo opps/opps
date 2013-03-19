@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.utils.translation import ugettext_lazy as _
 import pkg_resources
-
 
 pkg_resources.declare_namespace(__name__)
 trans_app_label = _('Opps')
