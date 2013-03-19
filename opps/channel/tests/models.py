@@ -113,3 +113,12 @@ class ChannelModelTest(TestCase):
         channel = Channel.objects.get_homepage()
         self.assertTrue(channel)
         self.assertEqual(channel.slug, self.channel.slug)
+
+    def test_not_set_homeoage(self):
+        """
+        not set channel home page, return none
+        """
+
+        channel = Channel.objects.get_homepage()
+        self.assertEqual(None, channel)
+        self.assertFalse(channel)
