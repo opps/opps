@@ -30,8 +30,10 @@ if not hasattr(settings, 'STATICSITEMAPS_ROOT_SITEMAP'):
     settings.STATICSITEMAPS_ROOT_SITEMAP = 'opps.sitemaps.feed.sitemaps'
 
 # Haystack
-getattr(settings, 'HAYSTACK_CONNECTIONS', {
-    'default': {'ENGINE': 'haystack.backends.simple_backend.SimpleEngine'}})
+if not hasattr(settings, 'HAYSTACK_CONNECTIONS'):
+    settings.HAYSTACK_CONNECTIONS = {
+            'default': {
+                'ENGINE': 'haystack.backends.simple_backend.SimpleEngine'}}
 
 # redactor
 getattr(settings, 'REDACTOR_OPTIONS', {'lang': 'en'})
