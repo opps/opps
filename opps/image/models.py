@@ -5,6 +5,7 @@ from datetime import datetime
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 
 from opps.core.models import Publishable
 from opps.source.models import Source
@@ -29,3 +30,8 @@ class Image(Publishable):
 
     def __unicode__(self):
         return "{0}-{1}".format(self.id, self.slug)
+
+    def get_absolute_url(self):
+        if self.date_available<=timezone.now() and self.published==True:
+            return self.image.url
+        return u""
