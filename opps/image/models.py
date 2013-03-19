@@ -32,6 +32,6 @@ class Image(Publishable):
         return "{0}-{1}".format(self.id, self.slug)
 
     def get_absolute_url(self):
-        if self.date_available<=timezone.now() and self.published==True:
+        if self.date_available <= timezone.now() and self.published:
             return self.image.url
         return u""
