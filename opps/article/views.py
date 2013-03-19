@@ -52,7 +52,10 @@ class OppsDetail(DetailView):
     @property
     def queryset(self):
         homepage = Channel.objects.get_homepage()
-        long_slug = self.kwargs.get('channel__long_slug', homepage.long_slug)
+        slug = None
+        if homepage:
+            slug = homepage.long_slug
+        long_slug = self.kwargs.get('channel__long_slug', slug)
         return Post.objects.filter(channel__long_slug=long_slug,
                                    slug=self.kwargs['slug'],
                                    date_available__lte=timezone.now(),
