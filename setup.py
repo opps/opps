@@ -54,6 +54,7 @@ setup(name='opps',
         download_url="https://github.com/avelino/opps/tarball/master",
         license=opps.__license__,
         packages=find_packages(exclude=('doc', 'docs',)),
+        namespace_packages=['opps'],
         package_dir={'opps': 'opps'},
         install_requires=install_requires,
         include_package_data=True,)
