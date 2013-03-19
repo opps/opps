@@ -18,13 +18,9 @@ install_requires = ["Django==1.5",
                     "django-wysiwyg-redactor==0.3.1",
                     "django-haystack==1.2.7"]
 if 'OPPS_TRAVIS' in os.environ:
-    install_requires = ["Django==1.5",
-                        "django-tagging==0.3.1",
-                        "django-googl==0.1",
-                        "django-static-sitemaps==1.5.1"
-                        "django-thumbor==0.2",
-                        "django-wysiwyg-redactor==0.3.1",
-                        "django-haystack==1.2.7"]
+    install_requires.remove('south>=0.7')
+    install_requires.remove('Pillow==1.7.8')
+    install_requires.remove('thumbor==3.7.1')
 
 classifiers = ["Development Status :: 4 - Beta",
                "Intended Audience :: Developers",
