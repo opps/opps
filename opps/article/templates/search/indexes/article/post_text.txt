@@ -1,0 +1,15 @@
+{{ object.content }}
+{{ object.content|safe }}
+{{ object.content|striptags }}
+{{ object.title }}
+{{ object.title|slugfy }}
+{{ object.title|safe }}
+{{ object.title|striptags }}
+{{ object.headline }}
+{{ object.headline|slugfy }}
+{{ object.headline|safe }}
+{{ object.headline|striptags }}
+{{ object.short_title }}
+{{ object.short_title|slugfy }}
+{{ object.short_title|safe }}
+{{ object.short_title|striptags }}
