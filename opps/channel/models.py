@@ -38,6 +38,9 @@ class Channel(Publishable):
             return "%s/%s" % (self.channel, self.slug)
         return "%s/%s" % (self.site.domain, self.slug)
 
+    def get_absolute_url(self):
+        return "http://{0}/".format(self.__unicode__())
+
     def clean(self):
 
         try:
