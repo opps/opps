@@ -4,6 +4,7 @@
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 
 from opps.article.models import Post
 from opps.channel.models import Channel
@@ -25,10 +26,15 @@ class OppsList(ListView):
     @property
     def queryset(self):
         if not self.kwargs.get('channel__long_slug'):
-            return Post.objects.filter(channel__homepage=True).all()
+            return Post.objects.filter(channel__homepage=True,
+                                       date_available__lte=timezone.now(),
+                                       published=True).all()
         long_slug = self.kwargs['channel__long_slug'][:-1]
-        get_object_or_404(Channel, long_slug=long_slug)
-        return Post.objects.filter(channel__long_slug=long_slug).all()
+        get_object_or_404(Channel, long_slug=long_slug,
+                          date_available__lte=timezone.now(), published=True)
+        return Post.objects.filter(channel__long_slug=long_slug,
+                                   date_available__lte=timezone.now(),
+                                   published=True).all()
 
 
 class OppsDetail(DetailView):
