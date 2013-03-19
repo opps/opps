@@ -40,6 +40,7 @@ The core team behind **opps** (in order of joining the project):
 * `Guilherme Gondim <https://github.com/semente>`_
 * `Gilson Filho <https://github.com/gilsondev>`_
 * `Davi Oliveira <https://github.com/arloc>`_
+* `Bruno Rocha <https://github.com/rochacbruno>`_
 
 Other contributors
 ******************
