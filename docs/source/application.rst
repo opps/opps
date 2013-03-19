@@ -19,4 +19,4 @@ Opps Base
 Opps Application
 ----------------
 
-* `opps.poll <https://github.com/oppsproject/opps.poll>`_ in dev
+* `opps.poll <https://github.com/oppsproject/opps-poll>`_
