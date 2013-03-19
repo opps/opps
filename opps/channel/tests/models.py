@@ -101,3 +101,15 @@ class ChannelModelTest(TestCase):
                           name=u'Sub Home', slug=u'sub-home',
                           description=u'sub home page', site=self.site,
                           channel=self.channel)
+
+    def test_channel_is_homepage(self):
+        """
+        check channel is home page
+        """
+        self.channel.homepage = True
+        self.channel.published = True
+        self.channel.save()
+
+        channel = Channel.objects.get_homepage()
+        self.assertTrue(channel)
+        self.assertEqual(channel.slug, self.channel.slug)
