@@ -12,6 +12,7 @@ settings.INSTALLED_APPS += (
     'opps.source',
     'django.contrib.redirects',
     'django_thumbor',
+    'haystack',
     'googl',
     'redactor',
     'static_sitemaps',
