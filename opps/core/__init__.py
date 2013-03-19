@@ -28,6 +28,10 @@ getattr(settings, 'OPPS_SHORT_URL', 'googl.short.GooglUrlShort')
 if not hasattr(settings, 'STATICSITEMAPS_ROOT_SITEMAP'):
     settings.STATICSITEMAPS_ROOT_SITEMAP = 'opps.sitemaps.feed.sitemaps'
 
+# Haystack
+getattr(settings, 'HAYSTACK_CONNECTIONS', {
+    'default': {'ENGINE': 'haystack.backends.simple_backend.SimpleEngine'}})
+
 # redactor
 getattr(settings, 'REDACTOR_OPTIONS', {'lang': 'en'})
 getattr(settings, 'REDACTOR_UPLOAD', 'uploads/')
