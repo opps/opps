@@ -15,7 +15,7 @@ def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = "{0}-{1}.{2}".format(uuid.uuid4(), instance.slug, ext)
     d = datetime.now()
-    folter = d.strftime("images/%Y/%m/%d/")
+    folter = "images/{0}".format(d.strftime("%Y/%m/%d/"))
     return os.path.join(folter, filename)
 
 
