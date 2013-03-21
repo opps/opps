@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from django.core.paginator import Paginator, InvalidPage
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from django.http import Http404
+
+from haystack.views import SearchView
 
 from opps.article.models import Post
 from opps.channel.models import Channel
@@ -60,3 +64,17 @@ class OppsDetail(DetailView):
                                    slug=self.kwargs['slug'],
                                    date_available__lte=timezone.now(),
                                    published=True).all()
+
+
+class Search(SearchView):
+    def get_results(self):
+        return self.form.search().order_by('-date_available')
+
+    def build_page(self):
+        paginator = Paginator(self.results, self.results_per_page)
+        try:
+            paginator.page(int(self.request.GET.get('page', 1)))
+        except InvalidPage:
+            raise Http404("No such page!")
+
+        return (None, self.results)
