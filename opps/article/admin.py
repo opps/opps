@@ -44,13 +44,11 @@ class PostAdminForm(forms.ModelForm):
         widgets = {'content': RedactorEditor()}
 
 
-class PostAdmin(admin.ModelAdmin):
-    form = PostAdminForm
+class ArticleAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["title"]}
     list_display = ['title', 'channel', 'date_available', 'published']
     list_filter = ['date_available', 'published', 'channel']
     search_fields = ['title', 'headline']
-    inlines = [PostImageInline, PostSourceInline]
     readonly_fields = ('get_absolute_url', 'short_url',)
     exclude = ('user',)
     raw_id_fields = ['main_image', 'channel']
@@ -75,7 +73,12 @@ class PostAdmin(admin.ModelAdmin):
         except User.DoesNotExist:
             obj.user = request.user
 
-        super(PostAdmin, self).save_model(request, obj, form, change)
+        super(ArticleAdmin, self).save_model(request, obj, form, change)
+
+
+class PostAdmin(ArticleAdmin):
+    form = PostAdminForm
+    inlines = [PostImageInline, PostSourceInline]
 
 
 class ArticleBoxAdmin(admin.ModelAdmin):
