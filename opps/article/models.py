@@ -22,8 +22,6 @@ class Article(Publishable):
     headline = models.TextField(_(u"Headline"), blank=True)
     channel = models.ForeignKey('channel.Channel', verbose_name=_(u"Channel"))
 
-    content = models.TextField(_(u"Content"))
-
     main_image = models.ForeignKey('image.Image',
                                    verbose_name=_(u'Main Image'), blank=False,
                                    null=True, on_delete=models.SET_NULL)
@@ -54,6 +52,7 @@ class Article(Publishable):
 
 class Post(Article):
 
+    content = models.TextField(_(u"Content"))
     images = models.ManyToManyField(Image, null=True, blank=True,
                                     related_name='post_images',
                                     through='PostImage')
