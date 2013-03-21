@@ -1,0 +1,10 @@
+Result: {{ query }} ({% if query %}{{ page.count }}{% endif %})
+
+
+{% if page.count == 0 %}
+not result
+{% endif %}
+
+  {% for obj in page %}
+  {{ obj.date_available }}
+  {% endfor %}
