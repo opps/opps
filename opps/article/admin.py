@@ -89,7 +89,7 @@ class ArticleBoxAdmin(admin.ModelAdmin):
     exclude = ('user',)
     raw_id_fields = ['channel', 'post']
 
-    fieldets = (
+    fieldsets = (
         (_(u'Identification'), {
             'fields': ('site', 'name', 'slug')}),
         (_(u'Relationships'), {
