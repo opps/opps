@@ -17,9 +17,9 @@ class ChannelModelTest(TestCase):
     def setUp(self):
         self.user = User.objects.create(username=u'test', password='test')
         self.site = Site.objects.filter(name=u'example.com').get()
-        self.channel = Channel.objects.create(name=u'Home', slug=u'home',
-                                              description=u'home page',
-                                              site=self.site, user=self.user)
+        self.parent = Channel.objects.create(name=u'Home', slug=u'home',
+                                             description=u'home page',
+                                             site=self.site, user=self.user)
 
     def test_check_create_home(self):
         """
@@ -27,7 +27,7 @@ class ChannelModelTest(TestCase):
         """
         home = Channel.objects.filter(slug=u'home').get()
         self.assertTrue(home)
-        self.assertEqual(home, self.channel)
+        self.assertEqual(home, self.parent)
 
     def test_not_is_published(self):
         """
@@ -41,9 +41,9 @@ class ChannelModelTest(TestCase):
         """
         is_published true on home channel
         """
-        self.channel.published = True
-        self.channel.date_available = timezone.now() - timedelta(hours=1)
-        self.channel.save()
+        self.parent.published = True
+        self.parent.date_available = timezone.now() - timedelta(hours=1)
+        self.parent.save()
 
         home = Channel.objects.filter(slug=u'home').get()
         self.assertTrue(home.is_published())
@@ -52,11 +52,11 @@ class ChannelModelTest(TestCase):
     def test_create_sub_channel_home(self):
         channel = Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
                                          description=u'sub home page',
-                                         site=self.site, channel=self.channel,
+                                         site=self.site, parent=self.parent,
                                          user=self.user)
 
         self.assertTrue(channel)
-        self.assertEqual(channel.channel, self.channel)
+        self.assertEqual(channel.parent, self.parent)
 
     def test_not_is_published_sub_channel(self):
         """
@@ -65,7 +65,7 @@ class ChannelModelTest(TestCase):
         subchannel = Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
                                             description=u'sub home page',
                                             site=self.site, user=self.user,
-                                            channel=self.channel)
+                                            parent=self.parent)
 
         subhome = Channel.objects.filter(slug=u'sub-home').get()
         self.assertFalse(subhome.is_published())
@@ -79,7 +79,7 @@ class ChannelModelTest(TestCase):
         subchannel = Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
                                             description=u'sub home page',
                                             site=self.site, user=self.user,
-                                            channel=self.channel)
+                                            parent=self.parent)
         subchannel.published = True
         subchannel.date_available = timezone.now() - timedelta(hours=1)
         subchannel.save()
@@ -95,24 +95,24 @@ class ChannelModelTest(TestCase):
         """
         Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
                                description=u'sub home page', site=self.site,
-                               channel=self.channel, user=self.user)
+                               parent=self.parent, user=self.user)
 
         self.assertRaises(IntegrityError, Channel.objects.create,
                           name=u'Sub Home', slug=u'sub-home',
                           description=u'sub home page', site=self.site,
-                          channel=self.channel)
+                          parent=self.parent)
 
     def test_channel_is_homepage(self):
         """
         check channel is home page
         """
-        self.channel.homepage = True
-        self.channel.published = True
-        self.channel.save()
+        self.parent.homepage = True
+        self.parent.published = True
+        self.parent.save()
 
         channel = Channel.objects.get_homepage()
         self.assertTrue(channel)
-        self.assertEqual(channel.slug, self.channel.slug)
+        self.assertEqual(channel.slug, self.parent.slug)
 
     def test_not_set_homeoage(self):
         """
