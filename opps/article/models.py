@@ -56,6 +56,8 @@ class Post(Article):
     images = models.ManyToManyField(Image, null=True, blank=True,
                                     related_name='post_images',
                                     through='PostImage')
+    album = models.ForeignKey('Album', verbose_name=_(u'Album'), null=True,
+                              blank=True, on_delete=models.SET_NULL)
 
 
 class Album(Article):
