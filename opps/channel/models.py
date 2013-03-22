@@ -16,6 +16,10 @@ class ChannelManager(models.Manager):
         except Channel.DoesNotExist:
             return None
 
+    def get_all_children(self):
+        channel = Channel.objects.filter(channel=None)
+        return [ch.get_channel_children() for ch in channel]
+
 
 class Channel(Publishable):
 
@@ -40,6 +44,13 @@ class Channel(Publishable):
 
     def get_absolute_url(self):
         return "http://{0}/".format(self.__unicode__())
+
+    def get_channel_children(self, include_self=True):
+        r = []
+        r.append(self)
+        for c in Channel.objects.filter(channel=self):
+            r.append(c.get_channel_children(include_self=False))
+        return r
 
     def clean(self):
 
