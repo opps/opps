@@ -95,6 +95,7 @@ class AlbumAdminForm(forms.ModelForm):
     class Meta:
         model = Album
 
+
 class AlbumAdmin(ArticleAdmin):
     form = AlbumAdminForm
     inlines = [AlbumImageInline]
