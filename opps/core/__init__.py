@@ -16,10 +16,14 @@ settings.INSTALLED_APPS += (
     'googl',
     'redactor',
     'static_sitemaps',
-    'tagging',)
+    'tagging',
+    'mptt',)
 
 settings.MIDDLEWARE_CLASSES += (
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',)
+
+settings.TEMPLATE_CONTEXT_PROCESSORS += (
+    'opps.channel.context_processors.channel_context',)
 
 # Opps
 getattr(settings, 'OPPS_SHORT', 'googl')
