@@ -58,6 +58,13 @@ class Post(Article):
                                     through='PostImage')
 
 
+class Album(Article):
+
+    images = models.ManyToManyField(Image, null=True, blank=True,
+                                    related_name='album_images',
+                                    through='PostImage')
+
+
 class PostImage(models.Model):
     post = models.ForeignKey(Post, verbose_name=_(u'Post'), null=True,
                              blank=True, related_name='postimage_post',
