@@ -67,8 +67,7 @@ class Album(Article):
 
 class ManyToImage(models.Model):
     image = models.ForeignKey(Image, verbose_name=_(u'Image'), null=True,
-                              blank=True, related_name='postimage_image',
-                              on_delete=models.SET_NULL)
+                              blank=True, on_delete=models.SET_NULL)
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
     def __unicode__(self):
@@ -95,6 +94,12 @@ class PostSource(models.Model):
 
     def __unicode__(self):
         return self.source.slug
+
+
+class AlbumImage(ManyToImage):
+    album = models.ForeignKey(Album, verbose_name=_(u'Album'), null=True,
+                             blank=True, related_name='albumimage_post',
+                             on_delete=models.SET_NULL)
 
 
 class ArticleBox(Publishable):
