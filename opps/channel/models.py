@@ -3,6 +3,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 
+from mptt.models import MPTTModel, TreeForeignKey
+
 from opps.core.models import Publishable
 from opps.channel.utils import generate_long_slug
 
@@ -16,12 +18,8 @@ class ChannelManager(models.Manager):
         except Channel.DoesNotExist:
             return None
 
-    def get_all_children(self):
-        channel = Channel.objects.filter(channel=None)
-        return [ch.get_channel_children() for ch in channel]
 
-
-class Channel(Publishable):
+class Channel(MPTTModel, Publishable):
 
     name = models.CharField(_(u"Name"), max_length=60, unique=True)
     slug = models.SlugField(u"URL", max_length=150, unique=True,
@@ -32,25 +30,21 @@ class Channel(Publishable):
                                    max_length=255, null=True, blank=True)
     homepage = models.BooleanField(_(u"Is home page?"), default=False)
     position = models.IntegerField(_(u"Position"), default=0)
-    channel = models.ForeignKey('self', related_name='subchannel',
+    parent = TreeForeignKey('self', related_name='subchannel',
                                 null=True, blank=True)
 
     objects = ChannelManager()
 
+    class MPTTMeta:
+        order_insertion_by = ['position', 'name']
+
     def __unicode__(self):
-        if self.channel:
-            return "%s/%s" % (self.channel, self.slug)
+        if self.parent:
+            return "%s/%s" % (self.parent, self.slug)
         return "%s/%s" % (self.site.domain, self.slug)
 
     def get_absolute_url(self):
         return "http://{0}/".format(self.__unicode__())
-
-    def get_channel_children(self, include_self=True):
-        r = []
-        r.append(self)
-        for c in Channel.objects.filter(channel=self):
-            r.append(c.get_channel_children(include_self=False))
-        return r
 
     def clean(self):
 
@@ -74,7 +68,7 @@ class Channel(Publishable):
     def save(self, *args, **kwargs):
 
         if not self.long_slug:
-            self.long_slug = generate_long_slug(self.channel, self.slug,
+            self.long_slug = generate_long_slug(self.parent, self.slug,
                                                 self.site.domain)
 
         super(Channel, self).save(*args, **kwargs)
