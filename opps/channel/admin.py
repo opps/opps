@@ -9,9 +9,9 @@ from opps.channel.utils import generate_long_slug
 
 class ChannelAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ['name', 'parent', 'date_available', 'homepage',
+    list_display = ['name', 'parent', 'site', 'date_available', 'homepage',
                     'position', 'published']
-    list_filter = ['date_available', 'published', 'homepage', 'parent']
+    list_filter = ['date_available', 'published', 'site', 'homepage', 'parent']
     search_fields = ['name']
     exclude = ('user', 'long_slug')
     raw_id_fields = ['parent']
