@@ -55,7 +55,14 @@ class OppsDetail(DetailView):
         if not homepage:
             return None
         long_slug = self.kwargs.get('channel__long_slug', homepage.long_slug)
-        return 'article/{0}/{1}.html'.format(long_slug, self.kwargs['slug'])
+
+        domain_folter = 'article'
+        if self.site.id > 1:
+            domain_folter = "{0}/article".format(self.site)
+
+        return '{0}/{1}/{2}.html'.format(domain_folter,
+                                         long_slug,
+                                         self.kwargs['slug'])
 
     @property
     def queryset(self):
