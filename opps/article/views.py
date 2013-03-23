@@ -26,7 +26,12 @@ class OppsList(ListView):
             return None
         long_slug = self.kwargs.get('channel__long_slug',
                                     homepage.long_slug)
-        return 'channel/{0}.html'.format(long_slug)
+
+        domain_folter = 'channel'
+        if self.site.id > 1:
+            domain_folter = "{0}/channel".format(self.site)
+
+        return '{0}/{1}.html'.format(domain_folter, long_slug)
 
     @property
     def queryset(self):
