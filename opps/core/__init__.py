@@ -20,7 +20,8 @@ settings.INSTALLED_APPS += (
     'mptt',)
 
 settings.MIDDLEWARE_CLASSES += (
-    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',)
+    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
+    'opps.core.middleware.DynamicSiteMiddleware',)
 
 settings.TEMPLATE_CONTEXT_PROCESSORS += (
     'opps.channel.context_processors.channel_context',)
