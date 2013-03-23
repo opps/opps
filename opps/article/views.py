@@ -27,11 +27,11 @@ class OppsList(ListView):
         long_slug = self.kwargs.get('channel__long_slug',
                                     homepage.long_slug)
 
-        domain_folter = 'channel'
+        domain_folder = 'channel'
         if self.site.id > 1:
-            domain_folter = "{0}/channel".format(self.site)
+            domain_folder = "{0}/channel".format(self.site)
 
-        return '{0}/{1}.html'.format(domain_folter, long_slug)
+        return '{0}/{1}.html'.format(domain_folder, long_slug)
 
     @property
     def queryset(self):
@@ -61,11 +61,11 @@ class OppsDetail(DetailView):
             return None
         long_slug = self.kwargs.get('channel__long_slug', homepage.long_slug)
 
-        domain_folter = 'article'
+        domain_folder = 'article'
         if self.site.id > 1:
-            domain_folter = "{0}/article".format(self.site)
+            domain_folder = "{0}/article".format(self.site)
 
-        return '{0}/{1}/{2}.html'.format(domain_folter,
+        return '{0}/{1}/{2}.html'.format(domain_folder,
                                          long_slug,
                                          self.kwargs['slug'])
 
