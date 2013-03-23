@@ -21,7 +21,7 @@ class OppsList(ListView):
 
     @property
     def template_name(self):
-        homepage = Channel.objects.get_homepage()
+        homepage = Channel.objects.get_homepage(site=self.site)
         if not homepage:
             return None
         long_slug = self.kwargs.get('channel__long_slug',
@@ -51,7 +51,7 @@ class OppsDetail(DetailView):
 
     @property
     def template_name(self):
-        homepage = Channel.objects.get_homepage()
+        homepage = Channel.objects.get_homepage(site=self.site)
         if not homepage:
             return None
         long_slug = self.kwargs.get('channel__long_slug', homepage.long_slug)
@@ -59,12 +59,14 @@ class OppsDetail(DetailView):
 
     @property
     def queryset(self):
-        homepage = Channel.objects.get_homepage()
+        self.site = get_current_site(self.request)
+        homepage = Channel.objects.get_homepage(site=self.site)
         slug = None
         if homepage:
             slug = homepage.long_slug
         long_slug = self.kwargs.get('channel__long_slug', slug)
-        return Post.objects.filter(channel__long_slug=long_slug,
+        return Post.objects.filter(site=self.site,
+                                   channel__long_slug=long_slug,
                                    slug=self.kwargs['slug'],
                                    date_available__lte=timezone.now(),
                                    published=True).all()
