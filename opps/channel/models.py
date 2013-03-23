@@ -11,10 +11,10 @@ from opps.channel.utils import generate_long_slug
 
 class ChannelManager(models.Manager):
 
-    def get_homepage(self):
+    def get_homepage(self, site):
         try:
             return super(ChannelManager, self).get_query_set().filter(
-                homepage=True, published=True).get()
+                site=site, homepage=True, published=True).get()
         except Channel.DoesNotExist:
             return None
 
