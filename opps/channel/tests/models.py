@@ -110,7 +110,7 @@ class ChannelModelTest(TestCase):
         self.parent.published = True
         self.parent.save()
 
-        channel = Channel.objects.get_homepage()
+        channel = Channel.objects.get_homepage(site=self.parent.site)
         self.assertTrue(channel)
         self.assertEqual(channel.slug, self.parent.slug)
 
@@ -119,6 +119,6 @@ class ChannelModelTest(TestCase):
         not set channel home page, return none
         """
 
-        channel = Channel.objects.get_homepage()
+        channel = Channel.objects.get_homepage(site=self.parent.site)
         self.assertEqual(None, channel)
         self.assertFalse(channel)
