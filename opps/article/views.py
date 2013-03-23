@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from django.contrib.sites.models import get_current_site
 from django.core.paginator import Paginator, InvalidPage
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -29,14 +30,17 @@ class OppsList(ListView):
 
     @property
     def queryset(self):
+        self.site = get_current_site(self.request)
         if not self.kwargs.get('channel__long_slug'):
             return Post.objects.filter(channel__homepage=True,
+                                       site=self.site,
                                        date_available__lte=timezone.now(),
                                        published=True).all()
         long_slug = self.kwargs['channel__long_slug'][:-1]
-        get_object_or_404(Channel, long_slug=long_slug,
+        get_object_or_404(Channel, site=self.site, long_slug=long_slug,
                           date_available__lte=timezone.now(), published=True)
-        return Post.objects.filter(channel__long_slug=long_slug,
+        return Post.objects.filter(site=self.site,
+                                   channel__long_slug=long_slug,
                                    date_available__lte=timezone.now(),
                                    published=True).all()
 
