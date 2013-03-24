@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 
@@ -53,7 +52,7 @@ class Channel(MPTTModel, Publishable):
             channel_exist_domain = Channel.objects.filter(
                 slug=self.slug,
                 site__domain=self.site.domain)
-            channel_is_home = Channel.objects.filter(site=settings.SITE_ID,
+            channel_is_home = Channel.objects.filter(site=self.site.id,
                                                      homepage=True,
                                                      published=True).all()
             if self.pk:
