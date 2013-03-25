@@ -6,6 +6,7 @@ from opps.article.models import ArticleBox
 
 register = template.Library()
 
+
 @register.inclusion_tag('article/articlebox_detail.html')
 def get_articlebox(slug, channel_slug=None):
     if channel_slug:
