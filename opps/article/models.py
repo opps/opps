@@ -6,9 +6,6 @@ from tagging.fields import TagField
 from googl.short import GooglUrlShort
 
 from opps.core.models import Publishable
-from opps.image.models import Image
-from opps.source.models import Source
-from opps.channel.models import Channel
 
 
 class Article(Publishable):
@@ -53,22 +50,22 @@ class Article(Publishable):
 class Post(Article):
 
     content = models.TextField(_(u"Content"))
-    images = models.ManyToManyField(Image, null=True, blank=True,
+    images = models.ManyToManyField('image.Image', null=True, blank=True,
                                     related_name='post_images',
-                                    through='PostImage')
+                                    through='article.PostImage')
     album = models.ManyToManyField('Album', related_name='post_algum',
                                    null=True, blank=True)
 
 
 class Album(Article):
 
-    images = models.ManyToManyField(Image, null=True, blank=True,
+    images = models.ManyToManyField('image.Image', null=True, blank=True,
                                     related_name='album_images',
-                                    through='AlbumImage')
+                                    through='article.AlbumImage')
 
 
 class ManyToImage(models.Model):
-    image = models.ForeignKey(Image, verbose_name=_(u'Image'), null=True,
+    image = models.ForeignKey('image.Image', verbose_name=_(u'Image'), null=True,
                               blank=True, on_delete=models.SET_NULL)
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
@@ -86,10 +83,10 @@ class PostImage(ManyToImage):
 
 
 class PostSource(models.Model):
-    post = models.ForeignKey(Post, verbose_name=_(u'Post'), null=True,
+    post = models.ForeignKey('article.Post', verbose_name=_(u'Post'), null=True,
                              blank=True, related_name='postsource_post',
                              on_delete=models.SET_NULL)
-    source = models.ForeignKey(Source, verbose_name=_(u'Source'), null=True,
+    source = models.ForeignKey('source.Source', verbose_name=_(u'Source'), null=True,
                                blank=True, related_name='postsource_source',
                                on_delete=models.SET_NULL)
     order = models.PositiveIntegerField(_(u'Order'), default=0)
@@ -110,11 +107,11 @@ class ArticleBox(Publishable):
                             unique=True, db_index=True)
     post = models.ForeignKey(Post, null=True, blank=True,
                              on_delete=models.SET_NULL)
-    channel = models.ForeignKey(Channel, null=True, blank=True,
+    channel = models.ForeignKey('channel.Channel', null=True, blank=True,
                              on_delete=models.SET_NULL)
     posts = models.ManyToManyField(Post, null=True, blank=True,
                                    related_name='articlebox_post',
-                                   through='ArticleBoxPost')
+                                   through='article.ArticleBoxPost')
 
     def __unicode__(self):
         return self.slug

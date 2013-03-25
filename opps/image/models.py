@@ -8,7 +8,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
 from opps.core.models import Publishable
-from opps.source.models import Source
 
 
 def get_file_path(instance, filename):
@@ -26,7 +25,7 @@ class Image(Publishable):
     image = models.ImageField(upload_to=get_file_path)
     description = models.TextField(_(u"Description"), null=True, blank=True)
 
-    source = models.ForeignKey(Source, null=True, blank=True)
+    source = models.ForeignKey('source.Source', null=True, blank=True)
 
     def __unicode__(self):
         return "{0}-{1}".format(self.id, self.slug)
