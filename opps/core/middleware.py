@@ -18,8 +18,8 @@ class DynamicSiteMiddleware(object):
 
     def get_hosting(self, hosting):
         domain, port = self.hosting_parse(hosting)
-        if domain == '127.0.0.1':
-            domain = 'examplo.com'
+        if domain in settings.OPPS_DEFAULT_URLS:
+            domain = 'example.com'
         return get_object_or_404(Site, domain=domain)
 
     def process_request(self, request):

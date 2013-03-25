@@ -27,6 +27,7 @@ settings.TEMPLATE_CONTEXT_PROCESSORS += (
     'opps.channel.context_processors.channel_context',)
 
 # Opps
+getattr(settings, 'OPPS_DEFAULT_URLS', ('127.0.0.1',))
 getattr(settings, 'OPPS_SHORT', 'googl')
 getattr(settings, 'OPPS_SHORT_URL', 'googl.short.GooglUrlShort')
 
