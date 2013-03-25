@@ -70,7 +70,7 @@ class Post(Article):
     album = models.ManyToManyField(
         'Album',
         null=True, blank=True,
-        related_name='post_album',
+        related_name='post_albums',
     )
 
 
@@ -83,14 +83,14 @@ class ArticleSource(models.Model):
         'article.Article',
         null=True, blank=True,
         on_delete=models.SET_NULL,
-        related_name='articlesource_article',
+        related_name='articlesource_articles',
         verbose_name=_(u'Article'),
     )
     source = models.ForeignKey(
         'source.Source',
         null=True, blank=True,
         on_delete=models.SET_NULL,
-        related_name='articlesource_source',
+        related_name='articlesource_sources',
         verbose_name=_(u'Source'),
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
@@ -104,7 +104,7 @@ class ArticleImage(models.Model):
         'article.Article',
         verbose_name=_(u'Article'),
         null=True, blank=True,
-        related_name='articleimage_article',
+        related_name='articleimage_articles',
         on_delete=models.SET_NULL
     )
     image = models.ForeignKey(
@@ -127,8 +127,8 @@ class ArticleBox(Publishable):
         max_length=150,
         unique=True,
     )
-    post = models.ForeignKey(
-        Post,
+    article = models.ForeignKey(
+        Article,
         null=True, blank=True,
         on_delete=models.SET_NULL
     )
@@ -137,30 +137,30 @@ class ArticleBox(Publishable):
         null=True, blank=True,
         on_delete=models.SET_NULL
     )
-    posts = models.ManyToManyField(
-        Post,
+    articles = models.ManyToManyField(
+        Article,
         null=True, blank=True,
-        related_name='articlebox_post',
-        through='article.ArticleBoxPost'
+        related_name='articlebox_articles',
+        through='article.ArticleBoxArticles'
     )
 
     def __unicode__(self):
         return self.slug
 
 
-class ArticleBoxPost(models.Model):
-    post = models.ForeignKey(
-        Post,
+class ArticleBoxArticles(models.Model):
+    article = models.ForeignKey(
+        Article,
         null=True, blank=True,
         on_delete=models.SET_NULL,
-        related_name='articleboxpost_post',
-        verbose_name=_(u'Article Box Post'),
+        related_name='articleboxarticles_articles',
+        verbose_name=_(u'Article Box Articles'),
     )
     articlebox = models.ForeignKey(
         ArticleBox,
         null=True, blank=True,
         on_delete=models.SET_NULL,
-        related_name='articlebox',
+        related_name='articleboxarticles_articleboxs',
         verbose_name=_(u'Article Box'),
     )
 
