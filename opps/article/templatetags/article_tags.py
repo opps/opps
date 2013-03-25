@@ -7,8 +7,8 @@ from opps.article.models import ArticleBox
 register = template.Library()
 
 
-@register.inclusion_tag('article/articlebox_detail.html')
-def get_articlebox(slug, channel_slug=None):
+@register.simple_tag
+def get_articlebox(slug, channel_slug=None, template_name=None):
     if channel_slug:
         slug = slug + '-' + channel_slug
 
@@ -17,10 +17,20 @@ def get_articlebox(slug, channel_slug=None):
     except ArticleBox.DoesNotExist:
         box = None
 
-    return {'articlebox': box}
+    t = template.loader.get_template('article/articlebox_detail.html')
+    if template_name:
+        t = template.loader.get_template(template_name)
+
+    return t.render(template.Context({'articlebox': box}))
 
 
-@register.inclusion_tag('article/articlebox_list.html')
-def get_all_articlebox(channel_slug):
-    boxes = ArticleBox.objects.filter(site=settings.SITE_ID, channel__slug=channel_slug)
-    return {'articleboxes': boxes}
+@register.simple_tag
+def get_all_articlebox(channel_slug, template_name=None):
+    boxes = ArticleBox.objects.filter(site=settings.SITE_ID,
+                                      channel__slug=channel_slug)
+
+    t = template.loader.get_template('article/articlebox_list.html')
+    if template_name:
+        t = template.loader.get_template(template_name)
+
+    return t.render(template.Context({'articleboxes': boxes}))
