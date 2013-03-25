@@ -33,7 +33,7 @@ settings.OPPS_DEFAULT_URLS = getattr(
 settings.OPPS_SHORT = getattr(
     settings, 'OPPS_SHORT', 'googl')
 
-settings.OOPS_SHORT_URL = getattr(
+settings.OPPS_SHORT_URL = getattr(
     settings, 'OPPS_SHORT_URL', 'googl.short.GooglUrlShort')
 
 # Sitemap
