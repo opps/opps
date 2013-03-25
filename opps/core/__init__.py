@@ -6,10 +6,10 @@ from django.conf import settings
 trans_app_label = _('Core')
 
 settings.INSTALLED_APPS += (
-    'opps.article',
-    'opps.image',
-    'opps.channel',
-    'opps.source',
+    'opps.articles',
+    'opps.images',
+    'opps.channels',
+    'opps.sources',
     'django.contrib.redirects',
     'django_thumbor',
     'haystack',
@@ -24,7 +24,7 @@ settings.MIDDLEWARE_CLASSES += (
     'opps.core.middleware.DynamicSiteMiddleware',)
 
 settings.TEMPLATE_CONTEXT_PROCESSORS += (
-    'opps.channel.context_processors.channel_context',)
+    'opps.channels.context_processors.channel_context',)
 
 # Opps
 settings.OPPS_DEFAULT_URLS = getattr(

@@ -3,8 +3,8 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from opps.channel.models import Channel
-from opps.channel.utils import generate_long_slug
+from .models import Channel
+from .utils import generate_long_slug
 
 
 class ChannelAdmin(admin.ModelAdmin):

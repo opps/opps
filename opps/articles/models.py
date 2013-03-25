@@ -27,25 +27,25 @@ class Article(Publishable):
         null=True, blank=False,
     )
     channel = models.ForeignKey(
-        'channel.Channel',
+        'channels.Channel',
         verbose_name=_(u"Channel"),
     )
     main_image = models.ForeignKey(
-        'image.Image',
+        'images.Image',
         null=True, blank=False,
         on_delete=models.SET_NULL,
         verbose_name=_(u'Main Image'),
     )
     images = models.ManyToManyField(
-        'image.Image',
+        'images.Image',
         null=True, blank=True,
         related_name='article_images',
-        through='article.ArticleImage',
+        through='articles.ArticleImage',
     )
     sources = models.ManyToManyField(
-        'source.Source',
+        'sources.Source',
         null=True, blank=True,
-        through='article.ArticleSource',
+        through='articles.ArticleSource',
     )
     tags = TagField(null=True, verbose_name=_(u"Tags"))
 
@@ -80,14 +80,14 @@ class Album(Article):
 
 class ArticleSource(models.Model):
     article = models.ForeignKey(
-        'article.Article',
+        'articles.Article',
         null=True, blank=True,
         on_delete=models.SET_NULL,
         related_name='articlesource_articles',
         verbose_name=_(u'Article'),
     )
     source = models.ForeignKey(
-        'source.Source',
+        'sources.Source',
         null=True, blank=True,
         on_delete=models.SET_NULL,
         related_name='articlesource_sources',
@@ -101,14 +101,14 @@ class ArticleSource(models.Model):
 
 class ArticleImage(models.Model):
     article = models.ForeignKey(
-        'article.Article',
+        'articles.Article',
         verbose_name=_(u'Article'),
         null=True, blank=True,
         related_name='articleimage_articles',
         on_delete=models.SET_NULL
     )
     image = models.ForeignKey(
-        'image.Image',
+        'images.Image',
         verbose_name=_(u'Image'),
         null=True, blank=True,
         on_delete=models.SET_NULL
@@ -133,7 +133,7 @@ class ArticleBox(Publishable):
         on_delete=models.SET_NULL
     )
     channel = models.ForeignKey(
-        'channel.Channel',
+        'channels.Channel',
         null=True, blank=True,
         on_delete=models.SET_NULL
     )
@@ -141,7 +141,7 @@ class ArticleBox(Publishable):
         Article,
         null=True, blank=True,
         related_name='articlebox_articles',
-        through='article.ArticleBoxArticles'
+        through='articles.ArticleBoxArticles'
     )
 
     def __unicode__(self):

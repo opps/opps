@@ -25,7 +25,7 @@ class Image(Publishable):
     image = models.ImageField(upload_to=get_file_path)
     description = models.TextField(_(u"Description"), null=True, blank=True)
 
-    source = models.ForeignKey('source.Source', null=True, blank=True)
+    source = models.ForeignKey('sources.Source', null=True, blank=True)
 
     def __unicode__(self):
         return "{0}-{1}".format(self.id, self.slug)

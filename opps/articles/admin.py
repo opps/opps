@@ -4,8 +4,8 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from opps.article.models import Post, Album, ArticleSource, ArticleImage
-from opps.article.models import ArticleBox, ArticleBoxPost
+from .models import Post, Album, ArticleSource, ArticleImage
+from .models import ArticleBox, ArticleBoxArticles
 
 from redactor.widgets import RedactorEditor
 
@@ -30,10 +30,10 @@ class ArticleSourceInline(admin.TabularInline):
         'fields': ('source', 'order')})]
 
 
-class ArticleBoxPostInline(admin.TabularInline):
-    model = ArticleBoxPost
+class ArticleBoxArticlesInline(admin.TabularInline):
+    model = ArticleBoxArticles
     fk_name = 'articlebox'
-    raw_id_fields = ['post']
+    raw_id_fields = ['article']
     actions = None
     extra = 1
 
@@ -108,15 +108,15 @@ class ArticleBoxAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["name"]}
     list_display = ['name', 'date_available', 'published']
     list_filter = ['date_available', 'published']
-    inlines = [ArticleBoxPostInline]
+    inlines = [ArticleBoxArticlesInline]
     exclude = ('user',)
-    raw_id_fields = ['channel', 'post']
+    raw_id_fields = ['channel', 'article']
 
     fieldsets = (
         (_(u'Identification'), {
             'fields': ('site', 'name', 'slug')}),
         (_(u'Relationships'), {
-            'fields': ('channel', 'post')}),
+            'fields': ('channel', 'article')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),

@@ -3,7 +3,7 @@
 #
 from django.conf.urls import patterns, url
 
-from opps.article.views import OppsDetail, OppsList, Search
+from .views import OppsDetail, OppsList, Search
 
 
 urlpatterns = patterns(

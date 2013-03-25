@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import template
 from django.conf import settings
-from opps.article.models import ArticleBox
+from opps.articles.models import ArticleBox
 
 
 register = template.Library()

@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 from django.contrib.sitemaps import GenericSitemap
 
-from opps.article.models import Post
-from opps.sitemaps.googlenews import GoogleNewsSitemap
+from opps.articles.models import Post
+from .googlenews import GoogleNewsSitemap
 
 from datetime import datetime, timedelta
 from collections import OrderedDict

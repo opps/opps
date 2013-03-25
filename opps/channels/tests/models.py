@@ -9,7 +9,7 @@ from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-from opps.channel.models import Channel
+from opps.channels.models import Channel
 
 
 class ChannelModelTest(TestCase):

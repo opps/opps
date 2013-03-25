@@ -11,8 +11,8 @@ from django.http import Http404
 
 from haystack.views import SearchView
 
-from opps.article.models import Post
-from opps.channel.models import Channel
+from .models import Post
+from opps.channels.models import Channel
 
 
 class OppsList(ListView):

@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from mptt.models import MPTTModel, TreeForeignKey
 
 from opps.core.models import Publishable
-from opps.channel.utils import generate_long_slug
+from .utils import generate_long_slug
 
 
 class ChannelManager(models.Manager):
