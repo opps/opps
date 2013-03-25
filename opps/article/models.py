@@ -9,7 +9,6 @@ from opps.core.models import Publishable
 
 
 class Article(Publishable):
-
     title = models.CharField(_(u"Title"), max_length=140)
     slug = models.SlugField(_(u"URL"), max_length=150, unique=True,
                             db_index=True)
@@ -23,13 +22,13 @@ class Article(Publishable):
                                    verbose_name=_(u'Main Image'), blank=False,
                                    null=True, on_delete=models.SET_NULL)
 
+    images = models.ManyToManyField('image.Image', null=True, blank=True,
+                                    related_name='article_images',
+                                    through='article.ArticleImage')
     sources = models.ManyToManyField('source.Source', null=True, blank=True,
-                            through=models.get_model('source', 'PostSource'))
+                                     through='article.ArticleSource')
 
     tags = TagField(null=True, verbose_name=_(u"Tags"))
-
-    class Meta:
-        abstract = True
 
     def __absolute_url(self):
         return "{0}/{1}".format(self.channel, self.slug)
@@ -48,46 +47,21 @@ class Article(Publishable):
 
 
 class Post(Article):
-
     content = models.TextField(_(u"Content"))
-    images = models.ManyToManyField('image.Image', null=True, blank=True,
-                                    related_name='post_images',
-                                    through='article.PostImage')
-    album = models.ManyToManyField('Album', related_name='post_algum',
+    album = models.ManyToManyField('Album', related_name='post_album',
                                    null=True, blank=True)
 
 
 class Album(Article):
-
-    images = models.ManyToManyField('image.Image', null=True, blank=True,
-                                    related_name='album_images',
-                                    through='article.AlbumImage')
+    pass
 
 
-class ManyToImage(models.Model):
-    image = models.ForeignKey('image.Image', verbose_name=_(u'Image'), null=True,
-                              blank=True, on_delete=models.SET_NULL)
-    order = models.PositiveIntegerField(_(u'Order'), default=0)
-
-    def __unicode__(self):
-        return self.image.title
-
-    class Meta:
-        abstract = True
-
-
-class PostImage(ManyToImage):
-    post = models.ForeignKey(Post, verbose_name=_(u'Post'), null=True,
-                             blank=True, related_name='postimage_post',
-                             on_delete=models.SET_NULL)
-
-
-class PostSource(models.Model):
-    post = models.ForeignKey('article.Post', verbose_name=_(u'Post'), null=True,
-                             blank=True, related_name='postsource_post',
+class ArticleSource(models.Model):
+    article = models.ForeignKey('article.Article', verbose_name=_(u'Article'), null=True,
+                             blank=True, related_name='articlesource_article',
                              on_delete=models.SET_NULL)
     source = models.ForeignKey('source.Source', verbose_name=_(u'Source'), null=True,
-                               blank=True, related_name='postsource_source',
+                               blank=True, related_name='articlesource_source',
                                on_delete=models.SET_NULL)
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
@@ -95,10 +69,16 @@ class PostSource(models.Model):
         return self.source.slug
 
 
-class AlbumImage(ManyToImage):
-    album = models.ForeignKey(Album, verbose_name=_(u'Album'), null=True,
-                             blank=True, related_name='albumimage_post',
+class ArticleImage(models.Model):
+    article = models.ForeignKey('article.Article', verbose_name=_(u'Article'), null=True,
+                             blank=True, related_name='articleimage_article',
                              on_delete=models.SET_NULL)
+    image = models.ForeignKey('image.Image', verbose_name=_(u'Image'), null=True,
+                              blank=True, on_delete=models.SET_NULL)
+    order = models.PositiveIntegerField(_(u'Order'), default=0)
+
+    def __unicode__(self):
+        return self.image.title
 
 
 class ArticleBox(Publishable):
@@ -124,7 +104,6 @@ class ArticleBoxPost(models.Model):
     articlebox = models.ForeignKey(ArticleBox, verbose_name=_(u'Article Box'), null=True,
                                    blank=True, related_name='articlebox',
                                    on_delete=models.SET_NULL)
-
 
     def __unicode__(self):
         return "{0}-{1}".format(self.articlebox.slug, self.post.slug)

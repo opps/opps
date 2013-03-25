@@ -4,34 +4,24 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from opps.article.models import Post, PostImage, PostSource
-from opps.article.models import Album, AlbumImage
+from opps.article.models import Post, Album, ArticleSource, ArticleImage
 from opps.article.models import ArticleBox, ArticleBoxPost
 
 from redactor.widgets import RedactorEditor
 
 
-class PostImageInline(admin.TabularInline):
-    model = PostImage
-    fk_name = 'post'
+class ArticleImageInline(admin.TabularInline):
+    model = ArticleImage
+    fk_name = 'article'
     raw_id_fields = ['image']
     actions = None
     extra = 1
     fieldsets = [(None, {'fields': ('image', 'order')})]
 
 
-class AlbumImageInline(admin.TabularInline):
-    model = AlbumImage
-    fk_name = 'album'
-    raw_id_fields = ['image']
-    actions = None
-    extra = 1
-    fieldsets = [(None, {'fields': ('image', 'order')})]
-
-
-class PostSourceInline(admin.TabularInline):
-    model = PostSource
-    fk_name = 'post'
+class ArticleSourceInline(admin.TabularInline):
+    model = ArticleSource
+    fk_name = 'article'
     raw_id_fields = ['source']
     actions = None
     extra = 1
@@ -76,7 +66,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
 class PostAdmin(ArticleAdmin):
     form = PostAdminForm
-    inlines = [PostImageInline, PostSourceInline]
+    inlines = [ArticleImageInline, ArticleSourceInline]
     raw_id_fields = ['main_image', 'channel', 'album']
 
     fieldsets = (
@@ -99,7 +89,7 @@ class AlbumAdminForm(forms.ModelForm):
 
 class AlbumAdmin(ArticleAdmin):
     form = AlbumAdminForm
-    inlines = [AlbumImageInline]
+    inlines = [ArticleImageInline]
 
     fieldsets = (
         (_(u'Identification'), {
