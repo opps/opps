@@ -27,26 +27,39 @@ settings.TEMPLATE_CONTEXT_PROCESSORS += (
     'opps.channel.context_processors.channel_context',)
 
 # Opps
-getattr(settings, 'OPPS_DEFAULT_URLS', ('127.0.0.1',))
-getattr(settings, 'OPPS_SHORT', 'googl')
-getattr(settings, 'OPPS_SHORT_URL', 'googl.short.GooglUrlShort')
+settings.OPPS_DEFAULT_URLS = getattr(
+    settings, 'OPPS_DEFAULT_URLS', ('127.0.0.1',))
+
+settings.OPPS_SHORT = getattr(
+    settings, 'OPPS_SHORT', 'googl')
+
+settings.OOPS_SHORT_URL = getattr(
+    settings, 'OPPS_SHORT_URL', 'googl.short.GooglUrlShort')
 
 # Sitemap
-if not hasattr(settings, 'STATICSITEMAPS_ROOT_SITEMAP'):
-    settings.STATICSITEMAPS_ROOT_SITEMAP = 'opps.sitemaps.feed.sitemaps'
+settings.STATICSITEMAPS_ROOT_SITEMAP = getattr(
+    settings, 'STATICSITEMAPS_ROOT_SITEMAP', 'opps.sitemaps.feed.sitemaps')
 
 # Haystack
-if not hasattr(settings, 'HAYSTACK_SITECONF'):
-    settings.HAYSTACK_SITECONF = 'opps.search'
+settings.HAYSTACK_SITECONF = getattr(
+    settings, 'HAYSTACK_SITECONF', 'opps.search')
 
-if not hasattr(settings, 'HAYSTACK_SEARCH_ENGINE'):
-    settings.HAYSTACK_SEARCH_ENGINE = 'dummy'
+settings.HAYSTACK_SEARCH_ENGINE = getattr(
+    settings, 'HAYSTACK_SEARCH_ENGINE', 'dummy')
 
 # redactor
-getattr(settings, 'REDACTOR_OPTIONS', {'lang': 'en'})
-getattr(settings, 'REDACTOR_UPLOAD', 'uploads/')
+settings.REDACTOR_OPTIONS = getattr(
+    settings, 'REDACTOR_OPTIONS', {'lang': 'en'})
+
+settings.REDACTOR_UPLOAD = getattr(
+    settings, 'REDACTOR_UPLOAD', 'uploads/')
 
 # thumbor
-getattr(settings, 'THUMBOR_SERVER', 'http://localhost:8888')
-getattr(settings, 'THUMBOR_MEDIA_URL', 'http://localhost:8000/media')
-getattr(settings, 'THUMBOR_SECURITY_KEY', '')
+settings.THUMBOR_SERVER = getattr(
+    settings, 'THUMBOR_SERVER', 'http://localhost:8888')
+
+settings.THUMBOR_MEDIA_URL = getattr(
+    settings, 'THUMBOR_MEDIA_URL', 'http://localhost:8000/media')
+
+settings.THUMBOR_SECURITY_KEY = getattr(
+    settings, 'THUMBOR_SECURITY_KEY', '')
