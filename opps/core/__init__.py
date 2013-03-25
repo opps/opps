@@ -28,7 +28,7 @@ settings.TEMPLATE_CONTEXT_PROCESSORS += (
 
 # Opps
 settings.OPPS_DEFAULT_URLS = getattr(
-    settings, 'OPPS_DEFAULT_URLS', ('127.0.0.1',))
+    settings, 'OPPS_DEFAULT_URLS', ('127.0.0.1', 'localhost',))
 
 settings.OPPS_SHORT = getattr(
     settings, 'OPPS_SHORT', 'googl')
