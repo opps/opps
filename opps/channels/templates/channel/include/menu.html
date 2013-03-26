@@ -1,7 +1,7 @@
 {% load mptt_tags %}
 <ul>
   {% recursetree opps_menu %}
-  <li>{{ node.name }}
+  <li><a href="{% url 'articles:channel' node.long_slug %}">{{ node.name }}</a>
     {% if not node.is_leaf_node %}
     <ul class="children">{{ children }}</ul>
     {% endif %}
