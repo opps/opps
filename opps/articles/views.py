@@ -24,14 +24,17 @@ class OppsList(ListView):
         homepage = Channel.objects.get_homepage(site=self.site)
         if not homepage:
             return None
+
         long_slug = self.kwargs.get('channel__long_slug',
                                     homepage.long_slug)
+        if homepage.long_slug != long_slug:
+            long_slug = long_slug[:-1]
 
         domain_folder = 'channel'
         if self.site.id > 1:
             domain_folder = "{0}/channel".format(self.site)
 
-        return '{0}/{1}.html'.format(domain_folder, long_slug[:-1])
+        return '{0}/{1}.html'.format(domain_folder, long_slug)
 
     @property
     def queryset(self):
