@@ -31,7 +31,7 @@ class OppsList(ListView):
         if self.site.id > 1:
             domain_folder = "{0}/channel".format(self.site)
 
-        return '{0}/{1}.html'.format(domain_folder, long_slug)
+        return '{0}/{1}.html'.format(domain_folder, long_slug[:-1])
 
     @property
     def queryset(self):
