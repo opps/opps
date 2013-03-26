@@ -6,10 +6,10 @@ from django.conf import settings
 trans_app_label = _('Core')
 
 settings.INSTALLED_APPS += (
-    'opps.articles',
-    'opps.images',
     'opps.channels',
     'opps.sources',
+    'opps.articles',
+    'opps.images',
     'django.contrib.redirects',
     'django_thumbor',
     'haystack',
