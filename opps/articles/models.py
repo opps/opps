@@ -160,7 +160,7 @@ class ArticleBoxArticles(models.Model):
         ArticleBox,
         null=True, blank=True,
         on_delete=models.SET_NULL,
-        related_name='articleboxarticles_articleboxs',
+        related_name='articleboxarticles_articleboxes',
         verbose_name=_(u'Article Box'),
     )
 
