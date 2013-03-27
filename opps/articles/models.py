@@ -163,6 +163,7 @@ class ArticleBoxArticles(models.Model):
         related_name='articleboxarticles_articleboxes',
         verbose_name=_(u'Article Box'),
     )
+    order = models.PositiveIntegerField(_(u'Order'), default=0)
 
     def __unicode__(self):
-        return "{0}-{1}".format(self.articlebox.slug, self.post.slug)
+        return "{0}-{1}".format(self.articlebox.slug, self.article.slug)

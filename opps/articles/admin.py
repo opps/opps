@@ -36,6 +36,9 @@ class ArticleBoxArticlesInline(admin.TabularInline):
     raw_id_fields = ['article']
     actions = None
     extra = 1
+    fieldsets = [(None, {
+        'classes': ('collapse',),
+        'fields': ('article', 'order')})]
 
 
 class PostAdminForm(forms.ModelForm):
