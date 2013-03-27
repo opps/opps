@@ -30,9 +30,9 @@ class OppsList(ListView):
         if homepage.long_slug != long_slug:
             long_slug = long_slug[:-1]
 
-        domain_folder = 'channel'
+        domain_folder = 'channels'
         if self.site.id > 1:
-            domain_folder = "{0}/channel".format(self.site)
+            domain_folder = "{0}/channels".format(self.site)
 
         return '{0}/{1}.html'.format(domain_folder, long_slug)
 
@@ -64,9 +64,9 @@ class OppsDetail(DetailView):
             return None
         long_slug = self.kwargs.get('channel__long_slug', homepage.long_slug)
 
-        domain_folder = 'article'
+        domain_folder = 'articles'
         if self.site.id > 1:
-            domain_folder = "{0}/article".format(self.site)
+            domain_folder = "{0}/articles".format(self.site)
 
         return '{0}/{1}/{2}.html'.format(domain_folder,
                                          long_slug,
