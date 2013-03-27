@@ -74,7 +74,7 @@ class PostAdmin(ArticleAdmin):
 
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('site', 'title', 'slug', 'get_absolute_url', 
+            'fields': ('site', 'title', 'slug', 'get_absolute_url',
                 'short_url')}),
         (_(u'Content'), {
             'fields': ('short_title', 'headline', 'content', 'main_image')}),
