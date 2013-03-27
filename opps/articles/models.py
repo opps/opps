@@ -145,7 +145,7 @@ class ArticleBox(Publishable):
     )
 
     def __unicode__(self):
-        return self.slug
+        return "{0}-{1}".format(self.slug, self.site.name)
 
 
 class ArticleBoxArticles(models.Model):
