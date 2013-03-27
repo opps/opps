@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Post, Album, ArticleSource, ArticleImage
+from .models import Post, Album, Article, ArticleSource, ArticleImage
 from .models import ArticleBox, ArticleBoxArticles
 
 from redactor.widgets import RedactorEditor
@@ -135,6 +135,13 @@ class ArticleBoxAdmin(admin.ModelAdmin):
 
         super(ArticleBoxAdmin, self).save_model(request, obj, form, change)
 
+
+class HideArticleAdmin(admin.ModelAdmin):
+    def get_model_perms(self, *args, **kwargs):
+        return {}
+
+
+admin.site.register(Article, HideArticleAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Album, AlbumAdmin)
 admin.site.register(ArticleBox, ArticleBoxAdmin)
