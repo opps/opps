@@ -68,7 +68,7 @@ class Article(Publishable):
 class Post(Article):
     content = models.TextField(_(u"Content"))
     album = models.ManyToManyField(
-        'Album',
+        'articles.Album',
         null=True, blank=True,
         related_name='post_albums',
     )
@@ -128,7 +128,7 @@ class ArticleBox(Publishable):
         unique=True,
     )
     article = models.ForeignKey(
-        Article,
+        'articles.Article',
         null=True, blank=True,
         on_delete=models.SET_NULL
     )
@@ -138,7 +138,7 @@ class ArticleBox(Publishable):
         on_delete=models.SET_NULL
     )
     articles = models.ManyToManyField(
-        Article,
+        'articles.Article',
         null=True, blank=True,
         related_name='articlebox_articles',
         through='articles.ArticleBoxArticles'
@@ -149,19 +149,19 @@ class ArticleBox(Publishable):
 
 
 class ArticleBoxArticles(models.Model):
-    article = models.ForeignKey(
-        Article,
-        null=True, blank=True,
-        on_delete=models.SET_NULL,
-        related_name='articleboxarticles_articles',
-        verbose_name=_(u'Article Box Articles'),
-    )
     articlebox = models.ForeignKey(
-        ArticleBox,
+        'articles.ArticleBox',
         null=True, blank=True,
         on_delete=models.SET_NULL,
         related_name='articleboxarticles_articleboxes',
         verbose_name=_(u'Article Box'),
+    )
+    article = models.ForeignKey(
+        'articles.Article',
+        null=True, blank=True,
+        on_delete=models.SET_NULL,
+        related_name='articleboxarticles_articles',
+        verbose_name=_(u'Article'),
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
