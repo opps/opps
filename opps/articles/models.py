@@ -145,7 +145,7 @@ class ArticleBox(Publishable):
     )
 
     def __unicode__(self):
-        return "{0}-{1}".format(self.slug, self.site.name)
+        return u"{0}-{1}".format(self.slug, self.site.name)
 
 
 class ArticleBoxArticles(models.Model):
@@ -166,4 +166,4 @@ class ArticleBoxArticles(models.Model):
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
     def __unicode__(self):
-        return "{0}-{1}".format(self.articlebox.slug, self.article.slug)
+        return u"{0}-{1}".format(self.articlebox.slug, self.article.slug)
