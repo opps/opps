@@ -31,6 +31,7 @@ classifiers = ["Development Status :: 4 - Beta",
                "Framework :: Django",
                'Programming Language :: Python',
                "Programming Language :: Python :: 2.7",
+               "Programming Language :: Python :: 2.6",
                "Operating System :: OS Independent",
                "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
                'Topic :: Software Development :: Libraries :: Python Modules']
