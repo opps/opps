@@ -17,7 +17,7 @@ def get_articlebox(slug, channel_slug=None, template_name=None):
     except ArticleBox.DoesNotExist:
         box = None
 
-    t = template.loader.get_template('article/articlebox_detail.html')
+    t = template.loader.get_template('articles/articlebox_detail.html')
     if template_name:
         t = template.loader.get_template(template_name)
 
@@ -29,7 +29,7 @@ def get_all_articlebox(channel_slug, template_name=None):
     boxes = ArticleBox.objects.filter(site=settings.SITE_ID,
                                       channel__slug=channel_slug)
 
-    t = template.loader.get_template('article/articlebox_list.html')
+    t = template.loader.get_template('articles/articlebox_list.html')
     if template_name:
         t = template.loader.get_template(template_name)
 
