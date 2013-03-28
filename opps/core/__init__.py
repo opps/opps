@@ -2,14 +2,59 @@
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
+from appconf import AppConf
+
 
 trans_app_label = _('Core')
+
+
+class OppsCoreConf(AppConf):
+    DEFAULT_URLS = ('127.0.0.1', 'localhost',)
+    SHORT = 'googl'
+    SHORT_URL = 'googl.short.GooglUrlShort'
+
+    class Meta:
+        prefix = 'opps'
+
+
+class StaticSiteMapsConf(AppConf):
+    ROOT_SITEMAP = 'opps.sitemaps.feed.sitemaps'
+
+    class Meta:
+        prefix = 'staticsitemaps'
+
+
+class HaystackConf(AppConf):
+    SITECONF = 'opps.search'
+    SEARCH_ENGINE = 'dummy'
+
+    class Meta:
+        prefix = 'haystack'
+
+
+class RedactorConf(AppConf):
+    OPTIONS = {'lang': 'en'}
+    UPLOAD = 'uploads/'
+
+    class Meta:
+        prefix = 'redactor'
+
+
+class ThumborConf(AppConf):
+    SERVER = 'http://localhost:8888'
+    MEDIA_URL = 'http://localhost:8000/media'
+    SECURITY_KEY = ''
+
+    class Meta:
+        prefix = 'thumbor'
+
 
 settings.INSTALLED_APPS += (
     'opps.channels',
     'opps.sources',
     'opps.articles',
     'opps.images',
+    'appconf',
     'django.contrib.redirects',
     'django_thumbor',
     'haystack',
@@ -25,41 +70,3 @@ settings.MIDDLEWARE_CLASSES += (
 
 settings.TEMPLATE_CONTEXT_PROCESSORS += (
     'opps.channels.context_processors.channel_context',)
-
-# Opps
-settings.OPPS_DEFAULT_URLS = getattr(
-    settings, 'OPPS_DEFAULT_URLS', ('127.0.0.1', 'localhost',))
-
-settings.OPPS_SHORT = getattr(
-    settings, 'OPPS_SHORT', 'googl')
-
-settings.OPPS_SHORT_URL = getattr(
-    settings, 'OPPS_SHORT_URL', 'googl.short.GooglUrlShort')
-
-# Sitemap
-settings.STATICSITEMAPS_ROOT_SITEMAP = getattr(
-    settings, 'STATICSITEMAPS_ROOT_SITEMAP', 'opps.sitemaps.feed.sitemaps')
-
-# Haystack
-settings.HAYSTACK_SITECONF = getattr(
-    settings, 'HAYSTACK_SITECONF', 'opps.search')
-
-settings.HAYSTACK_SEARCH_ENGINE = getattr(
-    settings, 'HAYSTACK_SEARCH_ENGINE', 'dummy')
-
-# redactor
-settings.REDACTOR_OPTIONS = getattr(
-    settings, 'REDACTOR_OPTIONS', {'lang': 'en'})
-
-settings.REDACTOR_UPLOAD = getattr(
-    settings, 'REDACTOR_UPLOAD', 'uploads/')
-
-# thumbor
-settings.THUMBOR_SERVER = getattr(
-    settings, 'THUMBOR_SERVER', 'http://localhost:8888')
-
-settings.THUMBOR_MEDIA_URL = getattr(
-    settings, 'THUMBOR_MEDIA_URL', 'http://localhost:8000/media')
-
-settings.THUMBOR_SECURITY_KEY = getattr(
-    settings, 'THUMBOR_SECURITY_KEY', '')
