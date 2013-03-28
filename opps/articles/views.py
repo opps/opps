@@ -8,16 +8,28 @@ from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.http import Http404
+from django.conf import settings
 
 from haystack.views import SearchView
 
 from .models import Post
 from opps.channels.models import Channel
 
+def set_context_data(self, SUPER, **kwargs):
+    context = super(SUPER, self).get_context_data(**kwargs)
+    article = self.article.get()
+    context['opps_channel'] = article.channel
+    context['opps_channel_conf'] = settings.OPPS_CHANNEL_CONF\
+            .get(article.channel.slug, '')
+    return context
+
 
 class OppsList(ListView):
 
     context_object_name = "context"
+
+    def get_context_data(self, **kwargs):
+        return set_context_data(self, OppsList, **kwargs)
 
     @property
     def template_name(self):
@@ -47,15 +59,19 @@ class OppsList(ListView):
         long_slug = self.kwargs['channel__long_slug'][:-1]
         get_object_or_404(Channel, site=self.site, long_slug=long_slug,
                           date_available__lte=timezone.now(), published=True)
-        return Post.objects.filter(site=self.site,
-                                   channel__long_slug=long_slug,
-                                   date_available__lte=timezone.now(),
-                                   published=True).all()
+        self.article = Post.objects.filter(site=self.site,
+                                           channel__long_slug=long_slug,
+                                           date_available__lte=timezone.now(),
+                                           published=True).all()
+        return self.article
 
 
 class OppsDetail(DetailView):
 
     context_object_name = "context"
+
+    def get_context_data(self, **kwargs):
+        return set_context_data(self, OppsDetail, **kwargs)
 
     @property
     def template_name(self):
@@ -79,11 +95,12 @@ class OppsDetail(DetailView):
         if homepage:
             slug = homepage.long_slug
         long_slug = self.kwargs.get('channel__long_slug', slug)
-        return Post.objects.filter(site=self.site,
+        self.article = Post.objects.filter(site=self.site,
                                    channel__long_slug=long_slug,
                                    slug=self.kwargs['slug'],
                                    date_available__lte=timezone.now(),
                                    published=True).all()
+        return self.article
 
 
 class Search(SearchView):
