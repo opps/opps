@@ -27,6 +27,7 @@ class Channel(MPTTModel, Publishable):
                                  db_index=True)
     description = models.CharField(_(u"Description"),
                                    max_length=255, null=True, blank=True)
+    show_in_menu = models.BooleanField(_(u"Show in menu?"), default=False)
     homepage = models.BooleanField(_(u"Is home page?"), default=False)
     position = models.IntegerField(_(u"Position"), default=0)
     parent = TreeForeignKey('self', related_name='subchannel',
