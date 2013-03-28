@@ -15,6 +15,7 @@ from haystack.views import SearchView
 from .models import Post
 from opps.channels.models import Channel
 
+
 def set_context_data(self, SUPER, **kwargs):
     context = super(SUPER, self).get_context_data(**kwargs)
     article = self.article.get()
