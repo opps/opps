@@ -11,6 +11,7 @@ def channel_context(request):
     site = get_current_site(request)
     opps_menu = Channel.objects.filter(site=site,
                                        date_available__lte=timezone.now(),
-                                       published=True)
+                                       published=True,
+                                       show_in_menu=True)
 
     return {'opps_menu': opps_menu}
