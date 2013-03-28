@@ -18,10 +18,11 @@ from opps.channels.models import Channel
 
 def set_context_data(self, SUPER, **kwargs):
     context = super(SUPER, self).get_context_data(**kwargs)
-    article = self.article.get()
-    context['opps_channel'] = article.channel
-    context['opps_channel_conf'] = settings.OPPS_CHANNEL_CONF\
-            .get(article.channel.slug, '')
+    if len(self.article) >= 1:
+        article = self.article.get()
+        context['opps_channel'] = article.channel
+        context['opps_channel_conf'] = settings.OPPS_CHANNEL_CONF\
+                .get(article.channel.slug, '')
     return context
 
 
