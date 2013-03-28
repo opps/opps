@@ -52,10 +52,11 @@ class OppsList(ListView):
     def queryset(self):
         self.site = get_current_site(self.request)
         if not self.kwargs.get('channel__long_slug'):
-            return Post.objects.filter(channel__homepage=True,
-                                       site=self.site,
-                                       date_available__lte=timezone.now(),
-                                       published=True).all()
+            self.article = Post.objects.filter(channel__homepage=True,
+                                               site=self.site,
+                                               date_available__lte=timezone.now(),
+                                               published=True).all()
+            return self.article
         long_slug = self.kwargs['channel__long_slug'][:-1]
         get_object_or_404(Channel, site=self.site, long_slug=long_slug,
                           date_available__lte=timezone.now(), published=True)
