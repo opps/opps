@@ -12,6 +12,7 @@ class OppsCoreConf(AppConf):
     DEFAULT_URLS = ('127.0.0.1', 'localhost',)
     SHORT = 'googl'
     SHORT_URL = 'googl.short.GooglUrlShort'
+    CHANNEL_CONF = {}
 
     class Meta:
         prefix = 'opps'
