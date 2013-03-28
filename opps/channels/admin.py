@@ -19,7 +19,7 @@ class ChannelAdmin(admin.ModelAdmin):
     fieldsets = (
         (_(u'Identification'), {
             'fields': ('site', 'parent', 'name', 'slug', 'description',
-                       'position', 'homepage',)}),
+                       'position', 'show_in_menu', 'homepage',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
