@@ -25,35 +25,30 @@ class OppsList(ListView):
 
     @property
     def template_name(self):
-        homepage = Channel.objects.get_homepage(site=self.site)
-        if not homepage:
-            return None
-
-        long_slug = self.kwargs.get('channel__long_slug',
-                                    homepage.long_slug)
-        if homepage.long_slug != long_slug:
-            long_slug = long_slug[:-1]
-
         domain_folder = 'channels'
         if self.site.id > 1:
             domain_folder = "{0}/channels".format(self.site)
 
-        return '{0}/{1}.html'.format(domain_folder, long_slug)
+        return '{0}/{1}.html'.format(domain_folder, self.long_slug)
 
     @property
     def queryset(self):
         self.site = get_current_site(self.request)
+        self.long_slug = None
         if not self.kwargs.get('channel__long_slug'):
             self.article = Post.objects.filter(channel__homepage=True,
                                                site=self.site,
                                                date_available__lte=timezone.now(),
                                                published=True).all()
+            homepage = Channel.objects.get_homepage(site=self.site)
+            if homepage:
+                self.long_slug = homepage.long_slug
             return self.article
-        long_slug = self.kwargs['channel__long_slug'][:-1]
-        get_object_or_404(Channel, site=self.site, long_slug=long_slug,
+        self.long_slug = self.kwargs['channel__long_slug']
+        get_object_or_404(Channel, site=self.site, long_slug=self.long_slug,
                           date_available__lte=timezone.now(), published=True)
         self.article = Post.objects.filter(site=self.site,
-                                           channel__long_slug=long_slug,
+                                           channel__long_slug=self.long_slug,
                                            date_available__lte=timezone.now(),
                                            published=True).all()
         return self.article
