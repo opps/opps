@@ -2,7 +2,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from tagging.fields import TagField
+from taggit.managers import TaggableManager
 from googl.short import GooglUrlShort
 
 from opps.core.models import Publishable
@@ -47,7 +47,7 @@ class Article(Publishable):
         null=True, blank=True,
         through='articles.ArticleSource',
     )
-    tags = TagField(null=True, verbose_name=_(u"Tags"))
+    tags = TaggableManager(blank=True)
 
     def __unicode__(self):
         return self.__absolute_url()
