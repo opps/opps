@@ -6,6 +6,7 @@ from django.core.paginator import Paginator, InvalidPage
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
+from django import template
 from django.utils import timezone
 from django.http import Http404
 
@@ -66,8 +67,13 @@ class OppsDetail(DetailView):
         domain_folder = 'articles'
         if self.site.id > 1:
             domain_folder = "{0}/articles".format(self.site)
-
-        return '{0}/{1}.html'.format(domain_folder, self.long_slug)
+        try:
+            _template = '{0}/{1}/{2}.html'.format(
+                domain_folder, self.long_slug, self.article.get().slug)
+            template.loader.get_template(_template)
+        except template.TemplateDoesNotExist:
+            _template = '{0}/{1}.html'.format(domain_folder, self.long_slug)
+        return _template
 
     @property
     def queryset(self):
