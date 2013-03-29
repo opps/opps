@@ -12,7 +12,7 @@ class ImagesAdmin(admin.ModelAdmin):
     list_filter = ['date_available', 'published', 'source']
     search_fields = ['title']
     raw_id_fields = ['source']
-    readonly_fields = ['image_thumb',]
+    readonly_fields = ['image_thumb']
     exclude = ('user',)
 
     fieldsets = (
