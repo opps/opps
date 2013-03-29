@@ -8,22 +8,12 @@ from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.http import Http404
-from django.conf import settings
 
 from haystack.views import SearchView
 
 from .models import Post
 from opps.channels.models import Channel
-
-
-def set_context_data(self, SUPER, **kwargs):
-    context = super(SUPER, self).get_context_data(**kwargs)
-    if len(self.article) >= 1:
-        article = self.article.get()
-        context['opps_channel'] = article.channel
-        context['opps_channel_conf'] = settings.OPPS_CHANNEL_CONF\
-                .get(article.channel.slug, '')
-    return context
+from opps.core.utils import set_context_data
 
 
 class OppsList(ListView):
