@@ -3,6 +3,8 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
+from django_thumbor import generate_url
+
 from .models import Image
 
 
@@ -37,7 +39,7 @@ class ImagesAdmin(admin.ModelAdmin):
     def image_thumb(self, obj):
         if obj.image:
             return u'<img width="60px" height="60px" src="{0}" />'\
-                    .format(obj.image.url)
+                    .format(generate_url(obj.image.url, width=60, height=60))
         return _(u'No Image')
     image_thumb.short_description = _(u'Thumbnail')
     image_thumb.allow_tags = True
