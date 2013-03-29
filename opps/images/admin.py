@@ -36,10 +36,9 @@ class ImagesAdmin(admin.ModelAdmin):
 
     def image_thumb(self, obj):
         if obj.image:
-            return u'<img width="60px" height="60px" \
-                    src="{url}" />'.format(url=obj.image.url)
-        else:
-            return _(u'No Image')
+            return u'<img width="60px" height="60px" src="{0}" />'\
+                    .format(obj.image.url)
+        return _(u'No Image')
     image_thumb.short_description = _(u'Thumbnail')
     image_thumb.allow_tags = True
 
