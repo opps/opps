@@ -63,17 +63,11 @@ class OppsDetail(DetailView):
 
     @property
     def template_name(self):
-        homepage = Channel.objects.get_homepage(site=self.site)
-        if not homepage:
-            return None
-        long_slug = self.kwargs.get('channel__long_slug', homepage.long_slug)
-
         domain_folder = 'articles'
         if self.site.id > 1:
             domain_folder = "{0}/articles".format(self.site)
 
-        return '{0}/{1}.html'.format(domain_folder,
-                                     long_slug)
+        return '{0}/{1}.html'.format(domain_folder, self.long_slug)
 
     @property
     def queryset(self):
@@ -82,9 +76,9 @@ class OppsDetail(DetailView):
         slug = None
         if homepage:
             slug = homepage.long_slug
-        long_slug = self.kwargs.get('channel__long_slug', slug)
+        self.long_slug = self.kwargs.get('channel__long_slug', slug)
         self.article = Post.objects.filter(site=self.site,
-                                   channel__long_slug=long_slug,
+                                   channel__long_slug=self.long_slug,
                                    slug=self.kwargs['slug'],
                                    date_available__lte=timezone.now(),
                                    published=True).all()
