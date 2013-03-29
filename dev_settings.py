@@ -55,7 +55,7 @@ INSTALLED_APPS = (
 
     'opps.core',
 
-    'tagging',
+    'taggit',
 )
 
 TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner'
