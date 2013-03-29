@@ -62,7 +62,7 @@ settings.INSTALLED_APPS += (
     'googl',
     'redactor',
     'static_sitemaps',
-    'tagging',
+    'taggit',
     'mptt',)
 
 settings.MIDDLEWARE_CLASSES += (
