@@ -50,18 +50,15 @@ class Article(Publishable):
     tags = TagField(null=True, verbose_name=_(u"Tags"))
 
     def __unicode__(self):
-        return self.__absolute_url()
+        return self.get_absolute_url()
 
     def save(self, *args, **kwargs):
         if not self.short_url:
             self.short_url = GooglUrlShort(self.get_absolute_url()).short()
         super(Article, self).save(*args, **kwargs)
 
-    def __absolute_url(self):
-        return "{0}/{1}".format(self.channel, self.slug)
-
     def get_absolute_url(self):
-        return "http://{0}".format(self.__absolute_url())
+        return "/{0}/{1}".format(self.channel.long_slug, self.slug)
     get_absolute_url.short_description = 'URL'
 
 
