@@ -55,13 +55,14 @@ settings.INSTALLED_APPS += (
     'opps.sources',
     'opps.articles',
     'opps.images',
+    'opps.sitemaps',
     'appconf',
     'django.contrib.redirects',
+    'django.contrib.sitemaps',
     'django_thumbor',
     'haystack',
     'googl',
     'redactor',
-    'static_sitemaps',
     'tagging',
     'mptt',)
 
