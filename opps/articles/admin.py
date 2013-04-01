@@ -52,7 +52,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ['title', 'channel', 'date_available', 'published']
     list_filter = ['date_available', 'published', 'channel']
     search_fields = ['title', 'headline']
-    readonly_fields = ['get_absolute_url', 'short_url']
+    readonly_fields = ['get_http_absolute_url', 'short_url']
     exclude = ('user',)
     raw_id_fields = ['main_image', 'channel']
 
@@ -74,7 +74,7 @@ class PostAdmin(ArticleAdmin):
 
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('site', 'title', 'slug', 'get_absolute_url',
+            'fields': ('site', 'title', 'slug', 'get_http_absolute_url',
                        'short_url')}),
         (_(u'Content'), {
             'fields': ('short_title', 'headline', 'content', 'main_image')}),
@@ -97,7 +97,7 @@ class AlbumAdmin(ArticleAdmin):
 
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('title', 'slug', 'get_absolute_url', 'short_url',)}),
+            'fields': ('title', 'slug', 'get_http_absolute_url', 'short_url',)}),
         (_(u'Content'), {
             'fields': ('short_title', 'headline', 'main_image')}),
         (_(u'Relationships'), {
