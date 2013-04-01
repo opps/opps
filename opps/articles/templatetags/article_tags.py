@@ -21,7 +21,7 @@ def get_articlebox(slug, channel_slug=None, template_name=None):
     if template_name:
         t = template.loader.get_template(template_name)
 
-    return t.render(template.Context({'articlebox': box}))
+    return t.render(template.Context({'articlebox': box, 'slug': slug}))
 
 
 @register.simple_tag
