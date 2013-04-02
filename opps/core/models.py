@@ -36,3 +36,140 @@ class Publishable(Date):
 
     def is_published(self):
         return self.published and self.date_available <= timezone.now()
+
+
+class BaseBox(Publishable):
+    name = models.CharField(_(u"Box name"), max_length=140)
+    slug = models.SlugField(
+        _(u"Slug"),
+        db_index=True,
+        max_length=150,
+        unique=True,
+    )
+    article = models.ForeignKey(
+        'articles.Article',
+        null=True, blank=True,
+        help_text=_(u'Only published article'),
+        on_delete=models.SET_NULL
+    )
+    channel = models.ForeignKey(
+        'channels.Channel',
+        null=True, blank=True,
+        on_delete=models.SET_NULL
+    )
+
+    class Meta:
+        abstract = True
+
+    def __unicode__(self):
+        return u"{0}-{1}".format(self.slug, self.site.name)
+
+
+class BaseConfig(Publishable):
+    """
+    Basic key:value configuration for apps
+    In admin it should be accessible only for users in developers group
+
+    TODO:
+    - Create base template filters
+       {{ get_value|'key' }}
+    - format_value for Json and Yaml
+    - BaseConfigAdmin to show only for developers
+
+    """
+
+    FORMATS = (
+        ('text', 'Text'),
+        ('json', 'Json'),
+        ('yaml', 'Yaml'),
+    )
+
+    key_group = models.SlugField(
+        _(u"Config Key Group"),
+        db_index=True,
+        max_length=150,
+        null=True,
+        blank=True
+    )
+
+    key = models.SlugField(
+        _(u"Config Key"),
+        db_index=True,
+        max_length=150,
+        unique=True,
+    )
+
+    format = models.CharField(_(u"Format"), choices=FORMATS, default='text')
+    value = models.TextField(_(u"Config Value"))
+    description = models.TextField(_(u"Description"), blank=True, null=True)
+
+    article = models.ForeignKey(
+        'articles.Article',
+        null=True, blank=True,
+        help_text=_(u'Only published article'),
+        on_delete=models.SET_NULL
+    )
+    channel = models.ForeignKey(
+        'channels.Channel',
+        null=True, blank=True,
+        on_delete=models.SET_NULL
+    )
+
+    class Meta:
+        abstract = True
+        permissions = (("developer", "Developer"),)
+        unique_together = ("key", "site", "channel", "article")
+
+    def __unicode__(self):
+        return u"{0}-{1}".format(self.key, self.value)
+
+
+    @classmethod
+    def format_value(cls, value, format):
+        if format == "text":
+            return value
+        elif format == "json":
+            return json.loads(value)
+        elif format == "yaml":
+            return "TODO"
+
+    @classmethod
+    def get_value(cls, key, **kwargs):
+        """
+        kwargs must have filters to QuerySet
+           site, channel, article, format, description
+           return a single formated value
+        """
+        instance = cls.objects.filter(key=key)
+        if kwargs:
+            instance = instance.filter(**kwargs)
+
+        if not instance:
+            return False
+        else:
+            instance = instance.latest('-date_insert')
+
+        # format
+        value = cls.format_value(instance.value, instance.format)
+
+        return value
+
+    @classmethod
+    def get_values(cls, key_group, **kwargs):
+        """
+        kwargs must have filters to QuerySet
+           site, channel, article, format, description
+           return a dict of keys and formated values
+        """
+        instances = cls.objects.filter(key_group=key_group)
+        if kwargs:
+            instances = instance.filter(**kwargs)
+
+        if not instances:
+            return False
+
+
+        value = {instance.key: cls.format_value(instance.value, instance.format)
+                    for instance in instances}
+
+        return value

@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 from tagging.fields import TagField
 from googl.short import GooglUrlShort
 
-from opps.core.models import Publishable
+from opps.core.models import Publishable, BaseBox
 
 
 class Article(Publishable):
@@ -125,34 +125,14 @@ class ArticleImage(models.Model):
         return self.image.title
 
 
-class ArticleBox(Publishable):
-    name = models.CharField(_(u"Box name"), max_length=140)
-    slug = models.SlugField(
-        _(u"Slug"),
-        db_index=True,
-        max_length=150,
-        unique=True,
-    )
-    article = models.ForeignKey(
-        'articles.Article',
-        null=True, blank=True,
-        help_text=_(u'Only published article'),
-        on_delete=models.SET_NULL
-    )
-    channel = models.ForeignKey(
-        'channels.Channel',
-        null=True, blank=True,
-        on_delete=models.SET_NULL
-    )
+class ArticleBox(BaseBox):
+
     articles = models.ManyToManyField(
         'articles.Article',
         null=True, blank=True,
         related_name='articlebox_articles',
         through='articles.ArticleBoxArticles'
     )
-
-    def __unicode__(self):
-        return u"{0}-{1}".format(self.slug, self.site.name)
 
 
 class ArticleBoxArticles(models.Model):
