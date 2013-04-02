@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import template
 from django.conf import settings
+from django.utils import timezone
 from opps.articles.models import ArticleBox
 
 
@@ -13,7 +14,9 @@ def get_articlebox(slug, channel_slug=None, template_name=None):
         slug = slug + '-' + channel_slug
 
     try:
-        box = ArticleBox.objects.get(site=settings.SITE_ID, slug=slug)
+        box = ArticleBox.objects.get(site=settings.SITE_ID, slug=slug,
+                                     date_available__lte=timezone.now(),
+                                     published=True)
     except ArticleBox.DoesNotExist:
         box = None
 
