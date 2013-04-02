@@ -86,10 +86,10 @@ class OppsDetail(DetailView):
             slug = homepage.long_slug
         self.long_slug = self.kwargs.get('channel__long_slug', slug)
         self.article = Post.objects.filter(site=self.site,
-                                   channel__long_slug=self.long_slug,
-                                   slug=self.kwargs['slug'],
-                                   date_available__lte=timezone.now(),
-                                   published=True).all()
+                                           channel__long_slug=self.long_slug,
+                                           slug=self.kwargs['slug'],
+                                           date_available__lte=timezone.now(),
+                                           published=True).all()
         return self.article
 
 
