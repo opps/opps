@@ -52,6 +52,9 @@ class Article(Publishable):
     def __unicode__(self):
         return self.get_absolute_url()
 
+    class Meta:
+        ordering = ['-date_available', ]
+
     def save(self, *args, **kwargs):
         if not self.short_url:
             self.short_url = GooglUrlShort(self.get_http_absolute_url()).short()
