@@ -78,7 +78,8 @@ class PostAdmin(ArticleAdmin):
             'fields': ('site', 'title', 'slug', 'get_http_absolute_url',
                        'short_url')}),
         (_(u'Content'), {
-            'fields': ('short_title', 'headline', 'content', 'main_image')}),
+            'fields': ('short_title', 'headline', 'content', 'main_image',
+                       'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel', 'album',)}),
         (_(u'Publication'), {

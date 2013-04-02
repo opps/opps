@@ -68,7 +68,7 @@ settings.INSTALLED_APPS += (
     'haystack',
     'googl',
     'redactor',
-    'tagging',
+    'taggit',
     'mptt',)
 
 settings.MIDDLEWARE_CLASSES += (
