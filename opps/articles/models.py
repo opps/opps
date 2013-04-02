@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ValidationError
 
 from tagging.fields import TagField
 from googl.short import GooglUrlShort
@@ -134,6 +136,7 @@ class ArticleBox(Publishable):
     article = models.ForeignKey(
         'articles.Article',
         null=True, blank=True,
+        help_text=_(u'Only published article'),
         on_delete=models.SET_NULL
     )
     channel = models.ForeignKey(
@@ -171,3 +174,11 @@ class ArticleBoxArticles(models.Model):
 
     def __unicode__(self):
         return u"{0}-{1}".format(self.articlebox.slug, self.article.slug)
+
+    def clean(self):
+
+        if not self.article.published:
+            raise ValidationError('Article not published!')
+
+        if self.article.date_available <= timezone.now():
+            raise ValidationError('Article not published!')
