@@ -7,7 +7,7 @@ import os
 import opps
 
 
-install_requires = ["Django==1.5.1",
+install_requires = ["django",
                     "south>=0.7",
                     "Pillow==1.7.8",
                     "thumbor==3.7.1",
