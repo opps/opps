@@ -81,10 +81,10 @@ class BaseConfig(Publishable):
     """
 
     FORMATS = (
-        ('text', 'Text'),
-        ('json', 'Json'),
-        ('yaml', 'Yaml'),
-        ('template', 'Template'),
+        ('text', _(u'Text')),
+        ('json', _(u'Json')),
+        ('yaml', _(u'Yaml')),
+        ('template', _(u'Template')),
     )
 
     key_group = models.SlugField(
