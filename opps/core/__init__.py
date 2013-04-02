@@ -50,6 +50,11 @@ class ThumborConf(AppConf):
         prefix = 'thumbor'
 
 
+class DjangoConf(AppConf):
+    CACHES = {'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',}}
+
+
 settings.INSTALLED_APPS += (
     'opps.channels',
     'opps.sources',
