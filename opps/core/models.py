@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
 from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
@@ -163,7 +165,7 @@ class BaseConfig(Publishable):
         """
         instances = cls.objects.filter(key_group=key_group)
         if kwargs:
-            instances = instance.filter(**kwargs)
+            instances = instances.filter(**kwargs)
 
         if not instances:
             return False
