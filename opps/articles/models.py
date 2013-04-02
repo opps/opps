@@ -57,7 +57,8 @@ class Article(Publishable):
 
     def save(self, *args, **kwargs):
         if not self.short_url:
-            self.short_url = GooglUrlShort(self.get_http_absolute_url()).short()
+            self.short_url = GooglUrlShort(self.get_http_absolute_url())\
+                .short()
         super(Article, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
