@@ -118,7 +118,7 @@ class BaseConfig(Publishable):
     class Meta:
         abstract = True
         permissions = (("developer", "Developer"),)
-        unique_together = ("key", "site", "channel", "article")
+        unique_together = ("key_group", "key", "site", "channel", "article")
 
     def __unicode__(self):
         return u"{0}-{1}".format(self.key, self.value)
