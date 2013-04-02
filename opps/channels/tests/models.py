@@ -6,7 +6,7 @@ from datetime import timedelta
 from django.db import IntegrityError
 from django.test import TestCase
 from django.contrib.sites.models import Site
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.utils import timezone
 
 from opps.channels.models import Channel
@@ -15,6 +15,7 @@ from opps.channels.models import Channel
 class ChannelModelTest(TestCase):
 
     def setUp(self):
+        User = get_user_model()
         self.user = User.objects.create(username=u'test', password='test')
         self.site = Site.objects.filter(name=u'example.com').get()
         self.parent = Channel.objects.create(name=u'Home', slug=u'home',

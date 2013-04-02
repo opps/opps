@@ -5,7 +5,7 @@ from django.db import IntegrityError
 from django.test import TestCase
 
 from django.contrib.sites.models import Site
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from opps.sources.models import Source
 
@@ -13,6 +13,7 @@ from opps.sources.models import Source
 class SourceModelTest(TestCase):
 
     def setUp(self):
+        User = get_user_model()
         self.user = User.objects.create(username=u'test', password='test')
         self.site = Site.objects.filter(name=u'example.com').get()
         self.source = Source.objects.create(name=u'Test site',

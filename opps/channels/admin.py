@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Channel
@@ -28,6 +28,7 @@ class ChannelAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.long_slug = generate_long_slug(obj.parent, obj.slug,
                                            obj.site.domain)
+        User = get_user_model()
         try:
             if obj.user:
                 pass

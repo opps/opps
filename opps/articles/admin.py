@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django import forms
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Post, Album, Article, ArticleSource, ArticleImage
@@ -57,6 +57,7 @@ class ArticleAdmin(admin.ModelAdmin):
     raw_id_fields = ['main_image', 'channel']
 
     def save_model(self, request, obj, form, change):
+        User = get_user_model()
         try:
             obj.site = obj.channel.site
             if obj.user:
@@ -127,6 +128,7 @@ class ArticleBoxAdmin(admin.ModelAdmin):
     )
 
     def save_model(self, request, obj, form, change):
+        User = get_user_model()
         try:
             if obj.user:
                 pass
