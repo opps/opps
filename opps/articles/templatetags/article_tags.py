@@ -2,7 +2,8 @@
 from django import template
 from django.conf import settings
 from django.utils import timezone
-from opps.articles.models import ArticleBox
+
+from .models import ArticleBox
 
 
 register = template.Library()
