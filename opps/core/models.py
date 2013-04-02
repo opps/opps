@@ -84,7 +84,6 @@ class BaseConfig(Publishable):
         ('text', _(u'Text')),
         ('json', _(u'Json')),
         ('yaml', _(u'Yaml')),
-        ('template', _(u'Template')),
     )
 
     key_group = models.SlugField(
@@ -134,8 +133,6 @@ class BaseConfig(Publishable):
         elif format == "json":
             return json.loads(value)
         elif format == "yaml":
-            return "TODO"
-        elif format == "template":
             return "TODO"
 
     @classmethod
