@@ -46,10 +46,12 @@ class OppsList(ListView):
                 self.long_slug = homepage.long_slug
             return self.article
         self.long_slug = self.kwargs['channel__long_slug']
-        get_object_or_404(Channel, site=self.site, long_slug=self.long_slug,
-                          date_available__lte=timezone.now(), published=True)
+        self.channel = get_object_or_404(Channel, site=self.site,
+                                         long_slug=self.long_slug,
+                                         date_available__lte=timezone.now(),
+                                         published=True)
         self.article = Post.objects.filter(site=self.site,
-                                           channel__long_slug=self.long_slug,
+                                           channel=self.channel,
                                            date_available__lte=timezone.now(),
                                            published=True).all()
         return self.article
