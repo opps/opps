@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist
 
 from mptt.models import MPTTModel, TreeForeignKey
 
-from opps.core.models import Publishable
+from opps.core.models import Publishable, BaseConfig
 from .utils import generate_long_slug
 
 
@@ -73,3 +73,10 @@ class Channel(MPTTModel, Publishable):
                                                 self.site.domain)
 
         super(Channel, self).save(*args, **kwargs)
+
+
+class ChannelConfig(BaseConfig):
+    """
+    Default implementation
+    """
+    pass
