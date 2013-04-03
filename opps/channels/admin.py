@@ -39,10 +39,11 @@ class ChannelAdmin(admin.ModelAdmin):
 
 
 class ChannelConfigAdmin(admin.ModelAdmin):
-    list_display = ['key','key_group', 'channel', 'date_insert', 'date_available', 'published']
+    list_display = ['key', 'key_group', 'channel', 'date_insert',
+                    'date_available', 'published']
     list_filter = ["key", 'key_group', "channel", "published"]
     search_fields = ["key", "key_group", "value"]
-    raw_id_fields = ['channel',]
+    raw_id_fields = ['channel']
     exclude = ('user', 'article')
 
     def save_model(self, request, obj, form, change):
