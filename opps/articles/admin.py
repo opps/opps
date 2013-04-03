@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Post, Album, Article, ArticleSource, ArticleImage
-from .models import ArticleBox, ArticleBoxArticles
+from .models import ArticleBox, ArticleBoxArticles, ArticleConfig
 
 from redactor.widgets import RedactorEditor
 
@@ -144,7 +144,26 @@ class HideArticleAdmin(admin.ModelAdmin):
         return {}
 
 
+class ArticleConfigAdmin(admin.ModelAdmin):
+    list_display = ['key','key_group', 'channel', 'date_insert', 'date_available', 'published']
+    list_filter = ["key", 'key_group', "channel", "published"]
+    search_fields = ["key", "key_group", "value"]
+    raw_id_fields = ['channel', 'article']
+    exclude = ('user',)
+
+    def save_model(self, request, obj, form, change):
+        User = get_user_model()
+        try:
+            if obj.user:
+                pass
+        except User.DoesNotExist:
+            obj.user = request.user
+
+        super(ArticleConfigAdmin, self).save_model(request, obj, form, change)
+
+
 admin.site.register(Article, HideArticleAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Album, AlbumAdmin)
 admin.site.register(ArticleBox, ArticleBoxAdmin)
+admin.site.register(ArticleConfig, ArticleConfigAdmin)

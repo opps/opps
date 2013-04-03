@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 from taggit.managers import TaggableManager
 from googl.short import GooglUrlShort
 
-from opps.core.models import Publishable, BaseBox
+from opps.core.models import Publishable, BaseBox, BaseConfig
 
 
 class Article(Publishable):
@@ -162,3 +162,10 @@ class ArticleBoxArticles(models.Model):
 
         if self.article.date_available <= timezone.now():
             raise ValidationError('Article not published!')
+
+
+class ArticleConfig(BaseConfig):
+    """
+    Default implementation
+    """
+    pass
