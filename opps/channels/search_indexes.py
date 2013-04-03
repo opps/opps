@@ -17,8 +17,8 @@ class ChannelIndex(SearchIndex):
 
     def index_queryset(self):
         return Channel.objects.filter(
-                date_available__lte=datetime.datetime.now(),
-                published=True)
+            date_available__lte=datetime.datetime.now(),
+            published=True)
 
 
 site.register(Channel, ChannelIndex)

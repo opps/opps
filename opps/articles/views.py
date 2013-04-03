@@ -39,7 +39,8 @@ class OppsList(ListView):
         if not self.kwargs.get('channel__long_slug'):
             self.article = Post.objects.filter(channel__homepage=True,
                                                site=self.site,
-                                               date_available__lte=timezone.now(),
+                                               date_available__lte=timezone.
+                                               now(),
                                                published=True).all()
             homepage = Channel.objects.get_homepage(site=self.site)
             if homepage:

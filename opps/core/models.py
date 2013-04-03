@@ -102,7 +102,7 @@ class BaseConfig(Publishable):
     )
 
     format = models.CharField(_(u"Format"), max_length=20,
-                             choices=FORMATS, default='text')
+                              choices=FORMATS, default='text')
     value = models.TextField(_(u"Config Value"))
     description = models.TextField(_(u"Description"), blank=True, null=True)
 
@@ -125,7 +125,6 @@ class BaseConfig(Publishable):
 
     def __unicode__(self):
         return u"{0}-{1}".format(self.key, self.value)
-
 
     @classmethod
     def format_value(cls, value, format):
@@ -171,8 +170,8 @@ class BaseConfig(Publishable):
         if not instances:
             return False
 
-
-        value = {instance.key: cls.format_value(instance.value, instance.format)
-                    for instance in instances}
+        value = {instance.key: cls.format_value(instance.value,
+                                                instance.format)
+                 for instance in instances}
 
         return value

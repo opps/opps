@@ -31,7 +31,7 @@ class Channel(MPTTModel, Publishable):
     homepage = models.BooleanField(_(u"Is home page?"), default=False)
     position = models.IntegerField(_(u"Position"), default=0)
     parent = TreeForeignKey('self', related_name='subchannel',
-                                null=True, blank=True)
+                            null=True, blank=True)
 
     objects = ChannelManager()
 

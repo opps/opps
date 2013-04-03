@@ -99,7 +99,8 @@ class AlbumAdmin(ArticleAdmin):
 
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('title', 'slug', 'get_http_absolute_url', 'short_url',)}),
+            'fields': ('title', 'slug', 'get_http_absolute_url',
+                       'short_url',)}),
         (_(u'Content'), {
             'fields': ('short_title', 'headline', 'main_image')}),
         (_(u'Relationships'), {

@@ -17,8 +17,8 @@ class PostIndex(SearchIndex):
 
     def index_queryset(self):
         return Post.objects.filter(
-                date_available__lte=datetime.datetime.now(),
-                published=True)
+            date_available__lte=datetime.datetime.now(),
+            published=True)
 
 
 site.register(Post, PostIndex)
