@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django import forms
-from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Post, Album, Article, ArticleSource, ArticleImage
 from .models import ArticleBox, ArticleBoxArticles, ArticleConfig
+from opps.core.admin import PublishableAdmin
 
 from redactor.widgets import RedactorEditor
 
@@ -47,7 +47,7 @@ class PostAdminForm(forms.ModelForm):
         widgets = {'content': RedactorEditor()}
 
 
-class ArticleAdmin(admin.ModelAdmin):
+class ArticleAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ["title"]}
     list_display = ['title', 'channel', 'date_available', 'published']
     list_filter = ['date_available', 'published', 'channel']
@@ -55,17 +55,6 @@ class ArticleAdmin(admin.ModelAdmin):
     readonly_fields = ['get_http_absolute_url', 'short_url']
     exclude = ('user',)
     raw_id_fields = ['main_image', 'channel']
-
-    def save_model(self, request, obj, form, change):
-        User = get_user_model()
-        try:
-            obj.site = obj.channel.site
-            if obj.user:
-                pass
-        except User.DoesNotExist:
-            obj.user = request.user
-
-        super(ArticleAdmin, self).save_model(request, obj, form, change)
 
 
 class PostAdmin(ArticleAdmin):
@@ -111,7 +100,7 @@ class AlbumAdmin(ArticleAdmin):
     )
 
 
-class ArticleBoxAdmin(admin.ModelAdmin):
+class ArticleBoxAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ["name"]}
     list_display = ['name', 'date_available', 'published']
     list_filter = ['date_available', 'published']
@@ -129,39 +118,19 @@ class ArticleBoxAdmin(admin.ModelAdmin):
             'fields': ('published', 'date_available')}),
     )
 
-    def save_model(self, request, obj, form, change):
-        User = get_user_model()
-        try:
-            if obj.user:
-                pass
-        except User.DoesNotExist:
-            obj.user = request.user
-
-        super(ArticleBoxAdmin, self).save_model(request, obj, form, change)
-
 
 class HideArticleAdmin(admin.ModelAdmin):
     def get_model_perms(self, *args, **kwargs):
         return {}
 
 
-class ArticleConfigAdmin(admin.ModelAdmin):
+class ArticleConfigAdmin(PublishableAdmin):
     list_display = ['key', 'key_group', 'channel', 'date_insert',
                     'date_available', 'published']
     list_filter = ["key", 'key_group', "channel", "published"]
     search_fields = ["key", "key_group", "value"]
     raw_id_fields = ['channel', 'article']
     exclude = ('user',)
-
-    def save_model(self, request, obj, form, change):
-        User = get_user_model()
-        try:
-            if obj.user:
-                pass
-        except User.DoesNotExist:
-            obj.user = request.user
-
-        super(ArticleConfigAdmin, self).save_model(request, obj, form, change)
 
 
 admin.site.register(Article, HideArticleAdmin)
