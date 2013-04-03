@@ -101,7 +101,8 @@ class BaseConfig(Publishable):
         unique=True,
     )
 
-    format = models.CharField(_(u"Format"), choices=FORMATS, default='text')
+    format = models.CharField(_(u"Format"), max_length=20,
+                             choices=FORMATS, default='text')
     value = models.TextField(_(u"Config Value"))
     description = models.TextField(_(u"Description"), blank=True, null=True)
 
