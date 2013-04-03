@@ -170,8 +170,9 @@ class BaseConfig(Publishable):
         if not instances:
             return False
 
-        value = {instance.key: cls.format_value(instance.value,
-                                                instance.format)
-                 for instance in instances}
+        value = {}
+        for instance in instances:
+            value[instance.key] = cls.format_value(instance.value,
+                                                   instance.format)
 
         return value
