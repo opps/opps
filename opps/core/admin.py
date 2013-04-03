@@ -12,4 +12,3 @@ class PublishableAdmin(admin.ModelAdmin):
         if getattr(obj, 'pk', None) is None:
             obj.user = request.user
         obj.save()
-
