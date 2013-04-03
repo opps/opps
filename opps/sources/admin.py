@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Source
+from opps.core.admin import PublishableAdmin
 
 
-class SourceAdmin(admin.ModelAdmin):
+class SourceAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ['name']
     list_filter = ['date_available', 'published']
@@ -22,14 +22,5 @@ class SourceAdmin(admin.ModelAdmin):
             'fields': ('published', 'date_available')}),
     )
 
-    def save_model(self, request, obj, form, change):
-        User = get_user_model()
-        try:
-            if obj.user:
-                pass
-        except User.DoesNotExist:
-            obj.user = request.user
-
-        super(SourceAdmin, self).save_model(request, obj, form, change)
 
 admin.site.register(Source, SourceAdmin)
