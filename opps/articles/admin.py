@@ -145,7 +145,7 @@ class HideArticleAdmin(admin.ModelAdmin):
 
 
 class ArticleConfigAdmin(admin.ModelAdmin):
-    list_display = ['key','key_group', 'channel', 'date_insert',
+    list_display = ['key', 'key_group', 'channel', 'date_insert',
                     'date_available', 'published']
     list_filter = ["key", 'key_group', "channel", "published"]
     search_fields = ["key", "key_group", "value"]
