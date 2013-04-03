@@ -56,14 +56,7 @@ class DjangoConf(AppConf):
 
 
 settings.INSTALLED_APPS += (
-    'opps.channels',
-    'opps.sources',
-    'opps.articles',
-    'opps.images',
-    'opps.sitemaps',
     'appconf',
-    'django.contrib.redirects',
-    'django.contrib.sitemaps',
     'django_thumbor',
     'haystack',
     'googl',
