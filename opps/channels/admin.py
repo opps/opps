@@ -5,9 +5,10 @@ from django.utils.translation import ugettext_lazy as _
 
 from .models import Channel, ChannelConfig
 from .utils import generate_long_slug
+from opps.core.admin import PublishableAdmin
 
 
-class ChannelAdmin(admin.ModelAdmin):
+class ChannelAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ['name', 'parent', 'site', 'date_available', 'homepage',
                     'position', 'published']
@@ -28,12 +29,6 @@ class ChannelAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.long_slug = generate_long_slug(obj.parent, obj.slug,
                                            obj.site.domain)
-        User = get_user_model()
-        try:
-            if obj.user:
-                pass
-        except User.DoesNotExist:
-            obj.user = request.user
 
         super(ChannelAdmin, self).save_model(request, obj, form, change)
 
