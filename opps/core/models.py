@@ -150,7 +150,7 @@ class BaseConfig(Publishable):
         if not instance:
             return False
         else:
-            instance = instance.latest('-date_insert')
+            instance = instance.latest('date_insert')
 
         # format
         value = cls.format_value(instance.value, instance.format)
