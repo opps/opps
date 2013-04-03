@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 
 from django_thumbor import generate_url
 
 from .models import Image
+from opps.core.admin import PublishableAdmin
 
 
-class ImagesAdmin(admin.ModelAdmin):
+class ImagesAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ("title",)}
     list_display = ['image_thumb', 'title', 'source', 'date_available',
                     'published']
@@ -27,16 +27,6 @@ class ImagesAdmin(admin.ModelAdmin):
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
     )
-
-    def save_model(self, request, obj, form, change):
-        User = get_user_model()
-        try:
-            if obj.user:
-                pass
-        except User.DoesNotExist:
-            obj.user = request.user
-
-        super(ImagesAdmin, self).save_model(request, obj, form, change)
 
     def image_thumb(self, obj):
         if obj.image:
