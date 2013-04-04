@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 
     'opps.core',
+    'opps.boxes',
     'opps.channels',
     'opps.sources',
     'opps.articles',
