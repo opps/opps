@@ -120,8 +120,17 @@ class ArticleBoxAdmin(PublishableAdmin):
 
 
 class HideArticleAdmin(admin.ModelAdmin):
+
+    list_display = ['title', 'channel', 'date_available', 'published']
+    list_filter = ['date_available', 'published', 'channel']
+    search_fields = ['title', 'slug', 'channel']
+    date_hierarchy = ('date_available')
+
     def get_model_perms(self, *args, **kwargs):
         return {}
+
+    def has_add_permission(self, request):
+        return False
 
 
 class ArticleConfigAdmin(PublishableAdmin):
