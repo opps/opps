@@ -160,7 +160,7 @@ class ArticleBoxArticles(models.Model):
         if not self.article.published:
             raise ValidationError('Article not published!')
 
-        if self.article.date_available <= timezone.now():
+        if self.article.date_available >= timezone.now():
             raise ValidationError('Article not published!')
 
 
