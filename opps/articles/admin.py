@@ -49,11 +49,7 @@ class PostAdminForm(forms.ModelForm):
 
 class ArticleAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ["title"]}
-    list_display = ['title', 'channel', 'date_available', 'published']
-    list_filter = ['date_available', 'published', 'channel']
-    search_fields = ['title', 'headline']
     readonly_fields = ['get_http_absolute_url', 'short_url']
-    exclude = ('user',)
     raw_id_fields = ['main_image', 'channel']
 
 
@@ -105,8 +101,6 @@ class ArticleBoxAdmin(PublishableAdmin):
     list_display = ['name', 'date_available', 'published']
     list_filter = ['date_available', 'published']
     inlines = [ArticleBoxArticlesInline]
-    exclude = ('user',)
-    raw_id_fields = ['channel', 'article']
 
     fieldsets = (
         (_(u'Identification'), {
@@ -119,12 +113,7 @@ class ArticleBoxAdmin(PublishableAdmin):
     )
 
 
-class HideArticleAdmin(admin.ModelAdmin):
-
-    list_display = ['title', 'channel', 'date_available', 'published']
-    list_filter = ['date_available', 'published', 'channel']
-    search_fields = ['title', 'slug', 'channel']
-    date_hierarchy = ('date_available')
+class HideArticleAdmin(PublishableAdmin):
 
     def get_model_perms(self, *args, **kwargs):
         return {}
@@ -138,8 +127,6 @@ class ArticleConfigAdmin(PublishableAdmin):
                     'date_available', 'published']
     list_filter = ["key", 'key_group', "channel", "published"]
     search_fields = ["key", "key_group", "value"]
-    raw_id_fields = ['channel', 'article']
-    exclude = ('user',)
 
 
 admin.site.register(Article, HideArticleAdmin)
