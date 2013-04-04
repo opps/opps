@@ -13,8 +13,8 @@ from django.http import Http404
 from haystack.views import SearchView
 
 from .models import Post
+from .utils import set_context_data
 from opps.channels.models import Channel
-from opps.core.utils import set_context_data
 
 
 class OppsList(ListView):
