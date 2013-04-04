@@ -158,10 +158,10 @@ class ArticleBoxArticles(models.Model):
     def clean(self):
 
         if not self.article.published:
-            raise ValidationError('Article not published!')
+            raise ValidationError(_(u'Article not published!'))
 
         if self.article.date_available >= timezone.now():
-            raise ValidationError('Article not published!')
+            raise ValidationError(_(u'Article date_available is greater than today!'))
 
 
 class ArticleConfig(BaseConfig):
