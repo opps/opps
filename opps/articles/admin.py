@@ -120,6 +120,7 @@ class HideArticleAdmin(PublishableAdmin):
     list_display = ['image_thumb', 'title', 'channel_name', 'date_available',
                     'published']
     readonly_fields = ['image_thumb']
+
     def image_thumb(self, obj):
         if obj.main_image:
             return u'<img width="60px" height="60px" src="{0}" />'.format(
