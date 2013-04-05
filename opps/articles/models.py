@@ -32,6 +32,11 @@ class Article(Publishable):
         'channels.Channel',
         verbose_name=_(u"Channel"),
     )
+    channel_name = models.CharField(
+        _(u"Channel name"),
+        max_length=140,
+        null=True, blank=False,
+    )
     main_image = models.ForeignKey(
         'images.Image',
         null=True, blank=False,
@@ -61,6 +66,7 @@ class Article(Publishable):
         if not self.short_url:
             self.short_url = GooglUrlShort(self.get_http_absolute_url())\
                 .short()
+        self.channel_name = self.channel.name
         super(Article, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
