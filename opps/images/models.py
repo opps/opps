@@ -7,6 +7,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
+from taggit.models import TaggedItemBase
 from taggit.managers import TaggableManager
 
 from opps.core.models import Publishable
@@ -20,6 +21,12 @@ def get_file_path(instance, filename):
     return os.path.join(folder, filename)
 
 
+class TaggedImage(TaggedItemBase):
+    """Tag for images """
+    content_object = models.ForeignKey('images.Image')
+    pass
+
+
 class Image(Publishable):
 
     title = models.CharField(_(u"Title"), max_length=140, db_index=True)
@@ -27,7 +34,7 @@ class Image(Publishable):
                             db_index=True)
     image = models.ImageField(upload_to=get_file_path)
     description = models.TextField(_(u"Description"), null=True, blank=True)
-    tags = TaggableManager(blank=True)
+    tags = TaggableManager(blank=True, through=TaggedImage)
 
     source = models.ForeignKey('sources.Source', null=True, blank=True)
 
