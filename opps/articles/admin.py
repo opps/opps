@@ -8,6 +8,7 @@ from .models import ArticleBox, ArticleBoxArticles, ArticleConfig
 from opps.core.admin import PublishableAdmin
 
 from redactor.widgets import RedactorEditor
+from django_thumbor import generate_url
 
 
 class ArticleImageInline(admin.TabularInline):
@@ -115,6 +116,17 @@ class ArticleBoxAdmin(PublishableAdmin):
 
 
 class HideArticleAdmin(PublishableAdmin):
+
+    list_display = ['image_thumb', 'title', 'channel_name', 'date_available',
+                    'published']
+    readonly_fields = ['image_thumb']
+    def image_thumb(self, obj):
+        if obj.main_image:
+            return u'<img width="60px" height="60px" src="{0}" />'.format(
+                generate_url(obj.main_image.image.url, width=60, height=60))
+        return _(u'No Image')
+    image_thumb.short_description = _(u'Thumbnail')
+    image_thumb.allow_tags = True
 
     def get_model_perms(self, *args, **kwargs):
         return {}
