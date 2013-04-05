@@ -22,7 +22,7 @@ class ImagesAdmin(PublishableAdmin):
         (_(u'Identification'), {
             'fields': ('site', 'title', 'slug', 'image')}),
         (_(u'Content'), {
-            'fields': ('description', 'source')}),
+            'fields': ('description', 'tags', 'source')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
