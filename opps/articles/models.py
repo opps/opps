@@ -11,7 +11,7 @@ from opps.core.models import Publishable, BaseBox, BaseConfig
 
 
 class Article(Publishable):
-    title = models.CharField(_(u"Title"), max_length=140)
+    title = models.CharField(_(u"Title"), max_length=140, db_index=True)
     headline = models.TextField(_(u"Headline"), blank=True)
     slug = models.SlugField(
         _(u"URL"),
