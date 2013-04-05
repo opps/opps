@@ -13,7 +13,7 @@ def channel_context(request):
     opps_menu = Channel.objects.filter(site=site,
                                        date_available__lte=timezone.now(),
                                        published=True,
-                                       show_in_menu=True)
+                                       show_in_menu=True).order_by('order')
 
     return {'opps_menu': opps_menu,
             'opps_channel_conf_all': settings.OPPS_CHANNEL_CONF}
