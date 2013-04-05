@@ -29,14 +29,14 @@ class Channel(MPTTModel, Publishable):
                                    max_length=255, null=True, blank=True)
     show_in_menu = models.BooleanField(_(u"Show in menu?"), default=False)
     homepage = models.BooleanField(_(u"Is home page?"), default=False)
-    position = models.IntegerField(_(u"Position"), default=0)
+    order = models.IntegerField(_(u"Order"), default=0)
     parent = TreeForeignKey('self', related_name='subchannel',
                             null=True, blank=True)
 
     objects = ChannelManager()
 
     class MPTTMeta:
-        order_insertion_by = ['position', 'name']
+        order_insertion_by = ['order', 'name']
 
     def __unicode__(self):
         if self.parent:

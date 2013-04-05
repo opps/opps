@@ -37,6 +37,8 @@ class QuerySet(Publishable):
     )
 
     model = models.CharField(_(u'Model'), max_length=150, choices=OPPS_APPS)
+    order = models.CharField(_('Order'), max_length=2, choices=(
+        ('-', 'DESC'), ('', 'ASC')))
 
 
 class DynamicBox(BaseBox):

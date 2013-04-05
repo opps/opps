@@ -11,7 +11,7 @@ from opps.core.admin import PublishableAdmin
 class ChannelAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ['name', 'parent', 'site', 'date_available', 'homepage',
-                    'position', 'published']
+                    'order', 'published']
     list_filter = ['date_available', 'published', 'site', 'homepage', 'parent']
     search_fields = ['name']
     exclude = ('user', 'long_slug')
@@ -20,7 +20,7 @@ class ChannelAdmin(PublishableAdmin):
     fieldsets = (
         (_(u'Identification'), {
             'fields': ('site', 'parent', 'name', 'slug', 'description',
-                       'position', 'show_in_menu', 'homepage',)}),
+                       'order', 'show_in_menu', 'homepage',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
