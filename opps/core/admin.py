@@ -8,9 +8,9 @@ class PublishableAdmin(admin.ModelAdmin):
     Overrides standard admin.ModelAdmin save_model method
     It sets user (author) based on data from requet.
     """
-    list_display = ['title', 'date_available', 'published']
-    list_filter = ['date_available', 'published']
-    search_fields = ['title', 'slug', 'headline']
+    list_display = ['title', 'channel_name', 'date_available', 'published']
+    list_filter = ['date_available', 'published', 'channel_name']
+    search_fields = ['title', 'slug', 'headline', 'channel_name']
     exclude = ('user',)
 
     def save_model(self, request, obj, form, change):
