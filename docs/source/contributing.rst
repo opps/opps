@@ -3,7 +3,7 @@ Contributing
 
 Contributions are very welcome. Specially roles. If you implement a role that you think others might be using, please contribute.
 
-To contribute head to `opps's github page <https://github.com/oppsproject/opps>`_, fork it and create a pull request.
+To contribute head to `opps's github page <https://github.com/opps/opps>`_, fork it and create a pull request.
 
 
 Developing
@@ -46,7 +46,7 @@ Other contributors
 ******************
 
 Other non-core members, but equally important, equally rocking, equally ass-kicking contributors can be seen in this list:
-https://github.com/oppsproject/opps/network/members
+https://github.com/opps/opps/network/members
 
 There are also some more contributors that haven't send code to the project, but who help in other ways, when and how they can.
 We're very happy to have you, guys!
