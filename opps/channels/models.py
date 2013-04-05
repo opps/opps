@@ -36,7 +36,7 @@ class Channel(MPTTModel, Publishable):
     objects = ChannelManager()
 
     class MPTTMeta:
-        order_insertion_by = ['position', 'name']
+        order_insertion_by = ['order', 'name']
 
     def __unicode__(self):
         if self.parent:
