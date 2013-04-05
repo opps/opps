@@ -10,9 +10,7 @@ register = template.Library()
 
 
 @register.simple_tag
-def get_articlebox(slug, channel_slug=None, template_name=None):
-    if channel_slug:
-        slug = u"{0}-{1}".format(slug, channel_slug)
+def get_articlebox(slug, template_name=None):
 
     try:
         box = ArticleBox.objects.get(site=settings.SITE_ID, slug=slug,
