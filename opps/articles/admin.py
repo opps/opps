@@ -101,6 +101,7 @@ class ArticleBoxAdmin(PublishableAdmin):
     list_display = ['name', 'date_available', 'published']
     list_filter = ['date_available', 'published']
     inlines = [ArticleBoxArticlesInline]
+    raw_id_fields = ['channel', 'article']
 
     fieldsets = (
         (_(u'Identification'), {
