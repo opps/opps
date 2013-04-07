@@ -56,5 +56,5 @@ setup(name='opps',
       namespace_packages=['opps'],
       package_dir={'opps': 'opps'},
       install_requires=install_requires,
-      ependency_links=dependency_links,
+      dependency_links=dependency_links,
       include_package_data=True,)
