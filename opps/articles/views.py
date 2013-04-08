@@ -42,9 +42,9 @@ class OppsDetail(DetailView):
 
     @property
     def template_name(self):
-        domain_folder = 'articles'
+        domain_folder = self.type
         if self.site.id > 1:
-            domain_folder = "{0}/articles".format(self.site)
+            domain_folder = "{0}/{1}".format(self.site, self.type)
         try:
             _template = '{0}/{1}/{2}.html'.format(
                 domain_folder, self.long_slug, self.article.get().slug)
@@ -53,9 +53,12 @@ class OppsDetail(DetailView):
             _template = '{0}/{1}.html'.format(domain_folder, self.long_slug)
         return _template
 
+
+class PostDetail(OppsDetail):
     @property
     def queryset(self):
         self.site = get_current_site(self.request)
+        self.type = 'articles'
         homepage = Channel.objects.get_homepage(site=self.site)
         slug = None
         if homepage:
