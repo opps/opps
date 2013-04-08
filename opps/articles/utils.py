@@ -8,7 +8,8 @@ def set_context_data(self, SUPER, **kwargs):
     context = super(SUPER, self).get_context_data(**kwargs)
     if len(self.article) >= 1:
         article = self.article[0]
-        context['articleboxes'] = ArticleBox.objects.filter(channel=article.channel)
+        context['articleboxes'] = ArticleBox.objects.filter(
+            channel=article.channel)
         if len(self.article) == 1:
             context['articleboxes'] = context['articleboxes'].filter(
                 article=article)
