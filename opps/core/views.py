@@ -42,5 +42,3 @@ class OppsDetail(DetailView):
         except template.TemplateDoesNotExist:
             _template = '{0}/{1}.html'.format(domain_folder, self.long_slug)
         return _template
-
-
