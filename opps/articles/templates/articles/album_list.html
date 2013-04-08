@@ -1,7 +1,7 @@
 {% include "channels/include/menu.html" %}
 ----------------
 <ul>
-{% for post in context %}
-  <li><a href="{% url 'articles:album_open' post.channel.long_slug post.slug %}" alt="{{ post.short_title }}">{{ post.title }}</a></li>
+{% for album in context %}
+  <li><a href="{% url 'articles:album_open' album.channel.long_slug album.slug %}" alt="{{ album.short_title }}">{{ album.title }}</a></li>
 {% endfor %}
 </ul>
