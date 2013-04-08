@@ -102,7 +102,7 @@ class Album(Article):
         return "/album/{0}/{1}".format(self.channel.long_slug, self.slug)
 
     def get_http_absolute_url(self):
-        protocol, path ="http://{0}/{1}".format(
+        protocol, path = "http://{0}/{1}".format(
             self.channel, self.slug).split(self.site.domain)
         return "{0}{1}/album{2}".format(protocol, self.site, path)
 
