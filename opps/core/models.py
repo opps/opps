@@ -142,7 +142,11 @@ class BaseConfig(Publishable):
            site, channel, article, format, description
            return a single formated value
         """
-        instance = cls.objects.filter(key=key)
+        instance = cls.objects.filter(
+            key=key,
+            published=True,
+            date_available__lte=timezone.now()
+        )
         if kwargs:
             instance = instance.filter(**kwargs)
 
@@ -163,7 +167,11 @@ class BaseConfig(Publishable):
            site, channel, article, format, description
            return a dict of keys and formated values
         """
-        instances = cls.objects.filter(key_group=key_group)
+        instances = cls.objects.filter(
+            key_group=key_group,
+            published=True,
+            date_available__lte=timezone.now()
+        )
         if kwargs:
             instances = instances.filter(**kwargs)
 
