@@ -87,8 +87,13 @@ class Post(Article):
     )
 
     def all_images(self):
-        imgs = [i for i in self.images.all()]
-        imgs += [i for a in self.album.all() for i in a.images.all()]
+        imgs = [i for i in self.images.filter(
+            published=True, date_available__lte=timezone.now())]
+
+        imgs += [i for a in self.album.filter(
+            published=True, date_available__lte=timezone.now())
+            for i in a.images.filter(published=True,
+                                     date_available__lte=timezone.now())]
         return imgs
 
 
