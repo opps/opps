@@ -36,6 +36,7 @@ class Article(Publishable):
         _(u"Channel name"),
         max_length=140,
         null=True, blank=False,
+        db_index=True,
     )
     main_image = models.ForeignKey(
         'images.Image',
