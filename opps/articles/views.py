@@ -5,8 +5,14 @@ from django.http import Http404
 
 from haystack.views import SearchView
 
-from .models import Post
+from .models import Post, Album
 from opps.core.views import OppsDetail, OppsList
+
+
+class PostList(OppsList):
+    def __init__(self):
+        self.obj = Post
+        self.type = "channels"
 
 
 class PostDetail(OppsDetail):
@@ -15,10 +21,16 @@ class PostDetail(OppsDetail):
         self.type = 'articles'
 
 
-class PostList(OppsList):
+class AlbumList(OppsList):
     def __init__(self):
-        self.obj = Post
-        self.type = "channels"
+        self.obj = Album
+        self.type = "channels/album"
+
+
+class AlbumDetail(OppsDetail):
+    def __init__(self):
+        self.obj = Album
+        self.type = 'articles/album'
 
 
 class Search(SearchView):
