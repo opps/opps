@@ -8,6 +8,7 @@ from taggit.managers import TaggableManager
 from googl.short import GooglUrlShort
 
 from opps.core.models import Publishable, BaseBox, BaseConfig
+from opps.images.models import Image
 
 
 class Article(Publishable):
@@ -84,6 +85,11 @@ class Post(Article):
         null=True, blank=True,
         related_name='post_albums',
     )
+
+    def all_images(self):
+        imgs = [i for i in self.images.all()]
+        imgs += [i for a in self.album.all() for i in a.images.all()]
+        return imgs
 
 
 class Album(Article):
