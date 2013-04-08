@@ -8,7 +8,6 @@ from taggit.managers import TaggableManager
 from googl.short import GooglUrlShort
 
 from opps.core.models import Publishable, BaseBox, BaseConfig
-from opps.images.models import Image
 
 
 class Article(Publishable):
