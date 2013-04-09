@@ -63,9 +63,5 @@ settings.INSTALLED_APPS += (
     'redactor',
     'mptt',)
 
-settings.MIDDLEWARE_CLASSES += (
-    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
-    'opps.core.middleware.DynamicSiteMiddleware',)
-
 settings.TEMPLATE_CONTEXT_PROCESSORS += (
     'opps.channels.context_processors.channel_context',)
