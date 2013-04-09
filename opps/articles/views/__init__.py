@@ -5,8 +5,8 @@ from django.http import Http404
 
 from haystack.views import SearchView
 
-from .models import Post, Album
-from opps.core.views import OppsDetail, OppsList
+from opps.articles.models import Post, Album
+from opps.articles.views.generic import OppsDetail, OppsList
 
 
 class PostList(OppsList):
