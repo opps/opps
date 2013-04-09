@@ -57,7 +57,7 @@ class ArticleAdmin(PublishableAdmin):
 class PostAdmin(ArticleAdmin):
     form = PostAdminForm
     inlines = [ArticleImageInline, ArticleSourceInline]
-    raw_id_fields = ['main_image', 'channel', 'album']
+    raw_id_fields = ['main_image', 'channel', 'albums']
 
     fieldsets = (
         (_(u'Identification'), {
@@ -67,7 +67,7 @@ class PostAdmin(ArticleAdmin):
             'fields': ('short_title', 'headline', 'content', 'main_image',
                        'tags')}),
         (_(u'Relationships'), {
-            'fields': ('channel', 'album',)}),
+            'fields': ('channel', 'albums',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
