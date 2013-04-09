@@ -10,27 +10,23 @@ from opps.articles.views.generic import OppsDetail, OppsList
 
 
 class PostList(OppsList):
-    def __init__(self):
-        self.obj = Post
-        self.type = "channels"
+    obj = Post
+    type = "channels"
 
 
 class PostDetail(OppsDetail):
-    def __init__(self):
-        self.obj = Post
-        self.type = 'articles'
+    obj = Post
+    type = 'articles'
 
 
 class AlbumList(OppsList):
-    def __init__(self):
-        self.obj = Album
-        self.type = "channels/album"
+    obj = Album
+    type = "channels/album"
 
 
 class AlbumDetail(OppsDetail):
-    def __init__(self):
-        self.obj = Album
-        self.type = 'articles/album'
+    obj = Album
+    type = 'articles/album'
 
 
 class Search(SearchView):
