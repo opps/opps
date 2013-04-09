@@ -17,7 +17,7 @@ class QuerySetAdmin(PublishableAdmin):
         (_(u'Identification'), {
             'fields': ('site', 'name', 'slug')}),
         (_(u'Rules'), {
-            'fields': ('model',)}),
+            'fields': ('model', 'order', 'limit')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
