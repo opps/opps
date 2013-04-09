@@ -185,13 +185,11 @@ class ArticleBox(BaseBox):
     def get_queryset(self):
         _app, _model = self.queryset.model.split('.')
         model = models.get_model(_app, _model)
-        obj = model.objects.filter(published=True,
-                                   date_available__lte=timezone.now()
-                                   ).order_by('{0}id'.format(
-                                       self.queryset.order))
-        if self.queryset.limit:
-            return obj[:self.queryset.limit]
-        return obj
+        return model.objects.filter(published=True,
+                                    date_available__lte=timezone.now()
+                                    ).order_by('{0}id'.format(
+                                        self.queryset.order))[
+                                            :self.queryset.limit]
 
 
 class ArticleBoxArticles(models.Model):
