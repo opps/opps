@@ -30,6 +30,11 @@ class QuerySet(Publishable):
     limit = models.PositiveIntegerField(_(u'Limit'), default=7)
     order = models.CharField(_('Order'), max_length=1, choices=(
         ('-', 'DESC'), ('+', 'ASC')))
+    channel = models.ForeignKey(
+        'channels.Channel',
+        verbose_name=_(u"Channel"),
+    )
+
 
 
 class DynamicBox(BaseBox):
