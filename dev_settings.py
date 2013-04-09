@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'opps.images',
     'opps.sitemaps',
 
+    'south',
     'taggit',
 )
 
