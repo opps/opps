@@ -3,7 +3,7 @@ from django.contrib import admin
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Post, Album, Article, ArticleSource, ArticleImage
+from .models import Post, Album, Article, Link, ArticleSource, ArticleImage
 from .models import ArticleBox, ArticleBoxArticles, ArticleConfig
 from opps.core.admin import PublishableAdmin
 
@@ -97,6 +97,22 @@ class AlbumAdmin(ArticleAdmin):
     )
 
 
+class LinkAdmin(ArticleAdmin):
+    fieldsets = (
+        (_(u'Identification'), {
+            'fields': ('title', 'slug', 'get_http_absolute_url',
+                       'short_url',)}),
+        (_(u'Content'), {
+            'fields': ('short_title', 'headline', 'url', 'main_image')}),
+        (_(u'Relationships'), {
+            'fields': ('channel',)}),
+        (_(u'Publication'), {
+            'classes': ('extrapretty'),
+            'fields': ('published', 'date_available')}),
+    )
+
+
+
 class ArticleBoxAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ["name"]}
     list_display = ['name', 'date_available', 'published']
@@ -146,5 +162,6 @@ class ArticleConfigAdmin(PublishableAdmin):
 admin.site.register(Article, HideArticleAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Album, AlbumAdmin)
+admin.site.register(Link, LinkAdmin)
 admin.site.register(ArticleBox, ArticleBoxAdmin)
 admin.site.register(ArticleConfig, ArticleConfigAdmin)
