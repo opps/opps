@@ -117,13 +117,13 @@ class ArticleBoxAdmin(PublishableAdmin):
     list_display = ['name', 'date_available', 'published']
     list_filter = ['date_available', 'published']
     inlines = [ArticleBoxArticlesInline]
-    raw_id_fields = ['channel', 'article']
+    raw_id_fields = ['channel', 'article', 'queryset']
 
     fieldsets = (
         (_(u'Identification'), {
             'fields': ('site', 'name', 'slug')}),
         (_(u'Relationships'), {
-            'fields': ('channel', 'article')}),
+            'fields': ('channel', 'article', 'queryset')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
