@@ -176,6 +176,11 @@ class ArticleBox(BaseBox):
         related_name='articlebox_articles',
         through='articles.ArticleBoxArticles'
     )
+    queryset = models.ForeignKey(
+        'boxes.QuerySet',
+        null=True, blank=True,
+        verbose_name=_(u'Query Set')
+    )
 
 
 class ArticleBoxArticles(models.Model):
