@@ -112,7 +112,6 @@ class LinkAdmin(ArticleAdmin):
     )
 
 
-
 class ArticleBoxAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ["name"]}
     list_display = ['name', 'date_available', 'published']
