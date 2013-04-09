@@ -17,4 +17,4 @@ install:
 
 .PHONY: pep8
 pep8:
-	@flake8 opps --ignore=F403
+	@flake8 opps --ignore=F403 --exclude=migrations
