@@ -81,7 +81,7 @@ class Article(Publishable):
 
 class Post(Article):
     content = models.TextField(_(u"Content"))
-    album = models.ManyToManyField(
+    albums = models.ManyToManyField(
         'articles.Album',
         null=True, blank=True,
         related_name='post_albums',
