@@ -12,7 +12,8 @@ class PublishableAdmin(admin.ModelAdmin):
     It sets user (author) based on data from requet.
     """
     list_display = ['title', 'channel_name', 'date_available', 'published']
-    list_filter = ['date_available', 'published', 'channel_name']
+    list_filter = ['date_available', 'published', 'channel_name',
+                   'child_class']
     search_fields = ['title', 'slug', 'headline', 'channel_name']
     exclude = ('user',)
 
