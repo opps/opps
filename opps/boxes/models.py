@@ -27,7 +27,7 @@ class QuerySet(Publishable):
     )
 
     model = models.CharField(_(u'Model'), max_length=150, choices=OPPS_APPS)
-    limit = models.PositiveIntegerField(_(u'Limit'))
+    limit = models.PositiveIntegerField(_(u'Limit'), default=7)
     order = models.CharField(_('Order'), max_length=1, choices=(
         ('-', 'DESC'), ('+', 'ASC')))
 
