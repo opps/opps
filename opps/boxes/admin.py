@@ -11,13 +11,14 @@ class QuerySetAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ["name"]}
     list_display = ['name', 'date_available', 'published']
     list_filter = ['date_available', 'published']
+    raw_id_fields = ['channel']
     exclude = ('user',)
 
     fieldsets = (
         (_(u'Identification'), {
             'fields': ('site', 'name', 'slug')}),
         (_(u'Rules'), {
-            'fields': ('model', 'order', 'limit')}),
+            'fields': ('model', 'order', 'limit', 'channel')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
