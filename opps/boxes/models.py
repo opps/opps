@@ -36,7 +36,6 @@ class QuerySet(Publishable):
     )
 
 
-
 class DynamicBox(BaseBox):
 
     dynamicqueryset = models.ForeignKey(
