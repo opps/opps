@@ -29,7 +29,8 @@ def get_box(appname, slug, template_name=None):
         t = template.loader.get_template(
             '{0}/{1}_detail.html'.format(appname, model.__name__.lower())
         )
-    return t.render(template.Context({'{0}box'.format(model.__name__.lower()): box, 'slug': slug}))
+    return t.render(template.Context({'{0}box'.format(
+        model.__name__.lower()): box, 'slug': slug}))
 
 
 @register.simple_tag
@@ -51,4 +52,5 @@ def get_all_box(appname, channel_slug, template_name=None):
             '{0}/{1}_list.html'.format(appname, model.__name__.lower())
         )
 
-    return t.render(template.Context({'{0}boxes'.format(model.__name__.lower()): boxes}))
+    return t.render(template.Context({'{0}boxes'.format(
+        model.__name__.lower()): boxes}))
