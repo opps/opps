@@ -36,10 +36,6 @@ The core team
 The core team behind **opps** (in order of joining the project):
 
 * `Thiago Avelino <https://github.com/avelino>`_ (technical leader of this project)
-* `Sergio Oliveira <https://github.com/seocam>`_
-* `Guilherme Gondim <https://github.com/semente>`_
-* `Gilson Filho <https://github.com/gilsondev>`_
-* `Davi Oliveira <https://github.com/arloc>`_
 * `Bruno Rocha <https://github.com/rochacbruno>`_
 
 Other contributors
