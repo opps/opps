@@ -38,3 +38,5 @@ nosetests.xml
 .project
 .pydevproject
 *.swp
+
+images
