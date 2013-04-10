@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django import template
-from django.db.models import get_models
+from opps.core.utils import get_app_model
 
 register = template.Library()
 
@@ -18,16 +18,8 @@ def get_config(appname, key, **kwargs):
     {% get_config 'opps.polls' 'key_slug' %}
     """
 
-    app_label = appname.split('.')[-1]
-    models = [model for model in get_models()
-              if 'Config' in model.__name__
-              and model._meta.app_label == app_label]
-    if not models:
-        return False
-    else:
-        model = models[0]
-
-    return model.get_value(key, **kwargs)
+    model = get_app_model(appname, "Config")
+    return model and model.get_value(key, **kwargs)
 
 
 @register.simple_tag
@@ -42,13 +34,5 @@ def get_configs(appname, key_group, **kwargs):
     {% get_configs 'opps.polls' 'key_group_slug' %}
     """
 
-    app_label = appname.split('.')[-1]
-    models = [model for model in get_models()
-              if 'Config' in model.__name__
-              and model._meta.app_label == app_label]
-    if not models:
-        return False
-    else:
-        model = models[0]
-
-    return model.get_values(key_group, **kwargs)
+    model = get_app_model(appname, "Config")
+    return model and model.get_values(key_group, **kwargs)
