@@ -86,8 +86,8 @@ class Article(Publishable):
     get_http_absolute_url.short_description = 'URL'
 
     def recommendation(self):
-        return Article.objects.filter(tags__in=self.tags.all())\
-                .exclude(pk=self.pk)[:10]
+        return Article.objects.filter(tags__in=self.tags.all()).exclude(
+            pk=self.pk)[:10]
 
 
 class Post(Article):
