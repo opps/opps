@@ -102,7 +102,7 @@ class Post(Article):
         imgs = [i for i in self.images.filter(
             published=True, date_available__lte=timezone.now())]
 
-        imgs += [i for a in self.album.filter(
+        imgs += [i for a in self.albums.filter(
             published=True, date_available__lte=timezone.now())
             for i in a.images.filter(published=True,
                                      date_available__lte=timezone.now())]
