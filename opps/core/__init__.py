@@ -62,6 +62,3 @@ settings.INSTALLED_APPS += (
     'googl',
     'redactor',
     'mptt',)
-
-settings.TEMPLATE_CONTEXT_PROCESSORS += (
-    'opps.channels.context_processors.channel_context',)
