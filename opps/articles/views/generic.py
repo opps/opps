@@ -46,7 +46,7 @@ class OppsList(ListView):
                                          date_available__lte=timezone.now(),
                                          published=True)
         self.article = self.obj.objects.filter(site=self.site,
-                                               channel=self.channel,
+                                               channel_name=self.channel.name,
                                                date_available__lte=timezone.
                                                now(),
                                                published=True).all()
