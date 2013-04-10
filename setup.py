@@ -19,8 +19,6 @@ install_requires = ["django",
                     "django-mptt==0.5.5",
                     "django-appconf"]
 if 'OPPS_TRAVIS' in os.environ:
-    install_requires.remove('south>=0.7')
-    install_requires.remove('Pillow==1.7.8')
     install_requires.remove('thumbor==3.7.1')
 dependency_links = ['http://github.com/avelino/django-googl/tarball/master#egg=django-googl']
 
