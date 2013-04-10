@@ -1,3 +1,10 @@
 <h1>{{ context.title }}</h1>
 <h2>{{ context.short_title }}</h2>
 <div>{{ context.content|safe }}</div>
+
+<h3>tags</h3>
+<ul>
+  {% for tag in context.tags.all %}
+  <li><a href="{% url 'articles:tag_open' tag.slug %}">{{ tag.name }}</a></li>
+  {% endfor %}
+</ul>
