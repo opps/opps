@@ -3,6 +3,9 @@ import datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 try:
@@ -21,7 +24,7 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('date_insert', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('date_update', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=User)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm["%s.%s" % (User._meta.app_label, User._meta.object_name)])),
             ('site', self.gf('django.db.models.fields.related.ForeignKey')(default=0, to=orm['sites.Site'])),
             ('date_available', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now, null=True)),
             ('published', self.gf('django.db.models.fields.BooleanField')(default=False)),
@@ -45,7 +48,7 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('date_insert', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('date_update', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=User)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm["%s.%s" % (User._meta.app_label, User._meta.object_name)])),
             ('site', self.gf('django.db.models.fields.related.ForeignKey')(default=0, to=orm['sites.Site'])),
             ('date_available', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now, null=True)),
             ('published', self.gf('django.db.models.fields.BooleanField')(default=False)),
@@ -93,7 +96,7 @@ class Migration(SchemaMigration):
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '150'}),
             'sources': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['sources.Source']", 'null': 'True', 'through': u"orm['articles.ArticleSource']", 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'db_index': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['%s.%s']" % (User._meta.app_label, User._meta.object_name)})
         },
         u'articles.articleimage': {
             'Meta': {'object_name': 'ArticleImage'},
@@ -122,21 +125,8 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         },
-        u'auth.user': {
-            'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
-            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
-            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
+        "%s.%s" % (User._meta.app_label, User._meta.module_name): {
+        'Meta': {'object_name': User.__name__},
         },
         u'channels.channel': {
             'Meta': {'object_name': 'Channel'},
@@ -158,7 +148,7 @@ class Migration(SchemaMigration):
             'site': ('django.db.models.fields.related.ForeignKey', [], {'default': '0', 'to': u"orm['sites.Site']"}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '150'}),
             'tree_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['%s.%s']" % (User._meta.app_label, User._meta.object_name)})
         },
         u'channels.channelconfig': {
             'Meta': {'unique_together': "(('key_group', 'key', 'site', 'channel', 'article'),)", 'object_name': 'ChannelConfig'},
@@ -174,7 +164,7 @@ class Migration(SchemaMigration):
             'key_group': ('django.db.models.fields.SlugField', [], {'max_length': '150', 'null': 'True', 'blank': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'site': ('django.db.models.fields.related.ForeignKey', [], {'default': '0', 'to': u"orm['sites.Site']"}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['%s.%s']" % (User._meta.app_label, User._meta.object_name)}),
             'value': ('django.db.models.fields.TextField', [], {})
         },
         u'contenttypes.contenttype': {
@@ -197,7 +187,7 @@ class Migration(SchemaMigration):
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '150', 'blank': 'True'}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sources.Source']", 'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'db_index': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['%s.%s']" % (User._meta.app_label, User._meta.object_name)})
         },
         u'sites.site': {
             'Meta': {'ordering': "('domain',)", 'object_name': 'Site', 'db_table': "'django_site'"},
@@ -217,7 +207,7 @@ class Migration(SchemaMigration):
             'site': ('django.db.models.fields.related.ForeignKey', [], {'default': '0', 'to': u"orm['sites.Site']"}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '140'}),
             'url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['%s.%s']" % (User._meta.app_label, User._meta.object_name)})
         },
         u'taggit.tag': {
             'Meta': {'object_name': 'Tag'},
