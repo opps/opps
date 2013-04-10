@@ -85,6 +85,10 @@ class Article(Publishable):
         return "http://{0}/{1}".format(self.channel, self.slug)
     get_http_absolute_url.short_description = 'URL'
 
+    def recommendation(self):
+        return Article.objects.filter(tags__in=self.tags.all())\
+                .exclude(pk=self.pk)[:10]
+
 
 class Post(Article):
     content = models.TextField(_(u"Content"))
