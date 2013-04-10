@@ -88,7 +88,7 @@ class AlbumAdmin(ArticleAdmin):
             'fields': ('title', 'slug', 'get_http_absolute_url',
                        'short_url',)}),
         (_(u'Content'), {
-            'fields': ('short_title', 'headline', 'main_image')}),
+            'fields': ('short_title', 'headline', 'main_image', 'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
         (_(u'Publication'), {
@@ -103,7 +103,8 @@ class LinkAdmin(ArticleAdmin):
             'fields': ('title', 'slug', 'get_http_absolute_url',
                        'short_url',)}),
         (_(u'Content'), {
-            'fields': ('short_title', 'headline', 'url', 'main_image')}),
+            'fields': ('short_title', 'headline', 'url', 'main_image',
+                       'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
         (_(u'Publication'), {
