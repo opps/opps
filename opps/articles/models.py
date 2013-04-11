@@ -39,6 +39,12 @@ class Article(Publishable):
         null=True, blank=False,
         db_index=True,
     )
+    channel_long_slug = models.CharField(
+        _(u"Channel long slug"),
+        max_length=250,
+        null=True, blank=False,
+        db_index=True,
+    )
     child_class = models.CharField(
         _(u'Child class'),
         max_length=30,
@@ -75,6 +81,7 @@ class Article(Publishable):
             self.short_url = GooglUrlShort(self.get_http_absolute_url())\
                 .short()
         self.channel_name = self.channel.name
+        self.channel_long_slug = self.channel.long_slug
         self.child_class = self.__class__.__name__
         super(Article, self).save(*args, **kwargs)
 
