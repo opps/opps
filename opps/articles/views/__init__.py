@@ -40,11 +40,11 @@ class TagList(OppsList):
     def queryset(self):
         self.site = get_current_site(self.request)
         self.long_slug = self.kwargs['tag']
-        self.article = self.obj.objects.filter(site=self.site,
-                                               tags__slug=self.long_slug,
-                                               date_available__lte=timezone.
-                                               now(),
-                                               published=True).all()
+        self.article = self.obj.objects.filter(
+            site=self.site,
+            tags__slug=self.long_slug,
+            date_available__lte=timezone.now(),
+            published=True).all()
         return self.article
 
 
