@@ -1,7 +1,7 @@
 Opps CMS Example
 ================
 
-## First things firsts
+## First things first
 
 Create a virtualenv environment ( if you don't know what this is read
 [this]("http://virtualenvwrapper.readthedocs.org/en/latest/")).
