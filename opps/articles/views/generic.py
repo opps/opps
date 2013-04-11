@@ -30,28 +30,28 @@ class OppsList(ListView):
     def queryset(self):
         self.site = get_current_site(self.request)
         self.long_slug = None
+
         if not self.kwargs.get('channel__long_slug'):
-            homepage = Channel.objects.get_homepage(site=self.site)
-            self.article = self.obj.objects.filter(channel_name=homepage.name,
-                                                   name=homepage.name,
-                                                   site=self.site,
-                                                   date_available__lte=
-                                                   timezone.now(),
-                                                   published=True).all()
-            homepage = Channel.objects.get_homepage(site=self.site)
-            if homepage:
-                self.long_slug = homepage.long_slug
+            self.channel = Channel.objects.get_homepage(site=self.site)
+            self.article = self.obj.objects.filter(
+                site=self.site,
+                date_available__lte=timezone.now(),
+                published=True).all()
+            if self.channel:
+                self.article = self.article.filter(
+                    channel_long_slug=self.channel.long_slug)
+                self.long_slug = self.channel.long_slug
             return self.article
+
         self.long_slug = self.kwargs['channel__long_slug']
-        self.channel = get_object_or_404(Channel, site=self.site,
-                                         long_slug=self.long_slug,
-                                         date_available__lte=timezone.now(),
-                                         published=True)
-        self.article = self.obj.objects.filter(site=self.site,
-                                               channel_name=self.channel.name,
-                                               date_available__lte=timezone.
-                                               now(),
-                                               published=True).all()
+        get_object_or_404(Channel, site=self.site, long_slug=self.long_slug,
+                          date_available__lte=timezone.now(),
+                          published=True)
+        self.article = self.obj.objects.filter(
+            site=self.site,
+            channel_long_slug=self.long_slug,
+            date_available__lte=timezone.now(),
+            published=True).all()
         return self.article
 
 
@@ -78,17 +78,15 @@ class OppsDetail(DetailView):
     @property
     def queryset(self):
         self.site = get_current_site(self.request)
-        self.type = 'articles'
         homepage = Channel.objects.get_homepage(site=self.site)
         slug = None
         if homepage:
             slug = homepage.long_slug
         self.long_slug = self.kwargs.get('channel__long_slug', slug)
-        self.article = self.obj.objects.filter(site=self.site,
-                                               channel__long_slug=self.
-                                               long_slug,
-                                               slug=self.kwargs['slug'],
-                                               date_available__lte=timezone.
-                                               now(),
-                                               published=True).all()
+        self.article = self.obj.objects.filter(
+            site=self.site,
+            channel_long_slug=self.long_slug,
+            slug=self.kwargs['slug'],
+            date_available__lte=timezone.now(),
+            published=True).all()
         return self.article
