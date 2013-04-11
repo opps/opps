@@ -66,6 +66,7 @@ INSTALLED_APPS = (
 
     'south',
     'taggit',
+    'example',
 )
 
 TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner'
