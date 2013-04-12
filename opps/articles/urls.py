@@ -19,7 +19,7 @@ urlpatterns = patterns(
         cache_page(60 * 15)(AlbumDetail.as_view()), name='album_open'),
 
     # TAGs
-    url(r'^tag/(?P<tag>[\w]+)$',
+    url(r'^tag/(?P<tag>[\w//-]+)$',
         cache_page(60 * 2)(TagList.as_view()), name='tag_open'),
 
     # POST
