@@ -12,27 +12,27 @@ from opps.articles.views.generic import OppsDetail, OppsList
 
 
 class PostList(OppsList):
-    obj = Post
+    model = Post
     type = "channels"
 
 
 class PostDetail(OppsDetail):
-    obj = Post
+    model = Post
     type = 'articles'
 
 
 class AlbumList(OppsList):
-    obj = Album
+    model = Album
     type = "channels/album"
 
 
 class AlbumDetail(OppsDetail):
-    obj = Album
+    model = Album
     type = 'articles/album'
 
 
 class TagList(OppsList):
-    obj = Article
+    model = Article
     type = "tags"
     template_name_suffix = '_tags'
 
@@ -40,7 +40,7 @@ class TagList(OppsList):
     def queryset(self):
         self.site = get_current_site(self.request)
         self.long_slug = self.kwargs['tag']
-        self.article = self.obj.objects.filter(
+        self.article = self.model.objects.filter(
             site=self.site,
             tags__slug=self.long_slug,
             date_available__lte=timezone.now(),
