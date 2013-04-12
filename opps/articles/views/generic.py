@@ -14,6 +14,8 @@ from opps.channels.models import Channel
 class OppsList(ListView):
 
     context_object_name = "context"
+    paginate_by = 12
+    slug = None
 
     def get_context_data(self, **kwargs):
         return set_context_data(self, OppsList, **kwargs)
@@ -29,29 +31,21 @@ class OppsList(ListView):
     @property
     def queryset(self):
         self.site = get_current_site(self.request)
-        self.long_slug = None
+        self.long_slug = self.kwargs.get(
+            'channel__long_slug',
+            Channel.objects.get_homepage(site=self.site).long_slug)
 
-        if not self.kwargs.get('channel__long_slug'):
-            self.channel = Channel.objects.get_homepage(site=self.site)
-            self.article = self.obj.objects.filter(
-                site=self.site,
-                date_available__lte=timezone.now(),
-                published=True).all()
-            if self.channel:
-                self.article = self.article.filter(
-                    channel_long_slug=self.channel.long_slug)
-                self.long_slug = self.channel.long_slug
-            return self.article
-
-        self.long_slug = self.kwargs['channel__long_slug']
-        get_object_or_404(Channel, site=self.site, long_slug=self.long_slug,
-                          date_available__lte=timezone.now(),
-                          published=True)
-        self.article = self.obj.objects.filter(
+        self.article = self.model.objects.filter(
             site=self.site,
             channel_long_slug=self.long_slug,
             date_available__lte=timezone.now(),
-            published=True).all()
+            published=True)[:self.paginate_by]
+        if not self.article:
+            get_object_or_404(Channel, site=self.site,
+                              long_slug=self.long_slug,
+                              date_available__lte=timezone.now(),
+                              published=True)
+
         return self.article
 
 
@@ -78,15 +72,15 @@ class OppsDetail(DetailView):
     @property
     def queryset(self):
         self.site = get_current_site(self.request)
-        homepage = Channel.objects.get_homepage(site=self.site)
-        slug = None
-        if homepage:
-            slug = homepage.long_slug
-        self.long_slug = self.kwargs.get('channel__long_slug', slug)
-        self.article = self.obj.objects.filter(
+        self.long_slug = self.kwargs.get(
+            'channel__long_slug',
+            Channel.objects.get_homepage(site=self.site).long_slug)
+        self.slug = self.kwargs.get('slug')
+
+        self.article = self.model.objects.filter(
             site=self.site,
             channel_long_slug=self.long_slug,
-            slug=self.kwargs['slug'],
+            slug=self.slug,
             date_available__lte=timezone.now(),
-            published=True).all()
+            published=True)
         return self.article
