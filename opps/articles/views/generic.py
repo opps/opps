@@ -16,6 +16,7 @@ class OppsList(ListView):
     context_object_name = "context"
     paginate_by = 12
     slug = None
+    limit = None
 
     def get_context_data(self, **kwargs):
         return set_context_data(self, OppsList, **kwargs)
@@ -39,7 +40,8 @@ class OppsList(ListView):
             site=self.site,
             channel_long_slug=self.long_slug,
             date_available__lte=timezone.now(),
-            published=True)[:self.paginate_by]
+            published=True)[:self.limit]
+
         if not self.article:
             get_object_or_404(Channel, site=self.site,
                               long_slug=self.long_slug,
