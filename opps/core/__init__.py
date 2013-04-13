@@ -13,6 +13,7 @@ class OppsCoreConf(AppConf):
     SHORT = 'googl'
     SHORT_URL = 'googl.short.GooglUrlShort'
     CHANNEL_CONF = {}
+    VIEWS_LIMIT = None
 
     class Meta:
         prefix = 'opps'
