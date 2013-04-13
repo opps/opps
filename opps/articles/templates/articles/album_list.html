@@ -5,3 +5,5 @@
   <li><a href="{% url 'articles:album_open' album.channel.long_slug album.slug %}" alt="{{ album.short_title }}">{{ album.title }}</a></li>
 {% endfor %}
 </ul>
+
+{% include 'articles/include/paginate.html' %}
