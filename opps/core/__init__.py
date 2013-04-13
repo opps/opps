@@ -14,6 +14,7 @@ class OppsCoreConf(AppConf):
     SHORT_URL = 'googl.short.GooglUrlShort'
     CHANNEL_CONF = {}
     VIEWS_LIMIT = None
+    PAGINATE_BY = 10
 
     class Meta:
         prefix = 'opps'
