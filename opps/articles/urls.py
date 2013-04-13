@@ -5,11 +5,13 @@ from django.views.decorators.cache import cache_page
 
 from .views import PostDetail, PostList, AlbumList, AlbumDetail, TagList
 from .views import Search
+from .views.feed import ArticleFeed
 
 
 urlpatterns = patterns(
     '',
     url(r'^$', cache_page(60 * 2)(PostList.as_view()), name='home'),
+    url(r'^(RSS|FEED)$', cache_page(60 * 2)(ArticleFeed()), name='feed'),
     url(r'^search/', Search(), name='search'),
 
     # ALBUM
