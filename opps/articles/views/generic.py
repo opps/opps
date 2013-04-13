@@ -15,9 +15,9 @@ from opps.channels.models import Channel
 class OppsList(ListView):
 
     context_object_name = "context"
-    paginate_by = 12
-    slug = None
+    paginate_by = settings.OPPS_PAGINATE_BY
     limit = settings.OPPS_VIEWS_LIMIT
+    slug = None
 
     def get_context_data(self, **kwargs):
         return set_context_data(self, OppsList, **kwargs)
