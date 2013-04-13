@@ -27,6 +27,7 @@ class ArticleFeed(Feed):
         return Article.objects.filter(site=self.site).order_by(
             '-date_available')[:40]
 
+
 class ChannelFeed(Feed):
 
     def __init__(self, model):
@@ -47,7 +48,7 @@ class ChannelFeed(Feed):
 
     def description(self, obj):
         return u"Latest news on {0}'s channel {1}".format(self.site.name,
-                                                         obj.name)
+                                                          obj.name)
 
     def items(self, obj):
         return self.model.objects.filter(
