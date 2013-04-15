@@ -21,6 +21,7 @@ class FlatPageAdmin(admin.ModelAdmin):
     form = FlatPageAdminForm
     prepopulated_fields = {"slug": ["title"]}
     readonly_fields = ['get_http_absolute_url', 'short_url']
+    list_display = ['title', 'site', 'published', 'date_available']
     raw_id_fields = ['main_image']
 
     fieldsets = (
