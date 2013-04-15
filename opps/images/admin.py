@@ -10,9 +10,8 @@ from opps.core.admin import PublishableAdmin
 
 class ImagesAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ("title",)}
-    list_display = ['image_thumb', 'title', 'source', 'date_available',
-                    'published']
-    list_filter = ['date_available', 'published', 'source']
+    list_display = ['image_thumb', 'title', 'date_available', 'published']
+    list_filter = ['date_available', 'published']
     search_fields = ['title']
     raw_id_fields = ['source']
     readonly_fields = ['image_thumb']
