@@ -37,6 +37,11 @@ class FlatPage(Publishable):
     def __unicode__(self):
         return u"{0} - {1}".format(self.site.name, self.slug)
 
+    def save(self, *args, **kwargs):
+        if not self.short_url:
+            self.short_url = GooglUrlShort(self.get_http_absolute_url())\
+                .short()
+
 
 class FlatPageConfig(BaseConfig):
     """
