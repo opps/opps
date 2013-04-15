@@ -38,8 +38,6 @@ class FlatPage(Publishable):
                                       self.get_absolute_url())
     get_http_absolute_url.short_description = 'URL'
 
-
-
     def __unicode__(self):
         return u"{0} - {1}".format(self.site.name, self.slug)
 
