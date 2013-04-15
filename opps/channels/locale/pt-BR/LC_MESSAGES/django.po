@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Thiago Avelino <thiagoavelinoster@gmail.com>, 2013
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-15 18:56-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: __init__.py:5
+msgid "Channels"
+msgstr ""
+
+#: admin.py:21
+msgid "Identification"
+msgstr ""
+
+#: admin.py:24
+msgid "Publication"
+msgstr ""
+
+#: models.py:24
+msgid "Name"
+msgstr ""
+
+#: models.py:26
+msgid "Path name"
+msgstr ""
+
+#: models.py:28
+msgid "Description"
+msgstr ""
+
+#: models.py:30
+msgid "Show in menu?"
+msgstr ""
+
+#: models.py:31
+msgid "Is home page?"
+msgstr ""
+
+#: models.py:32
+msgid "Order"
+msgstr ""
