@@ -19,7 +19,6 @@ class PublishableAdmin(admin.ModelAdmin):
     exclude = ('user',)
 
     def save_model(self, request, obj, form, change):
-        print request.user, request.user.id
         if getattr(obj, 'pk', None) is None:
             obj.user = get_user_model().objects.get(pk=request.user.pk)
             obj.date_insert = timezone.now()
