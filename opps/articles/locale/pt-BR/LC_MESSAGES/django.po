@@ -1,0 +1,118 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Thiago Avelino <thiagoavelinoster@gmail.com>, 2013
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-15 18:51-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: __init__.py:5
+msgid "Articles"
+msgstr ""
+
+#: admin.py:63 admin.py:87 admin.py:102 admin.py:124
+msgid "Identification"
+msgstr ""
+
+#: admin.py:66 admin.py:90 admin.py:105 models.py:101
+msgid "Content"
+msgstr ""
+
+#: admin.py:69 admin.py:92 admin.py:108 admin.py:126
+msgid "Relationships"
+msgstr ""
+
+#: admin.py:71 admin.py:94 admin.py:110 admin.py:128
+msgid "Publication"
+msgstr ""
+
+#: admin.py:144
+msgid "No Image"
+msgstr ""
+
+#: admin.py:145
+msgid "Thumbnail"
+msgstr ""
+
+#: models.py:15
+msgid "Title"
+msgstr ""
+
+#: models.py:16
+msgid "Headline"
+msgstr ""
+
+#: models.py:18 models.py:130
+msgid "URL"
+msgstr ""
+
+#: models.py:24
+msgid "Short title"
+msgstr ""
+
+#: models.py:29
+msgid "Short URL"
+msgstr ""
+
+#: models.py:34
+msgid "Channel"
+msgstr ""
+
+#: models.py:37
+msgid "Channel name"
+msgstr ""
+
+#: models.py:43
+msgid "Channel long slug"
+msgstr ""
+
+#: models.py:49
+msgid "Child class"
+msgstr ""
+
+#: models.py:58
+msgid "Main Image"
+msgstr ""
+
+#: models.py:154 models.py:172 models.py:226
+msgid "Article"
+msgstr ""
+
+#: models.py:161
+msgid "Source"
+msgstr ""
+
+#: models.py:163 models.py:183 models.py:228
+msgid "Order"
+msgstr ""
+
+#: models.py:179
+msgid "Image"
+msgstr ""
+
+#: models.py:200
+msgid "Query Set"
+msgstr ""
+
+#: models.py:219
+msgid "Article Box"
+msgstr ""
+
+#: models.py:236
+msgid "Article not published!"
+msgstr ""
+
+#: models.py:239
+msgid "Article date_available is greater than today!"
+msgstr ""
