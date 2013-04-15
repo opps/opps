@@ -20,12 +20,12 @@ class FlatPageAdminForm(forms.ModelForm):
 class FlatPageAdmin(admin.ModelAdmin):
     form = FlatPageAdminForm
     prepopulated_fields = {"slug": ["title"]}
-    readonly_fields = ['get_absolute_url', 'short_url']
+    readonly_fields = ['get_http_absolute_url', 'short_url']
     raw_id_fields = ['main_image']
 
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('site', 'title', 'slug', 'get_absolute_url',
+            'fields': ('site', 'title', 'slug', 'get_http_absolute_url',
                        'short_url')}),
         (_(u'Content'), {
             'fields': ('headline', 'content', 'main_image')}),
