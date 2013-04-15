@@ -60,6 +60,7 @@ INSTALLED_APPS = (
     'opps.articles',
     'opps.images',
     'opps.sitemaps',
+    'opps.flatpages',
 
     'south',
     'taggit',
