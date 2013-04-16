@@ -127,7 +127,7 @@ class Album(Article):
 
 
 class Link(Article):
-    url = models.URLField(_(u"URL"))
+    url = models.URLField(_(u"URL"), null=True, blank=True)
     articles = models.ForeignKey(
         'articles.Article',
         null=True, blank=True,
@@ -141,6 +141,13 @@ class Link(Article):
         protocol, path = "http://{0}/{1}".format(
             self.channel, self.slug).split(self.site.domain)
         return "{0}{1}/link{2}".format(protocol, self.site, path)
+
+    def clean(self):
+        if not self.url and not self.articles:
+            raise ValidationError(_('URL field is required.'))
+
+        if self.articles:
+            self.url = self.articles.get_http_absolute_url()
 
     def save(self, *args, **kwargs):
         obj, create = Redirect.objects.get_or_create(
