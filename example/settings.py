@@ -73,6 +73,9 @@ INSTALLED_APPS = (
 
 TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner'
 
+CACHES = {'default': {
+    'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}}
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
