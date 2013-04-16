@@ -34,6 +34,11 @@ Quick links
 * `Mailing list <http://groups.google.com/group/opps-developers>`_
 
 
+Sponsor
+=======
+
+* `YACOWS <http://www.yacows.com.br>`_
+
 
 License
 =======
