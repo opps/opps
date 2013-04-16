@@ -120,7 +120,7 @@ class ArticleBoxAdmin(PublishableAdmin):
     list_filter = ['date_available', 'published']
     inlines = [ArticleBoxArticlesInline]
     raw_id_fields = ['channel', 'article', 'queryset']
-    search_fields = ['name', 'slug', 'date_available']
+    search_fields = ['name', 'slug']
 
     fieldsets = (
         (_(u'Identification'), {
