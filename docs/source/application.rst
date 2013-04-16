@@ -9,14 +9,17 @@ Opps Base
     :target: https://travis-ci.org/opps/opps
 
 * `opps.core <https://github.com/opps/opps/tree/master/opps/core>`_
-* `opps.article <https://github.com/opps/opps/tree/master/opps/article>`_
-* `opps.channel <https://github.com/opps/opps/tree/master/opps/channel>`_
-* `opps.source <https://github.com/opps/opps/tree/master/opps/source>`_
-* `opps.image <https://github.com/opps/opps/tree/master/opps/image>`_
+* `opps.articles <https://github.com/opps/opps/tree/master/opps/articles>`_
+* `opps.channels <https://github.com/opps/opps/tree/master/opps/channels>`_
+* `opps.boxes <https://github.com/opps/opps/tree/master/opps/boxes>`_
+* `opps.images <https://github.com/opps/opps/tree/master/opps/images>`_
+* `opps.flatpages <https://github.com/opps/opps/tree/master/opps/flatpages>`_
+* `opps.sources <https://github.com/opps/opps/tree/master/opps/sources>`_
+* `opps.search <https://github.com/opps/opps/tree/master/opps/search>`_
 * `opps.sitemaps <https://github.com/opps/opps/tree/master/opps/sitemaps>`_
 
 
 Opps Application
 ----------------
 
-* `opps.poll <https://github.com/opps/opps-poll>`_
+* `opps.polls <https://github.com/opps/opps-polls>`_
