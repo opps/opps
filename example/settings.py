@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.redirects',
     'django.contrib.admin',
 
     'opps.core',
