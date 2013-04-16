@@ -70,7 +70,7 @@ class OppsDetail(DetailView):
             domain_folder = "{0}/{1}".format(self.site, self.type)
         try:
             _template = '{0}/{1}/{2}.html'.format(
-                domain_folder, self.long_slug, self.article.get().slug)
+                domain_folder, self.long_slug, self.slug)
             template.loader.get_template(_template)
         except template.TemplateDoesNotExist:
             _template = '{0}/{1}.html'.format(domain_folder, self.long_slug)
@@ -79,10 +79,14 @@ class OppsDetail(DetailView):
     @property
     def queryset(self):
         self.site = get_current_site(self.request)
-        self.long_slug = self.kwargs.get(
-            'channel__long_slug',
-            Channel.objects.get_homepage(site=self.site).long_slug)
         self.slug = self.kwargs.get('slug')
+        try:
+            self.long_slug = self.kwargs.get(
+                'channel__long_slug',
+                Channel.objects.get_homepage(site=self.site).long_slug)
+        except AttributeError:
+            self.long_slug = None
+            return None
 
         self.article = self.model.objects.filter(
             site=self.site,
