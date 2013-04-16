@@ -128,6 +128,11 @@ class Album(Article):
 
 class Link(Article):
     url = models.URLField(_(u"URL"))
+    articles = models.ForeignKey(
+        'articles.Article',
+        null=True, blank=True,
+        related_name='link_article'
+    )
 
     def get_absolute_url(self):
         return "/link/{0}/{1}".format(self.channel.long_slug, self.slug)
