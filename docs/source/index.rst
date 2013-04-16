@@ -28,6 +28,7 @@ Quick links
 
    installation
    application
+   develop
    contributing
 * `Source (github) <https://github.com/opps/opps>`_
 * `Mailing list <http://groups.google.com/group/opps-developers>`_
