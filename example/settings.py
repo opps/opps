@@ -37,6 +37,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.static",
     "django.core.context_processors.request",
+    'opps.channels.context_processors.channel_context',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -45,6 +46,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'opps.core.middleware.DynamicSiteMiddleware', # Used in Multi-Site
 )
 
 INSTALLED_APPS = (
@@ -63,10 +65,10 @@ INSTALLED_APPS = (
     'opps.articles',
     'opps.images',
     'opps.sitemaps',
+    'opps.flatpages',
 
     'south',
     'taggit',
-    'example',
 )
 
 TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner'
