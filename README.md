@@ -10,6 +10,10 @@ After the virtual environment creation you should do:
 
     $ pip install opps
 
+or
+
+    $ pip install -r requirements.txt
+
 Trouble installing Opps? Go
 [here]("http://www.oppsproject.org/en/latest/installation.html")
 
