@@ -33,9 +33,13 @@ class OppsList(ListView):
     @property
     def queryset(self):
         self.site = get_current_site(self.request)
-        self.long_slug = self.kwargs.get(
-            'channel__long_slug',
-            Channel.objects.get_homepage(site=self.site).long_slug)
+        try:
+            self.long_slug = self.kwargs.get(
+                'channel__long_slug',
+                Channel.objects.get_homepage(site=self.site).long_slug)
+        except AttributeError:
+            self.long_slug = None
+            return None
 
         self.article = self.model.objects.filter(
             site=self.site,
