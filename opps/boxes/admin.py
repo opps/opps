@@ -31,6 +31,7 @@ class DynamicBoxAdmin(PublishableAdmin):
     list_filter = ['date_available', 'published']
     exclude = ('user',)
     raw_id_fields = ['channel', 'article', 'dynamicqueryset']
+    search_fields = ['name', 'slug', 'date_available']
 
     fieldsets = (
         (_(u'Identification'), {
