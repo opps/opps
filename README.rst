@@ -16,6 +16,17 @@ The place to create issues is `opps's github issues <https://github.com/opps/opp
 If you are not sure about something, have a doubt or feedback, or just want to ask for a feature, feel free to join `our mailing list <http://groups.google.com/group/opps-developers>`_, or, if you're on FreeNode (IRC), you can join the chat #opps .
 
 
+Run example
+===========
+
+    $ git clone git@github.com:opps/opps.git
+    $ cd opps
+    $ python setup.py develop
+    $ opps-admin.py startproject PROJECT_NAME
+    $ cd PROJECT_NAME
+    $ python manage.py runserver
+
+
 Sponsor
 =======
 
