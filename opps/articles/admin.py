@@ -98,7 +98,7 @@ class AlbumAdmin(ArticleAdmin):
 
 
 class LinkAdmin(ArticleAdmin):
-    raw_id_fields = ['articles']
+    raw_id_fields = ['articles', 'channel', 'main_image']
     fieldsets = (
         (_(u'Identification'), {
             'fields': ('title', 'slug', 'get_http_absolute_url',
