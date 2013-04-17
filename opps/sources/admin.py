@@ -11,6 +11,7 @@ class SourceAdmin(PublishableAdmin):
     list_display = ['name']
     list_filter = ['date_available', 'published']
     exclude = ('user',)
+    search_fields = ['name', 'slug', 'url']
 
     fieldsets = (
         (_(u'Identification'), {
