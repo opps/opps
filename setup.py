@@ -55,4 +55,5 @@ setup(name='opps',
       package_dir={'opps': 'opps'},
       install_requires=install_requires,
       dependency_links=dependency_links,
+      scripts=['opps/bin/opps-admin.py'],
       include_package_data=True,)
