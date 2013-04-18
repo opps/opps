@@ -5,6 +5,7 @@ from opps.articles.models import ArticleBox
 def set_context_data(self, SUPER, **kwargs):
     context = super(SUPER, self).get_context_data(**kwargs)
 
+    context['channel_long_slug'] = self.long_slug
     context['articleboxes'] = ArticleBox.objects.filter(
         channel__long_slug=self.long_slug)
     if self.slug:
