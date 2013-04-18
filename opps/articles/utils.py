@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-from opps.articles.models import ArticleBox, Album
+from opps.articles.models import ArticleBox, Album, Post
 
 
 def set_context_data(self, SUPER, **kwargs):
     context = super(SUPER, self).get_context_data(**kwargs)
 
+    context['posts'] = Post.objects.filter(
+        channel_long_slug=self.long_slug)[:self.limit]
     context['albums'] = Album.objects.filter(
         channel_long_slug=self.long_slug)[:self.limit]
     context['channel_long_slug'] = self.long_slug
