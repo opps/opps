@@ -2,7 +2,7 @@
 .PHONY: test
 test: pep8
 	DJANGO_SETTINGS_MODULE=dev_settings \
-	django-admin.py test core articles boxes channels images sources sitemaps
+	django-admin.py test core articles boxes channels images sources sitemaps flatpages
 
 .PHONY: travis
 travis:
