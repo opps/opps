@@ -59,6 +59,7 @@ class OppsList(ListView):
 class OppsDetail(DetailView):
 
     context_object_name = "context"
+    limit = settings.OPPS_VIEWS_LIMIT
 
     def get_context_data(self, **kwargs):
         return set_context_data(self, OppsDetail, **kwargs)
