@@ -62,7 +62,6 @@ class OppsDetail(DetailView):
 
     context_object_name = "context"
     limit = settings.OPPS_VIEWS_LIMIT
-    channel_long_slug = []
 
     def get_context_data(self, **kwargs):
         return set_context_data(self, OppsDetail, **kwargs)
@@ -92,6 +91,10 @@ class OppsDetail(DetailView):
         except AttributeError:
             self.long_slug = None
             return None
+
+        self.channel_long_slug = [self.long_slug]
+        self.channel_long_slug.append(
+            [children.long_slug for children in self.channel.get_children()])
 
         self.article = self.model.objects.filter(
             site=self.site,
