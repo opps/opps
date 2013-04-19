@@ -101,6 +101,11 @@ class OppsDetail(DetailView):
             self.long_slug = None
             return None
 
+        self.channel = get_object_or_404(Channel, site=self.site,
+                                         long_slug=self.long_slug,
+                                         date_available__lte=timezone.now(),
+                                         published=True)
+
         self.channel_long_slug = [self.long_slug]
         self.channel_long_slug.append(
             [children.long_slug for children in self.channel.get_children()])
