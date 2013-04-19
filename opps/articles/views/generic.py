@@ -4,6 +4,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.contrib.sites.models import get_current_site
 from django.shortcuts import get_object_or_404
+from django.http import Http404
 from django.utils import timezone
 from django import template
 from django.conf import settings
@@ -63,6 +64,9 @@ class OppsList(ListView):
             channel_long_slug__in=self.channel_long_slug,
             date_available__lte=timezone.now(),
             published=True)[:self.limit]
+
+        if len(self.article) == 0:
+            raise Http404
 
         return self.article
 
