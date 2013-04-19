@@ -4,12 +4,13 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 
 from mptt.models import MPTTModel, TreeForeignKey
+from mptt.managers import TreeManager
 
 from opps.core.models import Publishable, BaseConfig
 from .utils import generate_long_slug
 
 
-class ChannelManager(models.Manager):
+class ChannelManager(TreeManager):
 
     def get_homepage(self, site):
         try:
