@@ -10,16 +10,16 @@ import opps
 install_requires = ["django",
                     "south>=0.7",
                     "Pillow==1.7.8",
-                    "thumbor==3.7.1",
-                    'django-thumbor==0.2',
+                    "thumbor",
+                    'django-thumbor',
                     "django-googl",
                     "django-taggit",
                     "django-wysiwyg-redactor==0.3.1",
                     "django-haystack==1.2.7",
-                    "django-mptt==0.5.5",
-                    "django-appconf"]
-if 'OPPS_TRAVIS' in os.environ:
-    install_requires.remove('thumbor==3.7.1')
+                    "django-mptt",
+                    "django-appconf",
+                    "python-memcached",
+                    "johnny-cache"]
 dependency_links = ['http://github.com/avelino/django-googl/tarball/master#egg=django-googl']
 
 classifiers = ["Development Status :: 4 - Beta",
