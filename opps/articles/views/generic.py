@@ -57,15 +57,17 @@ class OppsList(ListView):
                                          published=True)
 
         self.channel_long_slug = [self.long_slug]
-        self.channel_long_slug.append(
-            [children.long_slug for children in self.channel.get_children()])
+        for children in self.channel.get_children():
+            self.channel_long_slug.append(children)
         self.article = self.model.objects.filter(
             site=self.site,
             channel_long_slug__in=self.channel_long_slug,
             date_available__lte=timezone.now(),
             published=True)[:self.limit]
+        import pdb; pdb.set_trace()
 
-        if len(self.article) == 0:
+        if len(self.article) == 0 and self.kwargs.get('channel__long_slug',
+                                                      None):
             raise Http404
 
         return self.article
