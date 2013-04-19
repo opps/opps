@@ -20,7 +20,7 @@ class ChannelAdmin(PublishableAdmin):
     fieldsets = (
         (_(u'Identification'), {
             'fields': ('site', 'parent', 'name', 'slug', 'description',
-                       'order', 'show_in_menu', 'homepage',)}),
+                       'order', 'show_in_menu', 'homepage', 'group')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
