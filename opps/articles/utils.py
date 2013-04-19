@@ -1,15 +1,22 @@
 # -*- coding: utf-8 -*-
-from opps.articles.models import ArticleBox, Album, Post
+from django.utils import timezone
+
+from opps.articles.models import ArticleBox, Article
 
 
 def set_context_data(self, SUPER, **kwargs):
     context = super(SUPER, self).get_context_data(**kwargs)
 
-    context['posts'] = Post.objects.filter(
-        channel_long_slug=self.long_slug)[:self.limit]
-    context['albums'] = Album.objects.filter(
-        channel_long_slug=self.long_slug)[:self.limit]
+    article = Article.objects.filter(
+        site=self.site,
+        channel_long_slug__in=self.channel_long_slug,
+        date_available__lte=timezone.now(),
+        published=True)
+    context['posts'] = article.filter(child_class='Post')[:self.limit]
+    context['albums'] = article.filter(child_class='Album')[:self.limit]
+
     context['channel_long_slug'] = self.long_slug
+
     context['articleboxes'] = ArticleBox.objects.filter(
         channel__long_slug=self.long_slug)
     if self.slug:
