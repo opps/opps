@@ -62,6 +62,7 @@ class OppsDetail(DetailView):
 
     context_object_name = "context"
     limit = settings.OPPS_VIEWS_LIMIT
+    channel_long_slug = []
 
     def get_context_data(self, **kwargs):
         return set_context_data(self, OppsDetail, **kwargs)
@@ -83,6 +84,7 @@ class OppsDetail(DetailView):
     def queryset(self):
         self.site = get_current_site(self.request)
         self.slug = self.kwargs.get('slug')
+
         try:
             self.long_slug = self.kwargs.get(
                 'channel__long_slug',
