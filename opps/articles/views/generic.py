@@ -64,7 +64,6 @@ class OppsList(ListView):
             channel_long_slug__in=self.channel_long_slug,
             date_available__lte=timezone.now(),
             published=True)[:self.limit]
-        import pdb; pdb.set_trace()
 
         if len(self.article) == 0 and self.kwargs.get('channel__long_slug',
                                                       None):
