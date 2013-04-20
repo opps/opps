@@ -220,7 +220,7 @@ class ArticleBox(BaseBox):
                                         date_available__lte=timezone.now())
         if self.queryset.channel:
             queryset = queryset.filter(channel=self.queryset.channel)
-        queryset.order_by('{0}id'.format(self.queryset.order)
+        queryset = queryset.order_by('{0}id'.format(self.queryset.order)
                           )[:self.queryset.limit]
 
         return queryset
