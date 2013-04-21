@@ -63,6 +63,18 @@ The core team behind **opps** (in order of joining the project):
 * `Thiago Avelino <https://github.com/avelino>`_ (technical leader of this project)
 * `Bruno Rocha <https://github.com/rochacbruno>`_
 
+Patches and Suggestions
+***********************
+
+* Gilson Filho
+* Rael Max
+* André Melo
+* Ellison Leão
+* Guilherme Gondim
+* arloc
+* Sergio Oliveira
+
+
 Other contributors
 ******************
 
