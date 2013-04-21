@@ -27,6 +27,31 @@ Therefore, it's very important to keep some things in mind when contributing wit
     Having a code example of a part of the API is really helpful for the user.
 
 
+Developer Setup
+---------------
+
+Check out the code from the `github project`_::
+
+    git clone git://github.com/opps/opps.git
+    cd opps
+
+Create a `virtualenv`_ (the example here is with `virtualenvwrapper`_) and install all development packages::
+
+    mkvirtualenv opps
+    pip install -r requirements.txt
+    python setup.py develop
+
+Here is how to run the test suite::
+
+    make test
+
+Here is how to build the documentation::
+
+    cd docs
+    pip install -r requirements.txt
+    make html
+
+
 The team
 --------
 
@@ -46,3 +71,8 @@ https://github.com/opps/opps/network/members
 
 There are also some more contributors that haven't send code to the project, but who help in other ways, when and how they can.
 We're very happy to have you, guys!
+
+
+.. _`github project`: https://github.com/opps/opps
+.. _virtualenv: http://www.virtualenv.org/
+.. _virtualenvwrapper: http://virtualenvwrapper.readthedocs.org/
