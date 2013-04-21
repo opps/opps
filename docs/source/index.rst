@@ -26,7 +26,7 @@ Quick links
 .. toctree::
    :maxdepth: 2
 
-   installation
+   setup
    application
    develop
    contributing
