@@ -29,14 +29,15 @@ class OppsList(ListView):
         if self.site.id > 1:
             domain_folder = "{0}/{1}".format(self.site, self.type)
 
-        if self.channel.group and self.channel.parent:
-            try:
-                _template = '{0}/_{1}.html'.format(
-                    domain_folder, self.channel.parent.long_slug)
-                template.loader.get_template(_template)
-                return _template
-            except template.TemplateDoesNotExist:
-                pass
+        if self.channel:
+            if self.channel.group and self.channel.parent:
+                try:
+                    _template = '{0}/_{1}.html'.format(
+                        domain_folder, self.channel.parent.long_slug)
+                    template.loader.get_template(_template)
+                    return _template
+                except template.TemplateDoesNotExist:
+                    pass
 
         return '{0}/{1}.html'.format(domain_folder, self.long_slug)
 
