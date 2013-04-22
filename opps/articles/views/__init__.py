@@ -36,6 +36,7 @@ class TagList(OppsList):
     type = "tags"
     template_name_suffix = '_tags'
     channel_long_slug = []
+    channel = None
 
     @property
     def queryset(self):
