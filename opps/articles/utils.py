@@ -15,7 +15,10 @@ def set_context_data(self, SUPER, **kwargs):
     context['posts'] = article.filter(child_class='Post')[:self.limit]
     context['albums'] = article.filter(child_class='Album')[:self.limit]
 
-    context['channel_long_slug'] = self.long_slug
+    context['channel'] = {}
+    context['channel']['long_slug'] = self.long_slug
+    if self.channel:
+        context['channel']['level'] = self.channel.get_level()
 
     context['articleboxes'] = ArticleBox.objects.filter(
         channel__long_slug=self.long_slug)
