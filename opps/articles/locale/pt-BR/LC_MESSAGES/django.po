@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-15 18:51-0500\n"
+"POT-Creation-Date: 2013-04-23 17:36-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,27 +21,27 @@ msgstr ""
 msgid "Articles"
 msgstr ""
 
-#: admin.py:63 admin.py:87 admin.py:102 admin.py:124
+#: admin.py:63 admin.py:87 admin.py:103 admin.py:126
 msgid "Identification"
 msgstr ""
 
-#: admin.py:66 admin.py:90 admin.py:105 models.py:101
+#: admin.py:66 admin.py:90 admin.py:106 models.py:101
 msgid "Content"
 msgstr ""
 
-#: admin.py:69 admin.py:92 admin.py:108 admin.py:126
+#: admin.py:69 admin.py:92 admin.py:109 admin.py:128
 msgid "Relationships"
 msgstr ""
 
-#: admin.py:71 admin.py:94 admin.py:110 admin.py:128
+#: admin.py:71 admin.py:94 admin.py:111 admin.py:130
 msgid "Publication"
 msgstr ""
 
-#: admin.py:144
+#: admin.py:146
 msgid "No Image"
 msgstr ""
 
-#: admin.py:145
+#: admin.py:147
 msgid "Thumbnail"
 msgstr ""
 
@@ -85,34 +85,38 @@ msgstr ""
 msgid "Main Image"
 msgstr ""
 
-#: models.py:154 models.py:172 models.py:226
+#: models.py:147
+msgid "URL field is required."
+msgstr ""
+
+#: models.py:166 models.py:184 models.py:242
 msgid "Article"
 msgstr ""
 
-#: models.py:161
+#: models.py:173
 msgid "Source"
 msgstr ""
 
-#: models.py:163 models.py:183 models.py:228
+#: models.py:175 models.py:195 models.py:244
 msgid "Order"
 msgstr ""
 
-#: models.py:179
+#: models.py:191
 msgid "Image"
 msgstr ""
 
-#: models.py:200
+#: models.py:212
 msgid "Query Set"
 msgstr ""
 
-#: models.py:219
+#: models.py:235
 msgid "Article Box"
 msgstr ""
 
-#: models.py:236
+#: models.py:252
 msgid "Article not published!"
 msgstr ""
 
-#: models.py:239
-msgid "Article date_available is greater than today!"
+#: models.py:255
+msgid "Article date available is greater than today!"
 msgstr ""
