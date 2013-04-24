@@ -3,6 +3,7 @@
 from django.test import TestCase
 
 from opps.articles.models import Article, Post
+from opps.channels.models import Channel
 
 
 class ArticleModelTest(TestCase):
@@ -11,6 +12,7 @@ class ArticleModelTest(TestCase):
 
     def setUp(self):
         self.article = Article.objects.get(id=1)
+        self.channel = Channel.objects.get(slug=u'channel-01')
 
     def test_child_class(self):
         self.assertTrue(self.article.child_class)
@@ -25,6 +27,11 @@ class ArticleModelTest(TestCase):
 
     def test_recommendation(self):
         self.assertEqual([], self.article.recommendation())
+
+    def test_not_normalization_channel(self):
+        self.assertEqual(self.article.channel_name, self.channel.name)
+        self.assertEqual(self.article.channel_long_slug,
+                         self.channel.long_slug)
 
 
 class PostModelTest(TestCase):
