@@ -35,6 +35,12 @@ class ArticleModelTest(TestCase):
             u"image-example.jpg"
         )
 
+    def test_search_category(self):
+        self.assertEqual(
+            self.article.search_category,
+            'Post'
+        )
+
     def test_recommendation(self):
         self.assertEqual([], self.article.recommendation())
 

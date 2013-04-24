@@ -91,6 +91,11 @@ class Article(Publishable):
     def get_thumb(self):
         return self.main_image
 
+    @property
+    def search_category(self):
+        """for use in search result"""
+        return _(self.child_class)
+
     def get_http_absolute_url(self):
         return "http://{0}/{1}".format(self.channel, self.slug)
     get_http_absolute_url.short_description = 'URL'
