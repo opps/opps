@@ -32,6 +32,7 @@ class ArticleModelTest(TestCase):
         self.assertEqual(self.article.channel_name, self.channel.name)
         self.assertEqual(self.article.channel_long_slug,
                          self.channel.long_slug)
+        self.assertEqual(self.article.child_class, 'Post')
 
 
 class PostModelTest(TestCase):
@@ -50,5 +51,3 @@ class PostModelTest(TestCase):
         self.assertEqual(post[0].slug, u'test-post-application')
         self.assertEqual(post[0].title, u'test post application')
         self.assertTrue(post[0].short_url)
-
-
