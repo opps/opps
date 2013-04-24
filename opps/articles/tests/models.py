@@ -9,7 +9,7 @@ class PostModelTest(TestCase):
 
     fixtures = ['tests/initial_data.json']
 
-    def setUP(self):
+    def setUp(self):
         self.post = Post.objects.get(id=1)
 
     def test_basic_post_exist(self):
@@ -26,3 +26,11 @@ class PostModelTest(TestCase):
 
         self.assertTrue(self.post.child_class)
         self.assertEqual(self.post.child_class, 'Post')
+
+    def test_get_absolute_url(self):
+
+        self.assertEqual(self.post.get_absolute_url(),
+                         u'/channel-01/test-post-application')
+        self.assertEqual(self.post.get_absolute_url(),
+                         "/{0}/{1}".format(self.post.channel.long_slug,
+                                           self.post.slug))
