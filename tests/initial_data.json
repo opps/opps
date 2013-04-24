@@ -1,0 +1,1771 @@
+[
+{
+  "pk": 1, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "permission", 
+    "name": "permission", 
+    "app_label": "auth"
+  }
+},
+{
+  "pk": 2, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "group", 
+    "name": "group", 
+    "app_label": "auth"
+  }
+},
+{
+  "pk": 3, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "user", 
+    "name": "user", 
+    "app_label": "auth"
+  }
+},
+{
+  "pk": 4, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "contenttype", 
+    "name": "content type", 
+    "app_label": "contenttypes"
+  }
+},
+{
+  "pk": 5, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "session", 
+    "name": "session", 
+    "app_label": "sessions"
+  }
+},
+{
+  "pk": 6, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "site", 
+    "name": "site", 
+    "app_label": "sites"
+  }
+},
+{
+  "pk": 7, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "redirect", 
+    "name": "redirect", 
+    "app_label": "redirects"
+  }
+},
+{
+  "pk": 8, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "logentry", 
+    "name": "log entry", 
+    "app_label": "admin"
+  }
+},
+{
+  "pk": 9, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "migrationhistory", 
+    "name": "migration history", 
+    "app_label": "south"
+  }
+},
+{
+  "pk": 10, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "channel", 
+    "name": "channel", 
+    "app_label": "channels"
+  }
+},
+{
+  "pk": 11, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "channelconfig", 
+    "name": "channel config", 
+    "app_label": "channels"
+  }
+},
+{
+  "pk": 12, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "source", 
+    "name": "source", 
+    "app_label": "sources"
+  }
+},
+{
+  "pk": 13, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "article", 
+    "name": "article", 
+    "app_label": "articles"
+  }
+},
+{
+  "pk": 14, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "post", 
+    "name": "post", 
+    "app_label": "articles"
+  }
+},
+{
+  "pk": 15, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "album", 
+    "name": "album", 
+    "app_label": "articles"
+  }
+},
+{
+  "pk": 16, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "link", 
+    "name": "link", 
+    "app_label": "articles"
+  }
+},
+{
+  "pk": 17, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "articlesource", 
+    "name": "article source", 
+    "app_label": "articles"
+  }
+},
+{
+  "pk": 18, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "articleimage", 
+    "name": "article image", 
+    "app_label": "articles"
+  }
+},
+{
+  "pk": 19, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "articlebox", 
+    "name": "article box", 
+    "app_label": "articles"
+  }
+},
+{
+  "pk": 20, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "articleboxarticles", 
+    "name": "article box articles", 
+    "app_label": "articles"
+  }
+},
+{
+  "pk": 21, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "articleconfig", 
+    "name": "article config", 
+    "app_label": "articles"
+  }
+},
+{
+  "pk": 22, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "taggedimage", 
+    "name": "tagged image", 
+    "app_label": "images"
+  }
+},
+{
+  "pk": 23, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "image", 
+    "name": "image", 
+    "app_label": "images"
+  }
+},
+{
+  "pk": 24, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "flatpage", 
+    "name": "flat page", 
+    "app_label": "flatpages"
+  }
+},
+{
+  "pk": 25, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "flatpageconfig", 
+    "name": "flat page config", 
+    "app_label": "flatpages"
+  }
+},
+{
+  "pk": 26, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "tag", 
+    "name": "Tag", 
+    "app_label": "taggit"
+  }
+},
+{
+  "pk": 27, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "taggeditem", 
+    "name": "Tagged Item", 
+    "app_label": "taggit"
+  }
+},
+{
+  "pk": 28, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "queryset", 
+    "name": "query set", 
+    "app_label": "boxes"
+  }
+},
+{
+  "pk": 29, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "dynamicbox", 
+    "name": "dynamic box", 
+    "app_label": "boxes"
+  }
+},
+{
+  "pk": "dvfeb8sus6tw8yfzuhwmeh02izi8bi0t", 
+  "model": "sessions.session", 
+  "fields": {
+    "expire_date": "2013-05-08T00:10:14.239", 
+    "session_data": "YzkyZGEzOGNhY2YxMzJhYjg3ZGM1NjAzNDAzYmE4YjU4MWU2YTA3ZDqAAn1xAShVEl9hdXRoX3VzZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEDVQ1fYXV0aF91c2VyX2lkcQRLAXUu"
+  }
+},
+{
+  "pk": 1, 
+  "model": "sites.site", 
+  "fields": {
+    "domain": "example.com", 
+    "name": "example.com"
+  }
+},
+{
+  "pk": 1, 
+  "model": "articles.articleimage", 
+  "fields": {
+    "article": 1, 
+    "image": 1, 
+    "order": 0
+  }
+},
+{
+  "pk": 2, 
+  "model": "articles.articleimage", 
+  "fields": {
+    "article": 1, 
+    "image": 2, 
+    "order": 0
+  }
+},
+{
+  "pk": 3, 
+  "model": "articles.articleimage", 
+  "fields": {
+    "article": 2, 
+    "image": 2, 
+    "order": 0
+  }
+},
+{
+  "pk": 1, 
+  "model": "articles.articleboxarticles", 
+  "fields": {
+    "article": 2, 
+    "order": 0, 
+    "articlebox": 1
+  }
+},
+{
+  "pk": 2, 
+  "model": "articles.articleboxarticles", 
+  "fields": {
+    "article": 1, 
+    "order": 0, 
+    "articlebox": 1
+  }
+},
+{
+  "pk": 1, 
+  "model": "images.taggedimage", 
+  "fields": {
+    "content_object": 1, 
+    "tag": 1
+  }
+},
+{
+  "pk": 2, 
+  "model": "images.taggedimage", 
+  "fields": {
+    "content_object": 1, 
+    "tag": 2
+  }
+},
+{
+  "pk": 3, 
+  "model": "images.taggedimage", 
+  "fields": {
+    "content_object": 1, 
+    "tag": 3
+  }
+},
+{
+  "pk": 4, 
+  "model": "images.taggedimage", 
+  "fields": {
+    "content_object": 2, 
+    "tag": 1
+  }
+},
+{
+  "pk": 5, 
+  "model": "images.taggedimage", 
+  "fields": {
+    "content_object": 2, 
+    "tag": 4
+  }
+},
+{
+  "pk": 1, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2013-04-23T23:22:08.217", 
+    "app_name": "core", 
+    "migration": "0001_initial"
+  }
+},
+{
+  "pk": 2, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2013-04-23T23:22:08.346", 
+    "app_name": "channels", 
+    "migration": "0001_initial"
+  }
+},
+{
+  "pk": 3, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2013-04-23T23:22:08.397", 
+    "app_name": "channels", 
+    "migration": "0002_auto__add_field_channel_group"
+  }
+},
+{
+  "pk": 4, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2013-04-23T23:22:08.469", 
+    "app_name": "sources", 
+    "migration": "0001_initial"
+  }
+},
+{
+  "pk": 5, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2013-04-23T23:22:08.672", 
+    "app_name": "articles", 
+    "migration": "0001_initial"
+  }
+},
+{
+  "pk": 6, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2013-04-23T23:22:08.746", 
+    "app_name": "articles", 
+    "migration": "0002_auto__add_field_article_child_class"
+  }
+},
+{
+  "pk": 7, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2013-04-23T23:22:08.820", 
+    "app_name": "articles", 
+    "migration": "0003_auto__add_field_article_channel_long_slug"
+  }
+},
+{
+  "pk": 8, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2013-04-23T23:22:08.897", 
+    "app_name": "articles", 
+    "migration": "0004_auto__add_field_link_articles"
+  }
+},
+{
+  "pk": 9, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2013-04-23T23:22:09.015", 
+    "app_name": "images", 
+    "migration": "0001_initial"
+  }
+},
+{
+  "pk": 10, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2013-04-23T23:22:09.057", 
+    "app_name": "sitemaps", 
+    "migration": "0001_initial"
+  }
+},
+{
+  "pk": 11, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2013-04-23T23:22:09.172", 
+    "app_name": "flatpages", 
+    "migration": "0001_initial"
+  }
+},
+{
+  "pk": 12, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2013-04-23T23:22:09.233", 
+    "app_name": "taggit", 
+    "migration": "0001_initial"
+  }
+},
+{
+  "pk": 13, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2013-04-23T23:22:09.243", 
+    "app_name": "taggit", 
+    "migration": "0002_unique_tagnames"
+  }
+},
+{
+  "pk": 14, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2013-04-23T23:22:09.367", 
+    "app_name": "boxes", 
+    "migration": "0001_initial"
+  }
+},
+{
+  "pk": 1, 
+  "model": "taggit.tag", 
+  "fields": {
+    "name": "logo", 
+    "slug": "logo"
+  }
+},
+{
+  "pk": 2, 
+  "model": "taggit.tag", 
+  "fields": {
+    "name": "opps", 
+    "slug": "opps"
+  }
+},
+{
+  "pk": 3, 
+  "model": "taggit.tag", 
+  "fields": {
+    "name": "cms", 
+    "slug": "cms"
+  }
+},
+{
+  "pk": 4, 
+  "model": "taggit.tag", 
+  "fields": {
+    "name": "python", 
+    "slug": "python"
+  }
+},
+{
+  "pk": 1, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_permission", 
+    "name": "Can add permission", 
+    "content_type": 1
+  }
+},
+{
+  "pk": 2, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_permission", 
+    "name": "Can change permission", 
+    "content_type": 1
+  }
+},
+{
+  "pk": 3, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_permission", 
+    "name": "Can delete permission", 
+    "content_type": 1
+  }
+},
+{
+  "pk": 4, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_group", 
+    "name": "Can add group", 
+    "content_type": 2
+  }
+},
+{
+  "pk": 5, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_group", 
+    "name": "Can change group", 
+    "content_type": 2
+  }
+},
+{
+  "pk": 6, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_group", 
+    "name": "Can delete group", 
+    "content_type": 2
+  }
+},
+{
+  "pk": 7, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_user", 
+    "name": "Can add user", 
+    "content_type": 3
+  }
+},
+{
+  "pk": 8, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_user", 
+    "name": "Can change user", 
+    "content_type": 3
+  }
+},
+{
+  "pk": 9, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_user", 
+    "name": "Can delete user", 
+    "content_type": 3
+  }
+},
+{
+  "pk": 10, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_contenttype", 
+    "name": "Can add content type", 
+    "content_type": 4
+  }
+},
+{
+  "pk": 11, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_contenttype", 
+    "name": "Can change content type", 
+    "content_type": 4
+  }
+},
+{
+  "pk": 12, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_contenttype", 
+    "name": "Can delete content type", 
+    "content_type": 4
+  }
+},
+{
+  "pk": 13, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_session", 
+    "name": "Can add session", 
+    "content_type": 5
+  }
+},
+{
+  "pk": 14, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_session", 
+    "name": "Can change session", 
+    "content_type": 5
+  }
+},
+{
+  "pk": 15, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_session", 
+    "name": "Can delete session", 
+    "content_type": 5
+  }
+},
+{
+  "pk": 16, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_site", 
+    "name": "Can add site", 
+    "content_type": 6
+  }
+},
+{
+  "pk": 17, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_site", 
+    "name": "Can change site", 
+    "content_type": 6
+  }
+},
+{
+  "pk": 18, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_site", 
+    "name": "Can delete site", 
+    "content_type": 6
+  }
+},
+{
+  "pk": 19, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_redirect", 
+    "name": "Can add redirect", 
+    "content_type": 7
+  }
+},
+{
+  "pk": 20, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_redirect", 
+    "name": "Can change redirect", 
+    "content_type": 7
+  }
+},
+{
+  "pk": 21, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_redirect", 
+    "name": "Can delete redirect", 
+    "content_type": 7
+  }
+},
+{
+  "pk": 22, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_logentry", 
+    "name": "Can add log entry", 
+    "content_type": 8
+  }
+},
+{
+  "pk": 23, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_logentry", 
+    "name": "Can change log entry", 
+    "content_type": 8
+  }
+},
+{
+  "pk": 24, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_logentry", 
+    "name": "Can delete log entry", 
+    "content_type": 8
+  }
+},
+{
+  "pk": 25, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_migrationhistory", 
+    "name": "Can add migration history", 
+    "content_type": 9
+  }
+},
+{
+  "pk": 26, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_migrationhistory", 
+    "name": "Can change migration history", 
+    "content_type": 9
+  }
+},
+{
+  "pk": 27, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_migrationhistory", 
+    "name": "Can delete migration history", 
+    "content_type": 9
+  }
+},
+{
+  "pk": 28, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_channel", 
+    "name": "Can add channel", 
+    "content_type": 10
+  }
+},
+{
+  "pk": 29, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_channel", 
+    "name": "Can change channel", 
+    "content_type": 10
+  }
+},
+{
+  "pk": 30, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_channel", 
+    "name": "Can delete channel", 
+    "content_type": 10
+  }
+},
+{
+  "pk": 31, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_channelconfig", 
+    "name": "Can add channel config", 
+    "content_type": 11
+  }
+},
+{
+  "pk": 32, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_channelconfig", 
+    "name": "Can change channel config", 
+    "content_type": 11
+  }
+},
+{
+  "pk": 33, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_channelconfig", 
+    "name": "Can delete channel config", 
+    "content_type": 11
+  }
+},
+{
+  "pk": 34, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "developer", 
+    "name": "Developer", 
+    "content_type": 11
+  }
+},
+{
+  "pk": 35, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_source", 
+    "name": "Can add source", 
+    "content_type": 12
+  }
+},
+{
+  "pk": 36, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_source", 
+    "name": "Can change source", 
+    "content_type": 12
+  }
+},
+{
+  "pk": 37, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_source", 
+    "name": "Can delete source", 
+    "content_type": 12
+  }
+},
+{
+  "pk": 38, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_article", 
+    "name": "Can add article", 
+    "content_type": 13
+  }
+},
+{
+  "pk": 39, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_article", 
+    "name": "Can change article", 
+    "content_type": 13
+  }
+},
+{
+  "pk": 40, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_article", 
+    "name": "Can delete article", 
+    "content_type": 13
+  }
+},
+{
+  "pk": 41, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_post", 
+    "name": "Can add post", 
+    "content_type": 14
+  }
+},
+{
+  "pk": 42, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_post", 
+    "name": "Can change post", 
+    "content_type": 14
+  }
+},
+{
+  "pk": 43, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_post", 
+    "name": "Can delete post", 
+    "content_type": 14
+  }
+},
+{
+  "pk": 44, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_album", 
+    "name": "Can add album", 
+    "content_type": 15
+  }
+},
+{
+  "pk": 45, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_album", 
+    "name": "Can change album", 
+    "content_type": 15
+  }
+},
+{
+  "pk": 46, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_album", 
+    "name": "Can delete album", 
+    "content_type": 15
+  }
+},
+{
+  "pk": 47, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_link", 
+    "name": "Can add link", 
+    "content_type": 16
+  }
+},
+{
+  "pk": 48, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_link", 
+    "name": "Can change link", 
+    "content_type": 16
+  }
+},
+{
+  "pk": 49, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_link", 
+    "name": "Can delete link", 
+    "content_type": 16
+  }
+},
+{
+  "pk": 50, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_articlesource", 
+    "name": "Can add article source", 
+    "content_type": 17
+  }
+},
+{
+  "pk": 51, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_articlesource", 
+    "name": "Can change article source", 
+    "content_type": 17
+  }
+},
+{
+  "pk": 52, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_articlesource", 
+    "name": "Can delete article source", 
+    "content_type": 17
+  }
+},
+{
+  "pk": 53, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_articleimage", 
+    "name": "Can add article image", 
+    "content_type": 18
+  }
+},
+{
+  "pk": 54, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_articleimage", 
+    "name": "Can change article image", 
+    "content_type": 18
+  }
+},
+{
+  "pk": 55, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_articleimage", 
+    "name": "Can delete article image", 
+    "content_type": 18
+  }
+},
+{
+  "pk": 56, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_articlebox", 
+    "name": "Can add article box", 
+    "content_type": 19
+  }
+},
+{
+  "pk": 57, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_articlebox", 
+    "name": "Can change article box", 
+    "content_type": 19
+  }
+},
+{
+  "pk": 58, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_articlebox", 
+    "name": "Can delete article box", 
+    "content_type": 19
+  }
+},
+{
+  "pk": 59, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_articleboxarticles", 
+    "name": "Can add article box articles", 
+    "content_type": 20
+  }
+},
+{
+  "pk": 60, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_articleboxarticles", 
+    "name": "Can change article box articles", 
+    "content_type": 20
+  }
+},
+{
+  "pk": 61, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_articleboxarticles", 
+    "name": "Can delete article box articles", 
+    "content_type": 20
+  }
+},
+{
+  "pk": 62, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_articleconfig", 
+    "name": "Can add article config", 
+    "content_type": 21
+  }
+},
+{
+  "pk": 63, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_articleconfig", 
+    "name": "Can change article config", 
+    "content_type": 21
+  }
+},
+{
+  "pk": 64, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_articleconfig", 
+    "name": "Can delete article config", 
+    "content_type": 21
+  }
+},
+{
+  "pk": 65, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "developer", 
+    "name": "Developer", 
+    "content_type": 21
+  }
+},
+{
+  "pk": 66, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_taggedimage", 
+    "name": "Can add tagged image", 
+    "content_type": 22
+  }
+},
+{
+  "pk": 67, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_taggedimage", 
+    "name": "Can change tagged image", 
+    "content_type": 22
+  }
+},
+{
+  "pk": 68, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_taggedimage", 
+    "name": "Can delete tagged image", 
+    "content_type": 22
+  }
+},
+{
+  "pk": 69, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_image", 
+    "name": "Can add image", 
+    "content_type": 23
+  }
+},
+{
+  "pk": 70, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_image", 
+    "name": "Can change image", 
+    "content_type": 23
+  }
+},
+{
+  "pk": 71, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_image", 
+    "name": "Can delete image", 
+    "content_type": 23
+  }
+},
+{
+  "pk": 72, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_flatpage", 
+    "name": "Can add flat page", 
+    "content_type": 24
+  }
+},
+{
+  "pk": 73, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_flatpage", 
+    "name": "Can change flat page", 
+    "content_type": 24
+  }
+},
+{
+  "pk": 74, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_flatpage", 
+    "name": "Can delete flat page", 
+    "content_type": 24
+  }
+},
+{
+  "pk": 75, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_flatpageconfig", 
+    "name": "Can add flat page config", 
+    "content_type": 25
+  }
+},
+{
+  "pk": 76, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_flatpageconfig", 
+    "name": "Can change flat page config", 
+    "content_type": 25
+  }
+},
+{
+  "pk": 77, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_flatpageconfig", 
+    "name": "Can delete flat page config", 
+    "content_type": 25
+  }
+},
+{
+  "pk": 78, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "developer", 
+    "name": "Developer", 
+    "content_type": 25
+  }
+},
+{
+  "pk": 79, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_tag", 
+    "name": "Can add Tag", 
+    "content_type": 26
+  }
+},
+{
+  "pk": 80, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_tag", 
+    "name": "Can change Tag", 
+    "content_type": 26
+  }
+},
+{
+  "pk": 81, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_tag", 
+    "name": "Can delete Tag", 
+    "content_type": 26
+  }
+},
+{
+  "pk": 82, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_taggeditem", 
+    "name": "Can add Tagged Item", 
+    "content_type": 27
+  }
+},
+{
+  "pk": 83, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_taggeditem", 
+    "name": "Can change Tagged Item", 
+    "content_type": 27
+  }
+},
+{
+  "pk": 84, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_taggeditem", 
+    "name": "Can delete Tagged Item", 
+    "content_type": 27
+  }
+},
+{
+  "pk": 85, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_queryset", 
+    "name": "Can add query set", 
+    "content_type": 28
+  }
+},
+{
+  "pk": 86, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_queryset", 
+    "name": "Can change query set", 
+    "content_type": 28
+  }
+},
+{
+  "pk": 87, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_queryset", 
+    "name": "Can delete query set", 
+    "content_type": 28
+  }
+},
+{
+  "pk": 88, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_dynamicbox", 
+    "name": "Can add dynamic box", 
+    "content_type": 29
+  }
+},
+{
+  "pk": 89, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_dynamicbox", 
+    "name": "Can change dynamic box", 
+    "content_type": 29
+  }
+},
+{
+  "pk": 90, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_dynamicbox", 
+    "name": "Can delete dynamic box", 
+    "content_type": 29
+  }
+},
+{
+  "pk": 1, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "test", 
+    "first_name": "", 
+    "last_name": "", 
+    "is_active": true, 
+    "is_superuser": true, 
+    "is_staff": true, 
+    "last_login": "2013-04-24T00:10:14.236", 
+    "groups": [], 
+    "user_permissions": [], 
+    "password": "pbkdf2_sha256$10000$jqSigKcrqpBJ$v1p9BHAjTEEGB79/OFKMiCdy5mZq1SqXWKtx7g5pba8=", 
+    "email": "test@oppsproject.org", 
+    "date_joined": "2013-04-23T23:22:02.910"
+  }
+},
+{
+  "pk": 1, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-04-24T00:10:34.052", 
+    "object_repr": "example.com/home", 
+    "object_id": "1", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 10
+  }
+},
+{
+  "pk": 2, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-04-24T00:10:52.897", 
+    "object_repr": "example.com/channel-01", 
+    "object_id": "2", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 10
+  }
+},
+{
+  "pk": 3, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-04-24T00:11:25.509", 
+    "object_repr": "example.com/channel-01/sub-channel-01", 
+    "object_id": "3", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 10
+  }
+},
+{
+  "pk": 4, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-04-24T00:11:40.817", 
+    "object_repr": "example.com/channel-02", 
+    "object_id": "4", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 10
+  }
+},
+{
+  "pk": 5, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-04-24T00:23:01.039", 
+    "object_repr": "1-opps-image-example", 
+    "object_id": "1", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 23
+  }
+},
+{
+  "pk": 6, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-04-24T00:23:10.975", 
+    "object_repr": "/channel-01/test-post-application", 
+    "object_id": "1", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 14
+  }
+},
+{
+  "pk": 7, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-04-24T00:29:00.113", 
+    "object_repr": "2-python-software-fundation", 
+    "object_id": "2", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 23
+  }
+},
+{
+  "pk": 8, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2013-04-24T00:36:03.302", 
+    "object_repr": "/channel-01/test-post-application", 
+    "object_id": "1", 
+    "change_message": "Changed tags. Added article image \"opps image example\". Added article image \"python software fundation\".", 
+    "user": 1, 
+    "content_type": 14
+  }
+},
+{
+  "pk": 9, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-04-24T00:36:46.597", 
+    "object_repr": "thiago-avelino", 
+    "object_id": "1", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 12
+  }
+},
+{
+  "pk": 10, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2013-04-24T00:36:48.628", 
+    "object_repr": "2-python-software-fundation", 
+    "object_id": "2", 
+    "change_message": "Changed tags and source.", 
+    "user": 1, 
+    "content_type": 23
+  }
+},
+{
+  "pk": 11, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-04-24T00:49:32.894", 
+    "object_repr": "/album/channel-01/test-album", 
+    "object_id": "2", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 15
+  }
+},
+{
+  "pk": 12, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2013-04-24T00:49:51.406", 
+    "object_repr": "/channel-01/test-post-application", 
+    "object_id": "1", 
+    "change_message": "Changed tags and albums.", 
+    "user": 1, 
+    "content_type": 14
+  }
+},
+{
+  "pk": 13, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-04-24T07:19:51.626", 
+    "object_repr": "example.com - test", 
+    "object_id": "None", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 24
+  }
+},
+{
+  "pk": 14, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2013-04-24T07:20:38.859", 
+    "object_repr": "test-article-box-example.com", 
+    "object_id": "1", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 19
+  }
+},
+{
+  "pk": 15, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2013-04-24T07:20:46.745", 
+    "object_repr": "test-article-box-example.com", 
+    "object_id": "1", 
+    "change_message": "Changed published.", 
+    "user": 1, 
+    "content_type": 19
+  }
+},
+{
+  "pk": 1, 
+  "model": "channels.channel", 
+  "fields": {
+    "parent": null, 
+    "rght": 2, 
+    "tree_id": 3, 
+    "group": false, 
+    "name": "home", 
+    "long_slug": "home", 
+    "level": 0, 
+    "date_available": "2013-04-24T00:10:21", 
+    "date_update": "2013-04-24T00:10:34.051", 
+    "site": 1, 
+    "date_insert": "2013-04-24T00:10:34.051", 
+    "order": 0, 
+    "lft": 1, 
+    "user": 1, 
+    "published": true, 
+    "show_in_menu": false, 
+    "homepage": true, 
+    "slug": "home", 
+    "description": ""
+  }
+},
+{
+  "pk": 2, 
+  "model": "channels.channel", 
+  "fields": {
+    "parent": null, 
+    "rght": 4, 
+    "tree_id": 1, 
+    "group": false, 
+    "name": "channel 01", 
+    "long_slug": "channel-01", 
+    "level": 0, 
+    "date_available": "2013-04-24T00:10:36", 
+    "date_update": "2013-04-24T00:10:52.896", 
+    "site": 1, 
+    "date_insert": "2013-04-24T00:10:52.896", 
+    "order": 0, 
+    "lft": 1, 
+    "user": 1, 
+    "published": true, 
+    "show_in_menu": true, 
+    "homepage": false, 
+    "slug": "channel-01", 
+    "description": ""
+  }
+},
+{
+  "pk": 3, 
+  "model": "channels.channel", 
+  "fields": {
+    "parent": 2, 
+    "rght": 3, 
+    "tree_id": 1, 
+    "group": false, 
+    "name": "sub-channel-01", 
+    "long_slug": "channel-01/sub-channel-01", 
+    "level": 1, 
+    "date_available": "2013-04-24T00:10:56", 
+    "date_update": "2013-04-24T00:11:25.508", 
+    "site": 1, 
+    "date_insert": "2013-04-24T00:11:25.508", 
+    "order": 0, 
+    "lft": 2, 
+    "user": 1, 
+    "published": true, 
+    "show_in_menu": true, 
+    "homepage": false, 
+    "slug": "sub-channel-01", 
+    "description": ""
+  }
+},
+{
+  "pk": 4, 
+  "model": "channels.channel", 
+  "fields": {
+    "parent": null, 
+    "rght": 2, 
+    "tree_id": 2, 
+    "group": false, 
+    "name": "channel 02", 
+    "long_slug": "channel-02", 
+    "level": 0, 
+    "date_available": "2013-04-24T00:11:30", 
+    "date_update": "2013-04-24T00:11:40.816", 
+    "site": 1, 
+    "date_insert": "2013-04-24T00:11:40.816", 
+    "order": 0, 
+    "lft": 1, 
+    "user": 1, 
+    "published": true, 
+    "show_in_menu": true, 
+    "homepage": false, 
+    "slug": "channel-02", 
+    "description": ""
+  }
+},
+{
+  "pk": 1, 
+  "model": "sources.source", 
+  "fields": {
+    "feed": "", 
+    "name": "Thiago Avelino", 
+    "url": "http://www.avelino.us/", 
+    "date_available": "2013-04-24T00:36:28", 
+    "date_update": "2013-04-24T00:36:46.596", 
+    "site": 1, 
+    "date_insert": "2013-04-24T00:36:46.596", 
+    "user": 1, 
+    "published": true, 
+    "slug": "thiago-avelino"
+  }
+},
+{
+  "pk": 1, 
+  "model": "articles.article", 
+  "fields": {
+    "channel_long_slug": "channel-01", 
+    "main_image": 1, 
+    "child_class": "Post", 
+    "title": "test post application", 
+    "headline": "", 
+    "short_url": "http://goo.gl/kY6OT", 
+    "date_available": "2013-04-24T00:19:42", 
+    "date_update": "2013-04-24T00:49:51.385", 
+    "site": 1, 
+    "short_title": "Generate article type post", 
+    "date_insert": "2013-04-24T00:23:10.967", 
+    "channel_name": "channel 01", 
+    "user": 1, 
+    "published": true, 
+    "slug": "test-post-application", 
+    "channel": 2
+  }
+},
+{
+  "pk": 2, 
+  "model": "articles.article", 
+  "fields": {
+    "channel_long_slug": "channel-01", 
+    "main_image": 1, 
+    "child_class": "Album", 
+    "title": "test album", 
+    "headline": "", 
+    "short_url": "http://goo.gl/j1z3H", 
+    "date_available": "2013-04-24T00:48:51", 
+    "date_update": "2013-04-24T00:49:32.888", 
+    "site": 1, 
+    "short_title": "run test article type album", 
+    "date_insert": "2013-04-24T00:49:32.888", 
+    "channel_name": "channel 01", 
+    "user": 1, 
+    "published": true, 
+    "slug": "test-album", 
+    "channel": 2
+  }
+},
+{
+  "pk": 1, 
+  "model": "articles.post", 
+  "fields": {
+    "content": "<p style=\"text-align: justify; margin: 0px 0px 14px; padding: 0px;\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean leo lorem, ullamcorper et hendrerit non, tristique quis massa. Aliquam a rutrum tellus. Cras at arcu a dui accumsan commodo. Aliquam ac felis quis leo imperdiet porttitor. Vivamus blandit ullamcorper dui, at vulputate metus ornare a. Fusce dignissim iaculis lobortis. Sed et hendrerit magna. Maecenas eget mattis metus.</p>\r\n\r\n<p style=\"text-align: justify; margin: 0px 0px 14px; padding: 0px;\">Donec quis porttitor elit. Morbi ut sapien sit amet sem pretium tristique. Nam porttitor iaculis tortor, ac varius enim elementum et. Praesent risus sapien, convallis vel facilisis at, feugiat viverra metus. Etiam commodo justo in dolor dictum dapibus. Phasellus eleifend, mauris sit amet faucibus tempus, odio leo cursus lorem, eu ultrices orci nibh vel dolor. Fusce suscipit egestas lectus quis luctus. Nunc ultrices commodo lacus sed tincidunt. Fusce viverra erat vitae nulla aliquam molestie. Suspendisse volutpat feugiat tristique. Mauris tincidunt est enim. In posuere suscipit lectus, at mollis turpis aliquam vitae. Phasellus elit justo, commodo sit amet posuere eu, imperdiet dictum nibh.</p>\r\n\r\n<p style=\"text-align: justify; margin: 0px 0px 14px; padding: 0px;\">Cras porta elit id dui auctor in scelerisque libero tristique. Aenean euismod justo sed neque semper a accumsan dui venenatis. Sed sodales, metus elementum aliquet tempor, augue nisi ultrices tortor, accumsan aliquet sapien nibh vitae erat. Maecenas nibh lorem, suscipit eu ultricies ac, pretium ut ligula. Aliquam erat volutpat. Sed at orci non tortor pulvinar imperdiet vel in ipsum. Sed facilisis venenatis interdum. Sed congue erat vitae eros pulvinar adipiscing ac at libero. Sed ultrices tellus sed massa laoreet imperdiet. Donec vel porta dolor. Sed et iaculis erat. Nulla rhoncus cursus ligula, sed lacinia quam imperdiet ac. Nulla euismod, nulla ac fermentum malesuada, nisl ipsum lacinia enim, vel euismod lorem lectus eu orci. Donec a risus erat.</p>\r\n\r\n<p style=\"text-align: justify; margin: 0px 0px 14px; padding: 0px;\">Vivamus eget ultricies felis. Donec viverra aliquam felis commodo sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse eget eros ipsum. Integer dapibus risus vitae augue tristique id rhoncus diam pretium. Sed quam magna, placerat ac placerat sed, blandit a felis. Nulla ut enim tempor nisl sagittis mattis. Aliquam augue nisl, vehicula eget euismod eu, placerat vel tellus. Sed nec ligula lectus, id condimentum arcu. Integer vitae elit neque, ac commodo purus. Etiam commodo consequat sem, vestibulum tincidunt nisi eleifend id. Pellentesque nulla arcu, laoreet id sagittis quis, molestie a mauris. Nulla facilisi. Cras id elit nec tortor imperdiet fringilla. Duis gravida convallis leo, eget pulvinar sapien dapibus vel. Nulla porttitor imperdiet tortor eu bibendum.</p>\r\n\r\n<p style=\"text-align: justify; margin: 0px 0px 14px; padding: 0px;\">Nulla eget sem eros. Pellentesque blandit adipiscing mi, vel consectetur mi viverra id. Vestibulum commodo ultricies velit, vitae consectetur nisl aliquet sit amet. Cras a risus sem, sit amet tincidunt dolor. Praesent facilisis nisl nec ligula congue ac ornare sem pellentesque. Cras sit amet leo orci, egestas sodales ante. In tincidunt hendrerit dolor a dictum. Nam a orci et ante lacinia semper id ac mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin leo urna, vulputate sit amet imperdiet et, accumsan in orci. Duis egestas, est quis accumsan pellentesque, nisl purus varius lorem, eu rhoncus purus nulla at mi.</p>\r\n", 
+    "albums": [
+      2
+    ]
+  }
+},
+{
+  "pk": 2, 
+  "model": "articles.album", 
+  "fields": {}
+},
+{
+  "pk": 1, 
+  "model": "articles.articlebox", 
+  "fields": {
+    "name": "test article box", 
+    "date_available": "2013-04-24T07:20:08", 
+    "date_update": "2013-04-24T07:20:46.737", 
+    "queryset": null, 
+    "site": 1, 
+    "date_insert": "2013-04-24T07:20:38.853", 
+    "user": 1, 
+    "published": true, 
+    "article": null, 
+    "slug": "test-article-box", 
+    "channel": 1
+  }
+},
+{
+  "pk": 1, 
+  "model": "images.image", 
+  "fields": {
+    "description": "Logo Opps CMS (Content manage sistem)", 
+    "title": "opps image example", 
+    "date_available": "2013-04-24T00:21:37", 
+    "date_update": "2013-04-24T00:23:01.021", 
+    "site": 1, 
+    "date_insert": "2013-04-24T00:23:01.021", 
+    "source": null, 
+    "user": 1, 
+    "image": "images/2013/04/24/865c3845-1543-4341-a823-c0abeee451fb-opps-image-example.jpg", 
+    "published": true, 
+    "slug": "opps-image-example"
+  }
+},
+{
+  "pk": 2, 
+  "model": "images.image", 
+  "fields": {
+    "description": "logo python", 
+    "title": "python software fundation", 
+    "date_available": "2013-04-24T00:28:30", 
+    "date_update": "2013-04-24T00:36:48.609", 
+    "site": 1, 
+    "date_insert": "2013-04-24T00:29:00.101", 
+    "source": 1, 
+    "user": 1, 
+    "image": "images/2013/04/24/841f19e8-5f57-4c9f-a74b-55e87f49cb24-python-software-fundation.png", 
+    "published": true, 
+    "slug": "python-software-fundation"
+  }
+}
+]
