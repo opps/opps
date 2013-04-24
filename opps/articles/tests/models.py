@@ -17,3 +17,9 @@ class PostModelTest(TestCase):
         self.assertEqual(post[0].slug, u'test-post-application')
         self.assertEqual(post[0].title, u'test post application')
         self.assertTrue(post[0].short_url)
+
+    def test_child_class(self):
+        post = Post.objects.get(id=1)
+
+        self.assertTrue(post.child_class)
+        self.assertEqual(post.child_class, 'Post')
