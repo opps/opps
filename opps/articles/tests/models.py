@@ -26,6 +26,14 @@ class ArticleModelTest(TestCase):
                          "/{0}/{1}".format(self.article.channel.long_slug,
                                            self.article.slug))
 
+    def test_get_thumb(self):
+        thumb = self.article.get_thumb()
+        self.assertIsInstance(thumb, Image)
+        self.assertEqual(
+            thumb.image,
+            "images/2013/04/24/865c3845-1543-4341-a823-c0abeee451fb-opps-image-example.jpg"
+        )
+
     def test_recommendation(self):
         self.assertEqual([], self.article.recommendation())
 
