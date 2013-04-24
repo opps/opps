@@ -4,6 +4,7 @@ from django.test import TestCase
 
 from opps.articles.models import Article, Post
 from opps.channels.models import Channel
+from opps.images.models import Image
 
 
 class ArticleModelTest(TestCase):
@@ -51,3 +52,8 @@ class PostModelTest(TestCase):
         self.assertEqual(post[0].slug, u'test-post-application')
         self.assertEqual(post[0].title, u'test post application')
         self.assertTrue(post[0].short_url)
+
+    def test_get_all_images(self):
+
+        self.assertEqual(self.post.all_images(),
+                         [i for i in Image.objects.all()])
