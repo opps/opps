@@ -88,6 +88,9 @@ class Article(Publishable):
     def get_absolute_url(self):
         return "/{0}/{1}".format(self.channel.long_slug, self.slug)
 
+    def get_thumb(self):
+        return self.main_image
+
     def get_http_absolute_url(self):
         return "http://{0}/{1}".format(self.channel, self.slug)
     get_http_absolute_url.short_description = 'URL'
