@@ -16,7 +16,10 @@ not result
 
     <form method="get" action=".">
         <table>
+            {% comment %}
             {{ form.as_table }}
+            {% endcomment %}
+            <input type="search" id="q" name="q" placeholder="Search" value="{{ request.GET.q}}" required>
             <tr>
                 <td>&nbsp;</td>
                 <td>
