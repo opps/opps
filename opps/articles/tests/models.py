@@ -31,7 +31,8 @@ class ArticleModelTest(TestCase):
         self.assertIsInstance(thumb, Image)
         self.assertEqual(
             thumb.image,
-            "images/2013/04/24/865c3845-1543-4341-a823-c0abeee451fb-opps-image-example.jpg"
+            u"images/2013/04/24/865c3845-1543-4341-a823-c0abeee451fb-opps-"
+            u"image-example.jpg"
         )
 
     def test_recommendation(self):
