@@ -520,6 +520,84 @@
   }
 },
 {
+  "pk": 5, 
+  "model": "taggit.tag", 
+  "fields": {
+    "name": "test", 
+    "slug": "test"
+  }
+},
+{
+  "pk": 6, 
+  "model": "taggit.tag", 
+  "fields": {
+    "name": "post", 
+    "slug": "post"
+  }
+},
+{
+  "pk": 7, 
+  "model": "taggit.tag", 
+  "fields": {
+    "name": "album", 
+    "slug": "album"
+  }
+},
+{
+  "pk": 1, 
+  "model": "taggit.taggeditem", 
+  "fields": {
+    "tag": 2, 
+    "content_type": 14, 
+    "object_id": 1
+  }
+},
+{
+  "pk": 2, 
+  "model": "taggit.taggeditem", 
+  "fields": {
+    "tag": 5, 
+    "content_type": 14, 
+    "object_id": 1
+  }
+},
+{
+  "pk": 3, 
+  "model": "taggit.taggeditem", 
+  "fields": {
+    "tag": 6, 
+    "content_type": 14, 
+    "object_id": 1
+  }
+},
+{
+  "pk": 4, 
+  "model": "taggit.taggeditem", 
+  "fields": {
+    "tag": 2, 
+    "content_type": 15, 
+    "object_id": 2
+  }
+},
+{
+  "pk": 5, 
+  "model": "taggit.taggeditem", 
+  "fields": {
+    "tag": 5, 
+    "content_type": 15, 
+    "object_id": 2
+  }
+},
+{
+  "pk": 6, 
+  "model": "taggit.taggeditem", 
+  "fields": {
+    "tag": 7, 
+    "content_type": 15, 
+    "object_id": 2
+  }
+},
+{
   "pk": 1, 
   "model": "auth.permission", 
   "fields": {
@@ -1543,6 +1621,32 @@
   }
 },
 {
+  "pk": 16, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2013-04-24T08:40:20.876", 
+    "object_repr": "/channel-01/test-post-application", 
+    "object_id": "1", 
+    "change_message": "Changed tags.", 
+    "user": 1, 
+    "content_type": 14
+  }
+},
+{
+  "pk": 17, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2013-04-24T08:40:35.231", 
+    "object_repr": "/album/channel-01/test-album", 
+    "object_id": "2", 
+    "change_message": "Changed tags.", 
+    "user": 1, 
+    "content_type": 15
+  }
+},
+{
   "pk": 1, 
   "model": "channels.channel", 
   "fields": {
@@ -1669,7 +1773,7 @@
     "headline": "", 
     "short_url": "http://goo.gl/kY6OT", 
     "date_available": "2013-04-24T00:19:42", 
-    "date_update": "2013-04-24T00:49:51.385", 
+    "date_update": "2013-04-24T08:40:20.827", 
     "site": 1, 
     "short_title": "Generate article type post", 
     "date_insert": "2013-04-24T00:23:10.967", 
@@ -1691,7 +1795,7 @@
     "headline": "", 
     "short_url": "http://goo.gl/j1z3H", 
     "date_available": "2013-04-24T00:48:51", 
-    "date_update": "2013-04-24T00:49:32.888", 
+    "date_update": "2013-04-24T08:40:35.181", 
     "site": 1, 
     "short_title": "run test article type album", 
     "date_insert": "2013-04-24T00:49:32.888", 
