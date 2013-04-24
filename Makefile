@@ -18,3 +18,7 @@ install:
 .PHONY: pep8
 pep8:
 	@flake8 opps --ignore=F403 --exclude=migrations
+
+.PHONY: sdist
+sdist: test
+	@python setup.py sdist upload
