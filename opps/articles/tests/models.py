@@ -23,6 +23,9 @@ class ArticleModelTest(TestCase):
                          "/{0}/{1}".format(self.article.channel.long_slug,
                                            self.article.slug))
 
+    def test_recommendation(self):
+        self.assertEqual([], self.article.recommendation())
+
 
 class PostModelTest(TestCase):
 
