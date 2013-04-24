@@ -113,7 +113,7 @@ class Post(Article):
             published=True, date_available__lte=timezone.now())
             for i in a.images.filter(published=True,
                                      date_available__lte=timezone.now())]
-        return imgs
+        return list(set(imgs))
 
 
 class Album(Article):
