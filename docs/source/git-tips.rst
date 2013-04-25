@@ -53,6 +53,27 @@ Push your new branch, and the commit(s) within, to your fork:
     git push origin newfeaturebranch
 
 
+Issuing a pull request
+----------------------
+
+Read the `GitHub pull request documentation`_ first. Then navigate to your Opps fork at `https://github.com/GH-USER/opps`, select the new branch from the drop-down, and select "Pull Request". Enter a title and description for your pull request, review the proposed changes using the "Commits" and "Files Changed" tabs, and select "Send pull request".
+
+If someone reviews your contribution and ask you to make more changes, do so and then rebase to upstream master:
+
+::
+
+    git checkout newfeaturebranch
+    git fetch upstream
+    git rebase -p upstream/master
+
+When prompted, include a relevant commit message, describing all your changes. Finally, push your changes via:
+
+::
+
+    git push --force origin newfeaturebranch
+
+
 .. _`GitHub Help`: https://help.github.com/
 .. _`set up Git`: https://help.github.com/articles/set-up-git
 .. _`Opps project`: https://github.com/opps/opps
+.. _`GitHub pull request documentation`: https://help.github.com/articles/using-pull-requests
