@@ -1,6 +1,12 @@
 Develop
 =======
 
+.. toctree::
+   :maxdepth: 2
+
+   git-tips
+
+
 South Migrations
 ----------------
 
@@ -8,6 +14,7 @@ South Migrations
 
 For every migration created, make the following modifications.
 
+::
 
     try:
         from django.contrib.auth import get_user_model
