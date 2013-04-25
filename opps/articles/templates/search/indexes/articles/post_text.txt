@@ -2,14 +2,14 @@
 {{ object.content|safe }}
 {{ object.content|striptags }}
 {{ object.title }}
-{{ object.title|slugfy }}
+{{ object.title|slugify }}
 {{ object.title|safe }}
 {{ object.title|striptags }}
 {{ object.headline }}
-{{ object.headline|slugfy }}
+{{ object.headline|slugify }}
 {{ object.headline|safe }}
 {{ object.headline|striptags }}
 {{ object.short_title }}
-{{ object.short_title|slugfy }}
+{{ object.short_title|slugify }}
 {{ object.short_title|safe }}
 {{ object.short_title|striptags }}

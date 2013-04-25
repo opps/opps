@@ -1,4 +1,4 @@
 {{ object.name }}
 {{ object.name|safe }}
 {{ object.name|striptags }}
-{{ object.name|slugfy }}
+{{ object.name|slugify }}
