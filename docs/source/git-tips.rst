@@ -73,6 +73,28 @@ When prompted, include a relevant commit message, describing all your changes. F
     git push --force origin newfeaturebranch
 
 
+Squashing commits
+-----------------
+
+If you are asked to squash your commits:
+
+::
+
+    git checkout newfeaturebranch
+    git fetch upstream
+    git rebase upstream/master
+    git rebase -i
+
+
+When prompted, mark your initial commit with pick, and all your follow-on commits with squash.
+
+Then edit the commit message to make sense, taking out any extraneous information and succinctly describing your changes. Finally, push your changes via:
+
+::
+
+    git push --force origin newfeaturebranch
+
+
 .. _`GitHub Help`: https://help.github.com/
 .. _`set up Git`: https://help.github.com/articles/set-up-git
 .. _`Opps project`: https://github.com/opps/opps
