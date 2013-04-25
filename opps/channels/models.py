@@ -48,6 +48,18 @@ class Channel(MPTTModel, Publishable):
     def get_absolute_url(self):
         return "http://{0}/".format(self.__unicode__())
 
+    def get_thumb(self):
+        return None
+
+    @property
+    def search_category(self):
+        """for use in search result"""
+        return _('Channel')
+
+    @property
+    def title(self):
+        return self.name
+
     def clean(self):
 
         try:
