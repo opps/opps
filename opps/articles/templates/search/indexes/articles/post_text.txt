@@ -13,7 +13,3 @@
 {{ object.short_title|slugify }}
 {{ object.short_title|safe }}
 {{ object.short_title|striptags }}
-{% for tag in object.tags.all %}
-{{tag.name}}
-{{tag.name|slugify }}
-{% endfor %}
