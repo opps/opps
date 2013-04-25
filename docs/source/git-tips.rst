@@ -23,6 +23,36 @@ This adds a "remote" for your fork called "origin". Add the canonical Opps proje
     git remote add upstream https://github.com/opps/opps.git
 
 
+Making your changes
+-------------------
+
+Create and switch to a new branch to house your feature or bugfix (replace `newfeaturebranch` with an appropriate name):
+
+::
+
+    git fetch upstream
+    git checkout -b newfeaturebranch upstream/master
+
+Once you are satisfied with your changes, run the tests and check coding standards:
+
+::
+
+    make test
+
+Once the tests all pass and you are comfortable that your code complies with the suggested coding standards, add and commit your changes:
+
+::
+
+    git add changedfile1 changedfile2
+    git commit
+
+Push your new branch, and the commit(s) within, to your fork:
+
+::
+
+    git push origin newfeaturebranch
+
+
 .. _`GitHub Help`: https://help.github.com/
 .. _`set up Git`: https://help.github.com/articles/set-up-git
 .. _`Opps project`: https://github.com/opps/opps
