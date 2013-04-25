@@ -13,7 +13,7 @@ Next, clone your fork (replace GH-USER with your GitHub username):
 
 ::
 
-    git clone https://github.com/GH-USER/pelican.git
+    git clone https://github.com/GH-USER/opps.git
 
 This adds a "remote" for your fork called "origin". Add the canonical Opps project as an additional remote called "upstream":
 
