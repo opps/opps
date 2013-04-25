@@ -95,7 +95,14 @@ Then edit the commit message to make sense, taking out any extraneous informatio
     git push --force origin newfeaturebranch
 
 
+Relevant Resources
+------------------
+
+* `Git merge vs. rebase`_
+
+
 .. _`GitHub Help`: https://help.github.com/
 .. _`set up Git`: https://help.github.com/articles/set-up-git
 .. _`Opps project`: https://github.com/opps/opps
 .. _`GitHub pull request documentation`: https://help.github.com/articles/using-pull-requests
+.. _`Git merge vs. rebase`: http://mislav.uniqpath.com/2013/02/merge-vs-rebase/
