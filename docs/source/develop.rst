@@ -1,12 +1,6 @@
 Develop
 =======
 
-.. toctree::
-   :maxdepth: 2
-
-   git-tips
-
-
 South Migrations
 ----------------
 

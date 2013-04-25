@@ -28,6 +28,7 @@ Quick links
 
    setup
    application
+   git-tips
    develop
    contributing
 * `Source (github) <https://github.com/opps/opps>`_
