@@ -1,6 +1,7 @@
 {% if not object.is_legacy %}
 {% load encoding_tags %}
 {{ object.content|striptags|htmlentitydecode }}
+{{ object.content|htmlentitydecode|slugify }}
 {% endif %}
 {{ object.title|slugify }}
 {{ object.title|striptags }}
