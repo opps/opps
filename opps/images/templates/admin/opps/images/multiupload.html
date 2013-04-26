@@ -1,0 +1,31 @@
+<div id="upload-container">
+  <script
+    src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script
+    src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>
+
+  <script>
+    $( document ).ready(function() {
+      $("#{{ name }}").change(function(){
+        $('.loadimages').html("");
+        $.map($("#{{ name }}").get(0).files, function(file) {
+          $(".loadimages").val(window.loadImage(
+            file,
+            function (img) { $('.loadimages').append(img); },
+            {maxWidth: 120, maxHeight: 120, canvas: true, noRevoke: true}
+          ));
+        })
+      });
+    });
+  </script>
+
+  <style>
+    .loadimages canvas, .loadimages img { padding: 10px; }
+  </style>
+
+  <input type="file" name="{{ name }}" value="{{ value }}" id="{{ name }}" {% if not value %}multiple{% endif %} />
+  <div class="loadimages" style="height:{% if not value %}260px; overflow:auto;{% else %}130px;{% endif %} background: #F8F8F8;">
+    {% if value %}<img width="120" height="120" src="{{ value }}" />{% endif %}
+  </div>
+
+</div>
