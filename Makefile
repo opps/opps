@@ -28,3 +28,11 @@ clean:
 	@find ./ -name '*.pyc' -exec rm -f {} \;
 	@find ./ -name 'Thumbs.db' -exec rm -f {} \;
 	@find ./ -name '*~' -exec rm -f {} \;
+
+.PHONY: tx
+tx:
+	@for resource in articles boxes channels core flatpages images search sitemaps sources; do
+		@tx set --auto-local -r opps.$resource "$resource/locale/<lang>/LC_MESSAGES/django.po" \
+			--source-language=en \
+			--source-file "templates/$resource.pot" --execute
+	@done
