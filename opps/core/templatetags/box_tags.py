@@ -29,7 +29,7 @@ def get_box(appname, slug, template_name=None):
         t = template.loader.get_template(
             '{0}/{1}_detail.html'.format(appname, model.__name__.lower())
         )
-    return t.render(template.Context({'{0}box'.format(
+    return t.render(template.Context({'{0}'.format(
         model.__name__.lower()): box, 'slug': slug}))
 
 
