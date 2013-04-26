@@ -38,3 +38,7 @@ tx:
 .PHONY: txpush
 txpush:
 	tx push --source --translations
+
+.PHONY: txpull
+txpull:
+	tx pull -a
