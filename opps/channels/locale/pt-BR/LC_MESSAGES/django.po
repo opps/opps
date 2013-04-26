@@ -1,54 +1,55 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Thiago Avelino <thiagoavelinoster@gmail.com>, 2013
-#
-#, fuzzy
+# 
+# Translators:
+# Ellison Leão <ellisonleao@gmail.com>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: opps\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-15 18:56-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2013-04-23 21:23+0000\n"
+"Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: __init__.py:5
 msgid "Channels"
-msgstr ""
+msgstr "Canais"
 
 #: admin.py:21
 msgid "Identification"
-msgstr ""
+msgstr "Identificação"
 
 #: admin.py:24
 msgid "Publication"
-msgstr ""
+msgstr "Publicação"
 
 #: models.py:24
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: models.py:26
 msgid "Path name"
-msgstr ""
+msgstr "Nome do caminho"
 
 #: models.py:28
 msgid "Description"
-msgstr ""
+msgstr "Descrição"
 
 #: models.py:30
 msgid "Show in menu?"
-msgstr ""
+msgstr "Mostrar no menu?"
 
 #: models.py:31
 msgid "Is home page?"
-msgstr ""
+msgstr "É pagina principal?"
 
 #: models.py:32
 msgid "Order"
-msgstr ""
+msgstr "Ordem"
