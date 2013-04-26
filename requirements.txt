@@ -3,3 +3,4 @@ flake8==2.0
 mock==1.0.1
 coverage==3.6
 django-coverage==1.2.2
+transifex-client
