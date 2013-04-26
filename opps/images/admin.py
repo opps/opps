@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth import get_user_model
 
 from django_thumbor import generate_url
 
 from .models import Image
+from .forms import ImageModelForm
 from opps.core.admin import PublishableAdmin
 
 
 class ImagesAdmin(PublishableAdmin):
+    form = ImageModelForm
     prepopulated_fields = {"slug": ("title",)}
     list_display = ['image_thumb', 'title', 'date_available', 'published']
     list_filter = ['date_available', 'published']
@@ -26,6 +29,18 @@ class ImagesAdmin(PublishableAdmin):
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
     )
+
+    def save_model(self, request, obj, form, change):
+        if not change:
+            import pdb; pdb.set_trace()
+            for i in form.more_image():
+                Image.objects.create(
+                    image=i,
+                    title=obj.title,
+                    slug=obj.slug,
+                    description=obj.description,
+                    published=obj.published,
+                    user=get_user_model().objects.get(pk=request.user.pk))
 
     def image_thumb(self, obj):
         if obj.image:
