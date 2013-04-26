@@ -31,16 +31,17 @@ class ImagesAdmin(PublishableAdmin):
     )
 
     def save_model(self, request, obj, form, change):
-        if not change:
-            import pdb; pdb.set_trace()
+        if not change and len(form.more_image()) >= 1:
             for i in form.more_image():
-                Image.objects.create(
+                img = Image.objects.create(
                     image=i,
                     title=obj.title,
                     slug=obj.slug,
                     description=obj.description,
                     published=obj.published,
                     user=get_user_model().objects.get(pk=request.user.pk))
+                img.tags.add('')
+        super(ImagesAdmin, self).save_model(request, obj, form, change)
 
     def image_thumb(self, obj):
         if obj.image:
