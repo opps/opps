@@ -11,8 +11,8 @@ from .models import Post
 
 migration_date = getattr(settings, 'MIGRATION_DATE', None)
 if migration_date:
-    migration_date = datetime.strptime(migration_date, "%Y-%m-%d")
-    Post.is_legacy = lambda self: migration_date.date() >= self.date_insert.date()
+    m_date = datetime.strptime(migration_date, "%Y-%m-%d").date()
+    Post.is_legacy = lambda self: m_date >= self.date_insert.date()
 else:
     Post.is_legacy = lambda self: False
 
