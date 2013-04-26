@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Thiago Avelino <thiagoavelinoster@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-26 20:10-0300\n"
+"PO-Revision-Date: 2013-04-23 20:40+0000\n"
+"Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: __init__.py:5
+msgid "Articles"
+msgstr "Articles"
+
+#: admin.py:63 admin.py:87 admin.py:103 admin.py:126
+msgid "Identification"
+msgstr "Identification"
+
+#: admin.py:66 admin.py:90 admin.py:106 models.py:109
+msgid "Content"
+msgstr "Content"
+
+#: admin.py:69 admin.py:92 admin.py:109 admin.py:128
+msgid "Relationships"
+msgstr "Relationships"
+
+#: admin.py:71 admin.py:94 admin.py:111 admin.py:130
+msgid "Publication"
+msgstr "Publication"
+
+#: admin.py:146
+msgid "No Image"
+msgstr "No Image"
+
+#: admin.py:147
+msgid "Thumbnail"
+msgstr "Thumbnail"
+
+#: models.py:15
+msgid "Title"
+msgstr "Title"
+
+#: models.py:16
+msgid "Headline"
+msgstr "Headline"
+
+#: models.py:18 models.py:138
+msgid "URL"
+msgstr "URL"
+
+#: models.py:24
+msgid "Short title"
+msgstr "Short title"
+
+#: models.py:29
+msgid "Short URL"
+msgstr "Short URL"
+
+#: models.py:34
+msgid "Channel"
+msgstr "Channel"
+
+#: models.py:37
+msgid "Channel name"
+msgstr "Channel name"
+
+#: models.py:43
+msgid "Channel long slug"
+msgstr "Channel long slug"
+
+#: models.py:49
+msgid "Child class"
+msgstr "Child class"
+
+#: models.py:58
+msgid "Main Image"
+msgstr "Main Image"
+
+#: models.py:155
+msgid "URL field is required."
+msgstr "URL field is required."
+
+#: models.py:174 models.py:192 models.py:250
+msgid "Article"
+msgstr "Article"
+
+#: models.py:181
+msgid "Source"
+msgstr "Source"
+
+#: models.py:183 models.py:203 models.py:252
+msgid "Order"
+msgstr "Order"
+
+#: models.py:199
+msgid "Image"
+msgstr "Image"
+
+#: models.py:220
+msgid "Query Set"
+msgstr "Query Set"
+
+#: models.py:243
+msgid "Article Box"
+msgstr "Article Box"
+
+#: models.py:260
+msgid "Article not published!"
+msgstr "Article not published!"
+
+#: models.py:263
+msgid "Article date available is greater than today!"
+msgstr "Article date available is greater than today!"

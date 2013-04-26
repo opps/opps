@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Ellison Leão <ellisonleao@gmail.com>, 2013
+# Ellison Leão <ellisonleao@gmail.com>, 2013
+# Thiago Avelino <Thiagoavelinoster@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-26 20:10-0300\n"
+"PO-Revision-Date: 2013-04-26 23:21+0000\n"
+"Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: __init__.py:5
+msgid "Channels"
+msgstr "Canais"
+
+#: admin.py:21
+msgid "Identification"
+msgstr "Identificação"
+
+#: admin.py:24
+msgid "Publication"
+msgstr "Publicação"
+
+#: models.py:25
+msgid "Name"
+msgstr "Nome"
+
+#: models.py:27
+msgid "Path name"
+msgstr "Nome do caminho"
+
+#: models.py:29
+msgid "Description"
+msgstr "Descrição"
+
+#: models.py:31
+msgid "Show in menu?"
+msgstr "Mostrar no menu?"
+
+#: models.py:32
+msgid "Is home page?"
+msgstr "É pagina principal?"
+
+#: models.py:33
+msgid "Group sub-channel?"
+msgstr "Agrupar sub-canal?"
+
+#: models.py:34
+msgid "Order"
+msgstr "Ordem"
+
+#: models.py:57
+msgid "Channel"
+msgstr "Canal"

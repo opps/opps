@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Thiago Avelino <thiagoavelinoster@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-26 20:10-0300\n"
+"PO-Revision-Date: 2013-04-23 15:34+0000\n"
+"Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: __init__.py:5
+msgid "Boxes"
+msgstr "Boxes"
+
+#: admin.py:18 admin.py:37
+msgid "Identification"
+msgstr "Identification"
+
+#: admin.py:20
+msgid "Rules"
+msgstr "Rules"
+
+#: admin.py:22 admin.py:41
+msgid "Publication"
+msgstr "Publication"
+
+#: admin.py:39
+msgid "Relationships"
+msgstr "Relationships"
+
+#: models.py:21
+msgid "Dynamic queryset name"
+msgstr "Dynamic queryset name"
+
+#: models.py:23
+msgid "Slug"
+msgstr "Slug"
+
+#: models.py:29
+msgid "Model"
+msgstr "Model"
+
+#: models.py:30
+msgid "Limit"
+msgstr "Limit"
+
+#: models.py:31
+msgid "Order"
+msgstr "Order"
+
+#: models.py:35
+msgid "Channel"
+msgstr "Channel"
+
+#: models.py:43
+msgid "Query Set"
+msgstr "Query Set"

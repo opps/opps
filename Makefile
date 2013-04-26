@@ -29,10 +29,8 @@ clean:
 	@find ./ -name 'Thumbs.db' -exec rm -f {} \;
 	@find ./ -name '*~' -exec rm -f {} \;
 
-.PHONY: tx
+.PHONY: txset
 tx:
-	@for resource in articles boxes channels core flatpages images search sitemaps sources; do
-		@tx set --auto-local -r opps.$resource "$resource/locale/<lang>/LC_MESSAGES/django.po" \
-			--source-language=en \
-			--source-file "templates/$resource.pot" --execute
-	@done
+	for resource in articles boxes channels core flatpages images search sitemaps sources; do\
+		tx set --auto-local -r opps.$resource "opps/$resource/locale/<lang>/LC_MESSAGES/django.po" --source-language=en_US --source-file "opps/$resource/locale/en_US/LC_MESSAGES/django.po" --execute;\
+	done
