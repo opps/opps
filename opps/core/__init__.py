@@ -15,6 +15,7 @@ class OppsCoreConf(AppConf):
     CHANNEL_CONF = {}
     VIEWS_LIMIT = None
     PAGINATE_BY = 10
+    CHECK_MOBILE = False
 
     class Meta:
         prefix = 'opps'
