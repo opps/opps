@@ -31,6 +31,11 @@ class DynamicSiteMiddleware(object):
 
 
 class MobileDetectionMiddleware(object):
+    u"""Used django-mobile core
+
+    https://github.com/gregmuellegger/django-mobile/blob/3093a9791e5e812021e49
+    3226e5393033115c8bf/django_mobile/middleware.py
+    """
 
     user_agents_test_match = (
         "w3c ", "acs-", "alav", "alca", "amoi", "audi",
@@ -40,7 +45,7 @@ class MobileDetectionMiddleware(object):
         "keji", "leno", "lg-c", "lg-d", "lg-g", "lge-",
         "maui", "maxo", "midp", "mits", "mmef", "mobi",
         "mot-", "moto", "mwbp", "nec-", "newt", "noki",
-        "xda",  "palm", "pana", "pant", "phil", "play",
+        "xda", "palm", "pana", "pant", "phil", "play",
         "port", "prox", "qwap", "sage", "sams", "sany",
         "sch-", "sec-", "send", "seri", "sgh-", "shar",
         "sie-", "siem", "smal", "smar", "sony", "sph-",
@@ -60,10 +65,14 @@ class MobileDetectionMiddleware(object):
                                    re.IGNORECASE)
 
     def __init__(self):
-        user_agents_test_match = r'^(?:%s)' % '|'.join(self.user_agents_test_match)
-        self.user_agents_test_match_regex = re.compile(user_agents_test_match, re.IGNORECASE)
-        self.user_agents_test_search_regex = re.compile(self.user_agents_test_search, re.IGNORECASE)
-        self.user_agents_exception_search_regex = re.compile(self.user_agents_exception_search, re.IGNORECASE)
+        user_agents_test_match = r'^(?:%s)' % '|'.join(
+            self.user_agents_test_match)
+        self.user_agents_test_match_regex = re.compile(
+            user_agents_test_match, re.IGNORECASE)
+        self.user_agents_test_search_regex = re.compile(
+            self.user_agents_test_search, re.IGNORECASE)
+        self.user_agents_exception_search_regex = re.compile(
+            self.user_agents_exception_search, re.IGNORECASE)
 
     def process_request(self, request):
         is_mobile = False
@@ -85,5 +94,5 @@ class MobileDetectionMiddleware(object):
                     is_mobile = True
 
         if is_mobile and settings.OPPS_CHECK_MOBILE:
-            settings.TEMPLATE_DIRS = tuple(["{0}/mobile".format(i) \
+            settings.TEMPLATE_DIRS = tuple(["{0}/mobile".format(i)
                                             for i in settings.TEMPLATE_DIRS])
