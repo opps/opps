@@ -77,14 +77,14 @@ class MobileDetectionMiddleware(object):
     def process_request(self, request):
         is_mobile = False
 
-        if request.META.has_key('HTTP_USER_AGENT'):
+        if 'HTTP_USER_AGENT' in request.META:
             user_agent = request.META['HTTP_USER_AGENT']
 
             if self.user_agents_test_search_regex.search(user_agent) and \
                not self.user_agents_exception_search_regex.search(user_agent):
                 is_mobile = True
             else:
-                if request.META.has_key('HTTP_ACCEPT'):
+                if 'HTTP_ACCEPT' in request.META:
                     http_accept = request.META['HTTP_ACCEPT']
                     if self.http_accept_regex.search(http_accept):
                         is_mobile = True
