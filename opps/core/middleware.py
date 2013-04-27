@@ -65,3 +65,25 @@ class MobileDetectionMiddleware(object):
         self.user_agents_test_search_regex = re.compile(self.user_agents_test_search, re.IGNORECASE)
         self.user_agents_exception_search_regex = re.compile(self.user_agents_exception_search, re.IGNORECASE)
 
+    def process_request(self, request):
+        is_mobile = False
+
+        if request.META.has_key('HTTP_USER_AGENT'):
+            user_agent = request.META['HTTP_USER_AGENT']
+
+            if self.user_agents_test_search_regex.search(user_agent) and \
+               not self.user_agents_exception_search_regex.search(user_agent):
+                is_mobile = True
+            else:
+                if request.META.has_key('HTTP_ACCEPT'):
+                    http_accept = request.META['HTTP_ACCEPT']
+                    if self.http_accept_regex.search(http_accept):
+                        is_mobile = True
+
+            if not is_mobile:
+                if self.user_agents_test_match_regex.match(user_agent):
+                    is_mobile = True
+
+        if is_mobile and settings.OPPS_CHECK_MOBILE:
+            settings.TEMPLATE_DIRS = tuple(["{0}/mobile".format(i) \
+                                            for i in settings.TEMPLATE_DIRS])
