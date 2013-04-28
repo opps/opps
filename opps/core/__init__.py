@@ -37,7 +37,15 @@ class HaystackConf(AppConf):
 
 
 class RedactorConf(AppConf):
-    OPTIONS = {'lang': 'en'}
+    OPTIONS = {'lang': settings.LANGUAGE_CODE.replace('-',
+                                                      '_').lower() or 'en',
+               "buttons": ['html', '|', 'formatting', '|', 'bold', 'italic',
+                           'deleted', '|', 'unorderedlist', 'orderedlist',
+                           'outdent', 'indent', '|', 'video', 'table', 'link',
+                           '|', 'fontcolor', 'backcolor', '|', 'alignment',
+                           '|', 'horizontalrule'],
+               'air': True,
+               'airButtons': ['formatting', '|', 'bold', 'italic', 'deleted']}
     UPLOAD = 'uploads/'
 
     class Meta:
