@@ -99,6 +99,12 @@ class Article(Publishable, Slugged):
         return [a for a in Article.objects.filter(
             tags__in=self.tags.all()).exclude(pk=self.pk)[:10]]
 
+    def all_images(self):
+        imgs = [i for i in self.images.filter(
+            published=True, date_available__lte=timezone.now())]
+
+        return list(set(imgs))
+
 
 class Post(Article):
     content = models.TextField(_(u"Content"))
@@ -109,8 +115,7 @@ class Post(Article):
     )
 
     def all_images(self):
-        imgs = [i for i in self.images.filter(
-            published=True, date_available__lte=timezone.now())]
+        imgs = super(Post, self).all_images()
 
         imgs += [i for a in self.albums.filter(
             published=True, date_available__lte=timezone.now())
