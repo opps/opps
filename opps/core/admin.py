@@ -54,7 +54,6 @@ def apply_rules(admin_class, rules):
 
     # apply fieldsets
     fieldsets = rules.get('fieldsets')
-    import pdb; pdb.set_trace()
     if fieldsets:
         new_items = [(_(item[0]), item[1]) for item in fieldsets]
         admin_class.fieldsets = new_items

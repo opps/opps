@@ -16,6 +16,7 @@ class OppsCoreConf(AppConf):
     VIEWS_LIMIT = None
     PAGINATE_BY = 10
     CHECK_MOBILE = False
+    ADMIN_RULES = {}
 
     class Meta:
         prefix = 'opps'
