@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
+import os
 from django.shortcuts import get_object_or_404
 from django.contrib.sites.models import Site
 from django.conf import settings
@@ -94,5 +95,5 @@ class MobileDetectionMiddleware(object):
                     is_mobile = True
 
         if is_mobile and settings.OPPS_CHECK_MOBILE:
-            settings.TEMPLATE_DIRS = tuple(["{0}/mobile".format(i)
-                                            for i in settings.TEMPLATE_DIRS])
+            settings.TEMPLATE_DIRS = ("{0}/mobile".format(os.path.join(
+                settings.PROJECT_PATH, 'src', 'templates')),)
