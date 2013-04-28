@@ -4,7 +4,10 @@ import json
 from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ValidationError
+
 from django.contrib.sites.models import Site
+from django.contrib.redirects.models import Redirect
 from django.utils import timezone
 
 
@@ -38,6 +41,51 @@ class Publishable(Date):
 
     def is_published(self):
         return self.published and self.date_available <= timezone.now()
+
+
+class Slugged(models.Model):
+
+    slug = models.SlugField(
+        _(u"URL"),
+        db_index=True,
+        max_length=150,
+        unique=True,
+    )
+
+    def clean(self):
+        print 'CLEANING SLUGGED'
+        try:
+            path = self.get_absolute_url()
+        except:
+            path = self.slug  # for the cases where get_absolute_url fails
+        print path
+        redirect = Redirect.objects.filter(site=self.site, old_path=path)
+        print redirect
+        if redirect.exists():
+            raise ValidationError(_(u"The URL already exists as a redirect"))
+
+        try:
+            super(Slugged, self).clean()
+        except AttributeError:
+            pass  # does not implement the clean method
+
+    def save(self, *args, **kwargs):
+        print "SAVING SLUGGED"
+        model = self.__class__
+        if self.pk is not None:
+            old_object = model.objects.get(pk=self.pk)
+            if old_object.slug != self.slug:
+                redirect = Redirect(
+                    site=self.site,
+                    old_path=old_object.get_absolute_url(),
+                    new_path=self.get_absolute_url()
+                )
+                redirect.save()
+
+        super(Slugged, self).save(*args, **kwargs)
+
+    class Meta:
+        abstract = True
 
 
 class BaseBox(Publishable):

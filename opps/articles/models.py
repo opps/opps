@@ -9,17 +9,12 @@ from taggit.managers import TaggableManager
 from googl.short import GooglUrlShort
 
 from opps.core.models import Publishable, BaseBox, BaseConfig
+from opps.core.models import Slugged
 
 
-class Article(Publishable):
+class Article(Publishable, Slugged):
     title = models.CharField(_(u"Title"), max_length=140, db_index=True)
     headline = models.TextField(_(u"Headline"), blank=True)
-    slug = models.SlugField(
-        _(u"URL"),
-        db_index=True,
-        max_length=150,
-        unique=True,
-    )
     short_title = models.CharField(
         _(u"Short title"),
         max_length=140,
