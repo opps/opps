@@ -8,6 +8,7 @@ from mptt.managers import TreeManager
 
 from opps.core.models import Publishable, BaseConfig
 from .utils import generate_long_slug
+from opps.core.models import Slugged
 
 
 class ChannelManager(TreeManager):
@@ -20,10 +21,9 @@ class ChannelManager(TreeManager):
             return None
 
 
-class Channel(MPTTModel, Publishable):
+class Channel(MPTTModel, Publishable, Slugged):
 
     name = models.CharField(_(u"Name"), max_length=60)
-    slug = models.SlugField(u"URL", max_length=150, db_index=True)
     long_slug = models.SlugField(_(u"Path name"), max_length=250,
                                  db_index=True)
     description = models.CharField(_(u"Description"),
@@ -79,6 +79,12 @@ class Channel(MPTTModel, Publishable):
 
         if self.homepage and len(channel_is_home) >= 1:
             raise ValidationError('Exist home page!')
+
+        # every class which implements Slugged needs this in clean
+        try:
+            super(Channel, self).clean()
+        except AttributeError:
+            pass  # does not implement the clean method
 
     def save(self, *args, **kwargs):
 
