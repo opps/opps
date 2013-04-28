@@ -53,7 +53,6 @@ class Slugged(models.Model):
     )
 
     def clean(self):
-        print 'CLEANING SLUGGED'
         try:
             path = self.get_absolute_url()
         except:
@@ -70,7 +69,6 @@ class Slugged(models.Model):
             pass  # does not implement the clean method
 
     def save(self, *args, **kwargs):
-        print "SAVING SLUGGED"
         model = self.__class__
         if self.pk is not None:
             old_object = model.objects.get(pk=self.pk)
