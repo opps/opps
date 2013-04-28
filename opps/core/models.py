@@ -53,13 +53,14 @@ class Slugged(models.Model):
     )
 
     def clean(self):
-        try:
-            path = self.get_absolute_url()
-        except:
-            path = self.slug  # for the cases where get_absolute_url fails
-        redirect = Redirect.objects.filter(site=self.site, old_path=path)
-        if redirect.exists():
-            raise ValidationError(_(u"The URL already exists as a redirect"))
+        if hasattr(self, 'get_absolute_url'):
+            try:
+                path = self.get_absolute_url()
+            except:
+                path = self.slug  # for the cases where get_absolute_url fails
+            redirect = Redirect.objects.filter(site=self.site, old_path=path)
+            if redirect.exists():
+                raise ValidationError(_(u"The URL already exists as a redirect"))
 
         try:
             super(Slugged, self).clean()
@@ -67,16 +68,17 @@ class Slugged(models.Model):
             pass  # does not implement the clean method
 
     def save(self, *args, **kwargs):
-        model = self.__class__
-        if self.pk is not None:
-            old_object = model.objects.get(pk=self.pk)
-            if old_object.slug != self.slug:
-                redirect = Redirect(
-                    site=self.site,
-                    old_path=old_object.get_absolute_url(),
-                    new_path=self.get_absolute_url()
-                )
-                redirect.save()
+        if hasattr(self, 'get_absolute_url'):
+            model = self.__class__
+            if self.pk is not None:
+                old_object = model.objects.get(pk=self.pk)
+                if old_object.slug != self.slug:
+                    redirect = Redirect(
+                        site=self.site,
+                        old_path=old_object.get_absolute_url(),
+                        new_path=self.get_absolute_url()
+                    )
+                    redirect.save()
 
         super(Slugged, self).save(*args, **kwargs)
 
