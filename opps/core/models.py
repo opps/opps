@@ -57,9 +57,7 @@ class Slugged(models.Model):
             path = self.get_absolute_url()
         except:
             path = self.slug  # for the cases where get_absolute_url fails
-        print path
         redirect = Redirect.objects.filter(site=self.site, old_path=path)
-        print redirect
         if redirect.exists():
             raise ValidationError(_(u"The URL already exists as a redirect"))
 
