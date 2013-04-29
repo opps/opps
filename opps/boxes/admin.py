@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .models import QuerySet, DynamicBox
 from opps.core.admin import PublishableAdmin
+from opps.core.admin import apply_opps_rules
 
 
 class QuerySetAdmin(PublishableAdmin):
@@ -25,6 +26,7 @@ class QuerySetAdmin(PublishableAdmin):
     )
 
 
+@apply_opps_rules('boxes')
 class DynamicBoxAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ["name"]}
     list_display = ['name', 'date_available', 'published']

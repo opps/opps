@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from .models import Post, Album, Article, Link, ArticleSource, ArticleImage
 from .models import ArticleBox, ArticleBoxArticles, ArticleConfig
 from opps.core.admin import PublishableAdmin
+from opps.core.admin import apply_opps_rules
 
 from redactor.widgets import RedactorEditor
 from django_thumbor import generate_url
@@ -54,6 +55,7 @@ class ArticleAdmin(PublishableAdmin):
     raw_id_fields = ['main_image', 'channel']
 
 
+@apply_opps_rules('articles')
 class PostAdmin(ArticleAdmin):
     form = PostAdminForm
     inlines = [ArticleImageInline, ArticleSourceInline]
@@ -79,6 +81,7 @@ class AlbumAdminForm(forms.ModelForm):
         model = Album
 
 
+@apply_opps_rules('articles')
 class AlbumAdmin(ArticleAdmin):
     form = AlbumAdminForm
     inlines = [ArticleImageInline]
@@ -97,6 +100,7 @@ class AlbumAdmin(ArticleAdmin):
     )
 
 
+@apply_opps_rules('articles')
 class LinkAdmin(ArticleAdmin):
     raw_id_fields = ['articles', 'channel', 'main_image']
     fieldsets = (

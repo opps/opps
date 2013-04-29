@@ -9,8 +9,10 @@ from django_thumbor import generate_url
 from .models import Image
 from .forms import ImageModelForm
 from opps.core.admin import PublishableAdmin
+from opps.core.admin import apply_opps_rules
 
 
+@apply_opps_rules('images')
 class ImagesAdmin(PublishableAdmin):
     form = ImageModelForm
     prepopulated_fields = {"slug": ("title",)}

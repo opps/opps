@@ -6,8 +6,10 @@ from django.utils.translation import ugettext_lazy as _
 from .models import Channel, ChannelConfig
 from .utils import generate_long_slug
 from opps.core.admin import PublishableAdmin
+from opps.core.admin import apply_opps_rules
 
 
+@apply_opps_rules('channels')
 class ChannelAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ['name', 'parent', 'site', 'date_available', 'homepage',

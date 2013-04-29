@@ -9,6 +9,7 @@ from django.conf import settings
 from redactor.widgets import RedactorEditor
 
 from .models import FlatPage
+from opps.core.admin import apply_opps_rules
 
 
 class FlatPageAdminForm(forms.ModelForm):
@@ -17,6 +18,7 @@ class FlatPageAdminForm(forms.ModelForm):
         widgets = {'content': RedactorEditor()}
 
 
+@apply_opps_rules('flatpages')
 class FlatPageAdmin(admin.ModelAdmin):
     form = FlatPageAdminForm
     prepopulated_fields = {"slug": ["title"]}
