@@ -206,7 +206,6 @@ class ArticleImage(models.Model):
         return u"{}".format(self.image.title)
 
 
-
 class ArticleBox(BaseBox):
 
     articles = models.ManyToManyField(
