@@ -35,21 +35,35 @@ def apply_rules(admin_class, app):
 
     example of use:
 
-    OPPS_ADMIN_RULES = getattr(settings, 'OPPS_ADMIN_RULES', {})
-    promo_admin_rules = OPPS_ADMIN_RULES.get('promos.PromoAdmin')
-    if promo_admin_rules:
-        PromoAdmin = apply_rules(PromoAdmin, promo_admin_rules)
-
-    example of settings.py
+    your project's settings.py
 
     OPPS_ADMIN_RULES = {
-        'promos.PromoAdmin': {
+        'appname.ModelNameAdmin': {
             'fieldsets': (
                 (u'Identification', {
                     'fields': ('site', 'title', 'slug')}),
-            )
+            ),
+            'list_display': (...),
+            'list_filter': (...),
+            'search_fields': (...),
+            ...
         }
     }
+
+    On appname/admin.py
+
+    as a factory:
+
+    from opps.core.admin import apply_rules
+    ModelNameAdmin = apply_rules(ModelNameAdmin, 'appname')
+
+    as a decorator:
+
+    from opps.core.admin import apply_opps_rules
+
+    @apply_opps_rules('appname')
+    class ModelNameAdmin(admin.ModelAdmin):
+        ...
     """
 
     key = "{0}.{1}".format(app, admin_class.__name__)
@@ -83,13 +97,7 @@ def apply_rules(admin_class, app):
 
 
 def apply_opps_rules(app):
-    """
-    A decorator to apply_rules
-
-    @apply_opps_rules('appname')
-    class ModelNameAdmin(ModelAdmin):
-        ...
-    """
+    __doc__ = apply_rules.__doc__
 
     def wrap(admin_class):
         admin_class = apply_rules(admin_class, app)
