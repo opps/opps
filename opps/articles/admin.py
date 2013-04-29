@@ -85,7 +85,7 @@ class AlbumAdmin(ArticleAdmin):
 
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('title', 'slug', 'get_http_absolute_url',
+            'fields': ('site', 'title', 'slug', 'get_http_absolute_url',
                        'short_url',)}),
         (_(u'Content'), {
             'fields': ('short_title', 'headline', 'main_image', 'tags')}),
@@ -101,7 +101,7 @@ class LinkAdmin(ArticleAdmin):
     raw_id_fields = ['articles', 'channel', 'main_image']
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('title', 'slug', 'get_http_absolute_url',
+            'fields': ('site', 'title', 'slug', 'get_http_absolute_url',
                        'short_url',)}),
         (_(u'Content'), {
             'fields': ('short_title', 'headline', 'url', 'articles',
