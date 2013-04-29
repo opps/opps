@@ -97,10 +97,11 @@ def apply_rules(admin_class, app):
 
 
 def apply_opps_rules(app):
-    __doc__ = apply_rules.__doc__
 
     def wrap(admin_class):
         admin_class = apply_rules(admin_class, app)
         return admin_class
 
     return wrap
+
+apply_opps_rules.__doc__ = apply_rules.__doc__
