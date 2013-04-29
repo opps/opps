@@ -8,6 +8,7 @@ from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
 
 
+@apply_opps_rules('boxes')
 class QuerySetAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ["name"]}
     list_display = ['name', 'date_available', 'published']
