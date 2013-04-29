@@ -66,7 +66,7 @@ class Article(Publishable, Slugged):
     tags = TaggableManager(blank=True)
 
     def __unicode__(self):
-        return self.get_absolute_url()
+        return u"{}".format(self.get_absolute_url())
 
     class Meta:
         ordering = ['-date_available', ]
@@ -183,7 +183,7 @@ class ArticleSource(models.Model):
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
     def __unicode__(self):
-        return self.source.slug
+        return u"{}".format(self.source.slug)
 
 
 class ArticleImage(models.Model):
@@ -203,7 +203,8 @@ class ArticleImage(models.Model):
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
     def __unicode__(self):
-        return self.image.title
+        return u"{}".format(self.image.title)
+
 
 
 class ArticleBox(BaseBox):
