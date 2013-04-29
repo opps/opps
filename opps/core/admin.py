@@ -28,7 +28,7 @@ class PublishableAdmin(admin.ModelAdmin):
         obj.save()
 
 
-def apply_rules(admin_class, rules):
+def apply_rules(admin_class, app):
     """
     To allow overrides of admin rules for opps apps
     it uses the settings.py to load the values
@@ -52,17 +52,47 @@ def apply_rules(admin_class, rules):
     }
     """
 
-    # apply fieldsets
+    key = "{0}.{1}".format(app, admin_class.__name__)
+    OPPS_ADMIN_RULES = getattr(settings, 'OPPS_ADMIN_RULES', {})
+    rules = OPPS_ADMIN_RULES.get(key)
+
+    if not rules:
+        return admin_class
+
     fieldsets = rules.get('fieldsets')
     if fieldsets:
         new_items = [(_(item[0]), item[1]) for item in fieldsets]
         admin_class.fieldsets = new_items
 
+    attrs = ('list_display', 'list_filter',
+             'search_fields', 'exclude', 'raw_id_fields',
+             'prepopulated_fields')
+
+    for attr in attrs:
+        to_apply = rules.get(attr)
+        if to_apply:
+            setattr(admin_class, attr, to_apply)
+
     # TODO:
-    # apply list_display
-    # apply list_filter
-    # apply search_fields
-    # apply exclude
-    # apply raw_id_fields
+    # form
+    # inlines
+    # actions
+    # override methods
 
     return admin_class
+
+
+def apply_opps_rules(app):
+    """
+    A decorator to apply_rules
+
+    @apply_opps_rules('appname')
+    class ModelNameAdmin(ModelAdmin):
+        ...
+    """
+
+    def wrap(admin_class):
+        admin_class = apply_rules(admin_class, app)
+        return admin_class
+
+    return wrap
