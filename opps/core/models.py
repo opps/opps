@@ -29,7 +29,7 @@ class PublishableManager(models.Manager):
 class Publishable(Date):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    site = models.ForeignKey(Site, default=0)
+    site = models.ForeignKey(Site, default=1)
     date_available = models.DateTimeField(_(u"Date available"),
                                           default=timezone.now, null=True)
     published = models.BooleanField(_(u"Published"), default=False)
