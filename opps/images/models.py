@@ -39,7 +39,7 @@ class Image(Publishable):
     source = models.ForeignKey('sources.Source', null=True, blank=True)
 
     def __unicode__(self):
-        return u"{0}-{1}".format(self.id, self.slug)
+        return self.slug
 
     def get_absolute_url(self):
         if self.date_available <= timezone.now() and self.published:

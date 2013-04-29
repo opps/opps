@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
+from django.contrib.sites.models import get_current_site
 
 from django_thumbor import generate_url
 
@@ -32,15 +33,15 @@ class ImagesAdmin(PublishableAdmin):
 
     def save_model(self, request, obj, form, change):
         if not change and len(form.more_image()) >= 1:
-            for i in form.more_image():
-                img = Image.objects.create(
-                    image=i,
-                    title=obj.title,
-                    slug=obj.slug,
-                    description=obj.description,
-                    published=obj.published,
-                    user=get_user_model().objects.get(pk=request.user.pk))
-                img.tags.add('')
+            [Image.objects.create(
+                site=get_current_site(request),
+                image=img,
+                title=obj.title,
+                slug=u"{0}-{1}".format(obj.slug, i),
+                description=obj.description,
+                published=obj.published,
+                user=get_user_model().objects.get(pk=request.user.pk))
+                for i, img in enumerate(form.more_image(), 1)]
         super(ImagesAdmin, self).save_model(request, obj, form, change)
 
     def image_thumb(self, obj):
