@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
 import os
-from django.shortcuts import get_object_or_404
 from django.contrib.sites.models import Site
 from django.conf import settings
 
@@ -22,7 +21,10 @@ class DynamicSiteMiddleware(object):
         domain, port = self.hosting_parse(hosting)
         if domain in settings.OPPS_DEFAULT_URLS:
             domain = 'example.com'
-        return get_object_or_404(Site, domain=domain)
+        try:
+            return Site.objects.get(domain=domain)
+        except Site.DoesNotExist:
+            return Site.objects.all()[0]
 
     def process_request(self, request):
         hosting = request.get_host().lower()
