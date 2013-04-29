@@ -20,6 +20,11 @@ class Article(Publishable, Slugged):
         max_length=140,
         null=True, blank=False,
     )
+    hat = models.CharField(
+        _(u"Hat"),
+        max_length=140,
+        null=True, blank=True,
+    )
     short_url = models.URLField(
         _("Short URL"),
         null=True, blank=False,
