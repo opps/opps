@@ -112,9 +112,26 @@ class BaseBox(Publishable):
         null=True, blank=True,
         on_delete=models.SET_NULL
     )
+    channel_name = models.CharField(
+        _(u"Channel name"),
+        max_length=140,
+        null=True, blank=False,
+        db_index=True,
+    )
+    channel_long_slug = models.CharField(
+        _(u"Channel long slug"),
+        max_length=250,
+        null=True, blank=False,
+        db_index=True,
+    )
 
     class Meta:
         abstract = True
+
+    def save(self, *args, **kwargs):
+        self.channel_name = self.channel.name
+        self.channel_long_slug = self.channel.long_slug
+        super(BaseBox, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return u"{0}-{1}".format(self.slug, self.site.name)
