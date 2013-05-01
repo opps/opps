@@ -79,8 +79,7 @@ class MobileDetectionMiddleware(object):
 
     def process_response(self, request, response):
         if not getattr(request, 'MOBILE', False):
-            patch_vary_headers(response, ['User-Agent'])
-            patch_vary_headers(response, ['X-Mobile'])
+            patch_vary_headers(response, ['Cookie'])
         return response
 
     def process_request(self, request):
