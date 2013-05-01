@@ -7,7 +7,6 @@ from mptt.models import MPTTModel, TreeForeignKey
 from mptt.managers import TreeManager
 
 from opps.core.models import Publishable, BaseConfig
-from .utils import generate_long_slug
 from opps.core.models import Slugged
 
 
