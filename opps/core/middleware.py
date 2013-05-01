@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import re
-import os
 from django.contrib.sites.models import Site
 from django.conf import settings
 
@@ -97,7 +96,7 @@ class MobileDetectionMiddleware(object):
                     is_mobile = True
 
         if is_mobile and settings.OPPS_CHECK_MOBILE:
-            settings.TEMPLATE_DIRS = (os.path.join(settings.PROJECT_PATH,
-                                                   'src',
-                                                   'templates',
-                                                   'mobile'))
+            try:
+                settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_MOBILE
+            except:
+                pass
