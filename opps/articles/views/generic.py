@@ -18,7 +18,6 @@ class OppsView(object):
     limit = settings.OPPS_VIEWS_LIMIT
     site = None
     slug = None
-    long_slug = None
     channel = None
     channel_long_slug = []
 
@@ -30,6 +29,15 @@ class OppsView(object):
         except AttributeError:
             pass
 
+    def set_folder(self):
+        domain_folder = self.type
+        if self.site.id > 1:
+            domain_folder = "{0}/{1}".format(self.site, self.type)
+
+        if self.request.META.get('HTTP_X_OPPS_MOBILE'):
+            domain_folder = "mobile/{}".format(domain_folder)
+        return domain_folder
+
 
 class OppsList(OppsView, ListView):
 
@@ -38,9 +46,7 @@ class OppsList(OppsView, ListView):
 
     @property
     def template_name(self):
-        domain_folder = self.type
-        if self.site.id > 1:
-            domain_folder = "{0}/{1}".format(self.site, self.type)
+        domain_folder = self.set_folder()
 
         if self.channel:
             if self.channel.group and self.channel.parent:
@@ -86,9 +92,8 @@ class OppsDetail(OppsView, DetailView):
 
     @property
     def template_name(self):
-        domain_folder = self.type
-        if self.site.id > 1:
-            domain_folder = "{0}/{1}".format(self.site, self.type)
+        domain_folder = self.set_folder()
+
         try:
             _template = '{0}/{1}/{2}.html'.format(
                 domain_folder, self.long_slug, self.slug)
