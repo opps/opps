@@ -45,7 +45,7 @@ class Channel(MPTTModel, Publishable, Slugged):
         http://en.wikipedia.org/wiki/Uniform_resource_identifier
         """
         if self.parent:
-            return u"{}{}/".format(self.parent, self.slug)
+            return u"/{}/{}/".format(self.parent.slug, self.slug)
         return u"/{}/".format(self.slug)
 
     def get_absolute_url(self):
@@ -90,11 +90,9 @@ class Channel(MPTTModel, Publishable, Slugged):
             pass  # does not implement the clean method
 
     def save(self, *args, **kwargs):
-
-        if not self.long_slug:
-            self.long_slug = generate_long_slug(self.parent, self.slug,
-                                                self.site.domain)
-
+        self.long_slug = u"{}".format(self.slug)
+        if self.parent:
+            self.long_slug = u"{}/{}".format(self.parent.slug, self.slug)
         super(Channel, self).save(*args, **kwargs)
 
 
