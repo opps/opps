@@ -151,9 +151,12 @@ class BaseConfig(Publishable):
     """
 
     FORMATS = (
-        ('text', _(u'Text')),
-        ('json', _(u'Json')),
-        ('yaml', _(u'Yaml')),
+        ('text', 'text'),
+        ('json', 'json'),
+        ('int', 'int'),
+        ('float', 'float'),
+        ('long', 'long'),
+        ('comma', 'comma list'),
     )
 
     key_group = models.SlugField(
@@ -198,12 +201,44 @@ class BaseConfig(Publishable):
 
     @classmethod
     def format_value(cls, value, format):
-        if format == "text":
-            return value
-        elif format == "json":
-            return json.loads(value)
-        elif format == "yaml":
-            return "TODO"
+        casts = {
+            'text': lambda value: value,
+            'int': lambda value: int(value),
+            'float': lambda value: float(value),
+            'long': lambda value: long(value),
+            'comma': lambda value: value.strip().split(','),
+            'json': lambda value: json.loads(value),
+        }
+        return casts.get(format, lambda value: value)(value)
+
+    def clean(self):
+        try:
+            BaseConfig.format_value(self.value, self.format)
+        except:
+            raise ValidationError(
+                _(u"Can't format the value to %s") % self.format
+            )
+
+    @classmethod
+    def get_keys(cls, **kwargs):
+        keysqs = cls.objects.values('key')
+        if kwargs:
+            keysqs = keysqs.filter(**kwargs)
+        return [item['key'] for item in keysqs]
+
+    @classmethod
+    def get_items(cls, **kwargs):
+        itemsqs = cls.objects.values('key', 'value', 'format')
+        if kwargs:
+            itemsqs = itemsqs.filter(**kwargs)
+        data = {
+            item['key']: {
+                'raw': item['value'],
+                'format': item['format'],
+                'value': cls.format_value(item['value'], item['format'])
+            } for item in itemsqs
+        }
+        return data
 
     @classmethod
     def get_value(cls, key, **kwargs):
