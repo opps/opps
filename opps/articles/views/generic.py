@@ -32,9 +32,6 @@ class OppsList(ListView):
         if self.site.id > 1:
             domain_folder = "{0}/{1}".format(self.site, self.type)
 
-        if self.request.MOBILE:
-            domain_folder = "mobile/{}".format(domain_folder)
-
         if self.channel:
             if self.channel.group and self.channel.parent:
                 try:
@@ -91,9 +88,6 @@ class OppsDetail(DetailView):
         domain_folder = self.type
         if self.site.id > 1:
             domain_folder = "{0}/{1}".format(self.site, self.type)
-
-        if self.request.MOBILE:
-            domain_folder = "mobile/{}".format(domain_folder)
 
         try:
             _template = '{0}/{1}/{2}.html'.format(
