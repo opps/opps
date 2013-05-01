@@ -12,7 +12,8 @@ from opps.articles.utils import set_context_data
 from opps.channels.models import Channel
 
 
-class OppsView(object):
+class OppsList(ListView):
+
     context_object_name = "context"
     paginate_by = settings.OPPS_PAGINATE_BY
     limit = settings.OPPS_VIEWS_LIMIT
@@ -21,15 +22,12 @@ class OppsView(object):
     channel = None
     channel_long_slug = []
 
-    def check_longslug(self):
-        self.long_slug = self.kwargs.get('channel__long_slug', None)
-        try:
-            if not self.long_slug:
-                Channel.objects.get_homepage(site=self.site).long_slug
-        except AttributeError:
-            pass
+    def get_context_data(self, **kwargs):
+        return set_context_data(self, OppsList, **kwargs)
 
-    def set_folder(self):
+    @property
+    def template_name(self):
+
         domain_folder = self.type
         if self.site.id > 1:
             domain_folder = "{0}/{1}".format(self.site, self.type)
@@ -37,16 +35,6 @@ class OppsView(object):
         if self.request.META.get('HTTP_X_OPPS_MOBILE'):
             domain_folder = "mobile/{}".format(domain_folder)
         return domain_folder
-
-
-class OppsList(OppsView, ListView):
-
-    def get_context_data(self, **kwargs):
-        return set_context_data(self, OppsList, **kwargs)
-
-    @property
-    def template_name(self):
-        domain_folder = self.set_folder()
 
         if self.channel:
             if self.channel.group and self.channel.parent:
@@ -64,7 +52,13 @@ class OppsList(OppsView, ListView):
     def queryset(self):
         self.site = get_current_site(self.request)
 
-        self.check_longslug()
+        self.long_slug = self.kwargs.get('channel__long_slug', None)
+        try:
+            if not self.long_slug:
+                Channel.objects.get_homepage(site=self.site).long_slug
+        except AttributeError:
+            pass
+
         if not self.long_slug:
             return None
 
@@ -85,14 +79,28 @@ class OppsList(OppsView, ListView):
         return self.article
 
 
-class OppsDetail(OppsView, DetailView):
+class OppsDetail(DetailView):
+
+    context_object_name = "context"
+    paginate_by = settings.OPPS_PAGINATE_BY
+    limit = settings.OPPS_VIEWS_LIMIT
+    site = None
+    slug = None
+    channel = None
+    channel_long_slug = []
 
     def get_context_data(self, **kwargs):
         return set_context_data(self, OppsDetail, **kwargs)
 
     @property
     def template_name(self):
-        domain_folder = self.set_folder()
+        domain_folder = self.type
+        if self.site.id > 1:
+            domain_folder = "{0}/{1}".format(self.site, self.type)
+
+        if self.request.META.get('HTTP_X_OPPS_MOBILE'):
+            domain_folder = "mobile/{}".format(domain_folder)
+        return domain_folder
 
         try:
             _template = '{0}/{1}/{2}.html'.format(
@@ -107,7 +115,13 @@ class OppsDetail(OppsView, DetailView):
         self.site = get_current_site(self.request)
         self.slug = self.kwargs.get('slug')
 
-        self.check_longslug()
+        self.long_slug = self.kwargs.get('channel__long_slug', None)
+        try:
+            if not self.long_slug:
+                Channel.objects.get_homepage(site=self.site).long_slug
+        except AttributeError:
+            pass
+
         if not self.long_slug:
             return None
 
