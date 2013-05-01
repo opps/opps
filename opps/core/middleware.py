@@ -105,7 +105,7 @@ class MobileDetectionMiddleware(object):
         request.META['HTTP_X_MOBILE'] = False
         request.MOBILE = request.META['HTTP_X_MOBILE']
         if is_mobile and settings.OPPS_CHECK_MOBILE:
-            settings.TEMPLATE_DIRS = (os.path.join(settings.ROJECT_PATH,
+            settings.TEMPLATE_DIRS = (os.path.join(settings.PROJECT_PATH,
                                                    'src',
                                                    'templates',
                                                    'mobile'))
