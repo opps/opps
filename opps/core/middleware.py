@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 from django.contrib.sites.models import Site
+from django.utils.cache import patch_vary_headers
 from django.conf import settings
 
 
@@ -76,6 +77,12 @@ class MobileDetectionMiddleware(object):
         self.user_agents_exception_search_regex = re.compile(
             self.user_agents_exception_search, re.IGNORECASE)
 
+    def process_response(self, request, response):
+        if not getattr(request, 'MOBILE', False):
+            patch_vary_headers(response, ['User-Agent'])
+            patch_vary_headers(response, ['X-Mobile'])
+        return response
+
     def process_request(self, request):
         is_mobile = False
 
@@ -95,5 +102,8 @@ class MobileDetectionMiddleware(object):
                 if self.user_agents_test_match_regex.match(user_agent):
                     is_mobile = True
 
+        request.META['HTTP_X_MOBILE'] = False
+        request.MOBILE = False
         if is_mobile and settings.OPPS_CHECK_MOBILE:
-            request.session['HTTP_X_OPPS_MOBILE'] = True
+            request.META['HTTP_X_MOBILE'] = True
+            request.MOBILE = True
