@@ -4,7 +4,6 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.contrib.sites.models import get_current_site
 from django.shortcuts import get_object_or_404
-from django.http import Http404
 from django.utils import timezone
 from django import template
 from django.conf import settings
@@ -13,12 +12,26 @@ from opps.articles.utils import set_context_data
 from opps.channels.models import Channel
 
 
-class OppsList(ListView):
-
+class OppsView(object):
     context_object_name = "context"
     paginate_by = settings.OPPS_PAGINATE_BY
     limit = settings.OPPS_VIEWS_LIMIT
+    site = None
     slug = None
+    long_slug = None
+    channel = None
+    channel_long_slug = []
+
+    def check_longslug(self):
+        self.long_slug = self.kwargs.get('channel__long_slug', None)
+        try:
+            if not self.long_slug:
+                Channel.objects.get_homepage(site=self.site).long_slug
+        except AttributeError:
+            pass
+
+
+class OppsList(OppsView, ListView):
 
     def get_context_data(self, **kwargs):
         return set_context_data(self, OppsList, **kwargs)
@@ -44,12 +57,9 @@ class OppsList(ListView):
     @property
     def queryset(self):
         self.site = get_current_site(self.request)
-        try:
-            self.long_slug = self.kwargs.get(
-                'channel__long_slug',
-                Channel.objects.get_homepage(site=self.site).long_slug)
-        except AttributeError:
-            self.long_slug = None
+
+        self.check_longslug()
+        if not self.long_slug:
             return None
 
         self.channel = get_object_or_404(Channel, site=self.site,
@@ -66,17 +76,10 @@ class OppsList(ListView):
             date_available__lte=timezone.now(),
             published=True)[:self.limit]
 
-        if len(self.article) == 0 and self.kwargs.get('channel__long_slug',
-                                                      None):
-            raise Http404
-
         return self.article
 
 
-class OppsDetail(DetailView):
-
-    context_object_name = "context"
-    limit = settings.OPPS_VIEWS_LIMIT
+class OppsDetail(OppsView, DetailView):
 
     def get_context_data(self, **kwargs):
         return set_context_data(self, OppsDetail, **kwargs)
@@ -99,12 +102,8 @@ class OppsDetail(DetailView):
         self.site = get_current_site(self.request)
         self.slug = self.kwargs.get('slug')
 
-        try:
-            self.long_slug = self.kwargs.get(
-                'channel__long_slug',
-                Channel.objects.get_homepage(site=self.site).long_slug)
-        except AttributeError:
-            self.long_slug = None
+        self.check_longslug()
+        if not self.long_slug:
             return None
 
         self.channel = get_object_or_404(Channel, site=self.site,
