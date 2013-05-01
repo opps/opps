@@ -17,9 +17,7 @@ class OppsList(ListView):
     context_object_name = "context"
     paginate_by = settings.OPPS_PAGINATE_BY
     limit = settings.OPPS_VIEWS_LIMIT
-    site = None
     slug = None
-    channel = None
     channel_long_slug = []
 
     def get_context_data(self, **kwargs):
@@ -55,11 +53,11 @@ class OppsList(ListView):
         self.long_slug = self.kwargs.get('channel__long_slug', None)
         try:
             if not self.long_slug:
-                Channel.objects.get_homepage(site=self.site).long_slug
+                self.long_slug = Channel.objects.get_homepage(
+                    site=self.site).long_slug
         except AttributeError:
-            pass
-
-        if not self.long_slug:
+            self.channel = None
+            self.long_slug = None
             return None
 
         self.channel = get_object_or_404(Channel, site=self.site,
@@ -82,12 +80,7 @@ class OppsList(ListView):
 class OppsDetail(DetailView):
 
     context_object_name = "context"
-    paginate_by = settings.OPPS_PAGINATE_BY
     limit = settings.OPPS_VIEWS_LIMIT
-    site = None
-    slug = None
-    channel = None
-    channel_long_slug = []
 
     def get_context_data(self, **kwargs):
         return set_context_data(self, OppsDetail, **kwargs)
