@@ -77,6 +77,13 @@ class OppsView(object):
         for children in self.channel.get_children():
             self.channel_long_slug.append(children)
 
+    def check_template(self, _template):
+        try:
+            template.loader.get_template(_template)
+            return True
+        except template.TemplateDoesNotExist:
+            return False
+
 
 class OppsList(OppsView, ListView):
 
@@ -87,13 +94,16 @@ class OppsList(OppsView, ListView):
 
         if self.channel:
             if self.channel.group and self.channel.parent:
-                try:
-                    _template = '{0}/_{1}.html'.format(
-                        domain_folder, self.channel.parent.long_slug)
-                    template.loader.get_template(_template)
+
+                _template = '{}/_{}.html'.format(
+                    domain_folder, self.channel.parent.long_slug)
+                if self.check_template(_template):
                     return _template
-                except template.TemplateDoesNotExist:
-                    pass
+
+                _template = '{}/_post_list.html'.format(
+                    domain_folder, self.channel.parent.long_slug)
+                if self.check_template(_template):
+                    return _template
 
         return '{0}/{1}.html'.format(domain_folder, self.long_slug)
 
