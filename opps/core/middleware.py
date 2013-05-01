@@ -2,7 +2,6 @@
 import re
 import os
 from django.contrib.sites.models import Site
-from django.utils.cache import patch_vary_headers
 from django.conf import settings
 
 
