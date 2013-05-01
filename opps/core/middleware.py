@@ -96,4 +96,4 @@ class MobileDetectionMiddleware(object):
                     is_mobile = True
 
         if is_mobile and settings.OPPS_CHECK_MOBILE:
-            request.META['HTTP_X_OPPS_MOBILE'] = True
+            request.session['HTTP_X_OPPS_MOBILE'] = True
