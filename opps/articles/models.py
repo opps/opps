@@ -139,6 +139,7 @@ class Album(Article):
                                              self.channel_long_slug,
                                              self.slug)
 
+
 class Link(Article):
     url = models.URLField(_(u"URL"), null=True, blank=True)
     articles = models.ForeignKey(
