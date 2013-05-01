@@ -8,7 +8,7 @@ from django.utils import timezone
 from django import template
 from django.conf import settings
 
-from opps.articles.utils import set_context_data
+from opps.articles.models import ArticleBox, Article
 from opps.channels.models import Channel
 
 
@@ -19,12 +19,37 @@ class OppsView(object):
     limit = settings.OPPS_VIEWS_LIMIT
 
     def __init__(self):
-
         self.slug = None
         self.channel = None
         self.long_slug = None
         self.channel_long_slug = []
         self.article = self.model.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(OppsView, self).get_context_data(**kwargs)
+
+        article = Article.objects.filter(
+            site=self.site,
+            channel_long_slug__in=self.channel_long_slug,
+            date_available__lte=timezone.now(),
+            published=True)
+        context['posts'] = article.filter(child_class='Post')[:self.limit]
+        context['albums'] = article.filter(child_class='Album')[:self.limit]
+
+        context['channel'] = {}
+        context['channel']['long_slug'] = self.long_slug
+        if self.channel:
+            context['channel']['slug'] = self.channel.slug
+            context['channel']['level'] = self.channel.get_level()
+            context['channel']['root'] = self.channel.get_root()
+
+        context['articleboxes'] = ArticleBox.objects.filter(
+            channel__long_slug=self.long_slug)
+        if self.slug:
+            context['articleboxes'] = context['articleboxes'].filter(
+                article__slug=self.slug)
+
+        return context
 
     def get_template_folder(self):
         domain_folder = self.type
@@ -54,9 +79,6 @@ class OppsView(object):
 
 
 class OppsList(OppsView, ListView):
-
-    def get_context_data(self, **kwargs):
-        return set_context_data(self, OppsList, **kwargs)
 
     @property
     def template_name(self):
@@ -95,9 +117,6 @@ class OppsList(OppsView, ListView):
 
 
 class OppsDetail(OppsView, DetailView):
-
-    def get_context_data(self, **kwargs):
-        return set_context_data(self, OppsDetail, **kwargs)
 
     @property
     def template_name(self):
