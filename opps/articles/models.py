@@ -86,7 +86,7 @@ class Article(Publishable, Slugged):
         super(Article, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return "/{0}/{1}".format(self.channel_long_slug, self.slug)
+        return "/{}/{}".format(self.channel_long_slug, self.slug)
 
     def get_thumb(self):
         return self.main_image
@@ -97,8 +97,8 @@ class Article(Publishable, Slugged):
         return _(self.child_class)
 
     def get_http_absolute_url(self):
-        return "http://{}/{}/{}".format(self.site.domain,
-                                        self.channel_long_slug, self.slug)
+        return "http://{}{}".format(self.site.domain,
+                                    self.get_absolute_url())
     get_http_absolute_url.short_description = 'URL'
 
     def recommendation(self):
@@ -132,12 +132,10 @@ class Post(Article):
 
 class Album(Article):
     def get_absolute_url(self):
-        return "/album/{0}/{1}".format(self.channel_long_slug, self.slug)
+        return "/album/{}/{}".format(self.channel_long_slug, self.slug)
 
     def get_http_absolute_url(self):
-        return "http://{}/album{}/{}".format(self.site.domain,
-                                             self.channel_long_slug,
-                                             self.slug)
+        return "http://{}{}".format(self.site.domain, self.get_absolute_url())
 
 
 class Link(Article):
