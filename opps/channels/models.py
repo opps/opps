@@ -41,12 +41,15 @@ class Channel(MPTTModel, Publishable, Slugged):
         order_insertion_by = ['order', 'name']
 
     def __unicode__(self):
+        """ Uniform resource identifier
+        http://en.wikipedia.org/wiki/Uniform_resource_identifier
+        """
         if self.parent:
-            return "%s/%s" % (self.parent, self.slug)
-        return "%s/%s" % (self.site.domain, self.slug)
+            return u"{}/{}".format(self.parent, self.slug)
+        return u"/{}".format(self.slug)
 
     def get_absolute_url(self):
-        return "http://{0}/".format(self.__unicode__())
+        return u"{}".format(self.__unicode__())
 
     def get_thumb(self):
         return None
