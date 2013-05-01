@@ -45,8 +45,8 @@ class Channel(MPTTModel, Publishable, Slugged):
         http://en.wikipedia.org/wiki/Uniform_resource_identifier
         """
         if self.parent:
-            return u"{}/{}".format(self.parent, self.slug)
-        return u"/{}".format(self.slug)
+            return u"{}{}/".format(self.parent, self.slug)
+        return u"/{}/".format(self.slug)
 
     def get_absolute_url(self):
         return u"{}".format(self.__unicode__())
