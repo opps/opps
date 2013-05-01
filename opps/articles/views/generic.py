@@ -17,8 +17,10 @@ class OppsList(ListView):
     context_object_name = "context"
     paginate_by = settings.OPPS_PAGINATE_BY
     limit = settings.OPPS_VIEWS_LIMIT
-    slug = None
-    channel_long_slug = []
+
+    def __init__(self):
+        self.slug = None
+        self.channel_long_slug = []
 
     def get_context_data(self, **kwargs):
         return set_context_data(self, OppsList, **kwargs)
@@ -32,7 +34,6 @@ class OppsList(ListView):
 
         if self.request.META.get('HTTP_X_OPPS_MOBILE'):
             domain_folder = "mobile/{}".format(domain_folder)
-        return domain_folder
 
         if self.channel:
             if self.channel.group and self.channel.parent:
@@ -93,7 +94,6 @@ class OppsDetail(DetailView):
 
         if self.request.META.get('HTTP_X_OPPS_MOBILE'):
             domain_folder = "mobile/{}".format(domain_folder)
-        return domain_folder
 
         try:
             _template = '{0}/{1}/{2}.html'.format(
