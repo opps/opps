@@ -32,7 +32,7 @@ class OppsList(ListView):
         if self.site.id > 1:
             domain_folder = "{0}/{1}".format(self.site, self.type)
 
-        if self.request.session.get('HTTP_X_OPPS_MOBILE'):
+        if self.request.MOBILE:
             domain_folder = "mobile/{}".format(domain_folder)
 
         if self.channel:
@@ -92,7 +92,7 @@ class OppsDetail(DetailView):
         if self.site.id > 1:
             domain_folder = "{0}/{1}".format(self.site, self.type)
 
-        if self.request.META.get('HTTP_X_OPPS_MOBILE'):
+        if self.request.MOBILE:
             domain_folder = "mobile/{}".format(domain_folder)
 
         try:
