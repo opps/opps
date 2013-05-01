@@ -78,11 +78,6 @@ class MobileDetectionMiddleware(object):
         self.user_agents_exception_search_regex = re.compile(
             self.user_agents_exception_search, re.IGNORECASE)
 
-    def process_response(self, request, response):
-        if not getattr(request, 'MOBILE'):
-            patch_vary_headers(response, ['Cookie'])
-        return response
-
     def process_request(self, request):
         is_mobile = False
 
@@ -102,12 +97,8 @@ class MobileDetectionMiddleware(object):
                 if self.user_agents_test_match_regex.match(user_agent):
                     is_mobile = True
 
-        request.META['HTTP_X_MOBILE'] = False
-        request.MOBILE = request.META['HTTP_X_MOBILE']
         if is_mobile and settings.OPPS_CHECK_MOBILE:
             settings.TEMPLATE_DIRS = (os.path.join(settings.PROJECT_PATH,
                                                    'src',
                                                    'templates',
                                                    'mobile'))
-            request.META['HTTP_X_MOBILE'] = True
-            request.MOBILE = request.META['HTTP_X_MOBILE']
