@@ -132,11 +132,9 @@ class OppsDetail(OppsView, DetailView):
     def template_name(self):
         domain_folder = self.get_template_folder()
 
-        try:
-            _template = '{0}/{1}/{2}.html'.format(
-                domain_folder, self.long_slug, self.slug)
-            template.loader.get_template(_template)
-        except template.TemplateDoesNotExist:
+        _template = '{0}/{1}/{2}.html'.format(
+            domain_folder, self.long_slug, self.slug)
+        if not self.check_template(_template):
             _template = '{0}/{1}.html'.format(domain_folder, self.long_slug)
         return _template
 
