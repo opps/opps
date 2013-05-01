@@ -17,6 +17,7 @@ def set_context_data(self, SUPER, **kwargs):
 
     context['channel'] = {}
     context['channel']['long_slug'] = self.long_slug
+    context['channel']['slug'] = self.channel.slug
     if self.channel:
         context['channel']['level'] = self.channel.get_level()
         context['channel']['root'] = self.channel.get_root()
