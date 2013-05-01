@@ -47,7 +47,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
-    'opps.core.middleware.DynamicSiteMiddleware', # Used in Multi-Site
+    # Used in Multi-Site
+    'opps.core.middleware.DynamicSiteMiddleware',
+    # Used in Mobile
+    'opps.core.middleware.MobileDetectionMiddleware',
 )
 
 INSTALLED_APPS = (
@@ -72,6 +75,8 @@ INSTALLED_APPS = (
     'south',
     'taggit',
 )
+
+OPPS_CHECK_MOBILE = True
 
 TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner'
 
