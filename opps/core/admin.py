@@ -46,10 +46,10 @@ class ChannelListFilter(SimpleListFilter):
         in the right sidebar.
         """
         qs = model_admin.get_queryset(request)
-        qs = qs.values('channel_name', 'channel_long_slug')
+        qs = qs.distinct().values('channel_name', 'channel_long_slug')
         if qs:
-            return ((item['channel_long_slug'], item['channel_name'])
-                    for item in qs)
+            return set([(item['channel_long_slug'], item['channel_name'])
+                       for item in qs])
 
     def queryset(self, request, queryset):
         """
