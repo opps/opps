@@ -48,7 +48,8 @@ class ChannelListFilter(SimpleListFilter):
         qs = model_admin.get_queryset(request)
         qs = qs.distinct().values('channel_name', 'channel_long_slug')
         if qs:
-            return set([(item['channel_long_slug'], item['channel_name'])
+            return set([(item['channel_long_slug'] or 'nochannel',
+                         item['channel_name'] or _(u'No channel'))
                        for item in qs])
 
     def queryset(self, request, queryset):
@@ -57,7 +58,9 @@ class ChannelListFilter(SimpleListFilter):
         provided in the query string and retrievable via
         `self.value()`.
         """
-        if self.value():
+        if self.value() == "nochannel":
+            queryset = queryset.filter(channel_long_slug__isnull=True)
+        elif self.value():
             queryset = queryset.filter(channel_long_slug=self.value())
 
         return queryset
