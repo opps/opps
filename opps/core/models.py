@@ -129,8 +129,9 @@ class BaseBox(Publishable):
         abstract = True
 
     def save(self, *args, **kwargs):
-        self.channel_name = self.channel.name
-        self.channel_long_slug = self.channel.long_slug
+        if self.channel:
+            self.channel_name = self.channel.name
+            self.channel_long_slug = self.channel.long_slug
         super(BaseBox, self).save(*args, **kwargs)
 
     def __unicode__(self):
