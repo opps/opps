@@ -4,7 +4,6 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Channel, ChannelConfig
-from .utils import generate_long_slug
 from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
 
@@ -29,8 +28,10 @@ class ChannelAdmin(PublishableAdmin):
     )
 
     def save_model(self, request, obj, form, change):
-        obj.long_slug = generate_long_slug(obj.parent, obj.slug,
-                                           obj.site.domain)
+        long_slug = u"{}".format(obj.slug)
+        if obj.parent:
+            long_slug = u"{}/{}".format(obj.parent.slug, obj.slug)
+        obj.long_slug = long_slug
 
         super(ChannelAdmin, self).save_model(request, obj, form, change)
 
