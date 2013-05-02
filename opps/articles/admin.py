@@ -4,7 +4,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Post, Album, Article, Link, ArticleSource, ArticleImage
-from .models import ArticleBox, ArticleBoxArticles, ArticleConfig
+from .models import ArticleBox, ArticleBoxArticles, ArticleConfig, PostRelated
 from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
 from opps.core.admin import BaseBoxAdmin
@@ -56,10 +56,19 @@ class ArticleAdmin(PublishableAdmin):
     raw_id_fields = ['main_image', 'channel']
 
 
+class PostRelatedInline(admin.TabularInline):
+    model = PostRelated
+    fk_name = 'post'
+    raw_id_fields = ['related']
+    actions = None
+    extra = 1
+    classes = ('collapse',)
+
+
 @apply_opps_rules('articles')
 class PostAdmin(ArticleAdmin):
     form = PostAdminForm
-    inlines = [ArticleImageInline, ArticleSourceInline]
+    inlines = [ArticleImageInline, ArticleSourceInline, PostRelatedInline]
     raw_id_fields = ['main_image', 'channel', 'albums']
 
     fieldsets = (

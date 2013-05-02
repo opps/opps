@@ -119,6 +119,12 @@ class Post(Article):
         null=True, blank=True,
         related_name='post_albums',
     )
+    related_posts = models.ManyToManyField(
+        'articles.Post',
+        null=True, blank=True,
+        related_name='post_relatedposts',
+        through='articles.PostRelated',
+    )
 
     def all_images(self):
         imgs = super(Post, self).all_images()
@@ -128,6 +134,29 @@ class Post(Article):
             for i in a.images.filter(published=True,
                                      date_available__lte=timezone.now())]
         return list(set(imgs))
+
+
+class PostRelated(models.Model):
+    post = models.ForeignKey(
+        'articles.Post',
+        verbose_name=_(u'Post'),
+        null=True,
+        blank=True,
+        related_name='postrelated_post',
+        on_delete=models.SET_NULL
+    )
+    related = models.ForeignKey(
+        'articles.Post',
+        verbose_name=_(u'Related Post'),
+        null=True,
+        blank=True,
+        related_name='postrelated_related',
+        on_delete=models.SET_NULL
+    )
+    order = models.PositiveIntegerField(_(u'Order'), default=0)
+
+    def __unicode__(self):
+        return u"{0}->{1}".format(self.related.slug, self.post.slug)
 
 
 class Album(Article):
