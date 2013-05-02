@@ -68,9 +68,6 @@ class ChannelListFilter(SimpleListFilter):
 
 class BaseBoxAdmin(PublishableAdmin):
 
-    def get_queryset(self, request):
-        return self.model.objects
-
     prepopulated_fields = {"slug": ["name"]}
     list_display = ['name', 'channel_name', 'date_available', 'published']
     list_filter = [ChannelListFilter, 'date_available', 'published']
@@ -86,6 +83,9 @@ class BaseBoxAdmin(PublishableAdmin):
             'classes': ('extrapretty',),
             'fields': ('published', 'date_available')}),
     )
+
+    def get_queryset(self, request):
+        return self.model.objects
 
 
 def apply_rules(admin_class, app):
