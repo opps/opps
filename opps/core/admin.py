@@ -72,7 +72,7 @@ class BaseBoxAdmin(PublishableAdmin):
         return self.model.objects
 
     prepopulated_fields = {"slug": ["name"]}
-    list_display = ['name', 'date_available', 'published']
+    list_display = ['name', 'channel_name', 'date_available', 'published']
     list_filter = [ChannelListFilter, 'date_available', 'published']
     raw_id_fields = ['channel', 'article']
     search_fields = ['name', 'slug', 'channel_name']
