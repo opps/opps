@@ -6,6 +6,8 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.admin import SimpleListFilter
+from opps.articles.models import ArticleBox
 
 
 class PublishableAdmin(admin.ModelAdmin):
@@ -26,6 +28,62 @@ class PublishableAdmin(admin.ModelAdmin):
             obj.site = Site.objects.get(pk=settings.SITE_ID)
         obj.date_update = timezone.now()
         obj.save()
+
+
+class ChannelListFilter(SimpleListFilter):
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = _(u'Channel')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'channel'
+
+    def lookups(self, request, model_admin):
+        """
+        Returns a list of tuples. The first element in each
+        tuple is the coded value for the option that will
+        appear in the URL query. The second element is the
+        human-readable name for the option that will appear
+        in the right sidebar.
+        """
+        qs = model_admin.get_queryset(request)
+        qs = qs.values('channel_name', 'channel_long_slug')
+        if qs:
+            return ((item['channel_long_slug'], item['channel_name'])
+                    for item in qs)
+
+    def queryset(self, request, queryset):
+        """
+        Returns the filtered queryset based on the value
+        provided in the query string and retrievable via
+        `self.value()`.
+        """
+        if self.value():
+            queryset = queryset.filter(channel_long_slug=self.value())
+
+        return queryset
+
+
+class BaseBoxAdmin(PublishableAdmin):
+
+    def get_queryset(self, request):
+        return self.model.objects
+
+    prepopulated_fields = {"slug": ["name"]}
+    list_display = ['name', 'date_available', 'published']
+    list_filter = [ChannelListFilter, 'date_available', 'published']
+    raw_id_fields = ['channel', 'article']
+    search_fields = ['name', 'slug', 'channel_name']
+
+    fieldsets = (
+        (_(u'Identification'), {
+            'fields': ('site', 'name', 'slug')}),
+        (_(u'Relationships'), {
+            'fields': (('channel', 'article'),)}),
+        (_(u'Publication'), {
+            'classes': ('extrapretty',),
+            'fields': ('published', 'date_available')}),
+    )
 
 
 def apply_rules(admin_class, app):

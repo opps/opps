@@ -7,6 +7,7 @@ from .models import Post, Album, Article, Link, ArticleSource, ArticleImage
 from .models import ArticleBox, ArticleBoxArticles, ArticleConfig
 from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
+from opps.core.admin import BaseBoxAdmin
 
 from redactor.widgets import RedactorEditor
 from django_thumbor import generate_url
@@ -118,13 +119,9 @@ class LinkAdmin(ArticleAdmin):
     )
 
 
-class ArticleBoxAdmin(PublishableAdmin):
-    prepopulated_fields = {"slug": ["name"]}
-    list_display = ['name', 'date_available', 'published']
-    list_filter = ['date_available', 'published']
+class ArticleBoxAdmin(BaseBoxAdmin):
     inlines = [ArticleBoxArticlesInline]
     raw_id_fields = ['channel', 'article', 'queryset']
-    search_fields = ['name', 'slug', 'channel_name']
 
     fieldsets = (
         (_(u'Identification'), {
