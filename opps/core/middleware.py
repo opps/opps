@@ -17,7 +17,8 @@ class URLMiddleware(object):
         self.request = request
         site = get_current_site(request)
         if site.id > 1:
-            self.request.urlconf = settings.ROOT_URLCONF + "_{0}".format(site.id)
+            prefix = "_{0}".format(site.id)
+            self.request.urlconf = settings.ROOT_URLCONF + prefix
 
 
 class TemplateContextMiddleware(object):
