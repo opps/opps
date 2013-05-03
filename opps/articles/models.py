@@ -111,7 +111,8 @@ class Article(Publishable, Slugged):
                 pk=self.pk).distinct().order_by('pk')[:10]]
 
     def all_images(self):
-        imgs = [i for i in self.images.filter(
+        imgs = [self.main_image]
+        imgs += [i for i in self.images.filter(
             published=True, date_available__lte=timezone.now())]
 
         return list(set(imgs))
