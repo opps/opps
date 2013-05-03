@@ -74,7 +74,7 @@ class Article(Publishable, Slugged):
         return u"{}".format(self.get_absolute_url())
 
     class Meta:
-        ordering = ['-date_available', ]
+        ordering = ['-date_available', 'title', 'channel_long_slug']
 
     def save(self, *args, **kwargs):
         if not self.short_url:
