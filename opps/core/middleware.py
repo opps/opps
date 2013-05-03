@@ -14,9 +14,10 @@ class URLMiddleware(object):
         if the requested site is id 2 it
         will force the ROOT_URLCONF = 'yourproject.urls_2.py'
         """
+        self.request = request
         site = get_current_site(request)
         if site.id > 1:
-            request.urlconf = settings.ROOT_URLCONF + "_{0}".format(site.id)
+            self.request.urlconf = settings.ROOT_URLCONF + "_{0}".format(site.id)
 
 
 class TemplateContextMiddleware(object):
