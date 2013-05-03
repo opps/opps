@@ -3,7 +3,6 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
-from django.contrib.redirects.models import Redirect
 
 from taggit.managers import TaggableManager
 from googl.short import GooglUrlShort
@@ -188,13 +187,6 @@ class Link(Article):
         if self.articles:
             self.url = self.articles.get_http_absolute_url()
 
-    def save(self, *args, **kwargs):
-        obj, create = Redirect.objects.get_or_create(
-            old_path=self.get_absolute_url(), site=self.site)
-        obj.new_path = self.url
-        obj.save()
-        super(Link, self).save(*args, **kwargs)
-
 
 class ArticleSource(models.Model):
     article = models.ForeignKey(
@@ -300,3 +292,5 @@ class ArticleConfig(BaseConfig):
     Default implementation
     """
     pass
+
+
