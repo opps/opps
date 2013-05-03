@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 from taggit.managers import TaggableManager
 from googl.short import GooglUrlShort
 
+from .signals import redirect_generate
 from opps.core.models import Publishable, BaseBox, BaseConfig
 from opps.core.models import Slugged
 
@@ -294,3 +295,4 @@ class ArticleConfig(BaseConfig):
     pass
 
 
+models.signals.post_save.connect(redirect_generate, sender=Link)
