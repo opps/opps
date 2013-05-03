@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 
 from django.contrib.sites.models import Site
+from django.contrib.sites.managers import CurrentSiteManager
 from django.contrib.redirects.models import Redirect
 from django.utils import timezone
 
@@ -35,6 +36,7 @@ class Publishable(Date):
     published = models.BooleanField(_(u"Published"), default=False)
 
     objects = PublishableManager()
+    on_site = CurrentSiteManager()
 
     class Meta:
         abstract = True
