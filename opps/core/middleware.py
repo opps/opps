@@ -51,7 +51,7 @@ class DynamicSiteMiddleware(object):
         if domain in settings.OPPS_DEFAULT_URLS:
             domain = 'example.com'
         try:
-            return Site.objects.get(domain=domain).select_related('publisher')
+            return Site.objects.get(domain=domain)
         except Site.DoesNotExist:
             return Site.objects.all()[0]
 
