@@ -102,8 +102,12 @@ class Article(Publishable, Slugged):
     get_http_absolute_url.short_description = 'URL'
 
     def recommendation(self):
+        tag_list = [t for t in self.tags.all()[:3]]
         return [a for a in Article.objects.filter(
-            tags__in=self.tags.all()).exclude(pk=self.pk)[:10]]
+            child_class=self.child_class,
+            date_available__lte=timezone.now(),
+            published=True,
+            tags__in=tag_list).exclude(pk=self.pk).distinct()[:10]]
 
     def all_images(self):
         imgs = [i for i in self.images.filter(
