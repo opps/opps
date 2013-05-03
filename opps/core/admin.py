@@ -20,6 +20,14 @@ class PublishableAdmin(admin.ModelAdmin):
     search_fields = ['title', 'slug', 'headline', 'channel_name']
     exclude = ('user',)
 
+    actions = ['publish']
+
+    def publish(modeladmin, request, queryset):
+        for obj in queryset:
+            obj.published = not obj.published
+            obj.save()
+    publish.short_description = _(u'Publish/Unpublish')
+
     def save_model(self, request, obj, form, change):
         if getattr(obj, 'pk', None) is None:
             obj.user = get_user_model().objects.get(pk=request.user.pk)
