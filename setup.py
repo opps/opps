@@ -22,7 +22,9 @@ install_requires = ["django",
 dependency_links = ['http://github.com/avelino/django-googl/tarball/master'
                     '#egg=django-googl',
                     'https://github.com/jmoiron/johnny-cache/tarball/master'
-                    '#egg=johnny-cache']
+                    '#egg=johnny-cache',
+                    'http://github.com/avelino/django-thumbor/tarball/master'
+                    '#egg=django-thumbor']
 
 classifiers = ["Development Status :: 4 - Beta",
                "Intended Audience :: Developers",
