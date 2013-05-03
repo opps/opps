@@ -53,7 +53,7 @@ class DynamicSiteMiddleware(object):
         try:
             return Site.objects.get(domain=domain).select_related('publisher')
         except Site.DoesNotExist:
-            return Site.objects.all()
+            return Site.objects.all()[0]
 
     def process_request(self, request):
         hosting = request.get_host().lower()
