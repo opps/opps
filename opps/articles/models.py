@@ -97,8 +97,8 @@ class Article(Publishable, Slugged):
         return _(self.child_class)
 
     def get_http_absolute_url(self):
-        return "http://{}{}".format(self.site.domain,
-                                    self.get_absolute_url())
+        return "http://{}{}".format(self.site.domain, self.get_absolute_url())
+
     get_http_absolute_url.short_description = 'URL'
 
     def recommendation(self):
@@ -169,9 +169,6 @@ class Album(Article):
     def get_absolute_url(self):
         return "/album/{}/{}".format(self.channel_long_slug, self.slug)
 
-    def get_http_absolute_url(self):
-        return "http://{}{}".format(self.site.domain, self.get_absolute_url())
-
 
 class Link(Article):
     url = models.URLField(_(u"URL"), null=True, blank=True)
@@ -182,12 +179,7 @@ class Link(Article):
     )
 
     def get_absolute_url(self):
-        return "/link/{0}/{1}".format(self.channel.long_slug, self.slug)
-
-    def get_http_absolute_url(self):
-        protocol, path = "http://{0}/{1}".format(
-            self.channel, self.slug).split(self.site.domain)
-        return "{0}{1}/link{2}".format(protocol, self.site, path)
+        return "/link/{}/{}".format(self.channel_long_slug, self.slug)
 
     def clean(self):
         if not self.url and not self.articles:
