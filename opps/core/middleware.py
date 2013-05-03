@@ -26,13 +26,11 @@ class TemplateContextMiddleware(object):
     Include aditional items in response context_data
     """
     def process_template_response(self, request, response):
-        try:
+        if hasattr(response, 'context_data'):
             if not 'channel' in response.context_data:
                 site = get_current_site(request)
                 response.context_data['channel'] = Channel.objects\
                         .get_homepage(site=site or Site.objects.get(pk=1))
-        except AttributeError:
-            pass
         return response
 
 
