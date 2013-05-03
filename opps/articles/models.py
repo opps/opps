@@ -102,7 +102,7 @@ class Article(Publishable, Slugged):
     get_http_absolute_url.short_description = 'URL'
 
     def recommendation(self):
-        tag_list = [t for t in self.tags.all()[:3]]
+        tag_list = [t for t in self.tags.select_related('publisher')[:3]]
         return [a for a in Article.objects.filter(
             child_class=self.child_class,
             date_available__lte=timezone.now(),

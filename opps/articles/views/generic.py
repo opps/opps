@@ -23,7 +23,7 @@ class OppsView(object):
         self.channel = None
         self.long_slug = None
         self.channel_long_slug = []
-        self.article = self.model.objects.all()
+        self.article = self.model.objects.select_related('publisher')
 
     def get_context_data(self, **kwargs):
         context = super(OppsView, self).get_context_data(**kwargs)
@@ -121,7 +121,7 @@ class OppsList(OppsView, ListView):
             site=self.site,
             channel_long_slug__in=self.channel_long_slug,
             date_available__lte=timezone.now(),
-            published=True)[:self.limit]
+            published=True).select_related('publisher')[:self.limit]
 
         return self.article
 
@@ -153,5 +153,5 @@ class OppsDetail(OppsView, DetailView):
             channel_long_slug=self.long_slug,
             slug=self.slug,
             date_available__lte=timezone.now(),
-            published=True)
+            published=True).select_related('publisher')
         return self.article

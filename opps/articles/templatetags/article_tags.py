@@ -28,10 +28,11 @@ def get_articlebox(slug, template_name=None):
 
 @register.simple_tag
 def get_all_articlebox(channel_slug, template_name=None):
-    boxes = ArticleBox.objects.filter(site=settings.SITE_ID,
-                                      date_available__lte=timezone.now(),
-                                      published=True,
-                                      channel__slug=channel_slug)
+    boxes = ArticleBox.objects.filter(
+        site=settings.SITE_ID,
+        date_available__lte=timezone.now(),
+        published=True,
+        channel__slug=channel_slug).select_related('publisher')
 
     t = template.loader.get_template('articles/articlebox_list.html')
     if template_name:

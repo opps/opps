@@ -40,12 +40,14 @@ class QuerySet(Publishable):
         _app, _model = self.model.split('.')
         model = models.get_model(_app, _model)
 
-        queryset = model.objects.filter(published=True,
-                                        date_available__lte=timezone.now())
+        queryset = model.objects.filter(
+            published=True,
+            date_available__lte=timezone.now()).select_related('publisher')
         if self.channel:
             queryset = queryset.filter(channel=self.channel)
-        queryset = queryset.order_by('{0}id'.format(self.order))[
-            :self.limit]
+        queryset = queryset.order_by(
+            '{0}id'.format(self.order)).select_related(
+                'publisher')[:self.limit]
 
         return queryset
 
