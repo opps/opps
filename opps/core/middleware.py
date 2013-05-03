@@ -8,6 +8,17 @@ from django.conf import settings
 from opps.channels.models import Channel
 
 
+class URLMiddleware(object):
+    def process_request(self, request):
+        """
+        if the requested site is id 2 it
+        will force the ROOT_URLCONF = 'yourproject.urls_2.py'
+        """
+        site = get_current_site(request)
+        if site.id > 1:
+            request.urlconf = settings.ROOT_URLCONF + "_{0}".format(site.id)
+
+
 class TemplateContextMiddleware(object):
     """
     Include aditional items in response context_data
