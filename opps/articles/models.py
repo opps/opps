@@ -107,7 +107,8 @@ class Article(Publishable, Slugged):
             child_class=self.child_class,
             date_available__lte=timezone.now(),
             published=True,
-            tags__in=tag_list).exclude(pk=self.pk).distinct()[:10]]
+            tags__in=tag_list).exclude(
+                pk=self.pk).distinct().order_by('pk')[:10]]
 
     def all_images(self):
         imgs = [i for i in self.images.filter(
