@@ -135,7 +135,7 @@ class ArticleBoxAdmin(BaseBoxAdmin):
 
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('site', 'name', 'slug')}),
+            'fields': ('site', 'name', 'slug', 'title')}),
         (_(u'Relationships'), {
             'fields': ('channel', 'article', 'queryset')}),
         (_(u'Publication'), {

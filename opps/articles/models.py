@@ -232,6 +232,12 @@ class ArticleImage(models.Model):
 
 class ArticleBox(BaseBox):
 
+    title = models.CharField(
+        _(u"Title"),
+        null=True,
+        blank=True,
+        max_length=140,
+    )
     articles = models.ManyToManyField(
         'articles.Article',
         null=True, blank=True,
