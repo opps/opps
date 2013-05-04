@@ -105,6 +105,7 @@ class Article(Publishable, Slugged):
         tag_list = [t for t in self.tags.select_related('publisher')[:3]]
         return [a for a in Article.objects.filter(
             child_class=self.child_class,
+            channel_long_slug=self.channel_long_slug,
             date_available__lte=timezone.now(),
             published=True,
             tags__in=tag_list).exclude(
