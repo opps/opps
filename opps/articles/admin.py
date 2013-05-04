@@ -38,6 +38,7 @@ class ArticleBoxArticlesInline(admin.TabularInline):
     fk_name = 'articlebox'
     raw_id_fields = ['article']
     actions = None
+    ordering = ('order',)
     extra = 1
     fieldsets = [(None, {
         'classes': ('collapse',),

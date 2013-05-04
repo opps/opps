@@ -244,6 +244,9 @@ class ArticleBox(BaseBox):
         verbose_name=_(u'Query Set')
     )
 
+    def ordered_articles(self, field='order'):
+        return self.articles.order_by('articleboxarticles_articles__order')
+
     def get_queryset(self):
         _app, _model = self.queryset.model.split('.')
         model = models.get_model(_app, _model)
@@ -274,6 +277,9 @@ class ArticleBoxArticles(models.Model):
         verbose_name=_(u'Article'),
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
+
+    class Meta:
+        ordering = ('order',)
 
     def __unicode__(self):
         return u"{0}-{1}".format(self.articlebox.slug, self.article.slug)
