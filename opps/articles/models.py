@@ -18,7 +18,7 @@ class Article(Publishable, Slugged):
     short_title = models.CharField(
         _(u"Short title"),
         max_length=140,
-        null=True, blank=False,
+        null=True, blank=True,
     )
     hat = models.CharField(
         _(u"Hat"),
@@ -27,7 +27,7 @@ class Article(Publishable, Slugged):
     )
     short_url = models.URLField(
         _("Short URL"),
-        null=True, blank=False,
+        null=True, blank=True,
     )
     channel = models.ForeignKey(
         'channels.Channel',
@@ -36,19 +36,19 @@ class Article(Publishable, Slugged):
     channel_name = models.CharField(
         _(u"Channel name"),
         max_length=140,
-        null=True, blank=False,
+        null=True, blank=True,
         db_index=True,
     )
     channel_long_slug = models.CharField(
         _(u"Channel long slug"),
         max_length=250,
-        null=True, blank=False,
+        null=True, blank=True,
         db_index=True,
     )
     child_class = models.CharField(
         _(u'Child class'),
         max_length=30,
-        null=True, blank=False,
+        null=True, blank=True,
         db_index=True
     )
     main_image = models.ForeignKey(
