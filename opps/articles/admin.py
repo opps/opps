@@ -77,8 +77,8 @@ class PostAdmin(ArticleAdmin):
             'fields': ('site', 'title', 'slug', 'get_http_absolute_url',
                        'short_url')}),
         (_(u'Content'), {
-            'fields': ('short_title', 'headline', 'content', 'main_image',
-                       'tags')}),
+            'fields': ('hat', 'short_title', 'headline', 'content',
+                       'main_image', 'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel', 'albums',)}),
         (_(u'Publication'), {
@@ -102,7 +102,8 @@ class AlbumAdmin(ArticleAdmin):
             'fields': ('site', 'title', 'slug', 'get_http_absolute_url',
                        'short_url',)}),
         (_(u'Content'), {
-            'fields': ('short_title', 'headline', 'main_image', 'tags')}),
+            'fields': ('hat', 'short_title', 'headline', 'main_image',
+                       'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
         (_(u'Publication'), {
@@ -119,7 +120,7 @@ class LinkAdmin(ArticleAdmin):
             'fields': ('site', 'title', 'slug', 'get_http_absolute_url',
                        'short_url',)}),
         (_(u'Content'), {
-            'fields': ('short_title', 'headline', 'url', 'articles',
+            'fields': ('hat', 'short_title', 'headline', 'url', 'articles',
                        'main_image', 'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
