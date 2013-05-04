@@ -233,6 +233,12 @@ class ArticleImage(models.Model):
 
 class ArticleBox(BaseBox):
 
+    title = models.CharField(
+        _(u"Title"),
+        null=True,
+        blank=True,
+        max_length=140,
+    )
     articles = models.ManyToManyField(
         'articles.Article',
         null=True, blank=True,
@@ -244,6 +250,9 @@ class ArticleBox(BaseBox):
         null=True, blank=True,
         verbose_name=_(u'Query Set')
     )
+
+    def ordered_articles(self, field='order'):
+        return self.articles.order_by('articleboxarticles_articles__order')
 
     def get_queryset(self):
         _app, _model = self.queryset.model.split('.')
@@ -275,6 +284,9 @@ class ArticleBoxArticles(models.Model):
         verbose_name=_(u'Article'),
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
+
+    class Meta:
+        ordering = ('order',)
 
     def __unicode__(self):
         return u"{0}-{1}".format(self.articlebox.slug, self.article.slug)

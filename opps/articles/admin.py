@@ -38,6 +38,7 @@ class ArticleBoxArticlesInline(admin.TabularInline):
     fk_name = 'articlebox'
     raw_id_fields = ['article']
     actions = None
+    ordering = ('order',)
     extra = 1
     fieldsets = [(None, {
         'classes': ('collapse',),
@@ -134,7 +135,7 @@ class ArticleBoxAdmin(BaseBoxAdmin):
 
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('site', 'name', 'slug')}),
+            'fields': ('site', 'name', 'slug', 'title')}),
         (_(u'Relationships'), {
             'fields': ('channel', 'article', 'queryset')}),
         (_(u'Publication'), {
