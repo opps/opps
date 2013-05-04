@@ -29,6 +29,10 @@ class FlatPage(Publishable):
     content = models.TextField(_(u"Content"))
     order = models.IntegerField(_(u"Order"), default=0)
 
+    class META:
+        verbose_name = _('Flat page')
+        verbose_name_plural = _('Flat pages')
+
     def get_absolute_url(self):
         return "/page/{0}".format(self.slug)
 
