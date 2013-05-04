@@ -36,6 +36,10 @@ class Channel(MPTTModel, Publishable, Slugged):
 
     objects = ChannelManager()
 
+    class META:
+        verbose_name = _('Channel')
+        verbose_name_plural = _('Channels')
+
     class MPTTMeta:
         order_insertion_by = ['order', 'name']
 
