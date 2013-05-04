@@ -14,5 +14,9 @@ class Source(Publishable):
     feed = models.URLField(_(u'Feed URL'), max_length=200, blank=True,
                            null=True)
 
+    class META:
+        verbose_name = _('Source')
+        verbose_name_plural = _('Sources')
+
     def __unicode__(self):
         return self.slug
