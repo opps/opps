@@ -38,6 +38,10 @@ class Image(Publishable):
 
     source = models.ForeignKey('sources.Source', null=True, blank=True)
 
+    class META:
+        verbose_name = _('Image')
+        verbose_name_plural = _('Images')
+
     def __unicode__(self):
         return self.slug
 
