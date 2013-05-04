@@ -38,6 +38,11 @@ class HaystackConf(AppConf):
 
 
 class RedactorConf(AppConf):
+    SIMPLE = {"buttons": ['html', '|', 'bold', 'italic',
+                          'deleted', '|', 'unorderedlist', 'orderedlist',
+                          '|', 'link', '|', 'fontcolor', 'backcolor', '|',
+                          'alignment']}
+
     OPTIONS = {'lang': settings.LANGUAGE_CODE.replace(
                '-', '_').replace('en_us', 'en').lower() or 'en',
                "buttons": ['html', '|', 'formatting', '|', 'bold', 'italic',

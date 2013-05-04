@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django import forms
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Post, Album, Article, Link, ArticleSource, ArticleImage
@@ -90,6 +91,11 @@ class PostAdmin(ArticleAdmin):
 class AlbumAdminForm(forms.ModelForm):
     class Meta:
         model = Album
+        widgets = {
+            'headline': RedactorEditor(
+                redactor_options=settings.REDACTOR_SIMPLE
+            )
+        }
 
 
 @apply_opps_rules('articles')
