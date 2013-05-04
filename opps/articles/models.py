@@ -118,7 +118,7 @@ class Article(Publishable, Slugged):
         imgs += [i for i in self.images.filter(
             published=True, date_available__lte=timezone.now())]
 
-        return list(set(imgs))
+        return imgs
 
 
 class Post(Article):
@@ -146,7 +146,7 @@ class Post(Article):
             published=True, date_available__lte=timezone.now())
             for i in a.images.filter(published=True,
                                      date_available__lte=timezone.now())]
-        return list(set(imgs))
+        return imgs
 
 
 class PostRelated(models.Model):
