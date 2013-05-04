@@ -1,66 +1,66 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Thiago Avelino <thiagoavelinoster@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: opps\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-26 20:10-0300\n"
+"POT-Creation-Date: 2013-05-04 13:13-0300\n"
 "PO-Revision-Date: 2013-04-23 20:40+0000\n"
 "Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en_US\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: __init__.py:5
+#: __init__.py:5 models.py:79
 msgid "Articles"
 msgstr "Articles"
 
-#: admin.py:63 admin.py:87 admin.py:103 admin.py:126
+#: admin.py:76 admin.py:101 admin.py:119 admin.py:138
 msgid "Identification"
 msgstr "Identification"
 
-#: admin.py:66 admin.py:90 admin.py:106 models.py:109
+#: admin.py:79 admin.py:104 admin.py:122 models.py:125
 msgid "Content"
 msgstr "Content"
 
-#: admin.py:69 admin.py:92 admin.py:109 admin.py:128
+#: admin.py:82 admin.py:107 admin.py:125 admin.py:140
 msgid "Relationships"
 msgstr "Relationships"
 
-#: admin.py:71 admin.py:94 admin.py:111 admin.py:130
+#: admin.py:84 admin.py:109 admin.py:127 admin.py:142
 msgid "Publication"
 msgstr "Publication"
 
-#: admin.py:146
+#: admin.py:158
 msgid "No Image"
 msgstr "No Image"
 
-#: admin.py:147
+#: admin.py:159
 msgid "Thumbnail"
 msgstr "Thumbnail"
 
-#: models.py:15
+#: models.py:16 models.py:263
 msgid "Title"
 msgstr "Title"
 
-#: models.py:16
+#: models.py:17
 msgid "Headline"
 msgstr "Headline"
 
-#: models.py:18 models.py:138
-msgid "URL"
-msgstr "URL"
-
-#: models.py:24
+#: models.py:19
 msgid "Short title"
 msgstr "Short title"
+
+#: models.py:24
+msgid "Hat"
+msgstr ""
 
 #: models.py:29
 msgid "Short URL"
@@ -86,38 +86,128 @@ msgstr "Child class"
 msgid "Main Image"
 msgstr "Main Image"
 
-#: models.py:155
-msgid "URL field is required."
-msgstr "URL field is required."
-
-#: models.py:174 models.py:192 models.py:250
+#: models.py:78 models.py:217 models.py:239 models.py:314
 msgid "Article"
 msgstr "Article"
 
-#: models.py:181
-msgid "Source"
-msgstr "Source"
+#: models.py:139 models.py:155
+msgid "Post"
+msgstr ""
 
-#: models.py:183 models.py:203 models.py:252
+#: models.py:140
+msgid "Posts"
+msgstr ""
+
+#: models.py:163
+msgid "Related Post"
+msgstr ""
+
+#: models.py:169 models.py:226 models.py:250 models.py:316
 msgid "Order"
 msgstr "Order"
 
-#: models.py:199
+#: models.py:172
+msgid "Post related"
+msgstr ""
+
+#: models.py:173
+msgid "Post relateds"
+msgstr ""
+
+#: models.py:181
+msgid "Album"
+msgstr ""
+
+#: models.py:182
+msgid "Albums"
+msgstr ""
+
+#: models.py:189
+msgid "URL"
+msgstr "URL"
+
+#: models.py:197
+msgid "Link"
+msgstr ""
+
+#: models.py:198
+msgid "Links"
+msgstr ""
+
+#: models.py:205
+msgid "URL field is required."
+msgstr "URL field is required."
+
+#: models.py:224
+msgid "Source"
+msgstr "Source"
+
+#: models.py:229
+#, fuzzy
+msgid "Article source"
+msgstr "Articles"
+
+#: models.py:230
+#, fuzzy
+msgid "Article sources"
+msgstr "Articles"
+
+#: models.py:246
 msgid "Image"
 msgstr "Image"
 
-#: models.py:220
+#: models.py:253
+#, fuzzy
+msgid "Article image"
+msgstr "Article"
+
+#: models.py:254
+#, fuzzy
+msgid "Article images"
+msgstr "Articles"
+
+#: models.py:277
 msgid "Query Set"
 msgstr "Query Set"
 
-#: models.py:243
+#: models.py:281
+#, fuzzy
+msgid "Article box"
+msgstr "Article Box"
+
+#: models.py:282
+#, fuzzy
+msgid "Articles boxes"
+msgstr "Article Box"
+
+#: models.py:307
 msgid "Article Box"
 msgstr "Article Box"
 
-#: models.py:260
+#: models.py:320
+#, fuzzy
+msgid "Article box articles"
+msgstr "Article Box"
+
+#: models.py:321
+#, fuzzy
+msgid "Article boxes articles"
+msgstr "Article Box"
+
+#: models.py:329
 msgid "Article not published!"
 msgstr "Article not published!"
 
-#: models.py:263
+#: models.py:332
 msgid "Article date available is greater than today!"
 msgstr "Article date available is greater than today!"
+
+#: models.py:342
+#, fuzzy
+msgid "Article config"
+msgstr "Article Box"
+
+#: models.py:343
+#, fuzzy
+msgid "Article configs"
+msgstr "Articles"
