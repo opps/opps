@@ -198,7 +198,10 @@ class Link(Article):
         verbose_name_plural = _('Links')
 
     def get_absolute_url(self):
-        return "/link/{}/{}".format(self.channel_long_slug, self.slug)
+        return self.url or "/link/{}/{}".format(
+            self.channel_long_slug,
+            self.slug
+        )
 
     def clean(self):
         if not self.url and not self.articles:
