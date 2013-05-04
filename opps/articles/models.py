@@ -75,6 +75,8 @@ class Article(Publishable, Slugged):
 
     class Meta:
         ordering = ['-date_available', 'title', 'channel_long_slug']
+        verbose_name = _('Article')
+        verbose_name_plural = _('Articles')
 
     def save(self, *args, **kwargs):
         if not self.short_url:
@@ -133,6 +135,10 @@ class Post(Article):
         through='articles.PostRelated',
     )
 
+    class META:
+        verbose_name = _('Post')
+        verbose_name_plural = _('Posts')
+
     def all_images(self):
         imgs = super(Post, self).all_images()
 
@@ -162,11 +168,19 @@ class PostRelated(models.Model):
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
+    class META:
+        verbose_name = _('Post related')
+        verbose_name_plural = _('Post relateds')
+
     def __unicode__(self):
         return u"{0}->{1}".format(self.related.slug, self.post.slug)
 
 
 class Album(Article):
+    class META:
+        verbose_name = _('Album')
+        verbose_name_plural = _('Albums')
+
     def get_absolute_url(self):
         return "/album/{}/{}".format(self.channel_long_slug, self.slug)
 
@@ -178,6 +192,10 @@ class Link(Article):
         null=True, blank=True,
         related_name='link_article'
     )
+
+    class META:
+        verbose_name = _('Link')
+        verbose_name_plural = _('Links')
 
     def get_absolute_url(self):
         return "/link/{}/{}".format(self.channel_long_slug, self.slug)
@@ -207,6 +225,10 @@ class ArticleSource(models.Model):
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
+    class META:
+        verbose_name = _('Article source')
+        verbose_name_plural = _('Article sources')
+
     def __unicode__(self):
         return u"{}".format(self.source.slug)
 
@@ -226,6 +248,10 @@ class ArticleImage(models.Model):
         on_delete=models.SET_NULL
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
+
+    class META:
+        verbose_name = _('Article image')
+        verbose_name_plural = _('Article images')
 
     def __unicode__(self):
         return u"{}".format(self.image.title)
@@ -250,6 +276,10 @@ class ArticleBox(BaseBox):
         null=True, blank=True,
         verbose_name=_(u'Query Set')
     )
+
+    class META:
+        verbose_name = _('Article box')
+        verbose_name_plural = _('Articles boxes')
 
     def ordered_articles(self, field='order'):
         return self.articles.order_by('articleboxarticles_articles__order')
@@ -287,6 +317,8 @@ class ArticleBoxArticles(models.Model):
 
     class Meta:
         ordering = ('order',)
+        verbose_name = _('Article box articles')
+        verbose_name_plural = _('Article boxes articles')
 
     def __unicode__(self):
         return u"{0}-{1}".format(self.articlebox.slug, self.article.slug)
@@ -305,7 +337,10 @@ class ArticleConfig(BaseConfig):
     """
     Default implementation
     """
-    pass
+
+    class META:
+        verbose_name = _('Article config')
+        verbose_name_plural = _('Article configs')
 
 
 models.signals.post_save.connect(redirect_generate, sender=Link)
