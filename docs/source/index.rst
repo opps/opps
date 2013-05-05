@@ -20,6 +20,13 @@ The place to create issues is `opps's github issues <https://github.com/opps/opp
 If you are not sure about something, have a doubt or feedback, or just want to ask for a feature, feel free to join `our mailing list <http://groups.google.com/group/opps-developers>`_, or, if you're on FreeNode (IRC), you can join the chat `#opps <http://webchat.freenode.net/?channels=opps>`_.
 
 
+Mailing list
+============
+
+.. raw:: html
+    :file: _templates/group_embedding.html
+
+
 Quick links
 ===========
 
