@@ -63,6 +63,7 @@ class PostRelatedInline(admin.TabularInline):
     fk_name = 'post'
     raw_id_fields = ['related']
     actions = None
+    ordering = ('order',)
     extra = 1
     classes = ('collapse',)
 

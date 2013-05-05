@@ -148,6 +148,12 @@ class Post(Article):
                                      date_available__lte=timezone.now())]
         return imgs
 
+    def ordered_related(self, field='order'):
+        """
+        used in template
+        """
+        return self.related_posts.order_by('postrelated_related__order')
+
 
 class PostRelated(models.Model):
     post = models.ForeignKey(
@@ -171,6 +177,7 @@ class PostRelated(models.Model):
     class META:
         verbose_name = _('Post related')
         verbose_name_plural = _('Post relateds')
+        ordering = ('order',)
 
     def __unicode__(self):
         return u"{0}->{1}".format(self.related.slug, self.post.slug)
