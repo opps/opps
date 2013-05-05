@@ -53,6 +53,11 @@ MIDDLEWARE_CLASSES = (
     'opps.core.middleware.MobileDetectionMiddleware',
 )
 
+TEMPLATE_DIRS = (os.path.join(PROJECT_PATH, 'src', 'templates'),)
+TEMPLATE_DIRS_WEB = TEMPLATE_DIRS
+TEMPLATE_DIRS_MOBILE = (os.path.join(PROJECT_PATH, 'src', 'templates',
+                                     'mobile'),)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
