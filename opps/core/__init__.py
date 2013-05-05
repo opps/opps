@@ -17,6 +17,7 @@ class OppsCoreConf(AppConf):
     PAGINATE_BY = 10
     CHECK_MOBILE = False
     ADMIN_RULES = {}
+    RELATED_POSTS_PLACEHOLDER = "---related---"
 
     class Meta:
         prefix = 'opps'
