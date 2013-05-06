@@ -140,6 +140,8 @@ class LinkAdmin(ArticleAdmin):
 class ArticleBoxAdmin(BaseBoxAdmin):
     inlines = [ArticleBoxArticlesInline]
     raw_id_fields = ['channel', 'article', 'queryset']
+    # list_display = ['name', 'channel_name', 'date_available',
+    #                 'is_dynamic', 'published']
 
     fieldsets = (
         (_(u'Identification'), {
@@ -150,6 +152,22 @@ class ArticleBoxAdmin(BaseBoxAdmin):
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
     )
+
+    def get_list_display(self, request):
+        if request.user.is_superuser:
+            return ['name', 'channel_name', 'date_available',
+                    'is_dynamic', 'published']
+        else:
+            return ['name', 'channel_name', 'date_available',
+                    'published']
+
+    def is_dynamic(self, obj):
+        if obj.queryset:
+            return True
+        else:
+            return False
+    is_dynamic.short_description = _(u'Dynamic')
+    is_dynamic.boolean = True
 
 
 class HideArticleAdmin(PublishableAdmin):

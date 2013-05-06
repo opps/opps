@@ -45,11 +45,10 @@ class QuerySet(Publishable):
             date_available__lte=timezone.now()).select_related('publisher')
         if self.channel:
             queryset = queryset.filter(channel=self.channel)
-        queryset = queryset.order_by(
-            '{0}id'.format(self.order)).select_related(
-                'publisher')[:self.limit]
+        if self.order == '-':
+            queryset = queryset.order_by('-id')
 
-        return queryset
+        return queryset[:self.limit]
 
 
 class DynamicBox(BaseBox):
