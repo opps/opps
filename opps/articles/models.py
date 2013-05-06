@@ -297,17 +297,10 @@ class ArticleBox(BaseBox):
         return self.articles.order_by('articleboxarticles_articles__order')
 
     def get_queryset(self):
-        _app, _model = self.queryset.model.split('.')
-        model = models.get_model(_app, _model)
-
-        queryset = model.objects.filter(published=True,
-                                        date_available__lte=timezone.now())
-        if self.queryset.channel:
-            queryset = queryset.filter(channel=self.queryset.channel)
-        queryset = queryset.order_by('{0}id'.format(self.queryset.order))[
-            :self.queryset.limit]
-
-        return queryset
+        """
+        for backwards compatibility
+        """
+        return self.queryset.get_queryset()
 
 
 class ArticleBoxArticles(models.Model):
