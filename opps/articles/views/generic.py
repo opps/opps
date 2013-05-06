@@ -8,7 +8,7 @@ from django.utils import timezone
 from django import template
 from django.conf import settings
 
-from opps.articles.models import ArticleBox, Article
+from opps.articles.models import ArticleBox, Article, Album
 from opps.channels.models import Channel
 
 
@@ -28,13 +28,14 @@ class OppsView(object):
     def get_context_data(self, **kwargs):
         context = super(OppsView, self).get_context_data(**kwargs)
 
-        article = Article.objects.filter(
-            site=self.site,
-            channel_long_slug__in=self.channel_long_slug,
-            date_available__lte=timezone.now(),
-            published=True)
+        filters = {}
+        filters['site'] = self.site
+        filters['channel_long_slug__in'] = self.channel_long_slug
+        filters['date_available__lte'] = timezone.now()
+        filters['published'] = True
+        article = Article.objects.filter(**filters)
         context['posts'] = article.filter(child_class='Post')[:self.limit]
-        context['albums'] = article.filter(child_class='Album')[:self.limit]
+        context['albums'] = Album.objects.filter(**filters)[:self.limit]
 
         context['channel'] = {}
         context['channel']['long_slug'] = self.long_slug
