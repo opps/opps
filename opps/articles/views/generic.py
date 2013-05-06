@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from django.core.exceptions import ImproperlyConfigured
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.contrib.sites.models import get_current_site
@@ -88,9 +89,8 @@ class OppsView(object):
 
 class OppsList(OppsView, ListView):
 
-    @property
-    def template_name(self):
-
+    def get_template_names(self):
+        names = []
         domain_folder = self.get_template_folder()
 
         if self.channel:
@@ -99,14 +99,21 @@ class OppsList(OppsView, ListView):
                 _template = '{}/_{}.html'.format(
                     domain_folder, self.channel.parent.long_slug)
                 if self.check_template(_template):
-                    return _template
+                    names.append(_template)
 
                 _template = '{}/_post_list.html'.format(
                     domain_folder, self.channel.parent.long_slug)
                 if self.check_template(_template):
-                    return _template
+                    names.append(_template)
 
-        return '{0}/{1}.html'.format(domain_folder, self.long_slug)
+        names.append('{}/{}.html'.format(domain_folder, self.long_slug))
+
+        try:
+            names = names + super(OppsList, self).get_template_names()
+        except ImproperlyConfigured:
+            pass
+
+        return names
 
     @property
     def queryset(self):
@@ -128,16 +135,6 @@ class OppsList(OppsView, ListView):
 
 
 class OppsDetail(OppsView, DetailView):
-
-    @property
-    def template_name(self):
-        domain_folder = self.get_template_folder()
-
-        _template = '{0}/{1}/{2}.html'.format(
-            domain_folder, self.long_slug, self.slug)
-        if not self.check_template(_template):
-            _template = '{0}/{1}.html'.format(domain_folder, self.long_slug)
-        return _template
 
     @property
     def queryset(self):
