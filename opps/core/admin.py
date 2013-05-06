@@ -53,7 +53,7 @@ class ChannelListFilter(SimpleListFilter):
         human-readable name for the option that will appear
         in the right sidebar.
         """
-        qs = model_admin.get_queryset(request)
+        qs = model_admin.queryset(request)
         qs = qs.distinct().values('channel_name', 'channel_long_slug')
         if qs:
             return set([(item['channel_long_slug'] or 'nochannel',
@@ -92,8 +92,15 @@ class BaseBoxAdmin(PublishableAdmin):
             'fields': ('published', 'date_available')}),
     )
 
-    def get_queryset(self, request):
-        return self.model.objects
+    def queryset(self, request):
+        qs = super(BaseBoxAdmin, self).queryset(request)
+        try:
+            # only supersusers can see queryset boxes
+            if not request.user.is_superuser:
+                qs = qs.filter(queryset__isnull=True)
+        except:
+            pass  # admin model soes not have the queryset field
+        return qs
 
 
 def apply_rules(admin_class, app):
