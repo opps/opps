@@ -77,6 +77,7 @@ class Article(Publishable, Slugged):
         ordering = ['-date_available', 'title', 'channel_long_slug']
         verbose_name = _('Article')
         verbose_name_plural = _('Articles')
+        unique_together = ("site", "child_class", "channel_long_slug", "slug")
 
     def save(self, *args, **kwargs):
         if not self.short_url:
