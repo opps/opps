@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Translators:
 # Ellison Leão <ellisonleao@gmail.com>, 2013
 # Ellison Leão <ellisonleao@gmail.com>, 2013
 # josene <jsene@yacows.com.br>, 2013
@@ -11,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-26 20:10-0300\n"
-"PO-Revision-Date: 2013-04-26 18:06+0000\n"
+"POT-Creation-Date: 2013-05-04 13:50-0300\n"
+"PO-Revision-Date: 2013-05-06 19:48+0000\n"
 "Last-Translator: josene <jsene@yacows.com.br>\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -21,9 +22,9 @@ msgstr ""
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: __init__.py:5
+#: __init__.py:5 models.py:19
 msgid "Sources"
-msgstr "Origens"
+msgstr "Fontes"
 
 #: admin.py:17
 msgid "Identification"
@@ -52,3 +53,7 @@ msgstr "URL"
 #: models.py:14
 msgid "Feed URL"
 msgstr "URL do Feed"
+
+#: models.py:18
+msgid "Source"
+msgstr "Fontes"

@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Translators:
 # josene <jsene@yacows.com.br>, 2013
 # josene <jsene@yacows.com.br>, 2013
 # Thiago Avelino <Thiagoavelinoster@gmail.com>, 2013
@@ -10,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-26 20:10-0300\n"
-"PO-Revision-Date: 2013-04-26 18:08+0000\n"
+"POT-Creation-Date: 2013-05-04 13:49-0300\n"
+"PO-Revision-Date: 2013-05-06 19:47+0000\n"
 "Last-Translator: josene <jsene@yacows.com.br>\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -24,42 +25,50 @@ msgstr ""
 msgid "FlatPages"
 msgstr "Páginas Simples"
 
-#: admin.py:28
+#: admin.py:30
 msgid "Identification"
 msgstr "Identificação"
 
-#: admin.py:31 models.py:30
+#: admin.py:33 models.py:29
 msgid "Content"
 msgstr "Conteúdo"
 
-#: admin.py:33
+#: admin.py:35
 msgid "Publication"
 msgstr "Publicação"
 
-#: models.py:11
+#: models.py:10
 msgid "Title"
 msgstr "Título"
 
-#: models.py:12
+#: models.py:11
 msgid "Headline"
 msgstr "Cabeçalho"
 
-#: models.py:14
+#: models.py:13
 msgid "URL"
 msgstr "URL"
 
-#: models.py:20
+#: models.py:19
 msgid "Short URL"
 msgstr "URL curta"
 
-#: models.py:23
+#: models.py:22
 msgid "Show in menu?"
 msgstr "Mostrar no menu?"
 
-#: models.py:28
+#: models.py:27
 msgid "Main Image"
 msgstr "Imagem principal"
 
-#: models.py:31
+#: models.py:30
 msgid "Order"
 msgstr "Ordem"
+
+#: models.py:33
+msgid "Flat page"
+msgstr "Páginas Simples"
+
+#: models.py:34
+msgid "Flat pages"
+msgstr "Páginas simples"

@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Translators:
 # Ellison Leão <ellisonleao@gmail.com>, 2013
 # Ellison Leão <ellisonleao@gmail.com>, 2013
 # josene <jsene@yacows.com.br>, 2013
@@ -12,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-26 20:10-0300\n"
-"PO-Revision-Date: 2013-04-26 18:02+0000\n"
+"POT-Creation-Date: 2013-05-04 13:49-0300\n"
+"PO-Revision-Date: 2013-05-06 19:52+0000\n"
 "Last-Translator: josene <jsene@yacows.com.br>\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -26,62 +27,104 @@ msgstr ""
 msgid "Core"
 msgstr "Modelo base"
 
-#: models.py:13
+#: admin.py:29
+msgid "Publish/Unpublish"
+msgstr "Publicar/Não Publicar"
+
+#: admin.py:43
+msgid "Channel"
+msgstr "Canal"
+
+#: admin.py:60
+msgid "No channel"
+msgstr "Nenhum Canal"
+
+#: admin.py:86
+msgid "Identification"
+msgstr "Identificação"
+
+#: admin.py:88
+msgid "Relationships"
+msgstr "Relacionamentos"
+
+#: admin.py:90
+msgid "Publication"
+msgstr "Publicação"
+
+#: models.py:17
 msgid "Date insert"
 msgstr "Data de inserção"
 
-#: models.py:14
+#: models.py:18
 msgid "Date update"
 msgstr "Data de atualização"
 
-#: models.py:30
+#: models.py:34
 msgid "Date available"
 msgstr "Data de publicação"
 
-#: models.py:32
+#: models.py:36
 msgid "Published"
 msgstr "Publicado"
 
-#: models.py:44
+#: models.py:51
+msgid "URL"
+msgstr "URL"
+
+#: models.py:71
+msgid "The URL already exists as a redirect"
+msgstr "A URL já existe como um redirecionamento"
+
+#: models.py:99
 msgid "Box name"
 msgstr "Nome do box"
 
-#: models.py:46
+#: models.py:101
 msgid "Slug"
 msgstr "slug"
 
-#: models.py:54 models.py:112
+#: models.py:109 models.py:188
 msgid "Only published article"
 msgstr "Apenas artigo publicado"
 
-#: models.py:84
-msgid "Text"
-msgstr "Texto"
+#: models.py:118
+msgid "Channel name"
+msgstr "Nome do Canal"
 
-#: models.py:85
-msgid "Json"
-msgstr "JSON"
+#: models.py:124
+msgid "Channel long slug"
+msgstr "Slug do canal longo"
 
-#: models.py:86
-msgid "Yaml"
-msgstr "YAML"
-
-#: models.py:90
+#: models.py:166
 msgid "Config Key Group"
 msgstr "Grupo de configuração da chave"
 
-#: models.py:98
+#: models.py:174
 msgid "Config Key"
 msgstr "Chave de configuração"
 
-#: models.py:104
+#: models.py:180
 msgid "Format"
 msgstr "Formato"
 
-#: models.py:106
+#: models.py:182
 msgid "Config Value"
 msgstr "Valor de configuração"
 
-#: models.py:107
+#: models.py:183
 msgid "Description"
 msgstr "Descrição"
+
+#: models.py:222
+#, python-format
+msgid "Can't format the value to %s"
+msgstr "Não é possível formatar o valor para %s"
+
+#~ msgid "Text"
+#~ msgstr "Text"
+
+#~ msgid "Json"
+#~ msgstr "Json"
+
+#~ msgid "Yaml"
+#~ msgstr "Yaml"

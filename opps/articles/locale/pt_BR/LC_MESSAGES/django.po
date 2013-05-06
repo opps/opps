@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Translators:
 # Ellison Leão <ellisonleao@gmail.com>, 2013
 # Ellison Leão <ellisonleao@gmail.com>, 2013
 # josene <jsene@yacows.com.br>, 2013
@@ -12,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-26 20:10-0300\n"
-"PO-Revision-Date: 2013-04-26 18:01+0000\n"
+"POT-Creation-Date: 2013-05-04 13:13-0300\n"
+"PO-Revision-Date: 2013-05-06 19:50+0000\n"
 "Last-Translator: josene <jsene@yacows.com.br>\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -22,49 +23,49 @@ msgstr ""
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: __init__.py:5
+#: __init__.py:5 models.py:79
 msgid "Articles"
 msgstr "Artigos"
 
-#: admin.py:63 admin.py:87 admin.py:103 admin.py:126
+#: admin.py:76 admin.py:101 admin.py:119 admin.py:138
 msgid "Identification"
 msgstr "Identificação"
 
-#: admin.py:66 admin.py:90 admin.py:106 models.py:109
+#: admin.py:79 admin.py:104 admin.py:122 models.py:125
 msgid "Content"
 msgstr "Conteúdo"
 
-#: admin.py:69 admin.py:92 admin.py:109 admin.py:128
+#: admin.py:82 admin.py:107 admin.py:125 admin.py:140
 msgid "Relationships"
 msgstr "Relacionamentos"
 
-#: admin.py:71 admin.py:94 admin.py:111 admin.py:130
+#: admin.py:84 admin.py:109 admin.py:127 admin.py:142
 msgid "Publication"
 msgstr "Publicação"
 
-#: admin.py:146
+#: admin.py:158
 msgid "No Image"
 msgstr "Sem imagem"
 
-#: admin.py:147
+#: admin.py:159
 msgid "Thumbnail"
 msgstr "Thumbnail"
 
-#: models.py:15
+#: models.py:16 models.py:263
 msgid "Title"
 msgstr "Título"
 
-#: models.py:16
+#: models.py:17
 msgid "Headline"
 msgstr "Cabeçalho"
 
-#: models.py:18 models.py:138
-msgid "URL"
-msgstr "URL"
-
-#: models.py:24
+#: models.py:19
 msgid "Short title"
 msgstr "Título curto"
+
+#: models.py:24
+msgid "Hat"
+msgstr "Chapéu"
 
 #: models.py:29
 msgid "Short URL"
@@ -90,38 +91,118 @@ msgstr "Classe filha"
 msgid "Main Image"
 msgstr "Imagem principal"
 
-#: models.py:155
-msgid "URL field is required."
-msgstr "Campo de URL é obrigatório."
-
-#: models.py:174 models.py:192 models.py:250
+#: models.py:78 models.py:217 models.py:239 models.py:314
 msgid "Article"
 msgstr "Artigo"
 
-#: models.py:181
-msgid "Source"
-msgstr "Origem"
+#: models.py:139 models.py:155
+msgid "Post"
+msgstr "Notícia"
 
-#: models.py:183 models.py:203 models.py:252
+#: models.py:140
+msgid "Posts"
+msgstr "Notícias"
+
+#: models.py:163
+msgid "Related Post"
+msgstr "Notícias Relacionadas"
+
+#: models.py:169 models.py:226 models.py:250 models.py:316
 msgid "Order"
 msgstr "Ordem"
 
-#: models.py:199
+#: models.py:172
+msgid "Post related"
+msgstr "Notícia relacionada"
+
+#: models.py:173
+msgid "Post relateds"
+msgstr "Notícias relacionadas"
+
+#: models.py:181
+msgid "Album"
+msgstr "Album"
+
+#: models.py:182
+msgid "Albums"
+msgstr "Albuns"
+
+#: models.py:189
+msgid "URL"
+msgstr "URL"
+
+#: models.py:197
+msgid "Link"
+msgstr "Link"
+
+#: models.py:198
+msgid "Links"
+msgstr "Links"
+
+#: models.py:205
+msgid "URL field is required."
+msgstr "Campo de URL é obrigatório."
+
+#: models.py:224
+msgid "Source"
+msgstr "Origem"
+
+#: models.py:229
+msgid "Article source"
+msgstr "Artigos"
+
+#: models.py:230
+msgid "Article sources"
+msgstr "Artigos"
+
+#: models.py:246
 msgid "Image"
 msgstr "Imagem"
 
-#: models.py:220
+#: models.py:253
+msgid "Article image"
+msgstr "Artigo"
+
+#: models.py:254
+msgid "Article images"
+msgstr "Articles"
+
+#: models.py:277
 msgid "Query Set"
 msgstr "Query Set"
 
-#: models.py:243
+#: models.py:281
+msgid "Article box"
+msgstr "Box de Artigo"
+
+#: models.py:282
+msgid "Articles boxes"
+msgstr "Box de Artigo"
+
+#: models.py:307
 msgid "Article Box"
 msgstr "Box de Artigo"
 
-#: models.py:260
+#: models.py:320
+msgid "Article box articles"
+msgstr "Box de Artigo"
+
+#: models.py:321
+msgid "Article boxes articles"
+msgstr "Box de Artigo"
+
+#: models.py:329
 msgid "Article not published!"
 msgstr "Artigo não publicado!"
 
-#: models.py:263
+#: models.py:332
 msgid "Article date available is greater than today!"
 msgstr "Data de publicação é maior que a data de hoje!"
+
+#: models.py:342
+msgid "Article config"
+msgstr "Box de Artigo"
+
+#: models.py:343
+msgid "Article configs"
+msgstr "Artigos"
