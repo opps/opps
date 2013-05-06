@@ -136,6 +136,21 @@ class OppsList(OppsView, ListView):
 
 class OppsDetail(OppsView, DetailView):
 
+    def get_template_names(self):
+        names = []
+        domain_folder = self.get_template_folder()
+
+        names.append('{}/{}/{}.html'.format(
+            domain_folder, self.long_slug, self.slug))
+        names.append('{}/{}.html'.format(domain_folder, self.long_slug))
+
+        try:
+            names = names + super(OppsDetail, self).get_template_names()
+        except ImproperlyConfigured:
+            pass
+
+        return names
+
     @property
     def queryset(self):
         self.site = get_current_site(self.request)
