@@ -77,12 +77,15 @@ class Article(Publishable, Slugged):
         ordering = ['-date_available', 'title', 'channel_long_slug']
         verbose_name = _('Article')
         verbose_name_plural = _('Articles')
-        unique_together = ("site", "child_class", "channel_long_slug", "slug")
+        unique_together = ["site", "child_class", "channel_long_slug", "slug"]
 
     def save(self, *args, **kwargs):
         self.channel_name = self.channel.name
         self.channel_long_slug = self.channel.long_slug
         self.child_class = self.__class__.__name__
+
+        models.signals.post_save.connect(shorturl_generate,
+                                         sender=self.__class__)
         super(Article, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -346,12 +349,5 @@ class ArticleConfig(BaseConfig):
         verbose_name_plural = _('Article configs')
 
 
-child_class = [cc.child_class for cc in
-               Article.objects.annotate(Count('child_class', distinct=True))]
-articles_all_related_objs = [a.model for a in
-                             Article._meta.get_all_related_objects()
-                             if a.model.__name__ in child_class]
-for m in articles_all_related_objs:
-    models.signals.post_save.connect(shorturl_generate, sender=m)
 models.signals.post_save.connect(redirect_generate, sender=Link)
 models.signals.post_delete.connect(delete_article, sender=Article)
