@@ -3,6 +3,7 @@ from django.contrib import admin
 from django import forms
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.admin import SimpleListFilter
 
 from .models import Post, Album, Article, Link, ArticleSource, ArticleImage
 from .models import ArticleBox, ArticleBoxArticles, ArticleConfig, PostRelated
@@ -137,6 +138,41 @@ class LinkAdmin(ArticleAdmin):
     )
 
 
+class HasQuerySet(SimpleListFilter):
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = _(u'Has queryset')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'hasqueryset'
+
+    def lookups(self, request, model_admin):
+        """
+        Returns a list of tuples. The first element in each
+        tuple is the coded value for the option that will
+        appear in the URL query. The second element is the
+        human-readable name for the option that will appear
+        in the right sidebar.
+        """
+        return (
+            ('no', _(u'No')),
+            ('yes', _(u'Yes'))
+        )
+
+    def queryset(self, request, queryset):
+        """
+        Returns the filtered queryset based on the value
+        provided in the query string and retrievable via
+        `self.value()`.
+        """
+        if self.value() == "no":
+            queryset = queryset.filter(queryset__isnull=True)
+        elif self.value() == 'yes':
+            queryset = queryset.filter(queryset__isnull=False)
+
+        return queryset
+
+
 class ArticleBoxAdmin(BaseBoxAdmin):
     inlines = [ArticleBoxArticlesInline]
     raw_id_fields = ['channel', 'article', 'queryset']
@@ -160,6 +196,12 @@ class ArticleBoxAdmin(BaseBoxAdmin):
         else:
             return ['name', 'channel_name', 'date_available',
                     'published']
+
+    def get_list_filter(self, request):
+        list_filter = super(ArticleBoxAdmin, self).list_filter
+        if request.user.is_superuser:
+            list_filter = [HasQuerySet] + list_filter
+        return list_filter
 
     def is_dynamic(self, obj):
         if obj.queryset:
