@@ -51,7 +51,6 @@ class Slugged(models.Model):
         _(u"URL"),
         db_index=True,
         max_length=150,
-        unique=True,
     )
 
     def clean(self):
@@ -92,6 +91,7 @@ class Slugged(models.Model):
         super(Slugged, self).save(*args, **kwargs)
 
     class Meta:
+        unique_together = ['site', 'slug']
         abstract = True
 
 
