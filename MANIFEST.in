@@ -1,1 +1,11 @@
 include README.md
+include opps/images/templates/admin/opps/images/*
+include opps/articles/templates/articles/include/*
+include opps/articles/templates/articles/*
+include opps/channels/templates/channels/include/*
+include opps/channels/templates/channels/*
+include opps/boxes/templates/boxes/*
+include opps/core/templates/*
+include opps/flatpages/templates/flatpages/*
+include opps/sitemaps/templates/*
+
