@@ -5,9 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 
 from taggit.managers import TaggableManager
-from googl.short import GooglUrlShort
 
-from .signals import redirect_generate, delete_article
+from .signals import redirect_generate, shorturl_generate, delete_article
 from opps.core.models import Publishable, BaseBox, BaseConfig
 from opps.core.models import Slugged
 
@@ -80,9 +79,6 @@ class Article(Publishable, Slugged):
         unique_together = ("site", "child_class", "channel_long_slug", "slug")
 
     def save(self, *args, **kwargs):
-        if not self.short_url:
-            self.short_url = GooglUrlShort(self.get_http_absolute_url())\
-                .short()
         self.channel_name = self.channel.name
         self.channel_long_slug = self.channel.long_slug
         self.child_class = self.__class__.__name__
@@ -348,5 +344,9 @@ class ArticleConfig(BaseConfig):
         verbose_name_plural = _('Article configs')
 
 
+articles_all_related_objs = [a.model for a in
+                             Article._meta.get_all_related_objects()]
+for m in articles_all_related_objs:
+    models.signals.post_save.connect(shorturl_generate, sender=m)
 models.signals.post_save.connect(redirect_generate, sender=Link)
 models.signals.post_delete.connect(delete_article, sender=Article)
