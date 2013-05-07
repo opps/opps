@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.db.models import Count
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
@@ -203,7 +204,7 @@ class Link(Article):
         verbose_name_plural = _('Links')
 
     def get_absolute_url(self):
-        return self.url or "/link/{}/{}".format(
+        return "/link/{}/{}".format(
             self.channel_long_slug,
             self.slug
         )
@@ -212,8 +213,9 @@ class Link(Article):
         if not self.url and not self.articles:
             raise ValidationError(_('URL field is required.'))
 
+        self.url = self.url
         if self.articles:
-            self.url = self.articles.get_http_absolute_url()
+            self.url = self.articles.get_absolute_url()
 
 
 class ArticleSource(models.Model):
@@ -344,8 +346,11 @@ class ArticleConfig(BaseConfig):
         verbose_name_plural = _('Article configs')
 
 
+child_class = [cc.child_class for cc in
+               Article.objects.annotate(Count('child_class', distinct=True))]
 articles_all_related_objs = [a.model for a in
-                             Article._meta.get_all_related_objects()]
+                             Article._meta.get_all_related_objects()
+                             if a.model.__name__ in child_class]
 for m in articles_all_related_objs:
     models.signals.post_save.connect(shorturl_generate, sender=m)
 models.signals.post_save.connect(redirect_generate, sender=Link)
