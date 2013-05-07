@@ -34,7 +34,7 @@ class Image(Publishable):
                             db_index=True)
     image = models.ImageField(upload_to=get_file_path)
     description = models.TextField(_(u"Description"), null=True, blank=True)
-    tags = TaggableManager(blank=True, through=TaggedImage)
+    tags = TaggableManager(blank=True, through=TaggedImage, verbose_name=u'Tags')
 
     source = models.ForeignKey('sources.Source', null=True, blank=True)
 

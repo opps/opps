@@ -68,7 +68,7 @@ class Article(Publishable, Slugged):
         null=True, blank=True,
         through='articles.ArticleSource',
     )
-    tags = TaggableManager(blank=True)
+    tags = TaggableManager(blank=True, verbose_name=u'Tags')
 
     def __unicode__(self):
         return u"{}".format(self.get_absolute_url())
