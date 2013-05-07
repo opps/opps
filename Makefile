@@ -29,6 +29,16 @@ clean:
 	@find ./ -name 'Thumbs.db' -exec rm -f {} \;
 	@find ./ -name '*~' -exec rm -f {} \;
 
+.PHONY: makemessages
+makemessages:
+	for resource in articles boxes channels core flatpages images search sitemaps sources; do\
+	    echo "make $$resource";\
+	    cd opps/$$resource;\
+		django-admin.py makemessages -l en_US;\
+		cd ../../;\
+	done
+
+
 .PHONY: tx
 tx:
 	for resource in articles boxes channels core flatpages images search sitemaps sources; do\
