@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-04 13:50-0300\n"
+"POT-Creation-Date: 2013-05-07 15:25-0300\n"
 "PO-Revision-Date: 2013-04-23 15:51+0000\n"
 "Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: __init__.py:5 models.py:19
+#: __init__.py:5 models.py:17
 msgid "Sources"
 msgstr "Sources"
 
@@ -39,18 +39,17 @@ msgid "Name"
 msgstr "Name"
 
 #: models.py:11
-msgid "Slug"
-msgstr "Slug"
-
-#: models.py:13
 msgid "URL"
 msgstr "URL"
 
-#: models.py:14
+#: models.py:12
 msgid "Feed URL"
 msgstr "Feed URL"
 
-#: models.py:18
+#: models.py:16
 #, fuzzy
 msgid "Source"
 msgstr "Sources"
+
+#~ msgid "Slug"
+#~ msgstr "Slug"

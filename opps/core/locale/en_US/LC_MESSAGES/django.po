@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-04 13:49-0300\n"
+"POT-Creation-Date: 2013-05-07 15:25-0300\n"
 "PO-Revision-Date: 2013-04-23 15:38+0000\n"
 "Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,7 +66,7 @@ msgstr "Published"
 msgid "URL"
 msgstr ""
 
-#: models.py:71
+#: models.py:70
 msgid "The URL already exists as a redirect"
 msgstr ""
 
