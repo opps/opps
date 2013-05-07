@@ -28,7 +28,12 @@ class Channel(MPTTModel, Publishable, Slugged):
     description = models.CharField(_(u"Description"),
                                    max_length=255, null=True, blank=True)
     show_in_menu = models.BooleanField(_(u"Show in menu?"), default=False)
-    homepage = models.BooleanField(_(u"Is home page?"), default=False)
+    homepage = models.BooleanField(
+        _(u"Is home page?"),
+        default=False,
+        help_text=_(u'Check only if this channel is the homepage.'
+                    u' Should have only one homepage per site')
+    )
     group = models.BooleanField(_(u"Group sub-channel?"), default=False)
     order = models.IntegerField(_(u"Order"), default=0)
     parent = TreeForeignKey('self', related_name='subchannel',
