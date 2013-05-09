@@ -20,7 +20,7 @@ def _prepend_media_url(url):
     if url.startswith(settings.MEDIA_URL):
         url = _remove_prefix(url, settings.MEDIA_URL)
         url.lstrip('/')
-        return u'{}/{}'.format(settings.THUMBOR_MEDIA_URL, url)
+        return '%s/%s' % (settings.THUMBOR_MEDIA_URL, url)
     return url
 
 
@@ -32,4 +32,4 @@ def image_url(image_url, **kwargs):
                                     **dict(settings.THUMBOR_ARGUMENTS,
                                            **kwargs)).strip('/')
 
-    return u'{}/{}'.format(settings.THUMBOR_SERVER, encrypted_url)
+    return '%s/%s' % (settings.THUMBOR_SERVER, encrypted_url)
