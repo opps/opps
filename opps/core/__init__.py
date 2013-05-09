@@ -63,6 +63,7 @@ class ThumborConf(AppConf):
     SERVER = 'http://localhost:8888'
     MEDIA_URL = 'http://localhost:8000/media'
     SECURITY_KEY = ''
+    ARGUMENTS = {}
 
     class Meta:
         prefix = 'thumbor'
