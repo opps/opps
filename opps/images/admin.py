@@ -5,10 +5,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.sites.models import get_current_site
 from django.contrib.admin import SimpleListFilter
 
-from django_thumbor import generate_url
-
 from .models import Image
 from .forms import ImageModelForm
+from .generate import image_url
 from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
 
@@ -89,7 +88,7 @@ class ImagesAdmin(PublishableAdmin):
     def image_thumb(self, obj):
         if obj.image:
             return u'<img width="60px" height="60px" src="{0}" />'.format(
-                generate_url(obj.image.url, width=60, height=60))
+                image_url(obj.image.url, width=60, height=60))
         return _(u'No Image')
     image_thumb.short_description = _(u'Thumbnail')
     image_thumb.allow_tags = True

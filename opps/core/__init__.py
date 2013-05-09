@@ -76,7 +76,6 @@ class DjangoConf(AppConf):
 
 settings.INSTALLED_APPS += (
     'appconf',
-    'django_thumbor',
     'haystack',
     'googl',
     'redactor',
