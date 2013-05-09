@@ -10,7 +10,7 @@ install_requires = ["django",
                     "south>=0.7",
                     "Pillow==1.7.8",
                     "thumbor",
-                    'django-thumbor',
+                    'libthumbor',
                     "django-googl==0.1.1",
                     "django-taggit",
                     "django-wysiwyg-redactor==0.3.1",
@@ -22,9 +22,7 @@ install_requires = ["django",
 dependency_links = ['http://github.com/avelino/django-googl/tarball/master'
                     '#egg=django-googl',
                     'https://github.com/jmoiron/johnny-cache/tarball/master'
-                    '#egg=johnny-cache',
-                    'http://github.com/avelino/django-thumbor/tarball/master'
-                    '#egg=django-thumbor']
+                    '#egg=johnny-cache']
 
 classifiers = ["Development Status :: 4 - Beta",
                "Intended Audience :: Developers",
