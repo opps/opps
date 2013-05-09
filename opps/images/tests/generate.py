@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from mock import patch
 from unittest import TestCase
 from django.template import Template, Context
 
 
-class TestThumborURLTTagMock(TestCase):
+class TestImagesTags(TestCase):
     url = 'oppsproject.org/path/image.jpg'
     generate_url_path = 'opps.images.templatetags.images_tags.image_url'
 
@@ -14,6 +13,9 @@ class TestThumborURLTTagMock(TestCase):
         template = Template(source)
         rendered = template.render(Context({'url': self.url}))
         return rendered.strip()
+
+    def test_templatetag_return(self):
+        self.assertTrue(self.render(u'url unsafe=True'))
 
     def test_should_pass_the_image_url_arg_to_the_helper(self):
         self.assertEqual(self.render(u'url unsafe=True'),
