@@ -50,6 +50,12 @@ class Article(Publishable, Slugged):
         null=True, blank=True,
         db_index=True
     )
+    child_app_label = models.CharField(
+        _(u'Child app label'),
+        max_length=30,
+        null=True, blank=True,
+        db_index=True
+    )
     main_image = models.ForeignKey(
         'images.Image',
         null=True, blank=False,
@@ -82,12 +88,19 @@ class Article(Publishable, Slugged):
         self.channel_name = self.channel.name
         self.channel_long_slug = self.channel.long_slug
         self.child_class = self.__class__.__name__
+        self.child_app_label = self._meta.app_label
 
         models.signals.post_save.connect(shorturl_generate,
                                          sender=self.__class__)
         super(Article, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
+        """
+        TODO: get_absolute_url from child_app_label/child_class
+        """
+        if self.child_class != "Post":
+            return "/{}/{}/{}".format(self.child_class.lower(),
+                                      self.channel_long_slug, self.slug)
         return "/{}/{}".format(self.channel_long_slug, self.slug)
 
     def get_thumb(self):
