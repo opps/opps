@@ -10,9 +10,9 @@ from .models import ArticleBox, ArticleBoxArticles, ArticleConfig, PostRelated
 from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
 from opps.core.admin import BaseBoxAdmin
+from opps.images.generate import image_url
 
 from redactor.widgets import RedactorEditor
-from django_thumbor import generate_url
 
 
 class ArticleImageInline(admin.TabularInline):
@@ -221,7 +221,7 @@ class HideArticleAdmin(PublishableAdmin):
     def image_thumb(self, obj):
         if obj.main_image:
             return u'<img width="60px" height="60px" src="{0}" />'.format(
-                generate_url(obj.main_image.image.url, width=60, height=60))
+                image_url(obj.main_image.image.url, width=60, height=60))
         return _(u'No Image')
     image_thumb.short_description = _(u'Thumbnail')
     image_thumb.allow_tags = True
