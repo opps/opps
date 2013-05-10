@@ -20,9 +20,11 @@ def image_obj(image, **kwargs):
     if getattr(image, 'flop'):
         new['flop'] = image.flop
     if getattr(image, 'halign'):
-        new['halign'] = image.halign
+        if image.halign:
+            new['halign'] = image.halign
     if getattr(image, 'valign'):
-        new['valign'] = image.valign
+        if image.valign:
+            new['valign'] = image.valign
     if getattr(image, 'fit_in'):
         new['fit_in'] = image.fit_in
     if getattr(image, 'smart'):
