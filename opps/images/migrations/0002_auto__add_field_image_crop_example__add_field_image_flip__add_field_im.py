@@ -46,8 +46,6 @@ class Migration(SchemaMigration):
                       self.gf('django.db.models.fields.BooleanField')(default=False),
                       keep_default=False)
 
-        db.create_unique(u'images_image', ['site_id', 'slug'])
-
 
     def backwards(self, orm):
         # Deleting field 'Image.crop_example'
