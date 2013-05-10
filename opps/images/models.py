@@ -36,7 +36,6 @@ def get_file_path(instance, filename):
 class TaggedImage(TaggedItemBase):
     """Tag for images """
     content_object = models.ForeignKey('images.Image')
-    pass
 
 
 class Cropping(models.Model):
