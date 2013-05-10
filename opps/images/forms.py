@@ -3,11 +3,12 @@
 from django import forms
 
 from .models import Image
-from .widgets import MultipleUpload
+from .widgets import MultipleUpload, CropExample
 
 
 class ImageModelForm(forms.ModelForm):
-    image = forms.FileField(required=False, widget=MultipleUpload())
+    image = forms.FileField(required=True, widget=MultipleUpload())
+    crop_example = forms.CharField(required=False, widget=CropExample())
 
     class Meta:
         model = Image
