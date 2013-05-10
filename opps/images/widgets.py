@@ -12,3 +12,12 @@ class MultipleUpload(forms.FileInput):
         return render_to_string("admin/opps/images/multiupload.html",
                                 {"name": name, "value": _value,
                                  "STATIC_URL": settings.STATIC_URL})
+
+class CropExample(forms.TextInput):
+
+    def render(self, name, value, attrs=None):
+        return render_to_string(
+            "admin/opps/images/cropexample.html",
+            {"name": name, "value": value,
+             "THUMBOR_SERVER": settings.THUMBOR_SERVER,
+             "THUMBOR_MEDIA_URL": settings.THUMBOR_MEDIA_URL})
