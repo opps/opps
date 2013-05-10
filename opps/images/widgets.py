@@ -17,6 +17,8 @@ class MultipleUpload(forms.FileInput):
 class CropExample(forms.TextInput):
 
     def render(self, name, value, attrs=None):
+        if u'http' not in value:
+            value = u"{}{}".format(settings.THUMBOR_MEDIA_URL, value)
         return render_to_string(
             "admin/opps/images/cropexample.html",
             {"name": name, "value": value,
