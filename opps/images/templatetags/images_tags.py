@@ -15,14 +15,18 @@ def image_url(image_url, **kwargs):
 @register.simple_tag
 def image_obj(image, **kwargs):
     new = {}
-    new['flip'] = image.flip
-    new['flop'] = image.flop
-    if image.halign:
+    if getattr(image, 'flip'):
+        new['flip'] = image.flip
+    if getattr(image, 'flop'):
+        new['flop'] = image.flop
+    if getattr(image, 'halign'):
         new['halign'] = image.halign
-    if image.valign:
+    if getattr(image, 'valign'):
         new['valign'] = image.valign
-    new['fit_in'] = image.fit_in
-    new['smart'] = image.smart
+    if getattr(image, 'fit_in'):
+        new['fit_in'] = image.fit_in
+    if getattr(image, 'smart'):
+        new['smart'] = image.smart
 
     kwargs = dict(new, **kwargs)
     return url(image_url=image.image.url, **kwargs)
