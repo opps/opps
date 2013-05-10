@@ -1,0 +1,28 @@
+<div id="crop_example-container">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+    $(function(){
+      var check_url = function() {
+        var src = "{{ THUMBOR_SERVER }}/unsafe/";
+        var l = "800", r = "600"
+        if ($("#id_fit_in").is(':checked')) { src += 'fit-in/'; }
+        if ($("#id_flip").is(':checked')) { l = '-' + l; }
+        if ($("#id_flop").is(':checked')) { r = '-' + r; }
+        src += l + "x" + r + "/";
+        if ($("#id_halign").val()) { src += $("#id_halign").val() + '/'; }
+        if ($("#id_valign").val()) { src += $("#id_valign").val() + '/'; }
+        if ($("#id_smart").is(':checked')) { src += 'smart/'; }
+
+        img = "{{ THUMBOR_MEDIA_URL }}/" + $("#image").attr('value')
+        console.log(src+img)
+        $("#crop_example").attr('src', src + img)
+      }
+      $("#id_meta, #id_flip, #id_flop, #id_fit_in, #id_smart, #id_halign, #id_valign").change(function(){
+        check_url();
+      });
+      check_url();
+    
+    });
+  </script>
+  <img id="crop_example" />
+</div>
