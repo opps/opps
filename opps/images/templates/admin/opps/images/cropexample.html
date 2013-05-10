@@ -14,7 +14,9 @@
         if ($("#id_smart").is(':checked')) { src += 'smart/'; }
 
         img = $("#image").attr('value')
-        console.log(src+img)
+        if (img.split('http').length == 1){
+          img = '{{ THUMBOR_MEDIA_URL }}' + img;
+        }
         $("#crop_example").attr('src', src + img)
       }
       $("#id_meta, #id_flip, #id_flop, #id_fit_in, #id_smart, #id_halign, #id_valign").change(function(){
