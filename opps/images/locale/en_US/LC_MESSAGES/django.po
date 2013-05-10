@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-07 15:25-0300\n"
+"POT-Creation-Date: 2013-05-10 15:04-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,46 +17,128 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: __init__.py:5 models.py:43
+#: __init__.py:5 models.py:98
 msgid "Images"
 msgstr ""
 
-#: admin.py:21
+#: admin.py:20
 msgid "User"
 msgstr ""
 
-#: admin.py:67
+#: admin.py:66
 msgid "Identification"
 msgstr ""
 
-#: admin.py:69
-msgid "Content"
+#: admin.py:68
+msgid "Crop"
 msgstr ""
 
 #: admin.py:71
+msgid "Content"
+msgstr ""
+
+#: admin.py:73
 msgid "Publication"
 msgstr ""
 
-#: admin.py:93
+#: admin.py:95
 msgid "No Image"
 msgstr ""
 
-#: admin.py:94
+#: admin.py:96
 msgid "Thumbnail"
 msgstr ""
 
-#: models.py:32
-msgid "Title"
+#: models.py:17
+msgid "Left"
 msgstr ""
 
-#: models.py:33
-msgid "Slug"
+#: models.py:18
+msgid "Center"
 msgstr ""
 
-#: models.py:36
-msgid "Description"
+#: models.py:19
+msgid "Right"
+msgstr ""
+
+#: models.py:22
+msgid "Top"
+msgstr ""
+
+#: models.py:23
+msgid "Middle"
+msgstr ""
+
+#: models.py:24
+msgid "Bottom"
 msgstr ""
 
 #: models.py:42
+msgid "Crop Example"
+msgstr ""
+
+#: models.py:44
+msgid "Flip"
+msgstr ""
+
+#: models.py:45
+msgid ""
+"Flag that indicates that thumbor should flip horizontally (on the vertical "
+"axis) the image"
+msgstr ""
+
+#: models.py:49
+msgid "Flop"
+msgstr ""
+
+#: models.py:50
+msgid ""
+"Flag that indicates that thumbor should flip vertically (on the horizontal "
+"axis) the image"
+msgstr ""
+
+#: models.py:54
+msgid "Horizontal Align"
+msgstr ""
+
+#: models.py:58
+msgid "Horizontal alignment that thumbor should use for cropping"
+msgstr ""
+
+#: models.py:60
+msgid "Vertical Align"
+msgstr ""
+
+#: models.py:64
+msgid "Vertical alignment that thumbor should use for cropping"
+msgstr ""
+
+#: models.py:67
+msgid "Fit in"
+msgstr ""
+
+#: models.py:68
+msgid ""
+"flag that indicates that thumbor should fit the image in the box defined by "
+"width x height"
+msgstr ""
+
+#: models.py:73
+msgid "Smart"
+msgstr ""
+
+#: models.py:74
+msgid "Flag that indicates thatthumbor should use smart cropping;"
+msgstr ""
+
+#: models.py:88
+msgid "Title"
+msgstr ""
+
+#: models.py:90
+msgid "Description"
+msgstr ""
+
+#: models.py:97
 msgid "Image"
 msgstr ""
