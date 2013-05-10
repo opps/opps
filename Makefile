@@ -1,6 +1,6 @@
 
 .PHONY: test
-test:
+test: pep8
 	DJANGO_SETTINGS_MODULE=tests.settings \
 	django-admin.py test core articles boxes channels images sources sitemaps flatpages
 

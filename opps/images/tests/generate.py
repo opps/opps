@@ -9,7 +9,7 @@ class TestImagesTags(TestCase):
     generate_url_path = 'opps.images.templatetags.images_tags.image_url'
 
     def render(self, arguments):
-        source = u'{% load images_tags %}{% image_url '+ arguments +' %}'
+        source = u'{% load images_tags %}{% image_url ' + arguments + ' %}'
         template = Template(source)
         rendered = template.render(Context({'url': self.url}))
         return rendered.strip()

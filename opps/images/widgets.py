@@ -13,6 +13,7 @@ class MultipleUpload(forms.FileInput):
                                 {"name": name, "value": _value,
                                  "STATIC_URL": settings.STATIC_URL})
 
+
 class CropExample(forms.TextInput):
 
     def render(self, name, value, attrs=None):

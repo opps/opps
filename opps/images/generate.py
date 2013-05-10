@@ -6,6 +6,7 @@ from django.conf import settings
 
 crypto = CryptoURL(key=settings.THUMBOR_SECURITY_KEY)
 
+
 def _remove_prefix(url, prefix):
     if url.startswith(prefix):
         return url[len(prefix):]

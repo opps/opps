@@ -41,7 +41,7 @@ class TaggedImage(TaggedItemBase):
 
 class Cropping(models.Model):
     crop_example = models.CharField(_(u"Crop Example"), max_length=140,
-                                   null=True, blank=True)
+                                    null=True, blank=True)
     flip = models.BooleanField(_(u'Flip'), default=False,
                                help_text=_(u'Flag that indicates that '
                                            u'thumbor should flip '
@@ -66,10 +66,10 @@ class Cropping(models.Model):
                                           u'thumbor should use for cropping'))
 
     fit_in = models.BooleanField(_(u'Fit in'), default=False,
-                               help_text=_(u'flag that indicates that '
-                                           u'thumbor should fit the image in '
-                                           u'the box defined by width x '
-                                           u'height'))
+                                 help_text=_(u'flag that indicates that '
+                                             u'thumbor should fit the image '
+                                             u'in the box defined by width x '
+                                             u'height'))
 
     smart = models.BooleanField(_(u'Smart'), default=False,
                                 help_text=_(u'Flag that indicates that'
@@ -89,7 +89,8 @@ class Image(Publishable, Slugged, Cropping):
     title = models.CharField(_(u"Title"), max_length=140, db_index=True)
     image = models.ImageField(upload_to=get_file_path)
     description = models.TextField(_(u"Description"), null=True, blank=True)
-    tags = TaggableManager(blank=True, through=TaggedImage, verbose_name=u'Tags')
+    tags = TaggableManager(blank=True, through=TaggedImage,
+                           verbose_name=u'Tags')
 
     source = models.ForeignKey('sources.Source', null=True, blank=True)
 
