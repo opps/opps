@@ -64,7 +64,7 @@ class Cropping(models.Model):
                               help_text=_(u'Vertical alignment that '
                                           u'thumbor should use for cropping'))
 
-    fit_in = models.BooleanField(_(u'Fit in'), default=False,
+    fit_in = models.BooleanField(_(u'Fit in'), default=True,
                                  help_text=_(u'flag that indicates that '
                                              u'thumbor should fit the image '
                                              u'in the box defined by width x '
