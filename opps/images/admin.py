@@ -65,6 +65,9 @@ class ImagesAdmin(PublishableAdmin):
     fieldsets = (
         (_(u'Identification'), {
             'fields': ('site', 'title', 'slug', 'image')}),
+        (_(u'Crop'), {
+            'fields': ('meta', 'flip', 'flop', 'halign', 'valign', 'fit_in',
+                       'smart', 'crop_example')}),
         (_(u'Content'), {
             'fields': ('description', 'tags', 'source')}),
         (_(u'Publication'), {
