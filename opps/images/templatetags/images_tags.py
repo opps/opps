@@ -13,7 +13,7 @@ def image_url(image_url, **kwargs):
 
 
 @register.simple_tag
-def image_obj(image, **kwargs):
+def image_obj(image):
     new = {}
     new['flip'] = image.flip
     new['flop'] = image.flop
@@ -24,5 +24,4 @@ def image_obj(image, **kwargs):
     new['fit_in'] = image.fit_in
     new['smart'] = image.smart
 
-    kwargs = dict(new, **kwargs)
-    return url(image_url=image.image.url, **kwargs)
+    return url(image_url=image.image.url, **new)
