@@ -4,7 +4,7 @@ from unittest import TestCase
 from django.template import Template, Context
 
 
-class TestImagesTags(TestCase):
+class TestImagesTagsImageUrl(TestCase):
     url = 'oppsproject.org/path/image.jpg'
     generate_url_path = 'opps.images.templatetags.images_tags.image_url'
 
