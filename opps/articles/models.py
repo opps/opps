@@ -339,6 +339,9 @@ class ArticleBoxArticles(models.Model):
         verbose_name=_(u'Article'),
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
+    date_available = models.DateTimeField(_(u"Date available"),
+                                          default=timezone.now, null=True)
+    date_end = models.DateTimeField(_(u"End date"), null=True, blank=True)
 
     class Meta:
         ordering = ('order',)
