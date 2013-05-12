@@ -307,7 +307,14 @@ class ArticleBox(BaseBox):
         verbose_name_plural = _('Articles boxes')
 
     def ordered_articles(self, field='order'):
-        return self.articles.order_by('articleboxarticles_articles__order')
+        now = timezone.now()
+        qs = self.articles.filter(
+            articleboxarticles_articles__date_available__lte=now
+        ).filter(
+            models.Q(articleboxarticles_articles__date_end__gte=now) |\
+            models.Q(articleboxarticles_articles__date_end__isnull=True)
+        )
+        return qs.order_by('articleboxarticles_articles__order')
 
     def get_queryset(self):
         """
