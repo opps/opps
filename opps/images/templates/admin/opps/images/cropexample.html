@@ -11,8 +11,8 @@
         if (django.jQuery("#id_flip").is(':checked')) { l = '-' + l; }
         if (django.jQuery("#id_flop").is(':checked')) { r = '-' + r; }
         src += l + "x" + r + "/";
-        if (django.jQuery("#id_halign").val()) { src += $("#id_halign").val() + '/'; }
-        if (django.jQuery("#id_valign").val()) { src += $("#id_valign").val() + '/'; }
+        if (django.jQuery("#id_halign").val()) { src += django.jQuery("#id_halign").val() + '/'; }
+        if (django.jQuery("#id_valign").val()) { src += django.jQuery("#id_valign").val() + '/'; }
         if (django.jQuery("#id_smart").is(':checked')) { src += 'smart/'; }
 
         img = django.jQuery("#imageExample").attr('src')
@@ -33,7 +33,7 @@
         x1: django.jQuery("#id_crop_x1").val(),
         x2: django.jQuery("#id_crop_x2").val(),
         y1: django.jQuery("#id_crop_y1").val(),
-        y2: $("#id_crop_y2").val(),
+        y2: django.jQuery("#id_crop_y2").val(),
         onSelectEnd: function (img, selection) {
           if (selection.height == 0 && selection.width == 0) {
             django.jQuery("#id_crop_x1").val(0)
