@@ -18,5 +18,6 @@ class CropExample(forms.TextInput):
         return render_to_string(
             "admin/opps/images/cropexample.html",
             {"name": name, "value": value,
+             'STATIC_URL': settings.STATIC_URL,
              "THUMBOR_SERVER": settings.THUMBOR_SERVER,
              "THUMBOR_MEDIA_URL": settings.THUMBOR_MEDIA_URL})
