@@ -162,6 +162,31 @@ def apply_rules(admin_class, app):
         if to_apply:
             setattr(admin_class, attr, to_apply)
 
+    field_overrides = rules.get('field_overrides')
+    """
+    Allow field attr overrides before form is rendered
+    'images.ImagesAdmin': {
+        'field_overrides': {
+            "slug": {"help_text": "banana"}
+        }
+    }
+    """
+    if field_overrides:
+        def get_form(self, request, obj=None, **kwargs):
+            form = super(self.__class__, self)\
+                .get_form(request, obj, **kwargs)
+            if hasattr(form, 'base_fields'):
+                for field, attrs in field_overrides.iteritems():
+                    for attr, value in attrs.iteritems():
+                        if isinstance(value, (str, unicode)):
+                            value = _(value)
+                        try:
+                            setattr(form.base_fields[field], attr, value)
+                        except:
+                            pass  # KeyError base_fields[field]
+            return form
+        admin_class.get_form = get_form
+
     # TODO:
     # form
     # inlines

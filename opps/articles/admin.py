@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django import forms
+from django.utils import timezone
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
@@ -44,7 +45,7 @@ class ArticleBoxArticlesInline(admin.TabularInline):
     extra = 1
     fieldsets = [(None, {
         'classes': ('collapse',),
-        'fields': ('article', 'order')})]
+        'fields': ('article', 'order', 'date_available', 'date_end')})]
 
 
 class PostAdminForm(forms.ModelForm):
@@ -189,6 +190,16 @@ class ArticleBoxAdmin(BaseBoxAdmin):
             'fields': ('published', 'date_available')}),
     )
 
+    def clean_ended_entries(self, request, queryset):
+        now = timezone.now()
+        for box in queryset:
+            ended = box.articleboxarticles_articleboxes.filter(
+                date_end__lt=now
+            )
+            if ended:
+                ended.delete()
+    clean_ended_entries.short_description = _(u'Clean ended articles')
+
     def get_list_display(self, request):
         if request.user.is_superuser:
             return ['name', 'channel_name', 'date_available',
@@ -210,6 +221,8 @@ class ArticleBoxAdmin(BaseBoxAdmin):
             return False
     is_dynamic.short_description = _(u'Dynamic')
     is_dynamic.boolean = True
+
+    actions = ('clean_ended_entries',)
 
 
 class HideArticleAdmin(PublishableAdmin):
