@@ -1,6 +1,20 @@
 <div id="crop_example-container">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>
+  <script type="text/javascript">
+    /**
+     * Load jQuery Only If Not Present
+     **/
+    if(!(window.jQuery || $)) {
+      var s = document.createElement('script');
+      s.setAttribute('src', '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js');
+      s.setAttribute('type', 'text/javascript');
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  </script>
+
+  <script src="{{ STATIC_URL }}admin/opps/images/js/jquery.imgareaselect.pack.js"></script>
+  <link href="{{ STATIC_URL }}admin/opps/images/css/imgareaselect-default.css" rel="stylesheet" type="text/css" />
+
+  <script type="text/javascript">
     $(function(){
       var check_url = function() {
         var src = "{{ THUMBOR_SERVER }}/unsafe/";
@@ -23,7 +37,33 @@
         check_url();
       });
       check_url();
-    
+
+      $('img#crop_example').imgAreaSelect({
+        handles: true,
+        instance: true,
+        x1: $("#id_crop_x1").val(),
+        x2: $("#id_crop_x2").val(),
+        y1: $("#id_crop_y1").val(),
+        y2: $("#id_crop_y2").val(),
+        onSelectEnd: function (img, selection) {
+          if (selection.height == 0 && selection.width == 0) {
+            $("#id_crop_x1").val(0)
+            $("#id_crop_x2").val(0)
+            $("#id_crop_y1").val(0)
+            $("#id_crop_y2").val(0)
+          } else {
+            $("#id_crop_x1").val(selection.x1)
+            $("#id_crop_x2").val(selection.x2)
+            $("#id_crop_y1").val(selection.y1)
+            $("#id_crop_y2").val(selection.y2)
+          }
+        }
+      });
+      $(".field-crop_x1").hide()
+      $(".field-crop_x2").hide()
+      $(".field-crop_y1").hide()
+      $(".field-crop_y2").hide()
+
     });
   </script>
   <img id="crop_example" />
