@@ -9,6 +9,10 @@ from .widgets import MultipleUpload, CropExample
 class ImageModelForm(forms.ModelForm):
     image = forms.FileField(required=True, widget=MultipleUpload())
     crop_example = forms.CharField(required=False, widget=CropExample())
+    crop_x1 = forms.CharField(required=False, widget=forms.HiddenInput())
+    crop_x2 = forms.CharField(required=False, widget=forms.HiddenInput())
+    crop_y1 = forms.CharField(required=False, widget=forms.HiddenInput())
+    crop_y2 = forms.CharField(required=False, widget=forms.HiddenInput())
 
     class Meta:
         model = Image
