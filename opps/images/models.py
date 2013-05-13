@@ -41,6 +41,14 @@ class TaggedImage(TaggedItemBase):
 class Cropping(models.Model):
     crop_example = models.CharField(_(u"Crop Example"), max_length=140,
                                     null=True, blank=True)
+    crop_x1 = models.PositiveSmallIntegerField(default=0, null=True,
+                                               blank=True)
+    crop_x2 = models.PositiveSmallIntegerField(default=0, null=True,
+                                               blank=True)
+    crop_y1 = models.PositiveSmallIntegerField(default=0, null=True,
+                                               blank=True)
+    crop_y2 = models.PositiveSmallIntegerField(default=0, null=True,
+                                               blank=True)
     flip = models.BooleanField(_(u'Flip'), default=False,
                                help_text=_(u'Flag that indicates that '
                                            u'thumbor should flip '
