@@ -17,10 +17,12 @@ def image_obj(image, **kwargs):
     new = {}
     new['flip'] = image.flip
     new['flop'] = image.flop
+    """
     if image.halign != "":
         new['halign'] = image.halign
     if image.valign != "":
         new['valign'] = image.valign
+    """
     new['fit_in'] = image.fit_in
     new['smart'] = image.smart
 
