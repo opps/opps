@@ -1,70 +1,57 @@
 <div id="crop_example-container">
-  <script type="text/javascript">
-    /**
-     * Load jQuery Only If Not Present
-     **/
-    if(!(window.jQuery || $)) {
-      var s = document.createElement('script');
-      s.setAttribute('src', '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js');
-      s.setAttribute('type', 'text/javascript');
-      document.getElementsByTagName('head')[0].appendChild(s);
-    }
-  </script>
-
   <script src="{{ STATIC_URL }}admin/opps/images/js/jquery.imgareaselect.pack.js"></script>
   <link href="{{ STATIC_URL }}admin/opps/images/css/imgareaselect-default.css" rel="stylesheet" type="text/css" />
 
   <script type="text/javascript">
-    $(function(){
+    django.jQuery(function(){
       var check_url = function() {
         var src = "{{ THUMBOR_SERVER }}/unsafe/";
         var l = "800", r = "600"
-        if ($("#id_fit_in").is(':checked')) { src += 'fit-in/'; }
-        if ($("#id_flip").is(':checked')) { l = '-' + l; }
-        if ($("#id_flop").is(':checked')) { r = '-' + r; }
+        if (django.jQuery("#id_fit_in").is(':checked')) { src += 'fit-in/'; }
+        if (django.jQuery("#id_flip").is(':checked')) { l = '-' + l; }
+        if (django.jQuery("#id_flop").is(':checked')) { r = '-' + r; }
         src += l + "x" + r + "/";
-        if ($("#id_halign").val()) { src += $("#id_halign").val() + '/'; }
-        if ($("#id_valign").val()) { src += $("#id_valign").val() + '/'; }
-        if ($("#id_smart").is(':checked')) { src += 'smart/'; }
+        if (django.jQuery("#id_halign").val()) { src += $("#id_halign").val() + '/'; }
+        if (django.jQuery("#id_valign").val()) { src += $("#id_valign").val() + '/'; }
+        if (django.jQuery("#id_smart").is(':checked')) { src += 'smart/'; }
 
-        img = $("#imageExample").attr('src')
+        img = django.jQuery("#imageExample").attr('src')
         if (img.split('http').length == 1){
           img = '{{ THUMBOR_MEDIA_URL }}' + img;
         }
-        $("#crop_example").attr('src', src + img)
+        django.jQuery("#crop_example").attr('src', src + img)
       }
-      $("#id_meta, #id_flip, #id_flop, #id_fit_in, #id_smart, #id_halign, #id_valign").change(function(){
+      django.jQuery("#id_meta, #id_flip, #id_flop, #id_fit_in, #id_smart, #id_halign, #id_valign").change(function(){
         check_url();
       });
       check_url();
 
-      $('img#crop_example').imgAreaSelect({
+      django.jQuery('img#crop_example').imgAreaSelect({
         handles: true,
         instance: true,
         fadeSpeed: 400,
-        x1: $("#id_crop_x1").val(),
-        x2: $("#id_crop_x2").val(),
-        y1: $("#id_crop_y1").val(),
+        x1: django.jQuery("#id_crop_x1").val(),
+        x2: django.jQuery("#id_crop_x2").val(),
+        y1: django.jQuery("#id_crop_y1").val(),
         y2: $("#id_crop_y2").val(),
         onSelectEnd: function (img, selection) {
           if (selection.height == 0 && selection.width == 0) {
-            $("#id_crop_x1").val(0)
-            $("#id_crop_x2").val(0)
-            $("#id_crop_y1").val(0)
-            $("#id_crop_y2").val(0)
+            django.jQuery("#id_crop_x1").val(0)
+            django.jQuery("#id_crop_x2").val(0)
+            django.jQuery("#id_crop_y1").val(0)
+            django.jQuery("#id_crop_y2").val(0)
           } else {
-            $("#id_crop_x1").val(selection.x1)
-            $("#id_crop_x2").val(selection.x2)
-            $("#id_crop_y1").val(selection.y1)
-            $("#id_crop_y2").val(selection.y2)
+            django.jQuery("#id_crop_x1").val(selection.x1)
+            django.jQuery("#id_crop_x2").val(selection.x2)
+            django.jQuery("#id_crop_y1").val(selection.y1)
+            django.jQuery("#id_crop_y2").val(selection.y2)
           }
         }
       });
-      $(".field-crop_x1").hide()
-      $(".field-crop_x2").hide()
-      $(".field-crop_y1").hide()
-      $(".field-crop_y2").hide()
-
+      django.jQuery(".field-crop_x1").hide()
+      django.jQuery(".field-crop_x2").hide()
+      django.jQuery(".field-crop_y1").hide()
+      django.jQuery(".field-crop_y2").hide()
     });
   </script>
   <img id="crop_example" />

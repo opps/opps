@@ -1,25 +1,14 @@
 <div id="upload-container">
-  <script type="text/javascript">
-    /**
-     * Load jQuery Only If Not Present
-     **/
-    if(!(window.jQuery || $)) {
-      var s = document.createElement('script');
-      s.setAttribute('src', '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js');
-      s.setAttribute('type', 'text/javascript');
-      document.getElementsByTagName('head')[0].appendChild(s);
-    }
-  </script>
   <script type="text/javascript" src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>
 
   <script>
-    $( document ).ready(function() {
-      $("#{{ name }}").change(function(){
-        $('.loadimages').html("");
-        $.map($("#{{ name }}").get(0).files, function(file) {
-          $(".loadimages").val(window.loadImage(
+    django.jQuery( document ).ready(function() {
+      django.jQuery("#{{ name }}").change(function(){
+        django.jQuery('.loadimages').html("");
+        django.jQuery.map(django.jQuery("#{{ name }}").get(0).files, function(file) {
+          django.jQuery(".loadimages").val(window.loadImage(
             file,
-            function (img) { $('.loadimages').append(img); },
+            function (img) { django.jQuery('.loadimages').append(img); },
             {maxWidth: 120, maxHeight: 120, canvas: true, noRevoke: true}
           ));
         })
