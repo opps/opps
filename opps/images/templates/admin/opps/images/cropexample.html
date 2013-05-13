@@ -27,7 +27,7 @@
         if ($("#id_valign").val()) { src += $("#id_valign").val() + '/'; }
         if ($("#id_smart").is(':checked')) { src += 'smart/'; }
 
-        img = $("#image").attr('value')
+        img = $("#imageExample").attr('src')
         if (img.split('http').length == 1){
           img = '{{ THUMBOR_MEDIA_URL }}' + img;
         }

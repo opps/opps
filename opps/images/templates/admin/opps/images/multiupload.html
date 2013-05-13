@@ -33,7 +33,7 @@
 
   <input type="file" name="{{ name }}" value="{{ value }}" id="{{ name }}" {% if not value %}multiple{% endif %} />
   <div class="loadimages" style="height:{% if not value %}260px; overflow:auto;{% else %}130px;{% endif %} background: #F8F8F8;">
-    {% if value %}<img width="120" height="120" src="{{ value }}" />{% endif %}
+    {% if value %}<img width="120" height="120" src="{{ value }}" id="imageExample" />{% endif %}
   </div>
 
 </div>
