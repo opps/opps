@@ -67,7 +67,8 @@ class ImagesAdmin(PublishableAdmin):
             'fields': ('site', 'title', 'slug', 'image')}),
         (_(u'Crop'), {
             'fields': ('flip', 'flop', 'halign', 'valign', 'fit_in',
-                       'smart', 'crop_example')}),
+                       'smart', 'crop_x1', 'crop_x2', 'crop_y1', 'crop_y2',
+                       'crop_example')}),
         (_(u'Content'), {
             'fields': ('description', 'tags', 'source')}),
         (_(u'Publication'), {
