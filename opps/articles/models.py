@@ -129,8 +129,12 @@ class Article(Publishable, Slugged):
 
     def all_images(self):
         imgs = [self.main_image]
-        imgs += [i for i in self.images.filter(
-            published=True, date_available__lte=timezone.now())]
+        images = self.images.filter(
+            published=True, date_available__lte=timezone.now()
+        )
+        if self.main_image:
+            images = images.exclude(pk=self.main_image.pk)
+        imgs += [i for i in images.distinct()]
 
         return imgs
 
@@ -155,11 +159,16 @@ class Post(Article):
 
     def all_images(self):
         imgs = super(Post, self).all_images()
-
-        imgs += [i for a in self.albums.filter(
-            published=True, date_available__lte=timezone.now())
-            for i in a.images.filter(published=True,
-                                     date_available__lte=timezone.now())]
+        imgs += [
+            i for a in self.albums.filter(
+                published=True,
+                date_available__lte=timezone.now()
+            ).distinct()
+            for i in a.images.filter(
+                published=True,
+                date_available__lte=timezone.now()
+            ).exclude(pk__in=[i.pk for i in imgs]).distinct()
+        ]
         return imgs
 
     def ordered_related(self, field='order'):
