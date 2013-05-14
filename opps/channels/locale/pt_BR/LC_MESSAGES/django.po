@@ -6,14 +6,15 @@
 # Translators:
 # Ellison Leão <ellisonleao@gmail.com>, 2013
 # Ellison Leão <ellisonleao@gmail.com>, 2013
+# josene <jsene@yacows.com.br>, 2013
 # Thiago Avelino <Thiagoavelinoster@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: opps\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-07 15:25-0300\n"
-"PO-Revision-Date: 2013-05-07 18:26+0000\n"
-"Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
+"POT-Creation-Date: 2013-05-10 15:04-0300\n"
+"PO-Revision-Date: 2013-05-13 19:27+0000\n"
+"Last-Translator: josene <jsene@yacows.com.br>\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,7 +58,7 @@ msgstr "É pagina principal?"
 msgid ""
 "Check only if this channel is the homepage. Should have only one homepage "
 "per site"
-msgstr ""
+msgstr "Marque apenas se este canal é a homepage. Deve existir apenas uma homepage por site."
 
 #: models.py:37
 msgid "Group sub-channel?"
