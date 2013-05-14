@@ -6,7 +6,8 @@
     django.jQuery(function(){
       var check_url = function() {
         var src = "{{ THUMBOR_SERVER }}/unsafe/";
-        var l = "800", r = "600"
+        var l = parseInt(django.jQuery('#imageExample').attr('data-width')/4);
+        var r = parseInt(django.jQuery('#imageExample').attr('data-height')/4);
         if (django.jQuery("#id_fit_in").is(':checked')) { src += 'fit-in/'; }
         if (django.jQuery("#id_flip").is(':checked')) { l = '-' + l; }
         if (django.jQuery("#id_flop").is(':checked')) { r = '-' + r; }
@@ -21,6 +22,7 @@
         }
         django.jQuery("#crop_example").attr('src', src + img)
       }
+
       django.jQuery("#id_meta, #id_flip, #id_flop, #id_fit_in, #id_smart, #id_halign, #id_valign").change(function(){
         check_url();
       });
