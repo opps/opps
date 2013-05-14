@@ -1,4 +1,17 @@
 <div id="crop_example-container">
+
+  <script type="text/javascript">
+    /**
+     * Load jQuery Only If Not Present
+     **/
+    if(!(window.jQuery || $)) {
+      var s = document.createElement('script');
+      s.setAttribute('src', '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js');
+      s.setAttribute('type', 'text/javascript');
+      document.getElementsByTagName('head')[0].appendChild(s);
+    }
+  </script>
+
   <script src="{{ STATIC_URL }}admin/opps/images/js/jquery.imgareaselect.pack.js"></script>
   <link href="{{ STATIC_URL }}admin/opps/images/css/imgareaselect-default.css" rel="stylesheet" type="text/css" />
 
