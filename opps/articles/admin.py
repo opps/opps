@@ -22,7 +22,17 @@ class ArticleImageInline(admin.TabularInline):
     raw_id_fields = ['image']
     actions = None
     extra = 1
-    fieldsets = [(None, {'fields': ('image', 'order')})]
+    fieldsets = [(None, {'fields': ('image', 'image_thumb', 'order')})]
+
+    readonly_fields = ['image_thumb']
+
+    def image_thumb(self, obj):
+        if obj.image:
+            return u'<img width="60px" height="60px" src="{0}" />'.format(
+                image_url(obj.image.image.url, width=60, height=60))
+        return _(u'No Image')
+    image_thumb.short_description = _(u'Thumbnail')
+    image_thumb.allow_tags = True
 
 
 class ArticleSourceInline(admin.TabularInline):
@@ -56,7 +66,8 @@ class PostAdminForm(forms.ModelForm):
 
 class ArticleAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ["title"]}
-    readonly_fields = ['get_http_absolute_url', 'short_url', 'in_articleboxes']
+    readonly_fields = ['get_http_absolute_url', 'short_url',
+                       'in_articleboxes', 'image_thumb']
     raw_id_fields = ['main_image', 'channel']
 
     def in_articleboxes(self, obj):
@@ -73,6 +84,14 @@ class ArticleAdmin(PublishableAdmin):
         return _(u"This item is not in a box")
     in_articleboxes.allow_tags = True
     in_articleboxes.short_description = _(u'Article boxes')
+
+    def image_thumb(self, obj):
+        if obj.main_image:
+            return u'<img width="60px" height="60px" src="{0}" />'.format(
+                image_url(obj.main_image.image.url, width=60, height=60))
+        return _(u'No Image')
+    image_thumb.short_description = _(u'Thumbnail')
+    image_thumb.allow_tags = True
 
 
 class PostRelatedInline(admin.TabularInline):
@@ -97,7 +116,7 @@ class PostAdmin(ArticleAdmin):
                        'short_url')}),
         (_(u'Content'), {
             'fields': ('hat', 'short_title', 'headline', 'content',
-                       'main_image', 'tags')}),
+                       ('main_image', 'image_thumb'), 'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel', 'albums',)}),
         (_(u'Publication'), {
@@ -126,8 +145,8 @@ class AlbumAdmin(ArticleAdmin):
             'fields': ('site', 'title', 'slug', 'get_http_absolute_url',
                        'short_url',)}),
         (_(u'Content'), {
-            'fields': ('hat', 'short_title', 'headline', 'main_image',
-                       'tags')}),
+            'fields': ('hat', 'short_title', 'headline',
+                       ('main_image', 'image_thumb'), 'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
         (_(u'Publication'), {
@@ -145,7 +164,7 @@ class LinkAdmin(ArticleAdmin):
                        'short_url',)}),
         (_(u'Content'), {
             'fields': ('hat', 'short_title', 'headline', 'url', 'articles',
-                       'main_image', 'tags')}),
+                       ('main_image', 'image_thumb'), 'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
         (_(u'Publication'), {
