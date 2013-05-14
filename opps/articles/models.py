@@ -166,7 +166,12 @@ class Post(Article):
         """
         used in template
         """
-        return self.related_posts.order_by('postrelated_related__order')
+        return self.related_posts.filter(
+            published=True,
+            date_available__lte=timezone.now()
+        ).order_by(
+            'postrelated_related__order'
+        ).distinct()
 
 
 class PostRelated(models.Model):
@@ -310,6 +315,7 @@ class ArticleBox(BaseBox):
         now = timezone.now()
         qs = self.articles.filter(
             published=True,
+            date_available__lte=now,
             articleboxarticles_articles__date_available__lte=now
         ).filter(
             models.Q(articleboxarticles_articles__date_end__gte=now) |

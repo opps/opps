@@ -5,6 +5,8 @@ from django import forms
 from .models import Image
 from .widgets import MultipleUpload, CropExample
 
+from redactor.widgets import RedactorEditor
+
 
 class ImageModelForm(forms.ModelForm):
     image = forms.FileField(required=True, widget=MultipleUpload())
@@ -16,6 +18,7 @@ class ImageModelForm(forms.ModelForm):
 
     class Meta:
         model = Image
+        widgets = {'description': RedactorEditor()}
 
     def more_image(self):
         more_image = self.files.getlist('image')[:]

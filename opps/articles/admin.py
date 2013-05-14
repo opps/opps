@@ -56,8 +56,23 @@ class PostAdminForm(forms.ModelForm):
 
 class ArticleAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ["title"]}
-    readonly_fields = ['get_http_absolute_url', 'short_url']
+    readonly_fields = ['get_http_absolute_url', 'short_url', 'in_articleboxes']
     raw_id_fields = ['main_image', 'channel']
+
+    def in_articleboxes(self, obj):
+        articleboxes = obj.articlebox_articles.all()
+        if articleboxes:
+            html = [u"<ul>"]
+            for box in articleboxes:
+                li = (u"<li><a href='/admin/articles/articlebox/{box.id}/'"
+                      u" target='_blank'>{box.slug}</a></li>")
+                html.append(li.format(box=box))
+            html.append(u"</ul>")
+            print html
+            return u"".join(html)
+        return _(u"This item is not in a box")
+    in_articleboxes.allow_tags = True
+    in_articleboxes.short_description = _(u'Article boxes')
 
 
 class PostRelatedInline(admin.TabularInline):
@@ -87,7 +102,7 @@ class PostAdmin(ArticleAdmin):
             'fields': ('channel', 'albums',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('published', 'date_available')}),
+            'fields': ('published', 'date_available', 'in_articleboxes')}),
     )
 
 
