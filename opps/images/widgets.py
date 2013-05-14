@@ -9,7 +9,7 @@ class MultipleUpload(forms.FileInput):
         _height = ""
         _width = ""
         if value:
-            _value = "{0}{1}".format(settings.MEDIA_URL, value)
+            _value = "{}{}".format(settings.MEDIA_URL, value)
             _height = value.height
             _width = value.width
         return render_to_string("admin/opps/images/multiupload.html",
