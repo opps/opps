@@ -131,7 +131,8 @@ class Article(Publishable, Slugged):
         imgs = [self.main_image]
         images = self.images.filter(
             published=True, date_available__lte=timezone.now()
-        )
+        ).order_by('articleimage__order', '-date_available')
+
         if self.main_image:
             images = images.exclude(pk=self.main_image.pk)
         imgs += [i for i in images.distinct()]
