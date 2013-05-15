@@ -313,6 +313,7 @@ class ArticleBox(BaseBox):
     queryset = models.ForeignKey(
         'boxes.QuerySet',
         null=True, blank=True,
+        related_name='articlebox_querysets',
         verbose_name=_(u'Query Set')
     )
 
