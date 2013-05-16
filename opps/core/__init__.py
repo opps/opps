@@ -15,6 +15,7 @@ class OppsCoreConf(AppConf):
     CHANNEL_CONF = {}
     VIEWS_LIMIT = None
     PAGINATE_BY = 10
+    PAGINATE_SUFFIX = ''
     CHECK_MOBILE = False
     ADMIN_RULES = {}
     RELATED_POSTS_PLACEHOLDER = "---related---"

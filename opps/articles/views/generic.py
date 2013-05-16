@@ -94,10 +94,12 @@ class OppsList(OppsView, ListView):
         names = []
         domain_folder = self.get_template_folder()
 
-        paginated_suffix = ""
-        if self.request and self.request.GET.get('page'):
-            self.template_name_suffix = "_list_paginated"
-            paginated_suffix = "_paginated"
+        # look for a different template only if defined in settings
+        # default should be OPPS_PAGINATE_SUFFIX = "_paginated"
+        paginate_suffix = settings.OPPS_PAGINATE_SUFFIX
+
+        if paginate_suffix and self.request and self.request.GET.get('page'):
+            self.template_name_suffix = "_list{}".format(paginate_suffix)
 
         if self.channel:
             if self.channel.group and self.channel.parent:
@@ -105,14 +107,14 @@ class OppsList(OppsView, ListView):
                 _template = '{}/_{}{}.html'.format(
                     domain_folder,
                     self.channel.parent.long_slug,
-                    paginated_suffix
+                    paginate_suffix
                 )
                 names.append(_template)
 
                 _template = '{}/_post_list{}.html'.format(
                     domain_folder,
                     # self.channel.parent.long_slug,
-                    paginated_suffix
+                    paginate_suffix
                 )
                 names.append(_template)
 
@@ -120,7 +122,7 @@ class OppsList(OppsView, ListView):
             '{}/{}{}.html'.format(
                 domain_folder,
                 self.long_slug,
-                paginated_suffix
+                paginate_suffix
             )
         )
 
