@@ -94,20 +94,35 @@ class OppsList(OppsView, ListView):
         names = []
         domain_folder = self.get_template_folder()
 
+        paginated_suffix = ""
+        if self.request and self.request.GET.get('page'):
+            self.template_name_suffix = "_list_paginated"
+            paginated_suffix = "_paginated"
+
         if self.channel:
             if self.channel.group and self.channel.parent:
 
-                _template = '{}/_{}.html'.format(
-                    domain_folder, self.channel.parent.long_slug)
-                if self.check_template(_template):
-                    names.append(_template)
+                _template = '{}/_{}{}.html'.format(
+                    domain_folder,
+                    self.channel.parent.long_slug,
+                    paginated_suffix
+                )
+                names.append(_template)
 
-                _template = '{}/_post_list.html'.format(
-                    domain_folder, self.channel.parent.long_slug)
-                if self.check_template(_template):
-                    names.append(_template)
+                _template = '{}/_post_list{}.html'.format(
+                    domain_folder,
+                    # self.channel.parent.long_slug,
+                    paginated_suffix
+                )
+                names.append(_template)
 
-        names.append('{}/{}.html'.format(domain_folder, self.long_slug))
+        names.append(
+            '{}/{}{}.html'.format(
+                domain_folder,
+                self.long_slug,
+                paginated_suffix
+            )
+        )
 
         try:
             names = names + super(OppsList, self).get_template_names()
