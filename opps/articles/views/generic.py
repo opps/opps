@@ -96,10 +96,11 @@ class OppsList(OppsView, ListView):
 
         # look for a different template only if defined in settings
         # default should be OPPS_PAGINATE_SUFFIX = "_paginated"
-        paginate_suffix = settings.OPPS_PAGINATE_SUFFIX
-
-        if paginate_suffix and self.request and self.request.GET.get('page'):
+        if self.request and self.request.GET.get('page'):
+            paginate_suffix = settings.OPPS_PAGINATE_SUFFIX
             self.template_name_suffix = "_list{}".format(paginate_suffix)
+        else:
+            paginate_suffix = ''
 
         if self.channel:
             if self.channel.group and self.channel.parent:
