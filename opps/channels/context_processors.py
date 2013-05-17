@@ -16,4 +16,5 @@ def channel_context(request):
                                        show_in_menu=True).order_by('order')
 
     return {'opps_menu': opps_menu,
-            'opps_channel_conf_all': settings.OPPS_CHANNEL_CONF}
+            'opps_channel_conf_all': settings.OPPS_CHANNEL_CONF,
+            'site': site}
