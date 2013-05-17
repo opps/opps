@@ -11,3 +11,10 @@ class PublishableManager(models.Manager):
         return super(PublishableManager, self).get_query_set().filter(
             date_available__lte=timezone.now(), published=True)
 
+
+class CacheManager(models.Manager):
+    def __cache_key(self, id):
+        return u'{}:{}:{}'.format(settings.CACHE_PREFIX,
+                                  self.model._meta.db_table,
+                                  id)
+
