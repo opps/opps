@@ -24,7 +24,7 @@ class OppsView(object):
         self.channel = None
         self.long_slug = None
         self.channel_long_slug = []
-        self.article = self.model.objects.select_related('publisher')
+        self.article = None
 
     def get_context_data(self, **kwargs):
         context = super(OppsView, self).get_context_data(**kwargs)
