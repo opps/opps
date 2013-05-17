@@ -2,6 +2,8 @@
 
 ## 0.1.8
 
+* Queryset cache (opps.core.cache)
+
 ## 0.1.7
 
 ## 0.1.6
