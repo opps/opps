@@ -5,11 +5,12 @@ from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
-
 from django.contrib.sites.models import Site
 from django.contrib.sites.managers import CurrentSiteManager
 from django.contrib.redirects.models import Redirect
 from django.utils import timezone
+
+from .managers import PublishableManager
 
 
 class Date(models.Model):
@@ -19,12 +20,6 @@ class Date(models.Model):
 
     class Meta:
         abstract = True
-
-
-class PublishableManager(models.Manager):
-    def all_published(self):
-        return super(PublishableManager, self).get_query_set().filter(
-            date_available__lte=timezone.now(), published=True)
 
 
 class Publishable(Date):
