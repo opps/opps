@@ -3,6 +3,7 @@
 ## 0.1.8
 
 * Queryset cache (opps.core.cache)
+* Add image thumb on ArticleBox
 
 ## 0.1.7
 
