@@ -1,7 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.core.cache import cache
+
+from .managers import CacheManager
 
 
-class ModelCaching(models.Model):
-    pass
+ModelBase = type(models.Model)
+
+
+class MetaCaching(ModelBase):
+    def __new__(*args, **kwargs):
+        new_class = ModelBase.__new__(*args, **kwargs)
+        new_manager = CacheManager()
+        new_manager.contribute_to_class(new_class, 'objects')
+        new_class._default_manager = new_manager
+        return new_class
+
