@@ -5,15 +5,16 @@ from django.core.cache import cache
 from django.conf import settings
 
 
-class CacheManager(models.Manager):
-    def __cache_key(self, id):
-        return u'{}:{}:{}'.format(settings.CACHE_PREFIX,
-                                  self.model._meta.db_table,
-                                  id)
+def _cache_key(model, id):
+    return u'{}:{}:{}'.format(settings.CACHE_PREFIX,
+                              model._meta.db_table,
+                              id)
 
+
+class CacheManager(models.Manager):
     def get(self, *args, **kwargs):
         id = repr(kwargs)
-        pointer_key = self.__cache_key(id)
+        pointer_key = _cache_key(self.model, id)
         model_key = cache.get(pointer_key)
 
         if model_key is not None:
@@ -24,7 +25,7 @@ class CacheManager(models.Manager):
         model = super(CacheManager, self).get(*args, **kwargs)
 
         if not model_key:
-            model_key = self.__cache_key(model, model.pk)
+            model_key = _cache_key(model, model.pk)
             cache.set(pointer_key, model_key, settings.CACHE_EXPIRE)
 
         cache.set(model_key, model, settings.CACHE_EXPIRE)
