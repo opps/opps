@@ -19,6 +19,8 @@ class OppsCoreConf(AppConf):
     CHECK_MOBILE = False
     ADMIN_RULES = {}
     RELATED_POSTS_PLACEHOLDER = "---related---"
+    CACHE_PREFIX = 'opps'
+    CACHE_EXPIRE = 300
 
     class Meta:
         prefix = 'opps'
