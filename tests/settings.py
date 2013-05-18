@@ -42,8 +42,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'johnny.middleware.LocalStoreClearMiddleware',
-    'johnny.middleware.QueryCacheMiddleware',
 )
 
 INSTALLED_APPS = (
@@ -73,7 +71,6 @@ CACHES = {
         BACKEND = 'django.core.cache.backends.dummy.DummyCache',
     )
 }
-JOHNNY_MIDDLEWARE_KEY_PREFIX='opps_dev'
 
 TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner'
 
