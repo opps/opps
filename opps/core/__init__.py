@@ -19,6 +19,7 @@ class OppsCoreConf(AppConf):
     CHECK_MOBILE = False
     ADMIN_RULES = {}
     RELATED_POSTS_PLACEHOLDER = "---related---"
+    RSS_LINK_TEMPLATE = '<a href="{}" class="ir ico ico-rss">RSS</a>'
 
     class Meta:
         prefix = 'opps'
