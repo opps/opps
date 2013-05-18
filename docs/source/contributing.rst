@@ -52,6 +52,13 @@ Here is how to build the documentation::
     make html
 
 
+Architecture
+------------
+
+.. image:: _static/opps_visualized.png
+    :alt: Opps Architecture
+
+
 The team
 --------
 

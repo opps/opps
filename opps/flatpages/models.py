@@ -2,9 +2,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from googl.short import GooglUrlShort
-
 from opps.core.models import Publishable, BaseConfig
+from opps.articles.signals import shorturl_generate
 
 
 class FlatPage(Publishable):
@@ -30,6 +29,10 @@ class FlatPage(Publishable):
     content = models.TextField(_(u"Content"))
     order = models.IntegerField(_(u"Order"), default=0)
 
+    class META:
+        verbose_name = _('Flat page')
+        verbose_name_plural = _('Flat pages')
+
     def get_absolute_url(self):
         return "/page/{0}".format(self.slug)
 
@@ -41,14 +44,12 @@ class FlatPage(Publishable):
     def __unicode__(self):
         return u"{0} - {1}".format(self.site.name, self.slug)
 
-    def save(self, *args, **kwargs):
-        if not self.short_url:
-            self.short_url = GooglUrlShort(self.get_http_absolute_url())\
-                .short()
-
 
 class FlatPageConfig(BaseConfig):
     """
     Default implementation
     """
     pass
+
+
+models.signals.post_save.connect(shorturl_generate, sender=FlatPage)

@@ -1,0 +1,234 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# Thiago Avelino <thiagoavelinoster@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-10 15:04-0300\n"
+"PO-Revision-Date: 2013-04-23 20:40+0000\n"
+"Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: __init__.py:5 models.py:84
+msgid "Articles"
+msgstr "Articles"
+
+#: admin.py:79 admin.py:109 admin.py:127 admin.py:183
+msgid "Identification"
+msgstr "Identification"
+
+#: admin.py:82 admin.py:112 admin.py:130 models.py:139
+msgid "Content"
+msgstr "Content"
+
+#: admin.py:85 admin.py:115 admin.py:133 admin.py:185
+msgid "Relationships"
+msgstr "Relationships"
+
+#: admin.py:87 admin.py:117 admin.py:135 admin.py:187
+msgid "Publication"
+msgstr "Publication"
+
+#: admin.py:144
+msgid "Has queryset"
+msgstr ""
+
+#: admin.py:158
+msgid "No"
+msgstr ""
+
+#: admin.py:159
+msgid "Yes"
+msgstr ""
+
+#: admin.py:211
+msgid "Dynamic"
+msgstr ""
+
+#: admin.py:225
+msgid "No Image"
+msgstr "No Image"
+
+#: admin.py:226
+msgid "Thumbnail"
+msgstr "Thumbnail"
+
+#: models.py:15 models.py:288
+msgid "Title"
+msgstr "Title"
+
+#: models.py:16
+msgid "Headline"
+msgstr "Headline"
+
+#: models.py:18
+msgid "Short title"
+msgstr "Short title"
+
+#: models.py:23
+msgid "Hat"
+msgstr ""
+
+#: models.py:28
+msgid "Short URL"
+msgstr "Short URL"
+
+#: models.py:33
+msgid "Channel"
+msgstr "Channel"
+
+#: models.py:36
+msgid "Channel name"
+msgstr "Channel name"
+
+#: models.py:42
+msgid "Channel long slug"
+msgstr "Channel long slug"
+
+#: models.py:48
+msgid "Child class"
+msgstr "Child class"
+
+#: models.py:54
+#, fuzzy
+msgid "Child app label"
+msgstr "Child class"
+
+#: models.py:63
+msgid "Main Image"
+msgstr "Main Image"
+
+#: models.py:83 models.py:242 models.py:264 models.py:332
+msgid "Article"
+msgstr "Article"
+
+#: models.py:153 models.py:175
+msgid "Post"
+msgstr ""
+
+#: models.py:154
+msgid "Posts"
+msgstr ""
+
+#: models.py:183
+msgid "Related Post"
+msgstr ""
+
+#: models.py:189 models.py:251 models.py:275 models.py:334
+msgid "Order"
+msgstr "Order"
+
+#: models.py:192
+msgid "Post related"
+msgstr ""
+
+#: models.py:193
+msgid "Post relateds"
+msgstr ""
+
+#: models.py:202
+msgid "Album"
+msgstr ""
+
+#: models.py:203
+msgid "Albums"
+msgstr ""
+
+#: models.py:210
+msgid "URL"
+msgstr "URL"
+
+#: models.py:218
+msgid "Link"
+msgstr ""
+
+#: models.py:219
+msgid "Links"
+msgstr ""
+
+#: models.py:229
+msgid "URL field is required."
+msgstr "URL field is required."
+
+#: models.py:249
+msgid "Source"
+msgstr "Source"
+
+#: models.py:254
+#, fuzzy
+msgid "Article source"
+msgstr "Articles"
+
+#: models.py:255
+#, fuzzy
+msgid "Article sources"
+msgstr "Articles"
+
+#: models.py:271
+msgid "Image"
+msgstr "Image"
+
+#: models.py:278
+#, fuzzy
+msgid "Article image"
+msgstr "Article"
+
+#: models.py:279
+#, fuzzy
+msgid "Article images"
+msgstr "Articles"
+
+#: models.py:302
+msgid "Query Set"
+msgstr "Query Set"
+
+#: models.py:306
+#, fuzzy
+msgid "Article box"
+msgstr "Article Box"
+
+#: models.py:307
+#, fuzzy
+msgid "Articles boxes"
+msgstr "Article Box"
+
+#: models.py:325
+msgid "Article Box"
+msgstr "Article Box"
+
+#: models.py:338
+#, fuzzy
+msgid "Article box articles"
+msgstr "Article Box"
+
+#: models.py:339
+#, fuzzy
+msgid "Article boxes articles"
+msgstr "Article Box"
+
+#: models.py:347
+msgid "Article not published!"
+msgstr "Article not published!"
+
+#: models.py:350
+msgid "Article date available is greater than today!"
+msgstr "Article date available is greater than today!"
+
+#: models.py:360
+#, fuzzy
+msgid "Article config"
+msgstr "Article Box"
+
+#: models.py:361
+#, fuzzy
+msgid "Article configs"
+msgstr "Articles"

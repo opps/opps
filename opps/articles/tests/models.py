@@ -70,5 +70,6 @@ class PostModelTest(TestCase):
 
     def test_get_all_images(self):
 
-        self.assertEqual(self.post.all_images(),
+        all_images = set(self.post.all_images())
+        self.assertEqual(list(all_images),
                          [i for i in Image.objects.all()])

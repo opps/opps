@@ -15,6 +15,9 @@ class OppsCoreConf(AppConf):
     CHANNEL_CONF = {}
     VIEWS_LIMIT = None
     PAGINATE_BY = 10
+    CHECK_MOBILE = False
+    ADMIN_RULES = {}
+    RELATED_POSTS_PLACEHOLDER = "---related---"
 
     class Meta:
         prefix = 'opps'
@@ -36,7 +39,20 @@ class HaystackConf(AppConf):
 
 
 class RedactorConf(AppConf):
-    OPTIONS = {'lang': 'en'}
+    SIMPLE = {"buttons": ['html', '|', 'bold', 'italic',
+                          'deleted', '|', 'unorderedlist', 'orderedlist',
+                          '|', 'link', '|', 'fontcolor', 'backcolor', '|',
+                          'alignment']}
+
+    OPTIONS = {'lang': settings.LANGUAGE_CODE.replace(
+               '-', '_').replace('en_us', 'en').lower() or 'en',
+               "buttons": ['html', '|', 'formatting', '|', 'bold', 'italic',
+                           'deleted', '|', 'unorderedlist', 'orderedlist',
+                           'outdent', 'indent', '|', 'video', 'table', 'link',
+                           '|', 'fontcolor', 'backcolor', '|', 'alignment',
+                           '|', 'horizontalrule'],
+               'air': True,
+               'airButtons': ['formatting', '|', 'bold', 'italic', 'deleted']}
     UPLOAD = 'uploads/'
 
     class Meta:
@@ -47,6 +63,7 @@ class ThumborConf(AppConf):
     SERVER = 'http://localhost:8888'
     MEDIA_URL = 'http://localhost:8000/media'
     SECURITY_KEY = ''
+    ARGUMENTS = {}
 
     class Meta:
         prefix = 'thumbor'
@@ -59,7 +76,6 @@ class DjangoConf(AppConf):
 
 settings.INSTALLED_APPS += (
     'appconf',
-    'django_thumbor',
     'haystack',
     'googl',
     'redactor',

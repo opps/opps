@@ -7,7 +7,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 from mptt.managers import TreeManager
 
 from opps.core.models import Publishable, BaseConfig
-from .utils import generate_long_slug
+from opps.core.models import Slugged
 
 
 class ChannelManager(TreeManager):
@@ -20,16 +20,20 @@ class ChannelManager(TreeManager):
             return None
 
 
-class Channel(MPTTModel, Publishable):
+class Channel(MPTTModel, Publishable, Slugged):
 
     name = models.CharField(_(u"Name"), max_length=60)
-    slug = models.SlugField(u"URL", max_length=150, db_index=True)
     long_slug = models.SlugField(_(u"Path name"), max_length=250,
                                  db_index=True)
     description = models.CharField(_(u"Description"),
                                    max_length=255, null=True, blank=True)
     show_in_menu = models.BooleanField(_(u"Show in menu?"), default=False)
-    homepage = models.BooleanField(_(u"Is home page?"), default=False)
+    homepage = models.BooleanField(
+        _(u"Is home page?"),
+        default=False,
+        help_text=_(u'Check only if this channel is the homepage.'
+                    u' Should have only one homepage per site')
+    )
     group = models.BooleanField(_(u"Group sub-channel?"), default=False)
     order = models.IntegerField(_(u"Order"), default=0)
     parent = TreeForeignKey('self', related_name='subchannel',
@@ -37,16 +41,25 @@ class Channel(MPTTModel, Publishable):
 
     objects = ChannelManager()
 
+    class META:
+        unique_together = ("site", "long_slug", "slug", "parent")
+        verbose_name = _('Channel')
+        verbose_name_plural = _('Channels')
+
     class MPTTMeta:
+        unique_together = ("site", "long_slug", "slug", "parent")
         order_insertion_by = ['order', 'name']
 
     def __unicode__(self):
+        """ Uniform resource identifier
+        http://en.wikipedia.org/wiki/Uniform_resource_identifier
+        """
         if self.parent:
-            return "%s/%s" % (self.parent, self.slug)
-        return "%s/%s" % (self.site.domain, self.slug)
+            return u"/{}/{}/".format(self.parent.slug, self.slug)
+        return u"/{}/".format(self.slug)
 
     def get_absolute_url(self):
-        return "http://{0}/".format(self.__unicode__())
+        return u"{}".format(self.__unicode__())
 
     def get_thumb(self):
         return None
@@ -66,9 +79,10 @@ class Channel(MPTTModel, Publishable):
             channel_exist_domain = Channel.objects.filter(
                 slug=self.slug,
                 site__domain=self.site.domain)
-            channel_is_home = Channel.objects.filter(site=self.site.id,
-                                                     homepage=True,
-                                                     published=True).all()
+            channel_is_home = Channel.objects.filter(
+                site=self.site.id,
+                homepage=True,
+                published=True).select_related('publisher')
             if self.pk:
                 channel_is_home = channel_is_home.exclude(pk=self.pk)
         except ObjectDoesNotExist:
@@ -80,12 +94,16 @@ class Channel(MPTTModel, Publishable):
         if self.homepage and len(channel_is_home) >= 1:
             raise ValidationError('Exist home page!')
 
+        # every class which implements Slugged needs this in clean
+        try:
+            super(Channel, self).clean()
+        except AttributeError:
+            pass  # does not implement the clean method
+
     def save(self, *args, **kwargs):
-
-        if not self.long_slug:
-            self.long_slug = generate_long_slug(self.parent, self.slug,
-                                                self.site.domain)
-
+        self.long_slug = u"{}".format(self.slug)
+        if self.parent:
+            self.long_slug = u"{}/{}".format(self.parent.slug, self.slug)
         super(Channel, self).save(*args, **kwargs)
 
 

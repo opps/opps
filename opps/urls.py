@@ -8,8 +8,6 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    #url(r'^admin/images/mass/', include('opps.images.urls',
-    #                               namespace='images', app_name='images')),
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^redactor/', include('redactor.urls')),

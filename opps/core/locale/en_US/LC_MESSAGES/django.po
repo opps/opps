@@ -1,0 +1,125 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# Thiago Avelino <thiagoavelinoster@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-10 15:04-0300\n"
+"PO-Revision-Date: 2013-04-23 15:38+0000\n"
+"Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: __init__.py:8
+msgid "Core"
+msgstr "Core"
+
+#: admin.py:29
+msgid "Publish/Unpublish"
+msgstr ""
+
+#: admin.py:43
+msgid "Channel"
+msgstr ""
+
+#: admin.py:60
+msgid "No channel"
+msgstr ""
+
+#: admin.py:86
+msgid "Identification"
+msgstr ""
+
+#: admin.py:88
+msgid "Relationships"
+msgstr ""
+
+#: admin.py:90
+msgid "Publication"
+msgstr ""
+
+#: models.py:17
+msgid "Date insert"
+msgstr "Date insert"
+
+#: models.py:18
+msgid "Date update"
+msgstr "Date update"
+
+#: models.py:34
+msgid "Date available"
+msgstr "Date available"
+
+#: models.py:36
+msgid "Published"
+msgstr "Published"
+
+#: models.py:51
+msgid "URL"
+msgstr ""
+
+#: models.py:70
+msgid "The URL already exists as a redirect"
+msgstr ""
+
+#: models.py:99
+msgid "Box name"
+msgstr "Box name"
+
+#: models.py:101
+msgid "Slug"
+msgstr "Slug"
+
+#: models.py:109 models.py:188
+msgid "Only published article"
+msgstr "Only published article"
+
+#: models.py:118
+msgid "Channel name"
+msgstr ""
+
+#: models.py:124
+msgid "Channel long slug"
+msgstr ""
+
+#: models.py:166
+msgid "Config Key Group"
+msgstr "Config Key Group"
+
+#: models.py:174
+msgid "Config Key"
+msgstr "Config Key"
+
+#: models.py:180
+msgid "Format"
+msgstr "Format"
+
+#: models.py:182
+msgid "Config Value"
+msgstr "Config Value"
+
+#: models.py:183
+msgid "Description"
+msgstr "Description"
+
+#: models.py:222
+#, python-format
+msgid "Can't format the value to %s"
+msgstr ""
+
+#~ msgid "Text"
+#~ msgstr "Text"
+
+#~ msgid "Json"
+#~ msgstr "Json"
+
+#~ msgid "Yaml"
+#~ msgstr "Yaml"

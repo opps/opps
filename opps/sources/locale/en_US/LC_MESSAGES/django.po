@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# Thiago Avelino <thiagoavelinoster@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-05-10 15:04-0300\n"
+"PO-Revision-Date: 2013-04-23 15:51+0000\n"
+"Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: __init__.py:5 models.py:17
+msgid "Sources"
+msgstr "Sources"
+
+#: admin.py:17
+msgid "Identification"
+msgstr "Identification"
+
+#: admin.py:19
+msgid "Content"
+msgstr "Content"
+
+#: admin.py:21
+msgid "Publication"
+msgstr "Publication"
+
+#: models.py:10
+msgid "Name"
+msgstr "Name"
+
+#: models.py:11
+msgid "URL"
+msgstr "URL"
+
+#: models.py:12
+msgid "Feed URL"
+msgstr "Feed URL"
+
+#: models.py:16
+#, fuzzy
+msgid "Source"
+msgstr "Sources"
+
+#~ msgid "Slug"
+#~ msgstr "Slug"

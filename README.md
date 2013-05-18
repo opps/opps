@@ -4,14 +4,17 @@
 
 An *Open Source Content Management Platform* for the **magazine** websites and **high-traffic**, using the Django Framework.
 
-[![Build Status](https://travis-ci.org/opps/opps.png)](https://travis-ci.org/opps/opps "Opps Travis")
+[![Build Status](https://drone.io/github.com/opps/opps/status.png)](https://drone.io/github.com/opps/opps/latest)
+[![Build Status](https://travis-ci.org/opps/opps.png?branch=master)](https://travis-ci.org/opps/opps "Opps Travis")
+[![PyPi version](https://pypip.in/v/opps/badge.png)](https://crate.io/packages/opps/)
+[![PyPi downloads](https://pypip.in/d/opps/badge.png)](https://crate.io/packages/opps/)
 
 
 # Contacts
 
 The place to create issues is [opps's github issues](https://github.com/opps/opps/issues). The more information you send about an issue, the greater the chance it will get fixed fast.
 
-If you are not sure about something, have a doubt or feedback, or just want to ask for a feature, feel free to join our mailing list, or, if you're on Freenode (IRC), you can join the [#opps](irc://irc.freenode.net/opps) chat.
+If you are not sure about something, have a doubt or feedback, or just want to ask for a feature, feel free to join our mailing list, or, if you're on Freenode (IRC), you can join the [#opps](http://webchat.freenode.net/?channels=opps) chat.
 
 
 # Run example

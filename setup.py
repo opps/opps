@@ -3,7 +3,6 @@
 
 from setuptools import setup, find_packages
 
-import os
 import opps
 
 
@@ -11,8 +10,8 @@ install_requires = ["django",
                     "south>=0.7",
                     "Pillow==1.7.8",
                     "thumbor",
-                    'django-thumbor',
-                    "django-googl",
+                    'libthumbor',
+                    "django-googl==0.1.1",
                     "django-taggit",
                     "django-wysiwyg-redactor==0.3.1",
                     "django-haystack==1.2.7",
@@ -20,8 +19,10 @@ install_requires = ["django",
                     "django-appconf",
                     "python-memcached",
                     "johnny-cache"]
-dependency_links = ['http://github.com/avelino/django-googl/tarball/master#egg=django-googl',
-                    'https://github.com/jmoiron/johnny-cache/tarball/master#egg=johnny-cache']
+dependency_links = ['http://github.com/avelino/django-googl/tarball/master'
+                    '#egg=django-googl',
+                    'https://github.com/jmoiron/johnny-cache/tarball/master'
+                    '#egg=johnny-cache']
 
 classifiers = ["Development Status :: 4 - Beta",
                "Intended Audience :: Developers",

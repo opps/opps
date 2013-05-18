@@ -9,3 +9,11 @@ def get_app_model(appname, suffix=""):
               if (model.__name__.endswith(suffix) or not suffix)
               and model._meta.app_label == app_label]
     return models and models[0]
+
+
+def class_load(name):
+    mod = __import__(name)
+    components = name.split('.')
+    for comp in components[1:]:
+        mod = getattr(mod, comp)
+    return mod

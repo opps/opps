@@ -3,6 +3,7 @@
 #from django.conf import settings
 #from django.utils.importlib import import_module
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from opps.core.models import Publishable, BaseBox
@@ -34,6 +35,20 @@ class QuerySet(Publishable):
         'channels.Channel',
         verbose_name=_(u"Channel"),
     )
+
+    def get_queryset(self):
+        _app, _model = self.model.split('.')
+        model = models.get_model(_app, _model)
+
+        queryset = model.objects.filter(
+            published=True,
+            date_available__lte=timezone.now()).select_related('publisher')
+        if self.channel:
+            queryset = queryset.filter(channel=self.channel)
+        if self.order == '-':
+            queryset = queryset.order_by('-id')
+
+        return queryset[:self.limit]
 
 
 class DynamicBox(BaseBox):
