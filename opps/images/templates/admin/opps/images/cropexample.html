@@ -19,8 +19,8 @@
     django.jQuery(function(){
       var check_url = function() {
         var src = "{{ THUMBOR_SERVER }}/unsafe/";
-        var l = django.jQuery('#imageExample').attr('data-width');
-        var r = django.jQuery('#imageExample').attr('data-height');
+        var l = django.jQuery('#imageExample').attr('data-width')/2;
+        var r = django.jQuery('#imageExample').attr('data-height')/2;
         if (django.jQuery("#id_fit_in").is(':checked')) { src += 'fit-in/'; }
         if (django.jQuery("#id_flip").is(':checked')) { l = '-' + l; }
         if (django.jQuery("#id_flop").is(':checked')) { r = '-' + r; }
@@ -41,28 +41,6 @@
       });
       check_url();
 
-      $('img#crop_example').imgAreaSelect({
-        handles: true,
-        instance: true,
-        fadeSpeed: 400,
-        x1: django.jQuery("#id_crop_x1").val(),
-        x2: django.jQuery("#id_crop_x2").val(),
-        y1: django.jQuery("#id_crop_y1").val(),
-        y2: django.jQuery("#id_crop_y2").val(),
-        onSelectEnd: function (img, selection) {
-          if (selection.height == 0 && selection.width == 0) {
-            django.jQuery("#id_crop_x1").val(0)
-            django.jQuery("#id_crop_x2").val(0)
-            django.jQuery("#id_crop_y1").val(0)
-            django.jQuery("#id_crop_y2").val(0)
-          } else {
-            django.jQuery("#id_crop_x1").val(selection.x1)
-            django.jQuery("#id_crop_x2").val(selection.x2)
-            django.jQuery("#id_crop_y1").val(selection.y1)
-            django.jQuery("#id_crop_y2").val(selection.y2)
-          }
-        }
-      });
       django.jQuery(".field-crop_x1").hide()
       django.jQuery(".field-crop_x2").hide()
       django.jQuery(".field-crop_y1").hide()
