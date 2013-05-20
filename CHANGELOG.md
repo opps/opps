@@ -2,8 +2,9 @@
 
 ## 0.1.8
 
-* Queryset cache (opps.core.cache)
+* Queryset cache on generic view
 * Add image thumb on ArticleBox
+* Send current site to template ``{{ SITE }}``
 
 ## 0.1.7
 
