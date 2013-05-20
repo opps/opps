@@ -19,8 +19,8 @@
     django.jQuery(function(){
       var check_url = function() {
         var src = "{{ THUMBOR_SERVER }}/unsafe/";
-        var l = django.jQuery('#imageExample').attr('data-width')/2;
-        var r = django.jQuery('#imageExample').attr('data-height')/2;
+        var l = 800;
+        var r = 600;
         if (django.jQuery("#id_fit_in").is(':checked')) { src += 'fit-in/'; }
         if (django.jQuery("#id_flip").is(':checked')) { l = '-' + l; }
         if (django.jQuery("#id_flop").is(':checked')) { r = '-' + r; }
