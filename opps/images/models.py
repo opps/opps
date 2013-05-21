@@ -102,7 +102,7 @@ class Cropping(models.Model):
 class Image(Publishable, Slugged, Cropping):
 
     title = models.CharField(_(u"Title"), max_length=140, db_index=True)
-    image = models.ImageField(upload_to=get_file_path)
+    image = models.ImageField(upload_to=get_file_path, max_length=255)
     description = models.TextField(_(u"Description"), null=True, blank=True)
     tags = TaggableManager(blank=True, through=TaggedImage,
                            verbose_name=u'Tags')
