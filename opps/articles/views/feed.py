@@ -28,7 +28,8 @@ class ArticleFeed(Feed):
             site=self.site,
             date_available__lte=timezone.now(),
             published=True,
-            channel__include_in_main_rss=True
+            channel__include_in_main_rss=True,
+            channel__published=True
         ).order_by(
             '-date_available'
         ).select_related('publisher')[:40]
