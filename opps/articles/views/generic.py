@@ -134,6 +134,12 @@ class OppsList(OppsView, ListView):
         except ImproperlyConfigured:
             pass
 
+        if paginate_suffix:
+            # use the default _paginated.html if no template found
+            names.append(
+                "{}/{}.html".format(domain_folder, paginate_suffix)
+            )
+
         return names
 
     @property
