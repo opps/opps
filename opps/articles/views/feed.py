@@ -24,8 +24,14 @@ class ArticleFeed(Feed):
         return "Latest news on {0}'s".format(self.site.name)
 
     def items(self):
-        return Article.objects.filter(site=self.site).order_by(
-            '-date_available').select_related('publisher')[:40]
+        return Article.objects.filter(
+            site=self.site,
+            date_available__lte=timezone.now(),
+            published=True,
+            channel__include_in_main_rss=True
+        ).order_by(
+            '-date_available'
+        ).select_related('publisher')[:40]
 
 
 class ChannelFeed(Feed):
@@ -55,5 +61,7 @@ class ChannelFeed(Feed):
             site=self.site,
             channel_long_slug=obj.long_slug,
             date_available__lte=timezone.now(),
-            published=True).order_by(
-                '-date_available').select_related('publisher')[:40]
+            published=True,
+        ).order_by(
+            '-date_available'
+        ).select_related('publisher')[:40]
