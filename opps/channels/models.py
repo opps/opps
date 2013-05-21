@@ -28,6 +28,7 @@ class Channel(MPTTModel, Publishable, Slugged):
     description = models.CharField(_(u"Description"),
                                    max_length=255, null=True, blank=True)
     show_in_menu = models.BooleanField(_(u"Show in menu?"), default=False)
+    include_in_main_rss = models.BooleanField(_(u"Show in main RSS?"), default=True)
     homepage = models.BooleanField(
         _(u"Is home page?"),
         default=False,
