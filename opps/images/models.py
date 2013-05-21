@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import uuid
 import os
+import random
 from datetime import datetime
 
 from django.db import models
@@ -27,8 +27,8 @@ VALIGN_CHOICES = (
 
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
-    _id = id("{0}-{1}.{2}".format(filename, instance.slug))
-    filename = "{0}-{1}.{2}".format(_id, instance.slug, ext)
+    filename = u"{0}-{1}.{2}".format(random.getrandbits(32),
+                                     instance.slug, ext)
     d = datetime.now()
     folder = "images/{0}".format(d.strftime("%Y/%m/%d/"))
     return os.path.join(folder, filename)
