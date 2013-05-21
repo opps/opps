@@ -40,7 +40,7 @@ class TaggedImage(TaggedItemBase):
 
 
 class Cropping(models.Model):
-    crop_example = models.CharField(_(u"Crop Example"), max_length=140,
+    crop_example = models.CharField(_(u"Crop Example"), max_length=255,
                                     null=True, blank=True)
     crop_x1 = models.PositiveSmallIntegerField(default=0, null=True,
                                                blank=True)
