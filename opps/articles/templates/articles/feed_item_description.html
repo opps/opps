@@ -1,7 +1,11 @@
-{% load article_tags sponsor_tags images_tags %}
+{% load article_tags images_tags %}
+
+<a href="{{obj.get_absolute_url}}">
+    <img src="{% image_obj obj.main_image width=730 height=488 %}" alt="{{obj.title}}">
+</a>
+
 {% if obj.child_class = 'Post' %}
  {% autoescape off %}
-    {% get_campaign obj.post %}
     {% get_post_content obj.post %}
  {% endautoescape %}
 {% elif obj.child_class = 'Album' %}
