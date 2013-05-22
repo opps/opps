@@ -6,6 +6,7 @@
 * Add image thumb on ArticleBox
 * Send current site to template ``{{ SITE }}``
 * In /rss feed, filter channels by **published** and **include_in_main_rss**
+* RSS Feed now renders in a template
 
 ## 0.1.7
 
