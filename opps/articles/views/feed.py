@@ -16,15 +16,6 @@ class ItemFeed(Feed):
     def item_title(self, item):
         return item.title
 
-    def item_description(self, item):
-        """
-        TODO: USe template to render the description
-        https://docs.djangoproject.com/
-            en/1.5/ref/contrib/syndication/#a-complex-example
-        In the template render the Post.content and images.
-        """
-        return item.headline
-
     def item_link(self, item):
         return item.get_absolute_url()
 
