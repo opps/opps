@@ -9,7 +9,25 @@ from opps.articles.models import Article, Post, Album, Link
 from opps.channels.models import Channel
 
 
-class ArticleFeed(Feed):
+class ItemFeed(Feed):
+
+    def item_title(self, item):
+        return item.title
+
+    def item_description(self, item):
+        """
+        TODO: USe template to render the description
+        https://docs.djangoproject.com/
+            en/1.5/ref/contrib/syndication/#a-complex-example
+        In the template render the Post.content and images.
+        """
+        return item.headline
+
+    def item_link(self, item):
+        return item.get_absolute_url()
+
+
+class ArticleFeed(ItemFeed):
 
     link = "/rss"
 
@@ -35,7 +53,7 @@ class ArticleFeed(Feed):
         ).select_related('publisher')[:40]
 
 
-class ChannelFeed(Feed):
+class ChannelFeed(ItemFeed):
 
     def __init__(self, model):
         _model = {'Post': Post, 'Album': Album, 'Link': Link}
