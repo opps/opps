@@ -25,7 +25,7 @@ class FlatPageAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["title"]}
     readonly_fields = ['get_http_absolute_url', 'short_url', 'image_thumb']
     list_display = ['title', 'site', 'published', 'date_available']
-    raw_id_fields = ['main_image']
+    raw_id_fields = ['main_image', 'channel']
 
     fieldsets = (
         (_(u'Identification'), {
@@ -35,7 +35,7 @@ class FlatPageAdmin(admin.ModelAdmin):
             'fields': ('headline', 'content', ('main_image', 'image_thumb'))}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('published', 'date_available')}),
+            'fields': ('channel', 'published', 'date_available')}),
     )
 
     def image_thumb(self, obj):
