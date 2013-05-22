@@ -1,0 +1,13 @@
+{% load article_tags sponsor_tags images_tags %}
+{% if obj.child_class = 'Post' %}
+ {% autoescape off %}
+    {% get_campaign obj.post %}
+    {% get_post_content obj.post %}
+ {% endautoescape %}
+{% elif obj.child_class = 'Album' %}
+    {{obj.headline|safe}}
+{% elif obj.child_class = 'Link' %}
+    {{obj.headline|safe}}
+{% else %}
+    {{obj.headline|safe}}
+{% endif %}

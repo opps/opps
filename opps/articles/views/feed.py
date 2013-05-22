@@ -11,6 +11,8 @@ from opps.channels.models import Channel
 
 class ItemFeed(Feed):
 
+    description_template = 'articles/feed_item_description.html'
+
     def item_title(self, item):
         return item.title
 
