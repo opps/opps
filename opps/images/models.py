@@ -10,7 +10,7 @@ from django.utils import timezone
 from taggit.models import TaggedItemBase
 from taggit.managers import TaggableManager
 
-from opps.core.models import Publishable, Slugged
+from opps.core.models import Publishable
 
 
 HALIGN_CHOICES = (
@@ -100,7 +100,13 @@ class Cropping(models.Model):
         super(Cropping, self).save(*args, **kwargs)
 
 
-class Image(Publishable, Slugged, Cropping):
+class Image(Publishable, Cropping):
+
+    slug = models.SlugField(
+        _(u"URL"),
+        db_index=True,
+        max_length=150,
+    )
 
     title = models.CharField(_(u"Title"), max_length=140, db_index=True)
     image = models.ImageField(upload_to=get_file_path, max_length=255)
