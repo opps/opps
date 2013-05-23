@@ -152,8 +152,8 @@ class OppsList(OppsView, ListView):
 
         self.set_channel_rules()
 
-        cachekey = _cache_key('list', self.model, self.site,
-                              self.long_slug)
+        cachekey = _cache_key('list:mobile{}'.format(self.request.is_mobile),
+                              self.model, self.site, self.long_slug)
         get_cache = cache.get(cachekey)
         if get_cache:
             return get_cache
@@ -198,8 +198,9 @@ class OppsDetail(OppsView, DetailView):
 
         self.set_channel_rules()
 
-        cachekey = _cache_key('detail', self.model, self.site,
-                              "{}-{}".format(self.long_slug, self.slug))
+        cachekey = _cache_key('detail:mobile{}'.format(
+            self.request.is_mobile), self.model, self.site,
+            "{}-{}".format(self.long_slug, self.slug))
         get_cache = cache.get(cachekey)
         if get_cache:
             return get_cache
