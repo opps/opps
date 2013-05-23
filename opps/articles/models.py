@@ -146,6 +146,7 @@ class Post(Article):
         'articles.Album',
         null=True, blank=True,
         related_name='post_albums',
+        verbose_name=_(u"Albums")
     )
     related_posts = models.ManyToManyField(
         'articles.Post',
