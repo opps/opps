@@ -9,7 +9,18 @@ from opps.articles.models import Article, Post, Album, Link
 from opps.channels.models import Channel
 
 
-class ArticleFeed(Feed):
+class ItemFeed(Feed):
+
+    description_template = 'articles/feed_item_description.html'
+
+    def item_title(self, item):
+        return item.title
+
+    def item_link(self, item):
+        return item.get_absolute_url()
+
+
+class ArticleFeed(ItemFeed):
 
     link = "/rss"
 
@@ -35,7 +46,7 @@ class ArticleFeed(Feed):
         ).select_related('publisher')[:40]
 
 
-class ChannelFeed(Feed):
+class ChannelFeed(ItemFeed):
 
     def __init__(self, model):
         _model = {'Post': Post, 'Album': Album, 'Link': Link}
