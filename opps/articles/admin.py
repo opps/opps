@@ -171,8 +171,19 @@ class AlbumAdmin(ArticleAdmin):
     )
 
 
+class LinkAdminForm(forms.ModelForm):
+    class Meta:
+        model = Link
+
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        cleaned_data['tags'] = normalize_tags(u",".join(cleaned_data['tags']))
+        return cleaned_data
+
+
 @apply_opps_rules('articles')
 class LinkAdmin(ArticleAdmin):
+    form = LinkAdminForm
     raw_id_fields = ['articles', 'channel', 'main_image']
     fieldsets = (
         (_(u'Identification'), {
