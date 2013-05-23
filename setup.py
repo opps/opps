@@ -19,7 +19,9 @@ install_requires = ["django",
                     "django-appconf",
                     "python-memcached"]
 dependency_links = ['http://github.com/avelino/django-googl/tarball/master'
-                    '#egg=django-googl']
+                    '#egg=django-googl',
+                    'http://github.com/avelino/django-taggit/tarball/master'
+                    '#egg=django-taggit']
 
 classifiers = ["Development Status :: 4 - Beta",
                "Intended Audience :: Developers",
