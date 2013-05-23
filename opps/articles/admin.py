@@ -8,7 +8,6 @@ from django.contrib.admin import SimpleListFilter
 
 from .models import Post, Album, Article, Link, ArticleSource, ArticleImage
 from .models import ArticleBox, ArticleBoxArticles, ArticleConfig, PostRelated
-from .utils import normalize_tags
 from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
 from opps.core.admin import BaseBoxAdmin
@@ -67,11 +66,6 @@ class PostAdminForm(forms.ModelForm):
     class Meta:
         model = Post
         widgets = {'content': RedactorEditor()}
-
-    def clean(self):
-        cleaned_data = self.cleaned_data
-        cleaned_data['tags'] = normalize_tags(u",".join(cleaned_data['tags']))
-        return cleaned_data
 
 
 class ArticleAdmin(PublishableAdmin):
@@ -145,11 +139,6 @@ class AlbumAdminForm(forms.ModelForm):
             )
         }
 
-    def clean(self):
-        cleaned_data = self.cleaned_data
-        cleaned_data['tags'] = normalize_tags(u",".join(cleaned_data['tags']))
-        return cleaned_data
-
 
 @apply_opps_rules('articles')
 class AlbumAdmin(ArticleAdmin):
@@ -174,11 +163,6 @@ class AlbumAdmin(ArticleAdmin):
 class LinkAdminForm(forms.ModelForm):
     class Meta:
         model = Link
-
-    def clean(self):
-        cleaned_data = self.cleaned_data
-        cleaned_data['tags'] = normalize_tags(u",".join(cleaned_data['tags']))
-        return cleaned_data
 
 
 @apply_opps_rules('articles')
