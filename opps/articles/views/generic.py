@@ -162,7 +162,10 @@ class OppsList(OppsView, ListView):
             site=self.site,
             channel_long_slug__in=self.channel_long_slug,
             date_available__lte=timezone.now(),
-            published=True)[:self.limit]
+            published=True)
+        if self.limit:
+            self.article = self.article[:self.limit]
+
         cache.set(cachekey, self.article)
 
         return self.article
