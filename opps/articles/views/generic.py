@@ -200,7 +200,7 @@ class OppsDetail(OppsView, DetailView):
 
         cachekey = _cache_key('detail:mobile{}'.format(
             self.request.is_mobile), self.model, self.site,
-            "{}-{}".format(self.long_slug, self.slug))
+            id("{}-{}".format(self.long_slug, self.slug)))
         get_cache = cache.get(cachekey)
         if get_cache:
             return get_cache
