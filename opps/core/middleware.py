@@ -125,6 +125,7 @@ class MobileDetectionMiddleware(object):
                 if self.user_agents_test_match_regex.match(user_agent):
                     is_mobile = True
 
+        request.is_mobile = is_mobile
         settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_WEB
         if is_mobile and settings.OPPS_CHECK_MOBILE:
             settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_MOBILE
