@@ -79,7 +79,6 @@ class ArticleAdmin(PublishableAdmin):
                       u" target='_blank'>{box.slug}</a></li>")
                 html.append(li.format(box=box))
             html.append(u"</ul>")
-            print html
             return u"".join(html)
         return _(u"This item is not in a box")
     in_articleboxes.allow_tags = True
