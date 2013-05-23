@@ -6,6 +6,7 @@
 * Add image thumb on ArticleBox
 * Send current site to template ``{{ SITE }}``
 * In /rss feed, filter channels by **published** and **include_in_main_rss**
+* Flatpage is content type Article
 
 ## 0.1.7
 
