@@ -7,34 +7,9 @@ from django.contrib.sites.models import Site
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
+from django.contrib.sites.models import get_current_site
 
-
-class PublishableAdmin(admin.ModelAdmin):
-    """
-    Overrides standard admin.ModelAdmin save_model method
-    It sets user (author) based on data from requet.
-    """
-    list_display = ['title', 'channel_name', 'date_available', 'published']
-    list_filter = ['date_available', 'published', 'channel_name',
-                   'child_class']
-    search_fields = ['title', 'slug', 'headline', 'channel_name']
-    exclude = ('user',)
-
-    actions = ['publish']
-
-    def publish(modeladmin, request, queryset):
-        for obj in queryset:
-            obj.published = not obj.published
-            obj.save()
-    publish.short_description = _(u'Publish/Unpublish')
-
-    def save_model(self, request, obj, form, change):
-        if getattr(obj, 'pk', None) is None:
-            obj.user = get_user_model().objects.get(pk=request.user.pk)
-            obj.date_insert = timezone.now()
-            obj.site = Site.objects.get(pk=settings.SITE_ID)
-        obj.date_update = timezone.now()
-        obj.save()
+from opps.channels.models import Channel
 
 
 class ChannelListFilter(SimpleListFilter):
@@ -53,12 +28,32 @@ class ChannelListFilter(SimpleListFilter):
         human-readable name for the option that will appear
         in the right sidebar.
         """
+
         qs = model_admin.queryset(request)
-        qs = qs.distinct().values('channel_name', 'channel_long_slug')
+        qs = qs.order_by(
+            'channel_long_slug'
+        ).distinct().values('channel_long_slug')
+
         if qs:
-            return set([(item['channel_long_slug'] or 'nochannel',
-                         item['channel_name'] or _(u'No channel'))
-                       for item in qs])
+            channels = set([(item['channel_long_slug'] or 'nochannel',
+                             item['channel_long_slug'] or _(u'No channel'))
+                           for item in qs])
+            items = []
+
+            for channel in channels:
+                items.append(channel)
+                _value = channel[0]
+
+                other_values = [
+                    c[0].split('/')[0] for c in channels if not c[0] == _value
+                ]
+
+                if not '/' in _value and _value in other_values:
+                    value = "{}/*".format(_value)
+                    human_readable = "{}/*".format(_value)
+                    items.append((value, human_readable))
+
+            return sorted(items)
 
     def queryset(self, request, queryset):
         """
@@ -66,12 +61,49 @@ class ChannelListFilter(SimpleListFilter):
         provided in the query string and retrievable via
         `self.value()`.
         """
-        if self.value() == "nochannel":
+        value = self.value()
+        if value == "nochannel":
             queryset = queryset.filter(channel_long_slug__isnull=True)
-        elif self.value():
-            queryset = queryset.filter(channel_long_slug=self.value())
+        elif value and "*" in value:
+            site = get_current_site(request)
+            long_slug = value.replace('/*', '')
+            channel = Channel.objects.filter(site=site, long_slug=long_slug)[0]
+            child_channels = [channel]
+            for children in channel.get_children():
+                child_channels.append(children)
+            queryset = queryset.filter(channel__in=child_channels)
+        elif value:
+            queryset = queryset.filter(channel_long_slug=value)
 
         return queryset
+
+
+class PublishableAdmin(admin.ModelAdmin):
+    """
+    Overrides standard admin.ModelAdmin save_model method
+    It sets user (author) based on data from requet.
+    """
+    list_display = ['title', 'channel_long_slug',
+                    'date_available', 'published']
+    list_filter = ['child_class', 'date_available', 'published']
+    search_fields = ['title', 'slug', 'headline', 'channel_name']
+    exclude = ('user',)
+
+    actions = ['publish']
+
+    def publish(modeladmin, request, queryset):
+        for obj in queryset:
+            obj.published = not obj.published
+            obj.save()
+    publish.short_description = _(u'Publish/Unpublish')
+
+    def save_model(self, request, obj, form, change):
+        if getattr(obj, 'pk', None) is None:
+            obj.user = get_user_model().objects.get(pk=request.user.pk)
+            obj.date_insert = timezone.now()
+            obj.site = Site.objects.get(pk=settings.SITE_ID)
+        obj.date_update = timezone.now()
+        obj.save()
 
 
 class BaseBoxAdmin(PublishableAdmin):
