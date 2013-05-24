@@ -18,6 +18,24 @@ class PostList(OppsList):
     models = settings.OPPS_LIST_MODELS
     type = "channels"
 
+    def get_template_names(self):
+        """
+        Implemented here for backwards compatibility
+        """
+        names = super(PostList, self).get_template_names()
+        domain_folder = self.get_template_folder()
+        aditional_names = [
+            '{}/post_list.html'.format(domain_folder),
+            'articles/post_list.html'
+        ]
+        if self.paginate_suffix:
+            aditional_names = [
+                '{}/post_list_paginated.html'.format(domain_folder),
+                'articles/post_list_paginated.html'
+            ]
+        names = names + aditional_names
+        return names
+
     @property
     def queryset(self):
         self.site = get_current_site(self.request)
