@@ -68,6 +68,7 @@ class PostAdminForm(forms.ModelForm):
         widgets = {'content': RedactorEditor()}
 
 
+@apply_opps_rules('articles')
 class ArticleAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ["title"]}
     readonly_fields = ['get_http_absolute_url', 'short_url',
@@ -126,7 +127,8 @@ class PostAdmin(ArticleAdmin):
             'fields': ('channel', 'albums',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('published', 'date_available', 'in_articleboxes')}),
+            'fields': ('published', 'date_available',
+                       'show_on_root_channel', 'in_articleboxes')}),
     )
 
 
@@ -156,7 +158,7 @@ class AlbumAdmin(ArticleAdmin):
             'fields': ('channel',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('published', 'date_available')}),
+            'fields': ('published', 'date_available', 'show_on_root_channel')}),
     )
 
 
@@ -180,7 +182,7 @@ class LinkAdmin(ArticleAdmin):
             'fields': ('channel',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('published', 'date_available')}),
+            'fields': ('published', 'date_available', 'show_on_root_channel')}),
     )
 
 
