@@ -155,7 +155,7 @@ def apply_rules(admin_class, app):
 
     attrs = ('list_display', 'list_filter',
              'search_fields', 'exclude', 'raw_id_fields',
-             'prepopulated_fields')
+             'prepopulated_fields', 'readonly_fields')
 
     for attr in attrs:
         to_apply = rules.get(attr)
