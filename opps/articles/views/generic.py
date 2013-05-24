@@ -80,7 +80,7 @@ class OppsView(object):
 
         self.channel_long_slug = [self.long_slug]
         for children in self.channel.get_children():
-            self.channel_long_slug.append(children)
+            self.channel_long_slug.append(children.long_slug)
 
     def check_template(self, _template):
         try:
