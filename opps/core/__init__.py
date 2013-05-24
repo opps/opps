@@ -22,6 +22,7 @@ class OppsCoreConf(AppConf):
     CACHE_PREFIX = 'opps'
     CACHE_EXPIRE = 300
     RSS_LINK_TEMPLATE = '<a href="{}" class="ir ico ico-rss">RSS</a>'
+    LIST_MODELS = ('Post',)
 
     class Meta:
         prefix = 'opps'

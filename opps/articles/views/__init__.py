@@ -4,16 +4,49 @@ from django.core.paginator import Paginator, InvalidPage
 from django.contrib.sites.models import get_current_site
 from django.utils import timezone
 from django.http import Http404
+from django.core.cache import cache
+from django.conf import settings
 
 from haystack.views import SearchView
 
 from opps.articles.models import Post, Album, Article
 from opps.articles.views.generic import OppsDetail, OppsList
+from opps.core.cache import _cache_key
 
 
 class PostList(OppsList):
-    model = Post
+    models = settings.OPPS_LIST_MODELS
     type = "channels"
+
+    @property
+    def queryset(self):
+        self.site = get_current_site(self.request)
+        self.long_slug = self.get_long_slug()
+
+        if not self.long_slug:
+            return None
+
+        self.set_channel_rules()
+
+        cachekey = _cache_key('list:mobile{}'.format(self.request.is_mobile),
+                              Article, self.site, self.long_slug)
+        get_cache = cache.get(cachekey)
+        if get_cache:
+            return get_cache
+
+        self.article = Article.objects.filter(
+            site=self.site,
+            channel_long_slug__in=self.channel_long_slug,
+            date_available__lte=timezone.now(),
+            published=True,
+            child_class__in=self.models,
+            show_on_root_channel=True)
+        if self.limit:
+            self.article = self.article[:self.limit]
+
+        cache.set(cachekey, self.article)
+
+        return self.article
 
 
 class PostDetail(OppsDetail):
