@@ -97,6 +97,13 @@ class ArticleAdmin(PublishableAdmin):
     image_thumb.short_description = _(u'Thumbnail')
     image_thumb.allow_tags = True
 
+    def images_count(self, obj):
+        if obj.images:
+            return obj.images.count()
+        else:
+            return 0
+    images_count.short_description = _(u'Images')
+
 
 class PostRelatedInline(admin.TabularInline):
     model = PostRelated
@@ -146,6 +153,8 @@ class AlbumAdminForm(forms.ModelForm):
 class AlbumAdmin(ArticleAdmin):
     form = AlbumAdminForm
     inlines = [ArticleImageInline]
+    list_display = ['title', 'channel', 'images_count',
+                    'date_available', 'published']
 
     fieldsets = (
         (_(u'Identification'), {
