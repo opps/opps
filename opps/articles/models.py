@@ -74,6 +74,10 @@ class Article(Publishable, Slugged):
         through='articles.ArticleSource',
     )
     tags = TaggableManager(blank=True, verbose_name=u'Tags')
+    show_on_root_channel = models.BooleanField(
+        _(u"Show on root channel?"),
+        default=True
+    )
 
     def __unicode__(self):
         return u"{}".format(self.get_absolute_url())
