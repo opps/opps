@@ -187,8 +187,24 @@ def apply_rules(admin_class, app):
             return form
         admin_class.get_form = get_form
 
+    """
+    Allow custom form for admin
+    'articles.PostAdmin': {
+        ...
+        'form': 'yourapp.forms.PostAdminForm'
+    },
+    """
+    form = rules.get('form')
+    if form:
+        try:
+            _module = '.'.join(form.split('.')[:-1])
+            _form = form.split('.')[-1]
+            _temp = __import__(_module, globals(), locals(), [_form], -1)
+            admin_class.form = getattr(_temp, _form)
+        except:
+            pass
+
     # TODO:
-    # form
     # inlines
     # actions
     # override methods
