@@ -158,7 +158,8 @@ class AlbumAdmin(ArticleAdmin):
             'fields': ('channel',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('published', 'date_available', 'show_on_root_channel')}),
+            'fields': ('published', 'date_available',
+                       'show_on_root_channel')}),
     )
 
 
@@ -182,7 +183,8 @@ class LinkAdmin(ArticleAdmin):
             'fields': ('channel',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('published', 'date_available', 'show_on_root_channel')}),
+            'fields': ('published', 'date_available',
+                       'show_on_root_channel')}),
     )
 
 
