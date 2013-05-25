@@ -31,7 +31,7 @@ urlpatterns = patterns(
     # POST
     url(r'^(?P<long_slug>[\w\b//-]+)/(rss|feed)$',
         cache_page(60 * 2)(ChannelFeed(model='Post')), name='channel_feed'),
-    url(r'^(?P<channel__long_slug>[\w//-]+)/(?P<slug>[\w/-]+)$',
+    url(r'^(?P<channel__long_slug>[\w//-]+)/(?P<slug>[\w-]+)$',
         PostDetail.as_view(), name='open'),
     url(r'^(?P<channel__long_slug>[\w\b//-]+)/$',
         PostList.as_view(), name='channel'),
