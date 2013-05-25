@@ -43,7 +43,7 @@ class ArticleFeed(ItemFeed):
             channel__published=True
         ).order_by(
             '-date_available'
-        ).select_related('publisher')[:40]
+        )[:40]
 
 
 class ChannelFeed(ItemFeed):

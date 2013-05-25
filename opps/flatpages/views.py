@@ -32,5 +32,5 @@ class PageDetail(DetailView):
             site=self.site,
             slug=self.slug,
             date_available__lte=timezone.now(),
-            published=True).select_related('publisher')
+            published=True)
         return self.page

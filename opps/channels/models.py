@@ -86,7 +86,7 @@ class Channel(MPTTModel, Publishable, Slugged):
             channel_is_home = Channel.objects.filter(
                 site=self.site.id,
                 homepage=True,
-                published=True).select_related('publisher')
+                published=True)
             if self.pk:
                 channel_is_home = channel_is_home.exclude(pk=self.pk)
         except ObjectDoesNotExist:

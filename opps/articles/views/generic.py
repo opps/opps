@@ -219,7 +219,7 @@ class OppsDetail(OppsView, DetailView):
 
         self.article = self.model.objects.filter(
             **filters
-        ).select_related('publisher')
+        )
 
         if not preview_enabled:
             cache.set(cachekey, self.article)

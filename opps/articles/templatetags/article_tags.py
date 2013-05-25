@@ -33,7 +33,7 @@ def get_all_articlebox(channel_long_slug, template_name=None):
         site=settings.SITE_ID,
         date_available__lte=timezone.now(),
         published=True,
-        channel_long_slug=channel_long_slug).select_related('publisher')
+        channel_long_slug=channel_long_slug)
 
     t = template.loader.get_template('articles/articlebox_list.html')
     if template_name:
