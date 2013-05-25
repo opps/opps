@@ -211,18 +211,8 @@ class OppsDetail(OppsView, DetailView):
             filters['date_available__lte'] = timezone.now()
             filters['published'] = True
 
-            cachekey = _cache_key('detail:mobile{}'.format(
-                self.request.is_mobile), self.model, self.site,
-                "{}-{}".format(self.long_slug, self.slug))
-            get_cache = cache.get(cachekey)
-            if get_cache:
-                return get_cache
-
         self.article = self.model.objects.filter(
             **filters
         )
-
-        if not preview_enabled:
-            cache.set(cachekey, self.article)
 
         return self.article
