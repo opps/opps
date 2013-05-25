@@ -17,6 +17,7 @@ install_requires = ["django",
                     "django-haystack==1.2.7",
                     "django-mptt",
                     "django-appconf",
+                    'django-multiurl',
                     "python-memcached"]
 dependency_links = ['http://github.com/avelino/django-googl/tarball/master'
                     '#egg=django-googl',
