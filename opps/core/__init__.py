@@ -16,6 +16,7 @@ class OppsCoreConf(AppConf):
     VIEWS_LIMIT = None
     PAGINATE_BY = 10
     PAGINATE_SUFFIX = u''
+    PAGINATE_NOT_APP = []
     CHECK_MOBILE = False
     DOMAIN_MOBILE = u''
     PROTOCOL_MOBILE = u'http'
