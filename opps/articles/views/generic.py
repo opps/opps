@@ -56,31 +56,6 @@ class OppsView(object):
 
         return context
 
-    def get_object(self, queryset=None):
-        if queryset is None:
-            queryset = self.get_queryset()
-        pk = self.kwargs.get(self.pk_url_kwarg, None)
-        slug = self.kwargs.get(self.slug_url_kwarg, None)
-
-        if pk is not None:
-            queryset = queryset.filter(pk=pk)
-
-        elif slug is not None:
-            slug_field = self.get_slug_field()
-            queryset = queryset.filter(**{slug_field: slug})
-        else:
-            raise AttributeError("Generic detail view %s must be called with "
-                                 "either an object"
-                                 "pk or a slug." % self.__class__.__name__)
-
-        try:
-            obj = queryset.get()
-        except ObjectDoesNotExist:
-            pass
-
-        return obj
-
-
     def get_template_folder(self):
         domain_folder = self.type
         if self.site.id > 1:
