@@ -2,7 +2,7 @@
 import re
 from django.contrib.sites.models import Site
 from django.contrib.sites.models import get_current_site
-
+from django.http import HttpResponseRedirect
 from django.conf import settings
 
 from opps.channels.models import Channel
@@ -129,3 +129,9 @@ class MobileDetectionMiddleware(object):
         settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_WEB
         if is_mobile and settings.OPPS_CHECK_MOBILE:
             settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_MOBILE
+            if settings.OPPS_DOMAIN_MOBILE and \
+               request.META.get('HTTP_HOST', '') != \
+               settings.OPPS_DOMAIN_MOBILE:
+                return HttpResponseRedirect(u"{}://{}".format(
+                    settings.OPPS_PROTOCOL_MOBILE,
+                    settings.OPPS_DOMAIN_MOBILE))
