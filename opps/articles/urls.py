@@ -8,7 +8,6 @@ from .views import Search
 from .views.feed import ArticleFeed, ChannelFeed
 
 
-
 urlpatterns = patterns(
     '',
     url(r'^$', PostList.as_view(), name='home'),
