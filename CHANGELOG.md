@@ -8,6 +8,7 @@
 * In /rss feed, filter channels by **published** and **include_in_main_rss**
 * RSS Feed now renders in a template
 * Flatpage is content type Article
+* **Hotfix** fix *memory leak* (articles generic view)
 
 ## 0.1.7
 
