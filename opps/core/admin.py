@@ -138,7 +138,10 @@ class PublishableAdmin(admin.ModelAdmin):
     def preview_url(self, obj):
         html = (u'<a target="_blank" href="{href}" class="viewsitelink">'
                 u'<i class="icon-eye-open icon-alpha75"></i>{text}</a>')
-        return html.format(href=obj.get_absolute_url(), text=_(u"View on site"))
+        return html.format(
+            href=obj.get_absolute_url(),
+            text=_(u"View on site")
+        )
     preview_url.short_description = _(u"View on site")
     preview_url.allow_tags = True
 
