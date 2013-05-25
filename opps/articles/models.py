@@ -74,6 +74,10 @@ class Article(Publishable, Slugged):
         through='articles.ArticleSource',
     )
     tags = TaggableManager(blank=True, verbose_name=u'Tags')
+    show_on_root_channel = models.BooleanField(
+        _(u"Show on root channel?"),
+        default=True
+    )
 
     def __unicode__(self):
         return u"{}".format(self.get_absolute_url())
@@ -374,10 +378,6 @@ class ArticleBoxArticles(models.Model):
 
         if not self.article.published:
             raise ValidationError(_(u'Article not published!'))
-
-        if self.article.date_available >= timezone.now():
-            raise ValidationError(_(u'Article date available is greater than '
-                                    u'today!'))
 
 
 class ArticleConfig(BaseConfig):

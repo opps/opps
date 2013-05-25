@@ -11,6 +11,7 @@ from .models import ArticleBox, ArticleBoxArticles, ArticleConfig, PostRelated
 from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
 from opps.core.admin import BaseBoxAdmin
+from opps.core.admin import ChannelListFilter
 from opps.images.generate import image_url
 
 from redactor.widgets import RedactorEditor
@@ -68,6 +69,7 @@ class PostAdminForm(forms.ModelForm):
         widgets = {'content': RedactorEditor()}
 
 
+@apply_opps_rules('articles')
 class ArticleAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ["title"]}
     readonly_fields = ['get_http_absolute_url', 'short_url',
@@ -95,6 +97,18 @@ class ArticleAdmin(PublishableAdmin):
         return _(u'No Image')
     image_thumb.short_description = _(u'Thumbnail')
     image_thumb.allow_tags = True
+
+    def images_count(self, obj):
+        if obj.images:
+            return obj.images.count()
+        else:
+            return 0
+    images_count.short_description = _(u'Images')
+
+    def get_list_filter(self, request):
+        list_filter = super(ArticleAdmin, self).list_filter
+        list_filter = [ChannelListFilter] + list(list_filter)
+        return list_filter
 
 
 class PostRelatedInline(admin.TabularInline):
@@ -126,7 +140,8 @@ class PostAdmin(ArticleAdmin):
             'fields': ('channel', 'albums',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('published', 'date_available', 'in_articleboxes')}),
+            'fields': ('published', 'date_available',
+                       'show_on_root_channel', 'in_articleboxes')}),
     )
 
 
@@ -144,6 +159,8 @@ class AlbumAdminForm(forms.ModelForm):
 class AlbumAdmin(ArticleAdmin):
     form = AlbumAdminForm
     inlines = [ArticleImageInline]
+    list_display = ['title', 'channel', 'images_count',
+                    'date_available', 'published']
 
     fieldsets = (
         (_(u'Identification'), {
@@ -156,7 +173,8 @@ class AlbumAdmin(ArticleAdmin):
             'fields': ('channel',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('published', 'date_available')}),
+            'fields': ('published', 'date_available',
+                       'show_on_root_channel')}),
     )
 
 
@@ -180,7 +198,8 @@ class LinkAdmin(ArticleAdmin):
             'fields': ('channel',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('published', 'date_available')}),
+            'fields': ('published', 'date_available',
+                       'show_on_root_channel')}),
     )
 
 
