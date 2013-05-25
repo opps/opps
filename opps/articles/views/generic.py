@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.core.exceptions import ImproperlyConfigured, ObjectDoesNotExist
+from django.core.exceptions import ImproperlyConfigured
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.contrib.sites.models import get_current_site
@@ -13,6 +13,8 @@ from django.conf import settings
 from opps.articles.models import ArticleBox, Article, Album
 from opps.channels.models import Channel
 from opps.core.cache import _cache_key
+
+from multiurl import ContinueResolving
 
 
 class OppsView(object):
@@ -192,6 +194,8 @@ class OppsDetail(OppsView, DetailView):
     def queryset(self):
         self.site = get_current_site(self.request)
         self.slug = self.kwargs.get('slug')
+        if self.kwargs.get('slug')[-1] == '/':
+            self.slug = self.kwargs.get('slug')[:-1]
         self.long_slug = self.get_long_slug()
         if not self.long_slug:
             return None
@@ -220,6 +224,8 @@ class OppsDetail(OppsView, DetailView):
         self.article = self.model.objects.filter(
             **filters
         )
+        if len(self.article) == 0:
+            raise ContinueResolving
 
         if not preview_enabled:
             cache.set(cachekey, self.article)
