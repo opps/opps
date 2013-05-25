@@ -9,6 +9,7 @@
 * RSS Feed now renders in a template
 * Flatpage is content type Article
 * **Hotfix** fix *memory leak* (articles generic view)
+* Chekc OPPS_PAGINATE_NOT_APP app not used PAGINATE_SUFFIX
 
 ## 0.1.7
 
