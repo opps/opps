@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import md5
-from django.core.exceptions import ImproperlyConfigured, ObjectDoesNotExist
+from django.core.exceptions import ImproperlyConfigured
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.contrib.sites.models import get_current_site
