@@ -61,7 +61,6 @@ class OppsView(object):
         return domain_folder
 
     def get_long_slug(self):
-        import pdb; pdb.set_trace()
         self.long_slug = self.kwargs.get('channel__long_slug', None)
         try:
             if not self.long_slug:
