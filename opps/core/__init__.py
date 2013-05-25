@@ -15,8 +15,10 @@ class OppsCoreConf(AppConf):
     CHANNEL_CONF = {}
     VIEWS_LIMIT = None
     PAGINATE_BY = 10
-    PAGINATE_SUFFIX = ''
+    PAGINATE_SUFFIX = u''
     CHECK_MOBILE = False
+    DOMAIN_MOBILE = u''
+    PROTOCOL_MOBILE = u'http'
     ADMIN_RULES = {}
     RELATED_POSTS_PLACEHOLDER = "---related---"
     CACHE_PREFIX = 'opps'
