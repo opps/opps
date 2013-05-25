@@ -96,7 +96,9 @@ class OppsList(OppsView, ListView):
 
         # look for a different template only if defined in settings
         # default should be OPPS_PAGINATE_SUFFIX = "_paginated"
-        if self.request and self.request.GET.get('page'):
+        # if set OPPS_PAGINATE_NOT_APP = ['TagList'] not set paginate_suffix
+        if self.request and self.request.GET.get('page') and\
+           self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
             self.paginate_suffix = settings.OPPS_PAGINATE_SUFFIX
             self.template_name_suffix = "_list{}".format(self.paginate_suffix)
         else:
