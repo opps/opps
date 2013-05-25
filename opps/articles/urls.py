@@ -7,7 +7,6 @@ from .views import PostDetail, PostList, AlbumList, AlbumDetail, TagList
 from .views import Search
 from .views.feed import ArticleFeed, ChannelFeed
 
-from multiurl import multiurl
 
 
 urlpatterns = patterns(
@@ -32,10 +31,8 @@ urlpatterns = patterns(
     # POST
     url(r'^(?P<long_slug>[\w\b//-]+)/(rss|feed)$',
         cache_page(60 * 2)(ChannelFeed(model='Post')), name='channel_feed'),
-    multiurl(
-        url(r'^(?P<channel__long_slug>[\w//-]+)/(?P<slug>[\w//-]+)$',
-            PostDetail.as_view(), name='open'),
-        url(r'^(?P<channel__long_slug>[\w\b//-]+)/$',
-            PostList.as_view(), name='channel'),
-    )
+    url(r'^(?P<channel__long_slug>[\w//-]+)/(?P<slug>[\w/-]+)$',
+        PostDetail.as_view(), name='open'),
+    url(r'^(?P<channel__long_slug>[\w\b//-]+)/$',
+        PostList.as_view(), name='channel'),
 )
