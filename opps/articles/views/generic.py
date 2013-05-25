@@ -196,6 +196,8 @@ class OppsDetail(OppsView, DetailView):
         if not self.long_slug:
             return None
 
+    def get_queryset_set(self):
+
         self.set_channel_rules()
 
         filters = dict(
