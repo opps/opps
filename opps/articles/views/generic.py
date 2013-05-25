@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.core.exceptions import ImproperlyConfigured
+from django.core.cache import cache
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.contrib.sites.models import get_current_site
@@ -11,6 +12,7 @@ from django.conf import settings
 
 from opps.articles.models import ArticleBox, Article, Album
 from opps.channels.models import Channel
+from opps.core.cache import _cache_key
 
 
 class OppsView(object):
@@ -152,6 +154,12 @@ class OppsList(OppsView, ListView):
 
         self.set_channel_rules()
 
+        cachekey = _cache_key('list:mobile{}'.format(self.request.is_mobile),
+                              self.model, self.site, self.long_slug)
+        get_cache = cache.get(cachekey)
+        if get_cache:
+            return get_cache
+
         self.article = self.model.objects.filter(
             site=self.site,
             channel_long_slug__in=self.channel_long_slug,
@@ -159,6 +167,8 @@ class OppsList(OppsView, ListView):
             published=True)
         if self.limit:
             self.article = self.article[:self.limit]
+
+        cache.set(cachekey, self.article._clone())
 
         return self.article._clone()
 
@@ -202,8 +212,17 @@ class OppsDetail(OppsView, DetailView):
             filters['date_available__lte'] = timezone.now()
             filters['published'] = True
 
+            cachekey = _cache_key('detail:mobile{}'.format(
+                self.request.is_mobile), self.model, self.site,
+                "{}-{}".format(self.long_slug, self.slug))
+            get_cache = cache.get(cachekey)
+            if get_cache:
+                return get_cache
+
         self.article = self.model.objects.filter(
             **filters
         )
 
+        if not preview_enabled:
+            cache.set(cachekey, self.article._clone())
         return self.article._clone()
