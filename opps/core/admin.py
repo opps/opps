@@ -10,6 +10,7 @@ from django.contrib.admin import SimpleListFilter
 from django.contrib.sites.models import get_current_site
 
 from opps.channels.models import Channel
+from opps.images.generate import image_url
 
 
 class ChannelListFilter(SimpleListFilter):
@@ -84,7 +85,7 @@ class PublishableAdmin(admin.ModelAdmin):
     It sets user (author) based on data from requet.
     """
     list_display = ['title', 'channel_long_slug',
-                    'date_available', 'published']
+                    'date_available', 'published', 'preview_url']
     list_filter = ['child_class', 'date_available', 'published']
     search_fields = ['title', 'slug', 'headline', 'channel_name']
     exclude = ('user',)
@@ -104,6 +105,45 @@ class PublishableAdmin(admin.ModelAdmin):
             obj.site = Site.objects.get(pk=settings.SITE_ID)
         obj.date_update = timezone.now()
         obj.save()
+
+    def in_articleboxes(self, obj):
+        articleboxes = obj.articlebox_articles.all()
+        if articleboxes:
+            html = [u"<ul>"]
+            for box in articleboxes:
+                li = (u"<li><a href='/admin/articles/articlebox/{box.id}/'"
+                      u" target='_blank'>{box.slug}</a></li>")
+                html.append(li.format(box=box))
+            html.append(u"</ul>")
+            return u"".join(html)
+        return _(u"This item is not in a box")
+    in_articleboxes.allow_tags = True
+    in_articleboxes.short_description = _(u'Article boxes')
+
+    def image_thumb(self, obj):
+        if obj.main_image:
+            return u'<img width="60px" height="60px" src="{0}" />'.format(
+                image_url(obj.main_image.image.url, width=60, height=60))
+        return _(u'No Image')
+    image_thumb.short_description = _(u'Thumbnail')
+    image_thumb.allow_tags = True
+
+    def images_count(self, obj):
+        if obj.images:
+            return obj.images.count()
+        else:
+            return 0
+    images_count.short_description = _(u'Images')
+
+    def preview_url(self, obj):
+        html = (u'<a target="_blank" href="{href}" class="viewsitelink">'
+                u'<i class="icon-eye-open icon-alpha75"></i>{text}</a>')
+        return html.format(
+            href=obj.get_absolute_url(),
+            text=_(u"View on site")
+        )
+    preview_url.short_description = _(u"View on site")
+    preview_url.allow_tags = True
 
 
 class BaseBoxAdmin(PublishableAdmin):
