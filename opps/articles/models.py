@@ -3,12 +3,14 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
+from django.core.cache import cache
 
 from taggit.managers import TaggableManager
 
 from .signals import redirect_generate, shorturl_generate, delete_article
 from opps.core.models import Publishable, BaseBox, BaseConfig
 from opps.core.models import Slugged
+from opps.core.cache import _cache_key
 
 
 class Article(Publishable, Slugged):
@@ -121,8 +123,16 @@ class Article(Publishable, Slugged):
     get_http_absolute_url.short_description = 'URL'
 
     def recommendation(self):
+        cachekey = _cache_key(
+            '{}-recommendation'.format(self.__class__.__name__),
+            self.__class__, self.site, u"{}-{}".format(self.channel_long_slug,
+                                                       self.slug))
+        getcache = cache.get(cachekey)
+        if getcache:
+            return getcache
+
         tag_list = [t for t in self.tags.all()[:3]]
-        return [a for a in Article.objects.filter(
+        _list = [a for a in Article.objects.filter(
             child_class=self.child_class,
             channel_long_slug=self.channel_long_slug,
             date_available__lte=timezone.now(),
@@ -130,7 +140,18 @@ class Article(Publishable, Slugged):
             tags__in=tag_list).exclude(
                 pk=self.pk).distinct().all().order_by('pk')[:10]]
 
+        cache.set(cachekey, _list)
+        return _list
+
     def all_images(self):
+        cachekey = _cache_key(
+            '{}-all_images'.format(self.__class__.__name__),
+            self.__class__, self.site, u"{}-{}".format(self.channel_long_slug,
+                                                       self.slug))
+        getcache = cache.get(cachekey)
+        if getcache:
+            return getcache
+
         imgs = [self.main_image]
         images = self.images.filter(
             published=True, date_available__lte=timezone.now()
@@ -140,6 +161,7 @@ class Article(Publishable, Slugged):
             images = images.exclude(pk=self.main_image.pk)
         imgs += [i for i in images.distinct()]
 
+        cache.set(cachekey, imgs)
         return imgs
 
 
@@ -163,6 +185,14 @@ class Post(Article):
         verbose_name_plural = _('Posts')
 
     def all_images(self):
+        cachekey = _cache_key(
+            '{}-all_images'.format(self.__class__.__name__),
+            self.__class__, self.site, u"{}-{}".format(self.channel_long_slug,
+                                                       self.slug))
+        getcache = cache.get(cachekey)
+        if getcache:
+            return getcache
+
         imgs = super(Post, self).all_images()
         imgs += [
             i for a in self.albums.filter(
@@ -174,6 +204,8 @@ class Post(Article):
                 date_available__lte=timezone.now()
             ).exclude(pk__in=[i.pk for i in imgs]).distinct()
         ]
+
+        cache.set(cachekey, imgs)
         return imgs
 
     def ordered_related(self, field='order'):
