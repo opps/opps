@@ -186,7 +186,7 @@ class Post(Article):
 
     def all_images(self):
         cachekey = _cache_key(
-            '{}-all_images'.format(self.__class__.__name__),
+            '{}main-all_images'.format(self.__class__.__name__),
             self.__class__, self.site, u"{}-{}".format(self.channel_long_slug,
                                                        self.slug))
         getcache = cache.get(cachekey)
