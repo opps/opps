@@ -154,7 +154,7 @@ class OppsList(OppsView, ListView):
 
         self.set_channel_rules()
 
-        cachekey = _cache_key('list:mobile{}'.format(self.request.is_mobile),
+        cachekey = _cache_key(u'list:mobile{}'.format(self.request.is_mobile),
                               self.model, self.site, self.long_slug)
         get_cache = cache.get(cachekey)
         if get_cache:
@@ -212,9 +212,9 @@ class OppsDetail(OppsView, DetailView):
             filters['date_available__lte'] = timezone.now()
             filters['published'] = True
 
-            cachekey = _cache_key('detail:mobile{}'.format(
+            cachekey = _cache_key(u'detail:mobile{}'.format(
                 self.request.is_mobile), self.model, self.site,
-                "{}-{}".format(self.long_slug, self.slug))
+                u"{}-{}".format(self.long_slug, self.slug))
             get_cache = cache.get(cachekey)
             if get_cache:
                 return get_cache
