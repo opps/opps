@@ -29,14 +29,29 @@ class OppsView(object):
     def get_context_data(self, **kwargs):
         context = super(OppsView, self).get_context_data(**kwargs)
 
+        if hasattr(self, 'articleboxes'):
+            context['articleboxes'] = self.articleboxes
+        else:
+            context['articleboxes'] = ArticleBox.objects.filter(
+                channel__long_slug=self.long_slug)
+            self.excluded_ids = []
+            for box in context['articleboxes']:
+                self.excluded_ids += [a.pk for a in box.ordered_articles()]
+
         filters = {}
         filters['site'] = self.site
         filters['channel_long_slug__in'] = self.channel_long_slug
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
         article = Article.objects.filter(**filters)
-        context['posts'] = article.filter(child_class='Post')[:self.limit]
-        context['albums'] = Album.objects.filter(**filters)[:self.limit]
+
+        context['posts'] = article.filter(
+            child_class='Post'
+        ).exclude(pk__in=self.excluded_ids)[:self.limit]
+
+        context['albums'] = Album.objects.filter(
+            **filters
+        ).exclude(pk__in=self.excluded_ids)[:self.limit]
 
         context['channel'] = {}
         context['channel']['long_slug'] = self.long_slug
@@ -46,8 +61,6 @@ class OppsView(object):
             context['channel']['level'] = self.channel.get_level()
             context['channel']['root'] = self.channel.get_root()
 
-        context['articleboxes'] = ArticleBox.objects.filter(
-            channel__long_slug=self.long_slug)
         if self.slug:
             context['articleboxes'] = context['articleboxes'].filter(
                 article__slug=self.slug)
@@ -152,11 +165,20 @@ class OppsList(OppsView, ListView):
 
         self.set_channel_rules()
 
+        self.articleboxes = ArticleBox.objects.filter(
+            channel__long_slug=self.long_slug)
+
+        self.excluded_ids = []
+        for box in self.articleboxes:
+            self.excluded_ids += [a.pk for a in box.ordered_articles()]
+
         self.article = self.model.objects.filter(
             site=self.site,
             channel_long_slug__in=self.channel_long_slug,
             date_available__lte=timezone.now(),
-            published=True)
+            published=True
+        ).exclude(pk__in=self.excluded_ids)
+
         if self.limit:
             self.article = self.article[:self.limit]
 
