@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.9
+
 ## 0.1.8
 
 * Queryset cache on generic view
