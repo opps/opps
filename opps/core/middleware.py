@@ -60,7 +60,6 @@ class DynamicSiteMiddleware(object):
         site = self.get_hosting(hosting)
 
         settings.SITE_ID = site.id
-        settings.CACHE_MIDDLEWARE_KEY_PREFIX = "opps_site-{}".format(site.id)
 
 
 class MobileDetectionMiddleware(object):
