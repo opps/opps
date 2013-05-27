@@ -24,6 +24,8 @@ class OppsCoreConf(AppConf):
     RELATED_POSTS_PLACEHOLDER = "---related---"
     CACHE_PREFIX = 'opps'
     CACHE_EXPIRE = 300
+    CACHE_EXPIRE_LIST = 300
+    CACHE_EXPIRE_DETAIL = 300
     RSS_LINK_TEMPLATE = '<a href="{}" class="ir ico ico-rss">RSS</a>'
     LIST_MODELS = ('Post',)
 
