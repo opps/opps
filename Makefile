@@ -8,12 +8,12 @@ test: pep8
 travis:
 	pip install -r requirements.txt --use-mirrors
 	export OPPS_TRAVIS=True
-	python setup.py develop 
+	python setup.py develop
 
 .PHONY: install
 install:
 	pip install -r requirements.txt --use-mirrors
-	python setup.py develop 
+	python setup.py develop
 
 .PHONY: pep8
 pep8:
@@ -38,6 +38,14 @@ makemessages:
 		cd ../../;\
 	done
 
+.PHONY: compilemessages
+compilemessages:
+	for resource in articles boxes channels core flatpages images search sitemaps sources; do\
+	    echo "make $$resource";\
+	    cd opps/$$resource;\
+		django-admin.py compilemessages;\
+		cd ../../;\
+	done
 
 .PHONY: tx
 tx:

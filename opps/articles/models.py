@@ -3,12 +3,14 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
+from django.core.cache import cache
 
 from taggit.managers import TaggableManager
 
 from .signals import redirect_generate, shorturl_generate, delete_article
 from opps.core.models import Publishable, BaseBox, BaseConfig
 from opps.core.models import Slugged
+from opps.core.cache import _cache_key
 
 
 class Article(Publishable, Slugged):
@@ -74,6 +76,10 @@ class Article(Publishable, Slugged):
         through='articles.ArticleSource',
     )
     tags = TaggableManager(blank=True, verbose_name=u'Tags')
+    show_on_root_channel = models.BooleanField(
+        _(u"Show on root channel?"),
+        default=True
+    )
 
     def __unicode__(self):
         return u"{}".format(self.get_absolute_url())
@@ -117,25 +123,45 @@ class Article(Publishable, Slugged):
     get_http_absolute_url.short_description = 'URL'
 
     def recommendation(self):
-        tag_list = [t for t in self.tags.select_related('publisher')[:3]]
-        return [a for a in Article.objects.filter(
+        cachekey = _cache_key(
+            '{}-recommendation'.format(self.__class__.__name__),
+            self.__class__, self.site, u"{}-{}".format(self.channel_long_slug,
+                                                       self.slug))
+        getcache = cache.get(cachekey)
+        if getcache:
+            return getcache
+
+        tag_list = [t for t in self.tags.all()[:3]]
+        _list = [a for a in Article.objects.filter(
             child_class=self.child_class,
             channel_long_slug=self.channel_long_slug,
             date_available__lte=timezone.now(),
             published=True,
             tags__in=tag_list).exclude(
-                pk=self.pk).distinct().select_related(
-                    'publisher').order_by('pk')[:10]]
+                pk=self.pk).distinct().all().order_by('pk')[:10]]
+
+        cache.set(cachekey, _list)
+        return _list
 
     def all_images(self):
+        cachekey = _cache_key(
+            '{}-all_images'.format(self.__class__.__name__),
+            self.__class__, self.site, u"{}-{}".format(self.channel_long_slug,
+                                                       self.slug))
+        getcache = cache.get(cachekey)
+        if getcache:
+            return getcache
+
         imgs = [self.main_image]
         images = self.images.filter(
             published=True, date_available__lte=timezone.now()
-        )
+        ).order_by('articleimage__order', '-date_available')
+
         if self.main_image:
             images = images.exclude(pk=self.main_image.pk)
         imgs += [i for i in images.distinct()]
 
+        cache.set(cachekey, imgs)
         return imgs
 
 
@@ -145,6 +171,7 @@ class Post(Article):
         'articles.Album',
         null=True, blank=True,
         related_name='post_albums',
+        verbose_name=_(u"Albums")
     )
     related_posts = models.ManyToManyField(
         'articles.Post',
@@ -158,6 +185,14 @@ class Post(Article):
         verbose_name_plural = _('Posts')
 
     def all_images(self):
+        cachekey = _cache_key(
+            '{}main-all_images'.format(self.__class__.__name__),
+            self.__class__, self.site, u"{}-{}".format(self.channel_long_slug,
+                                                       self.slug))
+        getcache = cache.get(cachekey)
+        if getcache:
+            return getcache
+
         imgs = super(Post, self).all_images()
         imgs += [
             i for a in self.albums.filter(
@@ -169,6 +204,8 @@ class Post(Article):
                 date_available__lte=timezone.now()
             ).exclude(pk__in=[i.pk for i in imgs]).distinct()
         ]
+
+        cache.set(cachekey, imgs)
         return imgs
 
     def ordered_related(self, field='order'):
@@ -313,6 +350,7 @@ class ArticleBox(BaseBox):
     queryset = models.ForeignKey(
         'boxes.QuerySet',
         null=True, blank=True,
+        related_name='articlebox_querysets',
         verbose_name=_(u'Query Set')
     )
 
@@ -371,10 +409,6 @@ class ArticleBoxArticles(models.Model):
 
         if not self.article.published:
             raise ValidationError(_(u'Article not published!'))
-
-        if self.article.date_available >= timezone.now():
-            raise ValidationError(_(u'Article date available is greater than '
-                                    u'today!'))
 
 
 class ArticleConfig(BaseConfig):

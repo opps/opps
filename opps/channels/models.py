@@ -28,6 +28,10 @@ class Channel(MPTTModel, Publishable, Slugged):
     description = models.CharField(_(u"Description"),
                                    max_length=255, null=True, blank=True)
     show_in_menu = models.BooleanField(_(u"Show in menu?"), default=False)
+    include_in_main_rss = models.BooleanField(
+        _(u"Show in main RSS?"),
+        default=True
+    )
     homepage = models.BooleanField(
         _(u"Is home page?"),
         default=False,
@@ -82,7 +86,7 @@ class Channel(MPTTModel, Publishable, Slugged):
             channel_is_home = Channel.objects.filter(
                 site=self.site.id,
                 homepage=True,
-                published=True).select_related('publisher')
+                published=True)
             if self.pk:
                 channel_is_home = channel_is_home.exclude(pk=self.pk)
         except ObjectDoesNotExist:

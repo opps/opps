@@ -5,57 +5,56 @@ from south.v2 import SchemaMigration
 from django.db import models
 from django.contrib.auth import get_user_model
 
-
 User = get_user_model()
 
 
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'FlatPage'
-        db.create_table(u'flatpages_flatpage', (
-            (u'article_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['articles.Article'], unique=True, primary_key=True)),
-            ('show_in_menu', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('content', self.gf('django.db.models.fields.TextField')()),
-            ('order', self.gf('django.db.models.fields.IntegerField')(default=0)),
-        ))
-        db.send_create_signal(u'flatpages', ['FlatPage'])
+        # Adding index on 'ArticleConfig', fields ['date_available']
+        db.create_index(u'articles_articleconfig', ['date_available'])
 
-        # Adding model 'FlatPageConfig'
-        db.create_table(u'flatpages_flatpageconfig', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('date_insert', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('date_update', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm["%s.%s" % (User._meta.app_label, User._meta.object_name)])),
-            ('site', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['sites.Site'])),
-            ('date_available', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now, null=True)),
-            ('published', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('key_group', self.gf('django.db.models.fields.SlugField')(max_length=150, null=True, blank=True)),
-            ('key', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=150)),
-            ('format', self.gf('django.db.models.fields.CharField')(default='text', max_length=20)),
-            ('value', self.gf('django.db.models.fields.TextField')()),
-            ('description', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-            ('article', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['articles.Article'], null=True, on_delete=models.SET_NULL, blank=True)),
-            ('channel', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['channels.Channel'], null=True, on_delete=models.SET_NULL, blank=True)),
-        ))
-        db.send_create_signal(u'flatpages', ['FlatPageConfig'])
+        # Adding index on 'ArticleConfig', fields ['published']
+        db.create_index(u'articles_articleconfig', ['published'])
 
-        # Adding unique constraint on 'FlatPageConfig', fields ['key_group', 'key', 'site', 'channel', 'article']
-        db.create_unique(u'flatpages_flatpageconfig', ['key_group', 'key', 'site_id', 'channel_id', 'article_id'])
+        # Adding index on 'ArticleBox', fields ['date_available']
+        db.create_index(u'articles_articlebox', ['date_available'])
+
+        # Adding index on 'ArticleBox', fields ['published']
+        db.create_index(u'articles_articlebox', ['published'])
+
+        # Adding index on 'Article', fields ['date_available']
+        db.create_index(u'articles_article', ['date_available'])
+
+        # Adding index on 'Article', fields ['published']
+        db.create_index(u'articles_article', ['published'])
 
 
     def backwards(self, orm):
-        # Removing unique constraint on 'FlatPageConfig', fields ['key_group', 'key', 'site', 'channel', 'article']
-        db.delete_unique(u'flatpages_flatpageconfig', ['key_group', 'key', 'site_id', 'channel_id', 'article_id'])
+        # Removing index on 'Article', fields ['published']
+        db.delete_index(u'articles_article', ['published'])
 
-        # Deleting model 'FlatPage'
-        db.delete_table(u'flatpages_flatpage')
+        # Removing index on 'Article', fields ['date_available']
+        db.delete_index(u'articles_article', ['date_available'])
 
-        # Deleting model 'FlatPageConfig'
-        db.delete_table(u'flatpages_flatpageconfig')
+        # Removing index on 'ArticleBox', fields ['published']
+        db.delete_index(u'articles_articlebox', ['published'])
+
+        # Removing index on 'ArticleBox', fields ['date_available']
+        db.delete_index(u'articles_articlebox', ['date_available'])
+
+        # Removing index on 'ArticleConfig', fields ['published']
+        db.delete_index(u'articles_articleconfig', ['published'])
+
+        # Removing index on 'ArticleConfig', fields ['date_available']
+        db.delete_index(u'articles_articleconfig', ['date_available'])
 
 
     models = {
+        u'articles.album': {
+            'Meta': {'ordering': "['-date_available', 'title', 'channel_long_slug']", 'object_name': 'Album', '_ormbases': [u'articles.Article']},
+            u'article_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['articles.Article']", 'unique': 'True', 'primary_key': 'True'})
+        },
         u'articles.article': {
             'Meta': {'ordering': "['-date_available', 'title', 'channel_long_slug']", 'unique_together': "(['site', 'child_class', 'channel_long_slug', 'slug'],)", 'object_name': 'Article'},
             'channel': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['channels.Channel']"}),
@@ -63,7 +62,7 @@ class Migration(SchemaMigration):
             'channel_name': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '140', 'null': 'True', 'blank': 'True'}),
             'child_app_label': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '30', 'null': 'True', 'blank': 'True'}),
             'child_class': ('django.db.models.fields.CharField', [], {'db_index': 'True', 'max_length': '30', 'null': 'True', 'blank': 'True'}),
-            'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True'}),
+            'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True', 'db_index': 'True'}),
             'date_insert': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'date_update': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'hat': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
@@ -71,14 +70,60 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'images': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'article_images'", 'to': u"orm['images.Image']", 'through': u"orm['articles.ArticleImage']", 'blank': 'True', 'symmetrical': 'False', 'null': 'True'}),
             'main_image': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['images.Image']", 'null': 'True', 'on_delete': 'models.SET_NULL'}),
-            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'db_index': 'True'}),
             'short_title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
             'short_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
+            'show_on_root_channel': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'site': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': u"orm['sites.Site']"}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '150'}),
             'sources': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['sources.Source']", 'null': 'True', 'through': u"orm['articles.ArticleSource']", 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'db_index': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['%s.%s']" % (User._meta.app_label, User._meta.object_name)})
+        },
+        u'articles.articlebox': {
+            'Meta': {'object_name': 'ArticleBox'},
+            'article': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['articles.Article']", 'null': 'True', 'on_delete': 'models.SET_NULL', 'blank': 'True'}),
+            'articles': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'articlebox_articles'", 'to': u"orm['articles.Article']", 'through': u"orm['articles.ArticleBoxArticles']", 'blank': 'True', 'symmetrical': 'False', 'null': 'True'}),
+            'channel': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['channels.Channel']", 'null': 'True', 'on_delete': 'models.SET_NULL', 'blank': 'True'}),
+            'channel_long_slug': ('django.db.models.fields.CharField', [], {'max_length': '250', 'null': 'True', 'db_index': 'True'}),
+            'channel_name': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'db_index': 'True'}),
+            'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True', 'db_index': 'True'}),
+            'date_insert': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'date_update': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '140'}),
+            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'db_index': 'True'}),
+            'queryset': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'articlebox_querysets'", 'null': 'True', 'to': u"orm['boxes.QuerySet']"}),
+            'site': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': u"orm['sites.Site']"}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '150'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['%s.%s']" % (User._meta.app_label, User._meta.object_name)})
+        },
+        u'articles.articleboxarticles': {
+            'Meta': {'ordering': "('order',)", 'object_name': 'ArticleBoxArticles'},
+            'article': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'articleboxarticles_articles'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': u"orm['articles.Article']"}),
+            'articlebox': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'articleboxarticles_articleboxes'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': u"orm['articles.ArticleBox']"}),
+            'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True'}),
+            'date_end': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'order': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'})
+        },
+        u'articles.articleconfig': {
+            'Meta': {'unique_together': "(('key_group', 'key', 'site', 'channel', 'article'),)", 'object_name': 'ArticleConfig'},
+            'article': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['articles.Article']", 'null': 'True', 'on_delete': 'models.SET_NULL', 'blank': 'True'}),
+            'channel': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['channels.Channel']", 'null': 'True', 'on_delete': 'models.SET_NULL', 'blank': 'True'}),
+            'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True', 'db_index': 'True'}),
+            'date_insert': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'date_update': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'format': ('django.db.models.fields.CharField', [], {'default': "'text'", 'max_length': '20'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'key': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '150'}),
+            'key_group': ('django.db.models.fields.SlugField', [], {'max_length': '150', 'null': 'True', 'blank': 'True'}),
+            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'db_index': 'True'}),
+            'site': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': u"orm['sites.Site']"}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['%s.%s']" % (User._meta.app_label, User._meta.object_name)}),
+            'value': ('django.db.models.fields.TextField', [], {})
         },
         u'articles.articleimage': {
             'Meta': {'object_name': 'ArticleImage'},
@@ -94,6 +139,26 @@ class Migration(SchemaMigration):
             'order': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
             'source': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'articlesource_sources'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': u"orm['sources.Source']"})
         },
+        u'articles.link': {
+            'Meta': {'ordering': "['-date_available', 'title', 'channel_long_slug']", 'object_name': 'Link', '_ormbases': [u'articles.Article']},
+            u'article_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['articles.Article']", 'unique': 'True', 'primary_key': 'True'}),
+            'articles': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'link_article'", 'null': 'True', 'to': u"orm['articles.Article']"}),
+            'url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'})
+        },
+        u'articles.post': {
+            'Meta': {'ordering': "['-date_available', 'title', 'channel_long_slug']", 'object_name': 'Post', '_ormbases': [u'articles.Article']},
+            'albums': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'post_albums'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['articles.Album']"}),
+            u'article_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['articles.Article']", 'unique': 'True', 'primary_key': 'True'}),
+            'content': ('django.db.models.fields.TextField', [], {}),
+            'related_posts': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'post_relatedposts'", 'to': u"orm['articles.Post']", 'through': u"orm['articles.PostRelated']", 'blank': 'True', 'symmetrical': 'False', 'null': 'True'})
+        },
+        u'articles.postrelated': {
+            'Meta': {'object_name': 'PostRelated'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'order': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
+            'post': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'postrelated_post'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': u"orm['articles.Post']"}),
+            'related': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'postrelated_related'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': u"orm['articles.Post']"})
+        },
         u'auth.group': {
             'Meta': {'object_name': 'Group'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -107,12 +172,28 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         },
-        "%s.%s" % (User._meta.app_label, User._meta.module_name): {
+       "%s.%s" % (User._meta.app_label, User._meta.module_name): {
             'Meta': {'object_name': User.__name__},
+        },
+        u'boxes.queryset': {
+            'Meta': {'object_name': 'QuerySet'},
+            'channel': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['channels.Channel']"}),
+            'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True', 'db_index': 'True'}),
+            'date_insert': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'date_update': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'limit': ('django.db.models.fields.PositiveIntegerField', [], {'default': '7'}),
+            'model': ('django.db.models.fields.CharField', [], {'max_length': '150'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '140'}),
+            'order': ('django.db.models.fields.CharField', [], {'max_length': '1'}),
+            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'db_index': 'True'}),
+            'site': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': u"orm['sites.Site']"}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '150'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['%s.%s']" % (User._meta.app_label, User._meta.object_name)})
         },
         u'channels.channel': {
             'Meta': {'object_name': 'Channel'},
-            'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True'}),
+            'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True', 'db_index': 'True'}),
             'date_insert': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'date_update': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'description': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
@@ -126,7 +207,7 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '60'}),
             'order': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'parent': ('mptt.fields.TreeForeignKey', [], {'blank': 'True', 'related_name': "'subchannel'", 'null': 'True', 'to': u"orm['channels.Channel']"}),
-            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'db_index': 'True'}),
             'rght': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             'show_in_menu': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'site': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': u"orm['sites.Site']"}),
@@ -141,30 +222,6 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        u'flatpages.flatpage': {
-            'Meta': {'ordering': "['-date_available', 'title', 'channel_long_slug']", 'object_name': 'FlatPage', '_ormbases': [u'articles.Article']},
-            u'article_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['articles.Article']", 'unique': 'True', 'primary_key': 'True'}),
-            'content': ('django.db.models.fields.TextField', [], {}),
-            'order': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'show_in_menu': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
-        },
-        u'flatpages.flatpageconfig': {
-            'Meta': {'unique_together': "(('key_group', 'key', 'site', 'channel', 'article'),)", 'object_name': 'FlatPageConfig'},
-            'article': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['articles.Article']", 'null': 'True', 'on_delete': 'models.SET_NULL', 'blank': 'True'}),
-            'channel': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['channels.Channel']", 'null': 'True', 'on_delete': 'models.SET_NULL', 'blank': 'True'}),
-            'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True'}),
-            'date_insert': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'date_update': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'format': ('django.db.models.fields.CharField', [], {'default': "'text'", 'max_length': '20'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'key': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '150'}),
-            'key_group': ('django.db.models.fields.SlugField', [], {'max_length': '150', 'null': 'True', 'blank': 'True'}),
-            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'site': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': u"orm['sites.Site']"}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['%s.%s']" % (User._meta.app_label, User._meta.object_name)}),
-            'value': ('django.db.models.fields.TextField', [], {})
-        },
         u'images.image': {
             'Meta': {'object_name': 'Image'},
             'crop_example': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
@@ -172,7 +229,7 @@ class Migration(SchemaMigration):
             'crop_x2': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0', 'null': 'True', 'blank': 'True'}),
             'crop_y1': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0', 'null': 'True', 'blank': 'True'}),
             'crop_y2': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0', 'null': 'True', 'blank': 'True'}),
-            'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True'}),
+            'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True', 'db_index': 'True'}),
             'date_insert': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'date_update': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
@@ -182,7 +239,7 @@ class Migration(SchemaMigration):
             'halign': ('django.db.models.fields.CharField', [], {'default': 'False', 'max_length': '6', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '255'}),
-            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'db_index': 'True'}),
             'site': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': u"orm['sites.Site']"}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '150'}),
             'smart': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
@@ -199,13 +256,13 @@ class Migration(SchemaMigration):
         },
         u'sources.source': {
             'Meta': {'object_name': 'Source'},
-            'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True'}),
+            'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True', 'db_index': 'True'}),
             'date_insert': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'date_update': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'feed': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'db_index': 'True'}),
             'site': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': u"orm['sites.Site']"}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '150'}),
             'url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
@@ -226,4 +283,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['flatpages']
+    complete_apps = ['articles']

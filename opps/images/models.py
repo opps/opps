@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import uuid
 import os
+import random
 from datetime import datetime
 
 from django.db import models
@@ -10,7 +10,7 @@ from django.utils import timezone
 from taggit.models import TaggedItemBase
 from taggit.managers import TaggableManager
 
-from opps.core.models import Publishable, Slugged
+from opps.core.models import Publishable
 
 
 HALIGN_CHOICES = (
@@ -27,7 +27,8 @@ VALIGN_CHOICES = (
 
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
-    filename = "{0}-{1}.{2}".format(uuid.uuid4(), instance.slug, ext)
+    filename = u"{0}-{1}.{2}".format(random.getrandbits(32),
+                                     instance.slug, ext)
     d = datetime.now()
     folder = "images/{0}".format(d.strftime("%Y/%m/%d/"))
     return os.path.join(folder, filename)
@@ -39,7 +40,7 @@ class TaggedImage(TaggedItemBase):
 
 
 class Cropping(models.Model):
-    crop_example = models.CharField(_(u"Crop Example"), max_length=140,
+    crop_example = models.CharField(_(u"Crop Example"), max_length=255,
                                     null=True, blank=True)
     crop_x1 = models.PositiveSmallIntegerField(default=0, null=True,
                                                blank=True)
@@ -99,10 +100,16 @@ class Cropping(models.Model):
         super(Cropping, self).save(*args, **kwargs)
 
 
-class Image(Publishable, Slugged, Cropping):
+class Image(Publishable, Cropping):
+
+    slug = models.SlugField(
+        _(u"URL"),
+        db_index=True,
+        max_length=150,
+    )
 
     title = models.CharField(_(u"Title"), max_length=140, db_index=True)
-    image = models.ImageField(upload_to=get_file_path)
+    image = models.ImageField(upload_to=get_file_path, max_length=255)
     description = models.TextField(_(u"Description"), null=True, blank=True)
     tags = TaggableManager(blank=True, through=TaggedImage,
                            verbose_name=u'Tags')

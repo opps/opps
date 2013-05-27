@@ -24,7 +24,7 @@ class OppsView(object):
         self.channel = None
         self.long_slug = None
         self.channel_long_slug = []
-        self.article = self.model.objects.select_related('publisher')
+        self.article = None
 
     def get_context_data(self, **kwargs):
         context = super(OppsView, self).get_context_data(**kwargs)
@@ -78,7 +78,7 @@ class OppsView(object):
 
         self.channel_long_slug = [self.long_slug]
         for children in self.channel.get_children():
-            self.channel_long_slug.append(children)
+            self.channel_long_slug.append(children.long_slug)
 
     def check_template(self, _template):
         try:
@@ -94,25 +94,51 @@ class OppsList(OppsView, ListView):
         names = []
         domain_folder = self.get_template_folder()
 
+        # look for a different template only if defined in settings
+        # default should be OPPS_PAGINATE_SUFFIX = "_paginated"
+        # if set OPPS_PAGINATE_NOT_APP = ['TagList'] not set paginate_suffix
+        if self.request and self.request.GET.get('page') and\
+           self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
+            self.paginate_suffix = settings.OPPS_PAGINATE_SUFFIX
+            self.template_name_suffix = "_list{}".format(self.paginate_suffix)
+        else:
+            self.paginate_suffix = ''
+
         if self.channel:
             if self.channel.group and self.channel.parent:
 
-                _template = '{}/_{}.html'.format(
-                    domain_folder, self.channel.parent.long_slug)
-                if self.check_template(_template):
-                    names.append(_template)
+                _template = '{}/_{}{}.html'.format(
+                    domain_folder,
+                    self.channel.parent.long_slug,
+                    self.paginate_suffix
+                )
+                names.append(_template)
 
-                _template = '{}/_post_list.html'.format(
-                    domain_folder, self.channel.parent.long_slug)
-                if self.check_template(_template):
-                    names.append(_template)
+                _template = '{}/_post_list{}.html'.format(
+                    domain_folder,
+                    # self.channel.parent.long_slug,
+                    self.paginate_suffix
+                )
+                names.append(_template)
 
-        names.append('{}/{}.html'.format(domain_folder, self.long_slug))
+        names.append(
+            '{}/{}{}.html'.format(
+                domain_folder,
+                self.long_slug,
+                self.paginate_suffix
+            )
+        )
 
         try:
             names = names + super(OppsList, self).get_template_names()
         except ImproperlyConfigured:
             pass
+
+        if self.paginate_suffix:
+            # use the default _paginated.html if no template found
+            names.append(
+                "{}/{}.html".format(domain_folder, self.paginate_suffix)
+            )
 
         return names
 
@@ -130,9 +156,11 @@ class OppsList(OppsView, ListView):
             site=self.site,
             channel_long_slug__in=self.channel_long_slug,
             date_available__lte=timezone.now(),
-            published=True).select_related('publisher')[:self.limit]
+            published=True)
+        if self.limit:
+            self.article = self.article[:self.limit]
 
-        return self.article
+        return self.article._clone()
 
 
 class OppsDetail(OppsView, DetailView):
@@ -162,10 +190,20 @@ class OppsDetail(OppsView, DetailView):
 
         self.set_channel_rules()
 
-        self.article = self.model.objects.filter(
+        filters = dict(
             site=self.site,
             channel_long_slug=self.long_slug,
-            slug=self.slug,
-            date_available__lte=timezone.now(),
-            published=True).select_related('publisher')
-        return self.article
+            slug=self.slug
+        )
+
+        preview_enabled = self.request.user and self.request.user.is_staff
+
+        if not preview_enabled:
+            filters['date_available__lte'] = timezone.now()
+            filters['published'] = True
+
+        self.article = self.model.objects.filter(
+            **filters
+        )
+
+        return self.article._clone()

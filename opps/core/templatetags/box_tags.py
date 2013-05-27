@@ -34,7 +34,7 @@ def get_box(appname, slug, template_name=None):
 
 
 @register.simple_tag
-def get_all_box(appname, channel_slug, template_name=None):
+def get_all_box(appname, channel_long_slug, template_name=None):
     """
     {% load box_tags %}
     {% get_all_box 'polls' 'channel_slug' %}
@@ -43,7 +43,7 @@ def get_all_box(appname, channel_slug, template_name=None):
     boxes = model.objects.filter(site=settings.SITE_ID,
                                  date_available__lte=timezone.now(),
                                  published=True,
-                                 channel__slug=channel_slug)
+                                 channel_long_slug=channel_long_slug)
 
     if template_name:
         t = template.loader.get_template(template_name)

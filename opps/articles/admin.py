@@ -11,6 +11,7 @@ from .models import ArticleBox, ArticleBoxArticles, ArticleConfig, PostRelated
 from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
 from opps.core.admin import BaseBoxAdmin
+from opps.core.admin import ChannelListFilter
 from opps.images.generate import image_url
 
 from redactor.widgets import RedactorEditor
@@ -22,6 +23,8 @@ class ArticleImageInline(admin.TabularInline):
     raw_id_fields = ['image']
     actions = None
     extra = 1
+    verbose_name = _(u"Article image")
+    verbose_name_plural = _(u"Article images")
     fieldsets = [(None, {'fields': ('image', 'image_thumb', 'order')})]
 
     readonly_fields = ['image_thumb']
@@ -41,6 +44,8 @@ class ArticleSourceInline(admin.TabularInline):
     raw_id_fields = ['source']
     actions = None
     extra = 1
+    verbose_name = _(u"Article source")
+    verbose_name_plural = _(u"Article sources")
     fieldsets = [(None, {
         'classes': ('collapse',),
         'fields': ('source', 'order')})]
@@ -64,34 +69,17 @@ class PostAdminForm(forms.ModelForm):
         widgets = {'content': RedactorEditor()}
 
 
+@apply_opps_rules('articles')
 class ArticleAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ["title"]}
     readonly_fields = ['get_http_absolute_url', 'short_url',
                        'in_articleboxes', 'image_thumb']
     raw_id_fields = ['main_image', 'channel']
 
-    def in_articleboxes(self, obj):
-        articleboxes = obj.articlebox_articles.all()
-        if articleboxes:
-            html = [u"<ul>"]
-            for box in articleboxes:
-                li = (u"<li><a href='/admin/articles/articlebox/{box.id}/'"
-                      u" target='_blank'>{box.slug}</a></li>")
-                html.append(li.format(box=box))
-            html.append(u"</ul>")
-            print html
-            return u"".join(html)
-        return _(u"This item is not in a box")
-    in_articleboxes.allow_tags = True
-    in_articleboxes.short_description = _(u'Article boxes')
-
-    def image_thumb(self, obj):
-        if obj.main_image:
-            return u'<img width="60px" height="60px" src="{0}" />'.format(
-                image_url(obj.main_image.image.url, width=60, height=60))
-        return _(u'No Image')
-    image_thumb.short_description = _(u'Thumbnail')
-    image_thumb.allow_tags = True
+    def get_list_filter(self, request):
+        list_filter = super(ArticleAdmin, self).list_filter
+        list_filter = [ChannelListFilter] + list(list_filter)
+        return list_filter
 
 
 class PostRelatedInline(admin.TabularInline):
@@ -102,6 +90,8 @@ class PostRelatedInline(admin.TabularInline):
     ordering = ('order',)
     extra = 1
     classes = ('collapse',)
+    verbose_name = (u'Related post')
+    verbose_name_plural = (u'Related posts')
 
 
 @apply_opps_rules('articles')
@@ -121,7 +111,8 @@ class PostAdmin(ArticleAdmin):
             'fields': ('channel', 'albums',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('published', 'date_available', 'in_articleboxes')}),
+            'fields': ('published', 'date_available',
+                       'show_on_root_channel', 'in_articleboxes')}),
     )
 
 
@@ -139,6 +130,8 @@ class AlbumAdminForm(forms.ModelForm):
 class AlbumAdmin(ArticleAdmin):
     form = AlbumAdminForm
     inlines = [ArticleImageInline]
+    list_display = ['title', 'channel', 'images_count',
+                    'date_available', 'published', 'preview_url']
 
     fieldsets = (
         (_(u'Identification'), {
@@ -151,12 +144,19 @@ class AlbumAdmin(ArticleAdmin):
             'fields': ('channel',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('published', 'date_available')}),
+            'fields': ('published', 'date_available',
+                       'show_on_root_channel')}),
     )
+
+
+class LinkAdminForm(forms.ModelForm):
+    class Meta:
+        model = Link
 
 
 @apply_opps_rules('articles')
 class LinkAdmin(ArticleAdmin):
+    form = LinkAdminForm
     raw_id_fields = ['articles', 'channel', 'main_image']
     fieldsets = (
         (_(u'Identification'), {
@@ -169,7 +169,8 @@ class LinkAdmin(ArticleAdmin):
             'fields': ('channel',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('published', 'date_available')}),
+            'fields': ('published', 'date_available',
+                       'show_on_root_channel')}),
     )
 
 

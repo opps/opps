@@ -42,7 +42,7 @@ class QuerySet(Publishable):
 
         queryset = model.objects.filter(
             published=True,
-            date_available__lte=timezone.now()).select_related('publisher')
+            date_available__lte=timezone.now())
         if self.channel:
             queryset = queryset.filter(channel=self.channel)
         if self.order == '-':

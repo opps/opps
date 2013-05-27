@@ -7,6 +7,76 @@ from django.contrib.sites.models import Site
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
+from django.contrib.sites.models import get_current_site
+
+from opps.channels.models import Channel
+from opps.images.generate import image_url
+
+
+class ChannelListFilter(SimpleListFilter):
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = _(u'Channel')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'channel'
+
+    def lookups(self, request, model_admin):
+        """
+        Returns a list of tuples. The first element in each
+        tuple is the coded value for the option that will
+        appear in the URL query. The second element is the
+        human-readable name for the option that will appear
+        in the right sidebar.
+        """
+
+        qs = model_admin.queryset(request)
+        qs = qs.order_by(
+            'channel_long_slug'
+        ).distinct().values('channel_long_slug')
+
+        if qs:
+            channels = set([(item['channel_long_slug'] or 'nochannel',
+                             item['channel_long_slug'] or _(u'No channel'))
+                           for item in qs])
+            items = []
+
+            for channel in channels:
+                items.append(channel)
+                _value = channel[0]
+
+                other_values = [
+                    c[0].split('/')[0] for c in channels if not c[0] == _value
+                ]
+
+                if not '/' in _value and _value in other_values:
+                    value = "{}/*".format(_value)
+                    human_readable = "{}/*".format(_value)
+                    items.append((value, human_readable))
+
+            return sorted(items)
+
+    def queryset(self, request, queryset):
+        """
+        Returns the filtered queryset based on the value
+        provided in the query string and retrievable via
+        `self.value()`.
+        """
+        value = self.value()
+        if value == "nochannel":
+            queryset = queryset.filter(channel_long_slug__isnull=True)
+        elif value and "*" in value:
+            site = get_current_site(request)
+            long_slug = value.replace('/*', '')
+            channel = Channel.objects.filter(site=site, long_slug=long_slug)[0]
+            child_channels = [channel]
+            for children in channel.get_children():
+                child_channels.append(children)
+            queryset = queryset.filter(channel__in=child_channels)
+        elif value:
+            queryset = queryset.filter(channel_long_slug=value)
+
+        return queryset
 
 
 class PublishableAdmin(admin.ModelAdmin):
@@ -14,9 +84,9 @@ class PublishableAdmin(admin.ModelAdmin):
     Overrides standard admin.ModelAdmin save_model method
     It sets user (author) based on data from requet.
     """
-    list_display = ['title', 'channel_name', 'date_available', 'published']
-    list_filter = ['date_available', 'published', 'channel_name',
-                   'child_class']
+    list_display = ['title', 'channel_long_slug',
+                    'date_available', 'published', 'preview_url']
+    list_filter = ['child_class', 'date_available', 'published']
     search_fields = ['title', 'slug', 'headline', 'channel_name']
     exclude = ('user',)
 
@@ -36,42 +106,44 @@ class PublishableAdmin(admin.ModelAdmin):
         obj.date_update = timezone.now()
         obj.save()
 
+    def in_articleboxes(self, obj):
+        articleboxes = obj.articlebox_articles.all()
+        if articleboxes:
+            html = [u"<ul>"]
+            for box in articleboxes:
+                li = (u"<li><a href='/admin/articles/articlebox/{box.id}/'"
+                      u" target='_blank'>{box.slug}</a></li>")
+                html.append(li.format(box=box))
+            html.append(u"</ul>")
+            return u"".join(html)
+        return _(u"This item is not in a box")
+    in_articleboxes.allow_tags = True
+    in_articleboxes.short_description = _(u'Article boxes')
 
-class ChannelListFilter(SimpleListFilter):
-    # Human-readable title which will be displayed in the
-    # right admin sidebar just above the filter options.
-    title = _(u'Channel')
+    def image_thumb(self, obj):
+        if obj.main_image:
+            return u'<img width="60px" height="60px" src="{0}" />'.format(
+                image_url(obj.main_image.image.url, width=60, height=60))
+        return _(u'No Image')
+    image_thumb.short_description = _(u'Thumbnail')
+    image_thumb.allow_tags = True
 
-    # Parameter for the filter that will be used in the URL query.
-    parameter_name = 'channel'
+    def images_count(self, obj):
+        if obj.images:
+            return obj.images.count()
+        else:
+            return 0
+    images_count.short_description = _(u'Images')
 
-    def lookups(self, request, model_admin):
-        """
-        Returns a list of tuples. The first element in each
-        tuple is the coded value for the option that will
-        appear in the URL query. The second element is the
-        human-readable name for the option that will appear
-        in the right sidebar.
-        """
-        qs = model_admin.queryset(request)
-        qs = qs.distinct().values('channel_name', 'channel_long_slug')
-        if qs:
-            return set([(item['channel_long_slug'] or 'nochannel',
-                         item['channel_name'] or _(u'No channel'))
-                       for item in qs])
-
-    def queryset(self, request, queryset):
-        """
-        Returns the filtered queryset based on the value
-        provided in the query string and retrievable via
-        `self.value()`.
-        """
-        if self.value() == "nochannel":
-            queryset = queryset.filter(channel_long_slug__isnull=True)
-        elif self.value():
-            queryset = queryset.filter(channel_long_slug=self.value())
-
-        return queryset
+    def preview_url(self, obj):
+        html = (u'<a target="_blank" href="{href}" class="viewsitelink">'
+                u'<i class="icon-eye-open icon-alpha75"></i>{text}</a>')
+        return html.format(
+            href=obj.get_absolute_url(),
+            text=_(u"View on site")
+        )
+    preview_url.short_description = _(u"View on site")
+    preview_url.allow_tags = True
 
 
 class BaseBoxAdmin(PublishableAdmin):
@@ -155,7 +227,7 @@ def apply_rules(admin_class, app):
 
     attrs = ('list_display', 'list_filter',
              'search_fields', 'exclude', 'raw_id_fields',
-             'prepopulated_fields')
+             'prepopulated_fields', 'readonly_fields')
 
     for attr in attrs:
         to_apply = rules.get(attr)
@@ -187,8 +259,24 @@ def apply_rules(admin_class, app):
             return form
         admin_class.get_form = get_form
 
+    """
+    Allow custom form for admin
+    'articles.PostAdmin': {
+        ...
+        'form': 'yourapp.forms.PostAdminForm'
+    },
+    """
+    form = rules.get('form')
+    if form:
+        try:
+            _module = '.'.join(form.split('.')[:-1])
+            _form = form.split('.')[-1]
+            _temp = __import__(_module, globals(), locals(), [_form], -1)
+            admin_class.form = getattr(_temp, _form)
+        except:
+            pass
+
     # TODO:
-    # form
     # inlines
     # actions
     # override methods

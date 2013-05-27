@@ -17,12 +17,11 @@ install_requires = ["django",
                     "django-haystack==1.2.7",
                     "django-mptt",
                     "django-appconf",
-                    "python-memcached",
-                    "johnny-cache"]
+                    "python-memcached"]
 dependency_links = ['http://github.com/avelino/django-googl/tarball/master'
                     '#egg=django-googl',
-                    'https://github.com/jmoiron/johnny-cache/tarball/master'
-                    '#egg=johnny-cache']
+                    'http://github.com/avelino/django-taggit/tarball/master'
+                    '#egg=django-taggit']
 
 classifiers = ["Development Status :: 4 - Beta",
                "Intended Audience :: Developers",

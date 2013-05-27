@@ -15,9 +15,17 @@ class OppsCoreConf(AppConf):
     CHANNEL_CONF = {}
     VIEWS_LIMIT = None
     PAGINATE_BY = 10
+    PAGINATE_SUFFIX = u''
+    PAGINATE_NOT_APP = []
     CHECK_MOBILE = False
+    DOMAIN_MOBILE = u''
+    PROTOCOL_MOBILE = u'http'
     ADMIN_RULES = {}
     RELATED_POSTS_PLACEHOLDER = "---related---"
+    CACHE_PREFIX = 'opps'
+    CACHE_EXPIRE = 300
+    RSS_LINK_TEMPLATE = '<a href="{}" class="ir ico ico-rss">RSS</a>'
+    LIST_MODELS = ('Post',)
 
     class Meta:
         prefix = 'opps'

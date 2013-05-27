@@ -2,7 +2,7 @@
 import re
 from django.contrib.sites.models import Site
 from django.contrib.sites.models import get_current_site
-
+from django.http import HttpResponseRedirect
 from django.conf import settings
 
 from opps.channels.models import Channel
@@ -60,6 +60,7 @@ class DynamicSiteMiddleware(object):
         site = self.get_hosting(hosting)
 
         settings.SITE_ID = site.id
+        settings.CACHE_MIDDLEWARE_KEY_PREFIX = "opps_site-{}".format(site.id)
 
 
 class MobileDetectionMiddleware(object):
@@ -125,6 +126,13 @@ class MobileDetectionMiddleware(object):
                 if self.user_agents_test_match_regex.match(user_agent):
                     is_mobile = True
 
+        request.is_mobile = is_mobile
         settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_WEB
         if is_mobile and settings.OPPS_CHECK_MOBILE:
             settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_MOBILE
+            if settings.OPPS_DOMAIN_MOBILE and \
+               request.META.get('HTTP_HOST', '') != \
+               settings.OPPS_DOMAIN_MOBILE:
+                return HttpResponseRedirect(u"{}://{}".format(
+                    settings.OPPS_PROTOCOL_MOBILE,
+                    settings.OPPS_DOMAIN_MOBILE))

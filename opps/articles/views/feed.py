@@ -9,7 +9,18 @@ from opps.articles.models import Article, Post, Album, Link
 from opps.channels.models import Channel
 
 
-class ArticleFeed(Feed):
+class ItemFeed(Feed):
+
+    description_template = 'articles/feed_item_description.html'
+
+    def item_title(self, item):
+        return item.title
+
+    def item_link(self, item):
+        return item.get_absolute_url()
+
+
+class ArticleFeed(ItemFeed):
 
     link = "/rss"
 
@@ -24,11 +35,18 @@ class ArticleFeed(Feed):
         return "Latest news on {0}'s".format(self.site.name)
 
     def items(self):
-        return Article.objects.filter(site=self.site).order_by(
-            '-date_available').select_related('publisher')[:40]
+        return Article.objects.filter(
+            site=self.site,
+            date_available__lte=timezone.now(),
+            published=True,
+            channel__include_in_main_rss=True,
+            channel__published=True
+        ).order_by(
+            '-date_available'
+        )[:40]
 
 
-class ChannelFeed(Feed):
+class ChannelFeed(ItemFeed):
 
     def __init__(self, model):
         _model = {'Post': Post, 'Album': Album, 'Link': Link}
@@ -55,5 +73,7 @@ class ChannelFeed(Feed):
             site=self.site,
             channel_long_slug=obj.long_slug,
             date_available__lte=timezone.now(),
-            published=True).order_by(
-                '-date_available').select_related('publisher')[:40]
+            published=True,
+        ).order_by(
+            '-date_available'
+        ).select_related('publisher')[:40]
