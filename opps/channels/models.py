@@ -82,7 +82,7 @@ class Channel(MPTTModel, Publishable, Slugged):
         try:
             channel_exist_domain = Channel.objects.filter(
                 slug=self.slug,
-                site__domain=self.site.domain)
+                site=self.site)
             channel_is_home = Channel.objects.filter(
                 site=self.site.id,
                 homepage=True,
