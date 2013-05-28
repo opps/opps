@@ -30,7 +30,7 @@ class OppsView(object):
         context = super(OppsView, self).get_context_data(**kwargs)
 
         filters = {}
-        filters['site'] = self.site
+        filters['site_domain'] = self.site
         filters['channel_long_slug__in'] = self.channel_long_slug
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
@@ -64,7 +64,6 @@ class OppsView(object):
         self.long_slug = self.kwargs.get('channel__long_slug', None)
         try:
             if not self.long_slug:
-                import pdb; pdb.set_trace()
                 self.long_slug = Channel.objects.get_homepage(
                     site=self.site).long_slug
         except AttributeError:
