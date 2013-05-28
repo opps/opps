@@ -293,16 +293,14 @@ class Link(Article):
         )
 
     def is_local(self):
-        # TODO: Use denormalized site_domain field
         try:
             url = urlparse(self.url)
-            return url.netloc.replace('www', '') == self.site.domain
+            return url.netloc.replace('www', '') == self.site_domain
         except:
             return False
 
     def is_subdomain(self):
-        # TODO: Use denormalized site_domain field
-        return self.site.domain in self.url
+        return self.site_domain in self.url
 
     def clean(self):
         if not self.url and not self.articles:
