@@ -333,6 +333,7 @@ class ArticleSource(models.Model):
     class META:
         verbose_name = _('Article source')
         verbose_name_plural = _('Article sources')
+        ordering = ('order',)
 
     def __unicode__(self):
         return u"{}".format(self.source.slug)
@@ -357,6 +358,7 @@ class ArticleImage(models.Model):
     class META:
         verbose_name = _('Article image')
         verbose_name_plural = _('Article images')
+        ordering = ('order',)
 
     def __unicode__(self):
         return u"{}".format(self.image.title)
