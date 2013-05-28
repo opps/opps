@@ -125,21 +125,22 @@ class Article(Publishable, Slugged):
         return _(self.child_class)
 
     def get_http_absolute_url(self):
-        return "http://{}{}".format(self.site.domain, self.get_absolute_url())
+        return "http://{}{}".format(self.site_domain, self.get_absolute_url())
 
     get_http_absolute_url.short_description = 'URL'
 
     def recommendation(self):
         cachekey = _cache_key(
             '{}-recommendation'.format(self.__class__.__name__),
-            self.__class__, self.site, u"{}-{}".format(self.channel_long_slug,
-                                                       self.slug))
+            self.__class__, self.site_domain,
+            u"{}-{}".format(self.channel_long_slug, self.slug))
         getcache = cache.get(cachekey)
         if getcache:
             return getcache
 
         tag_list = [t for t in self.tags.all()[:3]]
         _list = [a for a in Article.objects.filter(
+            site_domain=self.site_domain,
             child_class=self.child_class,
             channel_long_slug=self.channel_long_slug,
             date_available__lte=timezone.now(),
@@ -153,8 +154,8 @@ class Article(Publishable, Slugged):
     def all_images(self):
         cachekey = _cache_key(
             '{}-all_images'.format(self.__class__.__name__),
-            self.__class__, self.site, u"{}-{}".format(self.channel_long_slug,
-                                                       self.slug))
+            self.__class__, self.site_domain,
+            u"{}-{}".format(self.channel_long_slug, self.slug))
         getcache = cache.get(cachekey)
         if getcache:
             return getcache
@@ -194,8 +195,8 @@ class Post(Article):
     def all_images(self):
         cachekey = _cache_key(
             '{}main-all_images'.format(self.__class__.__name__),
-            self.__class__, self.site, u"{}-{}".format(self.channel_long_slug,
-                                                       self.slug))
+            self.__class__, self.site_domain,
+            u"{}-{}".format(self.channel_long_slug, self.slug))
         getcache = cache.get(cachekey)
         if getcache:
             return getcache
