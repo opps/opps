@@ -16,10 +16,19 @@ class Migration(SchemaMigration):
                       self.gf('django.db.models.fields.CharField')(db_index=True, max_length=100, null=True, blank=True),
                       keep_default=False)
 
+        # Adding field 'Article.site_id'
+        db.add_column(u'articles_article', 'site_id',
+                      self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True, max_length=4, null=True, blank=True),
+                      keep_default=False)
+
+
 
     def backwards(self, orm):
         # Deleting field 'Article.site_domain'
         db.delete_column(u'articles_article', 'site_domain')
+
+        # Deleting field 'Article.site_id'
+        db.delete_column(u'articles_article', 'site_id')
 
 
     models = {
