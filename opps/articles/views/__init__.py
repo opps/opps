@@ -36,7 +36,7 @@ class PostList(OppsList):
 
     @property
     def queryset(self):
-        self.site = get_current_site(self.request)
+        self.site = get_current_site(self.request).domain
         self.long_slug = self.get_long_slug()
 
         if not self.long_slug:
@@ -45,7 +45,7 @@ class PostList(OppsList):
         self.set_channel_rules()
 
         self.article = Article.objects.filter(
-            site=self.site,
+            site_domain=self.site,
             channel_long_slug__in=self.channel_long_slug,
             date_available__lte=timezone.now(),
             published=True,
@@ -81,10 +81,10 @@ class TagList(OppsList):
 
     @property
     def queryset(self):
-        self.site = get_current_site(self.request)
+        self.site = get_current_site(self.request).domain
         self.long_slug = self.kwargs['tag']
         self.article = self.model.objects.filter(
-            site=self.site,
+            site_domain=self.site,
             tags__slug=self.long_slug,
             date_available__lte=timezone.now(),
             published=True).all()

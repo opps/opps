@@ -56,7 +56,7 @@ class OppsView(object):
 
     def get_template_folder(self):
         domain_folder = self.type
-        if self.site.id > 1:
+        if settings.SITE_ID > 1:
             domain_folder = "{0}/{1}".format(self.site, self.type)
         return domain_folder
 
@@ -64,6 +64,7 @@ class OppsView(object):
         self.long_slug = self.kwargs.get('channel__long_slug', None)
         try:
             if not self.long_slug:
+                import pdb; pdb.set_trace()
                 self.long_slug = Channel.objects.get_homepage(
                     site=self.site).long_slug
         except AttributeError:
@@ -71,7 +72,7 @@ class OppsView(object):
         return self.long_slug
 
     def set_channel_rules(self):
-        self.channel = get_object_or_404(Channel, site=self.site,
+        self.channel = get_object_or_404(Channel, site__domain=self.site,
                                          long_slug=self.long_slug,
                                          date_available__lte=timezone.now(),
                                          published=True)
@@ -144,7 +145,7 @@ class OppsList(OppsView, ListView):
 
     @property
     def queryset(self):
-        self.site = get_current_site(self.request)
+        self.site = get_current_site(self.request).domain
         self.long_slug = self.get_long_slug()
 
         if not self.long_slug:
@@ -153,7 +154,7 @@ class OppsList(OppsView, ListView):
         self.set_channel_rules()
 
         self.article = self.model.objects.filter(
-            site=self.site,
+            site_domain=self.site,
             channel_long_slug__in=self.channel_long_slug,
             date_available__lte=timezone.now(),
             published=True)
@@ -182,7 +183,7 @@ class OppsDetail(OppsView, DetailView):
 
     @property
     def queryset(self):
-        self.site = get_current_site(self.request)
+        self.site = get_current_site(self.request).domain
         self.slug = self.kwargs.get('slug')
         self.long_slug = self.get_long_slug()
         if not self.long_slug:
@@ -191,7 +192,7 @@ class OppsDetail(OppsView, DetailView):
         self.set_channel_rules()
 
         filters = dict(
-            site=self.site,
+            site_domain=self.site,
             channel_long_slug=self.long_slug,
             slug=self.slug
         )
