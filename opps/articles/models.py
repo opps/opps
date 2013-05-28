@@ -32,6 +32,12 @@ class Article(Publishable, Slugged):
         _("Short URL"),
         null=True, blank=True,
     )
+    site_id = models.PositiveIntegerField(
+        _(u"Site id"),
+        max_length=4,
+        null=True, blank=True,
+        db_index=True,
+    )
     site_domain = models.CharField(
         _(u"Site domain"),
         max_length=100,
@@ -100,6 +106,7 @@ class Article(Publishable, Slugged):
 
     def save(self, *args, **kwargs):
         self.site_domain = self.site.domain
+        self.site_id = self.site.id
         self.channel_name = self.channel.name
         self.channel_long_slug = self.channel.long_slug
         self.child_class = self.__class__.__name__
