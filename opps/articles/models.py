@@ -30,6 +30,12 @@ class Article(Publishable, Slugged):
         _("Short URL"),
         null=True, blank=True,
     )
+    site_domain = models.CharField(
+        _(u"Site domain"),
+        max_length=100,
+        null=True, blank=True,
+        db_index=True,
+    )
     channel = models.ForeignKey(
         'channels.Channel',
         verbose_name=_(u"Channel"),
@@ -91,6 +97,7 @@ class Article(Publishable, Slugged):
         unique_together = ["site", "child_class", "channel_long_slug", "slug"]
 
     def save(self, *args, **kwargs):
+        self.site_domain = self.site.domain
         self.channel_name = self.channel.name
         self.channel_long_slug = self.channel.long_slug
         self.child_class = self.__class__.__name__
