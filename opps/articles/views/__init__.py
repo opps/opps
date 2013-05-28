@@ -10,6 +10,7 @@ from haystack.views import SearchView
 
 from opps.articles.models import Post, Album, Article
 from opps.articles.views.generic import OppsDetail, OppsList
+from opps.articles.models import ArticleBox
 
 
 class PostList(OppsList):
@@ -44,13 +45,21 @@ class PostList(OppsList):
 
         self.set_channel_rules()
 
+        self.articleboxes = ArticleBox.objects.filter(
+            channel__long_slug=self.long_slug)
+
+        self.excluded_ids = []
+        for box in self.articleboxes:
+            self.excluded_ids += [a.pk for a in box.ordered_articles()]
+
         self.article = Article.objects.filter(
             site_domain=self.site,
             channel_long_slug__in=self.channel_long_slug,
             date_available__lte=timezone.now(),
             published=True,
             child_class__in=self.models,
-            show_on_root_channel=True)
+            show_on_root_channel=True
+        ).exclude(pk__in=self.excluded_ids)
         if self.limit:
             self.article = self.article[:self.limit]
 

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from urlparse import urlparse
+
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -282,6 +284,18 @@ class Link(Article):
             self.channel_long_slug,
             self.slug
         )
+
+    def is_local(self):
+        # TODO: Use denormalized site_domain field
+        try:
+            url = urlparse(self.url)
+            return url.netloc.replace('www', '') == self.site.domain
+        except:
+            return False
+
+    def is_subdomain(self):
+        # TODO: Use denormalized site_domain field
+        return self.site.domain in self.url
 
     def clean(self):
         if not self.url and not self.articles:
