@@ -29,14 +29,29 @@ class OppsView(object):
     def get_context_data(self, **kwargs):
         context = super(OppsView, self).get_context_data(**kwargs)
 
+        if hasattr(self, 'articleboxes'):
+            context['articleboxes'] = self.articleboxes
+        else:
+            context['articleboxes'] = ArticleBox.objects.filter(
+                channel__long_slug=self.long_slug)
+            self.excluded_ids = []
+            for box in context['articleboxes']:
+                self.excluded_ids += [a.pk for a in box.ordered_articles()]
+
         filters = {}
-        filters['site'] = self.site
+        filters['site_domain'] = self.site
         filters['channel_long_slug__in'] = self.channel_long_slug
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
         article = Article.objects.filter(**filters)
-        context['posts'] = article.filter(child_class='Post')[:self.limit]
-        context['albums'] = Album.objects.filter(**filters)[:self.limit]
+
+        context['posts'] = article.filter(
+            child_class='Post'
+        ).exclude(pk__in=self.excluded_ids)[:self.limit]
+
+        context['albums'] = Album.objects.filter(
+            **filters
+        ).exclude(pk__in=self.excluded_ids)[:self.limit]
 
         context['channel'] = {}
         context['channel']['long_slug'] = self.long_slug
@@ -46,8 +61,6 @@ class OppsView(object):
             context['channel']['level'] = self.channel.get_level()
             context['channel']['root'] = self.channel.get_root()
 
-        context['articleboxes'] = ArticleBox.objects.filter(
-            channel__long_slug=self.long_slug)
         if self.slug:
             context['articleboxes'] = context['articleboxes'].filter(
                 article__slug=self.slug)
@@ -56,7 +69,7 @@ class OppsView(object):
 
     def get_template_folder(self):
         domain_folder = self.type
-        if self.site.id > 1:
+        if settings.SITE_ID > 1:
             domain_folder = "{0}/{1}".format(self.site, self.type)
         return domain_folder
 
@@ -71,7 +84,7 @@ class OppsView(object):
         return self.long_slug
 
     def set_channel_rules(self):
-        self.channel = get_object_or_404(Channel, site=self.site,
+        self.channel = get_object_or_404(Channel, site__domain=self.site,
                                          long_slug=self.long_slug,
                                          date_available__lte=timezone.now(),
                                          published=True)
@@ -144,7 +157,7 @@ class OppsList(OppsView, ListView):
 
     @property
     def queryset(self):
-        self.site = get_current_site(self.request)
+        self.site = get_current_site(self.request).domain
         self.long_slug = self.get_long_slug()
 
         if not self.long_slug:
@@ -152,11 +165,20 @@ class OppsList(OppsView, ListView):
 
         self.set_channel_rules()
 
+        self.articleboxes = ArticleBox.objects.filter(
+            channel__long_slug=self.long_slug)
+
+        self.excluded_ids = []
+        for box in self.articleboxes:
+            self.excluded_ids += [a.pk for a in box.ordered_articles()]
+
         self.article = self.model.objects.filter(
-            site=self.site,
+            site_domain=self.site,
             channel_long_slug__in=self.channel_long_slug,
             date_available__lte=timezone.now(),
-            published=True)
+            published=True
+        ).exclude(pk__in=self.excluded_ids)
+
         if self.limit:
             self.article = self.article[:self.limit]
 
@@ -182,7 +204,7 @@ class OppsDetail(OppsView, DetailView):
 
     @property
     def queryset(self):
-        self.site = get_current_site(self.request)
+        self.site = get_current_site(self.request).domain
         self.slug = self.kwargs.get('slug')
         self.long_slug = self.get_long_slug()
         if not self.long_slug:
@@ -191,7 +213,7 @@ class OppsDetail(OppsView, DetailView):
         self.set_channel_rules()
 
         filters = dict(
-            site=self.site,
+            site_domain=self.site,
             channel_long_slug=self.long_slug,
             slug=self.slug
         )

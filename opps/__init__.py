@@ -4,7 +4,7 @@ import pkg_resources
 
 pkg_resources.declare_namespace(__name__)
 
-VERSION = (0, 1, 8)
+VERSION = (0, 1, 9, 'dev')
 
 __version__ = ".".join(map(str, VERSION))
 __status__ = "Development"

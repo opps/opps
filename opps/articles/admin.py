@@ -17,6 +17,7 @@ from opps.images.generate import image_url
 from redactor.widgets import RedactorEditor
 
 
+@apply_opps_rules('articles')
 class ArticleImageInline(admin.TabularInline):
     model = ArticleImage
     fk_name = 'article'
@@ -26,7 +27,7 @@ class ArticleImageInline(admin.TabularInline):
     verbose_name = _(u"Article image")
     verbose_name_plural = _(u"Article images")
     fieldsets = [(None, {'fields': ('image', 'image_thumb', 'order')})]
-
+    ordering = ('order',)
     readonly_fields = ['image_thumb']
 
     def image_thumb(self, obj):
@@ -38,6 +39,7 @@ class ArticleImageInline(admin.TabularInline):
     image_thumb.allow_tags = True
 
 
+@apply_opps_rules('articles')
 class ArticleSourceInline(admin.TabularInline):
     model = ArticleSource
     fk_name = 'article'
@@ -46,11 +48,13 @@ class ArticleSourceInline(admin.TabularInline):
     extra = 1
     verbose_name = _(u"Article source")
     verbose_name_plural = _(u"Article sources")
+    ordering = ('order',)
     fieldsets = [(None, {
         'classes': ('collapse',),
         'fields': ('source', 'order')})]
 
 
+@apply_opps_rules('articles')
 class ArticleBoxArticlesInline(admin.TabularInline):
     model = ArticleBoxArticles
     fk_name = 'articlebox'
@@ -82,6 +86,7 @@ class ArticleAdmin(PublishableAdmin):
         return list_filter
 
 
+@apply_opps_rules('articles')
 class PostRelatedInline(admin.TabularInline):
     model = PostRelated
     fk_name = 'post'
@@ -209,6 +214,7 @@ class HasQuerySet(SimpleListFilter):
         return queryset
 
 
+@apply_opps_rules('articles')
 class ArticleBoxAdmin(BaseBoxAdmin):
     inlines = [ArticleBoxArticlesInline]
     raw_id_fields = ['channel', 'article', 'queryset']

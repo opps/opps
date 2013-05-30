@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from urlparse import urlparse
+
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -29,6 +31,18 @@ class Article(Publishable, Slugged):
     short_url = models.URLField(
         _("Short URL"),
         null=True, blank=True,
+    )
+    site_iid = models.PositiveIntegerField(
+        _(u"Site id"),
+        max_length=4,
+        null=True, blank=True,
+        db_index=True,
+    )
+    site_domain = models.CharField(
+        _(u"Site domain"),
+        max_length=100,
+        null=True, blank=True,
+        db_index=True,
     )
     channel = models.ForeignKey(
         'channels.Channel',
@@ -91,6 +105,8 @@ class Article(Publishable, Slugged):
         unique_together = ["site", "child_class", "channel_long_slug", "slug"]
 
     def save(self, *args, **kwargs):
+        self.site_domain = self.site.domain
+        self.site_iid = self.site.id
         self.channel_name = self.channel.name
         self.channel_long_slug = self.channel.long_slug
         self.child_class = self.__class__.__name__
@@ -118,21 +134,22 @@ class Article(Publishable, Slugged):
         return _(self.child_class)
 
     def get_http_absolute_url(self):
-        return "http://{}{}".format(self.site.domain, self.get_absolute_url())
+        return "http://{}{}".format(self.site_domain, self.get_absolute_url())
 
     get_http_absolute_url.short_description = 'URL'
 
     def recommendation(self):
         cachekey = _cache_key(
             '{}-recommendation'.format(self.__class__.__name__),
-            self.__class__, self.site, u"{}-{}".format(self.channel_long_slug,
-                                                       self.slug))
+            self.__class__, self.site_domain,
+            u"{}-{}".format(self.channel_long_slug, self.slug))
         getcache = cache.get(cachekey)
         if getcache:
             return getcache
 
         tag_list = [t for t in self.tags.all()[:3]]
         _list = [a for a in Article.objects.filter(
+            site_domain=self.site_domain,
             child_class=self.child_class,
             channel_long_slug=self.channel_long_slug,
             date_available__lte=timezone.now(),
@@ -146,8 +163,8 @@ class Article(Publishable, Slugged):
     def all_images(self):
         cachekey = _cache_key(
             '{}-all_images'.format(self.__class__.__name__),
-            self.__class__, self.site, u"{}-{}".format(self.channel_long_slug,
-                                                       self.slug))
+            self.__class__, self.site_domain,
+            u"{}-{}".format(self.channel_long_slug, self.slug))
         getcache = cache.get(cachekey)
         if getcache:
             return getcache
@@ -187,8 +204,8 @@ class Post(Article):
     def all_images(self):
         cachekey = _cache_key(
             '{}main-all_images'.format(self.__class__.__name__),
-            self.__class__, self.site, u"{}-{}".format(self.channel_long_slug,
-                                                       self.slug))
+            self.__class__, self.site_domain,
+            u"{}-{}".format(self.channel_long_slug, self.slug))
         getcache = cache.get(cachekey)
         if getcache:
             return getcache
@@ -275,6 +292,16 @@ class Link(Article):
             self.slug
         )
 
+    def is_local(self):
+        try:
+            url = urlparse(self.url)
+            return url.netloc.replace('www', '') == self.site_domain
+        except:
+            return False
+
+    def is_subdomain(self):
+        return self.site_domain in self.url
+
     def clean(self):
         if not self.url and not self.articles:
             raise ValidationError(_('URL field is required.'))
@@ -304,6 +331,7 @@ class ArticleSource(models.Model):
     class META:
         verbose_name = _('Article source')
         verbose_name_plural = _('Article sources')
+        ordering = ('order',)
 
     def __unicode__(self):
         return u"{}".format(self.source.slug)
@@ -328,6 +356,7 @@ class ArticleImage(models.Model):
     class META:
         verbose_name = _('Article image')
         verbose_name_plural = _('Article images')
+        ordering = ('order',)
 
     def __unicode__(self):
         return u"{}".format(self.image.title)

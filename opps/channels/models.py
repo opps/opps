@@ -2,6 +2,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.conf import settings
 
 from mptt.models import MPTTModel, TreeForeignKey
 from mptt.managers import TreeManager
@@ -15,7 +16,7 @@ class ChannelManager(TreeManager):
     def get_homepage(self, site):
         try:
             return super(ChannelManager, self).get_query_set().filter(
-                site=site, homepage=True, published=True).get()
+                site__domain=site, homepage=True, published=True).get()
         except Channel.DoesNotExist:
             return None
 
@@ -82,9 +83,9 @@ class Channel(MPTTModel, Publishable, Slugged):
         try:
             channel_exist_domain = Channel.objects.filter(
                 slug=self.slug,
-                site__domain=self.site.domain)
+                site=self.site)
             channel_is_home = Channel.objects.filter(
-                site=self.site.id,
+                site__id=settings.SITE_ID,
                 homepage=True,
                 published=True)
             if self.pk:

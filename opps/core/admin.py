@@ -281,6 +281,12 @@ def apply_rules(admin_class, app):
     # actions
     # override methods
 
+    # load generic attributes
+    specific_keys = list(attrs) + ['form', 'field_overrides', 'fieldsets']
+    for k, v in rules.iteritems():
+        if not k in specific_keys:
+            setattr(admin_class, k, v)
+
     return admin_class
 
 
