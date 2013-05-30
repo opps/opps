@@ -4,14 +4,16 @@ import pkg_resources
 
 pkg_resources.declare_namespace(__name__)
 
-VERSION = (0, 1, 9, 'dev')
+VERSION = (0, 2, 0, 'dev')
 
 __version__ = ".".join(map(str, VERSION))
 __status__ = "Development"
-__description__ = u"Opps CMS websites magazines and high-traffic"
+__description__ = u"Open Source Content Management Platform - CMS for the "
+u"magazines, newspappers websites and portals with "
+u"high-traffic, using the Django Framework."
 
 __author__ = u"Thiago Avelino"
-__credits__ = []
+__credits__ = ['Bruno Rocha']
 __email__ = u"opps-developers@googlegroups.com"
 __license__ = u"MIT License"
-__copyright__ = u"Copyright 2013, YACOWS"
+__copyright__ = u"Copyright 2013, Opps Project"
