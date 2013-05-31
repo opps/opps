@@ -26,13 +26,25 @@ class Publishable(Date):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     site = models.ForeignKey(Site, default=1)
-    date_available = models.DateTimeField(_(u"Date available"),
-                                          default=timezone.now,
-                                          null=True,
-                                          db_index=True)
-    published = models.BooleanField(_(u"Published"),
-                                    default=False,
-                                    db_index=True)
+    site_iid = models.PositiveIntegerField(
+        _(u"Site id"),
+        max_length=4,
+        null=True, blank=True,
+        db_index=True)
+    site_domain = models.CharField(
+        _(u"Site domain"),
+        max_length=100,
+        null=True, blank=True,
+        db_index=True)
+    date_available = models.DateTimeField(
+        _(u"Date available"),
+        default=timezone.now,
+        null=True,
+        db_index=True)
+    published = models.BooleanField(
+        _(u"Published"),
+        default=False,
+        db_index=True)
 
     objects = PublishableManager()
     on_site = CurrentSiteManager()
@@ -40,8 +52,41 @@ class Publishable(Date):
     class Meta:
         abstract = True
 
+    def save(self, *args, **kwargs):
+        self.site_domain = self.site.domain
+        self.site_iid = self.site.id
+        super(Publishable, self).save(*args, **kwargs)
+
     def is_published(self):
         return self.published and self.date_available <= timezone.now()
+
+
+class Channeling(models.Model):
+    channel = models.ForeignKey(
+        'channels.Channel',
+        verbose_name=_(u"Channel"),
+    )
+    channel_name = models.CharField(
+        _(u"Channel name"),
+        max_length=140,
+        null=True, blank=True,
+        db_index=True,
+    )
+    channel_long_slug = models.CharField(
+        _(u"Channel long slug"),
+        max_length=250,
+        null=True, blank=True,
+        db_index=True,
+    )
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        if self.channel:
+            self.channel_name = self.channel.name
+            self.channel_long_slug = self.channel.long_slug
+        super(Channeling, self).save(*args, **kwargs)
 
 
 class Slugged(models.Model):
@@ -94,51 +139,6 @@ class Slugged(models.Model):
         abstract = True
 
 
-class BaseBox(Publishable):
-    name = models.CharField(_(u"Box name"), max_length=140)
-    slug = models.SlugField(
-        _(u"Slug"),
-        db_index=True,
-        max_length=150,
-        unique=True,
-    )
-    article = models.ForeignKey(
-        'articles.Article',
-        null=True, blank=True,
-        help_text=_(u'Only published article'),
-        on_delete=models.SET_NULL
-    )
-    channel = models.ForeignKey(
-        'channels.Channel',
-        null=True, blank=True,
-        on_delete=models.SET_NULL
-    )
-    channel_name = models.CharField(
-        _(u"Channel name"),
-        max_length=140,
-        null=True, blank=False,
-        db_index=True,
-    )
-    channel_long_slug = models.CharField(
-        _(u"Channel long slug"),
-        max_length=250,
-        null=True, blank=False,
-        db_index=True,
-    )
-
-    class Meta:
-        abstract = True
-
-    def save(self, *args, **kwargs):
-        if self.channel:
-            self.channel_name = self.channel.name
-            self.channel_long_slug = self.channel.long_slug
-        super(BaseBox, self).save(*args, **kwargs)
-
-    def __unicode__(self):
-        return u"{0}-{1}".format(self.slug, self.site.name)
-
-
 class BaseConfig(Publishable):
     """
     Basic key:value configuration for apps
@@ -181,10 +181,10 @@ class BaseConfig(Publishable):
     value = models.TextField(_(u"Config Value"))
     description = models.TextField(_(u"Description"), blank=True, null=True)
 
-    article = models.ForeignKey(
-        'articles.Article',
+    container = models.ForeignKey(
+        'containers.Container',
         null=True, blank=True,
-        help_text=_(u'Only published article'),
+        help_text=_(u'Only published container'),
         on_delete=models.SET_NULL
     )
     channel = models.ForeignKey(
@@ -196,7 +196,7 @@ class BaseConfig(Publishable):
     class Meta:
         abstract = True
         permissions = (("developer", "Developer"),)
-        unique_together = ("key_group", "key", "site", "channel", "article")
+        unique_together = ("key_group", "key", "site", "channel", "container")
 
     def __unicode__(self):
         return u"{0}-{1}".format(self.key, self.value)
