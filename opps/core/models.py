@@ -146,6 +146,7 @@ class Imaged(models.Model):
         'images.Image',
         null=True, blank=False,
         on_delete=models.SET_NULL,
+        related_name="%(app_label)s_%(class)s_mainimage",
         verbose_name=_(u'Main Image'))
     images = models.ManyToManyField(
         'images.Image',
