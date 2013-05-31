@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from opps.core.models import BaseConfig
-from opps.articles.signals import shorturl_generate
+from opps.containers.signals import shorturl_generate
 from opps.articles.models import Article
 
 
