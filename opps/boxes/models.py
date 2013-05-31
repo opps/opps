@@ -6,7 +6,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-from opps.core.models import Publishable, BaseBox
+from opps.core.models import Publishable, Channeling
 
 
 try:
@@ -49,6 +49,22 @@ class QuerySet(Publishable):
             queryset = queryset.order_by('-id')
 
         return queryset[:self.limit]
+
+
+class BaseBox(Publishable, Channeling):
+    name = models.CharField(_(u"Box name"), max_length=140)
+    slug = models.SlugField(
+        _(u"Slug"),
+        db_index=True,
+        max_length=150,
+        unique=True,
+    )
+
+    class Meta:
+        abstract = True
+
+    def __unicode__(self):
+        return u"{0}-{1}".format(self.slug, self.site.name)
 
 
 class DynamicBox(BaseBox):
