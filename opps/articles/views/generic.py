@@ -43,6 +43,7 @@ class OppsView(object):
         filters['channel_long_slug__in'] = self.channel_long_slug
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
+        filters['show_on_root_channel'] = True
         article = Article.objects.filter(**filters)
 
         context['posts'] = article.filter(
@@ -176,7 +177,8 @@ class OppsList(OppsView, ListView):
             site_domain=self.site,
             channel_long_slug__in=self.channel_long_slug,
             date_available__lte=timezone.now(),
-            published=True
+            published=True,
+            show_on_root_channel=True
         ).exclude(pk__in=self.excluded_ids)
 
         if self.limit:
