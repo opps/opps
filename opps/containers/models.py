@@ -8,13 +8,13 @@ from django.utils import timezone
 
 from .signals import shorturl_generate, delete_container
 from opps.core.cache import _cache_key
-from opps.core.models import Publishable, Slugged, Channeling
+from opps.core.models import Publishable, Slugged, Channeling, Imaged
 from opps.boxes.models import BaseBox
 
 from taggit.managers import TaggableManager
 
 
-class Container(Publishable, Slugged, Channeling):
+class Container(Publishable, Slugged, Channeling, Imaged):
     title = models.CharField(_(u"Title"), max_length=140, db_index=True)
     hat = models.CharField(
         _(u"Hat"),
