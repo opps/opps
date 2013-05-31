@@ -37,17 +37,6 @@ class Container(Publishable, Slugged, Channeling):
         null=True, blank=True,
         db_index=True
     )
-    main_image = models.ForeignKey(
-        'images.Image',
-        null=True, blank=False,
-        on_delete=models.SET_NULL,
-        verbose_name=_(u'Main Image'),
-        related_name="%(app_label)s_%(class)s_main_image"
-    )
-    images = models.ManyToManyField(
-        'images.Image',
-        null=True, blank=True,
-        through='containers.ContainerImage')
     tags = TaggableManager(blank=True, verbose_name=u'Tags')
     show_on_root_channel = models.BooleanField(
         _(u"Show on root channel?"),
