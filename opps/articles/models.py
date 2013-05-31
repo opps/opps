@@ -172,7 +172,7 @@ class Article(Publishable, Slugged):
         imgs = [self.main_image]
         images = self.images.filter(
             published=True, date_available__lte=timezone.now()
-        ).order_by('articleimage__order', '-date_available')
+        ).order_by('articleimage__order')
 
         if self.main_image:
             images = images.exclude(pk=self.main_image.pk)
@@ -219,7 +219,9 @@ class Post(Article):
             for i in a.images.filter(
                 published=True,
                 date_available__lte=timezone.now()
-            ).exclude(pk__in=[i.pk for i in imgs]).distinct()
+            ).exclude(
+                pk__in=[i.pk for i in imgs]
+            ).order_by('articleimage__order').distinct()
         ]
 
         cache.set(cachekey, imgs)
