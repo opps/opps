@@ -5,12 +5,14 @@ from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
+from django.core.cache import cache
 from django.contrib.sites.models import Site
 from django.contrib.sites.managers import CurrentSiteManager
 from django.contrib.redirects.models import Redirect
 from django.utils import timezone
 
 from .managers import PublishableManager
+from .cache import _cache_key
 
 
 class Date(models.Model):
@@ -137,6 +139,45 @@ class Slugged(models.Model):
     class Meta:
         unique_together = ['site', 'slug']
         abstract = True
+
+
+class Imaged(models.Model):
+    main_image = models.ForeignKey(
+        'images.Image',
+        null=True, blank=False,
+        on_delete=models.SET_NULL,
+        verbose_name=_(u'Main Image'))
+    images = models.ManyToManyField(
+        'images.Image',
+        null=True, blank=True,
+        through='containers.ContainerImage')
+
+    class Meta:
+        abstract = True
+
+    def all_images(self):
+        cachekey = _cache_key(
+            '{}-all_images'.format(self.__class__.__name__),
+            self.__class__, self.site_domain,
+            u"{}-{}".format(self.channel_long_slug, self.slug))
+        getcache = cache.get(cachekey)
+        if getcache:
+            return getcache
+
+        imgs = [self.main_image]
+        images = self.images.filter(
+            published=True, date_available__lte=timezone.now()
+        ).order_by('articleimage__order', '-date_available')
+
+        if self.main_image:
+            images = images.exclude(pk=self.main_image.pk)
+        imgs += [i for i in images.distinct()]
+
+        cache.set(cachekey, imgs)
+        return imgs
+
+    def get_thumb(self):
+        return self.main_image
 
 
 class BaseConfig(Publishable):
