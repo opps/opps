@@ -110,14 +110,20 @@ class Container(Publishable, Slugged, Channeling, Imaged):
         return _list
 
 
-class ContainerSource(models.Model):
+class ContainerThrough(models.Model):
     container = models.ForeignKey(
         'containers.Container',
         null=True, blank=True,
         on_delete=models.SET_NULL,
-        related_name='containersource_containers',
         verbose_name=_(u'Container'),
     )
+    order = models.PositiveIntegerField(_(u'Order'), default=0)
+
+    class META:
+        abstract = True
+
+
+class ContainerSource(ContainerThrough):
     source = models.ForeignKey(
         'sources.Source',
         null=True, blank=True,
@@ -125,7 +131,6 @@ class ContainerSource(models.Model):
         related_name='containersource_sources',
         verbose_name=_(u'Source'),
     )
-    order = models.PositiveIntegerField(_(u'Order'), default=0)
 
     class META:
         verbose_name = _(u'Container source')
@@ -136,21 +141,13 @@ class ContainerSource(models.Model):
         return u"{}".format(self.source.slug)
 
 
-class ContainerImage(models.Model):
-    container = models.ForeignKey(
-        'containers.Container',
-        null=True, blank=True,
-        on_delete=models.SET_NULL,
-        related_name='containerimage_containers',
-        verbose_name=_(u'Container'),
-    )
+class ContainerImage(ContainerThrough):
     image = models.ForeignKey(
         'images.Image',
         verbose_name=_(u'Image'),
         null=True, blank=True,
         on_delete=models.SET_NULL
     )
-    order = models.PositiveIntegerField(_(u'Order'), default=0)
 
     class META:
         verbose_name = _('Container image')
@@ -172,7 +169,6 @@ class ContainerBox(BaseBox):
     container = models.ManyToManyField(
         'containers.Container',
         null=True, blank=True,
-        related_name='containerbox_containers',
         through='containers.ContainerBoxContainers'
     )
     queryset = models.ForeignKey(
@@ -211,14 +207,12 @@ class ContainerBoxContainers(models.Model):
         'containers.ContainerBox',
         null=True, blank=True,
         on_delete=models.SET_NULL,
-        related_name='articleboxarticles_articleboxes',
         verbose_name=_(u'Article Box'),
     )
     container = models.ForeignKey(
         'containers.Container',
         null=True, blank=True,
         on_delete=models.SET_NULL,
-        related_name='containerboxcontainers_containers',
         verbose_name=_(u'Container'),
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
