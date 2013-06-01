@@ -134,7 +134,7 @@ class AlbumAdminForm(forms.ModelForm):
 @apply_opps_rules('articles')
 class AlbumAdmin(ArticleAdmin):
     form = AlbumAdminForm
-    inlines = [ArticleImageInline]
+    inlines = [ArticleImageInline, ArticleSourceInline]
     list_display = ['title', 'channel', 'images_count',
                     'date_available', 'published', 'preview_url']
 
