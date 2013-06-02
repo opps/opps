@@ -9,6 +9,7 @@ from django.utils import timezone
 from .signals import shorturl_generate, delete_container
 from opps.core.cache import _cache_key
 from opps.core.models import Publishable, Slugged, Channeling, Imaged
+from opps.core.models import BaseConfig
 from opps.boxes.models import BaseBox
 
 from taggit.managers import TaggableManager
@@ -166,9 +167,11 @@ class ContainerBox(BaseBox):
         blank=True,
         max_length=140,
     )
-    container = models.ManyToManyField(
+    containers = models.ManyToManyField(
         'containers.Container',
         null=True, blank=True,
+        verbose_name=_(u'Container'),
+        related_name='containerbox_containers',
         through='containers.ContainerBoxContainers'
     )
     queryset = models.ForeignKey(
@@ -233,5 +236,11 @@ class ContainerBoxContainers(models.Model):
         if not self.article.published:
             raise ValidationError(_(u'Article not published!'))
 
+
+class ContainerConfig(BaseConfig):
+    """
+    Default implementation
+    """
+    pass
 
 models.signals.post_delete.connect(delete_container, sender=Container)
