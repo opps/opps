@@ -64,7 +64,7 @@ class BaseBox(Publishable, Channeling):
         abstract = True
 
     def __unicode__(self):
-        return u"{0}-{1}".format(self.slug, self.site.name)
+        return u"{}-{}".format(self.slug, self.site.name)
 
 
 class DynamicBox(BaseBox):
