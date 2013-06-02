@@ -5,9 +5,9 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
 
 from .models import Container, ContainerSource, ContainerImage
-from .models import ContainerBox, ContainerBoxContainers
+from .models import ContainerBox, ContainerBoxContainers, ContainerConfig
 from opps.core.admin import PublishableAdmin, apply_opps_rules, BaseBoxAdmin
-from opps.core.admin import ChannelListFilter, ContainerConfig
+from opps.core.admin import ChannelListFilter
 from opps.images.generate import image_url
 
 
@@ -112,7 +112,7 @@ class HasQuerySet(SimpleListFilter):
 @apply_opps_rules('containers')
 class ContainerBoxAdmin(BaseBoxAdmin):
     inlines = [ContainerBoxContainersInline]
-    raw_id_fields = ['channel', 'container', 'queryset']
+    raw_id_fields = ['channel', 'containers', 'queryset']
     # list_display = ['name', 'channel_name', 'date_available',
     #                 'is_dynamic', 'published']
 
@@ -120,7 +120,7 @@ class ContainerBoxAdmin(BaseBoxAdmin):
         (_(u'Identification'), {
             'fields': ('site', 'name', 'slug', 'title')}),
         (_(u'Relationships'), {
-            'fields': ('channel', 'container', 'queryset')}),
+            'fields': ('channel', 'containers', 'queryset')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
