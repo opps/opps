@@ -49,7 +49,7 @@ class PostAdmin(ContainerAdmin):
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available',
-                       'show_on_root_channel', 'in_articleboxes')}),
+                       'show_on_root_channel', 'in_containerboxes')}),
     )
 
 
@@ -94,13 +94,13 @@ class LinkAdminForm(forms.ModelForm):
 @apply_opps_rules('articles')
 class LinkAdmin(ContainerAdmin):
     form = LinkAdminForm
-    raw_id_fields = ['articles', 'channel', 'main_image']
+    raw_id_fields = ['container', 'channel', 'main_image']
     fieldsets = (
         (_(u'Identification'), {
             'fields': ('site', 'title', 'slug', 'get_http_absolute_url',
                        'short_url',)}),
         (_(u'Content'), {
-            'fields': ('hat', 'short_title', 'headline', 'url', 'articles',
+            'fields': ('hat', 'short_title', 'headline', 'url', 'container',
                        ('main_image', 'image_thumb'), 'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
