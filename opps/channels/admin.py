@@ -43,7 +43,7 @@ class ChannelConfigAdmin(admin.ModelAdmin):
     list_filter = ["key", 'key_group', "channel", "published"]
     search_fields = ["key", "key_group", "value"]
     raw_id_fields = ['channel']
-    exclude = ('user', 'article')
+    exclude = ('user', 'container')
 
     def save_model(self, request, obj, form, change):
         User = get_user_model()

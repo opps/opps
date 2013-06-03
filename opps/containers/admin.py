@@ -65,7 +65,7 @@ class ContainerBoxContainersInline(admin.TabularInline):
 class ContainerAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ["title"]}
     readonly_fields = ['get_http_absolute_url', 'short_url',
-                       'in_articleboxes', 'image_thumb']
+                       'in_containerboxes', 'image_thumb']
     raw_id_fields = ['main_image', 'channel']
 
     def get_list_filter(self, request):
@@ -112,7 +112,7 @@ class HasQuerySet(SimpleListFilter):
 @apply_opps_rules('containers')
 class ContainerBoxAdmin(BaseBoxAdmin):
     inlines = [ContainerBoxContainersInline]
-    raw_id_fields = ['channel', 'containers', 'queryset']
+    raw_id_fields = ['channel', 'queryset']
     # list_display = ['name', 'channel_name', 'date_available',
     #                 'is_dynamic', 'published']
 
@@ -120,7 +120,7 @@ class ContainerBoxAdmin(BaseBoxAdmin):
         (_(u'Identification'), {
             'fields': ('site', 'name', 'slug', 'title')}),
         (_(u'Relationships'), {
-            'fields': ('channel', 'containers', 'queryset')}),
+            'fields': ('channel', 'queryset')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
@@ -129,12 +129,12 @@ class ContainerBoxAdmin(BaseBoxAdmin):
     def clean_ended_entries(self, request, queryset):
         now = timezone.now()
         for box in queryset:
-            ended = box.articleboxarticles_articleboxes.filter(
+            ended = box.containerboxcontainers_containerboxes.filter(
                 date_end__lt=now
             )
             if ended:
                 ended.delete()
-    clean_ended_entries.short_description = _(u'Clean ended articles')
+    clean_ended_entries.short_description = _(u'Clean ended containers')
 
     def get_list_display(self, request):
         if request.user.is_superuser:

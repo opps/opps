@@ -65,11 +65,3 @@ class BaseBox(Publishable, Channeling):
 
     def __unicode__(self):
         return u"{}-{}".format(self.slug, self.site.name)
-
-
-class DynamicBox(BaseBox):
-
-    dynamicqueryset = models.ForeignKey(
-        'boxes.QuerySet',
-        verbose_name=_(u'Query Set')
-    )

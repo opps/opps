@@ -3,12 +3,12 @@ from django.contrib.sitemaps import GenericSitemap as DjangoGenericSitemap
 from django.contrib.sitemaps import Sitemap as DjangoSitemap
 from django.utils import timezone
 
-from opps.articles.models import Article
+from opps.containers.models import Container
 
 
 def InfoDisct(googlenews=False):
-    article = Article.objects.filter(date_available__lte=timezone.now(),
-                                     published=True)
+    article = Container.objects.filter(date_available__lte=timezone.now(),
+                                       published=True)
     if googlenews:
         article = article[:1000]
     return {
@@ -21,8 +21,8 @@ class BaseSitemap(DjangoSitemap):
     priority = 0.6
 
     def items(self):
-        return Article.objects.filter(date_available__lte=timezone.now(),
-                                      published=True)
+        return Container.objects.filter(date_available__lte=timezone.now(),
+                                        published=True)
 
     def lastmod(self, obj):
         return obj.date_available

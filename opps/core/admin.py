@@ -106,7 +106,7 @@ class PublishableAdmin(admin.ModelAdmin):
         obj.date_update = timezone.now()
         obj.save()
 
-    def in_articleboxes(self, obj):
+    def in_containerboxes(self, obj):
         articleboxes = obj.articlebox_articles.all()
         if articleboxes:
             html = [u"<ul>"]
@@ -117,8 +117,8 @@ class PublishableAdmin(admin.ModelAdmin):
             html.append(u"</ul>")
             return u"".join(html)
         return _(u"This item is not in a box")
-    in_articleboxes.allow_tags = True
-    in_articleboxes.short_description = _(u'Article boxes')
+    in_containerboxes.allow_tags = True
+    in_containerboxes.short_description = _(u'Article boxes')
 
     def image_thumb(self, obj):
         if obj.main_image:

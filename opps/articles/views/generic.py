@@ -9,7 +9,8 @@ from django.utils import timezone
 from django import template
 from django.conf import settings
 
-from opps.articles.models import ArticleBox, Article, Album
+from opps.articles.models import Album
+from opps.containers.models import Container, ContainerBox
 from opps.channels.models import Channel
 
 
@@ -32,7 +33,7 @@ class OppsView(object):
         if hasattr(self, 'articleboxes'):
             context['articleboxes'] = self.articleboxes
         else:
-            context['articleboxes'] = ArticleBox.objects.filter(
+            context['articleboxes'] = ContainerBox.objects.filter(
                 channel__long_slug=self.long_slug)
             self.excluded_ids = []
             for box in context['articleboxes']:
@@ -43,7 +44,7 @@ class OppsView(object):
         filters['channel_long_slug__in'] = self.channel_long_slug
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
-        article = Article.objects.filter(**filters)
+        article = Container.objects.filter(**filters)
 
         context['posts'] = article.filter(
             child_class='Post'
@@ -165,7 +166,7 @@ class OppsList(OppsView, ListView):
 
         self.set_channel_rules()
 
-        self.articleboxes = ArticleBox.objects.filter(
+        self.articleboxes = ContainerBox.objects.filter(
             channel__long_slug=self.long_slug)
 
         self.excluded_ids = []

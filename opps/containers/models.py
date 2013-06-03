@@ -72,9 +72,9 @@ class Container(Publishable, Slugged, Channeling, Imaged):
         TODO: get_absolute_url from child_app_label/child_class
         """
         if self.child_class != "Post":
-            return "/{}/{}/{}".format(self.child_class.lower(),
-                                      self.channel_long_slug, self.slug)
-        return "/{}/{}".format(self.channel_long_slug, self.slug)
+            return u"/{}/{}/{}".format(self.child_class.lower(),
+                                       self.channel_long_slug, self.slug)
+        return u"/{}/{}".format(self.channel_long_slug, self.slug)
 
     def get_thumb(self):
         return self.main_image
@@ -185,7 +185,7 @@ class ContainerBox(BaseBox):
         verbose_name = _('Container box')
         verbose_name_plural = _('Containers boxes')
 
-    def ordered_articles(self, field='order'):
+    def ordered_containers(self, field='order'):
         now = timezone.now()
         qs = self.articles.filter(
             published=True,
@@ -210,7 +210,7 @@ class ContainerBoxContainers(models.Model):
         'containers.ContainerBox',
         null=True, blank=True,
         on_delete=models.SET_NULL,
-        verbose_name=_(u'Article Box'),
+        verbose_name=_(u'Container Box'),
     )
     container = models.ForeignKey(
         'containers.Container',
@@ -229,11 +229,11 @@ class ContainerBoxContainers(models.Model):
         verbose_name_plural = _('Article boxes articles')
 
     def __unicode__(self):
-        return u"{0}-{1}".format(self.articlebox.slug, self.article.slug)
+        return u"{0}-{1}".format(self.containerbox.slug, self.container.slug)
 
     def clean(self):
 
-        if not self.article.published:
+        if not self.container.published:
             raise ValidationError(_(u'Article not published!'))
 
 
