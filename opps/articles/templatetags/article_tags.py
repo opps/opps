@@ -4,7 +4,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 
-from opps.articles.models import ArticleBox
+from opps.containers.models import ContainerBox
 
 
 register = template.Library()
@@ -14,10 +14,10 @@ register = template.Library()
 def get_articlebox(slug, template_name=None):
 
     try:
-        box = ArticleBox.objects.get(site=settings.SITE_ID, slug=slug,
-                                     date_available__lte=timezone.now(),
-                                     published=True)
-    except ArticleBox.DoesNotExist:
+        box = ContainerBox.objects.get(site=settings.SITE_ID, slug=slug,
+                                       date_available__lte=timezone.now(),
+                                       published=True)
+    except ContainerBox.DoesNotExist:
         box = None
 
     t = template.loader.get_template('articles/articlebox_detail.html')
@@ -29,7 +29,7 @@ def get_articlebox(slug, template_name=None):
 
 @register.simple_tag
 def get_all_articlebox(channel_long_slug, template_name=None):
-    boxes = ArticleBox.objects.filter(
+    boxes = ContainerBox.objects.filter(
         site=settings.SITE_ID,
         date_available__lte=timezone.now(),
         published=True,
