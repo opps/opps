@@ -30,6 +30,7 @@ class PostIndex(SearchIndex):
             date_available__lte=datetime.now(),
             published=True)
 
+
 class AlbumIndex(SearchIndex):
     text = CharField(document=True, use_template=True)
     date_available = DateTimeField(model_attr='date_available')
