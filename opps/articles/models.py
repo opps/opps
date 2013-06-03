@@ -197,7 +197,7 @@ class Post(Article):
         verbose_name=_(u"Albums")
     )
     related_posts = models.ManyToManyField(
-        'articles.Post',
+        'articles.Article',
         null=True, blank=True,
         related_name='post_relatedposts',
         through='articles.PostRelated',
@@ -255,7 +255,7 @@ class PostRelated(models.Model):
         on_delete=models.SET_NULL
     )
     related = models.ForeignKey(
-        'articles.Post',
+        'articles.Article',
         verbose_name=_(u'Related Post'),
         null=True,
         blank=True,
