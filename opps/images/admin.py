@@ -55,7 +55,8 @@ class UserListFilter(SimpleListFilter):
 class ImagesAdmin(PublishableAdmin):
     form = ImageModelForm
     prepopulated_fields = {"slug": ("title",)}
-    list_display = ['image_thumb', 'title', 'date_available', 'published']
+    list_display = ['image_thumb', 'image_dimension', 'title',
+                    'date_available', 'published']
     list_filter = [UserListFilter, 'date_available', 'published']
     search_fields = ['title']
     raw_id_fields = ['source']
@@ -96,5 +97,12 @@ class ImagesAdmin(PublishableAdmin):
         return _(u'No Image')
     image_thumb.short_description = _(u'Thumbnail')
     image_thumb.allow_tags = True
+
+    def image_dimension(self, obj):
+        try:
+            return "{0}x{1}".format(obj.image.width, obj.image.height)
+        except:
+            return ''
+    image_dimension.short_description = _(u'Dimension')
 
 admin.site.register(Image, ImagesAdmin)
