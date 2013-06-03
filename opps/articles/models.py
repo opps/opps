@@ -7,7 +7,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.core.cache import cache
 
-
 from .signals import redirect_generate
 from opps.containers.models import Container
 from opps.core.cache import _cache_key
@@ -147,11 +146,11 @@ class Link(Article):
         return self.site_domain in self.url
 
     def clean(self):
-        if not self.url and not self.articles:
+        if not self.url and not self.containers:
             raise ValidationError(_('URL field is required.'))
 
         self.url = self.url
-        if self.articles:
+        if self.containers:
             self.url = self.container.get_absolute_url()
 
 
