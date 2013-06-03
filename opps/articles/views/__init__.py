@@ -10,7 +10,7 @@ from haystack.views import SearchView
 
 from opps.articles.models import Post, Album, Article
 from opps.articles.views.generic import OppsDetail, OppsList
-from opps.articles.models import ArticleBox
+from opps.containers.models import ContainerBox
 
 
 class PostList(OppsList):
@@ -45,7 +45,7 @@ class PostList(OppsList):
 
         self.set_channel_rules()
 
-        self.articleboxes = ArticleBox.objects.filter(
+        self.articleboxes = ContainerBox.objects.filter(
             channel__long_slug=self.long_slug)
 
         self.excluded_ids = []
