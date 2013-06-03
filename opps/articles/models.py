@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from urlparse import urlparse
 
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -139,6 +140,11 @@ class Article(Publishable, Slugged):
     get_http_absolute_url.short_description = 'URL'
 
     def recommendation(self):
+        now = timezone.now()
+        start = now - timezone.timedelta(
+            days=settings.OPPS_RECOMMENDATION_RANGE_DAYS
+        )
+
         cachekey = _cache_key(
             '{}-recommendation'.format(self.__class__.__name__),
             self.__class__, self.site_domain,
@@ -152,10 +158,10 @@ class Article(Publishable, Slugged):
             site_domain=self.site_domain,
             child_class=self.child_class,
             channel_long_slug=self.channel_long_slug,
-            date_available__lte=timezone.now(),
+            date_available__range=(start, now),
             published=True,
             tags__in=tag_list).exclude(
-                pk=self.pk).distinct().all().order_by('pk')[:10]]
+                pk=self.pk).distinct().order_by('-date_available')[:10]]
 
         cache.set(cachekey, _list)
         return _list
