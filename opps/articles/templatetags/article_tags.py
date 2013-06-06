@@ -10,8 +10,8 @@ from opps.articles.models import ArticleBox
 register = template.Library()
 
 
-@register.simple_tag
-def get_articlebox(slug, template_name=None):
+@register.simple_tag(takes_context=True)
+def get_articlebox(context, slug, template_name=None):
 
     try:
         box = ArticleBox.objects.get(site=settings.SITE_ID, slug=slug,
@@ -24,7 +24,11 @@ def get_articlebox(slug, template_name=None):
     if template_name:
         t = template.loader.get_template(template_name)
 
-    return t.render(template.Context({'articlebox': box, 'slug': slug}))
+    return t.render(template.Context({
+        'articlebox': box,
+        'slug': slug,
+        'context': context
+    }))
 
 
 @register.simple_tag
