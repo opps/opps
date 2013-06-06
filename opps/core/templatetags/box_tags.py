@@ -20,8 +20,10 @@ def get_box(context, appname, slug, template_name=None):
         box = model.objects.get(site=settings.SITE_ID, slug=slug,
                                 date_available__lte=timezone.now(),
                                 published=True)
+        channel = box.channel
     except model.DoesNotExist:
         box = None
+        channel = None
 
     if template_name:
         t = template.loader.get_template(template_name)
@@ -29,8 +31,12 @@ def get_box(context, appname, slug, template_name=None):
         t = template.loader.get_template(
             '{0}/{1}_detail.html'.format(appname, model.__name__.lower())
         )
-    return t.render(template.Context({'{0}'.format(
-        model.__name__.lower()): box, 'slug': slug, 'context': context}))
+    return t.render(template.Context({
+        '{0}'.format(model.__name__.lower()): box,
+        'slug': slug,
+        'context': context,
+        'channel': channel or context.get('channel')
+    }))
 
 
 @register.simple_tag(takes_context=True)
