@@ -44,6 +44,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
+ROOT_URLCONF = ''
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
