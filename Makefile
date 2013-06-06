@@ -1,8 +1,7 @@
 
 .PHONY: test
 test: pep8
-	DJANGO_SETTINGS_MODULE=tests.settings \
-	django-admin.py test core containers articles boxes channels images sources sitemaps flatpages
+	python runtests.py
 
 .PHONY: travis
 travis:
