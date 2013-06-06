@@ -101,7 +101,7 @@ class ImagesAdmin(PublishableAdmin):
 
             if article_model.objects.filter(slug=article_slug,
                                             channel=article_channel).exists():
-                article_slug += "-{}".format(obj.title)
+                article_slug += "-{}".format(obj.slug)
 
             generate_article = True
 
