@@ -93,9 +93,14 @@ class ImagesAdmin(PublishableAdmin):
             try:
                 article_channel = Channel.objects.get(pk=int(channel_id))
             except:
-                article_channel = Channel.objects.get_homepage()
+                article_channel = Channel.objects.get_homepage(site=obj.site)
 
             article_title = request.POST.get('generate_article_title')
+
+            if not article_title:
+                import uuid
+                article_title = obj.title + str(uuid.uuid4()).split('-')[-1]
+
             article_slug = slugify(article_title)
             article_model = getattr(opps.articles.models, article_type)
 
@@ -105,6 +110,7 @@ class ImagesAdmin(PublishableAdmin):
 
             generate_article = True
 
+        images = []
         if not change and len(form.more_image()) >= 1:
             images = [
                 Image.objects.create(
