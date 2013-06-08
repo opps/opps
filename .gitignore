@@ -34,3 +34,7 @@ nosetests.xml
 .project
 .pydevproject
 *.swp
+
+
+# Django
+settings.py
