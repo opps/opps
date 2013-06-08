@@ -3,11 +3,13 @@ from django.contrib import admin
 from django import forms
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 
 from .models import Post, PostRelated, Album, Link
 from opps.containers.admin import ContainerAdmin, ContainerImageInline
 from opps.containers.admin import ContainerSourceInline
 from opps.core.admin import apply_opps_rules
+from opps.contrib.multisite.models import SitePermission
 
 from redactor.widgets import RedactorEditor
 
@@ -51,6 +53,18 @@ class PostAdmin(ContainerAdmin):
             'fields': ('published', 'date_available',
                        'show_on_root_channel', 'in_containerboxes')}),
     )
+
+    def queryset(self, request):
+        queryset = super(PostAdmin, self).queryset(request)
+        try:
+            sitepermission = SitePermission.objects.get(
+                user=request.user,
+                date_available__lte=timezone.now(),
+                published=True)
+            return queryset.filter(site_iid=sitepermission.site_iid)
+        except SitePermission.DoesNotExist:
+            pass
+        return queryset
 
 
 class AlbumAdminForm(forms.ModelForm):
