@@ -26,7 +26,8 @@ class ArticleImageInline(admin.TabularInline):
     extra = 1
     verbose_name = _(u"Article image")
     verbose_name_plural = _(u"Article images")
-    fieldsets = [(None, {'fields': ('image', 'image_thumb', 'order')})]
+    fieldsets = [(None, {'fields': ('image', 'image_thumb',
+                         'order', 'caption')})]
     ordering = ('order',)
     readonly_fields = ['image_thumb']
 

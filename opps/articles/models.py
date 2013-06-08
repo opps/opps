@@ -184,6 +184,14 @@ class Article(Publishable, Slugged):
             images = images.exclude(pk=self.main_image.pk)
         imgs += [i for i in images.distinct()]
 
+        for im in imgs:
+            try:
+                caption = im.articleimage_set.get(article__id=self.id).caption
+                if caption:
+                    im.description = caption
+            except:
+                pass
+
         cache.set(cachekey, imgs)
         return imgs
 
@@ -217,8 +225,9 @@ class Post(Article):
             return getcache
 
         imgs = super(Post, self).all_images()
-        imgs += [
-            i for a in self.albums.filter(
+
+        album_images = [
+            (i, a) for a in self.albums.filter(
                 published=True,
                 date_available__lte=timezone.now()
             ).distinct()
@@ -229,6 +238,16 @@ class Post(Article):
                 pk__in=[i.pk for i in imgs]
             ).order_by('articleimage__order').distinct()
         ]
+
+        for im, a in album_images:
+            try:
+                caption = im.articleimage_set.get(article__id=a.id).caption
+                if caption:
+                    im.description = caption
+            except:
+                pass
+
+        imgs += [item[0] for item in album_images]
 
         cache.set(cachekey, imgs)
         return imgs
@@ -360,6 +379,12 @@ class ArticleImage(models.Model):
         on_delete=models.SET_NULL
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
+    caption = models.CharField(
+        _(u"Caption"),
+        max_length=255,
+        blank=True,
+        null=True
+    )
 
     class META:
         verbose_name = _('Article image')
