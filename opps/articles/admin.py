@@ -3,13 +3,12 @@ from django.contrib import admin
 from django import forms
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from django.utils import timezone
 
 from .models import Post, PostRelated, Album, Link
 from opps.containers.admin import ContainerAdmin, ContainerImageInline
 from opps.containers.admin import ContainerSourceInline
 from opps.core.admin import apply_opps_rules
-from opps.contrib.multisite.models import SitePermission
+from opps.contrib.multisite.admin import AdminViewPermission
 
 from redactor.widgets import RedactorEditor
 
@@ -34,7 +33,7 @@ class PostRelatedInline(admin.TabularInline):
 
 
 @apply_opps_rules('articles')
-class PostAdmin(ContainerAdmin):
+class PostAdmin(ContainerAdmin, AdminViewPermission):
     form = PostAdminForm
     inlines = [ContainerImageInline, ContainerSourceInline, PostRelatedInline]
     raw_id_fields = ['main_image', 'channel', 'albums']
@@ -54,18 +53,6 @@ class PostAdmin(ContainerAdmin):
                        'show_on_root_channel', 'in_containerboxes')}),
     )
 
-    def queryset(self, request):
-        queryset = super(PostAdmin, self).queryset(request)
-        try:
-            sitepermission = SitePermission.objects.get(
-                user=request.user,
-                date_available__lte=timezone.now(),
-                published=True)
-            return queryset.filter(site_iid=sitepermission.site_iid)
-        except SitePermission.DoesNotExist:
-            pass
-        return queryset
-
 
 class AlbumAdminForm(forms.ModelForm):
     class Meta:
@@ -78,7 +65,7 @@ class AlbumAdminForm(forms.ModelForm):
 
 
 @apply_opps_rules('articles')
-class AlbumAdmin(ContainerAdmin):
+class AlbumAdmin(ContainerAdmin, AdminViewPermission):
     form = AlbumAdminForm
     inlines = [ContainerImageInline]
     list_display = ['title', 'channel', 'images_count',
@@ -106,7 +93,7 @@ class LinkAdminForm(forms.ModelForm):
 
 
 @apply_opps_rules('articles')
-class LinkAdmin(ContainerAdmin):
+class LinkAdmin(ContainerAdmin, AdminViewPermission):
     form = LinkAdminForm
     raw_id_fields = ['container', 'channel', 'main_image']
     fieldsets = (
