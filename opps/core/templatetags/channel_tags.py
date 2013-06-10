@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from django import template
 import logging
- 
+
 register = template.Library()
 logger = logging.getLogger()
- 
+
+
 @register.simple_tag
-def get_url(obj, http=False, target=None, urlOnly=False):
+def get_url(obj, http=False, target=None, url_only=False):
     try:
         _url = obj.get_absolute_url()
         _target = target or '_self'
@@ -19,7 +20,7 @@ def get_url(obj, http=False, target=None, urlOnly=False):
             _url = 'http://{}{}'.format(
                 obj.site,
                 obj.get_absolute_url())
-        if urlOnly:
+        if url_only:
             return _url
         return 'href="{}" target="{}"'.format(_url, _target)
     except Exception as e:
