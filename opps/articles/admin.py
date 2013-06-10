@@ -1,22 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from django import forms
-from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Post, PostRelated, Album, Link
+from .forms import PostAdminForm, AlbumAdminForm, LinkAdminForm
+
 from opps.containers.admin import ContainerAdmin, ContainerImageInline
 from opps.containers.admin import ContainerSourceInline
 from opps.core.admin import apply_opps_rules
 from opps.contrib.multisite.admin import AdminViewPermission
-
-from redactor.widgets import RedactorEditor
-
-
-class PostAdminForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        widgets = {'content': RedactorEditor()}
 
 
 @apply_opps_rules('articles')
@@ -54,15 +46,6 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
     )
 
 
-class AlbumAdminForm(forms.ModelForm):
-    class Meta:
-        model = Album
-        widgets = {
-            'headline': RedactorEditor(
-                redactor_options=settings.REDACTOR_SIMPLE
-            )
-        }
-
 
 @apply_opps_rules('articles')
 class AlbumAdmin(ContainerAdmin, AdminViewPermission):
@@ -85,11 +68,6 @@ class AlbumAdmin(ContainerAdmin, AdminViewPermission):
             'fields': ('published', 'date_available',
                        'show_on_root_channel')}),
     )
-
-
-class LinkAdminForm(forms.ModelForm):
-    class Meta:
-        model = Link
 
 
 @apply_opps_rules('articles')
