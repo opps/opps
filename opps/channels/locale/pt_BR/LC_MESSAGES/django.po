@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Translators:
 # Ellison Leão <ellisonleao@gmail.com>, 2013
@@ -12,17 +12,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-10 15:04-0300\n"
+"POT-Creation-Date: 2013-06-11 14:57-0300\n"
 "PO-Revision-Date: 2013-05-13 19:27+0000\n"
 "Last-Translator: josene <jsene@yacows.com.br>\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: __init__.py:5 models.py:47
+#: __init__.py:5 models.py:52
 msgid "Channels"
 msgstr "Canais"
 
@@ -30,44 +30,59 @@ msgstr "Canais"
 msgid "Identification"
 msgstr "Identificação"
 
-#: admin.py:25
+#: admin.py:26
 msgid "Publication"
 msgstr "Publicação"
 
-#: models.py:25
+#: models.py:26
 msgid "Name"
 msgstr "Nome"
 
-#: models.py:26
+#: models.py:27
 msgid "Path name"
 msgstr "Nome do caminho"
 
-#: models.py:28
+#: models.py:29
 msgid "Description"
 msgstr "Descrição"
 
-#: models.py:30
+#: models.py:31
 msgid "Show in menu?"
 msgstr "Mostrar no menu?"
 
-#: models.py:32
+#: models.py:33
+#, fuzzy
+msgid "Show in main RSS?"
+msgstr "Mostrar no menu?"
+
+#: models.py:37
 msgid "Is home page?"
 msgstr "É pagina principal?"
 
-#: models.py:34
+#: models.py:39
 msgid ""
 "Check only if this channel is the homepage. Should have only one homepage "
 "per site"
-msgstr "Marque apenas se este canal é a homepage. Deve existir apenas uma homepage por site."
+msgstr ""
+"Marque apenas se este canal é a homepage. Deve existir apenas uma homepage "
+"por site."
 
-#: models.py:37
+#: models.py:42
 msgid "Group sub-channel?"
 msgstr "Agrupar sub-canal?"
 
-#: models.py:38
+#: models.py:43
 msgid "Order"
 msgstr "Ordem"
 
-#: models.py:46 models.py:70
+#: models.py:51 models.py:75
 msgid "Channel"
 msgstr "Canal"
+
+#: models.py:124
+msgid "Channel Config"
+msgstr "Config de Canal"
+
+#: models.py:125
+msgid "Channel Configs"
+msgstr "Configs de Canal"
