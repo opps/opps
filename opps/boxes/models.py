@@ -50,6 +50,10 @@ class QuerySet(Publishable):
 
         return queryset[:self.limit]
 
+    class Meta:
+        verbose_name = _(u'Queryset')
+        verbose_name_plural = _(u'Querysets')
+
 
 class DynamicBox(BaseBox):
 
@@ -57,3 +61,7 @@ class DynamicBox(BaseBox):
         'boxes.QuerySet',
         verbose_name=_(u'Query Set')
     )
+
+    class Meta:
+        verbose_name = _(u'Dynamic Box')
+        verbose_name_plural = _(u'Dynamic Boxes')

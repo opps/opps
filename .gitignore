@@ -1,5 +1,6 @@
 *.log
 *.pot
+*.mo
 local_settings.py
 
 *.py[cod]
