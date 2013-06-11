@@ -484,6 +484,8 @@ class ArticleConfig(BaseConfig):
     class Meta:
         verbose_name = _('Article config')
         verbose_name_plural = _('Article configs')
+        permissions = (("developer", "Developer"),)
+        unique_together = ("key_group", "key", "site", "channel", "article")
 
 
 models.signals.post_save.connect(redirect_generate, sender=Link)

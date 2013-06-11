@@ -123,3 +123,5 @@ class ChannelConfig(BaseConfig):
     class Meta:
         verbose_name = _(u'Channel Config')
         verbose_name_plural = _(u'Channel Configs')
+        permissions = (("developer", "Developer"),)
+        unique_together = ("key_group", "key", "site", "channel", "article")
