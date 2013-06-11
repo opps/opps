@@ -209,9 +209,10 @@ class Post(Article):
         null=True, blank=True,
         related_name='post_relatedposts',
         through='articles.PostRelated',
+        verbose_name=_(u'Related Posts'),
     )
 
-    class META:
+    class Meta:
         verbose_name = _('Post')
         verbose_name_plural = _('Posts')
 
@@ -283,7 +284,7 @@ class PostRelated(models.Model):
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
-    class META:
+    class Meta:
         verbose_name = _('Post related')
         verbose_name_plural = _('Post relateds')
         ordering = ('order',)
@@ -293,7 +294,7 @@ class PostRelated(models.Model):
 
 
 class Album(Article):
-    class META:
+    class Meta:
         verbose_name = _('Album')
         verbose_name_plural = _('Albums')
 
@@ -306,10 +307,11 @@ class Link(Article):
     articles = models.ForeignKey(
         'articles.Article',
         null=True, blank=True,
-        related_name='link_article'
+        related_name='link_article',
+        verbose_name=_(u'Articles')
     )
 
-    class META:
+    class Meta:
         verbose_name = _('Link')
         verbose_name_plural = _('Links')
 
@@ -355,7 +357,7 @@ class ArticleSource(models.Model):
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
-    class META:
+    class Meta:
         verbose_name = _('Article source')
         verbose_name_plural = _('Article sources')
         ordering = ('order',)
@@ -386,7 +388,7 @@ class ArticleImage(models.Model):
         null=True
     )
 
-    class META:
+    class Meta:
         verbose_name = _('Article image')
         verbose_name_plural = _('Article images')
         ordering = ('order',)
@@ -407,7 +409,8 @@ class ArticleBox(BaseBox):
         'articles.Article',
         null=True, blank=True,
         related_name='articlebox_articles',
-        through='articles.ArticleBoxArticles'
+        through='articles.ArticleBoxArticles',
+        verbose_name=_(u'Articles')
     )
     queryset = models.ForeignKey(
         'boxes.QuerySet',
@@ -416,7 +419,7 @@ class ArticleBox(BaseBox):
         verbose_name=_(u'Query Set')
     )
 
-    class META:
+    class Meta:
         verbose_name = _('Article box')
         verbose_name_plural = _('Articles boxes')
 
@@ -478,7 +481,7 @@ class ArticleConfig(BaseConfig):
     Default implementation
     """
 
-    class META:
+    class Meta:
         verbose_name = _('Article config')
         verbose_name_plural = _('Article configs')
 
