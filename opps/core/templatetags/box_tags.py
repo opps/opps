@@ -9,8 +9,8 @@ from opps.core.utils import get_app_model
 register = template.Library()
 
 
-@register.simple_tag
-def get_box(appname, slug, template_name=None):
+@register.simple_tag(takes_context=True)
+def get_box(context, appname, slug, template_name=None):
     """
     {% load box_tags %}
     {% get_box 'polls' 'box_slug' %}
@@ -20,8 +20,10 @@ def get_box(appname, slug, template_name=None):
         box = model.objects.get(site=settings.SITE_ID, slug=slug,
                                 date_available__lte=timezone.now(),
                                 published=True)
+        channel = box.channel
     except model.DoesNotExist:
         box = None
+        channel = None
 
     if template_name:
         t = template.loader.get_template(template_name)
@@ -29,12 +31,16 @@ def get_box(appname, slug, template_name=None):
         t = template.loader.get_template(
             '{0}/{1}_detail.html'.format(appname, model.__name__.lower())
         )
-    return t.render(template.Context({'{0}'.format(
-        model.__name__.lower()): box, 'slug': slug}))
+    return t.render(template.Context({
+        '{0}'.format(model.__name__.lower()): box,
+        'slug': slug,
+        'context': context,
+        'channel': channel or context.get('channel')
+    }))
 
 
-@register.simple_tag
-def get_all_box(appname, channel_long_slug, template_name=None):
+@register.simple_tag(takes_context=True)
+def get_all_box(context, appname, channel_long_slug, template_name=None):
     """
     {% load box_tags %}
     {% get_all_box 'polls' 'channel_slug' %}
@@ -53,4 +59,4 @@ def get_all_box(appname, channel_long_slug, template_name=None):
         )
 
     return t.render(template.Context({'{0}boxes'.format(
-        model.__name__.lower()): boxes}))
+        model.__name__.lower()): boxes, 'context': context}))

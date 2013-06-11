@@ -48,9 +48,8 @@ class PostList(OppsList):
         self.articleboxes = ArticleBox.objects.filter(
             channel__long_slug=self.long_slug)
 
-        self.excluded_ids = []
         for box in self.articleboxes:
-            self.excluded_ids += [a.pk for a in box.ordered_articles()]
+            self.excluded_ids.update([a.pk for a in box.ordered_articles()])
 
         self.article = Article.objects.filter(
             site_domain=self.site,
@@ -85,8 +84,6 @@ class TagList(OppsList):
     model = Article
     type = "tags"
     template_name_suffix = '_tags'
-    channel_long_slug = []
-    channel = None
 
     @property
     def queryset(self):

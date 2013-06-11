@@ -26,7 +26,8 @@ class ArticleImageInline(admin.TabularInline):
     extra = 1
     verbose_name = _(u"Article image")
     verbose_name_plural = _(u"Article images")
-    fieldsets = [(None, {'fields': ('image', 'image_thumb', 'order')})]
+    fieldsets = [(None, {'fields': ('image', 'image_thumb',
+                         'order', 'caption')})]
     ordering = ('order',)
     readonly_fields = ['image_thumb']
 
@@ -95,8 +96,8 @@ class PostRelatedInline(admin.TabularInline):
     ordering = ('order',)
     extra = 1
     classes = ('collapse',)
-    verbose_name = (u'Related post')
-    verbose_name_plural = (u'Related posts')
+    verbose_name = _(u'Related post')
+    verbose_name_plural = _(u'Related posts')
 
 
 @apply_opps_rules('articles')

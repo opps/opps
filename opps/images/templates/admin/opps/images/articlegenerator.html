@@ -1,0 +1,69 @@
+{% load i18n %}
+<div id="articlegenerator-container">
+
+    <script>
+
+        django.jQuery( document ).ready(function() {
+            django.jQuery('.generate_article_group .radio input').change(function(e){
+                value = django.jQuery(this).val();
+                if (value == 'Disabled') {
+                    toggle_disableable('disabled')
+                } else {
+                    toggle_disableable('')
+                }
+            })
+            toggle_disableable('disabled');
+        });
+
+        function toggle_disableable(status) {
+            django.jQuery('.disableable input').attr('disabled', status);
+            django.jQuery('.disableable select').attr('disabled', status);
+        }
+
+    </script>
+
+    <style>
+      .generate_article_group{
+        margin-bottom: 10px;
+      }
+    </style>
+
+    <div class="generate_article_group">
+        <label class="radio inline">
+            <input type="radio" name="generate_article_type" value="Disabled" checked="checked">
+            {% trans 'Disabled' %}
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="generate_article_type" value="Album">
+            {% trans 'Album' %}
+        </label>
+        <label class="radio inline">
+            <input type="radio" name="generate_article_type" value="Post">
+            {% trans 'Post' %}
+        </label>
+    </div>
+
+
+
+    <div class="disableable generate_article_group">
+        <div class="input-prepend">
+            <span class="add-on">{% trans 'Title' %}</span>
+            <input id="generate_article_title" name="generate_article_title" class="span4" placeholder="{% trans 'Title' %}" type="text" required>
+        </div>
+        <p class="help-block">{% trans 'If already exists a number will be appended i.e: article-title-01' %}</p>
+    </div>
+
+
+
+    <div class="disableable">
+        <label>{% trans 'Channel' %}</label>
+        <select id="generate_article_channel" name="generate_article_channel" class="input-xlarge">
+            {% for channel in channels %}
+            <option value="{{ channel.id }}"> {{ channel.long_slug }} </option>
+            {% endfor %}
+        </select>
+        <p class="help-block">{% trans 'Channel for the new generated Post or Album' %}</p>
+
+    </div>
+
+</div>

@@ -24,8 +24,9 @@ class Date(models.Model):
 
 class Publishable(Date):
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    site = models.ForeignKey(Site, default=1)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             verbose_name=_(u'User'))
+    site = models.ForeignKey(Site, default=1, verbose_name=_(u'Site'))
     date_available = models.DateTimeField(_(u"Date available"),
                                           default=timezone.now,
                                           null=True,
@@ -106,12 +107,14 @@ class BaseBox(Publishable):
         'articles.Article',
         null=True, blank=True,
         help_text=_(u'Only published article'),
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
+        verbose_name=_(u'Article'),
     )
     channel = models.ForeignKey(
         'channels.Channel',
         null=True, blank=True,
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
+        verbose_name=_(u'Channel'),
     )
     channel_name = models.CharField(
         _(u"Channel name"),
@@ -185,12 +188,14 @@ class BaseConfig(Publishable):
         'articles.Article',
         null=True, blank=True,
         help_text=_(u'Only published article'),
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
+        verbose_name=_(u'Article'),
     )
     channel = models.ForeignKey(
         'channels.Channel',
         null=True, blank=True,
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
+        verbose_name=_(u'Channel'),
     )
 
     class Meta:

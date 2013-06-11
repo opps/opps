@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from urlparse import urlparse
 
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -139,6 +140,11 @@ class Article(Publishable, Slugged):
     get_http_absolute_url.short_description = 'URL'
 
     def recommendation(self):
+        now = timezone.now()
+        start = now - timezone.timedelta(
+            days=settings.OPPS_RECOMMENDATION_RANGE_DAYS
+        )
+
         cachekey = _cache_key(
             '{}-recommendation'.format(self.__class__.__name__),
             self.__class__, self.site_domain,
@@ -152,10 +158,10 @@ class Article(Publishable, Slugged):
             site_domain=self.site_domain,
             child_class=self.child_class,
             channel_long_slug=self.channel_long_slug,
-            date_available__lte=timezone.now(),
+            date_available__range=(start, now),
             published=True,
             tags__in=tag_list).exclude(
-                pk=self.pk).distinct().all().order_by('pk')[:10]]
+                pk=self.pk).distinct().order_by('-date_available')[:10]]
 
         cache.set(cachekey, _list)
         return _list
@@ -178,6 +184,14 @@ class Article(Publishable, Slugged):
             images = images.exclude(pk=self.main_image.pk)
         imgs += [i for i in images.distinct()]
 
+        for im in imgs:
+            try:
+                caption = im.articleimage_set.get(article__id=self.id).caption
+                if caption:
+                    im.description = caption
+            except:
+                pass
+
         cache.set(cachekey, imgs)
         return imgs
 
@@ -191,13 +205,14 @@ class Post(Article):
         verbose_name=_(u"Albums")
     )
     related_posts = models.ManyToManyField(
-        'articles.Post',
+        'articles.Article',
         null=True, blank=True,
         related_name='post_relatedposts',
         through='articles.PostRelated',
+        verbose_name=_(u'Related Posts'),
     )
 
-    class META:
+    class Meta:
         verbose_name = _('Post')
         verbose_name_plural = _('Posts')
 
@@ -211,8 +226,9 @@ class Post(Article):
             return getcache
 
         imgs = super(Post, self).all_images()
-        imgs += [
-            i for a in self.albums.filter(
+
+        album_images = [
+            (i, a) for a in self.albums.filter(
                 published=True,
                 date_available__lte=timezone.now()
             ).distinct()
@@ -223,6 +239,16 @@ class Post(Article):
                 pk__in=[i.pk for i in imgs]
             ).order_by('articleimage__order').distinct()
         ]
+
+        for im, a in album_images:
+            try:
+                caption = im.articleimage_set.get(article__id=a.id).caption
+                if caption:
+                    im.description = caption
+            except:
+                pass
+
+        imgs += [item[0] for item in album_images]
 
         cache.set(cachekey, imgs)
         return imgs
@@ -249,7 +275,7 @@ class PostRelated(models.Model):
         on_delete=models.SET_NULL
     )
     related = models.ForeignKey(
-        'articles.Post',
+        'articles.Article',
         verbose_name=_(u'Related Post'),
         null=True,
         blank=True,
@@ -258,7 +284,7 @@ class PostRelated(models.Model):
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
-    class META:
+    class Meta:
         verbose_name = _('Post related')
         verbose_name_plural = _('Post relateds')
         ordering = ('order',)
@@ -268,7 +294,7 @@ class PostRelated(models.Model):
 
 
 class Album(Article):
-    class META:
+    class Meta:
         verbose_name = _('Album')
         verbose_name_plural = _('Albums')
 
@@ -281,10 +307,11 @@ class Link(Article):
     articles = models.ForeignKey(
         'articles.Article',
         null=True, blank=True,
-        related_name='link_article'
+        related_name='link_article',
+        verbose_name=_(u'Articles')
     )
 
-    class META:
+    class Meta:
         verbose_name = _('Link')
         verbose_name_plural = _('Links')
 
@@ -330,7 +357,7 @@ class ArticleSource(models.Model):
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
-    class META:
+    class Meta:
         verbose_name = _('Article source')
         verbose_name_plural = _('Article sources')
         ordering = ('order',)
@@ -354,8 +381,14 @@ class ArticleImage(models.Model):
         on_delete=models.SET_NULL
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
+    caption = models.CharField(
+        _(u"Caption"),
+        max_length=255,
+        blank=True,
+        null=True
+    )
 
-    class META:
+    class Meta:
         verbose_name = _('Article image')
         verbose_name_plural = _('Article images')
         ordering = ('order',)
@@ -376,7 +409,8 @@ class ArticleBox(BaseBox):
         'articles.Article',
         null=True, blank=True,
         related_name='articlebox_articles',
-        through='articles.ArticleBoxArticles'
+        through='articles.ArticleBoxArticles',
+        verbose_name=_(u'Articles')
     )
     queryset = models.ForeignKey(
         'boxes.QuerySet',
@@ -385,7 +419,7 @@ class ArticleBox(BaseBox):
         verbose_name=_(u'Query Set')
     )
 
-    class META:
+    class Meta:
         verbose_name = _('Article box')
         verbose_name_plural = _('Articles boxes')
 
@@ -447,7 +481,7 @@ class ArticleConfig(BaseConfig):
     Default implementation
     """
 
-    class META:
+    class Meta:
         verbose_name = _('Article config')
         verbose_name_plural = _('Article configs')
 
