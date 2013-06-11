@@ -20,7 +20,6 @@ class AdminViewPermission(admin.ModelAdmin):
             pass
         return queryset
 
-
     def get_form(self, request, obj=None, **kwargs):
         form = super(AdminViewPermission, self).get_form(request, obj,
                                                          **kwargs)
