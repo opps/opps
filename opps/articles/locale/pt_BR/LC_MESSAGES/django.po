@@ -154,7 +154,7 @@ msgstr "Artigo"
 
 #: models.py:205 models.py:299
 msgid "Albums"
-msgstr "Albuns"
+msgstr "Álbuns"
 
 #: models.py:212
 msgid "Related Posts"
