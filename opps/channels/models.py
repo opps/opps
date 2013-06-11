@@ -120,4 +120,6 @@ class ChannelConfig(BaseConfig):
     """
     Default implementation
     """
-    pass
+    class Meta:
+        verbose_name = _(u'Channel Config')
+        verbose_name_plural = _(u'Channel Configs')

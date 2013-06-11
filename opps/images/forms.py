@@ -18,7 +18,7 @@ class ImageModelForm(forms.ModelForm):
     generate_article = forms.CharField(
         required=False,
         widget=ArticleGenerator,
-        label=_(u'Generate content')
+        label=_(u'Generated content')
     )
     crop_example = forms.CharField(
         required=False,

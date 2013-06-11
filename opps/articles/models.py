@@ -407,7 +407,8 @@ class ArticleBox(BaseBox):
         'articles.Article',
         null=True, blank=True,
         related_name='articlebox_articles',
-        through='articles.ArticleBoxArticles'
+        through='articles.ArticleBoxArticles',
+        verbose_name=_(u'Articles')
     )
     queryset = models.ForeignKey(
         'boxes.QuerySet',
