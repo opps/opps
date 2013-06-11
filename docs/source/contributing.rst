@@ -80,6 +80,7 @@ Patches and Suggestions
 * Guilherme Gondim
 * arloc
 * Sergio Oliveira
+* Diego Yungh
 
 
 Other contributors
