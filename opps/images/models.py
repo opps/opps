@@ -114,9 +114,10 @@ class Image(Publishable, Cropping):
     tags = TaggableManager(blank=True, through=TaggedImage,
                            verbose_name=u'Tags')
 
-    source = models.ForeignKey('sources.Source', null=True, blank=True)
+    source = models.ForeignKey('sources.Source', verbose_name=_(u'Source'),
+                               null=True, blank=True)
 
-    class META:
+    class Meta:
         verbose_name = _('Image')
         verbose_name_plural = _('Images')
         unique_together = ['site', 'slug']
