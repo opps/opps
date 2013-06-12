@@ -20,6 +20,8 @@ class OppsCoreConf(AppConf):
     CHECK_MOBILE = False
     DOMAIN_MOBILE = u''
     PROTOCOL_MOBILE = u'http'
+    DOMAIN_WEB = u''
+    PROTOCOL_WEB = u'http'
     ADMIN_RULES = {}
     RELATED_POSTS_PLACEHOLDER = "---related---"
     CACHE_PREFIX = 'opps'
