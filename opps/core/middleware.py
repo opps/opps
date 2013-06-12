@@ -171,7 +171,7 @@ class MobileRedirectMiddleware(object):
     Allows setting and deleting of cookies from requests in exactly the same
     way as responses.
 
-    >>> request.set_cookie('name', 'value')
+    request.set_cookie('name', 'value')
 
     The set_cookie and delete_cookie are exactly the same as the ones built
     into the Django HttpResponse class.
