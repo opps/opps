@@ -8,6 +8,10 @@ logger = logging.getLogger()
 
 @register.simple_tag
 def get_url(obj, http=False, target=None, url_only=False):
+
+    if not hasattr(obj, 'child_class'):
+        return obj.get_absolute_url()
+
     try:
         _url = obj.get_absolute_url()
         _target = target or '_self'
