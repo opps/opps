@@ -136,3 +136,12 @@ class MobileDetectionMiddleware(object):
                 return HttpResponseRedirect(u"{}://{}".format(
                     settings.OPPS_PROTOCOL_MOBILE,
                     settings.OPPS_DOMAIN_MOBILE))
+
+
+class MobileRedirectMiddleware(object):
+
+    def process_request(self, request):
+        domain = request.META.get('HTTP_HOST', '')
+        mobile_domain = settings.OPPS_DOMAIN_MOBILE
+        if domain == mobile_domain:
+            settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_MOBILE
