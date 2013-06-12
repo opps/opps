@@ -142,7 +142,7 @@ class MobileDetectionMiddleware(object):
 
 
 def _set_cookie(self, key, value='', max_age=None, expires=None, path='/',
-           domain=None, secure=False):
+                domain=None, secure=False):
     self._resp_cookies[key] = value
     self.COOKIES[key] = value
     if max_age is not None:
@@ -181,12 +181,30 @@ class MobileRedirectMiddleware(object):
     """
     def process_request(self, request):
 
+        domain = request.META.get('HTTP_HOST', '')
+        mobile_domain = settings.OPPS_DOMAIN_MOBILE
+
         current_cookie = request.COOKIES.get('template_mode', None)
         template_mode = request.GET.get('template_mode', None)
         settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_WEB
 
+        is_mobile_domain = domain == mobile_domain
+
         if not template_mode and not current_cookie:
-            return
+            if is_mobile_domain:
+                template_mode = 'mobile'
+            else:
+                return
+
+        if is_mobile_domain and template_mode == 'desktop':
+            prot = settings.OPPS_PROTOCOL_WEB
+            web_domain = settings.OPPS_DOMAIN_WEB
+            url = u"{}://{}/?template_mode=desktop".format(prot, web_domain)
+            return HttpResponseRedirect(url)
+        elif not is_mobile_domain and template_mode == 'mobile':
+            prot = settings.OPPS_PROTOCOL_MOBILE
+            url = u"{}://{}/?template_mode=mobile".format(prot, mobile_domain)
+            return HttpResponseRedirect(url)
 
         request._resp_cookies = SimpleCookie()
         request.set_cookie = MethodType(_set_cookie, request, HttpRequest)
