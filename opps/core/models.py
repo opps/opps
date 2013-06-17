@@ -24,9 +24,15 @@ class Date(models.Model):
         abstract = True
 
 
-class Publishable(Date):
-
+class User(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
+
+    class Meta:
+        abstract = True
+
+
+class Publisher(Date):
+
     site = models.ForeignKey(Site, default=1)
     site_iid = models.PositiveIntegerField(
         _(u"Site id"),
@@ -57,10 +63,20 @@ class Publishable(Date):
     def save(self, *args, **kwargs):
         self.site_domain = self.site.domain
         self.site_iid = self.site.id
-        super(Publishable, self).save(*args, **kwargs)
+        super(Publisher, self).save(*args, **kwargs)
 
     def is_published(self):
         return self.published and self.date_available <= timezone.now()
+
+
+class Publishable(User, Publisher):
+    class Meta:
+        abstract = True
+
+
+class NotUserPublishable(Publisher):
+    class Meta:
+        abstract = True
 
 
 class Channeling(models.Model):
