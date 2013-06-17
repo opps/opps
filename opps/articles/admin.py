@@ -24,8 +24,6 @@ class ArticleImageInline(admin.TabularInline):
     raw_id_fields = ['image']
     actions = None
     extra = 1
-    verbose_name = _(u"Article image")
-    verbose_name_plural = _(u"Article images")
     fieldsets = [(None, {'fields': ('image', 'image_thumb',
                          'order', 'caption')})]
     ordering = ('order',)
@@ -47,8 +45,6 @@ class ArticleSourceInline(admin.TabularInline):
     raw_id_fields = ['source']
     actions = None
     extra = 1
-    verbose_name = _(u"Article source")
-    verbose_name_plural = _(u"Article sources")
     ordering = ('order',)
     fieldsets = [(None, {
         'classes': ('collapse',),
@@ -96,8 +92,6 @@ class PostRelatedInline(admin.TabularInline):
     ordering = ('order',)
     extra = 1
     classes = ('collapse',)
-    verbose_name = _(u'Related post')
-    verbose_name_plural = _(u'Related posts')
 
 
 @apply_opps_rules('articles')

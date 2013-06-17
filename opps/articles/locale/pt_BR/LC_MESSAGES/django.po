@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-11 15:19-0300\n"
+"POT-Creation-Date: 2013-06-17 14:53-0300\n"
 "PO-Revision-Date: 2013-05-13 17:54+0000\n"
 "Last-Translator: josene <jsene@yacows.com.br>\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
@@ -20,17 +20,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: __init__.py:5 models.py:105 models.py:311 models.py:413
+#: __init__.py:5 models.py:107 models.py:313 models.py:415
 msgid "Articles"
 msgstr "Artigos"
 
-#: admin.py:27 models.py:392
+#: admin.py:27 models.py:394
 msgid "Article image"
-msgstr "Imagem de Artigo"
+msgstr "Imagem da publicação"
 
-#: admin.py:28 models.py:393
+#: admin.py:28 models.py:395
 msgid "Article images"
-msgstr "Articles"
+msgstr "Imagens da Publicação"
 
 #: admin.py:38 admin.py:280
 msgid "No Image"
@@ -40,27 +40,19 @@ msgstr "Sem imagem"
 msgid "Thumbnail"
 msgstr "Thumbnail"
 
-#: admin.py:50 models.py:361
+#: admin.py:50 models.py:363
 msgid "Article source"
-msgstr "Fonte do Artigo"
+msgstr "Fonte da Publicação"
 
-#: admin.py:51 models.py:362
+#: admin.py:51 models.py:364
 msgid "Article sources"
-msgstr "Fontes do Artigo"
-
-#: admin.py:99
-msgid "Related post"
-msgstr "Notícia Relacionada"
-
-#: admin.py:100
-msgid "Related posts"
-msgstr "Notícias Relacionadas"
+msgstr "Fontes da Publicação"
 
 #: admin.py:110 admin.py:143 admin.py:168 admin.py:226
 msgid "Identification"
 msgstr "Identificação"
 
-#: admin.py:113 admin.py:146 admin.py:171 models.py:200
+#: admin.py:113 admin.py:146 admin.py:171 models.py:202
 msgid "Content"
 msgstr "Conteúdo"
 
@@ -92,7 +84,7 @@ msgstr "Artigos finalizados"
 msgid "Dynamic"
 msgstr "Dinâmica"
 
-#: models.py:20 models.py:403
+#: models.py:20 models.py:405
 msgid "Title"
 msgstr "Título"
 
@@ -144,121 +136,133 @@ msgstr "Classe filha"
 msgid "Main Image"
 msgstr "Imagem principal"
 
-#: models.py:95
+#: models.py:87
+msgid "Images"
+msgstr "Imagens"
+
+#: models.py:93
+msgid "Sources"
+msgstr "Origens"
+
+#: models.py:97
 msgid "Show on root channel?"
 msgstr "Exibir no canal principal?"
 
-#: models.py:104 models.py:349 models.py:372 models.py:458
+#: models.py:106 models.py:351 models.py:374 models.py:460
 msgid "Article"
 msgstr "Artigo"
 
-#: models.py:205 models.py:299
+#: models.py:207 models.py:301
 msgid "Albums"
 msgstr "Álbuns"
 
-#: models.py:212
+#: models.py:214 models.py:291
 msgid "Related Posts"
 msgstr "Notícias Relacionadas"
 
-#: models.py:216 models.py:271
+#: models.py:218 models.py:273
 msgid "Post"
 msgstr "Notícia"
 
-#: models.py:217
+#: models.py:219
 msgid "Posts"
 msgstr "Notícias"
 
-#: models.py:279
+#: models.py:281 models.py:290
 msgid "Related Post"
 msgstr "Notícia Relacionada"
 
-#: models.py:285 models.py:358 models.py:383 models.py:460
+#: models.py:287 models.py:360 models.py:385 models.py:462
 msgid "Order"
 msgstr "Ordem"
 
-#: models.py:288
-msgid "Post related"
-msgstr "Notícia relacionada"
-
-#: models.py:289
-msgid "Post relateds"
-msgstr "Notícias relacionadas"
-
-#: models.py:298
+#: models.py:300
 msgid "Album"
 msgstr "Álbum"
 
-#: models.py:306
+#: models.py:308
 msgid "URL"
 msgstr "URL"
 
-#: models.py:315
+#: models.py:317
 msgid "Link"
 msgstr "Link"
 
-#: models.py:316
+#: models.py:318
 msgid "Links"
 msgstr "Links"
 
-#: models.py:336
+#: models.py:338
 msgid "URL field is required."
 msgstr "Campo de URL é obrigatório."
 
-#: models.py:356
+#: models.py:358
 msgid "Source"
 msgstr "Origem"
 
-#: models.py:379
+#: models.py:381
 msgid "Image"
 msgstr "Imagem"
 
-#: models.py:385
+#: models.py:387
 msgid "Caption"
 msgstr "Legenda"
 
-#: models.py:419
+#: models.py:421
 msgid "Query Set"
 msgstr "Query Set"
 
-#: models.py:423
+#: models.py:425
 msgid "Article box"
 msgstr "Box de Artigo"
 
-#: models.py:424
+#: models.py:426
 msgid "Articles boxes"
 msgstr "Box de Artigo"
 
-#: models.py:451
+#: models.py:453
 msgid "Article Box"
 msgstr "Box de Artigo"
 
-#: models.py:461
+#: models.py:463
 msgid "Date available"
 msgstr "Data de publicação"
 
-#: models.py:463
+#: models.py:465
 msgid "End date"
 msgstr "Data final"
 
-#: models.py:467
+#: models.py:469
 msgid "Article box articles"
 msgstr "Box de Artigo"
 
-#: models.py:468
+#: models.py:470
 msgid "Article boxes articles"
 msgstr "Box de Artigo"
 
-#: models.py:476
+#: models.py:478
 msgid "Article not published!"
 msgstr "Artigo não publicado!"
 
-#: models.py:485
+#: models.py:487
 msgid "Article config"
 msgstr "Config de artigo"
 
-#: models.py:486
+#: models.py:488
 msgid "Article configs"
 msgstr "Configs de Artigo"
+
+#~ msgid "Related post"
+#~ msgstr "Notícia Relacionada"
+
+#~ msgid "Related posts"
+#~ msgstr "Notícias Relacionadas"
+
+#~ msgid "Post related"
+#~ msgstr "Notícia relacionada"
+
+#~ msgid "Post relateds"
+#~ msgstr "Notícias relacionadas"
 
 #~ msgid "Article date available is greater than today!"
 #~ msgstr "Data de publicação é maior que a data de hoje!"

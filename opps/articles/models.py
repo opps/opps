@@ -84,11 +84,13 @@ class Article(Publishable, Slugged):
         null=True, blank=True,
         related_name='article_images',
         through='articles.ArticleImage',
+        verbose_name=_(u'Images')
     )
     sources = models.ManyToManyField(
         'sources.Source',
         null=True, blank=True,
         through='articles.ArticleSource',
+        verbose_name=_(u'Sources')
     )
     tags = TaggableManager(blank=True, verbose_name=u'Tags')
     show_on_root_channel = models.BooleanField(
@@ -285,8 +287,8 @@ class PostRelated(models.Model):
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
     class Meta:
-        verbose_name = _('Post related')
-        verbose_name_plural = _('Post relateds')
+        verbose_name = _('Related Post')
+        verbose_name_plural = _('Related Posts')
         ordering = ('order',)
 
     def __unicode__(self):
@@ -389,8 +391,8 @@ class ArticleImage(models.Model):
     )
 
     class Meta:
-        verbose_name = _('Article image')
-        verbose_name_plural = _('Article images')
+        verbose_name = _(u'Article image')
+        verbose_name_plural = _(u'Article images')
         ordering = ('order',)
 
     def __unicode__(self):
