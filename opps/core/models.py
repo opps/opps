@@ -24,7 +24,7 @@ class Date(models.Model):
         abstract = True
 
 
-class User(models.Model):
+class Owned(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     class Meta:
@@ -69,7 +69,7 @@ class Publisher(Date):
         return self.published and self.date_available <= timezone.now()
 
 
-class Publishable(User, Publisher):
+class Publishable(Owned, Publisher):
     class Meta:
         abstract = True
 
