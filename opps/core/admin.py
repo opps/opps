@@ -287,8 +287,7 @@ def apply_rules(admin_class, app):
                 _inline = inline.split('.')[-1]
                 _temp = __import__(_module, globals(), locals(), [_inline], -1)
                 admin_class.inlines.append(getattr(_temp, _inline))
-            except Exception, e:
-                print str(e)
+            except:
                 pass
 
     # actions
