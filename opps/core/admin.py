@@ -278,11 +278,25 @@ def apply_rules(admin_class, app):
 
     # TODO:
     # inlines
+    inlines = rules.get('inlines')
+    if inlines:
+        admin_class.inlines = []
+        for inline in inlines:
+            try:
+                _module = '.'.join(inline.split('.')[:-1])
+                _inline = inline.split('.')[-1]
+                _temp = __import__(_module, globals(), locals(), [_inline], -1)
+                admin_class.inlines.append(getattr(_temp, _inline))
+            except Exception, e:
+                print str(e)
+                pass
+
     # actions
     # override methods
 
     # load generic attributes
-    specific_keys = list(attrs) + ['form', 'field_overrides', 'fieldsets']
+    specific_keys = list(attrs) + ['form', 'field_overrides',
+                                   'fieldsets', 'inlines']
     for k, v in rules.iteritems():
         if not k in specific_keys:
             setattr(admin_class, k, v)
