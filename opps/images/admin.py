@@ -120,12 +120,20 @@ class ImagesAdmin(PublishableAdmin):
                     slug=u"{0}-{1}".format(obj.slug, i),
                     description=obj.description,
                     published=obj.published,
-                    user=User.objects.get(pk=request.user.pk)
+                    user=User.objects.get(pk=request.user.pk),
+                    source=obj.source
                 )
                 for i, img in enumerate(form.more_image(), 1)
             ]
 
         super(ImagesAdmin, self).save_model(request, obj, form, change)
+
+        tags = request.POST.get('tags')
+        if tags:
+            tags = tags.replace('"', '')
+            for img in images:
+                img.tags.add(*tags.split(','))
+                img.save()
 
         if not change and generate_article:
             article = article_model.objects.create(
