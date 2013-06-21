@@ -8,7 +8,6 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
 from django.contrib.sites.models import get_current_site
-from django.db import IntegrityError
 from opps.channels.models import Channel
 from opps.images.generate import image_url
 
@@ -104,25 +103,7 @@ class PublishableAdmin(admin.ModelAdmin):
             obj.date_insert = timezone.now()
             obj.site = Site.objects.get(pk=settings.SITE_ID)
         obj.date_update = timezone.now()
-
-        try:
-            obj.save()
-        except IntegrityError:
-            # unique slug
-            slug_exists = self.model.objects.filter(
-                slug__startswith=obj.slug,
-                channel=obj.channel,
-                site=obj.site
-            )
-            if slug_exists:
-                last = slug_exists.latest('slug').slug
-                suffix = last.split('-')[-1]
-                if suffix.isdigit():
-                    suffix = int(suffix) + 1
-                    obj.slug = "{0}-{1}".format(obj.slug, suffix)
-                else:
-                    obj.slug = "{0}-1".format(obj.slug)
-                obj.save()
+        obj.save()
 
     def in_articleboxes(self, obj):
         articleboxes = obj.articlebox_articles.all()
@@ -263,8 +244,7 @@ def apply_rules(admin_class, app):
     """
     if field_overrides:
         def get_form(self, request, obj=None, **kwargs):
-            form = super(self.__class__, self)\
-                .get_form(request, obj, **kwargs)
+            form = super(self.__class__, self).get_form(request, obj, **kwargs)
             if hasattr(form, 'base_fields'):
                 for field, attrs in field_overrides.iteritems():
                     for attr, value in attrs.iteritems():
