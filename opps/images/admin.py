@@ -8,6 +8,7 @@ from django.utils.text import slugify
 from django.contrib import messages
 from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
+from django.db import transaction
 
 from .models import Image
 from .forms import ImageModelForm
@@ -15,7 +16,7 @@ from .generate import image_url
 
 from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
-import opps.articles.models
+from opps.articles.models import Post, Album, ArticleImage
 from opps.channels.models import Channel
 
 User = get_user_model()
@@ -86,30 +87,6 @@ class ImagesAdmin(PublishableAdmin):
 
     def save_model(self, request, obj, form, change):
 
-        generate_article = False
-        article_type = request.POST.get('generate_article_type')
-        if article_type in ('Post', 'Album'):
-            channel_id = request.POST.get('generate_article_channel')
-            try:
-                article_channel = Channel.objects.get(pk=int(channel_id))
-            except:
-                article_channel = Channel.objects.get_homepage(site=obj.site)
-
-            article_title = request.POST.get('generate_article_title')
-
-            if not article_title:
-                import uuid
-                article_title = obj.title + str(uuid.uuid4()).split('-')[-1]
-
-            article_slug = slugify(article_title)
-            article_model = getattr(opps.articles.models, article_type)
-
-            if article_model.objects.filter(slug=article_slug,
-                                            channel=article_channel).exists():
-                article_slug += "-{}".format(obj.slug)
-
-            generate_article = True
-
         images = []
         if not change and len(form.more_image()) >= 1:
             images = [
@@ -128,6 +105,35 @@ class ImagesAdmin(PublishableAdmin):
 
         super(ImagesAdmin, self).save_model(request, obj, form, change)
 
+        if not change:
+            self.generate_article(request, obj, change, images)
+
+    @transaction.commit_on_success
+    def generate_article(self, request, obj, change, images):
+
+        generate_article = False
+        article_type = request.POST.get('generate_article_type')
+        if article_type in ('Post', 'Album'):
+            channel_id = request.POST.get('generate_article_channel')
+            try:
+                article_channel = Channel.objects.get(pk=int(channel_id))
+            except:
+                article_channel = Channel.objects.get_homepage(site=obj.site)
+
+            article_title = request.POST.get('generate_article_title')
+            article_slug = slugify(article_title)
+
+            if article_type == 'Post':
+                article_model = Post
+            elif article_type == 'Album':
+                article_model = Album
+
+            if article_model.objects.filter(slug=article_slug,
+                                            channel=article_channel).exists():
+                article_slug += "-{}".format(obj.slug)
+
+            generate_article = True
+
         tags = request.POST.get('tags')
         if tags:
             tags = tags.replace('"', '')
@@ -135,7 +141,7 @@ class ImagesAdmin(PublishableAdmin):
                 img.tags.add(*tags.split(','))
                 img.save()
 
-        if not change and generate_article:
+        if generate_article:
             article = article_model.objects.create(
                 title=article_title,
                 slug=article_slug,
@@ -149,7 +155,7 @@ class ImagesAdmin(PublishableAdmin):
             images.insert(0, obj)
 
             for i, image in enumerate(images):
-                opps.articles.models.ArticleImage.objects.create(
+                ArticleImage.objects.create(
                     article=article,
                     image=image,
                     order=i
