@@ -89,7 +89,12 @@ class Slugged(models.Model):
 
     def validate_slug(self):
         slug = getattr(self, 'slug', None)
-        channel = getattr(self, 'channel', None)
+
+        try:
+            channel = getattr(self, 'channel', None)
+        except:
+            channel = None
+
         site = getattr(self, 'site', None)
         if settings.OPPS_SMART_SLUG_ENABLED:
             filters = {'slug__startswith': slug, 'site': site}
