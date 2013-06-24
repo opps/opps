@@ -8,13 +8,13 @@ import opps
 
 install_requires = ["django",
                     "south>=0.7",
-                    "Pillow==1.7.8",
+                    "Pillow",
                     "thumbor",
                     'libthumbor',
-                    "django-googl==0.1.1",
+                    "django-googl",
                     "django-taggit",
-                    "django-wysiwyg-redactor==0.3.1",
-                    "django-haystack==1.2.7",
+                    "django-wysiwyg-redactor",
+                    "django-haystack>=2",
                     "django-mptt",
                     "django-appconf",
                     "python-memcached"]
