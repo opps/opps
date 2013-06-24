@@ -101,8 +101,6 @@ class Slugged(models.Model):
             slug_exists = slug_exists.exclude(pk=self.pk)
 
         if settings.OPPS_SMART_SLUG_ENABLED:
-            # TODO: remove 2 step verification and use a loop in a list
-            # cause sometime the [-1] is not a digit
             if slug_exists:
                 last = slug_exists.latest('slug').slug
                 suffix = last.split('-')[-1]
