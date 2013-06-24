@@ -53,15 +53,6 @@ class Slugged(models.Model):
         max_length=150,
     )
 
-    def clean_fields(self, *args, **kwargs):
-        if settings.OPPS_SMART_SLUG_ENABLED:
-            self.validate_slug()
-
-        try:
-            super(Slugged, self).clean_fields(*args, **kwargs)
-        except AttributeError:
-            pass  # does not implement the clean_slug method
-
     def clean(self, *args, **kwargs):
 
         self.validate_slug()
