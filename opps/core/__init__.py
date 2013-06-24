@@ -44,8 +44,6 @@ class StaticSiteMapsConf(AppConf):
 
 
 class HaystackConf(AppConf):
-    SITECONF = 'opps.search'
-    SEARCH_ENGINE = 'dummy'
 
     class Meta:
         prefix = 'haystack'
