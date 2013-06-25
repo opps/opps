@@ -66,6 +66,12 @@ INSTALLED_APPS = (
     'taggit',
 )
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+    },
+}
+
 CACHES = {
     'default' : dict(
         BACKEND = 'django.core.cache.backends.dummy.DummyCache',
