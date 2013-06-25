@@ -8,7 +8,6 @@ from django.utils.text import slugify
 from django.contrib import messages
 from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
-from django.db import transaction
 
 from .models import Image
 from .forms import ImageModelForm
