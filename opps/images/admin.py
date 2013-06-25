@@ -87,9 +87,10 @@ class ImagesAdmin(PublishableAdmin):
 
     def save_model(self, request, obj, form, change):
 
-        images = []
+        # images = []
         if not change and len(form.more_image()) >= 1:
-            images = [
+            # images = [
+            [
                 Image.objects.create(
                     site=get_current_site(request),
                     image=img,
@@ -105,8 +106,8 @@ class ImagesAdmin(PublishableAdmin):
 
         super(ImagesAdmin, self).save_model(request, obj, form, change)
 
-        if not change:
-            self.generate_article(request, obj, change, images)
+        # if not change:
+        #     self.generate_article(request, obj, change, images)
 
     # @transaction.commit_on_success
     def generate_article(self, request, obj, change, images):
