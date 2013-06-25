@@ -108,7 +108,7 @@ class ImagesAdmin(PublishableAdmin):
         if not change:
             self.generate_article(request, obj, change, images)
 
-    @transaction.commit_on_success
+    # @transaction.commit_on_success
     def generate_article(self, request, obj, change, images):
 
         generate_article = False
