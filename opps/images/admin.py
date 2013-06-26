@@ -72,7 +72,7 @@ class ImagesAdmin(PublishableAdmin):
 
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('site', 'title', 'slug', 'image', 'generate_article')}),
+            'fields': ('site', 'title', 'slug', 'image', 'image_thumb')}),
         (_(u'Crop'), {
             'fields': ('flip', 'flop', 'halign', 'valign', 'fit_in',
                        'smart', 'crop_x1', 'crop_x2', 'crop_y1', 'crop_y2',
@@ -86,94 +86,19 @@ class ImagesAdmin(PublishableAdmin):
 
     def save_model(self, request, obj, form, change):
 
-        # images = []
         if not change and len(form.more_image()) >= 1:
-            # images = [
-            [
-                Image.objects.create(
-                    site=get_current_site(request),
-                    image=img,
-                    title=obj.title,
-                    slug=u"{0}-{1}".format(obj.slug, i),
-                    description=obj.description,
-                    published=obj.published,
-                    user=User.objects.get(pk=request.user.pk),
-                    source=obj.source
-                )
-                for i, img in enumerate(form.more_image(), 1)
-            ]
+            [Image.objects.create(
+                site=get_current_site(request),
+                image=img,
+                title=obj.title,
+                slug=u"{0}-{1}".format(obj.slug, i),
+                description=obj.description,
+                published=obj.published,
+                user=User.objects.get(pk=request.user.pk),
+                source=obj.source
+            ) for i, img in enumerate(form.more_image(), 1)]
 
         super(ImagesAdmin, self).save_model(request, obj, form, change)
-
-        # if not change:
-        #     self.generate_article(request, obj, change, images)
-
-    # @transaction.commit_on_success
-    def generate_article(self, request, obj, change, images):
-
-        generate_article = False
-        article_type = request.POST.get('generate_article_type')
-        if article_type in ('Post', 'Album'):
-            channel_id = request.POST.get('generate_article_channel')
-            try:
-                article_channel = Channel.objects.get(pk=int(channel_id))
-            except:
-                article_channel = Channel.objects.get_homepage(site=obj.site)
-
-            article_title = request.POST.get('generate_article_title')
-            article_slug = slugify(article_title)
-
-            if article_type == 'Post':
-                article_model = Post
-            elif article_type == 'Album':
-                article_model = Album
-
-            if article_model.objects.filter(slug=article_slug,
-                                            channel=article_channel).exists():
-                article_slug += "-{}".format(obj.slug)
-
-            generate_article = True
-
-        tags = request.POST.get('tags')
-        if tags:
-            tags = tags.replace('"', '')
-            for img in images:
-                img.tags.add(*tags.split(','))
-                img.save()
-
-        if generate_article:
-            article = article_model.objects.create(
-                title=article_title,
-                slug=article_slug,
-                channel=article_channel,
-                published=False,
-                site=obj.site,
-                user=obj.user,
-                main_image=obj
-            )
-
-            images.insert(0, obj)
-
-            for i, image in enumerate(images):
-                ArticleImage.objects.create(
-                    article=article,
-                    image=image,
-                    order=i
-                )
-
-            inf = (article._meta.app_label, article._meta.module_name)
-            admin_url = reverse("admin:%s_%s_change" % inf, args=(article.pk,))
-
-            msg = _(
-                u"New {type} created: "
-                u"<a href='{url}' target='_blank'>{title}</a>"
-            ).format(
-                type=_(article_type),
-                url=admin_url,
-                title=article.title
-            )
-
-            messages.info(request, mark_safe(msg), extra_tags='safe')
 
     def image_thumb(self, obj):
         if obj.image:
