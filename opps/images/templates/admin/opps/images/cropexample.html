@@ -29,7 +29,7 @@
         if (django.jQuery("#id_valign").val()) { src += django.jQuery("#id_valign").val() + '/'; }
         if (django.jQuery("#id_smart").is(':checked')) { src += 'smart/'; }
 
-        img = django.jQuery("#imageExample").attr('src')
+        img = django.jQuery("#imageExample").attr('data-original')
         if (img.split('http').length == 1){
           img = '{{ THUMBOR_MEDIA_URL }}' + img;
         }

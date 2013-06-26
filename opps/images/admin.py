@@ -102,8 +102,12 @@ class ImagesAdmin(PublishableAdmin):
 
     def image_thumb(self, obj):
         if obj.image:
-            return u'<img width="60px" height="60px" src="{0}" />'.format(
-                image_url(obj.image.url, width=60, height=60))
+            html = (u'<img width="60px" height="60px" id="imageExample" '
+                    u'src="{0}" data-original="{1}" />')
+            return html.format(
+                image_url(obj.image.url, width=60, height=60),
+                obj.image.url
+            )
         return _(u'No Image')
     image_thumb.short_description = _(u'Thumbnail')
     image_thumb.allow_tags = True
