@@ -138,9 +138,10 @@ class MobileDetectionMiddleware(object):
             if settings.OPPS_DOMAIN_MOBILE and \
                request.META.get('HTTP_HOST', '') != \
                settings.OPPS_DOMAIN_MOBILE:
-                return HttpResponseRedirect(u"{}://{}".format(
+                return HttpResponseRedirect(u"{}://{}{}".format(
                     settings.OPPS_PROTOCOL_MOBILE,
-                    settings.OPPS_DOMAIN_MOBILE))
+                    settings.OPPS_DOMAIN_MOBILE,
+                    request.META.get('PATH_INFO', '')))
 
 
 def _set_cookie(self, key, value='', max_age=None, expires=None, path='/',
