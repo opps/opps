@@ -66,12 +66,15 @@ class DynamicSiteMiddleware(object):
         settings.CACHE_MIDDLEWARE_KEY_PREFIX = "opps_site-{}".format(site.id)
 
 
-class MobileDetectionMiddleware(object):
+def _is_mobile(request):
     u"""Used django-mobile core
 
     https://github.com/gregmuellegger/django-mobile/blob/3093a9791e5e812021e49
     3226e5393033115c8bf/django_mobile/middleware.py
     """
+
+    http_accept_regex = re.compile("application/vnd\.wap\.xhtml\+xml",
+                                   re.IGNORECASE)
 
     user_agents_test_match = (
         "w3c ", "acs-", "alav", "alca", "amoi", "audi",
@@ -94,40 +97,40 @@ class MobileDetectionMiddleware(object):
         'up.browser', 'up.link', 'mmp', 'symbian', 'smartphone', 'midp',
         'wap', 'phone', 'windows ce', 'pda', 'mobile', 'mini', 'palm',
         'netfront', 'opera mobi',))
-
     user_agents_exception_search = u"(?:%s)" % u'|'.join(('ipad',))
+    user_agents_test_match = r'^(?:%s)' % '|'.join(user_agents_test_match)
 
-    http_accept_regex = re.compile("application/vnd\.wap\.xhtml\+xml",
-                                   re.IGNORECASE)
+    user_agents_test_match_regex = re.compile(
+        user_agents_test_match, re.IGNORECASE)
+    user_agents_test_search_regex = re.compile(
+        user_agents_test_search, re.IGNORECASE)
+    user_agents_exception_search_regex = re.compile(
+        user_agents_exception_search, re.IGNORECASE)
 
-    def __init__(self):
-        user_agents_test_match = r'^(?:%s)' % '|'.join(
-            self.user_agents_test_match)
-        self.user_agents_test_match_regex = re.compile(
-            user_agents_test_match, re.IGNORECASE)
-        self.user_agents_test_search_regex = re.compile(
-            self.user_agents_test_search, re.IGNORECASE)
-        self.user_agents_exception_search_regex = re.compile(
-            self.user_agents_exception_search, re.IGNORECASE)
+    is_mobile = False
+    if 'HTTP_ACCEPT' in request.META or 'HTTP_USER_AGENT' in request.META:
+        http_accept = request.META.get('HTTP_ACCEPT', '')
+
+        if http_accept_regex.search(http_accept):
+            is_mobile = True
+        else:
+            user_agent = request.META.get('HTTP_USER_AGENT', '')
+            if user_agents_test_search_regex.search(user_agent):
+                if not user_agents_exception_search_regex.search(
+                    user_agent):
+                    is_mobile = True
+
+        if not is_mobile:
+            if user_agents_test_match_regex.match(user_agent):
+                is_mobile = True
+
+    return is_mobile
+
+
+class MobileDetectionMiddleware(object):
 
     def process_request(self, request):
-        is_mobile = False
-        if 'HTTP_ACCEPT' in request.META or 'HTTP_USER_AGENT' in request.META:
-            http_accept = request.META.get('HTTP_ACCEPT', '')
-
-            if self.http_accept_regex.search(http_accept):
-                is_mobile = True
-            else:
-                user_agent = request.META.get('HTTP_USER_AGENT', '')
-                if self.user_agents_test_search_regex.search(user_agent) and \
-                   not \
-                   self.user_agents_exception_search_regex.search(user_agent):
-                    is_mobile = True
-
-            if not is_mobile:
-                if self.user_agents_test_match_regex.match(user_agent):
-                    is_mobile = True
-
+        is_mobile = _is_mobile(request)
         request.is_mobile = is_mobile
         settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_WEB
         if is_mobile and settings.OPPS_CHECK_MOBILE:
