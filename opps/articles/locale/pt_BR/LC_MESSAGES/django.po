@@ -208,6 +208,10 @@ msgstr "Imagem"
 msgid "Caption"
 msgstr "Legenda"
 
+#: models.py:391
+msgid "'Max length 255"
+msgstr "Limite 255"
+
 #: models.py:421
 msgid "Query Set"
 msgstr "Query Set"
