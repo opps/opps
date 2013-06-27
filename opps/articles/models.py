@@ -387,7 +387,8 @@ class ArticleImage(models.Model):
         _(u"Caption"),
         max_length=255,
         blank=True,
-        null=True
+        null=True,
+        help_text=_(u'Max length 255')
     )
 
     class Meta:
