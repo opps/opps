@@ -28,7 +28,7 @@ VALIGN_CHOICES = (
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = u"{0}-{1}.{2}".format(random.getrandbits(32),
-                                     instance.slug, ext)
+                                     instance.slug[:100], ext)
     d = datetime.now()
     folder = "images/{0}".format(d.strftime("%Y/%m/%d/"))
     return os.path.join(folder, filename)
