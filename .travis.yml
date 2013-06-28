@@ -3,9 +3,6 @@ python:
   - "2.7"
 env:
   - DJANGO=django==1.5
-  - DJANGO=django==1.6
-  - DJANGO=django==1.7
-  - DJANGO=https://github.com/django/django/archive/master.tar.gz
 install:
   - pip install $DJANGO --use-mirrors
   - make travis
