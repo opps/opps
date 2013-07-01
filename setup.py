@@ -14,7 +14,7 @@ install_requires = ["django",
                     "django-googl==0.1.1",
                     "django-taggit",
                     "django-wysiwyg-redactor==0.3.1",
-                    "django-haystack==1.2.7",
+                    "django-haystack>=2.0",
                     "django-mptt",
                     "django-appconf",
                     "python-memcached"]
