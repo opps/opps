@@ -38,6 +38,7 @@ if not settings.configured:
             'opps.images',
             'opps.sitemaps',
             'opps.flatpages',
+            'opps.archives',
 
             'taggit',
         ),

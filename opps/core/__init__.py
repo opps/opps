@@ -41,8 +41,11 @@ class StaticSiteMapsConf(AppConf):
 
 
 class HaystackConf(AppConf):
-    SITECONF = 'opps.search'
-    SEARCH_ENGINE = 'dummy'
+    CONNECTIONS = {
+        'default': {
+            'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+        }
+    }
 
     class Meta:
         prefix = 'haystack'

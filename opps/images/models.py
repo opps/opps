@@ -1,16 +1,9 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import os
-import random
-from datetime import datetime
-
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.utils import timezone
 
-from taggit.models import TaggedItemBase
-from taggit.managers import TaggableManager
-
-from opps.core.models import Publishable
+from opps.archives.models import Archive
 
 
 HALIGN_CHOICES = (
@@ -23,20 +16,6 @@ VALIGN_CHOICES = (
     ('middle', _('Middle')),
     ('bottom', _('Bottom'))
 )
-
-
-def get_file_path(instance, filename):
-    ext = filename.split('.')[-1]
-    filename = u"{0}-{1}.{2}".format(random.getrandbits(32),
-                                     instance.slug[:100], ext)
-    d = datetime.now()
-    folder = "images/{0}".format(d.strftime("%Y/%m/%d/"))
-    return os.path.join(folder, filename)
-
-
-class TaggedImage(TaggedItemBase):
-    """Tag for images """
-    content_object = models.ForeignKey('images.Image')
 
 
 class Cropping(models.Model):
@@ -100,31 +79,8 @@ class Cropping(models.Model):
         super(Cropping, self).save(*args, **kwargs)
 
 
-class Image(Publishable, Cropping):
-
-    slug = models.SlugField(
-        _(u"URL"),
-        db_index=True,
-        max_length=150,
-    )
-
-    title = models.CharField(_(u"Title"), max_length=140, db_index=True)
-    image = models.ImageField(upload_to=get_file_path, max_length=255)
-    description = models.TextField(_(u"Description"), null=True, blank=True)
-    tags = TaggableManager(blank=True, through=TaggedImage,
-                           verbose_name=u'Tags')
-
-    source = models.ForeignKey('sources.Source', null=True, blank=True)
+class Image(Archive, Cropping):
 
     class META:
         verbose_name = _('Image')
         verbose_name_plural = _('Images')
-        unique_together = ['site', 'slug']
-
-    def __unicode__(self):
-        return u"{}-{}".format(self.site, self.slug)
-
-    def get_absolute_url(self):
-        if self.date_available <= timezone.now() and self.published:
-            return self.image.url
-        return u""
