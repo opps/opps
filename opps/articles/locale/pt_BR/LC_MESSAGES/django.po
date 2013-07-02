@@ -270,3 +270,7 @@ msgstr "Configs de Artigo"
 
 #~ msgid "Article date available is greater than today!"
 #~ msgstr "Data de publicação é maior que a data de hoje!"
+
+#: models.py:83
+msgid "Main Image Caption"
+msgstr "Legenda da Imagem Principal"
