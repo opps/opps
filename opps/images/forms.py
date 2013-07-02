@@ -9,7 +9,7 @@ from redactor.widgets import RedactorEditor
 
 
 class ImageModelForm(forms.ModelForm):
-    image = forms.FileField(required=True, widget=MultipleUpload())
+    archive = forms.FileField(required=True, widget=MultipleUpload())
     crop_example = forms.CharField(required=False, widget=CropExample())
     crop_x1 = forms.CharField(required=False, widget=forms.HiddenInput())
     crop_x2 = forms.CharField(required=False, widget=forms.HiddenInput())
