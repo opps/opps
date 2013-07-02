@@ -31,7 +31,7 @@ class UserListFilter(SimpleListFilter):
         in the right sidebar.
         """
         # filter only users with images
-        qs = User.objects.filter(image__isnull=False).distinct()
+        qs = User.objects.filter(archive__isnull=False).distinct()
         if qs:
             return set([(item.username,
                          u"{0} ({1})".format(item.get_full_name(), item.email))
@@ -64,7 +64,7 @@ class ImagesAdmin(PublishableAdmin):
 
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('site', 'title', 'slug', 'image')}),
+            'fields': ('site', 'title', 'slug', 'archive')}),
         (_(u'Crop'), {
             'fields': ('flip', 'flop', 'halign', 'valign', 'fit_in',
                        'smart', 'crop_x1', 'crop_x2', 'crop_y1', 'crop_y2',
@@ -80,7 +80,7 @@ class ImagesAdmin(PublishableAdmin):
         if not change and len(form.more_image()) >= 1:
             [Image.objects.create(
                 site=get_current_site(request),
-                image=img,
+                archive=img,
                 title=obj.title,
                 slug=u"{0}-{1}".format(obj.slug, i),
                 description=obj.description,
@@ -90,9 +90,9 @@ class ImagesAdmin(PublishableAdmin):
         super(ImagesAdmin, self).save_model(request, obj, form, change)
 
     def image_thumb(self, obj):
-        if obj.image:
+        if obj.archive:
             return u'<img width="60px" height="60px" src="{0}" />'.format(
-                image_url(obj.image.url, width=60, height=60))
+                image_url(obj.archive.url, width=60, height=60))
         return _(u'No Image')
     image_thumb.short_description = _(u'Thumbnail')
     image_thumb.allow_tags = True

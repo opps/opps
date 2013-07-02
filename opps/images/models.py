@@ -80,6 +80,7 @@ class Cropping(models.Model):
 
 
 class Image(Archive, Cropping):
+    pass
 
     class META:
         verbose_name = _('Image')
