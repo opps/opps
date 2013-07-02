@@ -79,6 +79,13 @@ class Article(Publishable, Slugged):
         on_delete=models.SET_NULL,
         verbose_name=_(u'Main Image'),
     )
+    main_image_caption = models.CharField(
+        _(u"Main Image Caption"),
+        max_length=255,
+        blank=True,
+        null=True,
+        help_text=_(u'Maximum characters 255'),
+    )
     images = models.ManyToManyField(
         'images.Image',
         null=True, blank=True,
@@ -176,6 +183,8 @@ class Article(Publishable, Slugged):
         getcache = cache.get(cachekey)
         if getcache:
             return getcache
+
+        self.main_image.description = self.main_image_caption
 
         imgs = [self.main_image]
         images = self.images.filter(
@@ -296,13 +305,13 @@ class PostRelated(models.Model):
 
 
 class Album(Article):
+
     class Meta:
         verbose_name = _('Album')
         verbose_name_plural = _('Albums')
 
     def get_absolute_url(self):
         return "/album/{}/{}".format(self.channel_long_slug, self.slug)
-
 
 class Link(Article):
     url = models.URLField(_(u"URL"), null=True, blank=True)
@@ -387,7 +396,8 @@ class ArticleImage(models.Model):
         _(u"Caption"),
         max_length=255,
         blank=True,
-        null=True
+        null=True,
+        help_text=_(u'Maximum characters 255')
     )
 
     class Meta:

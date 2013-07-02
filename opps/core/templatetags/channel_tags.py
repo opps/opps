@@ -28,5 +28,6 @@ def get_url(obj, http=False, target=None, url_only=False):
             return _url
         return 'href="{}" target="{}"'.format(_url, _target)
     except Exception as e:
+        print str(e)
         logger.error("Exception at templatetag get_url: {}".format(e))
         return obj.get_absolute_url()
