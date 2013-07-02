@@ -75,12 +75,11 @@ class Cropping(models.Model):
         super(Cropping, self).clean()
 
     def save(self, *args, **kwargs):
-        self.crop_example = self.image.url
+        self.crop_example = self.archive.url
         super(Cropping, self).save(*args, **kwargs)
 
 
 class Image(Archive, Cropping):
-    pass
 
     class META:
         verbose_name = _('Image')
