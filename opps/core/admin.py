@@ -123,7 +123,7 @@ class PublishableAdmin(admin.ModelAdmin):
     def image_thumb(self, obj):
         if obj.main_image:
             return u'<img width="60px" height="60px" src="{0}" />'.format(
-                image_url(obj.main_image.image.url, width=60, height=60))
+                image_url(obj.main_image.archive.url, width=60, height=60))
         return _(u'No Image')
     image_thumb.short_description = _(u'Thumbnail')
     image_thumb.allow_tags = True
