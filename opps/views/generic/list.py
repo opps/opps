@@ -37,7 +37,7 @@ class ListView(View, DjangoListView):
                 )
                 names.append(_template)
 
-                _template = '{}/_post_list{}.html'.format(
+                _template = u'{}/_post_list{}.html'.format(
                     domain_folder,
                     # self.channel.parent.long_slug,
                     self.paginate_suffix
@@ -45,7 +45,7 @@ class ListView(View, DjangoListView):
                 names.append(_template)
 
         names.append(
-            '{}/{}{}.html'.format(
+            u'{}/{}{}.html'.format(
                 domain_folder,
                 self.long_slug,
                 self.paginate_suffix
@@ -60,7 +60,7 @@ class ListView(View, DjangoListView):
         if self.paginate_suffix:
             # use the default _paginated.html if no template found
             names.append(
-                "{}/{}.html".format(domain_folder, self.paginate_suffix)
+                u"{}/{}.html".format(domain_folder, self.paginate_suffix)
             )
 
         return names
