@@ -9,11 +9,13 @@ from django.conf import settings
 from haystack.views import SearchView
 
 from opps.articles.models import Post, Album, Article
-from opps.articles.views.generic import OppsDetail, OppsList
 from opps.containers.models import ContainerBox
 
+from opps.views.generic.list import ListView
+from opps.views.generic.detail import DetailView
 
-class PostList(OppsList):
+
+class PostList(ListView):
     models = settings.OPPS_LIST_MODELS
     type = "channels"
 
@@ -66,22 +68,22 @@ class PostList(OppsList):
         return self.article
 
 
-class PostDetail(OppsDetail):
+class PostDetail(DetailView):
     model = Post
     type = 'articles'
 
 
-class AlbumList(OppsList):
+class AlbumList(ListView):
     model = Album
     type = "channels/album"
 
 
-class AlbumDetail(OppsDetail):
+class AlbumDetail(DetailView):
     model = Album
     type = 'articles/album'
 
 
-class TagList(OppsList):
+class TagList(ListView):
     model = Article
     type = "tags"
     template_name_suffix = '_tags'
