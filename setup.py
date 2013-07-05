@@ -36,7 +36,7 @@ classifiers = ["Development Status :: 4 - Beta",
                'Topic :: Software Development :: Libraries :: Python Modules']
 
 try:
-    long_description = open('README.md').read()
+    long_description = open('README.rst').read()
 except:
     long_description = opps.__description__
 
