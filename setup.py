@@ -5,19 +5,8 @@ from setuptools import setup, find_packages
 
 import opps
 
+REQUIREMENTS = [i.strip() for i in open("requirements.txt").readlines()]
 
-install_requires = ["django",
-                    "south>=0.7",
-                    "Pillow==1.7.8",
-                    "thumbor",
-                    'libthumbor',
-                    "django-googl==0.1.1",
-                    "django-taggit",
-                    "django-wysiwyg-redactor==0.3.1",
-                    "django-haystack>=2.0",
-                    "django-mptt",
-                    "django-appconf",
-                    "python-memcached"]
 dependency_links = ['http://github.com/avelino/django-googl/tarball/master'
                     '#egg=django-googl',
                     'http://github.com/avelino/django-taggit/tarball/master'
@@ -54,7 +43,7 @@ setup(name='opps',
       packages=find_packages(exclude=('doc', 'docs',)),
       namespace_packages=['opps'],
       package_dir={'opps': 'opps'},
-      install_requires=install_requires,
+      install_requires=REQUIREMENTS,
       dependency_links=dependency_links,
       scripts=['opps/bin/opps-admin.py'],
       include_package_data=True,
