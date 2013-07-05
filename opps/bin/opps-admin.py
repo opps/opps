@@ -15,6 +15,6 @@ if __name__ == "__main__":
         management.call_command(
             'startproject', sys.argv[2],
             template='https://github.com/opps/opps-project-template/zipball/'
-            'master',
+            'opps/0.1.x',
             extensions=('py', 'md', 'dev')
         )
