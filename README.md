@@ -4,10 +4,7 @@
 
 An *Open Source Content Management Platform* for the **magazine** websites and **high-traffic**, using the Django Framework.
 
-[![Build Status](https://drone.io/github.com/opps/opps/status.png)](https://drone.io/github.com/opps/opps/latest)
-[![Build Status](https://travis-ci.org/opps/opps.png?branch=master)](https://travis-ci.org/opps/opps "Opps Travis")
-[![PyPi version](https://pypip.in/v/opps/badge.png)](https://crate.io/packages/opps/)
-[![PyPi downloads](https://pypip.in/d/opps/badge.png)](https://crate.io/packages/opps/)
+[![Build Status](https://travis-ci.org/opps/opps.png?branch=stable/0.1.x)](https://travis-ci.org/opps/opps "Opps Travis")
 
 
 # Contacts
