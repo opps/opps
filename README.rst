@@ -33,7 +33,8 @@ If you are not sure about something, have a doubt or feedback, or just want to a
 Run example
 ===========
 
-::
+.. code-block:: bash
+
     $ git clone git@github.com:opps/opps.git
     $ cd opps
     $ python setup.py develop
@@ -47,7 +48,7 @@ Run example
 Sponsor
 =======
 
-* `YACOWS <http://yacows.com.br/>_`
+* `YACOWS <http://yacows.com.br/>`_
 
 
 License
