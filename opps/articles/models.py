@@ -81,10 +81,10 @@ class Article(Publishable, Slugged):
     )
     main_image_caption = models.CharField(
         _(u"Main Image Caption"),
-        max_length=255,
+        max_length=4000,
         blank=True,
         null=True,
-        help_text=_(u'Maximum characters 255'),
+        help_text=_(u'Maximum characters 4000'),
     )
     images = models.ManyToManyField(
         'images.Image',
@@ -395,10 +395,10 @@ class ArticleImage(models.Model):
     order = models.PositiveIntegerField(_(u'Order'), default=0)
     caption = models.CharField(
         _(u"Caption"),
-        max_length=255,
+        max_length=4000,
         blank=True,
         null=True,
-        help_text=_(u'Maximum characters 255')
+        help_text=_(u'Maximum characters 4000')
     )
 
     class Meta:
