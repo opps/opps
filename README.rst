@@ -1,5 +1,5 @@
-Opps
-====
+Opps - OPen Publishing System
+=============================
 .. |Opps| image:: docs/source/_static/opps.jpg
     :alt: Opps Open Source Content Management
 
@@ -13,11 +13,11 @@ An *Open Source Content Management* for the **magazine** websites and **high-tra
     :target: https://travis-ci.org/opps/opps
     :alt: Build Status - Travis CI
 
-.. image:: https://pypip.in/v/opps/badge.png)
+.. image:: https://pypip.in/v/opps/badge.png
     :target: https://crate.io/packages/opps/
     :alt: Pypi version
 
-.. image:: https://pypip.in/d/opps/badge.png)
+.. image:: https://pypip.in/d/opps/badge.png
     :target: https://crate.io/packages/opps/
     :alt: Pypi downloads
 
