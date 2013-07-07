@@ -26,6 +26,7 @@ class OppsView(object):
         self.long_slug = None
         self.channel_long_slug = []
         self.article = None
+        self.excluded_ids = set()
 
     def get_context_data(self, **kwargs):
         context = super(OppsView, self).get_context_data(**kwargs)
@@ -35,9 +36,11 @@ class OppsView(object):
         else:
             context['articleboxes'] = ContainerBox.objects.filter(
                 channel__long_slug=self.long_slug)
-            self.excluded_ids = []
+
             for box in context['articleboxes']:
-                self.excluded_ids += [a.pk for a in box.ordered_articles()]
+                self.excluded_ids.update(
+                    [a.pk for a in box.ordered_articles()]
+                )
 
         filters = {}
         filters['site_domain'] = self.site
@@ -170,9 +173,8 @@ class OppsList(OppsView, ListView):
         self.articleboxes = ContainerBox.objects.filter(
             channel__long_slug=self.long_slug)
 
-        self.excluded_ids = []
         for box in self.articleboxes:
-            self.excluded_ids += [a.pk for a in box.ordered_articles()]
+            self.excluded_ids.update([a.pk for a in box.ordered_articles()])
 
         self.article = self.model.objects.filter(
             site_domain=self.site,
@@ -230,5 +232,7 @@ class OppsDetail(OppsView, DetailView):
         self.article = self.model.objects.filter(
             **filters
         )
+
+        self.excluded_ids.update([a.pk for a in self.article])
 
         return self.article._clone()

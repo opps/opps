@@ -22,6 +22,7 @@ class View(object):
         self.long_slug = None
         self.channel_long_slug = []
         self.article = None
+        self.excluded_ids = set()
 
     def get_context_data(self, **kwargs):
         context = super(View, self).get_context_data(**kwargs)
