@@ -104,7 +104,7 @@ With the above in your model, you can now create your search_indexes and templat
                   <small>{{ result.object.search_category }}</small><br>
                   {% if result.object.get_thumb %}
                   <a href="{{ result.object.get_absolute_url }}">
-                      <img src="{% image_url result.object.get_thumb.image.url width=100 height=100 %}" alt="{{ result.object.title}}" class="span2" />
+                      <img src="{% image_url result.object.get_thumb.archive.url width=100 height=100 %}" alt="{{ result.object.title}}" class="span2" />
                   </a>
                   {% endif %}
 
