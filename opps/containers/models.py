@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.core.cache import cache
 from django.utils import timezone
+from django.conf import settings
 
 from .signals import shorturl_generate, delete_container
 from opps.core.cache import _cache_key
@@ -89,6 +90,12 @@ class Container(Publishable, Slugged, Channeling, Imaged):
     get_http_absolute_url.short_description = 'URL'
 
     def recommendation(self):
+
+        now = timezone.now()
+        start = now - timezone.timedelta(
+            days=settings.OPPS_RECOMMENDATION_RANGE_DAYS
+        )
+
         cachekey = _cache_key(
             '{}-recommendation'.format(self.__class__.__name__),
             self.__class__, self.site_domain,
@@ -102,10 +109,10 @@ class Container(Publishable, Slugged, Channeling, Imaged):
             site_domain=self.site_domain,
             child_class=self.child_class,
             channel_long_slug=self.channel_long_slug,
-            date_available__lte=timezone.now(),
+            date_available__range=(start, now),
             published=True,
             tags__in=tag_list
-        ).exclude(pk=self.pk).distinct().all().order_by('pk')[:10]]
+        ).exclude(pk=self.pk).distinct().order_by('-date_available')[:10]]
 
         cache.set(cachekey, _list)
         return _list

@@ -28,6 +28,7 @@ class OppsCoreConf(AppConf):
     CACHE_EXPIRE_DETAIL = 300
     RSS_LINK_TEMPLATE = '<a href="{}" class="ir ico ico-rss">RSS</a>'
     LIST_MODELS = ('Post',)
+    RECOMMENDATION_RANGE_DAYS = 180
 
     class Meta:
         prefix = 'opps'
