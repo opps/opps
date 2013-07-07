@@ -163,7 +163,8 @@ class ContainerBoxAdmin(BaseBoxAdmin):
 
 class HideContainerAdmin(PublishableAdmin):
 
-    list_display = ['image_thumb', 'title', 'channel_name', 'date_available',
+    list_display = ['image_thumb', 'child_class', 'title',
+                    'channel_name', 'date_available',
                     'published']
     readonly_fields = ['image_thumb']
 

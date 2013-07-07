@@ -34,7 +34,7 @@ class Post(Article):
         verbose_name=_(u"Albums")
     )
     related_posts = models.ManyToManyField(
-        'articles.Post',
+        'containers.Container',
         null=True, blank=True,
         related_name='post_relatedposts',
         through='articles.PostRelated',
@@ -92,7 +92,7 @@ class PostRelated(models.Model):
         on_delete=models.SET_NULL
     )
     related = models.ForeignKey(
-        'articles.Post',
+        'containers.Container',
         verbose_name=_(u'Related Post'),
         null=True,
         blank=True,
@@ -102,8 +102,8 @@ class PostRelated(models.Model):
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
     class META:
-        verbose_name = _('Post related')
-        verbose_name_plural = _('Post relateds')
+        verbose_name = _('Related content')
+        verbose_name_plural = _('Related contents')
         ordering = ('order',)
 
     def __unicode__(self):
