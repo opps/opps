@@ -1,10 +1,10 @@
-.. title:: Opps Open Source Content Management Platform
+.. title:: Open Source Content Management - Opps (OPen Publishing System)
 
 
-|Opps|
-======
+|Opps - OPen Publishing System|
+===============================
 .. |Opps| image:: _static/opps.jpg
-    :alt: Opps Open Source Content Management Platform
+    :alt: Opps Open Source Content Management
 
 An *Open Source Content Management Platform* for the **magazine** websites and **high-traffic**, using the Django Framework.
 
