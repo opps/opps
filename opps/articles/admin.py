@@ -49,7 +49,7 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
 @apply_opps_rules('articles')
 class AlbumAdmin(ContainerAdmin, AdminViewPermission):
     form = AlbumAdminForm
-    inlines = [ContainerImageInline]
+    inlines = [ContainerImageInline, ContainerSourceInline]
     list_display = ['title', 'channel', 'images_count',
                     'date_available', 'published', 'preview_url']
 
