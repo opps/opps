@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.0
+
+* Content type (Container)
+* Isoled boxes application
+* ContainerBox, generic box (concept)
+* Used Container in all application
+* Archives, file manager
+* Images used archives
+* Used RST on README, pypi compatibility
+* Add contrib pattern (like django)
+* Upgrade haystack to 2.0 (stable)
+* Opps Generic Views
+* * New view format, used to URLs pattern
+
 ## 0.1.9
 
 ## 0.1.8
