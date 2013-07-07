@@ -1,6 +1,22 @@
+{% load images_tags %}
 <h1>{{ context.title }}</h1>
 <h2>{{ context.short_title }}</h2>
 <div>{{ context.content|safe }}</div>
+
+{% with images=context.all_images %}
+  {% if images %}
+  <div>
+     <h3> Images </h3>
+     {% for image in images %}
+        <figure>
+              <img src="{% image_obj image %}" width="100" alt="{{image.title}}">
+              <figcaption>{{ image.description|safe }}</figcaption>
+        </figure>
+     {% endfor %}
+  </div>
+  {% endif %}
+
+{% endwith %}
 
 <h3>tags</h3>
 <ul>
@@ -8,3 +24,5 @@
   <li><a href="{% url 'articles:tag_open' tag.slug %}">{{ tag.name }}</a></li>
   {% endfor %}
 </ul>
+
+
