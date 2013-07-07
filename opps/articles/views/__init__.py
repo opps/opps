@@ -8,7 +8,8 @@ from django.conf import settings
 
 from haystack.views import SearchView
 
-from opps.articles.models import Post, Album, Article
+from opps.articles.models import Post, Album
+from opps.containers.models import Container
 from opps.containers.models import ContainerBox
 
 from opps.views.generic.list import ListView
@@ -54,7 +55,7 @@ class PostList(ListView):
         for box in self.articleboxes:
             self.excluded_ids += [a.pk for a in box.ordered_articles()]
 
-        self.article = Article.objects.filter(
+        self.article = Container.objects.filter(
             site_domain=self.site,
             channel_long_slug__in=self.channel_long_slug,
             date_available__lte=timezone.now(),
@@ -84,7 +85,7 @@ class AlbumDetail(DetailView):
 
 
 class TagList(ListView):
-    model = Article
+    model = Container
     type = "tags"
     template_name_suffix = '_tags'
     channel_long_slug = []

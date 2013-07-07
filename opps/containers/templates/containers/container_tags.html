@@ -1,0 +1,9 @@
+{% include "channels/include/menu.html" %}
+----------------
+<ul>
+{% for tag in context %}
+  <li><a href="{% url 'articles:open' tag.channel.long_slug tag.slug %}" alt="{{ tag.short_title }}">{{ tag.title }}</a></li>
+{% endfor %}
+</ul>
+
+{% include 'articles/include/paginate.html' %}
