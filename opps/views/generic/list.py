@@ -86,7 +86,8 @@ class ListView(View, DjangoListView):
             site_domain=self.site,
             channel_long_slug__in=self.channel_long_slug,
             date_available__lte=timezone.now(),
-            published=True
+            published=True,
+            show_on_root_channel=True
         ).exclude(pk__in=self.excluded_ids)
 
         if self.limit:
