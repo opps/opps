@@ -36,24 +36,20 @@ class Migration(SchemaMigration):
         # Adding unique constraint on 'Container', fields ['site', 'child_class', 'channel_long_slug', 'slug']
         db.create_unique(u'containers_container', ['site_id', 'child_class', 'channel_long_slug', 'slug'])
 
-        # Adding model 'ContainerThrough'
-        db.create_table(u'containers_containerthrough', (
+        # Adding model 'ContainerSource'
+        db.create_table(u'containers_containersource', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('container', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['containers.Container'], null=True, on_delete=models.SET_NULL, blank=True)),
             ('order', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
-        ))
-        db.send_create_signal(u'containers', ['ContainerThrough'])
-
-        # Adding model 'ContainerSource'
-        db.create_table(u'containers_containersource', (
-            (u'containerthrough_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['containers.ContainerThrough'], unique=True, primary_key=True)),
             ('source', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='containersource_sources', null=True, on_delete=models.SET_NULL, to=orm['sources.Source'])),
         ))
         db.send_create_signal(u'containers', ['ContainerSource'])
 
         # Adding model 'ContainerImage'
         db.create_table(u'containers_containerimage', (
-            (u'containerthrough_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['containers.ContainerThrough'], unique=True, primary_key=True)),
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('container', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['containers.Container'], null=True, on_delete=models.SET_NULL, blank=True)),
+            ('order', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
             ('image', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['images.Image'], null=True, on_delete=models.SET_NULL, blank=True)),
         ))
         db.send_create_signal(u'containers', ['ContainerImage'])
@@ -124,9 +120,6 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Container'
         db.delete_table(u'containers_container')
-
-        # Deleting model 'ContainerThrough'
-        db.delete_table(u'containers_containerthrough')
 
         # Deleting model 'ContainerSource'
         db.delete_table(u'containers_containersource')
@@ -309,20 +302,18 @@ class Migration(SchemaMigration):
             'value': ('django.db.models.fields.TextField', [], {})
         },
         u'containers.containerimage': {
-            'Meta': {'object_name': 'ContainerImage', '_ormbases': [u'containers.ContainerThrough']},
-            u'containerthrough_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['containers.ContainerThrough']", 'unique': 'True', 'primary_key': 'True'}),
-            'image': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['images.Image']", 'null': 'True', 'on_delete': 'models.SET_NULL', 'blank': 'True'})
-        },
-        u'containers.containersource': {
-            'Meta': {'object_name': 'ContainerSource', '_ormbases': [u'containers.ContainerThrough']},
-            u'containerthrough_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['containers.ContainerThrough']", 'unique': 'True', 'primary_key': 'True'}),
-            'source': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'containersource_sources'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': u"orm['sources.Source']"})
-        },
-        u'containers.containerthrough': {
-            'Meta': {'object_name': 'ContainerThrough'},
+            'Meta': {'object_name': 'ContainerImage'},
             'container': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['containers.Container']", 'null': 'True', 'on_delete': 'models.SET_NULL', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['images.Image']", 'null': 'True', 'on_delete': 'models.SET_NULL', 'blank': 'True'}),
             'order': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'})
+        },
+        u'containers.containersource': {
+            'Meta': {'object_name': 'ContainerSource'},
+            'container': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['containers.Container']", 'null': 'True', 'on_delete': 'models.SET_NULL', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'order': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
+            'source': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'containersource_sources'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': u"orm['sources.Source']"})
         },
         u'contenttypes.contenttype': {
             'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
@@ -371,7 +362,7 @@ class Migration(SchemaMigration):
         u'taggit.tag': {
             'Meta': {'object_name': 'Tag'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100', 'db_index': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '100'})
         },
         u'taggit.taggeditem': {

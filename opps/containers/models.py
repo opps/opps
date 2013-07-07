@@ -111,7 +111,21 @@ class Container(Publishable, Slugged, Channeling, Imaged):
         return _list
 
 
-class ContainerThrough(models.Model):
+# DOES NOT WORKS, IT CREATES A TABLE WITH A WRONG NAME
+# class ContainerThrough(models.Model):
+#     container = models.ForeignKey(
+#         'containers.Container',
+#         null=True, blank=True,
+#         on_delete=models.SET_NULL,
+#         verbose_name=_(u'Container'),
+#     )
+#     order = models.PositiveIntegerField(_(u'Order'), default=0)
+
+#     class META:
+#         abstract = True
+
+
+class ContainerSource(models.Model):
     container = models.ForeignKey(
         'containers.Container',
         null=True, blank=True,
@@ -119,12 +133,6 @@ class ContainerThrough(models.Model):
         verbose_name=_(u'Container'),
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
-
-    class META:
-        abstract = True
-
-
-class ContainerSource(ContainerThrough):
     source = models.ForeignKey(
         'sources.Source',
         null=True, blank=True,
@@ -142,7 +150,14 @@ class ContainerSource(ContainerThrough):
         return u"{}".format(self.source.slug)
 
 
-class ContainerImage(ContainerThrough):
+class ContainerImage(models.Model):
+    container = models.ForeignKey(
+        'containers.Container',
+        null=True, blank=True,
+        on_delete=models.SET_NULL,
+        verbose_name=_(u'Container'),
+    )
+    order = models.PositiveIntegerField(_(u'Order'), default=0)
     image = models.ForeignKey(
         'images.Image',
         verbose_name=_(u'Image'),
