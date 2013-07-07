@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import get_current_site
 from django.contrib.admin import SimpleListFilter
+from django.core.files.images import get_image_dimensions
 
 from .models import Image
 from .forms import ImageModelForm
@@ -55,7 +56,8 @@ class UserListFilter(SimpleListFilter):
 class ImagesAdmin(PublishableAdmin):
     form = ImageModelForm
     prepopulated_fields = {"slug": ("title",)}
-    list_display = ['image_thumb', 'title', 'date_available', 'published']
+    list_display = ['image_thumb', 'image_dimension', 'title',
+                    'date_available', 'published']
     list_filter = [UserListFilter, 'date_available', 'published']
     search_fields = ['title']
     raw_id_fields = ['source']
@@ -96,5 +98,13 @@ class ImagesAdmin(PublishableAdmin):
         return _(u'No Image')
     image_thumb.short_description = _(u'Thumbnail')
     image_thumb.allow_tags = True
+
+    def image_dimension(self, obj):
+        try:
+            width, height = get_image_dimensions(obj.archive)
+            return "{0}x{1}".format(width, height)
+        except:
+            return ''
+    image_dimension.short_description = _(u'Dimension')
 
 admin.site.register(Image, ImagesAdmin)
