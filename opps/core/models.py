@@ -184,7 +184,7 @@ class Imaged(models.Model):
         imgs = [self.main_image]
         images = self.images.filter(
             published=True, date_available__lte=timezone.now()
-        ).order_by('articleimage__order', '-date_available')
+        ).order_by('containerimage__order')
 
         if self.main_image:
             images = images.exclude(pk=self.main_image.pk)

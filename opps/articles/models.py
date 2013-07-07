@@ -62,7 +62,9 @@ class Post(Article):
             for i in a.images.filter(
                 published=True,
                 date_available__lte=timezone.now()
-            ).exclude(pk__in=[i.pk for i in imgs]).distinct()
+            ).exclude(
+                pk__in=[i.pk for i in imgs]
+            ).order_by('containerimage__order').distinct()
         ]
 
         cache.set(cachekey, imgs)
