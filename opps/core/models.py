@@ -202,6 +202,14 @@ class Imaged(models.Model):
         on_delete=models.SET_NULL,
         related_name="%(app_label)s_%(class)s_mainimage",
         verbose_name=_(u'Main Image'))
+
+    main_image_caption = models.CharField(
+        _(u"Main image caption"),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+
     images = models.ManyToManyField(
         'images.Image',
         null=True, blank=True,

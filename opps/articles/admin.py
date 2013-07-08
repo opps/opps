@@ -36,7 +36,8 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
                        'short_url')}),
         (_(u'Content'), {
             'fields': ('hat', 'short_title', 'headline', 'content',
-                       ('main_image', 'image_thumb'), 'tags')}),
+                       ('main_image', 'main_image_caption',
+                        'image_thumb'), 'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel', 'albums',)}),
         (_(u'Publication'), {
@@ -59,7 +60,8 @@ class AlbumAdmin(ContainerAdmin, AdminViewPermission):
                        'short_url',)}),
         (_(u'Content'), {
             'fields': ('hat', 'short_title', 'headline',
-                       ('main_image', 'image_thumb'), 'tags')}),
+                       ('main_image', 'main_image_caption',
+                        'image_thumb'), 'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
         (_(u'Publication'), {
@@ -79,7 +81,8 @@ class LinkAdmin(ContainerAdmin, AdminViewPermission):
                        'short_url',)}),
         (_(u'Content'), {
             'fields': ('hat', 'short_title', 'headline', 'url', 'container',
-                       ('main_image', 'image_thumb'), 'tags')}),
+                       ('main_image', 'main_image_caption',
+                        'image_thumb'), 'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
         (_(u'Publication'), {
