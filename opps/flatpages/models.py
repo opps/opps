@@ -2,7 +2,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from opps.core.models import BaseConfig
 from opps.containers.signals import shorturl_generate
 from opps.articles.models import Article
 
@@ -23,13 +22,6 @@ class FlatPage(Article):
         return u"http://{0}{1}".format(self.site.domain,
                                        self.get_absolute_url())
     get_http_absolute_url.short_description = 'URL'
-
-
-class FlatPageConfig(BaseConfig):
-    """
-    Default implementation
-    """
-    pass
 
 
 models.signals.post_save.connect(shorturl_generate, sender=FlatPage)

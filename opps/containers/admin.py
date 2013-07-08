@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
 
 from .models import Container, ContainerSource, ContainerImage
-from .models import ContainerBox, ContainerBoxContainers, ContainerConfig
+from .models import ContainerBox, ContainerBoxContainers
 from opps.core.admin import PublishableAdmin, apply_opps_rules, BaseBoxAdmin
 from opps.core.admin import ChannelListFilter
 from opps.images.generate import image_url
@@ -182,13 +182,5 @@ class HideContainerAdmin(PublishableAdmin):
         return False
 
 
-class ContainerConfigAdmin(PublishableAdmin):
-    list_display = ['key', 'key_group', 'channel', 'date_insert',
-                    'date_available', 'published']
-    list_filter = ["key", 'key_group', "channel", "published"]
-    search_fields = ["key", "key_group", "value"]
-
-
 admin.site.register(Container, HideContainerAdmin)
 admin.site.register(ContainerBox, ContainerBoxAdmin)
-admin.site.register(ContainerConfig, ContainerConfigAdmin)

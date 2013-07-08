@@ -12,6 +12,8 @@ from django.contrib.sites.models import get_current_site
 from opps.channels.models import Channel
 from opps.images.generate import image_url
 
+from .models import Config
+
 
 class ChannelListFilter(SimpleListFilter):
     # Human-readable title which will be displayed in the
@@ -173,6 +175,15 @@ class BaseBoxAdmin(PublishableAdmin):
         except:
             pass  # admin model soes not have the queryset field
         return qs
+
+
+class ConfigAdmin(PublishableAdmin):
+    list_display = ['key', 'app_label', 'key_group', 'channel', 'date_insert',
+                    'date_available', 'published']
+    list_filter = ["key", 'app_label', 'key_group', "channel", "published"]
+    search_fields = ["key", "app_label", "key_group", "value"]
+
+admin.site.register(Config, ConfigAdmin)
 
 
 def apply_rules(admin_class, app):

@@ -10,7 +10,6 @@ from django.conf import settings
 from .signals import shorturl_generate, delete_container
 from opps.core.cache import _cache_key
 from opps.core.models import Publishable, Slugged, Channeling, Imaged
-from opps.core.models import BaseConfig
 from opps.boxes.models import BaseBox
 
 from taggit.managers import TaggableManager
@@ -265,11 +264,5 @@ class ContainerBoxContainers(models.Model):
         if not self.container.published:
             raise ValidationError(_(u'Article not published!'))
 
-
-class ContainerConfig(BaseConfig):
-    """
-    Default implementation
-    """
-    pass
 
 models.signals.post_delete.connect(delete_container, sender=Container)

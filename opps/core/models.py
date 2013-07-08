@@ -255,16 +255,10 @@ class Imaged(models.Model):
         return self.main_image
 
 
-class BaseConfig(Publishable):
+class Config(Publishable):
     """
     Basic key:value configuration for apps
     In admin it should be accessible only for users in developers group
-
-    TODO:
-    - Create base template filters
-       {{ get_value|'key' }}
-    - format_value for Json and Yaml
-    - BaseConfigAdmin to show only for developers
 
     """
 
@@ -275,6 +269,14 @@ class BaseConfig(Publishable):
         ('float', 'float'),
         ('long', 'long'),
         ('comma', 'comma list'),
+    )
+
+    app_label = models.SlugField(
+        _(u"App label"),
+        db_index=True,
+        max_length=150,
+        null=True,
+        blank=True
     )
 
     key_group = models.SlugField(
@@ -310,9 +312,8 @@ class BaseConfig(Publishable):
     )
 
     class Meta:
-        abstract = True
-        permissions = (("developer", "Developer"),)
-        unique_together = ("key_group", "key", "site", "channel", "container")
+        unique_together = ("app_label", "key_group", "key",
+                           "site", "channel", "container")
 
     def __unicode__(self):
         return u"{0}-{1}".format(self.key, self.value)

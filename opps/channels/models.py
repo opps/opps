@@ -7,7 +7,7 @@ from django.conf import settings
 from mptt.models import MPTTModel, TreeForeignKey
 from mptt.managers import TreeManager
 
-from opps.core.models import Publishable, BaseConfig
+from opps.core.models import Publishable
 from opps.core.models import Slugged
 
 
@@ -114,10 +114,3 @@ class Channel(MPTTModel, Publishable, Slugged):
         if self.parent:
             self.long_slug = u"{}/{}".format(self.parent.slug, self.slug)
         super(Channel, self).save(*args, **kwargs)
-
-
-class ChannelConfig(BaseConfig):
-    """
-    Default implementation
-    """
-    pass

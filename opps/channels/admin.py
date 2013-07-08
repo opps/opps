@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Channel, ChannelConfig
+from .models import Channel
 from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
 
@@ -37,24 +36,4 @@ class ChannelAdmin(PublishableAdmin):
         super(ChannelAdmin, self).save_model(request, obj, form, change)
 
 
-class ChannelConfigAdmin(admin.ModelAdmin):
-    list_display = ['key', 'key_group', 'channel', 'date_insert',
-                    'date_available', 'published']
-    list_filter = ["key", 'key_group', "channel", "published"]
-    search_fields = ["key", "key_group", "value"]
-    raw_id_fields = ['channel']
-    exclude = ('user', 'container')
-
-    def save_model(self, request, obj, form, change):
-        User = get_user_model()
-        try:
-            if obj.user:
-                pass
-        except User.DoesNotExist:
-            obj.user = request.user
-
-        super(ChannelConfigAdmin, self).save_model(request, obj, form, change)
-
-
 admin.site.register(Channel, ChannelAdmin)
-admin.site.register(ChannelConfig, ChannelConfigAdmin)
