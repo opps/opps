@@ -78,6 +78,10 @@ class Channel(MPTTModel, Publishable, Slugged):
     def title(self):
         return self.name
 
+    @property
+    def root(self):
+        return self.get_root()
+
     def clean(self):
 
         try:
