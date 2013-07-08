@@ -40,7 +40,7 @@ class View(object):
                 channel__long_slug=self.long_slug)
             self.excluded_ids = []
             for box in context['articleboxes']:
-                self.excluded_ids += [a.pk for a in box.ordered_articles()]
+                self.excluded_ids += [a.pk for a in box.ordered_containers()]
 
         filters = {}
         filters['site_domain'] = self.site

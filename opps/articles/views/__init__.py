@@ -52,7 +52,7 @@ class PostList(ListView):
             channel__long_slug=self.long_slug)
 
         for box in self.articleboxes:
-            self.excluded_ids.update([a.pk for a in box.ordered_articles()])
+            self.excluded_ids.update([a.pk for a in box.ordered_containers()])
 
         self.article = Container.objects.filter(
             site_domain=self.site,

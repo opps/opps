@@ -236,6 +236,16 @@ class Imaged(models.Model):
             images = images.exclude(pk=self.main_image.pk)
         imgs += [i for i in images.distinct()]
 
+        for im in imgs:
+            try:
+                caption = im.containerimage_set.get(
+                    container__id=self.id
+                ).caption
+                if caption:
+                    im.caption = caption
+            except:
+                pass
+
         cache.set(cachekey, imgs)
         return imgs
 

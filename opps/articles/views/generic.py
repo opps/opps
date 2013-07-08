@@ -44,7 +44,7 @@ class OppsView(object):
 
             for box in context['articleboxes']:
                 self.excluded_ids.update(
-                    [a.pk for a in box.ordered_articles()]
+                    [a.pk for a in box.ordered_containers()]
                 )
 
         filters = {}
@@ -179,7 +179,7 @@ class OppsList(OppsView, ListView):
             channel__long_slug=self.long_slug)
 
         for box in self.articleboxes:
-            self.excluded_ids.update([a.pk for a in box.ordered_articles()])
+            self.excluded_ids.update([a.pk for a in box.ordered_containers()])
 
         self.article = self.model.objects.filter(
             site_domain=self.site,

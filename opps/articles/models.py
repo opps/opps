@@ -54,8 +54,9 @@ class Post(Article):
             return getcache
 
         imgs = super(Post, self).all_images()
-        imgs += [
-            i for a in self.albums.filter(
+
+        album_images = [
+            (i, a) for a in self.albums.filter(
                 published=True,
                 date_available__lte=timezone.now()
             ).distinct()
@@ -66,6 +67,16 @@ class Post(Article):
                 pk__in=[i.pk for i in imgs]
             ).order_by('containerimage__order').distinct()
         ]
+
+        for im, a in album_images:
+            try:
+                caption = im.containerimage_set.get(container__id=a.id).caption
+                if caption:
+                    im.caption = caption
+            except:
+                pass
+
+        imgs += [item[0] for item in album_images]
 
         cache.set(cachekey, imgs)
         return imgs
