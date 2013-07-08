@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import logging
+
 from django import template
 from django.conf import settings
 from django.utils import timezone
@@ -8,6 +10,7 @@ from opps.containers.models import ContainerBox
 
 
 register = template.Library()
+logger = logging.getLogger()
 
 
 @register.simple_tag(takes_context=True)
@@ -97,3 +100,29 @@ def get_post_content(post, template_name='articles/post_related.html',
         ))
     else:
         return mark_safe(content + divider + related_rendered)
+
+
+@register.simple_tag
+def get_url(obj, http=False, target=None, url_only=False):
+
+    if not hasattr(obj, 'child_class'):
+        return obj.get_absolute_url()
+
+    try:
+        _url = obj.get_absolute_url()
+        _target = target or '_self'
+        _is_link = obj.child_class == 'Link'
+        # Determine if it's a local or foreign link
+        if _is_link and not obj.link.is_local() and not target:
+            _target = '_blank'
+        # Determine url type
+        if http:
+            _url = 'http://{}{}'.format(
+                obj.site,
+                obj.get_absolute_url())
+        if url_only:
+            return _url
+        return 'href="{}" target="{}"'.format(_url, _target)
+    except Exception as e:
+        logger.error("Exception at templatetag get_url: {}".format(e))
+        return obj.get_absolute_url()
