@@ -43,7 +43,14 @@ class QuerySet(Publishable):
         queryset = model.objects.filter(
             published=True,
             date_available__lte=timezone.now())
-        if self.channel:
+
+        try:
+            if model._meta.get_field_by_name('show_on_root_channel'):
+                queryset = queryset.filter(show_on_root_channel=True)
+        except:
+            pass  # silently pass when FieldDoesNotExists
+
+        if self.channel and not self.channel.homepage:
             queryset = queryset.filter(channel=self.channel)
         if self.order == '-':
             queryset = queryset.order_by('-id')
