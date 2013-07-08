@@ -55,8 +55,7 @@ class QuerySet(Publishable):
 
         try:
             self.get_queryset().all()
-        except Exception, e:
-            print str(e)
+        except:
             raise ValidationError(_(u'Invalid Queryset'))
 
     def get_queryset(self):
