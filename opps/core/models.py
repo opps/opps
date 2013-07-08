@@ -332,7 +332,7 @@ class Config(Publishable):
 
     def clean(self):
         try:
-            BaseConfig.format_value(self.value, self.format)
+            Config.format_value(self.value, self.format)
         except:
             raise ValidationError(
                 _(u"Can't format the value to %s") % self.format

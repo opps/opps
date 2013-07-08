@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 #from django.conf import settings
 #from django.utils.importlib import import_module
+import json
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ValidationError
 
 from opps.core.models import Publishable, Channeling
-
 
 try:
     OPPS_APPS = tuple([
@@ -27,14 +28,36 @@ class QuerySet(Publishable):
         unique=True,
     )
 
-    model = models.CharField(_(u'Model'), max_length=150, choices=OPPS_APPS)
+    model = models.CharField(_(u'Model'), max_length=150)
     limit = models.PositiveIntegerField(_(u'Limit'), default=7)
     order = models.CharField(_('Order'), max_length=1, choices=(
         ('-', 'DESC'), ('+', 'ASC')))
     channel = models.ForeignKey(
         'channels.Channel',
         verbose_name=_(u"Channel"),
+        blank=True,
+        null=True
     )
+
+    filters = models.TextField(
+        _(u'Filters'),
+        help_text=_(u'Json format extra filters for queryset'),
+        blank=True,
+        null=True
+    )
+
+    def clean(self):
+        if self.filters:
+            try:
+                json.loads(self.filters)
+            except:
+                raise ValidationError(_(u'Invalid JSON'))
+
+        try:
+            self.get_queryset().all()
+        except Exception, e:
+            print str(e)
+            raise ValidationError(_(u'Invalid Queryset'))
 
     def get_queryset(self):
         _app, _model = self.model.split('.')
@@ -52,6 +75,10 @@ class QuerySet(Publishable):
 
         if self.channel and not self.channel.homepage:
             queryset = queryset.filter(channel=self.channel)
+
+        if self.filters:
+            filters = json.loads(self.filters)
+            queryset = queryset.filter(**filters)
         if self.order == '-':
             queryset = queryset.order_by('-id')
 
