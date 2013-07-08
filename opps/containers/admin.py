@@ -114,8 +114,8 @@ class HasQuerySet(SimpleListFilter):
 class ContainerBoxAdmin(BaseBoxAdmin):
     inlines = [ContainerBoxContainersInline]
     raw_id_fields = ['channel', 'queryset']
-    # list_display = ['name', 'channel_name', 'date_available',
-    #                 'is_dynamic', 'published']
+    list_display = ['name', 'channel_name', 'date_available',
+                    'published']
 
     fieldsets = (
         (_(u'Identification'), {
@@ -138,12 +138,10 @@ class ContainerBoxAdmin(BaseBoxAdmin):
     clean_ended_entries.short_description = _(u'Clean ended containers')
 
     def get_list_display(self, request):
+        list_display = getattr(self, 'list_display', [])
         if request.user.is_superuser:
-            return ['name', 'channel_name', 'date_available',
-                    'is_dynamic', 'published']
-        else:
-            return ['name', 'channel_name', 'date_available',
-                    'published']
+            return list_display + ['is_dynamic']
+        return list_display
 
     def get_list_filter(self, request):
         list_filter = super(ContainerBoxAdmin, self).list_filter
