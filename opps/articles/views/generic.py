@@ -31,6 +31,11 @@ class OppsView(object):
     def get_context_data(self, **kwargs):
         context = super(OppsView, self).get_context_data(**kwargs)
 
+        # channel is needed everywhere
+        self.channel = self.channel or Channel.objects.get_homepage(
+            site=get_current_site(self.request)
+        )
+
         if hasattr(self, 'articleboxes'):
             context['articleboxes'] = self.articleboxes
         else:

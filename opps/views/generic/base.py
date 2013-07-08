@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django import template
 from django.conf import settings
+from django.contrib.sites.models import get_current_site
 
 from opps.articles.models import Album
 from opps.containers.models import Container, ContainerBox
@@ -26,6 +27,11 @@ class View(object):
 
     def get_context_data(self, **kwargs):
         context = super(View, self).get_context_data(**kwargs)
+
+        # channel is needed everywhere
+        self.channel = self.channel or Channel.objects.get_homepage(
+            site=get_current_site(self.request)
+        )
 
         if hasattr(self, 'articleboxes'):
             context['articleboxes'] = self.articleboxes
