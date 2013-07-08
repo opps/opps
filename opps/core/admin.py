@@ -245,8 +245,7 @@ def apply_rules(admin_class, app):
     """
     if field_overrides:
         def get_form(self, request, obj=None, **kwargs):
-            form = super(self.__class__, self)\
-                .get_form(request, obj, **kwargs)
+            form = super(self.__class__, self).get_form(request, obj, **kwargs)
             if hasattr(form, 'base_fields'):
                 for field, attrs in field_overrides.iteritems():
                     for attr, value in attrs.iteritems():
@@ -276,13 +275,25 @@ def apply_rules(admin_class, app):
         except:
             pass
 
+    inlines = rules.get('inlines')
+    if inlines:
+        admin_class.inlines = []
+        for inline in inlines:
+            try:
+                _module = '.'.join(inline.split('.')[:-1])
+                _inline = inline.split('.')[-1]
+                _temp = __import__(_module, globals(), locals(), [_inline], -1)
+                admin_class.inlines.append(getattr(_temp, _inline))
+            except:
+                pass
+
     # TODO:
-    # inlines
     # actions
     # override methods
 
     # load generic attributes
-    specific_keys = list(attrs) + ['form', 'field_overrides', 'fieldsets']
+    specific_keys = list(attrs) + ['form', 'field_overrides',
+                                   'fieldsets', 'inlines']
     for k, v in rules.iteritems():
         if not k in specific_keys:
             setattr(admin_class, k, v)
