@@ -29,6 +29,7 @@ class OppsCoreConf(AppConf):
     RSS_LINK_TEMPLATE = '<a href="{}" class="ir ico ico-rss">RSS</a>'
     LIST_MODELS = ('Post',)
     RECOMMENDATION_RANGE_DAYS = 180
+    SMART_SLUG_ENABLED = True
 
     class Meta:
         prefix = 'opps'

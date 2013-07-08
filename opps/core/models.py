@@ -116,6 +116,9 @@ class Slugged(models.Model):
     )
 
     def clean(self):
+
+        self.validate_slug()
+
         if hasattr(self, 'get_absolute_url'):
             try:
                 path = self.get_absolute_url()
@@ -136,6 +139,41 @@ class Slugged(models.Model):
             super(Slugged, self).clean()
         except AttributeError:
             pass  # does not implement the clean method
+
+    def validate_slug(self):
+        slug = getattr(self, 'slug', None)
+
+        try:
+            channel = getattr(self, 'channel', None)
+        except:
+            channel = None
+
+        site = getattr(self, 'site', None)
+        if settings.OPPS_SMART_SLUG_ENABLED:
+            filters = {'slug__startswith': slug, 'site': site}
+        else:
+            filters = {'slug': slug, 'site': site}
+
+        if channel:
+            filters['channel'] = channel
+
+        slug_exists = self.__class__.objects.filter(**filters)
+
+        if getattr(self, 'pk', None) is not None:
+            slug_exists = slug_exists.exclude(pk=self.pk)
+
+        if settings.OPPS_SMART_SLUG_ENABLED:
+            if slug_exists:
+                last = slug_exists.latest('slug').slug
+                suffix = last.split('-')[-1]
+                if suffix.isdigit():
+                    suffix = int(suffix) + 1
+                    self.slug = "{0}-{1}".format(self.slug, suffix)
+                else:
+                    self.slug = "{0}-1".format(self.slug)
+        else:
+            if slug_exists.exists():
+                raise ValidationError(_(u"URL already exists."))
 
     def save(self, *args, **kwargs):
         if hasattr(self, 'get_absolute_url'):
