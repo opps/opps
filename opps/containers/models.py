@@ -172,6 +172,13 @@ class ContainerImage(models.Model):
         on_delete=models.SET_NULL
     )
 
+    caption = models.CharField(
+        _(u"Caption"),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+
     class META:
         verbose_name = _('Container image')
         verbose_name_plural = _('Container images')

@@ -20,7 +20,8 @@ class ContainerImageInline(admin.TabularInline):
     extra = 1
     verbose_name = _(u"Container image")
     verbose_name_plural = _(u"Container images")
-    fieldsets = [(None, {'fields': ('image', 'image_thumb', 'order')})]
+    fieldsets = [(None, {'fields': ('image', 'image_thumb',
+                         'order', 'caption')})]
     ordering = ('order',)
     readonly_fields = ['image_thumb']
 
