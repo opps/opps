@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
+import random
 from types import MethodType
 
 from django.contrib.sites.models import Site
@@ -63,7 +64,7 @@ class DynamicSiteMiddleware(object):
         site = self.get_hosting(hosting)
 
         settings.SITE_ID = site.id
-        settings.CACHE_MIDDLEWARE_KEY_PREFIX = "opps_site-{}".format(site.id)
+        settings.CACHE_MIDDLEWARE_KEY_PREFIX = u"opps_site-{}".format(site.id)
 
 
 def _is_mobile(request):
@@ -134,6 +135,11 @@ class MobileDetectionMiddleware(object):
         request.is_mobile = is_mobile
         settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_WEB
         if is_mobile and settings.OPPS_CHECK_MOBILE:
+
+            # set cache prefix randon in mobile device
+            settings.CACHE_MIDDLEWARE_KEY_PREFIX = u"opps_site-{}-{}".format(
+                settings.SITE_ID, random.getrandbits(32))
+
             settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_MOBILE
             if settings.OPPS_DOMAIN_MOBILE and \
                request.META.get('HTTP_HOST', '') != \
@@ -207,6 +213,11 @@ class MobileRedirectMiddleware(object):
         elif not is_mobile_domain and template_mode == 'mobile':
             prot = settings.OPPS_PROTOCOL_MOBILE
             url = u"{}://{}/?template_mode=mobile".format(prot, mobile_domain)
+
+            # set cache prefix randon in mobile device
+            settings.CACHE_MIDDLEWARE_KEY_PREFIX = u"opps_site-{}-{}".format(
+                settings.SITE_ID, random.getrandbits(32))
+
             return HttpResponseRedirect(url)
 
         request._resp_cookies = SimpleCookie()
