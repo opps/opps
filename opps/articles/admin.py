@@ -106,7 +106,8 @@ class PostAdmin(ArticleAdmin):
                        'short_url')}),
         (_(u'Content'), {
             'fields': ('hat', 'short_title', 'headline', 'content',
-                       ('main_image', 'image_thumb'), 'main_image_caption', 'tags')}),
+                       ('main_image', 'image_thumb'), 'main_image_caption',
+                       'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel', 'albums',)}),
         (_(u'Publication'), {
@@ -139,7 +140,8 @@ class AlbumAdmin(ArticleAdmin):
                        'short_url',)}),
         (_(u'Content'), {
             'fields': ('hat', 'short_title', 'headline',
-                       ('main_image', 'image_thumb'), 'main_image_caption', 'tags')}),
+                       ('main_image', 'image_thumb'), 'main_image_caption',
+                       'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
         (_(u'Publication'), {
@@ -164,7 +166,8 @@ class LinkAdmin(ArticleAdmin):
                        'short_url',)}),
         (_(u'Content'), {
             'fields': ('hat', 'short_title', 'headline', 'url', 'articles',
-                       ('main_image', 'image_thumb'), 'main_image_caption', 'tags')}),
+                       ('main_image', 'image_thumb'), 'main_image_caption',
+                       'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
         (_(u'Publication'), {

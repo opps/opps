@@ -169,8 +169,8 @@ class Article(Publishable, Slugged):
             channel_long_slug=self.channel_long_slug,
             date_available__range=(start, now),
             published=True,
-            tags__in=tag_list).exclude(
-                pk=self.pk).distinct().order_by('-date_available')[:10]]
+            tags__in=tag_list
+        ).exclude(pk=self.pk).distinct().order_by('-date_available')[:10]]
 
         cache.set(cachekey, _list)
         return _list

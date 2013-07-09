@@ -9,15 +9,18 @@ from opps.articles.models import ArticleBox
 
 register = template.Library()
 
+
 @register.filter(name='is_articlebox')
 def is_articlebox(slug):
     try:
-        ArticleBox.objects.get(site=settings.SITE_ID, slug=slug,
-                                     date_available__lte=timezone.now(),
-                                     published=True)
+        ArticleBox.objects.get(
+            site=settings.SITE_ID, slug=slug,
+            date_available__lte=timezone.now(),
+            published=True)
         return True
     except ArticleBox.DoesNotExist:
         return False
+
 
 @register.simple_tag(takes_context=True)
 def get_articlebox(context, slug, template_name=None):

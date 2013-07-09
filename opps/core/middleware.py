@@ -117,8 +117,7 @@ def _is_mobile(request):
         else:
             user_agent = request.META.get('HTTP_USER_AGENT', '')
             if user_agents_test_search_regex.search(user_agent):
-                if not user_agents_exception_search_regex.search(
-                    user_agent):
+                if not user_agents_exception_search_regex.search(user_agent):
                     is_mobile = True
 
         if not is_mobile:

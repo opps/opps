@@ -4,10 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import get_current_site
 from django.contrib.admin import SimpleListFilter
-from django.utils.text import slugify
-from django.contrib import messages
-from django.utils.safestring import mark_safe
-from django.core.urlresolvers import reverse
 
 from .models import Image
 from .forms import ImageModelForm
@@ -15,8 +11,6 @@ from .generate import image_url
 
 from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
-from opps.articles.models import Post, Album, ArticleImage
-from opps.channels.models import Channel
 
 User = get_user_model()
 
