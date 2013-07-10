@@ -4,13 +4,11 @@ from django.core.paginator import Paginator, InvalidPage
 from django.contrib.sites.models import get_current_site
 from django.utils import timezone
 from django.http import Http404
-from django.conf import settings
 
 from haystack.views import SearchView
 
-from opps.articles.models import Post, Album
+from opps.articles.models import Album
 from opps.containers.models import Container
-from opps.containers.models import ContainerBox
 
 from opps.views.generic.list import ListView
 from opps.views.generic.detail import DetailView
