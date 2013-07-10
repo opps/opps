@@ -29,5 +29,6 @@ class DynamicSiteMiddleware(object):
         hosting = request.get_host().lower()
         site = self.get_hosting(hosting)
 
+        request.site = site
         settings.SITE_ID = site.id
         settings.CACHE_MIDDLEWARE_KEY_PREFIX = "opps_site-{}".format(site.id)
