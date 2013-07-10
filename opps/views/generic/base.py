@@ -24,6 +24,7 @@ class View(object):
         self.channel_long_slug = []
         self.article = None
         self.excluded_ids = set()
+        self.child_class = u'container'
 
     def get_context_data(self, **kwargs):
         context = super(View, self).get_context_data(**kwargs)
@@ -43,7 +44,7 @@ class View(object):
                 self.excluded_ids += [a.pk for a in box.ordered_containers()]
 
         filters = {}
-        filters['site_domain'] = self.site
+        filters['site_domain'] = self.request.site.domain
         filters['channel_long_slug__in'] = self.channel_long_slug
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
@@ -75,7 +76,8 @@ class View(object):
     def get_template_folder(self):
         domain_folder = self.type
         if settings.SITE_ID > 1:
-            domain_folder = "{0}/{1}".format(self.site, self.type)
+            domain_folder = "{0}/{1}".format(self.request.site.domain,
+                                             self.type)
         return domain_folder
 
     def get_long_slug(self):
@@ -83,13 +85,14 @@ class View(object):
         try:
             if not self.long_slug:
                 self.long_slug = Channel.objects.get_homepage(
-                    site=self.site).long_slug
+                    site=self.request.site).long_slug
         except AttributeError:
             pass
         return self.long_slug
 
     def set_channel_rules(self):
-        self.channel = get_object_or_404(Channel, site__domain=self.site,
+        self.channel = get_object_or_404(Channel,
+                                         site__domain=self.request.site.domain,
                                          long_slug=self.long_slug,
                                          date_available__lte=timezone.now(),
                                          published=True)
