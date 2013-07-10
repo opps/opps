@@ -193,7 +193,7 @@ class MobileRedirectMiddleware(object):
         mobile_domain = settings.OPPS_DOMAIN_MOBILE
 
         current_cookie = request.COOKIES.get('template_mode', None)
-        template_mode = request.GET.get('template_mode', None).encode('utf-8')
+        template_mode = request.GET.get('template_mode', None)
         settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_WEB
 
         is_mobile_domain = domain == mobile_domain
