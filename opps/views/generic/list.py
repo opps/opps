@@ -65,9 +65,7 @@ class ListView(View, DjangoListView):
 
         return names
 
-    @property
-    def queryset(self):
-        self.site = get_current_site(self.request).domain
+    def get_queryset(self):
         self.long_slug = self.get_long_slug()
 
         if not self.long_slug:
@@ -81,15 +79,13 @@ class ListView(View, DjangoListView):
         for box in self.articleboxes:
             self.excluded_ids.update([a.pk for a in box.ordered_containers()])
 
-        self.article = self.model.objects.filter(
-            site_domain=self.site,
-            channel_long_slug__in=self.channel_long_slug,
-            date_available__lte=timezone.now(),
-            published=True,
-            show_on_root_channel=True
-        ).exclude(pk__in=self.excluded_ids)
+        queryset = super(ListView, self).get_queryset()
+        filters = {}
+        filters['site_domain'] = self.request.site.domain
+        filters['channel_long_slug__in'] = self.channel_long_slug
+        filters['date_available__lte'] = timezone.now()
+        filters['published'] = True
+        filters['show_on_root_channel'] = True
+        queryset = queryset.filter(**filters).exclude(pk__in=self.excluded_ids)
 
-        if self.limit:
-            self.article = self.article[:self.limit]
-
-        return self.article._clone()
+        return queryset._clone()
