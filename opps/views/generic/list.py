@@ -67,6 +67,7 @@ class ListView(View, DjangoListView):
 
     def get_queryset(self):
         self.long_slug = self.get_long_slug()
+        self.site = get_current_site(self.request)
 
         if not self.long_slug:
             return None
@@ -81,7 +82,7 @@ class ListView(View, DjangoListView):
 
         queryset = super(ListView, self).get_queryset()
         filters = {}
-        filters['site_domain'] = self.request.site.domain
+        filters['site_domain'] = self.site.domain
         filters['channel_long_slug__in'] = self.channel_long_slug
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
