@@ -11,6 +11,8 @@ class AdminViewPermission(admin.ModelAdmin):
 
     def queryset(self, request):
         queryset = super(AdminViewPermission, self).queryset(request)
+        if not settings.OPPS_MULTISITE_ADMIN:
+            return queryset
         try:
             sitepermission = SitePermission.objects.get(
                 user=request.user,
