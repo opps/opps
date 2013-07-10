@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from django.conf import settings
 from django.utils import timezone
 
 from .models import SitePermission
@@ -23,6 +24,8 @@ class AdminViewPermission(admin.ModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         form = super(AdminViewPermission, self).get_form(request, obj,
                                                          **kwargs)
+        if not settings.OPPS_MULTISITE_ADMIN:
+            return form
         try:
             sitepermission = SitePermission.objects.get(
                 user=request.user,
