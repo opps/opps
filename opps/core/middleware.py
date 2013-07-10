@@ -193,23 +193,23 @@ class MobileRedirectMiddleware(object):
         mobile_domain = settings.OPPS_DOMAIN_MOBILE
 
         current_cookie = request.COOKIES.get('template_mode', None)
-        template_mode = request.GET.get('template_mode', None)
+        template_mode = request.GET.get('template_mode', None).encode('utf-8')
         settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_WEB
 
         is_mobile_domain = domain == mobile_domain
 
         if not template_mode and not current_cookie:
             if is_mobile_domain:
-                template_mode = 'mobile'
+                template_mode = u'mobile'
             else:
                 return
 
-        if is_mobile_domain and template_mode == 'desktop':
+        if is_mobile_domain and template_mode == u'desktop':
             prot = settings.OPPS_PROTOCOL_WEB
             web_domain = settings.OPPS_DOMAIN_WEB
             url = u"{}://{}/?template_mode=desktop".format(prot, web_domain)
             return HttpResponseRedirect(url)
-        elif not is_mobile_domain and template_mode == 'mobile':
+        elif not is_mobile_domain and template_mode == u'mobile':
             prot = settings.OPPS_PROTOCOL_MOBILE
             url = u"{}://{}/?template_mode=mobile".format(prot, mobile_domain)
 
@@ -229,7 +229,7 @@ class MobileRedirectMiddleware(object):
             request.set_cookie('template_mode', template_mode)
             current_cookie = template_mode
 
-        if current_cookie and current_cookie.strip().lower() == "mobile":
+        if current_cookie and current_cookie.strip().lower() == u"mobile":
             settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_MOBILE
 
     def process_response(self, request, response):
