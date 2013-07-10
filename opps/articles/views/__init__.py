@@ -17,59 +17,12 @@ from opps.views.generic.detail import DetailView
 
 
 class PostList(ListView):
-    models = settings.OPPS_LIST_MODELS
+    model = Container
     type = "channels"
-
-    def get_template_names(self):
-        """
-        Implemented here for backwards compatibility
-        """
-        names = super(PostList, self).get_template_names()
-        domain_folder = self.get_template_folder()
-        aditional_names = [
-            '{}/post_list.html'.format(domain_folder),
-            'articles/post_list.html'
-        ]
-        if self.paginate_suffix:
-            aditional_names = [
-                '{}/post_list_paginated.html'.format(domain_folder),
-                'articles/post_list_paginated.html'
-            ]
-        names = names + aditional_names
-        return names
-
-    @property
-    def queryset(self):
-        self.site = get_current_site(self.request).domain
-        self.long_slug = self.get_long_slug()
-
-        if not self.long_slug:
-            return None
-
-        self.set_channel_rules()
-
-        self.articleboxes = ContainerBox.objects.filter(
-            channel__long_slug=self.long_slug)
-
-        for box in self.articleboxes:
-            self.excluded_ids.update([a.pk for a in box.ordered_containers()])
-
-        self.article = Container.objects.filter(
-            site_domain=self.site,
-            channel_long_slug__in=self.channel_long_slug,
-            date_available__lte=timezone.now(),
-            published=True,
-            child_class__in=self.models,
-            show_on_root_channel=True
-        ).exclude(pk__in=self.excluded_ids)
-        if self.limit:
-            self.article = self.article[:self.limit]
-
-        return self.article
 
 
 class PostDetail(DetailView):
-    model = Post
+    model = Container
     type = 'articles'
 
 
