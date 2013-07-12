@@ -25,16 +25,20 @@ class ListView(View, DjangoListView):
                 if self.request.GET.get('page') and\
                    self.__class__.__name__ not in\
                    settings.OPPS_PAGINATE_NOT_APP:
-                    templates.append('{}/{}/list_paginate.html'.format(
+                    templates.append('{}/{}/list_paginated.html'.format(
                         domain_folder, self.channel.parent.long_slug))
 
             if self.request.GET.get('page') and\
                self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
-                templates.append('{}/{}/list_paginate.html'.format(
+                templates.append('{}/{}/list_paginated.html'.format(
                     domain_folder, self.channel.long_slug))
 
             templates.append('{}/{}/list.html'.format(
                 domain_folder, self.channel.long_slug))
+
+        if self.request.GET.get('page') and\
+           self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
+            templates.append('{}/list_paginated.html'.format(domain_folder))
 
         templates.append('{}/list.html'.format(domain_folder))
 
