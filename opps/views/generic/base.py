@@ -74,10 +74,9 @@ class View(object):
         return context
 
     def get_template_folder(self):
-        domain_folder = self.type
+        domain_folder = "containers"
         if settings.SITE_ID > 1:
-            domain_folder = "{0}/{1}".format(self.request.site.domain,
-                                             self.type)
+            domain_folder = "{}/containers".format(self.request.site.domain)
         return domain_folder
 
     def get_long_slug(self):
