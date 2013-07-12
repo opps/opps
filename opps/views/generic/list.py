@@ -14,56 +14,33 @@ from opps.containers.models import ContainerBox
 class ListView(View, DjangoListView):
 
     def get_template_names(self):
-        names = []
-        domain_folder = self.get_template_folder()
+        templates = []
 
-        # look for a different template only if defined in settings
-        # default should be OPPS_PAGINATE_SUFFIX = "_paginated"
-        # if set OPPS_PAGINATE_NOT_APP = ['TagList'] not set paginate_suffix
-        if self.request and self.request.GET.get('page') and\
-           self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
-            self.paginate_suffix = settings.OPPS_PAGINATE_SUFFIX
-            self.template_name_suffix = "_list{}".format(self.paginate_suffix)
-        else:
-            self.paginate_suffix = ''
+        domain_folder = self.get_template_folder()
 
         if self.channel:
             if self.channel.group and self.channel.parent:
+                templates.append('{}/{}/list.html'.format(
+                    domain_folder, self.channel.parent.long_slug))
 
-                _template = '{}/_{}{}.html'.format(
-                    domain_folder,
-                    self.channel.parent.long_slug,
-                    self.paginate_suffix
-                )
-                names.append(_template)
+                if self.request.GET.get('page') and\
+                   self.__class__.__name__ not in\
+                   settings.OPPS_PAGINATE_NOT_APP:
+                    templates.append('{}/{}/list_paginate.html'.format(
+                        domain_folder, self.channel.parent.long_slug))
 
-                _template = u'{}/_post_list{}.html'.format(
-                    domain_folder,
-                    # self.channel.parent.long_slug,
-                    self.paginate_suffix
-                )
-                names.append(_template)
 
-        names.append(
-            u'{}/{}{}.html'.format(
-                domain_folder,
-                self.long_slug,
-                self.paginate_suffix
-            )
-        )
+            if self.request.GET.get('page') and\
+               self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
+                templates.append('{}/{}/list_paginate.html'.format(
+                    domain_folder, self.channel.long_slug))
 
-        try:
-            names = names + super(ListView, self).get_template_names()
-        except ImproperlyConfigured:
-            pass
+            templates.append('{}/{}/list.html'.format(
+                domain_folder, self.channel.long_slug))
 
-        if self.paginate_suffix:
-            # use the default _paginated.html if no template found
-            names.append(
-                u"{}/{}.html".format(domain_folder, self.paginate_suffix)
-            )
+        templates.append('{}/list.html'.format(domain_folder))
 
-        return names
+        return templates
 
     def get_queryset(self):
         self.long_slug = self.get_long_slug()
