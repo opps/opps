@@ -4,7 +4,7 @@
 Opps - OPen Publishing System
 =============================
 .. image:: _static/opps.jpg
-    :alt: Opps Open Source Content Management
+    :alt: Opps - OPen Publishing System (Open Source Content Management Platform)
 
 An *Open Source Content Management Platform* for the **magazine** websites and **high-traffic**, using the Django Framework.
 
@@ -46,15 +46,6 @@ Sponsor
 =======
 
 * `YACOWS <http://www.yacows.com.br>`_
-
-
-Events
-======
-
-* `|PyBR9| <http://www.pythonbrasil.org.br/>`_
-.. |PyBR9| image:: http://2013.pythonbrasil.org.br/divulgue/no-seu-site/pythonbrasil9_en_rectangle.gif
-    :alt: PythonBrasil[9]
-
 
 
 License
