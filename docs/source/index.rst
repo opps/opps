@@ -48,6 +48,15 @@ Sponsor
 * `YACOWS <http://www.yacows.com.br>`_
 
 
+Events
+======
+
+* `|PyBR9| <http://www.pythonbrasil.org.br/>`_
+.. |PyBR9| image:: http://2013.pythonbrasil.org.br/divulgue/no-seu-site/pythonbrasil9_en_rectangle.gif
+    :alt: PythonBrasil[9]
+
+
+
 License
 =======
 
