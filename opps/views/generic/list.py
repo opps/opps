@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.core.exceptions import ImproperlyConfigured
 from django.views.generic.list import ListView as DjangoListView
 from django.contrib.sites.models import get_current_site
 from django.utils import timezone
@@ -28,7 +27,6 @@ class ListView(View, DjangoListView):
                    settings.OPPS_PAGINATE_NOT_APP:
                     templates.append('{}/{}/list_paginate.html'.format(
                         domain_folder, self.channel.parent.long_slug))
-
 
             if self.request.GET.get('page') and\
                self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
