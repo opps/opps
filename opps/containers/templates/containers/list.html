@@ -2,7 +2,7 @@
 ----------------
 <ul>
 {% for post in context %}
-  <li><a href="{% url 'articles:open' post.channel.long_slug post.slug %}" alt="{{ post.short_title }}">{{ post.title }}</a></li>
+  <li><a href="{% url 'containers:open' post.channel.long_slug post.slug %}" alt="{{ post.short_title }}">{{ post.title }}</a></li>
 {% endfor %}
 </ul>
 
