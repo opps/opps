@@ -11,9 +11,7 @@ class DetailView(View, DjangoDetailView):
 
     def get_template_names(self):
         templates = []
-
         domain_folder = self.get_template_folder()
-
 
         templates.append('{}/{}/{}/detail.html'.format(domain_folder,
                                                        self.long_slug,
