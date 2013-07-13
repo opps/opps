@@ -1,9 +1,27 @@
-{% include "channels/include/menu.html" %}
-----------------
-<ul>
-{% for post in context %}
-  <li><a href="{% url 'containers:open' post.channel.long_slug post.slug %}" alt="{{ post.short_title }}">{{ post.title }}</a></li>
-{% endfor %}
-</ul>
+{% extends "containers/base.html" %}
 
-{% include 'articles/include/paginate.html' %}
+{% block content %}
+
+{% include "channels/include/menu.html" %}
+
+<div class="row-fluid">
+  <div class="span12">
+    <ul class="thumbnails">
+    {% for container in context %}
+      <li class="span4">
+        <div class="thumbnail">
+          <img alt="300x200" src="http://lorempixel.com/300/200/people">
+          <div class="caption">
+            <h3>{{ container.hat }}</h3>
+            <p>
+              <a href="{% url 'containers:open' container.channel.long_slug container.slug %}" alt="{{ container.short_title }}">{{ container.title }}</a>
+            </p>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+    {% include 'containers/include/paginated.html' %}
+  </div>
+</div>
+{% endblock %}
