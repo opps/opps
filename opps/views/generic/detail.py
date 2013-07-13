@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.core.exceptions import ImproperlyConfigured
 from django.views.generic.detail import DetailView as DjangoDetailView
 from django.contrib.sites.models import get_current_site
 from django.utils import timezone
@@ -11,19 +10,19 @@ from opps.views.generic.base import View
 class DetailView(View, DjangoDetailView):
 
     def get_template_names(self):
-        names = []
+        templates = []
+
         domain_folder = self.get_template_folder()
 
-        names.append(u'{}/{}/{}.html'.format(
-            domain_folder, self.long_slug, self.slug))
-        names.append(u'{}/{}.html'.format(domain_folder, self.long_slug))
 
-        try:
-            names = names + super(DetailView, self).get_template_names()
-        except ImproperlyConfigured:
-            pass
+        templates.append('{}/{}/{}/detail.html'.format(domain_folder,
+                                                       self.long_slug,
+                                                       self.slug))
+        templates.append('{}/{}/detail.html'.format(domain_folder,
+                                                    self.long_slug))
+        templates.append('{}/detail.html'.format(domain_folder))
 
-        return names
+        return templates
 
     def get_queryset(self):
         self.site = get_current_site(self.request)
