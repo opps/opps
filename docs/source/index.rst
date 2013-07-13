@@ -33,6 +33,7 @@ Quick links
 .. toctree::
    :maxdepth: 2
 
+   overview
    setup
    application
    git-tips
