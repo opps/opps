@@ -1,0 +1,24 @@
+{% extends "containers/base.html" %}
+
+{% block content %}
+
+{% include "channels/include/menu.html" %}
+
+<div class="row-fluid">
+  <div class="span12">
+    <div class="page-header">
+      <h1>{{ context.title }}</h1>
+      <small>{{ context.short_title }}</small>
+
+      {{ context.content|safe }}
+
+      <p>
+      {% for tag in context.tags.all %}
+      <a class="btn" href="{% url 'containers:tag_open' tag.slug %}">{{ tag.name }} »</a>
+      {% endfor %}
+      </p>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
