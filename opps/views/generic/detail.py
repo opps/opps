@@ -12,12 +12,20 @@ class DetailView(View, DjangoDetailView):
     def get_template_names(self):
         templates = []
         domain_folder = self.get_template_folder()
+        child_class = self.object.child_class.lower()
 
-        templates.append('{}/{}/{}/detail.html'.format(domain_folder,
-                                                       self.long_slug,
-                                                       self.slug))
+        templates.append('{}/{}/{}/{}/detail.html'.format(
+            domain_folder, child_class, self.long_slug, self.slug))
+        templates.append('{}/{}/{}/detail.html'.format(
+            domain_folder, self.long_slug, self.slug))
+
+        templates.append('{}/{}/{}/detail.html'.format(
+            domain_folder, child_class, self.long_slug))
         templates.append('{}/{}/detail.html'.format(domain_folder,
                                                     self.long_slug))
+
+        templates.append('{}/{}/detail.html'.format(domain_folder,
+                                                    child_class))
         templates.append('{}/detail.html'.format(domain_folder))
 
         return templates
