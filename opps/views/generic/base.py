@@ -72,7 +72,6 @@ class View(object):
                 self.object.child_class
             ).objects.get(pk=self.object.pk)
 
-
         return context
 
     def get_template_folder(self):
