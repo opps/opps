@@ -25,9 +25,8 @@ class DetailView(View, DjangoDetailView):
 
         return names
 
-    @property
-    def queryset(self):
-        self.site = get_current_site(self.request).domain
+    def get_queryset(self):
+        self.site = get_current_site(self.request)
         self.slug = self.kwargs.get('slug')
         self.long_slug = self.get_long_slug()
         if not self.long_slug:
@@ -35,11 +34,10 @@ class DetailView(View, DjangoDetailView):
 
         self.set_channel_rules()
 
-        filters = dict(
-            site_domain=self.site,
-            channel_long_slug=self.long_slug,
-            slug=self.slug
-        )
+        filters = {}
+        filters['site_domain'] = self.site.domain
+        filters['channel_long_slug'] = self.long_slug
+        filters['slug'] = self.slug
 
         preview_enabled = self.request.user and self.request.user.is_staff
 
@@ -47,8 +45,5 @@ class DetailView(View, DjangoDetailView):
             filters['date_available__lte'] = timezone.now()
             filters['published'] = True
 
-        self.article = self.model.objects.filter(
-            **filters
-        )
-
-        return self.article._clone()
+        queryset = super(DetailView, self).get_queryset()
+        return queryset.filter(**filters)._clone()
