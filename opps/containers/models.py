@@ -32,6 +32,12 @@ class Container(Publishable, Slugged, Channeling, Imaged):
         null=True, blank=True,
         db_index=True
     )
+    child_module = models.CharField(
+        _(u'Child module'),
+        max_length=120,
+        null=True, blank=True,
+        db_index=True
+    )
     child_app_label = models.CharField(
         _(u'Child app label'),
         max_length=30,
@@ -61,6 +67,7 @@ class Container(Publishable, Slugged, Channeling, Imaged):
         self.channel_name = self.channel.name
         self.channel_long_slug = self.channel.long_slug
         self.child_class = self.__class__.__name__
+        self.child_module = self.__class__.__module__
         self.child_app_label = self._meta.app_label
 
         models.signals.post_save.connect(shorturl_generate,
