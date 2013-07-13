@@ -62,14 +62,16 @@ class View(object):
         context['channel'] = {}
         context['channel']['long_slug'] = self.long_slug
         if self.channel:
-            context['channel']['slug'] = self.channel.slug
-            context['channel']['title'] = self.channel.title
-            context['channel']['level'] = self.channel.get_level()
-            context['channel']['root'] = self.channel.get_root()
+            context['channel'] = self.channel
 
         if self.slug:
             context['articleboxes'] = context['articleboxes'].filter(
                 containers__slug=self.slug)
+            context['context'] = getattr(__import__(
+                self.object.child_module, fromlist=[self.object.child_class]),
+                self.object.child_class
+            ).objects.get(pk=self.object.pk)
+
 
         return context
 
