@@ -42,7 +42,8 @@ if not settings.configured:
             'taggit',
         ),
         SITE_ID = 1,
-        ROOT_URLCONF = "opps.urls"
+        ROOT_URLCONF = "opps.urls",
+        TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner',
     )
 
 
