@@ -1,6 +1,6 @@
 
 .PHONY: test
-test:
+test: pep8
 	python runtests.py
 
 .PHONY: travis
