@@ -70,4 +70,3 @@ class ContainerFields(TestCase):
         self.assertTrue(field.blank)
         self.assertFalse(field.unique)
         self.assertFalse(field.primary_key)
-
