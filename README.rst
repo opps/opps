@@ -35,14 +35,15 @@ Run example
 
 .. code-block:: bash
 
-    $ git clone git@github.com:opps/opps.git
-    $ cd opps
-    $ python setup.py develop
-    $ opps-admin.py startproject PROJECT_NAME
-    $ cd PROJECT_NAME
-    $ python manage.py syncdb
-    $ python manage.py migrate
-    $ python manage.py runserver
+    git clone git@github.com:opps/opps.git
+    cd opps
+    python setup.py develop
+    opps-admin.py startproject PROJECT_NAME
+    cd PROJECT_NAME
+    python manage.py syncdb
+    python manage.py migrate
+    python manage.py collectstatic
+    python manage.py runserver
 
 
 Sponsor
