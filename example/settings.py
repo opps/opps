@@ -66,8 +66,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.redirects',
-    'django.contrib.admin',
 
+    'opps.admin',
     'opps.containers',
     'opps.core',
     'opps.archives',
@@ -81,6 +81,8 @@ INSTALLED_APPS = (
 
     'south',
     'taggit',
+    'reversion',
+    'crispy_forms',
 )
 
 OPPS_CHECK_MOBILE = True
