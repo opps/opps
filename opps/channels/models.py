@@ -83,31 +83,21 @@ class Channel(MPTTModel, Publishable, Slugged):
         return self.get_root()
 
     def clean(self):
+        channel_exist_domain = Channel.objects.filter(
+            slug=self.slug, site=self.site)
+        channel_is_home = Channel.objects.filter(
+            site__id=settings.SITE_ID,
+            homepage=True, published=True)
+        if self.pk:
+            channel_is_home = channel_is_home.exclude(pk=self.pk)
 
-        try:
-            channel_exist_domain = Channel.objects.filter(
-                slug=self.slug,
-                site=self.site)
-            channel_is_home = Channel.objects.filter(
-                site__id=settings.SITE_ID,
-                homepage=True,
-                published=True)
-            if self.pk:
-                channel_is_home = channel_is_home.exclude(pk=self.pk)
-        except ObjectDoesNotExist:
-            return False
-
-        if len(channel_exist_domain) >= 1 and not self.pk:
+        if channel_exist_domain.exists() and not self.pk:
             raise ValidationError('Slug exist in domain!')
 
-        if self.homepage and len(channel_is_home) >= 1:
+        if self.homepage and channel_is_home.exists():
             raise ValidationError('Exist home page!')
 
-        # every class which implements Slugged needs this in clean
-        try:
-            super(Channel, self).clean()
-        except AttributeError:
-            pass  # does not implement the clean method
+        super(Channel, self).clean()
 
     def save(self, *args, **kwargs):
         self.long_slug = u"{}".format(self.slug)
