@@ -148,9 +148,16 @@ class ChannelModelTest(TestCase):
         self.assertRaises(ValidationError, invalid.full_clean)
 
     def test_clean_slug_exist_homepage(self):
+        Channel.objects.create(name=u'homepage', slug=u'homepage',
+                               homepage=True, site=self.site,
+                               user=self.user, published=True)
+        invalid = Channel.objects.create(name=u'invalid', slug=u'invalid',
+                                         homepage=True, site=self.site,
+                                         user=self.user)
+        self.assertRaises(ValidationError, invalid.full_clean)
+
+    def test_clean(self):
         valid = Channel.objects.create(name=u'homepage', slug=u'homepage',
                                        homepage=True, site=self.site,
-                                       user=self.user)
-        invalid = Channel(name=u'invalid', slug=u'invalid',
-                          homepage=True, site=self.site)
-        self.assertRaises(ValidationError, invalid.full_clean)
+                                       user=self.user, published=True)
+        valid.full_clean()
