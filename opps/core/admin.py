@@ -98,7 +98,7 @@ class PublishableAdmin(admin.ModelAdmin):
     publish.short_description = _(u'Publish/Unpublish')
 
     def save_model(self, request, obj, form, change):
-        if getattr(obj, 'pk', None) is None:
+        if not change:
             obj.user = get_user_model().objects.get(pk=request.user.pk)
             obj.date_insert = timezone.now()
             obj.site = Site.objects.get(pk=settings.SITE_ID)
