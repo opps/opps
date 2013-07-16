@@ -123,3 +123,6 @@ class ChannelModelTest(TestCase):
         channel = Channel.objects.get_homepage(site=self.parent.site)
         self.assertEqual(None, channel)
         self.assertFalse(channel)
+
+    def test_get_thumb(self):
+        self.assertIsNone(self.parent.get_thumb())
