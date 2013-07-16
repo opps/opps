@@ -1,7 +1,6 @@
 language: python
 python:
   - "2.7"
-  - "pypy"
 env:
   - DJANGO=django==1.5
 #  - DJANGO=https://github.com/django/django/zipball/stable/1.6.x
