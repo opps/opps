@@ -67,7 +67,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.redirects',
 
-    'opps.admin',
+    'opps.contrib.admin',
     'opps.containers',
     'opps.core',
     'opps.archives',
