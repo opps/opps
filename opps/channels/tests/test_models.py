@@ -126,3 +126,6 @@ class ChannelModelTest(TestCase):
 
     def test_get_thumb(self):
         self.assertIsNone(self.parent.get_thumb())
+
+    def test_search_category(self):
+        self.assertEqual('Channel', Channel().search_category)
