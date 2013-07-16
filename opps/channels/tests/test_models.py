@@ -126,3 +126,17 @@ class ChannelModelTest(TestCase):
 
     def test_get_thumb(self):
         self.assertIsNone(self.parent.get_thumb())
+
+    def test_search_category(self):
+        self.assertEqual('Channel', Channel().search_category)
+
+    def test_title(self):
+        self.assertEqual(self.parent.title, self.parent.name)
+
+    def test_root(self):
+        self.assertEqual(self.parent, self.parent.root)
+        subchannel = Channel.objects.create(name=u'Sub Home', slug=u'sub-home',
+                                            description=u'sub home page',
+                                            site=self.site, user=self.user,
+                                            parent=self.parent)
+        self.assertEqual(self.parent, subchannel.root)
