@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.conf.urls import patterns, url, include
-from django.contrib import admin
+
+from opps.contrib import admin
+from admin.plugins import xversion
 
 
 admin.autodiscover()
+xversion.registe_models()
 
 urlpatterns = patterns(
     '',
