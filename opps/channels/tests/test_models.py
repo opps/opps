@@ -5,6 +5,7 @@ from datetime import timedelta
 
 from django.db import IntegrityError
 from django.test import TestCase
+from django.core.exceptions import ValidationError
 from django.contrib.sites.models import Site
 from django.contrib.auth import get_user_model
 from django.utils import timezone
@@ -140,3 +141,16 @@ class ChannelModelTest(TestCase):
                                             site=self.site, user=self.user,
                                             parent=self.parent)
         self.assertEqual(self.parent, subchannel.root)
+
+    def test_clean_slug_exist_in_domain(self):
+        invalid = Channel(name=u'Home', slug=u'home', description=u'home page',
+                          site=self.site, user=self.user)
+        self.assertRaises(ValidationError, invalid.full_clean)
+
+    def test_clean_slug_exist_homepage(self):
+        valid = Channel.objects.create(name=u'homepage', slug=u'homepage',
+                                       homepage=True, site=self.site,
+                                       user=self.user)
+        invalid = Channel(name=u'invalid', slug=u'invalid',
+                          homepage=True, site=self.site)
+        self.assertRaises(ValidationError, invalid.full_clean)
