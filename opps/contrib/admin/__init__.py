@@ -4,4 +4,4 @@ import sys
 import xadmin
 
 
-sys.modules[__name__]= xadmin
+sys.modules[__name__] = xadmin
