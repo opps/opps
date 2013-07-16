@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.utils.translation import ugettext_lazy as _
-from .models import Post, Album, Link
 
 from opps.containers.models import ContainerSource, ContainerImage
 from opps.contrib import admin
 from opps.contrib.admin.layout import *
 from xadmin.plugins.inline import Inline
+
+from .models import Post, Album, Link
 
 
 class ImageInline(object):
@@ -26,21 +27,17 @@ class PostAdmin(object):
     form_layout = (
         Main(
             TabHolder(
-                Tab(_(u'Identification'),
-                    Fieldset('site', 'title', 'slug',
-                    'get_http_absolute_url', 'short_url'),
-                ),
-                Tab(_(u'Content'),
-                    Fieldset('hat', 'short_title', 'headline',
+                Tab(_(u'Identification'), Fieldset(
+                    'site', 'title', 'slug', 'get_http_absolute_url',
+                    'short_url')),
+                Tab(_(u'Content'), Fieldset('hat', 'short_title', 'headline',
                     'content', 'main_image', 'main_image_caption',
                     'image_thumb' 'tags'),
                     Inline(ContainerImage),
-                    Inline(ContainerSource),
-                ),
-                Tab(_(u'Relationships'),
-                    Fieldset('channel', 'albums'),
-                ),
-        )),
+                    Inline(ContainerSource)),
+                Tab(_(u'Relationships'), Fieldset('channel', 'albums')),
+            )
+        ),
         Side(
             Fieldset(_(u'Publication'), 'published', 'date_available',
                      'show_on_root_channel', 'in_containerboxes')
