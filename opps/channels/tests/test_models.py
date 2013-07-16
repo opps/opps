@@ -129,3 +129,6 @@ class ChannelModelTest(TestCase):
 
     def test_search_category(self):
         self.assertEqual('Channel', Channel().search_category)
+
+    def test_title(self):
+        self.assertEqual(self.parent.title, self.parent.name)
