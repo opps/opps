@@ -53,9 +53,9 @@ MIDDLEWARE_CLASSES = (
     'opps.contrib.mobile.middleware.MobileDetectionMiddleware',
 )
 
-TEMPLATE_DIRS = (os.path.join(PROJECT_PATH, 'src', 'templates'),)
+TEMPLATE_DIRS = (os.path.join(PROJECT_PATH, '..', 'templates'),)
 TEMPLATE_DIRS_WEB = TEMPLATE_DIRS
-TEMPLATE_DIRS_MOBILE = (os.path.join(PROJECT_PATH, 'src', 'templates',
+TEMPLATE_DIRS_MOBILE = (os.path.join(PROJECT_PATH, '..', 'templates',
                                      'mobile'),)
 
 INSTALLED_APPS = (
@@ -66,7 +66,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.redirects',
+    'opps.contrib.admin',
     'django.contrib.admin',
+
 
     'opps.containers',
     'opps.core',
@@ -117,4 +119,6 @@ LOGGING = {
 }
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_PATH, '..', 'static')
+STATICFILES_DIRS = (os.path.join(PROJECT_PATH, '..', '_static'),)
 ROOT_URLCONF = 'example.urls'
