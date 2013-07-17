@@ -44,7 +44,7 @@ class View(object):
                 self.excluded_ids += [a.pk for a in box.ordered_containers()]
 
         filters = {}
-        filters['site_domain'] = self.request.site.domain
+        filters['site_domain'] = self.site.domain
         filters['channel_long_slug__in'] = self.channel_long_slug
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
@@ -92,7 +92,7 @@ class View(object):
 
     def set_channel_rules(self):
         self.channel = get_object_or_404(Channel,
-                                         site__domain=self.request.site.domain,
+                                         site__domain=self.site.domain,
                                          long_slug=self.long_slug,
                                          date_available__lte=timezone.now(),
                                          published=True)
