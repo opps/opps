@@ -51,11 +51,11 @@
   <div id="content-main">
     {% block object-tools %}
         {% if has_add_permission %}
-        <ul class="nav nav-list">
+        <ul class="unstyled-list">
             {% block object-tools-items %}
             <li>
-                <a href="add/{% if is_popup %}?_popup=1{% endif %}" class="addlink">
-                {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+                <a href="add/{% if is_popup %}?_popup=1{% endif %}" class="addlink btn btn-success btn-mini">
+                <i class="icon icon-plus-sign"></i> {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
                 </a>
             </li>
             {% endblock %}

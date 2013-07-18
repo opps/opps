@@ -99,3 +99,7 @@ select{
 .selector .selector-available h2,.selector-available h2, .selector-chosen h2{
     margin:0;
 }
+
+ul.unstyled-list {
+    list-style:none;
+}
