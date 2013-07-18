@@ -34,7 +34,8 @@ Quick links
    :maxdepth: 2
 
    overview
-   setup
+   getting_started
+   template_customization
    application
    git-tips
    develop
