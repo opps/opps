@@ -1,0 +1,148 @@
+{% extends "admin/base_site.html" %}
+
+{% load i18n admin_modify %}
+
+{% load url from future %}
+
+
+
+{% block extrahead %}{{ block.super }}
+
+    <script type="text/javascript">window.__admin_media_prefix__ = "{{ STATIC_URL }}/admin/";</script>
+
+{% url 'admin:jsi18n' as jsi18nurl %}
+
+<script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
+
+{{ media }}
+
+{% endblock %}
+
+
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/admin/css/forms.css" />{% endblock %}
+
+
+
+{% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
+
+
+
+{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
+
+
+
+{% block breadcrumbs %}{% if not is_popup %}
+
+<ul class="breadcrumb">
+
+    <li><a href="../../../">{% trans "Home" %}</a> <span class="divider">/</span></li>
+
+    <li><a href="../../">{{ app_label|capfirst|escape }}</a> <span class="divider">/</span></li>
+
+    {% if has_change_permission %}<li><a href="../">{{ opts.verbose_name_plural|capfirst }}</a> <span class="divider">/</span></li>{% else %}
+
+    <li class="active">{{ opts.verbose_name_plural|capfirst }}</li>{% endif %}
+
+    {% if add %}<li class="active">{% trans "Add" %} {{ opts.verbose_name }}</li>{% else %}
+
+    <li class="active">{{ original|truncatewords:"18" }}</li>{% endif %}
+
+</ul>
+
+{% endif %}{% endblock %}
+
+
+
+{% block content %}<div id="content-main">
+
+{% block object-tools %}
+
+{% if change %}{% if not is_popup %}
+
+  <div class="object-tools">
+
+    {% block object-tools-items %}
+
+    <a href="history/" class="btn btn-info">{% trans "History" %}</a>
+
+    {% if has_absolute_url %}<a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink btn">{% trans "View on site" %}</a>{% endif%}
+
+    {% endblock %}
+
+  </div>
+
+{% endif %}{% endif %}
+
+{% endblock %}
+
+<form {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
+
+<div>
+
+{% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
+
+{% if save_on_top %}{% submit_row %}{% endif %}
+
+{% if errors %}
+
+    <p class="alert alert-error">
+
+    {% blocktrans count errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+
+    </p>
+
+    {{ adminform.form.non_field_errors }}
+
+{% endif %}
+
+
+
+{% for fieldset in adminform %}
+
+  {% include "admin/includes/fieldset.html" %}
+
+{% endfor %}
+
+
+
+{% block after_field_sets %}{% endblock %}
+
+
+
+{% for inline_admin_formset in inline_admin_formsets %}
+
+    {% include inline_admin_formset.opts.template %}
+
+{% endfor %}
+
+
+
+{% block after_related_objects %}{% endblock %}
+
+
+
+{% submit_row %}
+
+
+
+{% if adminform and add %}
+
+   <script type="text/javascript">document.getElementById("{{ adminform.first_field.id_for_label }}").focus();</script>
+
+{% endif %}
+
+
+
+{# JavaScript for prepopulated fields #}
+
+{% prepopulated_fields_js %}
+
+
+
+</div>
+
+</form></div>
+
+{% endblock %}
+

@@ -1,0 +1,101 @@
+ul,ol{
+    margin:0;
+}
+.navbar-inner{
+    border-radius: 0;
+}
+.main{
+    width:90%;
+    margin:20px auto;
+    max-width: 1200px;
+    min-width: 1000px;
+}
+.nav .nav-header{
+    font-size:14px;
+}
+.tip{
+    color:#999;
+}
+.table th,.table td{
+    vertical-align: middle;
+}
+.table .title{
+    background:#eee!important;
+    border-radius: 3px 3px 0 0;
+}
+.table .title a{
+    font-size:14px;
+}
+.selector-available h2,.selector-chosen h2{
+    font:bold 14px Arial;
+    height: 30px;
+    line-height: 30px;
+    color:#666;
+}
+.selector-filter img[alt=Filter]{
+    margin-top:9px;
+}
+.selector-filter input{
+    margin:5px 0;
+}
+.selector .selector-chosen .selector-filter {
+    height:36px;
+    line-height:36px;
+    padding:0 5px;
+    font-size:13px;
+}
+.selectfilter option{
+    padding:3px;
+}
+.submits{
+    margin-top: 20px;
+    padding:5px 0;
+    float: right;
+}
+.toolbar{
+    margin-top:20px;
+}
+.changelist-search .btn{
+    margin-bottom:9px;
+}
+form .aligned ul{
+    margin-left:0!important;
+}
+.object-tools{
+    list-style-position:inside;
+    padding:5px 10px 20px;
+    border-bottom: 1px solid #efefef;
+    margin-bottom: 10px;
+}
+.actions label{
+    display: inline;
+    float: left;
+}
+select{
+    margin-bottom: 0;
+}
+.action-checkbox,.action-checkbox-column{
+    width:50px;
+    text-align: center!important;
+}
+.delete-list{
+    margin:10px 20px;
+}
+#changelist-form{
+    float: left;
+    width:100%;
+}
+.changelist-filter{
+    float:right;
+    width:100%;
+}
+.filter-title{
+    padding:0 0 0 15px;
+    margin-bottom:10px;
+}
+.selector .selector-available input{
+    width:220px!important;
+}
+.selector .selector-available h2,.selector-available h2, .selector-chosen h2{
+    margin:0;
+}

@@ -1,0 +1,30 @@
+.login-wp{
+    width:500px;
+    margin: 100px auto;
+    
+}
+.login-form{
+    width:263px;
+    padding:20px 20px 20px 50px;
+    margin:0 auto 0;
+}
+.login-form .title{
+    margin-bottom:10px;
+}
+.login-form form{
+    margin:0;
+}
+.errorlist{
+    margin:0;
+    padding:0;
+    margin-bottom: 10px;
+}
+.errorlist li{
+    list-style: none;
+    background-color: #FCF8E3;
+    border: 1px solid #FBEED5;
+    border-radius: 4px 4px 4px 4px;
+    color: #C09853;
+    padding: 8px 35px 8px 14px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
