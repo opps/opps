@@ -110,7 +110,7 @@ class Channeling(models.Model):
 class Slugged(models.Model):
 
     slug = models.SlugField(
-        _(u"URL"),
+        _(u"Slug"),
         db_index=True,
         max_length=150,
     )
