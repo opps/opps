@@ -75,12 +75,6 @@ class Container(Publishable, Slugged, Channeling, Imaged):
         super(Container, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        """
-        TODO: get_absolute_url from child_app_label/child_class
-        """
-        if self.child_class != "Post":
-            return u"/{}/{}/{}".format(self.child_class.lower(),
-                                       self.channel_long_slug, self.slug)
         return u"/{}/{}".format(self.channel_long_slug, self.slug)
 
     def get_thumb(self):
