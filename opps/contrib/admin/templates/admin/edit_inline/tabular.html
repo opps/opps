@@ -1,4 +1,9 @@
-{% load i18n admin_modify %}
+{% load i18n admin_static admin_modify %}
+<style>
+  .sortable-placeholder {border: 1px dashed #ccc;}
+  .drag-handler {margin-right:5px;}
+</style>
+<script src="{% static 'admin/opps/js/jquery-sortable.js' %}"></script>
 <div class="inline-group" id="{{ inline_admin_formset.formset.prefix }}-group">
   <div class="tabular inline-related {% if forloop.last %}last-related{% endif %}">
 {{ inline_admin_formset.formset.management_form }}
@@ -15,14 +20,17 @@
      {% if inline_admin_formset.formset.can_delete %}<th>{% trans "Delete?" %}</th>{% endif %}
      </tr></thead>
 
-     <tbody>
+     <tbody class="sortable">
      {% for inline_admin_form in inline_admin_formset %}
         {% if inline_admin_form.form.non_field_errors %}
         <tr><td colspan="{{ inline_admin_form|cell_count }}">{{ inline_admin_form.form.non_field_errors }}</td></tr>
         {% endif %}
-        <tr class="{% cycle "row1" "row2" %} {% if inline_admin_form.original or inline_admin_form.show_url %}has_original{% endif %}{% if forloop.last %} empty-form{% endif %}"
+        <tr class="form-row {% cycle "row1" "row2" %} {% if inline_admin_form.original or inline_admin_form.show_url %}has_original{% endif %}{% if forloop.last %} empty-form{% endif %}"
              id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
         <td class="original">
+          {% if inline_admin_form.original %}
+          <span class="btn btn-mini drag-handler pull-left"><i class="icon-move"></i></span>
+          {% endif %}
           {% if inline_admin_form.original or inline_admin_form.show_url %}<p>
           {% if inline_admin_form.original %} {{ inline_admin_form.original }}{% endif %}
           {% if inline_admin_form.show_url %}<a href="../../../r/{{ inline_admin_form.original_content_type_id }}/{{ inline_admin_form.original.id }}/">{% trans "View on site" %}</a>{% endif %}
@@ -125,4 +133,21 @@
         });
     });
 })(django.jQuery);
+
+function sort_values(e) {
+  $('.sortable').find(".form-row").not(":last").each(function(i, e) {
+      $("#id_"+$(e).attr('id')+"-order").val(i+1);
+  });
+}
+$('.sortable').sortable({
+    handle: '.drag-handler',
+    itemSelector: '.form-row',
+    afterMove: function ($placeholder, container) {
+      sort_values(container);
+    },
+    onDrop: function ($item, container, _super) {
+      sort_values($item);
+    }
+})
+
 </script>
