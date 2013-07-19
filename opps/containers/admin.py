@@ -59,7 +59,8 @@ class ContainerBoxContainersInline(admin.TabularInline):
     extra = 1
     fieldsets = [(None, {
         'classes': ('collapse',),
-        'fields': ('container', 'order', 'date_available', 'date_end')})]
+        'fields': ('container', 'aggregate', 'order', 'date_available',
+                   'date_end')})]
 
 
 @apply_opps_rules('containers')
