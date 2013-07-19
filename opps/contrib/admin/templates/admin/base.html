@@ -3,9 +3,10 @@
     <head>
         <meta charset="utf-8">
         <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.css" />
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/rewrite.css" />
-        <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}admin/opps/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}admin/opps/css/rewrite.css" />
+        <script type="text/javascript" src="{{ STATIC_URL }}admin/opps/js/jquery.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}admin/opps/js/bootstrap.js"></script>
         {% block extrastyle %}{% endblock %}
         {% block extrahead %}{% endblock %}
         {% block blockbots %}
@@ -30,9 +31,13 @@
                                 <span class="caret"></span>
                               </a>
                               <ul id="g-account-menu" class="dropdown-menu" role="menu">
-                                <li><a href="#">
-                                  <i class="icon-key"></i>Action
-                                </a></li>
+                                <li id="change_passwd">
+                                  <i class="icon-key"></i>
+                                  {% url 'admin:password_change' as password_change_url %}
+                                  {% if password_change_url %}<a href="{{ password_change_url }}">{% trans 'Change password' %}</a>
+                                  {% else %}<a href="{{ root_path }}password_change/">{% trans 'Change password' %}</a>
+                                  {% endif %}
+                                </li>
                               </ul>
                             </li>
 
@@ -41,13 +46,7 @@
                             <li><a href="{{ docsroot }}">{% trans 'Documentation' %}</a></li>
                             {% endif %}
 
-                            {% url 'admin:password_change' as password_change_url %}
-                                {% if password_change_url %}
-                                    <li id="change_passwd"><a href="{{ password_change_url }}">{% trans 'Change password' %}</a></li>
-                                {% else %}
-                                    <li id="change_passwd"><a href="{{ root_path }}password_change/">{% trans 'Change password' %}</a></li>
-                                {% endif %}
-
+                        
                             {% url 'admin:logout' as logout_url %}
                                 {% if logout_url %}
                                     <li class=""><a href="{{ logout_url }}">{% trans 'Log out' %} </a></li>
