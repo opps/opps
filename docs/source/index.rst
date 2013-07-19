@@ -36,6 +36,7 @@ Quick links
    overview
    getting_started
    template_customization
+   content_architecture
    application
    git-tips
    develop
