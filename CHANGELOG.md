@@ -1,8 +1,10 @@
 # Changelog
 
-## 0.1.9
+## 0.1.10
 
 * Remove cache on mobile detect
+* Fix bug on save_model, use change instead of pk is None
+* Fix slug verbose name on Slugged model
 
 ## 0.1.9
 
