@@ -248,6 +248,7 @@ class ContainerBoxContainers(models.Model):
         verbose_name=_(u'Container'),
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
+    aggregate = models.BooleanField(_(u'Aggregate container'), default=False)
     date_available = models.DateTimeField(_(u"Date available"),
                                           default=timezone.now, null=True)
     date_end = models.DateTimeField(_(u"End date"), null=True, blank=True)
@@ -256,6 +257,7 @@ class ContainerBoxContainers(models.Model):
         ordering = ('order',)
         verbose_name = _('Article box articles')
         verbose_name_plural = _('Article boxes articles')
+        ordering = ('order', 'aggregate',)
 
     def __unicode__(self):
         return u"{0}-{1}".format(self.containerbox.slug, self.container.slug)
