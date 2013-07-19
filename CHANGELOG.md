@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.11
+
 ## 0.1.10
 
 * Remove cache on mobile detect
