@@ -1,5 +1,8 @@
-include README.md
+include README.rst
 include CHANGELOG.md
+include requirements.txt
+include opps/containers/templates/containers/*
+include opps/containers/templates/containers/include/*
 include opps/images/templates/admin/opps/images/*
 include opps/articles/templates/articles/include/*
 include opps/articles/templates/articles/*
