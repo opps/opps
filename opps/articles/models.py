@@ -159,11 +159,11 @@ class Link(Article):
         return self.site_domain in self.url
 
     def clean(self):
-        if not self.url and not self.containers:
+        if not self.url and not self.container:
             raise ValidationError(_('URL field is required.'))
 
         self.url = self.url
-        if self.containers:
+        if self.container:
             self.url = self.container.get_absolute_url()
 
 
