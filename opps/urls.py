@@ -14,6 +14,8 @@ urlpatterns = patterns(
 
     url(r'^sitemap', include('opps.sitemaps.urls')),
 
+    url(r'^api/', include('opps.api.urls')),
+
     url(r'^', include('opps.containers.urls', namespace='containers',
                       app_name='containers')),
 )
