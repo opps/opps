@@ -20,11 +20,14 @@ from opps.api.views.generic.detail import DetailView as DetailAPIView
 class ContainerList(ListView):
     model = Container
 
+
 class ContainerAPIList(ListAPIView):
     model = Container
 
+
 class ContainerDetail(DetailView):
     model = Container
+
 
 class ContainerAPIDetail(DetailAPIView):
     model = Container
