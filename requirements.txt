@@ -11,3 +11,4 @@ django-mptt
 django-appconf
 django-xadmin
 python-memcached
+djangorestframework
