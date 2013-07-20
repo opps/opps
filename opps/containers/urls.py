@@ -5,6 +5,7 @@ from django.conf import settings
 from django.views.decorators.cache import cache_page
 
 from .views import ContainerList, ContainerDetail
+from .views import ContainerAPIList, ContainerAPIDetail
 from .views import Search
 from opps.contrib.feeds.views import ContainerFeed, ChannelFeed
 
@@ -22,10 +23,16 @@ urlpatterns = patterns(
         cache_page(settings.OPPS_CACHE_EXPIRE)(
             ChannelFeed()), name='channel_feed'),
 
+    url(r'^(?P<channel__long_slug>[\w//-]+)/(?P<slug>[\w-]+).api$',
+        cache_page(settings.OPPS_CACHE_EXPIRE_DETAIL)(
+            ContainerAPIDetail.as_view()), name='open-api'),
     url(r'^(?P<channel__long_slug>[\w//-]+)/(?P<slug>[\w-]+)$',
         cache_page(settings.OPPS_CACHE_EXPIRE_DETAIL)(
             ContainerDetail.as_view()), name='open'),
 
+    url(r'^(?P<channel__long_slug>[\w\b//-]+).api$',
+        cache_page(settings.OPPS_CACHE_EXPIRE_LIST)(
+            ContainerAPIList.as_view()), name='channel-api'),
     url(r'^(?P<channel__long_slug>[\w\b//-]+)/$',
         cache_page(settings.OPPS_CACHE_EXPIRE_LIST)(
             ContainerList.as_view()), name='channel'),
