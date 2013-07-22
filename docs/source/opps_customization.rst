@@ -27,6 +27,11 @@ Install redactor:
 
     pip install django-wysiwyg-redactor
 
+Add django redactor to your INSTALLED_APPS:
+
+.. code-block:: python
+    INSTALLED_APPS += ('redactor')
+
 Add django redactor to your urls.py:
 
 .. code-block:: python
