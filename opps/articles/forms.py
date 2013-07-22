@@ -1,26 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django import forms
-from django.conf import settings
 
 from .models import Post, Album, Link
 
-from redactor.widgets import RedactorEditor
+from opps.core.widgets import OppsEditor
 
 
 class PostAdminForm(forms.ModelForm):
     class Meta:
         model = Post
-        widgets = {'content': RedactorEditor()}
+        widgets = {'content': OppsEditor()}
 
 
 class AlbumAdminForm(forms.ModelForm):
     class Meta:
         model = Album
         widgets = {
-            'headline': RedactorEditor(
-                redactor_options=settings.REDACTOR_SIMPLE
-            )
+            'headline': OppsEditor()
         }
 
 

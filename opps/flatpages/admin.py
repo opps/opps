@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.conf import settings
 
-from redactor.widgets import RedactorEditor
+from opps.core.widgets import OppsEditor
 
 from .models import FlatPage
 from opps.core.admin import apply_opps_rules
@@ -16,7 +16,7 @@ from opps.images.generate import image_url
 class FlatPageAdminForm(forms.ModelForm):
     class Meta:
         model = FlatPage
-        widgets = {'content': RedactorEditor()}
+        widgets = {'content': OppsEditor()}
 
 
 @apply_opps_rules('flatpages')

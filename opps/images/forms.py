@@ -5,7 +5,7 @@ from django import forms
 from .models import Image
 from .widgets import MultipleUpload, CropExample
 
-from redactor.widgets import RedactorEditor
+from opps.core.widgets import OppsEditor
 
 
 class ImageModelForm(forms.ModelForm):
@@ -18,7 +18,7 @@ class ImageModelForm(forms.ModelForm):
 
     class Meta:
         model = Image
-        widgets = {'description': RedactorEditor()}
+        widgets = {'description': OppsEditor()}
 
     def more_image(self):
         more_image = self.files.getlist('image')[:]

@@ -30,6 +30,7 @@ class OppsCoreConf(AppConf):
     LIST_MODELS = ('Post',)
     RECOMMENDATION_RANGE_DAYS = 180
     SMART_SLUG_ENABLED = True
+    OPPS_EDITOR = {}
 
     class Meta:
         prefix = 'opps'
@@ -51,27 +52,6 @@ class HaystackConf(AppConf):
 
     class Meta:
         prefix = 'haystack'
-
-
-class RedactorConf(AppConf):
-    SIMPLE = {"buttons": ['html', '|', 'bold', 'italic',
-                          'deleted', '|', 'unorderedlist', 'orderedlist',
-                          '|', 'link', '|', 'fontcolor', 'backcolor', '|',
-                          'alignment']}
-
-    OPTIONS = {'lang': settings.LANGUAGE_CODE.replace(
-               '-', '_').replace('en_us', 'en').lower() or 'en',
-               "buttons": ['html', '|', 'formatting', '|', 'bold', 'italic',
-                           'deleted', '|', 'unorderedlist', 'orderedlist',
-                           'outdent', 'indent', '|', 'video', 'table', 'link',
-                           '|', 'fontcolor', 'backcolor', '|', 'alignment',
-                           '|', 'horizontalrule'],
-               'air': True,
-               'airButtons': ['formatting', '|', 'bold', 'italic', 'deleted']}
-    UPLOAD = 'uploads/'
-
-    class Meta:
-        prefix = 'redactor'
 
 
 class ThumborConf(AppConf):
