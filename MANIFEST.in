@@ -1,4 +1,4 @@
 include README.rst
 include CHANGELOG.md
 include requirements.txt
-recursive-include opps *.html *.css *.js *.png *.gif
+recursive-include opps *.html *.css *.js *.png *.gif *.woff *.ttf *.svg *.eot
