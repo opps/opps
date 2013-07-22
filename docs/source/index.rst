@@ -37,10 +37,12 @@ Quick links
    getting_started
    template_customization
    content_architecture
+   opps_customization
    application
    git-tips
    develop
    contributing
+
 * `Source (github) <https://github.com/opps/opps>`_
 * `Mailing list <http://groups.google.com/group/opps-developers>`_
 
