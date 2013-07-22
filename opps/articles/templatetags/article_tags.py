@@ -137,7 +137,7 @@ def get_related(context, query_slice, chield_class, related_object):
 
     Sample usage::
 
-        {% get_related ":3" "post" context %}
+        {% get_related ":3" "post" context as context_var %}
 
     query_slice:
         A string with slice notation to limit the queryset result
