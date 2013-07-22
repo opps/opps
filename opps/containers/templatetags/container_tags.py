@@ -1,15 +1,9 @@
 # -*- coding: utf-8 -*-
-import logging
-
 from django import template
-from django.conf import settings
-from django.utils import timezone
-from django.utils.safestring import mark_safe
-
-from opps.containers.models import Container
 
 
 register = template.Library()
+
 
 @register.assignment_tag
 def get_recommendations(query_slice, child_class, container):
