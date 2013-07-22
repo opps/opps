@@ -27,9 +27,20 @@ Install redactor:
 
     pip install django-wysiwyg-redactor
 
+Add django redactor to your urls.py:
+
+.. code-block:: python
+    
+    urlpatterns = patterns(
+        '',
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
+        url(r'^', include('opps.urls')),
+        # django redactor
+        url(r'^redactor/', include('redactor.urls')),
+    )
 
 Set your own static paths:
-
 
 .. code-block:: python
 
