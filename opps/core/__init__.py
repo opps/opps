@@ -74,5 +74,4 @@ settings.INSTALLED_APPS += (
     'appconf',
     'haystack',
     'googl',
-    'redactor',
     'mptt',)
