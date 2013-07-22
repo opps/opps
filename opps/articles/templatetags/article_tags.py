@@ -6,7 +6,6 @@ from django.conf import settings
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 
-from opps.containers.models import Container
 from opps.containers.models import ContainerBox
 
 
@@ -127,38 +126,3 @@ def get_url(obj, http=False, target=None, url_only=False):
     except Exception as e:
         logger.error("Exception at templatetag get_url: {}".format(e))
         return obj.get_absolute_url()
-
-
-@register.assignment_tag(takes_context=True)
-def get_related(context, query_slice, chield_class, related_object):
-    """
-    Takes the related object and search by related posts and filters by given
-    child_class and limit the result by given slice.
-
-    Sample usage::
-
-        {% get_related ":3" "post" context as context_var %}
-
-    query_slice:
-        A string with slice notation to limit the queryset result
-    chield_class:
-        Name of child class
-    related_object:
-        A Container object
-    """
-
-    if not query_slice:
-        query_slice = ":"
-
-    bits = []
-    for x in query_slice.split(':'):
-        if len(x) == 0:
-            bits.append(None)
-        else:
-            bits.append(int(x))
-
-    return Container.objects.filter(site=settings.SITE_ID,
-                                    date_available__lte=timezone.now(),
-                                    published=True,
-                                    child_class=chield_class,
-                                    post_relatedposts=related_object)[slice(*bits)]

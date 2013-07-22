@@ -89,7 +89,10 @@ class Container(Publishable, Slugged, Channeling, Imaged):
         return "http://{}{}".format(self.site_domain, self.get_absolute_url())
     get_http_absolute_url.short_description = 'URL'
 
-    def recommendation(self):
+    def recommendation(self, child_class=False, query_slice=[None, 10]):
+
+        if not child_class:
+            child_class = self.child_class
 
         now = timezone.now()
         start = now - timezone.timedelta(
@@ -107,12 +110,13 @@ class Container(Publishable, Slugged, Channeling, Imaged):
         tag_list = [t for t in self.tags.all()[:3]]
         _list = [a for a in Container.objects.filter(
             site_domain=self.site_domain,
-            child_class=self.child_class,
+            child_class=child_class,
             channel_long_slug=self.channel_long_slug,
             date_available__range=(start, now),
             published=True,
             tags__in=tag_list
-        ).exclude(pk=self.pk).distinct().order_by('-date_available')[:10]]
+        ).exclude(pk=self.pk)
+         .distinct().order_by('-date_available')[slice(*query_slice)]]
 
         cache.set(cachekey, _list)
         return _list
