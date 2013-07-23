@@ -16,7 +16,7 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block mainbody %}
-<section class="login-wp">
+<div class="container">
     {% if form.errors and not form.non_field_errors and not form.this_is_the_login_form.errors %}
     <p class="alert alert-error">
         {% blocktrans count form.errors.items|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
@@ -30,25 +30,26 @@
     </p>
     {% endfor %}
     {% endif %}
-
-    <section class="hero-unit login-form centered">
-        <h3 class="title">{% trans 'Opps Administration' %}</h3>
-        <form action="{{ app_path }}" method="post">
-            {% csrf_token %}
-            <div class="form-row">
-                {% if not form.this_is_the_login_form.errors %}<label for="id_username" class="required">{% trans 'Username:' %}</label>{{ form.username.errors }}{% endif %}  {{ form.username }}
-            </div>
-            <div class="form-row">
-                {% if not form.this_is_the_login_form.errors %}<label for="id_password" class="required">{% trans 'Password:' %}</label>{{ form.password.errors }}{% endif %}  {{ form.password }}
-                <input type="hidden" name="this_is_the_login_form" value="1" />
-                <input type="hidden" name="next" value="{{ next }}" />
-            </div>
-            <div class="submit-row text-center">
-                <input type="submit" value="{% trans 'Log in' %}" class="btn btn-primary btn-large text-center" />
-            </div>
-        </form>
-    </section>
-</section>
+    <form class="form-signin" action="{{ app_path }}" method="post">
+      <h2 class="form-signin-heading">{% trans 'Opps Administration' %}</h2>
+      {% csrf_token %}
+      <div class="control-group">
+          {% if not form.this_is_the_login_form.errors %}<label for="id_username" class="requiredField control-label">{% trans 'Username:' %}</label>
+        <div class="controls">
+          {{ form.username.errors }}{% endif %}{{ form.username }}
+        </div>
+      </div>
+      <div class="control-group">
+        {% if not form.this_is_the_login_form.errors %}<label for="id_password" class="requiredField">{% trans 'Password:' %}</label>
+        <div class="controls">
+          {{ form.password.errors }}{% endif %}{{ form.password }}
+        </div>
+      </div>
+      <input type="hidden" name="this_is_the_login_form" value="1" />
+      <input type="hidden" name="next" value="{{ next }}" />
+      <button type="submit" class="btn btn-large btn-primary btn-block">{% trans 'Log in' %}</button>
+    </form>
+</div>
 <script type="text/javascript">document.getElementById('id_username').focus()</script>
 </div>
 {% endblock %} 
