@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block extrastyle %}{{ block.super }}
-<link rel="stylesheet" type="text/css" href="/admins/css/login.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}admin/opps/css/login.css" />
 {% endblock %}
 
 {% block branding %}{% endblock %}
@@ -31,7 +31,7 @@
     {% endfor %}
     {% endif %}
 
-    <section class="hero-unit login-form">
+    <section class="hero-unit login-form centered">
         <h3 class="title">{% trans 'Opps Administration' %}</h3>
         <form action="{{ app_path }}" method="post">
             {% csrf_token %}
@@ -43,8 +43,8 @@
                 <input type="hidden" name="this_is_the_login_form" value="1" />
                 <input type="hidden" name="next" value="{{ next }}" />
             </div>
-            <div class="submit-row">
-                <input type="submit" value="{% trans 'Log in' %}" class="btn btn-primary" />
+            <div class="submit-row text-center">
+                <input type="submit" value="{% trans 'Log in' %}" class="btn btn-primary btn-large text-center" />
             </div>
         </form>
     </section>
