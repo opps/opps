@@ -25,6 +25,7 @@ if not settings.configured:
             'django.contrib.contenttypes',
             'django.contrib.sessions',
             'django.contrib.sites',
+            'opps.contrib.admin',
             'django.contrib.admin',
             'django.contrib.redirects',
 
