@@ -30,6 +30,7 @@ if not settings.configured:
             'django.contrib.redirects',
 
             'opps.core',
+            'opps.core.tags',
             'opps.containers',
             'opps.boxes',
             'opps.channels',

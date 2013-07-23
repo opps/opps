@@ -74,11 +74,10 @@ class PostCreation(TestCase):
         self.assertTrue(self.post.channel, self.channel)
         self.assertTrue(self.post.user, self.user)
 
-    def test_add_multiple_tags_in_post(self):
-        # test 800 tags insertion in a post
-        self.post.tags.add(*self._gen_tags(800))
-        self.assertTrue(self.post.tags.count(), 800)
-        self.assertTrue(Tag.objects.count(), 800)
+    def test_multiple_tags_in_post(self):
+        self.post.tags = ','.join(self._gen_tags(100))
+        self.post.save()
+        self.assertTrue(Tag.objects.count(), 100)
 
     def _gen_tags(self, length):
         tags = []
