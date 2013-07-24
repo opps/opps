@@ -32,7 +32,7 @@ class UserListFilter(SimpleListFilter):
         in the right sidebar.
         """
         # filter only users with images
-        qs = User.objects.filter(archive__isnull=False).distinct()
+        qs = User.objects.filter(image__isnull=False).distinct()
         if qs:
             return set([(item.username,
                          u"{0} ({1})".format(item.get_full_name(), item.email))
