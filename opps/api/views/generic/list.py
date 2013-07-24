@@ -4,6 +4,7 @@ from django.contrib.sites.models import get_current_site
 from django.utils import timezone
 
 from rest_framework.generics import ListAPIView as RestListAPIView
+from rest_framework.generics import ListCreateAPIView
 
 from opps.views.generic.base import View
 from opps.containers.models import ContainerBox
@@ -38,3 +39,7 @@ class ListView(View, RestListAPIView):
         queryset = queryset.filter(**filters).exclude(pk__in=self.excluded_ids)
 
         return queryset._clone()
+
+
+class ListCreateView(ListCreateAPIView, ListView):
+    pass
