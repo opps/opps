@@ -1,6 +1,6 @@
 {% extends "admin/base_site.html" %}
 
-{% load i18n admin_modify %}
+{% load i18n admin_modify opps_admin_tags %}
 
 {% load url from future %}
 
@@ -67,6 +67,22 @@
     <a href="history/" class="btn btn-info">{% trans "History" %}</a>
 
     {% if has_absolute_url %}<a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink btn">{% trans "View on site" %}</a>{% endif%}
+
+    <!-- TODO: SUPPORT DROPDOWN BUTTONS -->
+    {% if adminform.model_admin.action_buttons %}
+        {% for btn in adminform.model_admin.action_buttons %}
+            <a href="{% action_button_url btn.url object_id %}"
+               class="{{btn.class|default:'btn'}}"
+               style="{{btn.style}}"
+               title="{{btn.title}}">
+               {% if btn.icon %}
+                <i class="icon {{btn.icon}}"></i>
+               {% endif %}
+                {% trans btn.text %}
+            </a>
+        {% endfor %}
+    {% endif %}
+
 
     {% endblock %}
 
