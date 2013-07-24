@@ -26,8 +26,14 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'sources', ['Source'])
 
+        # Adding unique constraint on 'Source', fields ['site', 'slug']
+        db.create_unique(u'sources_source', ['site_id', 'slug'])
+
 
     def backwards(self, orm):
+        # Removing unique constraint on 'Source', fields ['site', 'slug']
+        db.delete_unique(u'sources_source', ['site_id', 'slug'])
+
         # Deleting model 'Source'
         db.delete_table(u'sources_source')
 
@@ -76,7 +82,7 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         },
         u'sources.source': {
-            'Meta': {'object_name': 'Source'},
+            'Meta': {'unique_together': "(('site', 'slug'),)", 'object_name': 'Source'},
             'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True', 'db_index': 'True'}),
             'date_insert': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'date_update': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
