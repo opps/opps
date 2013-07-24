@@ -91,6 +91,7 @@ class Image(Archive, Cropping):
 
     tags = TaggableManager(blank=True, through=TaggedImage,
                            verbose_name=u'Tags')
+
     class Meta:
         verbose_name = _('Image')
         verbose_name_plural = _('Images')
