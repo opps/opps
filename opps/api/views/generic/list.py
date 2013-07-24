@@ -28,10 +28,13 @@ class ListView(View, RestListAPIView):
         queryset = super(ListView, self).get_queryset()
         filters = {}
         filters['site_domain'] = self.site.domain
-        filters['channel_long_slug__in'] = self.channel_long_slug
+        try:
+            if queryset.model._meta.get_field_by_name('channel_long_slug'):
+                filters['channel_long_slug__in'] = self.channel_long_slug
+        except:
+            pass
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
-        filters['show_on_root_channel'] = True
         queryset = queryset.filter(**filters).exclude(pk__in=self.excluded_ids)
 
         return queryset._clone()
