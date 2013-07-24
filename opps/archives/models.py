@@ -8,8 +8,6 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
-from taggit.models import TaggedItemBase
-from taggit.managers import TaggableManager
 
 from opps.core.models import Publishable, Slugged
 
@@ -23,22 +21,15 @@ def get_file_path(instance, filename):
     return os.path.join(folder, filename)
 
 
-class TaggedArchive(TaggedItemBase):
-    """Tag for images """
-    content_object = models.ForeignKey('archives.Archive')
-
-
 class Archive(Publishable, Slugged):
 
     title = models.CharField(_(u"Title"), max_length=140, db_index=True)
     archive = models.FileField(upload_to=get_file_path, max_length=255)
     description = models.TextField(_(u"Description"), null=True, blank=True)
-    tags = TaggableManager(blank=True, through=TaggedArchive,
-                           verbose_name=u'Tags')
 
     source = models.ForeignKey('sources.Source', null=True, blank=True)
 
-    class META:
+    class Meta:
         verbose_name = _('Archive')
         verbose_name_plural = _('Archives')
         unique_together = ['site', 'slug']

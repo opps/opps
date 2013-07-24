@@ -40,7 +40,7 @@ class Post(Article):
         through='articles.PostRelated',
     )
 
-    class META:
+    class Meta:
         verbose_name = _('Post')
         verbose_name_plural = _('Posts')
 
@@ -112,7 +112,7 @@ class PostRelated(models.Model):
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
-    class META:
+    class Meta:
         verbose_name = _('Related content')
         verbose_name_plural = _('Related contents')
         ordering = ('order',)
@@ -122,7 +122,7 @@ class PostRelated(models.Model):
 
 
 class Album(Article):
-    class META:
+    class Meta:
         verbose_name = _('Album')
         verbose_name_plural = _('Albums')
 
@@ -138,7 +138,7 @@ class Link(Article):
         related_name='link_containers'
     )
 
-    class META:
+    class Meta:
         verbose_name = _('Link')
         verbose_name_plural = _('Links')
 

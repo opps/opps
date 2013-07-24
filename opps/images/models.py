@@ -3,6 +3,9 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from taggit.models import TaggedItemBase
+from taggit.managers import TaggableManager
+
 from opps.archives.models import Archive
 
 
@@ -79,8 +82,16 @@ class Cropping(models.Model):
         super(Cropping, self).save(*args, **kwargs)
 
 
+class TaggedImage(TaggedItemBase):
+    """Tag for images """
+    content_object = models.ForeignKey('images.Image')
+
+
 class Image(Archive, Cropping):
 
-    class META:
+    tags = TaggableManager(blank=True, through=TaggedImage,
+                           verbose_name=u'Tags')
+
+    class Meta:
         verbose_name = _('Image')
         verbose_name_plural = _('Images')

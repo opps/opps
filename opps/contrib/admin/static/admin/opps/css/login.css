@@ -1,30 +1,48 @@
-.login-wp{
-    width:500px;
-    margin: 100px auto;
-    
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
 }
-.login-form{
-    width:263px;
-    padding:20px 20px 20px 50px;
-    margin:0 auto 0;
+.form-signin {
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  max-width: 320px;
+    -webkit-border-radius: 10px;
+       -moz-border-radius: 10px;
+            border-radius: 10px;
+    -webkit-box-shadow: 0 0px 40px rgba(0,0,0,.2);
+       -moz-box-shadow: 0 0px 40px rgba(0,0,0,.2);
+            box-shadow: 0 0px 40px rgba(0,0,0,.2);
 }
-.login-form .title{
-    margin-bottom:10px;
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
 }
-.login-form form{
-    margin:0;
+.form-signin .control-group{
+  background-color: transparent;
+  border: none;
 }
-.errorlist{
-    margin:0;
-    padding:0;
-    margin-bottom: 10px;
+.form-signin label {
+  font-size: 16px;
 }
-.errorlist li{
-    list-style: none;
-    background-color: #FCF8E3;
-    border: 1px solid #FBEED5;
-    border-radius: 4px 4px 4px 4px;
-    color: #C09853;
-    padding: 8px 35px 8px 14px;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+.form-signin input[type="text"],
+.form-signin input[type="password"] {
+  font-size: 16px;
+  height: auto;
+  margin-bottom: 15px;
+  padding: 7px 9px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-signin .alert-block{
+  padding: 0px;
+}
+.form-signin .alert-block ul{
+  margin: 10px 15px;
+}
+.form-signin .alert-block ul li{
+  list-style-type: none;
 }
