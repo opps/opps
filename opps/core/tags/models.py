@@ -27,8 +27,10 @@ class Tagged(models.Model):
 
     def save(self, *args, **kwargs):
         if self.tags:
-            for tag in self.tags.split(','):
+            tags = set(self.tags.split(','))
+            for tag in tags:
                 Tag.objects.get_or_create(name=tag)
+            self.tags = ','.join(tags)
 
         super(Tagged, self).save(*args, **kwargs)
 
