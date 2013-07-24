@@ -157,6 +157,10 @@ class Slugged(models.Model):
         if channel:
             filters['channel'] = channel
 
+        # if model does not have site
+        if not getattr(self, 'site', False):
+            del filters['site']
+
         slug_exists = self.__class__.objects.filter(**filters)
 
         if getattr(self, 'pk', None) is not None:
