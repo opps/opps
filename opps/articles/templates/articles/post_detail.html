@@ -20,7 +20,7 @@
 
 <h3>tags</h3>
 <ul>
-  {% for tag in context.tags.all %}
+  {% for tag in context.tags.get_tags %}
   <li><a href="{% url 'articles:tag_open' tag.slug %}">{{ tag.name }}</a></li>
   {% endfor %}
 </ul>
