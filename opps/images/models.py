@@ -81,6 +81,6 @@ class Cropping(models.Model):
 
 class Image(Archive, Cropping):
 
-    class META:
+    class Meta:
         verbose_name = _('Image')
         verbose_name_plural = _('Images')

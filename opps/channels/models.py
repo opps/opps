@@ -46,7 +46,7 @@ class Channel(MPTTModel, Publishable, Slugged):
 
     objects = ChannelManager()
 
-    class META:
+    class Meta:
         unique_together = ("site", "long_slug", "slug", "parent")
         verbose_name = _('Channel')
         verbose_name_plural = _('Channels')

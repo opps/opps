@@ -12,7 +12,7 @@ class Source(Publishable, Slugged):
     feed = models.URLField(_(u'Feed URL'), max_length=200, blank=True,
                            null=True)
 
-    class META:
+    class Meta:
         verbose_name = _('Source')
         verbose_name_plural = _('Sources')
         unique_together = ("site", "slug")

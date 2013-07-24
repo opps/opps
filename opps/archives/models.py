@@ -38,7 +38,7 @@ class Archive(Publishable, Slugged):
 
     source = models.ForeignKey('sources.Source', null=True, blank=True)
 
-    class META:
+    class Meta:
         verbose_name = _('Archive')
         verbose_name_plural = _('Archives')
         unique_together = ['site', 'slug']

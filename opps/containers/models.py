@@ -132,7 +132,7 @@ class Container(Publishable, Slugged, Channeling, Imaged):
 #     )
 #     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
-#     class META:
+#     class Meta:
 #         abstract = True
 
 
@@ -152,7 +152,7 @@ class ContainerSource(models.Model):
         verbose_name=_(u'Source'),
     )
 
-    class META:
+    class Meta:
         verbose_name = _(u'Container source')
         verbose_name_plural = _(u'Container sources')
         ordering = ('order',)
@@ -183,7 +183,7 @@ class ContainerImage(models.Model):
         null=True
     )
 
-    class META:
+    class Meta:
         verbose_name = _('Container image')
         verbose_name_plural = _('Container images')
         ordering = ('order',)
@@ -214,7 +214,7 @@ class ContainerBox(BaseBox):
         verbose_name=_(u'Query Set')
     )
 
-    class META:
+    class Meta:
         verbose_name = _('Container box')
         verbose_name_plural = _('Containers boxes')
 

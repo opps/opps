@@ -11,7 +11,7 @@ class FlatPage(Article):
     content = models.TextField(_(u"Content"))
     order = models.IntegerField(_(u"Order"), default=0)
 
-    class META:
+    class Meta:
         verbose_name = _(u'Flat page')
         verbose_name_plural = _(u'Flat pages')
 
