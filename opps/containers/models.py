@@ -11,13 +11,10 @@ from .signals import shorturl_generate, delete_container
 from opps.core.cache import _cache_key
 from opps.core.models import Publishable, Slugged, Channeling, Imaged
 from opps.boxes.models import BaseBox
-from opps.core.tags.fields import TagField
-from opps.core.tags.models import Tag
-
-#from taggit.managers import TaggableManager
+from opps.core.tags.models import Tagged
 
 
-class Container(Publishable, Slugged, Channeling, Imaged):
+class Container(Publishable, Slugged, Channeling, Imaged, Tagged):
     title = models.CharField(_(u"Title"), max_length=140, db_index=True)
     hat = models.CharField(
         _(u"Hat"),
@@ -46,9 +43,6 @@ class Container(Publishable, Slugged, Channeling, Imaged):
         null=True, blank=True,
         db_index=True
     )
-    #TaggableManager(blank=True, verbose_name=u'Tags')
-    tags = TagField(_(u'Tags'), max_length=4000, blank=True,
-                    help_text=_(u'A comma-separated list of tags.'))
     show_on_root_channel = models.BooleanField(
         _(u"Show on root channel?"),
         default=True
@@ -73,11 +67,6 @@ class Container(Publishable, Slugged, Channeling, Imaged):
         self.child_class = self.__class__.__name__
         self.child_module = self.__class__.__module__
         self.child_app_label = self._meta.app_label
-        #save tags
-        if self.tags:
-            for tag in self.tags.split(','):
-                Tag.objects.get_or_create(name=tag)
-
         models.signals.post_save.connect(shorturl_generate,
                                          sender=self.__class__)
         super(Container, self).save(*args, **kwargs)
@@ -87,11 +76,6 @@ class Container(Publishable, Slugged, Channeling, Imaged):
 
     def get_thumb(self):
         return self.main_image
-
-    def get_tags(self):
-        if not self.tags:
-            return ''
-        return [Tag.objects.get(name=i) for i in self.tags.split(',')]
 
     @property
     def search_category(self):
