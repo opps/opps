@@ -40,8 +40,6 @@ if not settings.configured:
             'opps.sitemaps',
             'opps.flatpages',
             'opps.archives',
-
-            'taggit',
         ),
         SITE_ID = 1,
         ROOT_URLCONF = "opps.urls",
