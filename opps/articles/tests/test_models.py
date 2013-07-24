@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from ..models import Article, Post
 from opps.channels.models import Channel
 
-from taggit.models import Tag
+from opps.core.tags.models import Tag
 
 
 class ArticleFields(TestCase):
