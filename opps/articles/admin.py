@@ -26,6 +26,16 @@ class PostRelatedInline(admin.TabularInline):
 
 @apply_opps_rules('articles')
 class PostAdmin(ContainerAdmin, AdminViewPermission):
+
+    action_buttons = [
+        {"text": "Upload multiple images",
+         "icon": "icon-picture",
+         "url": '/fileupload/image/%s',
+         "class": "btn btn-success",
+         "style": "",
+         "title": "Click to add multiple images"},
+    ]
+
     form = PostAdminForm
     inlines = [ContainerImageInline, ContainerSourceInline, PostRelatedInline]
     raw_id_fields = ['main_image', 'channel', 'albums']
@@ -49,6 +59,16 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
 
 @apply_opps_rules('articles')
 class AlbumAdmin(ContainerAdmin, AdminViewPermission):
+
+    action_buttons = [
+        {"text": "Upload multiple images",
+         "icon": "icon-picture",
+         "url": '/fileupload/image/%s',
+         "class": "btn btn-success",
+         "style": "",
+         "title": "Click to add multiple images"},
+    ]
+
     form = AlbumAdminForm
     inlines = [ContainerImageInline, ContainerSourceInline]
     list_display = ['title', 'channel', 'images_count',
