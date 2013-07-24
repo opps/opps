@@ -177,7 +177,7 @@ class Slugged(models.Model):
                     self.slug = "{0}-1".format(self.slug)
         else:
             if slug_exists.exists():
-                raise ValidationError(_(u"URL already exists."))
+                raise ValidationError(_(u"Slug already exists."))
 
     def save(self, *args, **kwargs):
         if hasattr(self, 'get_absolute_url'):

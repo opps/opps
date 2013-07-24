@@ -7,7 +7,7 @@ from opps.core.models import Date, Slugged
 
 
 class Tag(Date, Slugged):
-    name = models.CharField(_(u'Tag'), max_length=255, unique=True)
+    name = models.CharField(_(u'Name'), max_length=255, unique=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
