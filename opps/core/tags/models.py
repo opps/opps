@@ -34,7 +34,11 @@ class Tagged(models.Model):
 
     def get_tags(self):
         if self.tags:
-            return [Tag.objects.get(name=i) for i in self.tags.split(',')]
+            tags = []
+            for tag in self.tags.aplit(','):
+                t, created = Tag.objects.get_or_create(name=tag)
+                tags.append(t)
+            return tags
 
     class Meta:
         abstract = True
