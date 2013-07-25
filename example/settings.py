@@ -73,6 +73,7 @@ INSTALLED_APPS = (
 
     'opps.containers',
     'opps.core',
+    'opps.core.tags',
     'opps.archives',
     'opps.articles',
     'opps.boxes',
@@ -83,7 +84,6 @@ INSTALLED_APPS = (
     'opps.flatpages',
 
     'south',
-    'taggit',
     'rest_framework',
 )
 
