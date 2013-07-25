@@ -50,7 +50,7 @@ class Channel(MPTTModel, Publishable, Slugged):
         unique_together = ("site", "long_slug", "slug", "parent")
         verbose_name = _('Channel')
         verbose_name_plural = _('Channels')
-        ordering = ['name', 'parent', 'published']
+        ordering = ['name', 'parent__id', 'published']
 
     class MPTTMeta:
         unique_together = ("site", "long_slug", "slug", "parent")
