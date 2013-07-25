@@ -7,7 +7,8 @@ from opps.core.models import Date, Slugged
 
 
 class Tag(Date, Slugged):
-    name = models.CharField(_(u'Name'), max_length=255, unique=True)
+    name = models.CharField(_(u'Name'), max_length=255, unique=True,
+                            db_index=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -19,10 +20,12 @@ class Tag(Date, Slugged):
     class Meta:
         verbose_name = _(u'Tag')
         verbose_name_plural = _(u'Tags')
+        unique_together = ['slug', 'name']
 
 
 class Tagged(models.Model):
-    tags = models.CharField(_(u'Tags'), max_length=4000, blank=True,
+    tags = models.CharField(_(u'Tags'), max_length=4000, db_index=True,
+                            blank=True, null=True,
                             help_text=_(u'A comma-separated list of tags.'))
 
     def save(self, *args, **kwargs):
