@@ -8,9 +8,7 @@ import opps
 REQUIREMENTS = [i.strip() for i in open("requirements.txt").readlines()]
 
 dependency_links = ['http://github.com/avelino/django-googl/tarball/master'
-                    '#egg=django-googl',
-                    'http://github.com/avelino/django-taggit/tarball/master'
-                    '#egg=django-taggit']
+                    '#egg=django-googl',]
 
 classifiers = ["Development Status :: 4 - Beta",
                "Intended Audience :: Developers",

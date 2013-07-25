@@ -157,6 +157,10 @@ class Slugged(models.Model):
         if channel:
             filters['channel'] = channel
 
+        # if model does not have site
+        if not getattr(self, 'site', False):
+            del filters['site']
+
         slug_exists = self.__class__.objects.filter(**filters)
 
         if getattr(self, 'pk', None) is not None:
@@ -173,7 +177,7 @@ class Slugged(models.Model):
                     self.slug = "{0}-1".format(self.slug)
         else:
             if slug_exists.exists():
-                raise ValidationError(_(u"URL already exists."))
+                raise ValidationError(_(u"Slug already exists."))
 
     def save(self, *args, **kwargs):
         if hasattr(self, 'get_absolute_url'):
