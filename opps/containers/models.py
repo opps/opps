@@ -11,11 +11,10 @@ from .signals import shorturl_generate, delete_container
 from opps.core.cache import _cache_key
 from opps.core.models import Publishable, Slugged, Channeling, Imaged
 from opps.boxes.models import BaseBox
+from opps.core.tags.models import Tagged
 
-from taggit.managers import TaggableManager
 
-
-class Container(Publishable, Slugged, Channeling, Imaged):
+class Container(Publishable, Slugged, Channeling, Imaged, Tagged):
     title = models.CharField(_(u"Title"), max_length=140, db_index=True)
     hat = models.CharField(
         _(u"Hat"),
@@ -44,7 +43,6 @@ class Container(Publishable, Slugged, Channeling, Imaged):
         null=True, blank=True,
         db_index=True
     )
-    tags = TaggableManager(blank=True, verbose_name=u'Tags')
     show_on_root_channel = models.BooleanField(
         _(u"Show on root channel?"),
         default=True
@@ -69,7 +67,6 @@ class Container(Publishable, Slugged, Channeling, Imaged):
         self.child_class = self.__class__.__name__
         self.child_module = self.__class__.__module__
         self.child_app_label = self._meta.app_label
-
         models.signals.post_save.connect(shorturl_generate,
                                          sender=self.__class__)
         super(Container, self).save(*args, **kwargs)
@@ -107,7 +104,7 @@ class Container(Publishable, Slugged, Channeling, Imaged):
         if getcache:
             return getcache
 
-        tag_list = [t for t in self.tags.all()[:3]]
+        tag_list = [t for t in self.tags.split(',')[:3]]
         _list = [a for a in Container.objects.filter(
             site_domain=self.site_domain,
             child_class=child_class,

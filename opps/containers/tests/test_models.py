@@ -3,8 +3,8 @@
 from django.test import TestCase
 from django.db import models
 
-from taggit.managers import TaggableManager
-
+#from taggit.managers import TaggableManager
+from opps.core.tags.fields import TagField
 from ..models import Container
 
 
@@ -55,7 +55,7 @@ class ContainerFields(TestCase):
 
     def test_tags(self):
         field = Container._meta.get_field_by_name('tags')[0]
-        self.assertEqual(field.__class__, TaggableManager)
+        self.assertEqual(field.__class__, TagField)
         self.assertTrue(field.blank)
 
     def test_show_on_root_channel(self):
