@@ -12,6 +12,7 @@
 
       {{ context.content|safe }}
 
+      {% comment %}
       <p>
       {% for tag in context.get_tags %}
       <a class="btn" href="{% url 'containers:tag_open' tag.slug %}">{{ tag.name }} »</a>
