@@ -58,7 +58,10 @@ class PostList(OppsList):
             published=True,
             child_class__in=self.models,
             show_on_root_channel=True
-        ).exclude(pk__in=self.excluded_ids)
+        )
+        if not self.request.GET.get(self.page_kwarg):
+            self.article = self.article.exclude(pk__in=self.excluded_ids)
+
         if self.limit:
             self.article = self.article[:self.limit]
 
