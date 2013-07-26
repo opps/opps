@@ -50,6 +50,7 @@ Sponsor
 =======
 
 * `YACOWS <http://yacows.com.br/>`_
+* `Digital Ocean <http://digitalocean.com/>`_
 
 
 License

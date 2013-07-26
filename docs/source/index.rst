@@ -51,6 +51,7 @@ Sponsor
 =======
 
 * `YACOWS <http://www.yacows.com.br>`_
+* `Digital Ocean <http://digitalocean.com/>`_
 
 
 License
