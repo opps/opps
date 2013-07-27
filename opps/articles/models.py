@@ -162,7 +162,7 @@ class Article(Publishable, Slugged):
         if getcache:
             return getcache
 
-        tag_list = [t for t in self.tags.all()[:3]]
+        tag_list = [t for t in self.tags.all()]
         _list = [a for a in Article.objects.filter(
             site_domain=self.site_domain,
             child_class=self.child_class,
