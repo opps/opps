@@ -21,7 +21,7 @@ urlpatterns = patterns(
 
     url(r'^tags/(?P<tag>[\w//-]+)$',
         cache_page(settings.OPPS_CACHE_EXPIRE)(
-        TagList.as_view()), name='tag_open'),
+            TagList.as_view()), name='tag_open'),
 
     url(r'^(?P<long_slug>[\w\b//-]+)/(rss|feed)$',
         cache_page(settings.OPPS_CACHE_EXPIRE)(
