@@ -19,7 +19,7 @@ urlpatterns = patterns(
 
     url(r'^search/', Search(), name='search'),
 
-    url(r'^tags/(?P<tag>[\w//-]+)$',
+    url(r'^tag/(?P<tag>[\w//-]+)$',
         cache_page(settings.OPPS_CACHE_EXPIRE)(
             TagList.as_view()), name='tag_open'),
 
