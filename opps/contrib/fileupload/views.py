@@ -25,7 +25,6 @@ def response_mimetype(request):
 def image_create(request, container_pk):
 
     container = get_object_or_404(Container, pk=int(container_pk))
-
     if request.method == "POST":
         f = request.FILES.get('image')
 

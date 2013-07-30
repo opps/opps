@@ -34,48 +34,44 @@
 
 {% block content %}
 <div class="container">
-    <form id="fileupload" method="post" action="." enctype="multipart/form-data">{% csrf_token %}
-
-        <div class="well">
-           <h3>Multi image upload</h3>
-           <strong>{{container.child_class}}</strong>: {{container.title}}<br />
-           <strong>Channel</strong>: {{container.channel}}<br />
-        </div>
-
-        <div class="row fileupload-buttonbar">
-            <div class="span7">
-                <span class="btn btn-primary fileinput-button">
-                    <i class="icon-plus icon-white"></i>
-                    <span>Add files...</span>
-                    <input type="file" name="image" multiple>
-                </span>
-                <button type="submit" class="btn btn-success start">
-                    <i class="icon-upload icon-white"></i>
-                    <span>Start upload</span>
-                </button>
-                <button type="reset" class="btn btn-warning cancel">
-                    <i class="icon-ban-circle icon-white"></i>
-                    <span>Cancel upload</span>
-                </button>
-            </div>
-            <div class="span5 fileupload-progress fade">
-                <div class="progress progress-success progres-striped active">
-                    <div class="bar" style="width:0%"></div>
-                </div>
-                <div class="progress-extended">&nbsp;</div>
-            </div>
-        </div>
-        <div class="fileupload-loading"></div>
-        <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
-    </form>
-    <div class="fileupload-content">
-        <table class="files"></table>
-        <div class="fileupload-progressbar"></div>
+  <form id="fileupload" method="post" action="." enctype="multipart/form-data">
+    <div class="well">
+       <h3>Multi image upload</h3>
+       <strong>{{container.child_class}}</strong>: {{container.title}}<br />
+       <strong>Channel</strong>: {{container.channel}}<br />
     </div>
-
+    <div class="row fileupload-buttonbar">
+        <div class="span7">
+            <span class="btn btn-primary fileinput-button">
+                <i class="icon-plus icon-white"></i>
+                <span>Add files...</span>
+                <input type="file" name="image" multiple>
+            </span>
+            <button type="submit" class="btn btn-success start">
+                <i class="icon-upload icon-white"></i>
+                <span>Start upload</span>
+            </button>
+            <button type="reset" class="btn btn-warning cancel">
+                <i class="icon-ban-circle icon-white"></i>
+                <span>Cancel upload</span>
+            </button>
+        </div>
+        <div class="span5 fileupload-progress fade">
+            <div class="progress progress-success progres-striped active">
+                <div class="bar" style="width:0%"></div>
+            </div>
+            <div class="progress-extended">&nbsp;</div>
+        </div>
+    </div>
+    <div class="fileupload-loading"></div>
+    <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
+  </form>
+  <div class="fileupload-content">
+      <table class="files"></table>
+      <div class="fileupload-progressbar"></div>
+  </div>
 </div>
 {% upload_js container %}
-
 
 <script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
 <script src="{{ STATIC_URL }}js/tmpl.min.js"></script>
@@ -90,7 +86,6 @@
 <script src="{{ STATIC_URL }}js/locale.js"></script>
 <script src="{{ STATIC_URL }}js/mainupload.js"></script>
 <script src="{{ STATIC_URL }}js/csrf.js"></script>
-
 <script>
 $('#fileupload').bind('fileuploadsubmit', function (e, data) {
     var inputs = data.context.find(':input');
@@ -100,7 +95,6 @@ $('#fileupload').bind('fileuploadsubmit', function (e, data) {
     data.formData = inputs.serializeArray();
 });
 </script>
-
 {% endblock %}
 
 
