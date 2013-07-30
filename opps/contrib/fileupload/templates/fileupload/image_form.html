@@ -1,0 +1,106 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_modify opps_admin_tags %}
+{% load url from future %}
+{% load upload_tags %}
+
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript">window.__admin_media_prefix__ = "{{ STATIC_URL }}/admin/";</script>
+{% url 'admin:jsi18n' as jsi18nurl %}
+
+<script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
+{{ media }}
+{% endblock %}
+
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/admin/css/forms.css" />{% endblock %}
+
+
+{% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
+
+
+{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
+
+{% if not is_popup %}
+  {% block breadcrumbs %}
+    <ul class="breadcrumb">
+      <li>
+      <a href="/admin/articles/{{container.child_class|lower}}/{{container.pk}}/">Back to {{ container.child_class|lower }}</a>
+      </li>
+    </ul>
+  {% endblock %}
+{% endif %}
+
+
+{% block content %}
+<div class="container">
+    <form id="fileupload" method="post" action="." enctype="multipart/form-data">{% csrf_token %}
+
+        <div class="well">
+           <h3>Multi image upload</h3>
+           <strong>{{container.child_class}}</strong>: {{container.title}}<br />
+           <strong>Channel</strong>: {{container.channel}}<br />
+        </div>
+
+        <div class="row fileupload-buttonbar">
+            <div class="span7">
+                <span class="btn btn-primary fileinput-button">
+                    <i class="icon-plus icon-white"></i>
+                    <span>Add files...</span>
+                    <input type="file" name="image" multiple>
+                </span>
+                <button type="submit" class="btn btn-success start">
+                    <i class="icon-upload icon-white"></i>
+                    <span>Start upload</span>
+                </button>
+                <button type="reset" class="btn btn-warning cancel">
+                    <i class="icon-ban-circle icon-white"></i>
+                    <span>Cancel upload</span>
+                </button>
+            </div>
+            <div class="span5 fileupload-progress fade">
+                <div class="progress progress-success progres-striped active">
+                    <div class="bar" style="width:0%"></div>
+                </div>
+                <div class="progress-extended">&nbsp;</div>
+            </div>
+        </div>
+        <div class="fileupload-loading"></div>
+        <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
+    </form>
+    <div class="fileupload-content">
+        <table class="files"></table>
+        <div class="fileupload-progressbar"></div>
+    </div>
+
+</div>
+{% upload_js container %}
+
+
+<script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
+<script src="{{ STATIC_URL }}js/tmpl.min.js"></script>
+<script src="{{ STATIC_URL }}js/load-image.min.js"></script>
+<script src="{{ STATIC_URL }}js/canvas-to-blob.min.js"></script>
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}js/bootstrap-image-gallery.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.iframe-transport.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.fileupload.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.fileupload-fp.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.fileupload-ui.js"></script>
+<script src="{{ STATIC_URL }}js/locale.js"></script>
+<script src="{{ STATIC_URL }}js/mainupload.js"></script>
+<script src="{{ STATIC_URL }}js/csrf.js"></script>
+
+<script>
+$('#fileupload').bind('fileuploadsubmit', function (e, data) {
+    var inputs = data.context.find(':input');
+    if (inputs.filter('[required][value=""]').first().focus().length) {
+        return false;
+    }
+    data.formData = inputs.serializeArray();
+});
+</script>
+
+{% endblock %}
+
+
