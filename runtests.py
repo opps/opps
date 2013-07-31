@@ -26,6 +26,7 @@ if not settings.configured:
             'django.contrib.sessions',
             'django.contrib.sites',
             'opps.contrib.admin',
+            'opps.contrib.fileupload',
             'django.contrib.admin',
             'django.contrib.redirects',
 
