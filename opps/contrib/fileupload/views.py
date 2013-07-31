@@ -53,8 +53,9 @@ def image_create(request, container_pk):
             date_available=container.date_available,
             title=title,
             slug=slug,
-            image=f,
+            archive=f,
             published=True,
+            tags='',
         )
         if source:
             instance.source = source
@@ -70,9 +71,9 @@ def image_create(request, container_pk):
         )
 
         data = [{'name': f.name,
-                 'url': "%s" % instance.image.url,
+                 'url': "%s" % instance.archive.url,
                  'thumbnail_url': "%s" % image_url(
-                     instance.image.url,
+                     instance.archive.url,
                      width=60,
                      height=60
                  ),
