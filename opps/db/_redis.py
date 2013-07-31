@@ -19,3 +19,7 @@ class Redis:
                               db=self.db)
         self.conn = RedisClient(connection_pool=pool)
 
+    def close(self):
+        self.conn = None
+        return True
+
