@@ -31,3 +31,5 @@ class Redis:
     def save(self, document):
         return self.conn.set(self.key(), document)
 
+    def get(self):
+        self.conn.get(self.key())
