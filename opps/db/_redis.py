@@ -28,3 +28,6 @@ class Redis:
                                  self.key_prefix,
                                  self.key_sufix)
 
+    def save(self, document):
+        return self.conn.set(self.key(), document)
+
