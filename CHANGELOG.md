@@ -2,6 +2,9 @@
 
 ## 0.1.11
 
+* Fix Article recommendation
+* Change queryset on paginated templates
+
 ## 0.1.10
 
 * Remove cache on mobile detect
