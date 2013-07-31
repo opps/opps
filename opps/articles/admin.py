@@ -282,6 +282,11 @@ class HideArticleAdmin(PublishableAdmin):
     def has_add_permission(self, request):
         return False
 
+    def get_list_filter(self, request):
+        list_filter = super(HideArticleAdmin, self).list_filter
+        list_filter = [ChannelListFilter] + list(list_filter)
+        return list_filter
+
 
 class ArticleConfigAdmin(PublishableAdmin):
     list_display = ['key', 'key_group', 'channel', 'date_insert',
