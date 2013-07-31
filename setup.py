@@ -10,17 +10,19 @@ REQUIREMENTS = [i.strip() for i in open("requirements.txt").readlines()]
 dependency_links = ['http://github.com/avelino/django-googl/tarball/master'
                     '#egg=django-googl',]
 
-classifiers = ["Development Status :: 4 - Beta",
-               "Intended Audience :: Developers",
-               "License :: OSI Approved :: MIT License",
-               "Operating System :: OS Independent",
-               "Framework :: Django",
-               'Programming Language :: Python',
-               "Programming Language :: Python :: 2.7",
-               "Programming Language :: Python :: 2.6",
-               "Operating System :: OS Independent",
-               "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-               'Topic :: Software Development :: Libraries :: Python Modules']
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+    'Environment :: Web Environment',
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Framework :: Django",
+    'Programming Language :: Python',
+    "Programming Language :: Python :: 2.7",
+    "Operating System :: OS Independent",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    'Topic :: Software Development :: Libraries :: Application Frameworks',
+    'Topic :: Software Development :: Libraries :: Python Modules']
 
 try:
     long_description = open('README.rst').read()
