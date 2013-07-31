@@ -23,3 +23,8 @@ class Redis:
         self.conn = None
         return True
 
+    def key(self):
+        return '{}_{}_{}'.format(settings.OPPS_DB_NAME,
+                                 self.key_prefix,
+                                 self.key_sufix)
+
