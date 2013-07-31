@@ -2,12 +2,15 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import patterns, url, include
 from django.contrib import admin
-
+from filebrowser.sites import site
 
 admin.autodiscover()
 
 urlpatterns = patterns(
     '',
+    url(r'^admin/filebrowser/', include(site.urls)),
+    url(r'^grappelli/', include('grappelli.urls')),
+
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^fileupload/', include('opps.contrib.fileupload.urls')),
