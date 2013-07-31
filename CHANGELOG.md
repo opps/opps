@@ -2,6 +2,8 @@
 
 ## 0.1.12
 
+* Add filter in Articles Admin
+
 ## 0.1.11
 
 * Fix Article recommendation
