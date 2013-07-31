@@ -47,20 +47,31 @@
 
 {% block sidebar %}
 <div class="well">
+    <h1 class="nav-header">{% trans 'Recent Actions' %}</h1>
     <ul class="nav nav-list">
-        <li class="nav-header">{% trans 'Recent Actions' %}</li>
         <li class="divider"></li>
-        <li class="nav-header">{% trans 'My Actions' %}</li>
-        <li>
-          {% load log %}
-        </li>
+        <h3 class="nav-header">{% trans 'My Actions' %}</h3>
+        {% load log %}
         {% get_admin_log 10 as admin_log for_user user %}
         {% if not admin_log %}
         <li>
              <p class="tip">{% trans 'None available' %}</p>
         </li>
+        {% else %}
         {% for entry in admin_log %}
-        <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+        <li>
+            {% if entry.is_addition%}
+            <i class="icon-ok"></i> 
+            {% endif %}
+
+            {% if entry.is_change%}
+            <i class="icon-pencil"></i> 
+            {% endif %}
+
+            {% if entry.is_deletion%}
+            <i class="icon-remove"></i> 
+            {% endif %}
+
             {% if entry.is_deletion or not entry.get_admin_url %}
                 {{ entry.object_repr }}
             {% else %}
