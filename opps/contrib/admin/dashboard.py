@@ -10,7 +10,6 @@ from django.utils.translation import ugettext_lazy as _
 #from django.core.urlresolvers import reverse
 
 from grappelli.dashboard import modules, Dashboard
-#from grappelli.dashboard.utils import get_admin_site_name
 
 
 class CustomIndexDashboard(Dashboard):
@@ -18,45 +17,49 @@ class CustomIndexDashboard(Dashboard):
     """
     Custom index dashboard for www.
     """
+    title = "Opps CMS Dashboard"
 
     def init_with_context(self, context):
-        #site_name = get_admin_site_name(context)
+        site = context.get("site")
 
+        #site_name = get_admin_site_name(context)
         # append a group for "Administration" & "Applications"
-        self.children.append(modules.Group(
-            _('Group: Administration & Applications'),
-            column=1,
-            collapsible=True,
-            children=[
-                modules.AppList(
-                    _('Administration'),
-                    column=1,
-                    collapsible=False,
-                    models=('django.contrib.*',),
-                ),
-                modules.AppList(
-                    _('Applications'),
-                    column=1,
-                    css_classes=('collapse closed',),
-                    exclude=('django.contrib.*',),
-                )
-            ]
-        ))
+        #self.children.append(modules.Group(
+            #_('Group: Administration & Applications'),
+            #column=1,
+            #collapsible=True,
+            #children=[
+                #modules.AppList(
+                    #_('Administration'),
+                    #column=1,
+                    #collapsible=True,
+                    #css_classes=('collapse closed',),
+                    #models=('django.contrib.*',),
+                #),
+                #modules.AppList(
+                    #_('Applications'),
+                    #column=1,
+                    #css_classes=('collapse closed',),
+                    #exclude=('django.contrib.*',),
+                #)
+            #]
+        #))
 
         # append an app list module for "Applications"
         self.children.append(modules.AppList(
-            _('AppList: Applications'),
+            _('Applications'),
             collapsible=True,
             column=1,
-            css_classes=('collapse closed',),
+            css_classes=('collapse',),
             exclude=('django.contrib.*',),
         ))
 
         # append an app list module for "Administration"
         self.children.append(modules.ModelList(
-            _('ModelList: Administration'),
+            _('Administration'),
             column=1,
-            collapsible=False,
+            collapsible=True,
+            css_classes=('grp-closed',),
             models=('django.contrib.*',),
         ))
 
@@ -79,18 +82,13 @@ class CustomIndexDashboard(Dashboard):
             column=2,
             children=[
                 {
-                    'title': _('Django Documentation'),
-                    'url': 'http://docs.djangoproject.com/',
+                    'title': _('Opps Documentation'),
+                    'url': 'http://www.oppsproject.org/',
                     'external': True,
                 },
                 {
-                    'title': _('Grappelli Documentation'),
-                    'url': 'http://packages.python.org/django-grappelli/',
-                    'external': True,
-                },
-                {
-                    'title': _('Grappelli Google-Code'),
-                    'url': 'http://code.google.com/p/django-grappelli/',
+                    'title': _('YACOWS'),
+                    'url': 'http://www.yacows.com.br/',
                     'external': True,
                 },
             ]
@@ -98,10 +96,10 @@ class CustomIndexDashboard(Dashboard):
 
         # append a feed module
         self.children.append(modules.Feed(
-            _('Latest Django News'),
+            _('Latest Publications'),
             column=2,
-            feed_url='http://www.djangoproject.com/rss/weblog/',
-            limit=5
+            feed_url='http://{}/rss'.format(site.domain),
+            limit=10
         ))
 
         # append a recent actions module

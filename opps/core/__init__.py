@@ -36,6 +36,15 @@ class OppsCoreConf(AppConf):
         prefix = 'opps'
 
 
+class GrapelliCong(AppConf):
+
+    ADMIN_TITLE = "Opps CMS Admin"
+    INDEX_DASHBOARD = 'opps.contrib.admin.dashboard.CustomIndexDashboard'
+
+    class Meta:
+        prefix = 'GRAPPELLI'
+
+
 class StaticSiteMapsConf(AppConf):
     ROOT_SITEMAP = 'opps.sitemaps.feed.sitemaps'
 
