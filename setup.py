@@ -34,7 +34,7 @@ classifiers = [
                "Programming Language :: Python :: 2.7",
                "Operating System :: OS Independent",
                "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-               'Topic :: Software Development :: Libraries :: Application Frameworks'
+               'Topic :: Software Development :: Libraries :: Application Frameworks',
                'Topic :: Software Development :: Libraries :: Python Modules']
 
 try:
