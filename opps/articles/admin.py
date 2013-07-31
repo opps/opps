@@ -30,7 +30,7 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
     action_buttons = [
         {"text": "Upload multiple images",
          "icon": "icon-picture",
-         "url": '/fileupload/image/%s',
+         "url": '/fileupload/image/%s/',
          "class": "btn btn-success",
          "style": "",
          "title": "Click to add multiple images"},
