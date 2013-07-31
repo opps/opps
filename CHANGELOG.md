@@ -12,7 +12,10 @@
 * Add contrib pattern (like django)
 * Upgrade haystack to 2.0 (stable)
 * Opps Generic Views
-* * New view format, used to URLs pattern
+* New view format, used to URLs pattern
+* Add Grappelli dependence of the project
+* Create Opps DB (NoSQL Database architecture)
+* Add redis support (Opps BD)
 
 ## 0.1.9
 
