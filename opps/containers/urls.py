@@ -8,7 +8,7 @@ from .views import ContainerList, ContainerDetail
 from .views import ContainerAPIList, ContainerAPIDetail
 from .views import Search
 from opps.contrib.feeds.views import ContainerFeed, ChannelFeed
-
+from opps.core.tags.views import TagList
 
 urlpatterns = patterns(
     '',
@@ -18,6 +18,10 @@ urlpatterns = patterns(
         ContainerFeed()), name='feed'),
 
     url(r'^search/', Search(), name='search'),
+
+    url(r'^tag/(?P<tag>[\w//-]+)$',
+        cache_page(settings.OPPS_CACHE_EXPIRE)(
+            TagList.as_view()), name='tag_open'),
 
     url(r'^(?P<long_slug>[\w\b//-]+)/(rss|feed)$',
         cache_page(settings.OPPS_CACHE_EXPIRE)(

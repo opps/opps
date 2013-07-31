@@ -10,6 +10,8 @@ urlpatterns = patterns(
     '',
     url(r'^admin/', include(admin.site.urls)),
 
+    url(r'^fileupload/', include('opps.contrib.fileupload.urls')),
+
     url(r'^sitemap', include('opps.sitemaps.urls')),
 
     url(r'^api/', include('opps.api.urls')),

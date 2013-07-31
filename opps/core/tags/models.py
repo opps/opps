@@ -40,7 +40,7 @@ class Tagged(models.Model):
     def get_tags(self):
         if self.tags:
             tags = []
-            for tag in self.tags.aplit(','):
+            for tag in self.tags.split(','):
                 t, created = Tag.objects.get_or_create(name=tag)
                 tags.append(t)
             return tags
