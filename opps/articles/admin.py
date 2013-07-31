@@ -94,6 +94,7 @@ class PostRelatedInline(admin.TabularInline):
     extra = 1
     classes = ('collapse',)
 
+
 @apply_opps_rules('articles')
 class AlbumRelatedInline(admin.TabularInline):
     model = AlbumRelated
