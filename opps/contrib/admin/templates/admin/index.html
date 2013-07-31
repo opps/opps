@@ -47,19 +47,18 @@
 
 {% block sidebar %}
 <div class="well">
-    <h1 class="nav-header">{% trans 'Recent Actions' %}</h1>
-    <ul class="nav nav-list">
-        <li class="divider"></li>
-        <h3 class="nav-header">{% trans 'My Actions' %}</h3>
+    <h2>{% trans 'Recent Actions' %}</h2>
+    <h3 class="nav-header">{% trans 'My Actions' %}</h3>
+    <dl>
         {% load log %}
         {% get_admin_log 10 as admin_log for_user user %}
         {% if not admin_log %}
-        <li>
+        <dt>
              <p class="tip">{% trans 'None available' %}</p>
-        </li>
+        </dt>
         {% else %}
         {% for entry in admin_log %}
-        <li>
+        <dt>
             {% if entry.is_addition%}
             <i class="icon-ok"></i> 
             {% endif %}
@@ -77,13 +76,13 @@
             {% else %}
                 <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
             {% endif %}
-            <br/>
             {% if entry.content_type %}
-                <span class="mini quiet">{% filter capfirst %}{% trans entry.content_type.name %}{% endfilter %}</span>
+                <dd>{% filter capfirst %}{% trans entry.content_type.name %}{% endfilter %}</dd>
             {% else %}
-                <span class="mini quiet">{% trans 'Unknown content' %}</span>
+                <dd>{% trans 'Unknown content' %}</dd>
             {% endif %}
-        </li>
+            <br/>
+        </dt>
         {% endfor %}
         {% endif %}
     </ul>
