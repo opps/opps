@@ -7,7 +7,7 @@ pkg_resources.declare_namespace(__name__)
 VERSION = (0, 1, 12)
 
 __version__ = ".".join(map(str, VERSION))
-__status__ = "Development"
+__status__ = "Stable"
 __description__ = u"Opps CMS websites magazines and high-traffic"
 
 __author__ = u"Thiago Avelino"

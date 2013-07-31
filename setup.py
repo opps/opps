@@ -23,16 +23,18 @@ dependency_links = ['http://github.com/avelino/django-googl/tarball/master'
                     'http://github.com/avelino/django-taggit/tarball/master'
                     '#egg=django-taggit']
 
-classifiers = ["Development Status :: 4 - Beta",
+classifiers = [
+               'Development Status :: 5 - Production/Stable',
+               'Environment :: Web Environment',
                "Intended Audience :: Developers",
                "License :: OSI Approved :: MIT License",
                "Operating System :: OS Independent",
                "Framework :: Django",
                'Programming Language :: Python',
                "Programming Language :: Python :: 2.7",
-               "Programming Language :: Python :: 2.6",
                "Operating System :: OS Independent",
                "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+               'Topic :: Software Development :: Libraries :: Application Frameworks'
                'Topic :: Software Development :: Libraries :: Python Modules']
 
 try:
