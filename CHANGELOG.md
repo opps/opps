@@ -1,5 +1,7 @@
 # Changelog
 
+## 0.1.12
+
 ## 0.1.11
 
 * Fix Article recommendation
