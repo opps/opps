@@ -109,3 +109,8 @@ def get_post_content(post, template_name='articles/post_related.html',
         ))
     else:
         return mark_safe(content + divider + related_rendered)
+
+
+@register.inclusion_tag('articles/album_related.html')
+def get_album_related_articles(context):
+    return {'album': context}

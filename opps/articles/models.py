@@ -348,6 +348,17 @@ class Album(Article):
     def get_absolute_url(self):
         return "/album/{}/{}".format(self.channel_long_slug, self.slug)
 
+    def ordered_related(self, field='order'):
+        """
+        used in template
+        """
+        return self.related_articles.filter(
+            published=True,
+            date_available__lte=timezone.now()
+        ).order_by(
+            'albumrelated_related__order'
+        ).distinct()
+
 
 class Link(Article):
     url = models.URLField(_(u"URL"), null=True, blank=True)
