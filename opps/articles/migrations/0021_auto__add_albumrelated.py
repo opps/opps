@@ -33,7 +33,7 @@ class Migration(SchemaMigration):
 
     models = {
         "%s.%s" % (User._meta.app_label, User._meta.module_name): {
-        'meta': {'object_name': User.__name__},
+        'Meta': {'object_name': User.__name__},
         },
         u'articles.album': {
             'Meta': {'ordering': "['-date_available', 'title', 'channel_long_slug']", 'object_name': 'Album', '_ormbases': [u'articles.Article']},
