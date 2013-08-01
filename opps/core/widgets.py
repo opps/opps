@@ -41,15 +41,40 @@ CONFIG.update(USER_CONFIG)
 INIT_JS = {
     'tinymce': """
               <script type="text/javascript">
-              django.jQuery(document).ready(function(){
-                  tinymce.init(%s);
-              });
+
+            function CustomFileBrowser(field_name, url, type, win) {
+
+                var cmsURL = '/admin/filebrowser/browse/?pop=2';
+                cmsURL = cmsURL + '&type=' + type;
+
+                tinyMCE.activeEditor.windowManager.open({
+                    file: cmsURL,
+                    width: 980,
+                    height: 500,
+                    resizable: 'yes',
+                    scrollbars: 'yes',
+                    inline: 'no',
+                    close_previous: 'no'
+                }, {
+                    window: win,
+                    input: field_name,
+                    editor_id: tinyMCE.activeEditor.id
+                });
+                return false;
+
+            }
+
+            django.jQuery(document).ready(function(){
+            tinymce.init(%s);
+            });
               </script>""",
+
     'redactor': """<script type="text/javascript">
                   django.jQuery(document).ready(function(){
                       $("#%s").redactor(%s);
                   });
                   </script>""",
+
     'aloha': """<script type="text/javascript">
                      Aloha.ready( function() {
                         var $ = Aloha.jQuery;
@@ -78,15 +103,6 @@ class OppsEditor(widgets.Textarea):
         options = CONFIG.copy()
         for key in ('editor', 'css', 'js'):
             options.pop(key, None)
-        # options.update(self.custom_options)
-        # if self.allow_file_upload:
-        #     options['fileUpload'] = reverse(
-        #         'editor_upload_file',
-        #         kwargs={'upload_to': self.upload_to})
-        # if self.allow_image_upload:
-        #     options['imageUpload'] = reverse(
-        #         'editor_upload_image',
-        #         kwargs={'upload_to': self.upload_to})
         options.update(kwargs)
         return json.dumps(options)
 
@@ -100,6 +116,8 @@ class OppsEditor(widgets.Textarea):
         if editor in ('tinymce',):
             options = self.get_options(selector="#{}".format(id_))
             html += INIT_JS.get(CONFIG.get('editor')) % options
+            html = html.replace('"CustomFileBrowser"', "CustomFileBrowser")
+            html = html.replace("---editorid---", id_)
         else:
             if editor in ('aloha',):
                 html += """
