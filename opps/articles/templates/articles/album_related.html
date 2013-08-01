@@ -1,0 +1,11 @@
+{% load menu_tags channel_tags images_tags %}
+    <ul>
+    {% for related in album.ordered_related %}
+        <li>
+            <a {% get_url related %}>
+                <span>{{ related.title }}</span>
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
