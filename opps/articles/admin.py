@@ -7,7 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
 
 from .models import Post, Album, Article, Link, ArticleSource, ArticleImage
-from .models import ArticleBox, ArticleBoxArticles, ArticleConfig, PostRelated
+from .models import (ArticleBox, ArticleBoxArticles, ArticleConfig,
+                     PostRelated, AlbumRelated)
 from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
 from opps.core.admin import BaseBoxAdmin
@@ -95,6 +96,17 @@ class PostRelatedInline(admin.TabularInline):
 
 
 @apply_opps_rules('articles')
+class AlbumRelatedInline(admin.TabularInline):
+    model = AlbumRelated
+    fk_name = 'album'
+    raw_id_fields = ['related']
+    actions = None
+    ordering = ('order',)
+    extra = 1
+    classes = ('collapse',)
+
+
+@apply_opps_rules('articles')
 class PostAdmin(ArticleAdmin):
     form = PostAdminForm
     inlines = [ArticleImageInline, ArticleSourceInline, PostRelatedInline]
@@ -130,7 +142,7 @@ class AlbumAdminForm(forms.ModelForm):
 @apply_opps_rules('articles')
 class AlbumAdmin(ArticleAdmin):
     form = AlbumAdminForm
-    inlines = [ArticleImageInline, ArticleSourceInline]
+    inlines = [ArticleImageInline, ArticleSourceInline, AlbumRelatedInline]
     list_display = ['title', 'channel', 'images_count',
                     'date_available', 'published', 'preview_url']
 
