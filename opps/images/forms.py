@@ -5,23 +5,11 @@ from django.utils.translation import ugettext_lazy as _
 
 from .models import Image
 from .widgets import CropExample
-# MultipleUpload,
-# ArticleGenerator
 
-from redactor.widgets import RedactorEditor
+from opps.core.widgets import OppsEditor
 
 
 class ImageModelForm(forms.ModelForm):
-    # image = forms.FileField(
-    #     required=True,
-    #     widget=MultipleUpload(),
-    #     label=_(u'Image')
-    # )
-    # generate_article = forms.CharField(
-    #     required=False,
-    #     widget=ArticleGenerator,
-    #     label=_(u'Generated content')
-    # )
     crop_example = forms.CharField(
         required=False,
         widget=CropExample(),

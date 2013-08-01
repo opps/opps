@@ -2,7 +2,6 @@
 from django.contrib import admin
 from django import forms
 from django.utils import timezone
-from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
 
