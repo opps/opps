@@ -34,7 +34,7 @@ class ImageModelForm(forms.ModelForm):
 
     class Meta:
         model = Image
-        widgets = {'description': RedactorEditor()}
+        widgets = {'description': OppsEditor()}
 
     def __init__(self, *args, **kwargs):
         super(ImageModelForm, self).__init__(*args, **kwargs)

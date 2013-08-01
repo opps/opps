@@ -15,7 +15,7 @@ from opps.core.admin import BaseBoxAdmin
 from opps.core.admin import ChannelListFilter
 from opps.images.generate import image_url
 
-from redactor.widgets import RedactorEditor
+from opps.core.widgets import OppsEditor
 
 
 @apply_opps_rules('articles')
@@ -68,7 +68,7 @@ class ArticleBoxArticlesInline(admin.TabularInline):
 class PostAdminForm(forms.ModelForm):
     class Meta:
         model = Post
-        widgets = {'content': RedactorEditor()}
+        widgets = {'content': OppsEditor()}
 
 
 @apply_opps_rules('articles')
@@ -133,9 +133,7 @@ class AlbumAdminForm(forms.ModelForm):
     class Meta:
         model = Album
         widgets = {
-            'headline': RedactorEditor(
-                redactor_options=settings.REDACTOR_SIMPLE
-            )
+            'headline': OppsEditor()
         }
 
 
