@@ -12,7 +12,7 @@ class OppsDataBaseConf(AppConf):
     PASSWORD = getattr(settings, 'OPPS_DB_PASSWORD', None)
     PORT = getattr(settings, 'OPPS_DB_PORT', None)
     NAME = getattr(settings, 'OPPS_DB_NAME', 'opps_db')
-    TYPE = getattr(settings, 'OPPS_DB_TYPE', None)
+    ENGINE = getattr(settings, 'OPPS_DB_ENGINE', 'opps.db.')
     OPTION = getattr(settings, 'OPPS_BD_OPTION', None)
 
     class Meta:
