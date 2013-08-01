@@ -304,7 +304,42 @@ class PostRelated(models.Model):
         return u"{0}->{1}".format(self.related.slug, self.post.slug)
 
 
+class AlbumRelated(models.Model):
+    album = models.ForeignKey(
+        'articles.Album',
+        verbose_name=_(u'Album'),
+        null=True,
+        blank=True,
+        related_name='albumrelated_album',
+        on_delete=models.SET_NULL
+    )
+    related = models.ForeignKey(
+        'articles.Article',
+        verbose_name=_(u'Related Article'),
+        null=True,
+        blank=True,
+        related_name='albumrelated_related',
+        on_delete=models.SET_NULL
+    )
+    order = models.PositiveIntegerField(_(u'Order'), default=0)
+
+    class Meta:
+        verbose_name = _('Related Articles')
+        verbose_name_plural = _('Related Articles')
+        ordering = ('order',)
+
+    def __unicode__(self):
+        return u"{0}->{1}".format(self.related.slug, self.album.slug)
+
+
 class Album(Article):
+    related_articles = models.ManyToManyField(
+        'articles.Article',
+        null=True, blank=True,
+        related_name='album_relatedposts',
+        through='articles.AlbumRelated',
+        verbose_name=_(u'Related Posts'),
+    )
 
     class Meta:
         verbose_name = _('Album')
