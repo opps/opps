@@ -85,7 +85,7 @@ class View(object):
         try:
             if not self.long_slug:
                 self.long_slug = Channel.objects.get_homepage(
-                    site=self.request.site).long_slug
+                    site=self.site).long_slug
         except AttributeError:
             pass
         return self.long_slug
