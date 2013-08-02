@@ -19,17 +19,24 @@ class Redis:
                               db=self.db)
         self.conn = RedisClient(connection_pool=pool)
 
+    def object(self):
+        return self.conn
+
     def close(self):
         self.conn = None
         return True
 
+    @property
     def key(self):
-        return '{}_{}_{}'.format(settings.OPPS_DB_NAME,
-                                 self.key_prefix,
-                                 self.key_sufix)
+        return u'{}_{}_{}'.format(settings.OPPS_DB_NAME,
+                                  self.key_prefix,
+                                  self.key_sufix).lower()
 
     def save(self, document):
-        return self.conn.set(self.key(), document)
+        return self.conn.set(self.key, document)
+
+    def publish(self, document):
+        return self.conn.publish(self.key, document)
 
     def get(self):
-        self.conn.get(self.key())
+        return self.conn.get(self.key)
