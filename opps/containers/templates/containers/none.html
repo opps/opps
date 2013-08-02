@@ -1,0 +1,14 @@
+{% extends "containers/base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+{% include "channels/include/menu.html" %}
+
+<div class="row-fluid">
+  <div class="alert alert-block">
+    <h4>{% trans "Warning" %}!</h4>
+    <p>{% trans "It is necessary set channel as home page." %}</p>
+  </div>
+</div>
+{% endblock %}
