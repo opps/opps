@@ -8,16 +8,6 @@
 {% endblock %}
 
 
-{% block breadcrumbs %}
-    {% if not 'pop' in request.GET %}
-    <div class="admin_shortcuts {%if request.path != '/admin/'%} grp-collapse collapse grp-closed {%else%}grp-collapse collapse grp-open{%endif%}">
-        {% admin_shortcuts %}
-    </div>
-    {% endif %}
-
-{% endblock %}
-
-
 {% block pretitle %}
     {% if not 'pop' in request.GET %}
     <div class="admin_shortcuts {%if request.path != '/admin/'%} grp-collapse collapse grp-closed {%else%}grp-collapse collapse grp-open{%endif%}">
