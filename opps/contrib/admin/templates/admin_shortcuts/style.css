@@ -1,0 +1,45 @@
+{% extends 'admin_shortcuts/base.css' %}
+{% load static admin_shortcuts_tags %}
+
+{% block main %}
+/* shortcuts */
+.admin_shortcuts .shortcuts { background: #50839e; padding: 10px 15px 20px; margin: 0; list-style: none;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.2) inset; }
+.admin_shortcuts .shortcuts ul:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0;
+	height: 0; }
+.admin_shortcuts .shortcuts ul { padding: 0; margin: 5px 0 0 0; list-style: none; }
+.admin_shortcuts .shortcuts h2 { color: #fff; border-bottom: 1px solid #6093ae; line-height: 24px; margin: 10px 0 5px; }
+.admin_shortcuts .shortcuts li { padding: 0; margin: 0; float: left; list-style: none; }
+.admin_shortcuts .shortcuts li a { padding: 20px 0px 20px 55px; margin: 5px 10px 5px 0; display: block; float: left;
+	color: #fff; border: 1px solid #6b9db9; background: #6093ae 10px 50% no-repeat; font-size: 14px; line-height: 14px;
+	border-radius: 3px; box-shadow: 1px 1px 3px rgba(0,0,0,0.1); position: relative; min-height: 14px; }
+.admin_shortcuts .shortcuts li a .title { text-shadow: 0 0 1px rgba(0,0,0,0.5); padding-right: 25px; }
+.admin_shortcuts .shortcuts li a:hover, .admin_shortcuts .shortcuts li a:focus { background-color: #6b9db9; }
+.admin_shortcuts .shortcuts li a:active { background-color: #50839e; border-color: #6093ae; }
+{% endblock %}
+
+{% block count %}
+/* count */
+.admin_shortcuts .shortcuts li a .count { position: absolute; right: 3px; top: 2px; color: #96c9e5; font-size: 9px; }
+.admin_shortcuts .shortcuts li a .count_new { position: absolute; right: -7px; top: -7px; color: #fff; font-size: 10px;
+	line-height: 10px; border-radius: 30px; display: block; overflow: hidden; max-width: 40px; min-width: 10px;
+	height: 10px; padding: 6px; border: 2px solid #bd617f; background: #940f3a; text-align: center; font-weight: bold;
+	box-shadow: 0 0 3px rgba(0,0,0,0.2); }
+{% endblock %}
+
+{% block advanced %}
+/* advanced button */
+.admin_shortcuts #toggle_app_list { display: block; text-align: center; padding: 2px 0; color: #fff; font-size: 11px;
+	font-weight: bold; background: #7CA0C7 url('{% admin_static_url %}img/default-bg.gif') 0 100% repeat-x;
+	border-bottom: 1px solid #6093ae; }
+.admin_shortcuts #toggle_app_list:hover { background-position: 0 50%; }
+.admin_shortcuts #toggle_app_list .closed { display: inline; }
+.admin_shortcuts #toggle_app_list .open { display: none; }
+.admin_shortcuts #toggle_app_list.open .open { display: inline; }
+.admin_shortcuts #toggle_app_list.open .closed { display: none; }
+{% endblock %}
+
+{% block icons %}
+/* icons */
+{% for class in classes %}.admin_shortcuts .shortcuts li a.{{ class }} { background-image: url('{% static "admin_shortcuts" %}/{{ class }}.png'); }{% endfor %}
+{% endblock %}

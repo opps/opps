@@ -1,0 +1,5 @@
+<a href="{{ shortcut.url }}" {% if settings.open_new_window or shortcut.open_new_window %} target="_blank"{% endif %} class="{{ shortcut.class }}" {% if shortcut.help %}title="{{shortcut.help}}"{%endif%}>
+	{% if shortcut.title %}<span class="title">{{ shortcut.title }}</span>{% endif %}
+	{% if shortcut.count %}<span class="count">{{ shortcut.count }}</span>{% endif %}
+	{% if shortcut.count_new %}<span class="count_new">{{ shortcut.count_new }}</span>{% endif %}
+</a>

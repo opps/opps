@@ -1,0 +1,42 @@
+{% extends "admin/base.html" %}
+{% load i18n grp_tags admin_shortcuts_tags admin_static %}
+
+{% block title %}{{ title }} | {% trans 'Opps site admin' %}{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name">{% trans 'Opps administration' %}</h1>
+{% endblock %}
+
+
+{% block breadcrumbs %}
+    {% if not 'pop' in request.GET %}
+    <div class="admin_shortcuts {%if request.path != '/admin/'%} grp-collapse collapse grp-closed {%else%}grp-collapse collapse grp-open{%endif%}">
+        {% admin_shortcuts %}
+    </div>
+    {% endif %}
+
+{% endblock %}
+
+
+{% block pretitle %}
+    {% if not 'pop' in request.GET %}
+    <div class="admin_shortcuts {%if request.path != '/admin/'%} grp-collapse collapse grp-closed {%else%}grp-collapse collapse grp-open{%endif%}">
+        {% admin_shortcuts %}
+    </div>
+    {% endif %}
+{{ block.super }}
+{% endblock %}
+
+{% block extrastyle %}
+
+<style type="text/css">
+{% admin_shortcuts_css %}
+</style>
+
+{{ block.super }}
+
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
+
+{% endblock %}
+
+{% block extrahead %}{{ block.super }}{% admin_shortcuts_js %}{% endblock %}

@@ -1,0 +1,22 @@
+{% load i18n %}
+
+{% if admin_shortcuts %}
+	<ul class="shortcuts">
+	{% for group in admin_shortcuts %}
+		{% if group.title %}<h2>{{ group.title }}</h2>{% endif %}
+		<ul>
+		{% for shortcut in group.shortcuts %}
+			<li>{% include 'admin_shortcuts/shortcut.html' %}</li>
+		{% endfor %}
+		</ul>
+	{% endfor %}
+	</ul>
+{% endif %}
+
+{% if settings.hide_app_list and context.request.path != '/admin/' %}
+<a href="#" id="toggle_app_list">
+    <span class="open">&uarr;</span>
+    <span class="closed">&darr;</span>
+    &nbsp;&nbsp;{% trans 'Shortcuts' %}&nbsp;&nbsp;
+</a>
+{% endif %}

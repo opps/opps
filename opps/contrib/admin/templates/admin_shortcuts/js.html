@@ -1,0 +1,16 @@
+{% load admin_shortcuts_tags %}
+{% if settings.hide_app_list %}
+<!-- <script type="text/javascript" src="{% admin_static_url %}js/jquery.js"></script> -->
+<script type="text/javascript">
+	django.jQuery(function(){
+		// django.jQuery('#shortcuts').hide();
+		django.jQuery('#toggle_app_list').bind('click', function(e){
+			e.preventDefault();
+			django.jQuery('.shortcuts').slideToggle();
+			django.jQuery(this).toggleClass('open');
+            django.jQuery('.admin_shortcuts').toggleClass('grp-open');
+            django.jQuery('.admin_shortcuts').toggleClass('grp-closed');
+		});
+	});
+</script>
+{% endif %}

@@ -60,13 +60,66 @@ class OppsCoreConf(AppConf):
         prefix = 'opps'
 
 
-class GrapelliCong(AppConf):
+class GrapelliConf(AppConf):
 
     ADMIN_TITLE = "Opps CMS Admin"
     INDEX_DASHBOARD = 'opps.contrib.admin.dashboard.CustomIndexDashboard'
 
     class Meta:
         prefix = 'GRAPPELLI'
+
+
+class AdminConf(AppConf):
+
+    SHORTCUTS = [
+        {
+            'shortcuts': [
+                {
+                    'url_name': 'admin:articles_post_add',
+                    'title': '+ Notícia',
+                    'class': 'file3',
+                    'help': 'Clique para adicionar uma nova notícia'
+                },
+                {
+                    'url_name': 'admin:articles_post_changelist',
+                    'title': 'Notícias',
+                    'count': 'opps.contrib.admin.shortcuts.count_posts',
+                    'class': 'file2',
+                    'help': 'Clique para visualisar todas as notícias'
+                },
+                {
+                    'url_name': 'admin:images_image_add',
+                    'title': '+ Imagem',
+                    'class': 'picture',
+                    'help': 'Clique para adicionar uma nova imagem'
+                },
+                {
+                    'url_name': 'admin:articles_album_changelist',
+                    'title': 'Álbum',
+                    'count': 'opps.contrib.admin.shortcuts.count_albums',
+                    'class': 'camera',
+                    'help': 'Clique para visualisar todos os álbuns'
+                },
+                {
+                    'url': '/',
+                    'open_new_window': True,
+                    'help': 'Clique para visualizar a home page do site'
+                },
+            ]
+        }
+    ]
+
+    SHORTCUTS_SETTINGS = {
+        'hide_app_list': True,
+        'open_new_window': False,
+    }
+
+    SHORTCUTS_CLASS_MAPPINGS_EXTRA = [
+        ('blogs_blogpost', 'blog')
+    ]
+
+    class Meta:
+        prefix = 'ADMIN'
 
 
 class StaticSiteMapsConf(AppConf):
