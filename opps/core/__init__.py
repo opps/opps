@@ -32,7 +32,7 @@ class OppsCoreConf(AppConf):
     SMART_SLUG_ENABLED = True
 
     # default settings for tinymce
-    OPPS_EDITOR = {
+    EDITOR = {
         'editor': 'tinymce',
         'js': ('/static/tinymce/tinymce.min.js',),
         "theme": "modern",
@@ -42,16 +42,15 @@ class OppsCoreConf(AppConf):
             "searchreplace wordcount visualblocks visualchars code fullscreen",
             """insertdatetime media nonbreaking save table contextmenu
         directionality""",
-            "emoticons template paste textcolor"
+            "template paste textcolor"
         ],
         "toolbar1": """insertfile undo redo | styleselect | bold italic |
                 alignleft aligncenter alignright alignjustify |
-                bullist numlist outdent indent | link image""",
-        "toolbar2": "print preview media | forecolor backcolor emoticons",
+                bullist numlist outdent indent | link image media |
+                print preview  | forecolor backcolor""",
         "image_advtab": True,
         "templates": [
-            {"title": 'Test template 1', "content": 'Test 1'},
-            {"title": 'Test template 2', "content": 'Test 2'}
+            {"title": 'Related', "content": RELATED_POSTS_PLACEHOLDER},
         ],
         "file_browser_callback": 'CustomFileBrowser',
     }
