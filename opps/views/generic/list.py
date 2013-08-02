@@ -16,6 +16,9 @@ class ListView(View, DjangoListView):
         templates = []
 
         domain_folder = self.get_template_folder()
+        if not self.long_slug:
+            templates.append('{}/none.html'.format(domain_folder))
+            return templates
 
         if self.channel:
             if self.channel.group and self.channel.parent:
