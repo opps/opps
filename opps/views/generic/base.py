@@ -5,6 +5,7 @@ from django.utils import timezone
 from django import template
 from django.conf import settings
 from django.contrib.sites.models import get_current_site
+from django.core.exceptions import ImproperlyConfigured
 
 from opps.articles.models import Album
 from opps.containers.models import Container, ContainerBox
@@ -27,6 +28,9 @@ class View(object):
         self.child_class = u'container'
 
     def get_context_data(self, **kwargs):
+        if not self.long_slug:
+            context = []
+            return context
         context = super(View, self).get_context_data(**kwargs)
 
         # channel is needed everywhere
