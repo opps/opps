@@ -5,7 +5,6 @@ from django.utils import timezone
 from django import template
 from django.conf import settings
 from django.contrib.sites.models import get_current_site
-from django.core.exceptions import ImproperlyConfigured
 
 from opps.articles.models import Album
 from opps.containers.models import Container, ContainerBox
