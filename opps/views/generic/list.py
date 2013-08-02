@@ -45,8 +45,8 @@ class ListView(View, DjangoListView):
         return templates
 
     def get_queryset(self):
-        self.long_slug = self.get_long_slug()
         self.site = get_current_site(self.request)
+        self.long_slug = self.get_long_slug()
 
         if not self.long_slug:
             return None
