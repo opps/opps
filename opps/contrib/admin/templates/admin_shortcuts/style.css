@@ -3,8 +3,12 @@
 
 {% block main %}
 /* shortcuts */
-.admin_shortcuts .shortcuts { background: #50839e; padding: 10px 15px 20px; margin: 0; list-style: none;
-	box-shadow: 0 2px 5px rgba(0,0,0,0.2) inset; }
+.admin_shortcuts .shortcuts {
+    /*background: #50839e;
+    padding: 10px 15px 20px;*/
+    margin: 0; list-style: none;
+	/*box-shadow: 0 2px 5px rgba(0,0,0,0.2) inset;*/
+}
 .admin_shortcuts .shortcuts ul:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0;
 	height: 0; }
 .admin_shortcuts .shortcuts ul { padding: 0; margin: 5px 0 0 0; list-style: none; }
@@ -30,7 +34,7 @@
 {% block advanced %}
 /* advanced button */
 .admin_shortcuts #toggle_app_list { display: block; text-align: center; padding: 2px 0; color: #fff; font-size: 11px;
-	font-weight: bold; background: #7CA0C7 url('{% admin_static_url %}img/default-bg.gif') 0 100% repeat-x;
+	font-weight: bold; background: #6093ae;
 	border-bottom: 1px solid #6093ae; }
 .admin_shortcuts #toggle_app_list:hover { background-position: 0 50%; }
 .admin_shortcuts #toggle_app_list .closed { display: inline; }
