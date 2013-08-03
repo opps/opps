@@ -34,7 +34,7 @@ class OppsCoreConf(AppConf):
     # default settings for tinymce
     EDITOR = {
         'editor': 'tinymce',
-        'height' : 400,
+        'height': 400,
         'js': ('/static/tinymce/tinymce.min.js',),
         "theme": "modern",
         "plugins": [

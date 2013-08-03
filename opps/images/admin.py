@@ -92,7 +92,6 @@ class ImagesAdmin(PublishableAdmin):
     opps_editor_select.short_description = _(u'Select')
     opps_editor_select.allow_tags = True
 
-
     def image_thumb(self, obj):
         if obj.archive:
             return u'<img width="60px" height="60px" src="{0}" />'.format(
