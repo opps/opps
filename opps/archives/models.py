@@ -10,6 +10,7 @@ from django.utils import timezone
 
 
 from opps.core.models import Publishable, Slugged
+from opps.core.tags.models import Tagged
 
 
 def get_file_path(instance, filename):
@@ -42,3 +43,10 @@ class Archive(Publishable, Slugged):
         if self.date_available <= timezone.now() and self.published:
             return self.archive.url
         return u""
+
+
+class File(Archive, Tagged):
+
+    class Meta:
+        verbose_name = _('File')
+        verbose_name_plural = _('Files')
