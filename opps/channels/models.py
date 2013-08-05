@@ -27,8 +27,7 @@ class Channel(MPTTModel, Publishable, Slugged):
     long_slug = models.SlugField(_(u"Path name"), max_length=250,
                                  db_index=True)
     layout = models.CharField(_(u'Layout'), max_length=250, db_index=True,
-                              default="default",
-                              choices=((_(u"default"), _(u"Default")),))
+                              default="default")
     description = models.CharField(_(u"Description"),
                                    max_length=255, null=True, blank=True)
     show_in_menu = models.BooleanField(_(u"Show in menu?"), default=False)
