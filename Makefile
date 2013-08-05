@@ -33,12 +33,7 @@ makemessages:
 
 .PHONY: compilemessages
 compilemessages:
-	for api archives articles bin boxes channels containers contrib core db flatpages images search sitemaps sources views; do\
-	    echo "make $$resource";\
-	    cd opps/$$resource;\
-		django-admin.py compilemessages;\
-		cd ../../;\
-	done
+	@sh scripts/compilemessages.sh
 
 .PHONY: tx
 tx:
