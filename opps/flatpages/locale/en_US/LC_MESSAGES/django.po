@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-10 15:04-0300\n"
+"POT-Creation-Date: 2013-08-05 15:02-0300\n"
 "PO-Revision-Date: 2013-04-23 15:42+0000\n"
 "Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,52 +22,53 @@ msgstr ""
 msgid "FlatPages"
 msgstr "FlatPages"
 
-#: admin.py:30
+#: admin.py:31
 msgid "Identification"
 msgstr "Identification"
 
-#: admin.py:33 models.py:29
+#: admin.py:34 models.py:11
 msgid "Content"
 msgstr "Content"
 
-#: admin.py:35
+#: admin.py:36
 msgid "Publication"
 msgstr "Publication"
 
+#: admin.py:45
+#, fuzzy
+msgid "No Image"
+msgstr "Main Image"
+
+#: admin.py:46
+msgid "Thumbnail"
+msgstr ""
+
 #: models.py:10
-msgid "Title"
-msgstr "Title"
-
-#: models.py:11
-msgid "Headline"
-msgstr "Headline"
-
-#: models.py:13
-msgid "URL"
-msgstr "URL"
-
-#: models.py:19
-msgid "Short URL"
-msgstr "Short URL"
-
-#: models.py:22
 msgid "Show in menu?"
 msgstr "Show in menu?"
 
-#: models.py:27
-msgid "Main Image"
-msgstr "Main Image"
-
-#: models.py:30
+#: models.py:12
 msgid "Order"
 msgstr "Order"
 
-#: models.py:33
+#: models.py:15
 #, fuzzy
 msgid "Flat page"
 msgstr "FlatPages"
 
-#: models.py:34
+#: models.py:16
 #, fuzzy
 msgid "Flat pages"
 msgstr "FlatPages"
+
+#~ msgid "Title"
+#~ msgstr "Title"
+
+#~ msgid "Headline"
+#~ msgstr "Headline"
+
+#~ msgid "URL"
+#~ msgstr "URL"
+
+#~ msgid "Short URL"
+#~ msgstr "Short URL"

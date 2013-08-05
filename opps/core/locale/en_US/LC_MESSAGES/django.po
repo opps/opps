@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-10 15:04-0300\n"
+"POT-Creation-Date: 2013-08-05 15:02-0300\n"
 "PO-Revision-Date: 2013-04-23 15:38+0000\n"
 "Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,98 +22,158 @@ msgstr ""
 msgid "Core"
 msgstr "Core"
 
-#: admin.py:29
-msgid "Publish/Unpublish"
-msgstr ""
-
-#: admin.py:43
+#: admin.py:21 models.py:85
 msgid "Channel"
 msgstr ""
 
-#: admin.py:60
+#: admin.py:42
 msgid "No channel"
 msgstr ""
 
-#: admin.py:86
+#: admin.py:101
+msgid "Publish/Unpublish"
+msgstr ""
+
+#: admin.py:121
+msgid "This item is not in a box"
+msgstr ""
+
+#: admin.py:123
+msgid "Article boxes"
+msgstr ""
+
+#: admin.py:129
+msgid "No Image"
+msgstr ""
+
+#: admin.py:130
+msgid "Thumbnail"
+msgstr ""
+
+#: admin.py:138
+msgid "Images"
+msgstr ""
+
+#: admin.py:145 admin.py:147
+msgid "View on site"
+msgstr ""
+
+#: admin.py:160
 msgid "Identification"
 msgstr ""
 
-#: admin.py:88
+#: admin.py:162
 msgid "Relationships"
 msgstr ""
 
-#: admin.py:90
+#: admin.py:164
 msgid "Publication"
 msgstr ""
 
-#: models.py:17
+#: models.py:20
 msgid "Date insert"
 msgstr "Date insert"
 
-#: models.py:18
+#: models.py:21
 msgid "Date update"
 msgstr "Date update"
 
-#: models.py:34
+#: models.py:38
+msgid "Site id"
+msgstr ""
+
+#: models.py:43
+msgid "Site domain"
+msgstr ""
+
+#: models.py:48
 msgid "Date available"
 msgstr "Date available"
 
-#: models.py:36
+#: models.py:53
 msgid "Published"
 msgstr "Published"
 
-#: models.py:51
-msgid "URL"
-msgstr ""
-
-#: models.py:70
-msgid "The URL already exists as a redirect"
-msgstr ""
-
-#: models.py:99
-msgid "Box name"
-msgstr "Box name"
-
-#: models.py:101
-msgid "Slug"
-msgstr "Slug"
-
-#: models.py:109 models.py:188
-msgid "Only published article"
-msgstr "Only published article"
-
-#: models.py:118
+#: models.py:88
 msgid "Channel name"
 msgstr ""
 
-#: models.py:124
+#: models.py:94
 msgid "Channel long slug"
 msgstr ""
 
-#: models.py:166
+#: models.py:113
+msgid "Slug"
+msgstr "Slug"
+
+#: models.py:135
+msgid "The URL already exists as a redirect"
+msgstr ""
+
+#: models.py:180
+msgid "Slug already exists."
+msgstr ""
+
+#: models.py:208
+msgid "Main Image"
+msgstr ""
+
+#: models.py:211
+msgid "Main image caption"
+msgstr ""
+
+#: models.py:279
+msgid "App label"
+msgstr ""
+
+#: models.py:287
 msgid "Config Key Group"
 msgstr "Config Key Group"
 
-#: models.py:174
+#: models.py:295
 msgid "Config Key"
 msgstr "Config Key"
 
-#: models.py:180
+#: models.py:301
 msgid "Format"
 msgstr "Format"
 
-#: models.py:182
+#: models.py:303
 msgid "Config Value"
 msgstr "Config Value"
 
-#: models.py:183
+#: models.py:304
 msgid "Description"
 msgstr "Description"
 
-#: models.py:222
+#: models.py:309
+#, fuzzy
+msgid "Only published container"
+msgstr "Only published article"
+
+#: models.py:342
 #, python-format
 msgid "Can't format the value to %s"
 msgstr ""
+
+#: tags/models.py:10
+msgid "Name"
+msgstr ""
+
+#: tags/models.py:21
+msgid "Tag"
+msgstr ""
+
+#: tags/models.py:22 tags/models.py:27
+msgid "Tags"
+msgstr ""
+
+#: tags/models.py:29
+msgid "A comma-separated list of tags."
+msgstr ""
+
+#~ msgid "Box name"
+#~ msgstr "Box name"
 
 #~ msgid "Text"
 #~ msgstr "Text"
