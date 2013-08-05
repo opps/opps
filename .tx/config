@@ -1,6 +1,11 @@
 [main]
 host = https://www.transifex.com
 
+[opps-core.archives]
+file_filter = opps/archives/locale/<lang>/LC_MESSAGES/django.po
+source_file = opps/archives/locale/en_US/LC_MESSAGES/django.po
+source_lang = en_US
+
 [opps-core.articles]
 file_filter = opps/articles/locale/<lang>/LC_MESSAGES/django.po
 source_file = opps/articles/locale/en_US/LC_MESSAGES/django.po
@@ -14,6 +19,16 @@ source_lang = en_US
 [opps-core.channels]
 file_filter = opps/channels/locale/<lang>/LC_MESSAGES/django.po
 source_file = opps/channels/locale/en_US/LC_MESSAGES/django.po
+source_lang = en_US
+
+[opps-core.containers]
+file_filter = opps/containers/locale/<lang>/LC_MESSAGES/django.po
+source_file = opps/containers/locale/en_US/LC_MESSAGES/django.po
+source_lang = en_US
+
+[opps-core.contrib]
+file_filter = opps/contrib/locale/<lang>/LC_MESSAGES/django.po
+source_file = opps/contrib/locale/en_US/LC_MESSAGES/django.po
 source_lang = en_US
 
 [opps-core.core]
