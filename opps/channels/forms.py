@@ -7,7 +7,7 @@ from .models import Channel
 
 
 class ChannelAdminForm(forms.ModelForm):
-    layout = forms.ChoiceField(choices=(('default', _('Default'))))
+    layout = forms.ChoiceField(choices=(('default', _('Default')),))
 
     class Meta:
         model = Channel
