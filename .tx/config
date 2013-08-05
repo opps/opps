@@ -1,37 +1,37 @@
 [main]
 host = https://www.transifex.com
 
-[opps.articles]
+[opps-core.articles]
 file_filter = opps/articles/locale/<lang>/LC_MESSAGES/django.po
 source_file = opps/articles/locale/en_US/LC_MESSAGES/django.po
 source_lang = en_US
 
-[opps.boxes]
+[opps-core.boxes]
 file_filter = opps/boxes/locale/<lang>/LC_MESSAGES/django.po
 source_file = opps/boxes/locale/en_US/LC_MESSAGES/django.po
 source_lang = en_US
 
-[opps.channels]
+[opps-core.channels]
 file_filter = opps/channels/locale/<lang>/LC_MESSAGES/django.po
 source_file = opps/channels/locale/en_US/LC_MESSAGES/django.po
 source_lang = en_US
 
-[opps.core]
+[opps-core.core]
 file_filter = opps/core/locale/<lang>/LC_MESSAGES/django.po
 source_file = opps/core/locale/en_US/LC_MESSAGES/django.po
 source_lang = en_US
 
-[opps.flatpages]
+[opps-core.flatpages]
 file_filter = opps/flatpages/locale/<lang>/LC_MESSAGES/django.po
 source_file = opps/flatpages/locale/en_US/LC_MESSAGES/django.po
 source_lang = en_US
 
-[opps.images]
+[opps-core.images]
 file_filter = opps/images/locale/<lang>/LC_MESSAGES/django.po
 source_file = opps/images/locale/en_US/LC_MESSAGES/django.po
 source_lang = en_US
 
-[opps.sources]
+[opps-core.sources]
 file_filter = opps/sources/locale/<lang>/LC_MESSAGES/django.po
 source_file = opps/sources/locale/en_US/LC_MESSAGES/django.po
 source_lang = en_US

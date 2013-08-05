@@ -51,7 +51,7 @@ class ChannelAdmin(PublishableAdmin):
             channel_json = []
 
         if 'layout' in channel_json:
-            layout_list = ['default']+[l for l in channel_json['layout']]
+            layout_list = ['default'] + [l for l in channel_json['layout']]
             layout_choices = (
                 (n, n.title()) for n in layout_list)
 
