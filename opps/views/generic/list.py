@@ -23,6 +23,10 @@ class ListView(View, DjangoListView):
         list_name = 'list'
 
         if self.channel:
+            # Check layout, change via admin
+            if self.channel.layout != u'default':
+                list_name = self.channel.layout
+
             if self.channel.group and self.channel.parent:
                 templates.append('{}/{}/{}.html'.format(
                     domain_folder, self.channel.parent.long_slug, list_name))
