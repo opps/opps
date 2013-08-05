@@ -20,30 +20,34 @@ class ListView(View, DjangoListView):
             templates.append('{}/none.html'.format(domain_folder))
             return templates
 
+        list_name = 'list'
+
         if self.channel:
             if self.channel.group and self.channel.parent:
-                templates.append('{}/{}/list.html'.format(
-                    domain_folder, self.channel.parent.long_slug))
+                templates.append('{}/{}/{}.html'.format(
+                    domain_folder, self.channel.parent.long_slug, list_name))
 
                 if self.request.GET.get('page') and\
                    self.__class__.__name__ not in\
                    settings.OPPS_PAGINATE_NOT_APP:
-                    templates.append('{}/{}/list_paginated.html'.format(
-                        domain_folder, self.channel.parent.long_slug))
+                    templates.append('{}/{}/{}_paginated.html'.format(
+                        domain_folder, self.channel.parent.long_slug,
+                        list_name))
 
             if self.request.GET.get('page') and\
                self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
-                templates.append('{}/{}/list_paginated.html'.format(
-                    domain_folder, self.channel.long_slug))
+                templates.append('{}/{}/{}_paginated.html'.format(
+                    domain_folder, self.channel.long_slug, list_name))
 
-            templates.append('{}/{}/list.html'.format(
-                domain_folder, self.channel.long_slug))
+            templates.append('{}/{}/{}.html'.format(
+                domain_folder, self.channel.long_slug, list_name))
 
         if self.request.GET.get('page') and\
            self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
-            templates.append('{}/list_paginated.html'.format(domain_folder))
+            templates.append('{}/{}_paginated.html'.format(domain_folder,
+                                                           list_name))
 
-        templates.append('{}/list.html'.format(domain_folder))
+        templates.append('{}/{}.html'.format(domain_folder, list_name))
 
         return templates
 
