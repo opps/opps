@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Channel
+from .forms import ChannelAdminForm
 from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
 from opps.core.utils import get_template_path
@@ -19,6 +20,7 @@ class ChannelAdmin(PublishableAdmin):
     search_fields = ['name']
     exclude = ('user', 'long_slug')
     raw_id_fields = ['parent']
+    form = ChannelAdminForm
 
     fieldsets = (
         (_(u'Identification'), {
