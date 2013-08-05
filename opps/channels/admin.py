@@ -5,6 +5,9 @@ from django.utils.translation import ugettext_lazy as _
 from .models import Channel
 from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
+from opps.core.utils import get_template_path
+
+import json
 
 
 @apply_opps_rules('channels')
@@ -19,8 +22,9 @@ class ChannelAdmin(PublishableAdmin):
 
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('site', 'parent', 'name', 'slug', 'description',
-                       'order', ('show_in_menu', 'include_in_main_rss'),
+            'fields': ('site', 'parent', 'name', 'slug', 'layout',
+                       'description', 'order', ('show_in_menu',
+                                                'include_in_main_rss'),
                        'homepage', 'group')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
@@ -34,6 +38,25 @@ class ChannelAdmin(PublishableAdmin):
         obj.long_slug = long_slug
 
         super(ChannelAdmin, self).save_model(request, obj, form, change)
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(ChannelAdmin, self).get_form(request, obj, **kwargs)
+        try:
+            template = get_template_path(
+                'containers/{}/channel.json'.format(obj.slug))
+            f = open(template)
+            channel_json = json.loads(f.read().replace('\n', ''))
+            f.close()
+        except:
+            channel_json = []
+
+        if 'layout' in channel_json:
+            layout_list = ['default']+[l for l in channel_json['layout']]
+            layout_choices = (
+                (n, n.title()) for n in layout_list)
+
+            form.base_fields['layout'].choices = layout_choices
+        return form
 
 
 admin.site.register(Channel, ChannelAdmin)
