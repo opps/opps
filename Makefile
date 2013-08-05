@@ -37,9 +37,7 @@ compilemessages:
 
 .PHONY: tx
 tx:
-	for api archives articles bin boxes channels containers contrib core db flatpages images search sitemaps sources views; do\
-		tx set --auto-local -r opps-core.$$resource "opps/$$resource/locale/<lang>/LC_MESSAGES/django.po" --source-language=en_US --source-file "opps/$$resource/locale/en_US/LC_MESSAGES/django.po" --execute;\
-	done
+	@sh scripts/tx.sh
 
 .PHONY: txpush
 txpush:
