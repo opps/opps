@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from django.db.models import get_models, get_app
+from django.template import loader, TemplateDoesNotExist
 
 
 def get_app_model(appname, suffix=""):
@@ -17,3 +18,19 @@ def class_load(name):
     for comp in components[1:]:
         mod = getattr(mod, comp)
     return mod
+
+
+def get_template_path(path):
+    try:
+        template = loader.find_template(path)
+        if template[1]:
+            return template[1].name
+        for template_loader in loader.template_source_loaders:
+            try:
+                source, origin = template_loader.load_template_source(path)
+                return origin
+            except TemplateDoesNotExist:
+                pass
+        raise TemplateDoesNotExist(path)
+    except TemplateDoesNotExist:
+        return None
