@@ -34,6 +34,7 @@ class OppsCoreConf(AppConf):
     # default settings for tinymce
     EDITOR = {
         'editor': 'tinymce',
+        'height': 400,
         'js': ('/static/tinymce/tinymce.min.js',),
         "theme": "modern",
         "plugins": [
@@ -42,12 +43,12 @@ class OppsCoreConf(AppConf):
             "searchreplace wordcount visualblocks visualchars code fullscreen",
             """insertdatetime media nonbreaking save table contextmenu
         directionality""",
-            "template paste textcolor"
+            "template paste textcolor opps"
         ],
         "toolbar1": """insertfile undo redo | styleselect | bold italic |
                 alignleft aligncenter alignright alignjustify |
                 bullist numlist outdent indent | link image media |
-                print preview  | forecolor backcolor""",
+                print preview  | forecolor backcolor | opps""",
         "image_advtab": True,
         "templates": [
             {"title": 'Related', "content": RELATED_POSTS_PLACEHOLDER},

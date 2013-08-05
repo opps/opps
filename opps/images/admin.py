@@ -2,7 +2,6 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
-from django.contrib.sites.models import get_current_site
 from django.contrib.admin import SimpleListFilter
 from django.core.files.images import get_image_dimensions
 
@@ -78,18 +77,20 @@ class ImagesAdmin(PublishableAdmin):
             'fields': ('published', 'date_available')}),
     )
 
-    def save_model(self, request, obj, form, change):
-        if not change and len(form.more_image()) >= 1:
-            [Image.objects.create(
-                site=get_current_site(request),
-                archive=img,
-                title=obj.title,
-                slug=u"{0}-{1}".format(obj.slug, i),
-                description=obj.description,
-                published=obj.published,
-                user=User.objects.get(pk=request.user.pk))
-                for i, img in enumerate(form.more_image(), 1)]
-        super(ImagesAdmin, self).save_model(request, obj, form, change)
+    def get_list_display(self, request):
+        list_display = self.list_display
+        pop = request.GET.get('pop')
+        if pop == 'oppseditor':
+            list_display = ['opps_editor_select'] + list(list_display)
+        return list_display
+
+    def opps_editor_select(self, obj):
+        return '''
+        <a href="#" onclick="top.opps_editor_popup_selector('{0}')">{1}</a>
+        '''.format(image_url(obj.archive.url, width=200, height=200),
+                   'Select')
+    opps_editor_select.short_description = _(u'Select')
+    opps_editor_select.allow_tags = True
 
     def image_thumb(self, obj):
         if obj.archive:
