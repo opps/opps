@@ -122,12 +122,15 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         cache.set(cachekey, _list)
         return _list
 
-    def _inbox(self, containerbox):
-        if containerbox.isdigit():
-            return ContainerBoxContainers.objects.get(
-                container=self.id, containerbox__id=containerbox)
-        return ContainerBoxContainers.objects.get(
-            container=self.id, containerbox=containerbox)
+    def _inbox(self, containerbox=None):
+        obj = ContainerBoxContainers.objects
+        if containerbox:
+            if containerbox.isdigit():
+                return obj.get(container=self.id,
+                               containerbox__id=containerbox)
+            return obj.get(container=self.id,
+                           containerbox=containerbox)
+        return obj.filter(container=self.id)
 
 
 class ContainerSource(models.Model):
