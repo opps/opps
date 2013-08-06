@@ -14,6 +14,8 @@ def ofKey(value, arg):
 
 
 @register.filter
-def callMethod(obj, methodName, *args):
+def callMethod(obj, args):
+    arg = args.split(',')
+    methodName = arg[0]
     method = getattr(obj, methodName)
-    return method(*args)
+    return method(arg[1])
