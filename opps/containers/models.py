@@ -122,7 +122,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         cache.set(cachekey, _list)
         return _list
 
-    def _inbox(self, containerbox=None):
+    def inbox(self, containerbox=None):
         obj = ContainerBoxContainers.objects
         if containerbox:
             if containerbox.isdigit():
