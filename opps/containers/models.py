@@ -124,9 +124,10 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
 
     def _inbox(self, containerbox):
         if containerbox.isdigit():
-            return ContainerBoxContainers.objects.get(container=self.id,
-                                                      containerbox__id=containerbox)
-        return ContainerBoxContainers.objects.get(container=self.id, containerbox=containerbox)
+            return ContainerBoxContainers.objects.get(
+                container=self.id, containerbox__id=containerbox)
+        return ContainerBoxContainers.objects.get(
+            container=self.id, containerbox=containerbox)
 
 
 # DOES NOT WORKS, IT CREATES A TABLE WITH A WRONG NAME
