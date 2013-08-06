@@ -124,7 +124,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
 
     def inbox(self, containerbox=None):
         obj = ContainerBoxContainers.objects
-        if not isinstance(containerbox):
+        if isinstance(containerbox, str):
             if containerbox.isdigit():
                 return obj.get(container=self.id,
                                containerbox__slug=containerbox)
