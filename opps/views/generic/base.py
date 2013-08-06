@@ -70,10 +70,6 @@ class View(object):
         if self.slug:
             context['articleboxes'] = context['articleboxes'].filter(
                 containers__slug=self.slug)
-            context['context'] = getattr(__import__(
-                self.object.child_module, fromlist=[self.object.child_class]),
-                self.object.child_class
-            ).objects.get(pk=self.object.pk)
 
         return context
 
