@@ -10,4 +10,5 @@ django-appconf
 djangorestframework
 django-grappelli
 django-filebrowser
+django-polymorphic
 feedparser
