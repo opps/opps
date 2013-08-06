@@ -7,6 +7,9 @@ from django.core.cache import cache
 from django.utils import timezone
 from django.conf import settings
 
+from polymorphic import PolymorphicModel
+from polymorphic.showfields import ShowFieldContent
+
 from .signals import shorturl_generate, delete_container
 from opps.core.cache import _cache_key
 from opps.core.models import Publishable, Slugged, Channeling, Imaged
@@ -14,7 +17,8 @@ from opps.boxes.models import BaseBox
 from opps.core.tags.models import Tagged
 
 
-class Container(Publishable, Slugged, Channeling, Imaged, Tagged):
+class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
+                Channeling, Imaged, Tagged):
     title = models.CharField(_(u"Title"), max_length=140, db_index=True)
     hat = models.CharField(
         _(u"Hat"),
