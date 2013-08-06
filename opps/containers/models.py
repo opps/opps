@@ -122,6 +122,9 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         cache.set(cachekey, _list)
         return _list
 
+    def _inbox(self):
+        return ContainerBoxContainers.objects.get(container=self.id)
+
 
 # DOES NOT WORKS, IT CREATES A TABLE WITH A WRONG NAME
 # class ContainerThrough(models.Model):
