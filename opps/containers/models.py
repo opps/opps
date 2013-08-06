@@ -130,20 +130,6 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
             container=self.id, containerbox=containerbox)
 
 
-# DOES NOT WORKS, IT CREATES A TABLE WITH A WRONG NAME
-# class ContainerThrough(models.Model):
-#     container = models.ForeignKey(
-#         'containers.Container',
-#         null=True, blank=True,
-#         on_delete=models.SET_NULL,
-#         verbose_name=_(u'Container'),
-#     )
-#     order = models.PositiveIntegerField(_(u'Order'), default=0)
-
-#     class Meta:
-#         abstract = True
-
-
 class ContainerSource(models.Model):
     container = models.ForeignKey(
         'containers.Container',
