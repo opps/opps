@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from opps.channels.templatetags.menu_tags import ofKey
+from opps.core.templatetags.obj_tags import ofKey
 
 
 class OfKeyTest(TestCase):
