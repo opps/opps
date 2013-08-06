@@ -24,8 +24,8 @@ class Tag(Date, Slugged):
 
 
 class Tagged(models.Model):
-    tags = models.CharField(_(u'Tags'), max_length=4000, db_index=True,
-                            blank=True, null=True,
+    tags = models.CharField(_(u'Tags'), max_length=4000, blank=True,
+                            null=True,
                             help_text=_(u'A comma-separated list of tags.'))
 
     def save(self, *args, **kwargs):
