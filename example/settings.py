@@ -5,12 +5,12 @@ import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
+PROJECT_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..')
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_PATH, '../example.db'),
+        'NAME': os.path.join(PROJECT_PATH, 'example.db'),
     }
 }
 
@@ -123,6 +123,11 @@ LOGGING = {
 }
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_PATH, '..', 'static')
-STATICFILES_DIRS = (os.path.join(PROJECT_PATH, '..', '_static'),)
+STATIC_ROOT = os.path.join(PROJECT_PATH, 'public', 'static')
+
+STATICFILES_DIRS = (os.path.join(PROJECT_PATH, 'public', '_static'),)
+
+URL_TINYMCE = STATIC_URL + "tinymce"
+PATH_TINYMCE = STATIC_URL + "tinymce"
+
 ROOT_URLCONF = 'example.urls'
