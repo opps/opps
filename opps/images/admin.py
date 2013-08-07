@@ -94,6 +94,21 @@ class ImagesAdmin(PublishableAdmin):
 
         super(ImagesAdmin, self).save_model(request, obj, form, change)
 
+    def get_list_display(self, request):
+            list_display = self.list_display
+            pop = request.GET.get('pop')
+            if pop == 'oppseditor':
+                list_display = ['opps_editor_select'] + list(list_display)
+            return list_display
+
+    def opps_editor_select(self, obj):
+        return '''
+        <a href="#" onclick="top.opps_editor_popup_selector('{0}')">{1}</a>
+        '''.format(image_url(obj.image.url, width=200, height=200),
+                   'Select')
+    opps_editor_select.short_description = _(u'Select')
+    opps_editor_select.allow_tags = True
+
     def image_thumb(self, obj):
         if obj.image:
             html = (u'<img width="60px" height="60px" id="imageExample" '
