@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 *.log
 *.pot
 local_settings.py
 
+=======
+>>>>>>> 06587f42fb708a0195fc183d81c5af3f42bdc13d
 *.py[cod]
 
 # C extensions
@@ -14,6 +17,10 @@ dist
 build
 eggs
 parts
+<<<<<<< HEAD
+=======
+bin
+>>>>>>> 06587f42fb708a0195fc183d81c5af3f42bdc13d
 var
 sdist
 develop-eggs
@@ -29,12 +36,31 @@ pip-log.txt
 .tox
 nosetests.xml
 
+<<<<<<< HEAD
+=======
+# Translations
+*.mo
+
+>>>>>>> 06587f42fb708a0195fc183d81c5af3f42bdc13d
 # Mr Developer
 .mr.developer.cfg
 .project
 .pydevproject
+<<<<<<< HEAD
 *.swp
 
 
 # Django
 settings.py
+=======
+
+# SQLite3 databases
+*.db
+
+# Images
+images
+
+admin
+redactor
+static
+>>>>>>> 06587f42fb708a0195fc183d81c5af3f42bdc13d
