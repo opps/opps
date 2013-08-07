@@ -8,6 +8,8 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
 from django.contrib.sites.models import get_current_site
+from django.db.models import Q
+
 from opps.channels.models import Channel
 from opps.images.generate import image_url
 
@@ -74,6 +76,42 @@ class ChannelListFilter(SimpleListFilter):
             queryset = queryset.filter(channel__in=child_channels)
         elif value:
             queryset = queryset.filter(channel_long_slug=value)
+
+        return queryset
+
+
+class UserListFilter(SimpleListFilter):
+    title = _(u'User')
+
+    parameter_name = 'user'
+
+    def lookups(self, request, model_admin):
+        """
+        Returns a list of tuples. The first element in each
+        tuple is the coded value for the option that will
+        appear in the URL query. The second element is the
+        human-readable name for the option that will appear
+        in the right sidebar.
+        """
+        User = get_user_model()
+        q = Q()
+        q |= Q(is_superuser=True)
+        q |= Q(is_staff=True)
+        q &= Q(is_active=True)
+        users = User.objects.filter(q)
+        return [(i.id, i.get_full_name()) for i in users]
+
+    def queryset(self, request, queryset):
+        """
+        Returns the filtered queryset based on the value
+        provided in the query string and retrievable via
+        `self.value()`.
+        """
+        value = self.value()
+        if not value:
+            return queryset
+
+        queryset = queryset.filter(user=value)
 
         return queryset
 

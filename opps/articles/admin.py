@@ -11,7 +11,7 @@ from .models import (ArticleBox, ArticleBoxArticles, ArticleConfig,
 from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
 from opps.core.admin import BaseBoxAdmin
-from opps.core.admin import ChannelListFilter
+from opps.core.admin import ChannelListFilter, UserListFilter
 from opps.images.generate import image_url
 
 from opps.core.widgets import OppsEditor
@@ -79,7 +79,7 @@ class ArticleAdmin(PublishableAdmin):
 
     def get_list_filter(self, request):
         list_filter = super(ArticleAdmin, self).list_filter
-        list_filter = [ChannelListFilter] + list(list_filter)
+        list_filter = [ChannelListFilter, UserListFilter] + list(list_filter)
         return list_filter
 
 
