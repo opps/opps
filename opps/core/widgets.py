@@ -40,34 +40,12 @@ CONFIG.update(USER_CONFIG)
 
 INIT_JS = {
     'tinymce': """
-              <script type="text/javascript">
-
-            function CustomFileBrowser(field_name, url, type, win) {
-
-                var cmsURL = '/admin/filebrowser/browse/?pop=2';
-                cmsURL = cmsURL + '&type=' + type;
-
-                tinyMCE.activeEditor.windowManager.open({
-                    file: cmsURL,
-                    width: 980,
-                    height: 500,
-                    resizable: 'yes',
-                    scrollbars: 'yes',
-                    inline: 'no',
-                    close_previous: 'no',
-                }, {
-                    window: win,
-                    input: field_name,
-                    editor_id: tinyMCE.activeEditor.id
-                });
-                return false;
-
-            }
-
+            <script src='/static/opps_tinymce.js'></script>
+            <script type="text/javascript">
             django.jQuery(document).ready(function(){
             tinymce.init(%s);
             });
-              </script>""",
+            </script>""",
 
     'redactor': """<script type="text/javascript">
                   django.jQuery(document).ready(function(){
