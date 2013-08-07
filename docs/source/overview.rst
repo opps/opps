@@ -30,7 +30,7 @@ Translations are managed on the `Transiflex <https://www.transifex.com/projects/
 Sites Using Opps
 ----------------
 
-* `Portal Virgual <http://virgula.uol.com.br>`_
+* `Portal Virgula <http://virgula.uol.com.br>`_
 * `Portal Guiame <http://guiame.com.br>`_
 * `Grupo Troiano <http://grupotroiano.com.br>`_
 * `Troiano <http://troiano.com.br>`_
