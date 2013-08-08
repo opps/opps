@@ -3,14 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Translators:
 # Ellison Leão, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-05 15:02-0300\n"
-"PO-Revision-Date: 2013-08-08 17:44+0000\n"
+"PO-Revision-Date: 2013-08-08 17:08+0000\n"
 "Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -19,37 +18,26 @@ msgstr ""
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: __init__.py:5 models.py:17
-msgid "Sources"
-msgstr "Fontes"
+#: __init__.py:5 models.py:35
+msgid "Archives"
+msgstr "Arquivos"
 
-#: admin.py:17
-msgid "Identification"
-msgstr "Identificação"
+#: models.py:27
+msgid "Title"
+msgstr "Título"
 
-#: admin.py:19
-msgid "Content"
-msgstr "Conteúdo"
+#: models.py:29
+msgid "Description"
+msgstr "Descrição"
 
-#: admin.py:21
-msgid "Publication"
-msgstr "Publicação"
+#: models.py:34
+msgid "Archive"
+msgstr "Arquivo"
 
-#: models.py:10
-msgid "Name"
-msgstr "Nome"
+#: models.py:51
+msgid "File"
+msgstr "Arquivo"
 
-#: models.py:11
-msgid "URL"
-msgstr "URL"
-
-#: models.py:12
-msgid "Feed URL"
-msgstr "URL do Feed"
-
-#: models.py:16
-msgid "Source"
-msgstr "Fontes"
-
-#~ msgid "Slug"
-#~ msgstr "Slug"
+#: models.py:52
+msgid "Files"
+msgstr "Arquivos"

@@ -4,18 +4,14 @@
 # 
 # Translators:
 # Translators:
-# Ellison Leão <ellisonleao@gmail.com>, 2013
-# Ellison Leão <ellisonleao@gmail.com>, 2013
-# josene <jsene@yacows.com.br>, 2013
-# josene <jsene@yacows.com.br>, 2013
-# Thiago Avelino <Thiagoavelinoster@gmail.com>, 2013
+# Ellison Leão, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: opps\n"
+"Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-04 13:49-0300\n"
-"PO-Revision-Date: 2013-05-06 19:52+0000\n"
-"Last-Translator: josene <jsene@yacows.com.br>\n"
+"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"PO-Revision-Date: 2013-08-08 17:30+0000\n"
+"Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,100 +21,159 @@ msgstr ""
 
 #: __init__.py:8
 msgid "Core"
-msgstr "Modelo base"
+msgstr "Core"
 
-#: admin.py:29
-msgid "Publish/Unpublish"
-msgstr "Publicar/Não Publicar"
-
-#: admin.py:43
+#: admin.py:21 models.py:85
 msgid "Channel"
 msgstr "Canal"
 
-#: admin.py:60
+#: admin.py:42
 msgid "No channel"
-msgstr "Nenhum Canal"
+msgstr "Sem canal"
 
-#: admin.py:86
+#: admin.py:101
+msgid "Publish/Unpublish"
+msgstr "Publicar/Despublicar"
+
+#: admin.py:121
+msgid "This item is not in a box"
+msgstr "Este item não está em um box"
+
+#: admin.py:123
+msgid "Article boxes"
+msgstr "Boxes de artigos"
+
+#: admin.py:129
+msgid "No Image"
+msgstr "Sem imagem"
+
+#: admin.py:130
+msgid "Thumbnail"
+msgstr "Imagem pequena"
+
+#: admin.py:138
+msgid "Images"
+msgstr "Imagens"
+
+#: admin.py:145 admin.py:147
+msgid "View on site"
+msgstr "Ver no site"
+
+#: admin.py:160
 msgid "Identification"
 msgstr "Identificação"
 
-#: admin.py:88
+#: admin.py:162
 msgid "Relationships"
 msgstr "Relacionamentos"
 
-#: admin.py:90
+#: admin.py:164
 msgid "Publication"
 msgstr "Publicação"
 
-#: models.py:17
+#: models.py:20
 msgid "Date insert"
 msgstr "Data de inserção"
 
-#: models.py:18
+#: models.py:21
 msgid "Date update"
 msgstr "Data de atualização"
 
-#: models.py:34
+#: models.py:38
+msgid "Site id"
+msgstr "ID do Site"
+
+#: models.py:43
+msgid "Site domain"
+msgstr "Domínio do Site"
+
+#: models.py:48
 msgid "Date available"
 msgstr "Data de publicação"
 
-#: models.py:36
+#: models.py:53
 msgid "Published"
 msgstr "Publicado"
 
-#: models.py:51
-msgid "URL"
-msgstr "URL"
-
-#: models.py:71
-msgid "The URL already exists as a redirect"
-msgstr "A URL já existe como um redirecionamento"
-
-#: models.py:99
-msgid "Box name"
-msgstr "Nome do box"
-
-#: models.py:101
-msgid "Slug"
-msgstr "slug"
-
-#: models.py:109 models.py:188
-msgid "Only published article"
-msgstr "Apenas artigo publicado"
-
-#: models.py:118
+#: models.py:88
 msgid "Channel name"
-msgstr "Nome do Canal"
+msgstr "Nome do canal"
 
-#: models.py:124
+#: models.py:94
 msgid "Channel long slug"
-msgstr "Slug do canal longo"
+msgstr "Retranca longa do canal"
 
-#: models.py:166
-msgid "Config Key Group"
-msgstr "Grupo de configuração da chave"
+#: models.py:113
+msgid "Slug"
+msgstr "Retranca"
 
-#: models.py:174
-msgid "Config Key"
-msgstr "Chave de configuração"
+#: models.py:135
+msgid "The URL already exists as a redirect"
+msgstr "Esta URL já existe para um redirecionamento"
 
 #: models.py:180
+msgid "Slug already exists."
+msgstr "Retranca já existe"
+
+#: models.py:208
+msgid "Main Image"
+msgstr "Imagem Principal"
+
+#: models.py:211
+msgid "Main image caption"
+msgstr "Legenda da Imagem Principal"
+
+#: models.py:279
+msgid "App label"
+msgstr "Nome da App"
+
+#: models.py:287
+msgid "Config Key Group"
+msgstr "Grupo de Chave de Configuração"
+
+#: models.py:295
+msgid "Config Key"
+msgstr "Chave de Configuração"
+
+#: models.py:301
 msgid "Format"
 msgstr "Formato"
 
-#: models.py:182
+#: models.py:303
 msgid "Config Value"
 msgstr "Valor de configuração"
 
-#: models.py:183
+#: models.py:304
 msgid "Description"
 msgstr "Descrição"
 
-#: models.py:222
+#: models.py:309
+msgid "Only published container"
+msgstr "Apenas artigos publicados"
+
+#: models.py:342
 #, python-format
 msgid "Can't format the value to %s"
-msgstr "Não é possível formatar o valor para %s"
+msgstr "Erro ao formatar o valor para %s"
+
+#: tags/models.py:10
+msgid "Name"
+msgstr "Nome"
+
+#: tags/models.py:21
+msgid "Tag"
+msgstr "Tag"
+
+#: tags/models.py:22 tags/models.py:27
+msgid "Tags"
+msgstr "Tags"
+
+#: tags/models.py:29
+msgid "A comma-separated list of tags."
+msgstr "Uma lista de tags separada por vírgulas"
+
+#~ msgid "Box name"
+#~ msgstr "Box name"
 
 #~ msgid "Text"
 #~ msgstr "Text"

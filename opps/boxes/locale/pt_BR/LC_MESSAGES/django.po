@@ -3,19 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Bruno Rocha <rochacbruno@gmail.com>, 2013
-# Ellison Leão <ellisonleao@gmail.com>, 2013
-# Ellison Leão <ellisonleao@gmail.com>, 2013
-# josene <jsene@yacows.com.br>, 2013
-# josene <jsene@yacows.com.br>, 2013
-# Bruno Rocha <rochacbruno@gmail.com>, 2013
+# Translators:
+# Ellison Leão, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: opps\n"
+"Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-26 20:10-0300\n"
-"PO-Revision-Date: 2013-04-26 17:59+0000\n"
-"Last-Translator: josene <jsene@yacows.com.br>\n"
+"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"PO-Revision-Date: 2013-08-08 17:12+0000\n"
+"Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,46 +23,68 @@ msgstr ""
 msgid "Boxes"
 msgstr "Boxes"
 
-#: admin.py:18 admin.py:37
+#: admin.py:23
 msgid "Identification"
 msgstr "Identificação"
 
-#: admin.py:20
+#: admin.py:25
 msgid "Rules"
 msgstr "Regras"
 
-#: admin.py:22 admin.py:41
+#: admin.py:27
 msgid "Publication"
 msgstr "Publicação"
 
-#: admin.py:39
-msgid "Relationships"
-msgstr "Relacionamentos"
-
-#: models.py:21
-msgid "Dynamic queryset name"
-msgstr "Nome do queryset dinâmico"
+#: admin.py:30 admin.py:49
+msgid "Data sample"
+msgstr "Exemplo de data"
 
 #: models.py:23
-msgid "Slug"
-msgstr "slug"
+msgid "Dynamic queryset name"
+msgstr "Nome do Queryset dinâmico"
 
-#: models.py:29
+#: models.py:25 models.py:90
+msgid "Slug"
+msgstr "Retranca"
+
+#: models.py:31
 msgid "Model"
 msgstr "Modelo"
 
-#: models.py:30
+#: models.py:32
 msgid "Limit"
 msgstr "Limite"
 
-#: models.py:31
+#: models.py:33
 msgid "Order"
 msgstr "Ordem"
 
-#: models.py:35
+#: models.py:37
 msgid "Channel"
 msgstr "Canal"
 
 #: models.py:43
-msgid "Query Set"
-msgstr "Query Set"
+msgid "Filters"
+msgstr "Filtros"
+
+#: models.py:44
+msgid "Json format extra filters for queryset"
+msgstr "Filtros extras para queryset no formato JSON"
+
+#: models.py:54
+msgid "Invalid JSON"
+msgstr "JSON inválido"
+
+#: models.py:59
+msgid "Invalid Queryset"
+msgstr "Queryset inválido"
+
+#: models.py:88
+msgid "Box name"
+msgstr "Nome da Box"
+
+#~ msgid "Relationships"
+#~ msgstr "Relationships"
+
+#~ msgid "Query Set"
+#~ msgstr "Query Set"

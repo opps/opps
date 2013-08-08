@@ -1,0 +1,175 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Ellison Leão, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"PO-Revision-Date: 2013-08-08 17:20+0000\n"
+"Last-Translator: Ellison Leão\n"
+"Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: admin.py:21 models.py:184
+msgid "Container image"
+msgstr "Imagem de Container"
+
+#: admin.py:22 models.py:185
+msgid "Container images"
+msgstr "Imagens de Container"
+
+#: admin.py:32 admin.py:175
+msgid "No Image"
+msgstr "Sem imagem"
+
+#: admin.py:33 admin.py:176
+msgid "Thumbnail"
+msgstr "Imagem pequena"
+
+#: admin.py:44 models.py:153
+msgid "Container source"
+msgstr "Fonte do Container"
+
+#: admin.py:45 models.py:154
+msgid "Container sources"
+msgstr "Fontes do Container"
+
+#: admin.py:82
+msgid "Has queryset"
+msgstr "Tem Queryset"
+
+#: admin.py:96
+msgid "No"
+msgstr "Não"
+
+#: admin.py:97
+msgid "Yes"
+msgstr "Sim"
+
+#: admin.py:122
+msgid "Identification"
+msgstr "Identificação"
+
+#: admin.py:124
+msgid "Relationships"
+msgstr "Relacionamentos"
+
+#: admin.py:126
+msgid "Publication"
+msgstr "Publicação"
+
+#: admin.py:139
+msgid "Clean ended containers"
+msgstr "Containers finalizados"
+
+#: admin.py:158
+msgid "Dynamic"
+msgstr "Dinâmico"
+
+#: models.py:18 models.py:195
+msgid "Title"
+msgstr "Título"
+
+#: models.py:20
+msgid "Hat"
+msgstr "Chapéu"
+
+#: models.py:25
+msgid "Short URL"
+msgstr "URL Curta"
+
+#: models.py:29
+msgid "Child class"
+msgstr "Classe filha"
+
+#: models.py:35
+msgid "Child module"
+msgstr "Módulo filho"
+
+#: models.py:41
+msgid "Child app label"
+msgstr "Nome da app Filha"
+
+#: models.py:47
+msgid "Show on root channel?"
+msgstr "Mostrar no canal pai?"
+
+#: models.py:60 models.py:141 models.py:166 models.py:203 models.py:249
+msgid "Container"
+msgstr "Container"
+
+#: models.py:61
+msgid "Containers"
+msgstr "Containers"
+
+#: models.py:143 models.py:168 models.py:251
+msgid "Order"
+msgstr "Ordem"
+
+#: models.py:149
+msgid "Source"
+msgstr "Fonte"
+
+#: models.py:171
+msgid "Image"
+msgstr "Imagem"
+
+#: models.py:177
+msgid "Caption"
+msgstr "Legenda"
+
+#: models.py:211
+msgid "Query Set"
+msgstr "Queryset"
+
+#: models.py:215
+msgid "Container box"
+msgstr "Box de Container"
+
+#: models.py:216
+msgid "Containers boxes"
+msgstr "Boxes de Containers"
+
+#: models.py:243
+msgid "Container Box"
+msgstr "Box de Container"
+
+#: models.py:252
+msgid "Aggregate container"
+msgstr "Agregar containers"
+
+#: models.py:253
+msgid "Date available"
+msgstr "Data de publicação"
+
+#: models.py:255
+msgid "End date"
+msgstr "Data fim"
+
+#: models.py:259
+msgid "Article box articles"
+msgstr "Artigos de Box de Artigos"
+
+#: models.py:260
+msgid "Article boxes articles"
+msgstr "Artigos de Boxes de Artigos"
+
+#: models.py:269
+msgid "Article not published!"
+msgstr "Artigo não publicado!"
+
+#: templates/containers/none.html:10
+msgid "Warning"
+msgstr "Aviso"
+
+#: templates/containers/none.html:11
+msgid "It is necessary set channel as home page."
+msgstr "É necessário atribuir um canal como home."
