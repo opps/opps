@@ -1,0 +1,175 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# ppanhh <ppanhh@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"PO-Revision-Date: 2013-08-08 18:20+0000\n"
+"Last-Translator: ppanhh <ppanhh@gmail.com>\n"
+"Language-Team: Vietnamese (http://www.transifex.com/projects/p/opps/language/vi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: admin.py:21 models.py:184
+msgid "Container image"
+msgstr "Hình ảnh phần chứa dữ liệu"
+
+#: admin.py:22 models.py:185
+msgid "Container images"
+msgstr "Các hình ảnh phần chứa dữ liệu"
+
+#: admin.py:32 admin.py:175
+msgid "No Image"
+msgstr "Không có hình ảnh"
+
+#: admin.py:33 admin.py:176
+msgid "Thumbnail"
+msgstr "Hình ảnh thu nhỏ"
+
+#: admin.py:44 models.py:153
+msgid "Container source"
+msgstr "Nguồn chứa dữ liệu"
+
+#: admin.py:45 models.py:154
+msgid "Container sources"
+msgstr "Các nguồn chứa dữ liệu"
+
+#: admin.py:82
+msgid "Has queryset"
+msgstr "Có cài đặt truy vấn"
+
+#: admin.py:96
+msgid "No"
+msgstr "Không"
+
+#: admin.py:97
+msgid "Yes"
+msgstr "Có"
+
+#: admin.py:122
+msgid "Identification"
+msgstr "Định danh"
+
+#: admin.py:124
+msgid "Relationships"
+msgstr "Các mối liên hệ"
+
+#: admin.py:126
+msgid "Publication"
+msgstr "Công bố"
+
+#: admin.py:139
+msgid "Clean ended containers"
+msgstr "Dọn dẹp các phần chứa dữ liệu cuối cùng"
+
+#: admin.py:158
+msgid "Dynamic"
+msgstr "Động"
+
+#: models.py:18 models.py:195
+msgid "Title"
+msgstr "Tiêu đề"
+
+#: models.py:20
+msgid "Hat"
+msgstr "Mũ"
+
+#: models.py:25
+msgid "Short URL"
+msgstr "Đường dẫn liên kết ngắn"
+
+#: models.py:29
+msgid "Child class"
+msgstr "Lớp con"
+
+#: models.py:35
+msgid "Child module"
+msgstr "Module con"
+
+#: models.py:41
+msgid "Child app label"
+msgstr "Nhãn ứng dụng con"
+
+#: models.py:47
+msgid "Show on root channel?"
+msgstr "Hiển thị ở kênh dữ liệu gốc?"
+
+#: models.py:60 models.py:141 models.py:166 models.py:203 models.py:249
+msgid "Container"
+msgstr "Phần chứa dữ liệu"
+
+#: models.py:61
+msgid "Containers"
+msgstr "Các phần chứa dữ liệu"
+
+#: models.py:143 models.py:168 models.py:251
+msgid "Order"
+msgstr "Trật tự"
+
+#: models.py:149
+msgid "Source"
+msgstr "Nguồn"
+
+#: models.py:171
+msgid "Image"
+msgstr "Hình ảnh"
+
+#: models.py:177
+msgid "Caption"
+msgstr "Đầu đề"
+
+#: models.py:211
+msgid "Query Set"
+msgstr "Cài Đặt Truy Vấn"
+
+#: models.py:215
+msgid "Container box"
+msgstr "Hộp chứa dữ liệu"
+
+#: models.py:216
+msgid "Containers boxes"
+msgstr "Các hộp thuộc phần chứa dữ liệu"
+
+#: models.py:243
+msgid "Container Box"
+msgstr "Hộp chứa dữ liệu"
+
+#: models.py:252
+msgid "Aggregate container"
+msgstr "Gom nhóm các phần chứa dữ liệu"
+
+#: models.py:253
+msgid "Date available"
+msgstr "Ngày hiện có"
+
+#: models.py:255
+msgid "End date"
+msgstr "Ngày kết thúc"
+
+#: models.py:259
+msgid "Article box articles"
+msgstr "Các tiêu đề của hộp tiêu đề"
+
+#: models.py:260
+msgid "Article boxes articles"
+msgstr "Các tiêu đề của hộp tiêu đề"
+
+#: models.py:269
+msgid "Article not published!"
+msgstr "Tiêu đề vẫn chưa được đăng!"
+
+#: templates/containers/none.html:10
+msgid "Warning"
+msgstr "Cảnh báo"
+
+#: templates/containers/none.html:11
+msgid "It is necessary set channel as home page."
+msgstr "Đặt kênh dữ liệu làm trang chủ là điều nên làm."

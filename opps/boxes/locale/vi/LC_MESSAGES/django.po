@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# ppanhh <ppanhh@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"PO-Revision-Date: 2013-08-08 18:14+0000\n"
+"Last-Translator: ppanhh <ppanhh@gmail.com>\n"
+"Language-Team: Vietnamese (http://www.transifex.com/projects/p/opps/language/vi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: __init__.py:5
+msgid "Boxes"
+msgstr "Các hộp"
+
+#: admin.py:23
+msgid "Identification"
+msgstr "Định danh"
+
+#: admin.py:25
+msgid "Rules"
+msgstr "Các quy tắc"
+
+#: admin.py:27
+msgid "Publication"
+msgstr "Công bố"
+
+#: admin.py:30 admin.py:49
+msgid "Data sample"
+msgstr "Mẫu dữ liệu"
+
+#: models.py:23
+msgid "Dynamic queryset name"
+msgstr "Tên truy vấn động"
+
+#: models.py:25 models.py:90
+msgid "Slug"
+msgstr "Dãy chữ"
+
+#: models.py:31
+msgid "Model"
+msgstr "Mô hình"
+
+#: models.py:32
+msgid "Limit"
+msgstr "Giới hạ"
+
+#: models.py:33
+msgid "Order"
+msgstr "Trật tự"
+
+#: models.py:37
+msgid "Channel"
+msgstr "Kênh dữ liệu"
+
+#: models.py:43
+msgid "Filters"
+msgstr "Lọc dữ liệu"
+
+#: models.py:44
+msgid "Json format extra filters for queryset"
+msgstr "Bộ lọc bổ sung định dạng Json dành cho phần cài đặt truy vấn"
+
+#: models.py:54
+msgid "Invalid JSON"
+msgstr "JSON không hợp lệ"
+
+#: models.py:59
+msgid "Invalid Queryset"
+msgstr "Cài đặt truy vấn không hợp lệ"
+
+#: models.py:88
+msgid "Box name"
+msgstr "Tên hộp"
+
+#~ msgid "Relationships"
+#~ msgstr "Relationships"
+
+#~ msgid "Query Set"
+#~ msgstr "Query Set"

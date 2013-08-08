@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# ppanhh <ppanhh@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"PO-Revision-Date: 2013-08-08 18:29+0000\n"
+"Last-Translator: ppanhh <ppanhh@gmail.com>\n"
+"Language-Team: Vietnamese (http://www.transifex.com/projects/p/opps/language/vi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: __init__.py:5
+msgid "FlatPages"
+msgstr "FlatPages"
+
+#: admin.py:31
+msgid "Identification"
+msgstr "Định danh"
+
+#: admin.py:34 models.py:11
+msgid "Content"
+msgstr "Nội dung"
+
+#: admin.py:36
+msgid "Publication"
+msgstr "Công bố"
+
+#: admin.py:45
+msgid "No Image"
+msgstr "Hình ảnh chính"
+
+#: admin.py:46
+msgid "Thumbnail"
+msgstr "Hình ảnh thu nhỏ"
+
+#: models.py:10
+msgid "Show in menu?"
+msgstr "Hiển thị trong menu?"
+
+#: models.py:12
+msgid "Order"
+msgstr "Trật tự"
+
+#: models.py:15
+msgid "Flat page"
+msgstr "FlatPages"
+
+#: models.py:16
+msgid "Flat pages"
+msgstr "FlatPages"
+
+#~ msgid "Title"
+#~ msgstr "Title"
+
+#~ msgid "Headline"
+#~ msgstr "Headline"
+
+#~ msgid "URL"
+#~ msgstr "URL"
+
+#~ msgid "Short URL"
+#~ msgstr "Short URL"

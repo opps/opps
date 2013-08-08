@@ -1,0 +1,185 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# ppanhh <ppanhh@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"PO-Revision-Date: 2013-08-08 18:29+0000\n"
+"Last-Translator: ppanhh <ppanhh@gmail.com>\n"
+"Language-Team: Vietnamese (http://www.transifex.com/projects/p/opps/language/vi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: __init__.py:8
+msgid "Core"
+msgstr "Lõi"
+
+#: admin.py:21 models.py:85
+msgid "Channel"
+msgstr "Kênh dữ liệu"
+
+#: admin.py:42
+msgid "No channel"
+msgstr "Không có kênh dữ liệu"
+
+#: admin.py:101
+msgid "Publish/Unpublish"
+msgstr "Đăng bản/Bỏ đăng"
+
+#: admin.py:121
+msgid "This item is not in a box"
+msgstr "Đối tượng này không nằm trong hộp"
+
+#: admin.py:123
+msgid "Article boxes"
+msgstr "Các hộp tiêu đề"
+
+#: admin.py:129
+msgid "No Image"
+msgstr "Không có hình ảnh"
+
+#: admin.py:130
+msgid "Thumbnail"
+msgstr "Hình ảnh thu nhỏ"
+
+#: admin.py:138
+msgid "Images"
+msgstr "Các hình ảnh"
+
+#: admin.py:145 admin.py:147
+msgid "View on site"
+msgstr "Xem trên trang"
+
+#: admin.py:160
+msgid "Identification"
+msgstr "Định danh"
+
+#: admin.py:162
+msgid "Relationships"
+msgstr "Các mối liên hệ"
+
+#: admin.py:164
+msgid "Publication"
+msgstr "Đăng bản"
+
+#: models.py:20
+msgid "Date insert"
+msgstr "Chèn vào ngày"
+
+#: models.py:21
+msgid "Date update"
+msgstr "Cập nhật ngày"
+
+#: models.py:38
+msgid "Site id"
+msgstr "Chỉ số của trang"
+
+#: models.py:43
+msgid "Site domain"
+msgstr "Tên miền của trang"
+
+#: models.py:48
+msgid "Date available"
+msgstr "Ngày tháng hiện có"
+
+#: models.py:53
+msgid "Published"
+msgstr "Đã đăng bản"
+
+#: models.py:88
+msgid "Channel name"
+msgstr "Tên kênh dữ liệu"
+
+#: models.py:94
+msgid "Channel long slug"
+msgstr "Dãy chữ dài của kênh dữ liệu"
+
+#: models.py:113
+msgid "Slug"
+msgstr "Dãy chữ"
+
+#: models.py:135
+msgid "The URL already exists as a redirect"
+msgstr "Phần đường dẫn liên kết này đã tồn tại dưới dạng chuyển tiếp"
+
+#: models.py:180
+msgid "Slug already exists."
+msgstr "Dãy chữ đã tồn tại."
+
+#: models.py:208
+msgid "Main Image"
+msgstr "Hình ảnh chính"
+
+#: models.py:211
+msgid "Main image caption"
+msgstr "Đề mục hình ảnh chính"
+
+#: models.py:279
+msgid "App label"
+msgstr "Nhãn ứng dụng"
+
+#: models.py:287
+msgid "Config Key Group"
+msgstr "Chỉnh cấu hình nhóm khóa dữ liệu"
+
+#: models.py:295
+msgid "Config Key"
+msgstr "Chỉnh cấu hình khóa dữ liệu"
+
+#: models.py:301
+msgid "Format"
+msgstr "Định dạng"
+
+#: models.py:303
+msgid "Config Value"
+msgstr "Chỉnh cấu hình giá trị"
+
+#: models.py:304
+msgid "Description"
+msgstr "Mô tả"
+
+#: models.py:309
+msgid "Only published container"
+msgstr "Chỉ các tiêu đề đã đăng bản"
+
+#: models.py:342
+#, python-format
+msgid "Can't format the value to %s"
+msgstr "Không thể chỉnh định dạng giá trị thành %s"
+
+#: tags/models.py:10
+msgid "Name"
+msgstr "Tên"
+
+#: tags/models.py:21
+msgid "Tag"
+msgstr "Thẻ đánh dấu"
+
+#: tags/models.py:22 tags/models.py:27
+msgid "Tags"
+msgstr "Các thẻ đánh dấu"
+
+#: tags/models.py:29
+msgid "A comma-separated list of tags."
+msgstr "Cho vào dấu phẩy để tách biệt các yếu tố trong danh sách các thẻ đánh dấu"
+
+#~ msgid "Box name"
+#~ msgstr "Box name"
+
+#~ msgid "Text"
+#~ msgstr "Text"
+
+#~ msgid "Json"
+#~ msgstr "Json"
+
+#~ msgid "Yaml"
+#~ msgstr "Yaml"

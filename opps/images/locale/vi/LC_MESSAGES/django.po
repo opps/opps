@@ -1,0 +1,145 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# ppanhh <ppanhh@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"PO-Revision-Date: 2013-08-08 18:36+0000\n"
+"Last-Translator: ppanhh <ppanhh@gmail.com>\n"
+"Language-Team: Vietnamese (http://www.transifex.com/projects/p/opps/language/vi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: __init__.py:5 models.py:86
+msgid "Images"
+msgstr "Các hình ảnh"
+
+#: admin.py:20
+msgid "User"
+msgstr "Người dùng"
+
+#: admin.py:67
+msgid "Identification"
+msgstr "Định dan"
+
+#: admin.py:69
+msgid "Crop"
+msgstr "Lược bỏ"
+
+#: admin.py:73
+msgid "Content"
+msgstr "Nội dung"
+
+#: admin.py:75
+msgid "Publication"
+msgstr "Công bố"
+
+#: admin.py:92
+msgid "Select"
+msgstr "Chọn"
+
+#: admin.py:99
+msgid "No Image"
+msgstr "Không có hình ảnh"
+
+#: admin.py:100
+msgid "Thumbnail"
+msgstr "Hình ảnh thu nhỏ"
+
+#: admin.py:109
+msgid "Dimension"
+msgstr "Chiều"
+
+#: models.py:10
+msgid "Left"
+msgstr "Lề trái"
+
+#: models.py:11
+msgid "Center"
+msgstr "Chính giữa"
+
+#: models.py:12
+msgid "Right"
+msgstr "Lề phải"
+
+#: models.py:15
+msgid "Top"
+msgstr "Trên cùng"
+
+#: models.py:16
+msgid "Middle"
+msgstr "Ở chính giữa trung tâm"
+
+#: models.py:17
+msgid "Bottom"
+msgstr "Tận cùng"
+
+#: models.py:22
+msgid "Crop Example"
+msgstr "Lược bỏ ví dụ"
+
+#: models.py:32
+msgid "Flip"
+msgstr "Lật đối xứng"
+
+#: models.py:33
+msgid ""
+"Flag that indicates that thumbor should flip horizontally (on the vertical "
+"axis) the image"
+msgstr "Cờ đánh dấu chỉ ra các hình ảnh nên được lật đối xứng theo chiều ngang (dựa theo hướng thẳng đứng) của hình ảnh"
+
+#: models.py:37
+msgid "Flop"
+msgstr "Lắc lư"
+
+#: models.py:38
+msgid ""
+"Flag that indicates that thumbor should flip vertically (on the horizontal "
+"axis) the image"
+msgstr "Cờ đánh dấu chỉ ra các hình ảnh nên được lật đối xứng theo chiều thẳng đứng (dựa theo hướng nằm ngang) của hình ảnh"
+
+#: models.py:42
+msgid "Horizontal Align"
+msgstr "Canh chỉnh theo chiều ngang"
+
+#: models.py:46
+msgid "Horizontal alignment that thumbor should use for cropping"
+msgstr "Canh chỉnh theo chiều ngang khi sử dụng tính năng lược bỏ phần hình ảnh thu nhỏ"
+
+#: models.py:48
+msgid "Vertical Align"
+msgstr "Canh chỉnh theo chiều dọc"
+
+#: models.py:52
+msgid "Vertical alignment that thumbor should use for cropping"
+msgstr "Canh chỉnh theo chiều dọc khi sử dụng tính năng lược bỏ phần hình ảnh thu nhỏ"
+
+#: models.py:55
+msgid "Fit in"
+msgstr "Vừa vặn"
+
+#: models.py:56
+msgid ""
+"flag that indicates that thumbor should fit the image in the box defined by "
+"width x height"
+msgstr "cờ đánh dấu chỉ ra rằng các hình ảnh thu nhỏ nên được canh chỉnh vừa vặn với hộp được xác định bởi độ rộng x độ cao"
+
+#: models.py:61
+msgid "Smart"
+msgstr "Thông minh"
+
+#: models.py:62
+msgid "Flag that indicates thatthumbor should use smart cropping;"
+msgstr "Cờ đánh dấu chỉ ra rằng các hình ảnh thu nhỏ nên sử dụng tính năng lược bỏ thông minh:"
+
+#: models.py:85
+msgid "Image"
+msgstr "Hình ảnh"

@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# ppanhh <ppanhh@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"PO-Revision-Date: 2013-08-08 18:39+0000\n"
+"Last-Translator: ppanhh <ppanhh@gmail.com>\n"
+"Language-Team: Vietnamese (http://www.transifex.com/projects/p/opps/language/vi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: __init__.py:5 models.py:17
+msgid "Sources"
+msgstr "Các nguồn"
+
+#: admin.py:17
+msgid "Identification"
+msgstr "Định danh"
+
+#: admin.py:19
+msgid "Content"
+msgstr "Nội dung"
+
+#: admin.py:21
+msgid "Publication"
+msgstr "Công bố"
+
+#: models.py:10
+msgid "Name"
+msgstr "Tên"
+
+#: models.py:11
+msgid "URL"
+msgstr "Đường dẫn liên kết"
+
+#: models.py:12
+msgid "Feed URL"
+msgstr "Đường dẫn liên kết Feed"
+
+#: models.py:16
+msgid "Source"
+msgstr "Các nguồn"
+
+#~ msgid "Slug"
+#~ msgstr "Slug"
