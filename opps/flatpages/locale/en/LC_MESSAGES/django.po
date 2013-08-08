@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# Thiago Avelino <thiagoavelinoster@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"PO-Revision-Date: 2013-08-05 18:23+0000\n"
+"Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: __init__.py:5
+msgid "FlatPages"
+msgstr "FlatPages"
+
+#: admin.py:31
+msgid "Identification"
+msgstr "Identification"
+
+#: admin.py:34 models.py:11
+msgid "Content"
+msgstr "Content"
+
+#: admin.py:36
+msgid "Publication"
+msgstr "Publication"
+
+#: admin.py:45
+msgid "No Image"
+msgstr "Main Image"
+
+#: admin.py:46
+msgid "Thumbnail"
+msgstr "Thumbnail"
+
+#: models.py:10
+msgid "Show in menu?"
+msgstr "Show in menu?"
+
+#: models.py:12
+msgid "Order"
+msgstr "Order"
+
+#: models.py:15
+msgid "Flat page"
+msgstr "FlatPages"
+
+#: models.py:16
+msgid "Flat pages"
+msgstr "FlatPages"
+
+#~ msgid "Title"
+#~ msgstr "Title"
+
+#~ msgid "Headline"
+#~ msgstr "Headline"
+
+#~ msgid "URL"
+#~ msgstr "URL"
+
+#~ msgid "Short URL"
+#~ msgstr "Short URL"

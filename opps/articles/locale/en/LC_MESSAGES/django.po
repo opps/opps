@@ -1,0 +1,177 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# Thiago Avelino <thiagoavelinoster@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"PO-Revision-Date: 2013-08-05 18:17+0000\n"
+"Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: __init__.py:5
+msgid "Articles"
+msgstr "Articles"
+
+#: admin.py:44 admin.py:78 admin.py:99
+msgid "Identification"
+msgstr "Identification"
+
+#: admin.py:47 admin.py:81 admin.py:102 models.py:29
+msgid "Content"
+msgstr "Content"
+
+#: admin.py:51 admin.py:85 admin.py:106
+msgid "Relationships"
+msgstr "Relationships"
+
+#: admin.py:53 admin.py:87 admin.py:108
+msgid "Publication"
+msgstr "Publication"
+
+#: models.py:17
+msgid "Headline"
+msgstr "Headline"
+
+#: models.py:20
+msgid "Short title"
+msgstr "Short title"
+
+#: models.py:34 models.py:127
+msgid "Albums"
+msgstr "Albums"
+
+#: models.py:44 models.py:99
+msgid "Post"
+msgstr "Post"
+
+#: models.py:45
+msgid "Posts"
+msgstr "Posts"
+
+#: models.py:107
+msgid "Related Post"
+msgstr "Related Post"
+
+#: models.py:113
+msgid "Order"
+msgstr "Order"
+
+#: models.py:116
+msgid "Related content"
+msgstr "Related content"
+
+#: models.py:117
+msgid "Related contents"
+msgstr "Related contents"
+
+#: models.py:126
+msgid "Album"
+msgstr "Album"
+
+#: models.py:134
+msgid "URL"
+msgstr "URL"
+
+#: models.py:142
+msgid "Link"
+msgstr "Link"
+
+#: models.py:143
+msgid "Links"
+msgstr "Links"
+
+#: models.py:163
+msgid "URL field is required."
+msgstr "URL field is required."
+
+#~ msgid "No Image"
+#~ msgstr "No Image"
+
+#~ msgid "Thumbnail"
+#~ msgstr "Thumbnail"
+
+#~ msgid "Title"
+#~ msgstr "Title"
+
+#~ msgid "Short URL"
+#~ msgstr "Short URL"
+
+#~ msgid "Channel"
+#~ msgstr "Channel"
+
+#~ msgid "Channel name"
+#~ msgstr "Channel name"
+
+#~ msgid "Channel long slug"
+#~ msgstr "Channel long slug"
+
+#~ msgid "Child class"
+#~ msgstr "Child class"
+
+#~ msgid "Child app label"
+#~ msgstr "Child class"
+
+#~ msgid "Main Image"
+#~ msgstr "Main Image"
+
+#~ msgid "Article"
+#~ msgstr "Article"
+
+#~ msgid "Source"
+#~ msgstr "Source"
+
+#~ msgid "Article source"
+#~ msgstr "Articles"
+
+#~ msgid "Article sources"
+#~ msgstr "Articles"
+
+#~ msgid "Image"
+#~ msgstr "Image"
+
+#~ msgid "Article image"
+#~ msgstr "Article"
+
+#~ msgid "Article images"
+#~ msgstr "Articles"
+
+#~ msgid "Query Set"
+#~ msgstr "Query Set"
+
+#~ msgid "Article box"
+#~ msgstr "Article Box"
+
+#~ msgid "Articles boxes"
+#~ msgstr "Article Box"
+
+#~ msgid "Article Box"
+#~ msgstr "Article Box"
+
+#~ msgid "Article box articles"
+#~ msgstr "Article Box"
+
+#~ msgid "Article boxes articles"
+#~ msgstr "Article Box"
+
+#~ msgid "Article not published!"
+#~ msgstr "Article not published!"
+
+#~ msgid "Article date available is greater than today!"
+#~ msgstr "Article date available is greater than today!"
+
+#~ msgid "Article config"
+#~ msgstr "Article Box"
+
+#~ msgid "Article configs"
+#~ msgstr "Articles"

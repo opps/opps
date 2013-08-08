@@ -1,0 +1,185 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# Thiago Avelino <thiagoavelinoster@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"PO-Revision-Date: 2013-08-05 18:22+0000\n"
+"Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: __init__.py:8
+msgid "Core"
+msgstr "Core"
+
+#: admin.py:21 models.py:85
+msgid "Channel"
+msgstr "Channel"
+
+#: admin.py:42
+msgid "No channel"
+msgstr "No channel"
+
+#: admin.py:101
+msgid "Publish/Unpublish"
+msgstr "Publish/Unpublish"
+
+#: admin.py:121
+msgid "This item is not in a box"
+msgstr "This item is not in a box"
+
+#: admin.py:123
+msgid "Article boxes"
+msgstr "Article boxes"
+
+#: admin.py:129
+msgid "No Image"
+msgstr "No Image"
+
+#: admin.py:130
+msgid "Thumbnail"
+msgstr "Thumbnail"
+
+#: admin.py:138
+msgid "Images"
+msgstr "Images"
+
+#: admin.py:145 admin.py:147
+msgid "View on site"
+msgstr "View on site"
+
+#: admin.py:160
+msgid "Identification"
+msgstr "Identification"
+
+#: admin.py:162
+msgid "Relationships"
+msgstr "Relationships"
+
+#: admin.py:164
+msgid "Publication"
+msgstr "Publication"
+
+#: models.py:20
+msgid "Date insert"
+msgstr "Date insert"
+
+#: models.py:21
+msgid "Date update"
+msgstr "Date update"
+
+#: models.py:38
+msgid "Site id"
+msgstr "Site id"
+
+#: models.py:43
+msgid "Site domain"
+msgstr "Site domain"
+
+#: models.py:48
+msgid "Date available"
+msgstr "Date available"
+
+#: models.py:53
+msgid "Published"
+msgstr "Published"
+
+#: models.py:88
+msgid "Channel name"
+msgstr "Channel name"
+
+#: models.py:94
+msgid "Channel long slug"
+msgstr "Channel long slug"
+
+#: models.py:113
+msgid "Slug"
+msgstr "Slug"
+
+#: models.py:135
+msgid "The URL already exists as a redirect"
+msgstr "The URL already exists as a redirect"
+
+#: models.py:180
+msgid "Slug already exists."
+msgstr "Slug already exists."
+
+#: models.py:208
+msgid "Main Image"
+msgstr "Main Image"
+
+#: models.py:211
+msgid "Main image caption"
+msgstr "Main image caption"
+
+#: models.py:279
+msgid "App label"
+msgstr "App label"
+
+#: models.py:287
+msgid "Config Key Group"
+msgstr "Config Key Group"
+
+#: models.py:295
+msgid "Config Key"
+msgstr "Config Key"
+
+#: models.py:301
+msgid "Format"
+msgstr "Format"
+
+#: models.py:303
+msgid "Config Value"
+msgstr "Config Value"
+
+#: models.py:304
+msgid "Description"
+msgstr "Description"
+
+#: models.py:309
+msgid "Only published container"
+msgstr "Only published article"
+
+#: models.py:342
+#, python-format
+msgid "Can't format the value to %s"
+msgstr "Can't format the value to %s"
+
+#: tags/models.py:10
+msgid "Name"
+msgstr "Name"
+
+#: tags/models.py:21
+msgid "Tag"
+msgstr "Tag"
+
+#: tags/models.py:22 tags/models.py:27
+msgid "Tags"
+msgstr "Tags"
+
+#: tags/models.py:29
+msgid "A comma-separated list of tags."
+msgstr "A comma-separated list of tags."
+
+#~ msgid "Box name"
+#~ msgstr "Box name"
+
+#~ msgid "Text"
+#~ msgstr "Text"
+
+#~ msgid "Json"
+#~ msgstr "Json"
+
+#~ msgid "Yaml"
+#~ msgstr "Yaml"
