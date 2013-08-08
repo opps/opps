@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"POT-Creation-Date: 2013-08-08 15:40-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -127,7 +127,7 @@ msgstr ""
 
 #: models.py:56
 msgid ""
-"flag that indicates that thumbor should fit the image in the box defined by "
+"Flag that indicates that thumbor should fit the image in the box defined by "
 "width x height"
 msgstr ""
 
@@ -136,7 +136,7 @@ msgid "Smart"
 msgstr ""
 
 #: models.py:62
-msgid "Flag that indicates thatthumbor should use smart cropping;"
+msgid "Flag that indicates that thumbor should use smart cropping"
 msgstr ""
 
 #: models.py:85
