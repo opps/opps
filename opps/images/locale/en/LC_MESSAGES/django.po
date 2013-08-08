@@ -1,20 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"POT-Creation-Date: 2013-08-08 15:59-0300\n"
 "PO-Revision-Date: 2013-08-05 18:24+0000\n"
 "Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: __init__.py:5 models.py:86
@@ -93,7 +93,9 @@ msgstr "Flip"
 msgid ""
 "Flag that indicates that thumbor should flip horizontally (on the vertical "
 "axis) the image"
-msgstr "Flag that indicates that thumbor should flip horizontally (on the vertical axis) the image"
+msgstr ""
+"Flag that indicates that thumbor should flip horizontally (on the vertical "
+"axis) the image"
 
 #: models.py:37
 msgid "Flop"
@@ -103,7 +105,9 @@ msgstr "Flop"
 msgid ""
 "Flag that indicates that thumbor should flip vertically (on the horizontal "
 "axis) the image"
-msgstr "Flag that indicates that thumbor should flip vertically (on the horizontal axis) the image"
+msgstr ""
+"Flag that indicates that thumbor should flip vertically (on the horizontal "
+"axis) the image"
 
 #: models.py:42
 msgid "Horizontal Align"
@@ -126,17 +130,21 @@ msgid "Fit in"
 msgstr "Fit in"
 
 #: models.py:56
+#, fuzzy
 msgid ""
+"Flag that indicates that thumbor should fit the image in the box defined by "
+"width x height"
+msgstr ""
 "flag that indicates that thumbor should fit the image in the box defined by "
 "width x height"
-msgstr "flag that indicates that thumbor should fit the image in the box defined by width x height"
 
 #: models.py:61
 msgid "Smart"
 msgstr "Smart"
 
 #: models.py:62
-msgid "Flag that indicates thatthumbor should use smart cropping;"
+#, fuzzy
+msgid "Flag that indicates that thumbor should use smart cropping"
 msgstr "Flag that indicates thatthumbor should use smart cropping;"
 
 #: models.py:85

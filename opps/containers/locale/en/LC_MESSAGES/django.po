@@ -1,27 +1,27 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"POT-Creation-Date: 2013-08-08 15:59-0300\n"
 "PO-Revision-Date: 2013-08-05 18:20+0000\n"
 "Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: admin.py:21 models.py:184
+#: admin.py:21 models.py:181
 msgid "Container image"
 msgstr "Container image"
 
-#: admin.py:22 models.py:185
+#: admin.py:22 models.py:182
 msgid "Container images"
 msgstr "Container images"
 
@@ -33,11 +33,11 @@ msgstr "No Image"
 msgid "Thumbnail"
 msgstr "Thumbnail"
 
-#: admin.py:44 models.py:153
+#: admin.py:44 models.py:150
 msgid "Container source"
 msgstr "Container source"
 
-#: admin.py:45 models.py:154
+#: admin.py:45 models.py:151
 msgid "Container sources"
 msgstr "Container sources"
 
@@ -73,95 +73,95 @@ msgstr "Clean ended containers"
 msgid "Dynamic"
 msgstr "Dynamic"
 
-#: models.py:18 models.py:195
+#: models.py:22 models.py:192
 msgid "Title"
 msgstr "Title"
 
-#: models.py:20
+#: models.py:24
 msgid "Hat"
 msgstr "Hat"
 
-#: models.py:25
+#: models.py:29
 msgid "Short URL"
 msgstr "Short URL"
 
-#: models.py:29
+#: models.py:33
 msgid "Child class"
 msgstr "Child class"
 
-#: models.py:35
+#: models.py:39
 msgid "Child module"
 msgstr "Child module"
 
-#: models.py:41
+#: models.py:45
 msgid "Child app label"
 msgstr "Child app label"
 
-#: models.py:47
+#: models.py:51
 msgid "Show on root channel?"
 msgstr "Show on root channel?"
 
-#: models.py:60 models.py:141 models.py:166 models.py:203 models.py:249
+#: models.py:64 models.py:138 models.py:163 models.py:200 models.py:246
 msgid "Container"
 msgstr "Container"
 
-#: models.py:61
+#: models.py:65
 msgid "Containers"
 msgstr "Containers"
 
-#: models.py:143 models.py:168 models.py:251
+#: models.py:140 models.py:165 models.py:248
 msgid "Order"
 msgstr "Order"
 
-#: models.py:149
+#: models.py:146
 msgid "Source"
 msgstr "Source"
 
-#: models.py:171
+#: models.py:168
 msgid "Image"
 msgstr "Image"
 
-#: models.py:177
+#: models.py:174
 msgid "Caption"
 msgstr "Caption"
 
-#: models.py:211
+#: models.py:208
 msgid "Query Set"
 msgstr "Query Set"
 
-#: models.py:215
+#: models.py:212
 msgid "Container box"
 msgstr "Container box"
 
-#: models.py:216
+#: models.py:213
 msgid "Containers boxes"
 msgstr "Containers boxes"
 
-#: models.py:243
+#: models.py:240
 msgid "Container Box"
 msgstr "Container Box"
 
-#: models.py:252
+#: models.py:249
 msgid "Aggregate container"
 msgstr "Aggregate container"
 
-#: models.py:253
+#: models.py:250
 msgid "Date available"
 msgstr "Date available"
 
-#: models.py:255
+#: models.py:252
 msgid "End date"
 msgstr "End date"
 
-#: models.py:259
+#: models.py:256
 msgid "Article box articles"
 msgstr "Article box articles"
 
-#: models.py:260
+#: models.py:257
 msgid "Article boxes articles"
 msgstr "Article boxes articles"
 
-#: models.py:269
+#: models.py:266
 msgid "Article not published!"
 msgstr "Article not published!"
 
