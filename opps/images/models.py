@@ -60,8 +60,8 @@ class Cropping(models.Model):
 
     smart = models.BooleanField(_(u'Smart'), default=False,
                                 help_text=_(u'Flag that indicates that'
-                                            u'thumbor should use smart '
-                                            u'cropping;'))
+                                            u' thumbor should use smart '
+                                            u'cropping'))
 
     class Meta:
         abstract = True
