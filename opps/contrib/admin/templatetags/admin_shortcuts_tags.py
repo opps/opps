@@ -10,15 +10,48 @@ from django.utils.importlib import import_module
 register = template.Library()
 
 
+def make_url(shortcut, request):
+    if not shortcut.get('url'):
+        try:
+            url_name = shortcut['url_name']
+        except KeyError:
+            raise ImproperlyConfigured(
+                _('settings.ADMIN_SHORTCUTS is improperly configured. '
+                  'Please supply either a "url" or a "url_name" '
+                  'for each shortcut.')
+            )
+        current_app = shortcut.get('app_name')
+        if isinstance(url_name, list):
+            shortcut['url'] = reverse(
+                url_name[0], args=url_name[1:], current_app=current_app
+            )
+        else:
+            shortcut['url'] = reverse(
+                url_name, current_app=current_app)
+
+        shortcut['url'] += shortcut.get('url_extra', '')
+
+    if not shortcut.get('class'):
+        shortcut['class'] = get_shortcut_class(
+            shortcut.get('url_name', shortcut['url']))
+
+    if shortcut.get('count'):
+        shortcut['count'] = eval_func(shortcut['count'], request)
+
+    if shortcut.get('count_new'):
+        shortcut['count_new'] = eval_func(
+            shortcut['count_new'], request)
+
+
 @register.inclusion_tag('admin_shortcuts/base.html', takes_context=True)
 def admin_shortcuts(context):
     if 'ADMIN_SHORTCUTS' in context:
         admin_shortcuts = copy.deepcopy(context['ADMIN_SHORTCUTS'])
     else:
         admin_shortcuts = copy.deepcopy(
-            getattr(settings, 'ADMIN_SHORTCUTS', None))
+            getattr(settings, 'ADMIN_SHORTCUTS', []))
     admin_shortcuts_settings = copy.deepcopy(
-        getattr(settings, 'ADMIN_SHORTCUTS_SETTINGS', None))
+        getattr(settings, 'ADMIN_SHORTCUTS_SETTINGS', {}))
     request = context.get('request', None)
     if not admin_shortcuts:
         return ''
@@ -27,37 +60,13 @@ def admin_shortcuts(context):
         if not group.get('shortcuts'):
             raise ImproperlyConfigured(
                 'settings.ADMIN_SHORTCUTS is improperly configured.')
-        for shortcut in group.get('shortcuts'):
-            if not shortcut.get('url'):
-                try:
-                    url_name = shortcut['url_name']
-                except KeyError:
-                    raise ImproperlyConfigured(
-                        _('settings.ADMIN_SHORTCUTS is improperly configured. '
-                          'Please supply either a "url" or a "url_name" '
-                          'for each shortcut.')
-                    )
-                current_app = shortcut.get('app_name')
-                if isinstance(url_name, list):
-                    shortcut['url'] = reverse(
-                        url_name[0], args=url_name[1:], current_app=current_app
-                    )
-                else:
-                    shortcut['url'] = reverse(
-                        url_name, current_app=current_app)
 
-                shortcut['url'] += shortcut.get('url_extra', '')
+        for shortcut in group.get('shortcuts', []):
+            make_url(shortcut, request)
 
-            if not shortcut.get('class'):
-                shortcut['class'] = get_shortcut_class(
-                    shortcut.get('url_name', shortcut['url']))
-
-            if shortcut.get('count'):
-                shortcut['count'] = eval_func(shortcut['count'], request)
-
-            if shortcut.get('count_new'):
-                shortcut['count_new'] = eval_func(
-                    shortcut['count_new'], request)
+            for child in shortcut.get('children', []):
+                make_url(child, request)
+                # TODO: make it recursive for submenus
 
     return {
         'admin_shortcuts': admin_shortcuts,
