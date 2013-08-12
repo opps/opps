@@ -1,4 +1,5 @@
-{% load mptt_tags %}
+{% load mptt_tags cache %}
+{% cache 3600 menu node.long_slug %}
 <ul>
   {% recursetree opps_menu %}
   <li><a href="{% url 'articles:channel' node.long_slug %}">{{ node.name }}</a>
@@ -8,3 +9,4 @@
   </li>
   {% endrecursetree %}
 </ul>
+{% endcache %}
