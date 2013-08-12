@@ -187,7 +187,7 @@ class Article(Publishable, Slugged):
         self.main_image.description = self.main_image_caption
 
         imgs = [self.main_image]
-        images = self.images.filter(
+        images = self.images.select_related('source').filter(
             published=True, date_available__lte=timezone.now()
         ).order_by('articleimage__order')
 
@@ -195,13 +195,13 @@ class Article(Publishable, Slugged):
             images = images.exclude(pk=self.main_image.pk)
         imgs += [i for i in images.distinct()]
 
+        captions = {
+            ai.image_id: ai.caption for ai in self.articleimage_articles.all()
+        }
         for im in imgs:
-            try:
-                caption = im.articleimage_set.get(article__id=self.id).caption
-                if caption:
-                    im.description = caption
-            except:
-                pass
+            caption = captions.get(im.pk)
+            if caption:
+                im.description = caption
 
         cache.set(cachekey, imgs)
         return imgs
@@ -238,28 +238,28 @@ class Post(Article):
 
         imgs = super(Post, self).all_images()
 
-        album_images = [
-            (i, a) for a in self.albums.filter(
-                published=True,
-                date_available__lte=timezone.now()
-            ).distinct()
-            for i in a.images.filter(
+        albums = self.albums.filter(
+            published=True,
+            date_available__lte=timezone.now()
+        )
+        for album in albums:
+            images = album.images.select_related('source').filter(
                 published=True,
                 date_available__lte=timezone.now()
             ).exclude(
                 pk__in=[i.pk for i in imgs]
-            ).order_by('articleimage__order').distinct()
-        ]
-
-        for im, a in album_images:
-            try:
-                caption = im.articleimage_set.get(article__id=a.id).caption
+            )
+            captions = {
+                ai.image_id: ai.caption for ai in ArticleImage.objects.filter(
+                    article_id=album.pk
+                )
+            }
+            for image in images:
+                caption = captions.get(image.pk)
                 if caption:
-                    im.description = caption
-            except:
-                pass
+                    image.description = caption
 
-        imgs += [item[0] for item in album_images]
+                imgs.append(image)
 
         cache.set(cachekey, imgs)
         return imgs
