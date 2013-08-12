@@ -172,7 +172,7 @@ class Article(Publishable, Slugged):
             tags__in=tag_list
         ).exclude(pk=self.pk).distinct().order_by('-date_available')[:10]]
 
-        cache.set(cachekey, _list)
+        cache.set(cachekey, _list, 3600)
         return _list
 
     def all_images(self):
