@@ -50,7 +50,7 @@ class ContainerSourceInline(admin.TabularInline):
 
 
 @apply_opps_rules('containers')
-class ContainerBoxContainersInline(admin.TabularInline):
+class ContainerBoxContainersInline(admin.StackedInline):
     model = ContainerBoxContainers
     fk_name = 'containerbox'
     raw_id_fields = ['container']
