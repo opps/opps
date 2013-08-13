@@ -69,8 +69,9 @@ class Post(Article):
             )
 
             captions = {
-                ci.image_id: ci.caption for ci in ContainerImage.objects.filter(
-                   container_id=album.pk
+                ci.image_id: ci.caption for ci in
+                ContainerImage.objects.filter(
+                    container_id=album.pk
                 )
             }
             print captions
