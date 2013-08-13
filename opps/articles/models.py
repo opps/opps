@@ -187,7 +187,7 @@ class Article(Publishable, Slugged):
         self.main_image.description = self.main_image_caption
 
         imgs = [self.main_image]
-        images = self.images.select_related('source').filter(
+        images = self.images.prefetch_related('source').filter(
             published=True, date_available__lte=timezone.now()
         ).order_by('articleimage__order')
 
@@ -243,7 +243,7 @@ class Post(Article):
             date_available__lte=timezone.now()
         )
         for album in albums:
-            images = album.images.select_related('source').filter(
+            images = album.images.prefetch_related('source').filter(
                 published=True,
                 date_available__lte=timezone.now()
             ).exclude(
