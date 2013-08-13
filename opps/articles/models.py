@@ -8,7 +8,7 @@ from django.core.exceptions import ValidationError
 from django.core.cache import cache
 
 from .signals import redirect_generate
-from opps.containers.models import Container
+from opps.containers.models import Container, ContainerImage
 from opps.core.cache import _cache_key
 
 
@@ -55,28 +55,32 @@ class Post(Article):
 
         imgs = super(Post, self).all_images()
 
-        album_images = [
-            (i, a) for a in self.albums.filter(
+        albums = self.albums.filter(
+            published=True,
+            date_available__lte=timezone.now(),
+        )
+
+        for album in albums:
+            images = album.images.select_related('source').filter(
                 published=True,
-                date_available__lte=timezone.now()
-            ).distinct()
-            for i in a.images.filter(
-                published=True,
-                date_available__lte=timezone.now()
+                date_available__lte=timezone.now(),
             ).exclude(
                 pk__in=[i.pk for i in imgs]
-            ).order_by('containerimage__order').distinct()
-        ]
+            )
 
-        for im, a in album_images:
-            try:
-                caption = im.containerimage_set.get(container__id=a.id).caption
+            captions = {
+                ci.image_id: ci.caption for ci in
+                ContainerImage.objects.filter(
+                    container_id=album.pk
+                )
+            }
+            print captions
+
+            for image in images:
+                caption = captions.get(image.pk)
                 if caption:
-                    im.caption = caption
-            except:
-                pass
-
-        imgs += [item[0] for item in album_images]
+                    image.description = caption
+                imgs.append(image)
 
         cache.set(cachekey, imgs)
         return imgs
