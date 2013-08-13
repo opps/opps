@@ -485,14 +485,13 @@ class ArticleBox(BaseBox):
     def ordered_articles(self, field='order'):
         now = timezone.now()
         qs = self.articles.filter(
+            models.Q(articleboxarticles_articles__date_end__gte=now) |
+            models.Q(articleboxarticles_articles__date_end__isnull=True),
             published=True,
             date_available__lte=now,
             articleboxarticles_articles__date_available__lte=now
-        ).filter(
-            models.Q(articleboxarticles_articles__date_end__gte=now) |
-            models.Q(articleboxarticles_articles__date_end__isnull=True)
-        )
-        return qs.order_by('articleboxarticles_articles__order').distinct()
+        ).order_by('articleboxarticles_articles__order').distinct()
+        return qs
 
     def get_queryset(self):
         """
