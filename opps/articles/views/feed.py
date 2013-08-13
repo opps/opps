@@ -35,12 +35,16 @@ class ArticleFeed(ItemFeed):
         return "Latest news on {0}'s".format(self.site.name)
 
     def items(self):
+        channels = Channel.objects.filter(
+            include_in_main_rss=True,
+            published=True
+        ).values_list('pk', flat=True)
+
         return Article.objects.filter(
             site=self.site,
             date_available__lte=timezone.now(),
             published=True,
-            channel__include_in_main_rss=True,
-            channel__published=True
+            channel__in=channels
         ).order_by(
             '-date_available'
         )[:40]
