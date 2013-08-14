@@ -214,16 +214,13 @@ class ContainerBox(BaseBox):
 
     def ordered_containers(self, field='order'):
         now = timezone.now()
-        qs = self.containers.filter(
+        return self.containers.filter(
+            models.Q(containerboxcontainers__date_end__gte=now) |
+            models.Q(containerboxcontainers__date_end__isnull=True),
             published=True,
             date_available__lte=now,
             containerboxcontainers__date_available__lte=now
-        ).filter(
-            models.Q(containerboxcontainers__date_end__gte=now) |
-            models.Q(containerboxcontainers__date_end__isnull=True)
-        )
-        return qs.order_by('containerboxcontainers__order'
-                           ).distinct()
+        ).order_by('containerboxcontainers__order').distinct()
 
     def get_queryset(self):
         """
