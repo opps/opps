@@ -119,7 +119,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         ).exclude(pk=self.pk)
          .distinct().order_by('-date_available')[slice(*query_slice)]]
 
-        cache.set(cachekey, _list)
+        cache.set(cachekey, _list, 3600)
         return _list
 
     def inbox(self, containerbox=None):
@@ -214,16 +214,13 @@ class ContainerBox(BaseBox):
 
     def ordered_containers(self, field='order'):
         now = timezone.now()
-        qs = self.containers.filter(
+        return self.containers.filter(
+            models.Q(containerboxcontainers__date_end__gte=now) |
+            models.Q(containerboxcontainers__date_end__isnull=True),
             published=True,
             date_available__lte=now,
             containerboxcontainers__date_available__lte=now
-        ).filter(
-            models.Q(containerboxcontainers__date_end__gte=now) |
-            models.Q(containerboxcontainers__date_end__isnull=True)
-        )
-        return qs.order_by('containerboxcontainers__order'
-                           ).distinct()
+        ).order_by('containerboxcontainers__order').distinct()
 
     def get_queryset(self):
         """

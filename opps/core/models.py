@@ -234,7 +234,7 @@ class Imaged(models.Model):
         self.main_image.caption = self.main_image_caption
 
         imgs = [self.main_image]
-        images = self.images.filter(
+        images = self.images.prefetch_related('source').filter(
             published=True, date_available__lte=timezone.now()
         ).order_by('containerimage__order')
 
@@ -242,15 +242,14 @@ class Imaged(models.Model):
             images = images.exclude(pk=self.main_image.pk)
         imgs += [i for i in images.distinct()]
 
+        captions = {
+            ci.image_id: ci.caption for ci in self.containerimage_set.all()
+        }
+
         for im in imgs:
-            try:
-                caption = im.containerimage_set.get(
-                    container__id=self.id
-                ).caption
-                if caption:
-                    im.caption = caption
-            except:
-                pass
+            caption = captions.get(im.pk)
+            if caption:
+                im.description = caption
 
         cache.set(cachekey, imgs)
         return imgs
