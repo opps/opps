@@ -1,5 +1,5 @@
 // modify jquery ajax to add csrtoken when doing "local" requests
-$('html').ajaxSend(function(event, xhr, settings) {
+django.jQuery('html').ajaxSend(function(event, xhr, settings) {
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie != '') {

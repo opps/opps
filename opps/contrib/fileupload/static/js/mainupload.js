@@ -12,14 +12,15 @@
 /*jslint nomen: true, unparam: true, regexp: true */
 /*global $, window, document */
 
-$(function () {
+django.jQuery(function () {
     'use strict';
 
+
     // Initialize the jQuery File Upload widget:
-    $('#fileupload').fileupload();
+    django.jQuery('#fileupload').fileupload();
 
     // Enable iframe cross-domain access via redirect option:
-    $('#fileupload').fileupload(
+    django.jQuery('#fileupload').fileupload(
         'option',
         'redirect',
         window.location.href.replace(
