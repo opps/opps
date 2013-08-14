@@ -234,7 +234,7 @@ class Imaged(models.Model):
         self.main_image.caption = self.main_image_caption
 
         imgs = [self.main_image]
-        images = self.images.select_related('source').filter(
+        images = self.images.prefetch_related('source').filter(
             published=True, date_available__lte=timezone.now()
         ).order_by('containerimage__order')
 
