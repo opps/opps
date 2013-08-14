@@ -1,5 +1,5 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_modify opps_admin_tags %}
+{% load i18n admin_modify upload_tags %}
 {% load url from future %}
 {% load upload_tags %}
 
@@ -47,11 +47,11 @@
                 <span>Add files...</span>
                 <input type="file" name="image" multiple>
             </span>
-            <button type="submit" class="btn btn-success start">
+            <button type="submit" class="btn btn-success start grp-button">
                 <i class="icon-upload icon-white"></i>
                 <span>Start upload</span>
             </button>
-            <button type="reset" class="btn btn-warning cancel">
+            <button type="reset" class="btn btn-warning cancel grp-button">
                 <i class="icon-ban-circle icon-white"></i>
                 <span>Cancel upload</span>
             </button>
@@ -87,7 +87,7 @@
 <script src="{{ STATIC_URL }}js/mainupload.js"></script>
 <script src="{{ STATIC_URL }}js/csrf.js"></script>
 <script>
-$('#fileupload').bind('fileuploadsubmit', function (e, data) {
+django.jQuery('#fileupload').bind('fileuploadsubmit', function (e, data) {
     var inputs = data.context.find(':input');
     if (inputs.filter('[required][value=""]').first().focus().length) {
         return false;
