@@ -8,14 +8,18 @@ from opps.core.widgets import OppsEditor
 
 
 class PostAdminForm(forms.ModelForm):
+
     multiupload_link = '/fileupload/image/'
+
     class Meta:
         model = Post
         widgets = {'content': OppsEditor()}
 
 
 class AlbumAdminForm(forms.ModelForm):
+
     multiupload_link = '/fileupload/image/'
+
     class Meta:
         model = Album
         widgets = {
