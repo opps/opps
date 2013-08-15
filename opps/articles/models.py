@@ -130,9 +130,6 @@ class Album(Article):
         verbose_name = _('Album')
         verbose_name_plural = _('Albums')
 
-    def get_absolute_url(self):
-        return "/album/{}/{}".format(self.channel_long_slug, self.slug)
-
 
 class Link(Article):
     url = models.URLField(_(u"URL"), null=True, blank=True)
@@ -145,12 +142,6 @@ class Link(Article):
     class Meta:
         verbose_name = _('Link')
         verbose_name_plural = _('Links')
-
-    def get_absolute_url(self):
-        return "/link/{}/{}".format(
-            self.channel_long_slug,
-            self.slug
-        )
 
     def is_local(self):
         try:
