@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-08 15:59-0300\n"
+"POT-Creation-Date: 2013-08-15 20:18-0300\n"
 "PO-Revision-Date: 2013-08-05 18:21+0000\n"
 "Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,11 +61,45 @@ msgstr "Opps site admin"
 msgid "Opps administration"
 msgstr "Opps administration"
 
+#: admin/templates/admin/change_form.html:111
+msgid "Open All Items"
+msgstr ""
+
+#: admin/templates/admin/change_form.html:112
+msgid "Close All Items"
+msgstr ""
+
+#: admin/templates/admin/change_form.html:121
+msgid "Home"
+msgstr ""
+
+#: admin/templates/admin/change_form.html:124
+msgid "Add"
+msgstr ""
+
+#: admin/templates/admin/change_form.html:134
+msgid "Upload multiple images"
+msgstr ""
+
+#: admin/templates/admin/change_form.html:136
+msgid "History"
+msgstr ""
+
+#: admin/templates/admin/change_form.html:137
+msgid "View on site"
+msgstr ""
+
+#: admin/templates/admin/change_form.html:155
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
 #: admin/templates/admin_shortcuts/base.html:20
 msgid "Shortcuts"
 msgstr "Shortcuts"
 
-#: admin/templatetags/admin_shortcuts_tags.py:36
+#: admin/templatetags/admin_shortcuts_tags.py:19
 msgid ""
 "settings.ADMIN_SHORTCUTS is improperly configured. Please supply either a "
 "\"url\" or a \"url_name\" for each shortcut."
@@ -76,3 +110,11 @@ msgstr ""
 #: multisite/__init__.py:8
 msgid "Multisite"
 msgstr "Multisite"
+
+#: multisite/models.py:12
+msgid "Site Permission"
+msgstr ""
+
+#: multisite/models.py:13
+msgid "Site Permissions"
+msgstr ""
