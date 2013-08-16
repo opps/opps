@@ -26,4 +26,14 @@ class ChannelFormTest(TestCase):
         form = ChannelAdminForm(instance=self.parent)
         self.assertTrue(isinstance(form.instance, Channel))
         self.assertEqual(form.instance.pk, self.parent.pk)
+        self.assertEqual(int(form.fields['slug'].widget.attrs['maxlength']), 150)
 
+    def test_readonly_slug(self):
+        """
+        Check readonly field slug
+        """
+        form = ChannelAdminForm(instance=self.parent)
+        self.assertTrue(form.fields['slug'].widget.attrs['readonly'])
+
+        form_2 = ChannelAdminForm()
+        self.assertNotIn('readonly', form_2.fields['slug'].widget.attrs)
