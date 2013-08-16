@@ -40,8 +40,19 @@
        <strong>{{container.child_class}}</strong>: {{container.title}}<br />
        <strong>Channel</strong>: {{container.channel}}<br />
     </div>
+    
+    <ul class="grp-object-tools fileupload-buttonbar">
+      <li>
+        <a href="#" class="grp-state-focus fileinput-button">
+          <input type="file" name="image" multiple>
+        </a>
+      </li>
+      <li><a href="#" class="start">Enviar</a></li>
+      <li><a href="#" target="_blank" class="cancel">Cancelar</a></li>
+    </ul>
+
     <div class="row fileupload-buttonbar">
-        <div class="span7">
+        <!--<div class="span7">
             <span class="btn btn-primary fileinput-button">
                 <i class="icon-plus icon-white"></i>
                 <span>Add files...</span>
@@ -55,7 +66,7 @@
                 <i class="icon-ban-circle icon-white"></i>
                 <span>Cancel upload</span>
             </button>
-        </div>
+        </div>-->
         <div class="span5 fileupload-progress fade">
             <div class="progress progress-success progres-striped active">
                 <div class="bar" style="width:0%"></div>
@@ -87,13 +98,15 @@
 <script src="{{ STATIC_URL }}js/mainupload.js"></script>
 <script src="{{ STATIC_URL }}js/csrf.js"></script>
 <script>
-django.jQuery('#fileupload').bind('fileuploadsubmit', function (e, data) {
+(function($){
+  $('#fileupload').bind('fileuploadsubmit', function (e, data) {
     var inputs = data.context.find(':input');
     if (inputs.filter('[required][value=""]').first().focus().length) {
         return false;
     }
     data.formData = inputs.serializeArray();
-});
+  });
+})(django.jQuery);
 </script>
 {% endblock %}
 

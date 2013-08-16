@@ -89,7 +89,7 @@ class PublishableAdmin(admin.ModelAdmin):
     list_display = ['title', 'channel_long_slug',
                     'date_available', 'published', 'preview_url']
     list_filter = ['child_class', 'date_available', 'published']
-    search_fields = ['title', 'slug', 'headline', 'channel_name']
+    search_fields = ['title', 'slug', 'channel_name']
     exclude = ('user',)
 
     actions = ['publish']
