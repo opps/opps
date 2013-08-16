@@ -26,7 +26,17 @@ class ChannelFormTest(TestCase):
         form = ChannelAdminForm(instance=self.parent)
         self.assertTrue(isinstance(form.instance, Channel))
         self.assertEqual(form.instance.pk, self.parent.pk)
-        self.assertEqual(int(form.fields['slug'].widget.attrs['maxlength']), 150)
+        self.assertEqual(
+            int(form.fields['slug'].widget.attrs['maxlength']), 150)
+
+    def test_default_choices_layout(self):
+        """
+        Check choices default in layout field
+        """
+        form = ChannelAdminForm(instance=self.parent)
+        self.assertTrue(form.fields['layout'].choices)
+        self.assertEqual([c for c in form.fields['layout'].choices],
+                         [(u'default', u'Default')])
 
     def test_readonly_slug(self):
         """
