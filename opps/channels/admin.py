@@ -45,14 +45,14 @@ class ChannelAdmin(PublishableAdmin):
         form = super(ChannelAdmin, self).get_form(request, obj, **kwargs)
         try:
             template = get_template_path(
-                'containers/{}/channel.json'.format(obj.slug))
+                u'containers/{}/channel.json'.format(obj.slug))
             f = open(template)
             channel_json = json.loads(f.read().replace('\n', ''))
             f.close()
         except:
             channel_json = []
 
-        if 'layout' in channel_json:
+        if u'layout' in channel_json:
             layout_list = ['default'] + [l for l in channel_json['layout']]
             layout_choices = (
                 (n, n.title()) for n in layout_list)

@@ -82,5 +82,5 @@ class Cropping(models.Model):
 class Image(Archive, Cropping, Tagged):
 
     class Meta:
-        verbose_name = _('Image')
-        verbose_name_plural = _('Images')
+        verbose_name = _(u'Image')
+        verbose_name_plural = _(u'Images')

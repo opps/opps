@@ -18,7 +18,7 @@ def get_file_path(instance, filename):
     filename = u"{0}-{1}.{2}".format(random.getrandbits(32),
                                      instance.slug[:100], ext)
     d = datetime.now()
-    folder = "archives/{0}".format(d.strftime("%Y/%m/%d/"))
+    folder = u"archives/{0}".format(d.strftime("%Y/%m/%d/"))
     return os.path.join(folder, filename)
 
 
@@ -31,8 +31,8 @@ class Archive(Publishable, Slugged):
     source = models.ForeignKey('sources.Source', null=True, blank=True)
 
     class Meta:
-        verbose_name = _('Archive')
-        verbose_name_plural = _('Archives')
+        verbose_name = _(u'Archive')
+        verbose_name_plural = _(u'Archives')
         unique_together = ['site', 'slug']
         abstract = True
 
@@ -48,5 +48,5 @@ class Archive(Publishable, Slugged):
 class File(Archive, Tagged):
 
     class Meta:
-        verbose_name = _('File')
-        verbose_name_plural = _('Files')
+        verbose_name = _(u'File')
+        verbose_name_plural = _(u'Files')

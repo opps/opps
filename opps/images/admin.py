@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
@@ -20,7 +21,7 @@ class UserListFilter(SimpleListFilter):
     title = _(u'User')
 
     # Parameter for the filter that will be used in the URL query.
-    parameter_name = 'user'
+    parameter_name = u'user'
 
     def lookups(self, request, model_admin):
         """
@@ -43,7 +44,7 @@ class UserListFilter(SimpleListFilter):
         provided in the query string and retrievable via
         `self.value()`.
         """
-        if self.value() == "nouser":
+        if self.value() == u"nouser":
             queryset = queryset.filter(user__isnull=True)
         elif self.value():
             queryset = queryset.filter(user__username=self.value())
@@ -80,12 +81,12 @@ class ImagesAdmin(PublishableAdmin):
     def get_list_display(self, request):
         list_display = self.list_display
         pop = request.GET.get('pop')
-        if pop == 'oppseditor':
+        if pop == u'oppseditor':
             list_display = ['opps_editor_select'] + list(list_display)
         return list_display
 
     def opps_editor_select(self, obj):
-        return '''
+        return u'''
         <a href="#" onclick="top.opps_editor_popup_selector('{0}')">{1}</a>
         '''.format(image_url(obj.archive.url, width=200, height=200),
                    'Select')
@@ -103,7 +104,7 @@ class ImagesAdmin(PublishableAdmin):
     def image_dimension(self, obj):
         try:
             width, height = get_image_dimensions(obj.archive)
-            return "{0}x{1}".format(width, height)
+            return u"{0}x{1}".format(width, height)
         except:
             return ''
     image_dimension.short_description = _(u'Dimension')

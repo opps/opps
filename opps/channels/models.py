@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -50,8 +51,8 @@ class Channel(MPTTModel, Publishable, Slugged):
 
     class Meta:
         unique_together = ("site", "long_slug", "slug", "parent")
-        verbose_name = _('Channel')
-        verbose_name_plural = _('Channels')
+        verbose_name = _(u'Channel')
+        verbose_name_plural = _(u'Channels')
         ordering = ['name', 'parent__id', 'published']
 
     class MPTTMeta:
@@ -75,7 +76,7 @@ class Channel(MPTTModel, Publishable, Slugged):
     @property
     def search_category(self):
         """for use in search result"""
-        return _('Channel')
+        return _(u'Channel')
 
     @property
     def title(self):
