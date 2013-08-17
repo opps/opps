@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import patterns, url
 from django.conf import settings
-from django.views.decorators.cache import cache_page
+
+from opps.contrib.feeds.views import ContainerFeed, ChannelFeed
+from opps.core.tags.views import TagList
+from opps.core.cache import cache_page
 
 from .views import ContainerList, ContainerDetail
 from .views import ContainerAPIList, ContainerAPIDetail
 from .views import Search
-from opps.contrib.feeds.views import ContainerFeed, ChannelFeed
-from opps.core.tags.views import TagList
+
 
 urlpatterns = patterns(
     '',
