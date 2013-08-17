@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import patterns, url
 from django.conf import settings
-from django.views.decorators.cache import cache_page
+
+from opps.core.cache import cache_page
 
 from .views import PostDetail, PostList, AlbumList, AlbumDetail, TagList
 from .views import Search

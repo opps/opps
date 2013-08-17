@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.conf.urls import patterns, url
-from django.views.decorators.cache import cache_page
+
+from opps.core.cache import cache_page
 
 from .views import PageDetail
 
