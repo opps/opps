@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.conf.urls import patterns, url
-from django.views.decorators.cache import cache_page
 from django.contrib.sitemaps import views as sitemap_views
 
+from opps.core.cache import cache_page
 from opps.sitemaps.sitemaps import GenericSitemap, InfoDisct
 
 
