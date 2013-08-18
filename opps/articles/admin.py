@@ -5,6 +5,8 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
 
+from haystack.admin import SearchModelAdmin
+
 from .models import Post, Album, Article, Link, ArticleSource, ArticleImage
 from .models import (ArticleBox, ArticleBoxArticles, ArticleConfig,
                      PostRelated, AlbumRelated)
@@ -106,7 +108,7 @@ class AlbumRelatedInline(admin.TabularInline):
 
 
 @apply_opps_rules('articles')
-class PostAdmin(ArticleAdmin):
+class PostAdmin(SearchModelAdmin, ArticleAdmin):
     form = PostAdminForm
     inlines = [ArticleImageInline, ArticleSourceInline, PostRelatedInline]
     raw_id_fields = ['main_image', 'channel', 'albums']
@@ -137,7 +139,7 @@ class AlbumAdminForm(forms.ModelForm):
 
 
 @apply_opps_rules('articles')
-class AlbumAdmin(ArticleAdmin):
+class AlbumAdmin(SearchModelAdmin, ArticleAdmin):
     form = AlbumAdminForm
     inlines = [ArticleImageInline, ArticleSourceInline, AlbumRelatedInline]
     list_display = ['title', 'channel', 'images_count',
