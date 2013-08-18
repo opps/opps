@@ -10,6 +10,11 @@ User = get_user_model()
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        ("containers", "0001_initial"),
+        ("channels", "0001_initial"),
+    )
+
     def forwards(self, orm):
         # Adding model 'Config'
         db.create_table(u'core_config', (

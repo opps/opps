@@ -10,6 +10,10 @@ User = get_user_model()
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        ("containers", "0001_initial"),
+    )
+
     def forwards(self, orm):
         # Adding model 'Post'
         db.create_table(u'articles_post', (

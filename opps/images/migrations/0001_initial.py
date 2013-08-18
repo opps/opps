@@ -10,11 +10,15 @@ User = get_user_model()
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        ("sources", "0001_initial"),
+    )
+
     def forwards(self, orm):
         # Adding model 'TaggedImage'
         db.create_table(u'images_taggedimage', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('tag', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'images_taggedimage_items', to=orm['taggit.Tag'])),
+            ('tag', self.gf('django.db.models.fields.PositiveIntegerField')(db_index=True, max_length=4, null=True, blank=True)),
             ('content_object', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['images.Image'])),
         ))
         db.send_create_signal(u'images', ['TaggedImage'])
