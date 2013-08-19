@@ -7,11 +7,38 @@ from django.contrib.sites.models import Site
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
+from django.contrib.admin.views.main import ChangeList
 from django.contrib.sites.models import get_current_site
 from django.db.models import Q
 
+from haystack.query import SearchQuerySet
+
 from opps.channels.models import Channel
 from opps.images.generate import image_url
+
+
+class HaystackChangeList(ChangeList):
+    def get_query_set(self, request):
+        if not self.query:
+            return super(HaystackChangeList, self).get_query_set(request)
+
+        default_qs = self.root_query_set
+
+        sqs = SearchQuerySet().models(self.model).auto_query(self.query)
+        pks = [obj.pk for obj in sqs]
+
+        self.root_query_set = self.root_query_set.filter(pk__in=pks)
+        qs = super(HaystackChangeList, self).get_query_set(request)
+        self.root_query_set = default_qs
+        return qs
+
+
+class HaystackModelAdmin(object):
+    def get_changelist(self, request, **kwargs):
+        """
+        Returns the ChangeList class for use on the changelist page.
+        """
+        return HaystackChangeList
 
 
 class ChannelListFilter(SimpleListFilter):

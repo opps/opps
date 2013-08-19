@@ -102,7 +102,10 @@ class TagList(OppsList):
 
 class Search(SearchView):
     def get_results(self):
-        return self.form.search().order_by('-date_available')
+        return self.form.search().filter(
+            published=True,
+            date_available__lte=timezone.now(),
+        ).order_by('-date_available')
 
     def build_page(self):
         paginator = Paginator(self.results, self.results_per_page)
