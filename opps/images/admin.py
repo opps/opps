@@ -88,7 +88,7 @@ class ImagesAdmin(PublishableAdmin):
     def opps_editor_select(self, obj):
         return u'''
         <a href="#" onclick="top.opps_editor_popup_selector('{0}')">{1}</a>
-        '''.format(image_url(obj.archive.url, width=200, height=200),
+        '''.format(image_url(obj.archive.url),
                    'Select')
     opps_editor_select.short_description = _(u'Select')
     opps_editor_select.allow_tags = True
