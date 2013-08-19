@@ -1,5 +1,6 @@
 {{ object.title|slugify }}
 {{ object.title|striptags }}
+{{ object.channel_name }}
 {{ object.headline|slugify }}
 {{ object.headline|striptags }}
 {{ object.short_title|slugify }}

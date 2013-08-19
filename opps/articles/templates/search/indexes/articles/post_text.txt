@@ -3,6 +3,7 @@
 {{ object.content|striptags|htmlentitydecode }}
 {{ object.content|htmlentitydecode|slugify }}
 {% endif %}
+{{ object.channel_name }}
 {{ object.title|slugify }}
 {{ object.title|striptags }}
 {{ object.headline|slugify }}
