@@ -140,7 +140,7 @@ class AlbumAdminForm(forms.ModelForm):
 class AlbumAdmin(ArticleAdmin):
     form = AlbumAdminForm
     inlines = [ArticleImageInline, ArticleSourceInline, AlbumRelatedInline]
-    list_display = ['title', 'channel', 'images_count',
+    list_display = ['title', 'channel_long_slug', 'images_count',
                     'date_available', 'published', 'preview_url']
 
     fieldsets = (
