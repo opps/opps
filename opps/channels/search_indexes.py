@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from datetime import datetime
-
 from haystack.indexes import SearchIndex, Indexable, CharField, DateTimeField
 from haystack.indexes import BooleanField
 
