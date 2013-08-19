@@ -206,6 +206,14 @@ class Article(Publishable, Slugged):
         cache.set(cachekey, imgs)
         return imgs
 
+    def clean(self, *args, **kwargs):
+        article = Article.objects.filter(
+            slug=self.slug, site=self.site)
+        if self.id:
+            article = article.exclude(id=self.id)
+        if len(article) >= 1:
+            raise ValidationError(_(u'Slug field exists, choose another!'))
+
 
 class Post(Article):
     content = models.TextField(_(u"Content"))
