@@ -60,7 +60,12 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         return u"{}".format(self.get_absolute_url())
 
     def __repr__(self):
-        return self.__unicode__().encode('utf8')
+        val = self.__unicode__()
+        if isinstance(val, str):
+            return val
+        elif not isinstance(val, unicode):
+            val = unicode(val)
+        return val.encode('utf8')
 
     class Meta:
         ordering = ['-date_available', 'title', 'channel_long_slug']
