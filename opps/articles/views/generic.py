@@ -96,6 +96,7 @@ class OppsView(object):
                                          long_slug=self.long_slug,
                                          date_available__lte=timezone.now(),
                                          published=True)
+        self.long_slug = self.channel.long_slug
 
         self.channel_long_slug = [self.long_slug]
         for children in self.channel.get_children():
