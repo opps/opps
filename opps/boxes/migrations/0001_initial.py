@@ -10,6 +10,10 @@ User = get_user_model()
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        ("channels", "0001_initial"),
+    )
+
     def forwards(self, orm):
         # Adding model 'QuerySet'
         db.create_table(u'boxes_queryset', (

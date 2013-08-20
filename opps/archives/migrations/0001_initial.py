@@ -10,6 +10,10 @@ User = get_user_model()
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        ("sources", "0001_initial"),
+    )
+
     def forwards(self, orm):
         # Adding model 'File'
         db.create_table(u'archives_file', (

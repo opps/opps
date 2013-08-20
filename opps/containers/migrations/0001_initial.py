@@ -11,6 +11,13 @@ User = get_user_model()
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        ("channels", "0001_initial"),
+        ("images", "0001_initial"),
+        ("sources", "0001_initial"),
+        ("boxes", "0001_initial")
+    )
+
     def forwards(self, orm):
         # Adding model 'Container'
         db.create_table(u'containers_container', (
