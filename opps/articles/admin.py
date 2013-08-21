@@ -27,15 +27,6 @@ class PostRelatedInline(admin.TabularInline):
 @apply_opps_rules('articles')
 class PostAdmin(ContainerAdmin, AdminViewPermission):
 
-    action_buttons = [
-        {"text": "Upload multiple images",
-         "icon": "icon-picture",
-         "url": '/fileupload/image/%s/',
-         "class": "btn btn-success",
-         "style": "",
-         "title": "Click to add multiple images"},
-    ]
-
     form = PostAdminForm
     inlines = [ContainerImageInline, ContainerSourceInline, PostRelatedInline]
     search_fields = ['title', 'headline', 'slug', 'channel_name']
@@ -60,15 +51,6 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
 
 @apply_opps_rules('articles')
 class AlbumAdmin(ContainerAdmin, AdminViewPermission):
-
-    action_buttons = [
-        {"text": "Upload multiple images",
-         "icon": "icon-picture",
-         "url": '/fileupload/image/%s',
-         "class": "btn btn-success",
-         "style": "",
-         "title": "Click to add multiple images"},
-    ]
 
     form = AlbumAdminForm
     inlines = [ContainerImageInline, ContainerSourceInline]
