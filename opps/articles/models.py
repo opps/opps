@@ -74,7 +74,6 @@ class Post(Article):
                     container_id=album.pk
                 )
             }
-            print captions
 
             for image in images:
                 caption = captions.get(image.pk)
