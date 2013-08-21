@@ -234,7 +234,7 @@ class ContainerBox(BaseBox):
         """
         for backwards compatibility
         """
-        return self.queryset.get_queryset()
+        return self.queryset and self.queryset.get_queryset()
 
 
 class ContainerBoxContainers(models.Model):
