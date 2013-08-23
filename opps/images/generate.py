@@ -26,7 +26,7 @@ def _prepend_media_url(url):
 
 
 def image_url(image_url, **kwargs):
-    if not settings.THUMBOR_ENABLED or image_url.split('.')[-1] == 'git':
+    if not settings.THUMBOR_ENABLED or image_url.split('.')[-1] == 'gif':
         # TODO: alternative ways for generating the thumbnails
         return image_url
 
