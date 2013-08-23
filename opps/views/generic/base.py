@@ -68,6 +68,17 @@ class View(object):
             context['channel'] = self.channel
 
         if self.slug:
+            try:
+                context['next'] = self.get_object()\
+                    .get_next_by_date_insert()
+            except self.get_object().DoesNotExist:
+                pass
+            try:
+                context['prev'] = self.get_object()\
+                    .get_previous_by_date_insert()
+            except self.get_object().DoesNotExist:
+                pass
+
             context['articleboxes'] = context['articleboxes'].filter(
                 containers__slug=self.slug)
 
