@@ -26,6 +26,18 @@ class View(object):
         self.excluded_ids = set()
         self.child_class = u'container'
 
+    def get_paginate_by(self, queryset):
+        queryset = self.get_queryset()
+
+        setting_name = 'OPPS_{}_{}_PAGINATE_BY'.format(queryset.
+                                                       model._meta.app_label,
+                                                       queryset.model.
+                                                       __name__).upper()
+
+        paginate_by = getattr(settings, setting_name, self.paginate_by)
+
+        return paginate_by
+
     def get_context_data(self, **kwargs):
         if not self.long_slug:
             context = []
