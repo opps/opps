@@ -15,7 +15,7 @@ import json
 class ChannelAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ['name', 'parent', 'site', 'date_available', 'homepage',
-                    'order', 'published']
+                    'order', 'show_in_menu', 'published']
     list_filter = ['date_available', 'published', 'site', 'homepage', 'parent']
     search_fields = ['name']
     exclude = ('user', 'long_slug')
