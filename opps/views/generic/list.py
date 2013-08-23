@@ -11,7 +11,6 @@ from opps.containers.models import ContainerBox
 
 
 class ListView(View, DjangoListView):
-
     def get_template_names(self):
         templates = []
 
