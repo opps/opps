@@ -203,6 +203,7 @@ class Imaged(models.Model):
     main_image = models.ForeignKey(
         'images.Image',
         null=True, blank=False,
+        default=settings.OPPS_IMAGE_DEFAULT,
         on_delete=models.SET_NULL,
         related_name="%(app_label)s_%(class)s_mainimage",
         verbose_name=_(u'Main Image'))
