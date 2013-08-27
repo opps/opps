@@ -53,14 +53,15 @@ class ContainerSourceInline(admin.TabularInline):
 class ContainerBoxContainersInline(admin.StackedInline):
     model = ContainerBoxContainers
     fk_name = 'containerbox'
-    raw_id_fields = ['container']
+    raw_id_fields = ['container', 'main_image']
     actions = None
     ordering = ('order',)
     extra = 1
     fieldsets = [(None, {
         'classes': ('collapse',),
         'fields': ('container', 'aggregate', 'order', 'date_available',
-                   'date_end')})]
+                   'date_end', 'title', 'short_title', 'main_image',
+                   'main_image_caption')})]
 
 
 @apply_opps_rules('containers')
