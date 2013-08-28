@@ -33,6 +33,8 @@ If you are not sure about something, have a doubt or feedback, or just want to a
 Run example
 ===========
 
+Download and install Opps
+
 .. code-block:: bash
 
     git clone https://github.com/opps/opps.git
