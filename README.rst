@@ -35,9 +35,14 @@ Run example
 
 .. code-block:: bash
 
-    git clone git@github.com:opps/opps.git
+    git clone https://github.com/opps/opps.git
     cd opps
     python setup.py develop
+
+Now you can start a new Opps project
+
+.. code-block:: bash
+
     opps-admin.py startproject PROJECT_NAME
     cd PROJECT_NAME
     python manage.py syncdb
