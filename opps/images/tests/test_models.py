@@ -65,7 +65,7 @@ class CroppingFields(TestCase):
     def test_fit_in(self):
         field = Cropping._meta.get_field_by_name('fit_in')[0]
         self.assertTrue(field.__class__, models.BooleanField)
-        self.assertTrue(field.default)
+        self.assertFalse(field.default)
 
     def test_smart(self):
         field = Cropping._meta.get_field_by_name('smart')[0]
