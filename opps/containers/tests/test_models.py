@@ -102,23 +102,12 @@ class ContainerModelTest(TestCase):
         self.assertEqual(self.container.get_absolute_url(),
                          u"/home/test")
 
+    def test_get_thumb(self):
+        self.assertFalse(self.container.get_thumb())
+
+    def test_search_category(self):
+        self.assertEqual(self.container.search_category, u"Container")
+
     def test_get_http_absolute_url(self):
-        self.assertEqual(self.container.get_http_absolute_url(), u'http://example.com/home/test')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        self.assertEqual(self.container.get_http_absolute_url(),
+                         u'http://example.com/home/test')
