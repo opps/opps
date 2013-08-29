@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.core.cache import cache
 from django.utils import timezone
 from django.conf import settings
+from django.template.defaultfilters import slugify
 
 from polymorphic import PolymorphicModel
 from polymorphic.showfields import ShowFieldContent
@@ -79,6 +80,9 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         self.child_class = self.__class__.__name__
         self.child_module = self.__class__.__module__
         self.child_app_label = self._meta.app_label
+        if self.slug == u"":
+            self.slug = slugify(self.title)
+
         models.signals.post_save.connect(shorturl_generate,
                                          sender=self.__class__)
         super(Container, self).save(*args, **kwargs)
