@@ -80,6 +80,7 @@ class ContainerModelTest(TestCase):
 
         self.container = Container.objects.create(title=u'test',
                                                   user=self.user,
+                                                  published=True,
                                                   site=self.site,
                                                   channel=self.channel)
 
