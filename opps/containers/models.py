@@ -27,7 +27,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         null=True, blank=True,
     )
     short_url = models.URLField(
-        _("Short URL"),
+        _(u"Short URL"),
         null=True, blank=True,
     )
     child_class = models.CharField(
@@ -60,10 +60,18 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
     def __unicode__(self):
         return u"{}".format(self.get_absolute_url())
 
+    def __repr__(self):
+        val = self.__unicode__()
+        if isinstance(val, str):
+            return val
+        elif not isinstance(val, unicode):
+            val = unicode(val)
+        return val.encode('utf8')
+
     class Meta:
         ordering = ['-date_available', 'title', 'channel_long_slug']
-        verbose_name = _('Container')
-        verbose_name_plural = _('Containers')
+        verbose_name = _(u'Container')
+        verbose_name_plural = _(u'Containers')
         unique_together = ("site", "child_class", "channel_long_slug", "slug")
 
     def save(self, *args, **kwargs):
@@ -91,7 +99,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         return _(self.child_class)
 
     def get_http_absolute_url(self):
-        return "http://{}{}".format(self.site_domain, self.get_absolute_url())
+        return u"http://{}{}".format(self.site_domain, self.get_absolute_url())
     get_http_absolute_url.short_description = 'URL'
 
     def recommendation(self, child_class=False, query_slice=[None, 10]):
@@ -105,7 +113,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         )
 
         cachekey = _cache_key(
-            '{}-recommendation'.format(self.__class__.__name__),
+            u'{}-recommendation'.format(self.__class__.__name__),
             self.__class__, self.site_domain,
             u"{}-{}".format(self.channel_long_slug, self.slug))
         getcache = cache.get(cachekey)
@@ -182,8 +190,8 @@ class ContainerImage(models.Model):
     )
 
     class Meta:
-        verbose_name = _('Container image')
-        verbose_name_plural = _('Container images')
+        verbose_name = _(u'Container image')
+        verbose_name_plural = _(u'Container images')
         ordering = ('order',)
 
     def __unicode__(self):
@@ -213,8 +221,8 @@ class ContainerBox(BaseBox):
     )
 
     class Meta:
-        verbose_name = _('Container box')
-        verbose_name_plural = _('Containers boxes')
+        verbose_name = _(u'Container box')
+        verbose_name_plural = _(u'Containers boxes')
 
     def ordered_containers(self, field='order'):
         now = timezone.now()
@@ -230,7 +238,7 @@ class ContainerBox(BaseBox):
         """
         for backwards compatibility
         """
-        return self.queryset.get_queryset()
+        return self.queryset and self.queryset.get_queryset()
 
 
 class ContainerBoxContainers(models.Model):
@@ -252,10 +260,31 @@ class ContainerBoxContainers(models.Model):
                                           default=timezone.now, null=True)
     date_end = models.DateTimeField(_(u"End date"), null=True, blank=True)
 
+    title = models.CharField(_(u"Title"), max_length=140,
+                             null=True, blank=True)
+    short_title = models.CharField(
+        _(u"Short title"),
+        max_length=140,
+        null=True, blank=True,
+    )
+    main_image = models.ForeignKey(
+        'images.Image',
+        null=True, blank=True,
+        on_delete=models.SET_NULL,
+        verbose_name=_(u'Main Image'),
+    )
+    main_image_caption = models.CharField(
+        _(u"Main Image Caption"),
+        max_length=4000,
+        blank=True,
+        null=True,
+        help_text=_(u'Maximum characters 4000'),
+    )
+
     class Meta:
         ordering = ('order',)
-        verbose_name = _('Article box articles')
-        verbose_name_plural = _('Article boxes articles')
+        verbose_name = _(u'Article box articles')
+        verbose_name_plural = _(u'Article boxes articles')
         ordering = ('order', 'aggregate',)
 
     def __unicode__(self):

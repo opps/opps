@@ -26,6 +26,18 @@ class View(object):
         self.excluded_ids = set()
         self.child_class = u'container'
 
+    def get_paginate_by(self, queryset):
+        queryset = self.get_queryset()
+
+        setting_name = 'OPPS_{}_{}_PAGINATE_BY'.format(queryset.
+                                                       model._meta.app_label,
+                                                       queryset.model.
+                                                       __name__).upper()
+
+        paginate_by = getattr(settings, setting_name, self.paginate_by)
+
+        return paginate_by
+
     def get_context_data(self, **kwargs):
         if not self.long_slug:
             context = []
@@ -68,6 +80,17 @@ class View(object):
             context['channel'] = self.channel
 
         if self.slug:
+            try:
+                context['next'] = self.get_object()\
+                    .get_next_by_date_insert()
+            except self.get_object().DoesNotExist:
+                pass
+            try:
+                context['prev'] = self.get_object()\
+                    .get_previous_by_date_insert()
+            except self.get_object().DoesNotExist:
+                pass
+
             context['articleboxes'] = context['articleboxes'].filter(
                 containers__slug=self.slug)
 
@@ -95,6 +118,7 @@ class View(object):
                                          long_slug=self.long_slug,
                                          date_available__lte=timezone.now(),
                                          published=True)
+        self.long_slug = self.channel.long_slug
 
         self.channel_long_slug = [self.long_slug]
         for children in self.channel.get_children():

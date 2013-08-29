@@ -12,3 +12,5 @@ script: make test
 notifications:
   irc: "irc.freenode.org#opps"
   on_success: "never"
+after_success:
+  - coveralls

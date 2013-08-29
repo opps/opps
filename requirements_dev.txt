@@ -3,3 +3,4 @@ mock
 coverage
 django-coverage
 transifex-client
+coveralls
