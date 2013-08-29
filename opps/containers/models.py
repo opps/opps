@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.core.cache import cache
 from django.utils import timezone
 from django.conf import settings
+from django.template.defaultfilters import slugify
 
 from polymorphic import PolymorphicModel
 from polymorphic.showfields import ShowFieldContent
@@ -79,6 +80,9 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         self.child_class = self.__class__.__name__
         self.child_module = self.__class__.__module__
         self.child_app_label = self._meta.app_label
+        if self.slug == u"":
+            self.slug = slugify(self.title)
+
         models.signals.post_save.connect(shorturl_generate,
                                          sender=self.__class__)
         super(Container, self).save(*args, **kwargs)
@@ -255,6 +259,27 @@ class ContainerBoxContainers(models.Model):
     date_available = models.DateTimeField(_(u"Date available"),
                                           default=timezone.now, null=True)
     date_end = models.DateTimeField(_(u"End date"), null=True, blank=True)
+
+    title = models.CharField(_(u"Title"), max_length=140,
+                             null=True, blank=True)
+    short_title = models.CharField(
+        _(u"Short title"),
+        max_length=140,
+        null=True, blank=True,
+    )
+    main_image = models.ForeignKey(
+        'images.Image',
+        null=True, blank=True,
+        on_delete=models.SET_NULL,
+        verbose_name=_(u'Main Image'),
+    )
+    main_image_caption = models.CharField(
+        _(u"Main Image Caption"),
+        max_length=4000,
+        blank=True,
+        null=True,
+        help_text=_(u'Maximum characters 4000'),
+    )
 
     class Meta:
         ordering = ('order',)
