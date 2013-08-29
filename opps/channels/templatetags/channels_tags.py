@@ -2,7 +2,7 @@
 from django import template
 from django.conf import settings
 
-from channels.models import Channel
+from opps.channels.models import Channel
 
 
 register = template.Library()
@@ -18,5 +18,5 @@ def get_channel(slug):
     try:
         return Channel.objects.get(site=settings.SITE_ID, slug=slug,
                                    published=True)
-    except:
+    except Channel.DoesNotExist:
         return Channel.objects.none()
