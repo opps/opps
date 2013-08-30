@@ -31,7 +31,7 @@ class ChannelFields(TestCase):
         self.assertEqual(field.__class__, models.CharField)
         self.assertEqual(field.max_length, 250)
         self.assertTrue(field.db_index)
-        self.assertTrue(field.default)
+        self.assertEqual(field.default, u"default")
 
     def test_description(self):
         field = Channel._meta.get_field_by_name('description')[0]
@@ -39,6 +39,29 @@ class ChannelFields(TestCase):
         self.assertEqual(field.max_length, 255)
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
+
+    def test_show_in_menu(self):
+        field = Channel._meta.get_field_by_name('show_in_menu')[0]
+        self.assertEqual(field.__class__, models.BooleanField)
+        self.assertFalse(field.default)
+
+    def test_include_in_main_rss(self):
+        field = Channel._meta.get_field_by_name('include_in_main_rss')[0]
+        self.assertEqual(field.__class__, models.BooleanField)
+        self.assertTrue(field.default)
+
+    def test_homepage(self):
+        field = Channel._meta.get_field_by_name('homepage')[0]
+        self.assertEqual(field.__class__, models.BooleanField)
+        self.assertFalse(field.default)
+        self.assertEqual(field.help_text,
+                         u'Check only if this channel is the homepage.'
+                         u' Should have only one homepage per site')
+
+    def test_group(self):
+        field = Channel._meta.get_field_by_name('group')[0]
+        self.assertEqual(field.__class__, models.BooleanField)
+        self.assertFalse(field.default)
 
 
 class ChannelModelTest(TestCase):
