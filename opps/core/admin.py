@@ -81,17 +81,7 @@ class ChannelListFilter(SimpleListFilter):
         return queryset
 
 
-class PublishableAdmin(admin.ModelAdmin):
-    """
-    Overrides standard admin.ModelAdmin save_model method
-    It sets user (author) based on data from requet.
-    """
-    list_display = ['title', 'channel_long_slug',
-                    'date_available', 'published', 'preview_url']
-    list_filter = ['child_class', 'date_available', 'published']
-    search_fields = ['title', 'slug', 'channel_name']
-    exclude = ('user',)
-
+class MassPublishMixin(admin.ModelAdmin):
     actions = ['publish']
 
     def publish(modeladmin, request, queryset):
@@ -100,13 +90,12 @@ class PublishableAdmin(admin.ModelAdmin):
             obj.save()
     publish.short_description = _(u'Publish/Unpublish')
 
-    def save_model(self, request, obj, form, change):
-        if not change:
-            obj.user = get_user_model().objects.get(pk=request.user.pk)
-            obj.date_insert = timezone.now()
-            obj.site = Site.objects.get(pk=settings.SITE_ID)
-        obj.date_update = timezone.now()
-        obj.save()
+
+class PublisherAdmin(MassPublishMixin):
+    list_display = ['title', 'channel_long_slug',
+                    'date_available', 'published', 'preview_url']
+    list_filter = ['child_class', 'date_available', 'published']
+    search_fields = ['title', 'slug', 'channel_name']
 
     def in_containerboxes(self, obj):
         articleboxes = obj.articlebox_articles.all()
@@ -146,6 +135,26 @@ class PublishableAdmin(admin.ModelAdmin):
         )
     preview_url.short_description = _(u"View on site")
     preview_url.allow_tags = True
+
+
+class NotUserPublishableAdmin(PublisherAdmin):
+    pass
+
+
+class PublishableAdmin(PublisherAdmin):
+    """
+    Overrides standard admin.ModelAdmin save_model method
+    It sets user (author) based on data from requet.
+    """
+    exclude = ('user',)
+
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.user = get_user_model().objects.get(pk=request.user.pk)
+            obj.date_insert = timezone.now()
+            obj.site = Site.objects.get(pk=settings.SITE_ID)
+        obj.date_update = timezone.now()
+        obj.save()
 
 
 class BaseBoxAdmin(PublishableAdmin):
