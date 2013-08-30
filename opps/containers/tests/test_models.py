@@ -5,7 +5,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 
-from ..models import Container, ContainerSource, ContainerImage, ContainerBox
+from ..models import Container, ContainerSource
+from ..models import ContainerImage, ContainerBox, ContainerBoxContainers
 from opps.channels.models import Channel
 
 
@@ -186,3 +187,22 @@ class ContainerBoxFields(TestCase):
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
         self.assertEqual(field.verbose_name, u"Query Set")
+
+
+class ContainerBoxContainersFields(TestCase):
+
+    def test_containerbox(self):
+        field = ContainerBoxContainers._meta.get_field_by_name(
+            u"containerbox"
+        )[0]
+        self.assertEqual(field.__class__, models.ForeignKey)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+        self.assertEqual(field.verbose_name, u"Container Box")
+
+    def test_container(self):
+        field = ContainerBoxContainers._meta.get_field_by_name(u"container")[0]
+        self.assertEqual(field.__class__, models.ForeignKey)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+        self.assertEqual(field.verbose_name, u"Container")
