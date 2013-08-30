@@ -70,6 +70,7 @@ class ContainerAdmin(PublishableAdmin):
     readonly_fields = ['get_http_absolute_url', 'short_url',
                        'in_containerboxes', 'image_thumb']
     raw_id_fields = ['main_image', 'channel']
+    ordering = ('-date_available' ,)
 
     def get_list_filter(self, request):
         list_filter = super(ContainerAdmin, self).list_filter
