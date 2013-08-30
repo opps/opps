@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
+import operator
+
 from django.db import models
+from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.core.cache import cache
@@ -122,12 +126,12 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
 
         tag_list = [t for t in self.tags.split(',')[:3]]
         _list = [a for a in Container.objects.filter(
+            reduce(operator.and_, (Q(tags__contains=tag) for tag in tag_list)),
             site_domain=self.site_domain,
             child_class=child_class,
             channel_long_slug=self.channel_long_slug,
             date_available__range=(start, now),
-            published=True,
-            tags__in=tag_list
+            published=True
         ).exclude(pk=self.pk)
          .distinct().order_by('-date_available')[slice(*query_slice)]]
 
