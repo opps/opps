@@ -5,7 +5,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 
-from ..models import Container
+from ..models import Container, ContainerSource
 from opps.channels.models import Channel
 
 
@@ -112,3 +112,23 @@ class ContainerModelTest(TestCase):
     def test_get_http_absolute_url(self):
         self.assertEqual(self.container.get_http_absolute_url(),
                          u'http://example.com/home/test')
+
+
+class ContainerSourceFields(TestCase):
+
+    def test_containerbox(self):
+        field = ContainerSource._meta.get_field_by_name(u"container")[0]
+        self.assertEqual(field.__class__, models.ForeignKey)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+        self.assertEqual(field.verbose_name, u'Container')
+
+
+
+
+
+
+
+
+
+

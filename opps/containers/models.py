@@ -258,6 +258,7 @@ class ContainerBoxContainers(models.Model):
         on_delete=models.SET_NULL,
         verbose_name=_(u'Container'),
     )
+
     order = models.PositiveIntegerField(_(u'Order'), default=0)
     aggregate = models.BooleanField(_(u'Aggregate container'), default=False)
     date_available = models.DateTimeField(_(u"Date available"),
