@@ -5,7 +5,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 
-from ..models import Container, ContainerSource
+from ..models import Container, ContainerSource, ContainerImage
 from opps.channels.models import Channel
 
 
@@ -133,3 +133,24 @@ class ContainerSourceFields(TestCase):
         self.assertEqual(field.__class__, models.ForeignKey)
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
+
+class ContainerImageFields(TestCase):
+
+    def test_container(self):
+        field = ContainerImage._meta.get_field_by_name(u"container")[0]
+        self.assertEqual(field.__class__, models.ForeignKey)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+        self.assertEqual(field.verbose_name, u"Container")
+
+    def test_order(self):
+        field = ContainerImage._meta.get_field_by_name(u"order")[0]
+        self.assertEqual(field.__class__, models.PositiveIntegerField)
+        self.assertEqual(field.default, 0)
+
+    def test_image(self):
+        field = ContainerImage._meta.get_field_by_name(u"image")[0]
+        self.assertEqual(field.__class__, models.ForeignKey)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+        self.assertEqual(field.verbose_name, u"Image")

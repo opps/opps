@@ -181,9 +181,9 @@ class ContainerImage(models.Model):
     order = models.PositiveIntegerField(_(u'Order'), default=0)
     image = models.ForeignKey(
         'images.Image',
-        verbose_name=_(u'Image'),
         null=True, blank=True,
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
+        verbose_name=_(u'Image'),
     )
 
     caption = models.CharField(
