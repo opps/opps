@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from datetime import timedelta
+from mptt.models import TreeForeignKey
 
 from django.db import IntegrityError
 from django.test import TestCase
@@ -62,6 +63,17 @@ class ChannelFields(TestCase):
         field = Channel._meta.get_field_by_name('group')[0]
         self.assertEqual(field.__class__, models.BooleanField)
         self.assertFalse(field.default)
+
+    def test_order(self):
+        field = Channel._meta.get_field_by_name('order')[0]
+        self.assertEqual(field.__class__, models.IntegerField)
+        self.assertEqual(field.default, 0)
+
+    def test_parent(self):
+        field = Channel._meta.get_field_by_name('parent')[0]
+        self.assertEqual(field.__class__, TreeForeignKey)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
 
 
 class ChannelModelTest(TestCase):
