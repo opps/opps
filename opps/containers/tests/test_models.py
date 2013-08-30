@@ -5,7 +5,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 
-from ..models import Container, ContainerSource, ContainerImage
+from ..models import Container, ContainerSource, ContainerImage, ContainerBox
 from opps.channels.models import Channel
 
 
@@ -134,6 +134,7 @@ class ContainerSourceFields(TestCase):
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
 
+
 class ContainerImageFields(TestCase):
 
     def test_container(self):
@@ -154,3 +155,34 @@ class ContainerImageFields(TestCase):
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
         self.assertEqual(field.verbose_name, u"Image")
+
+    def test_caption(self):
+        field = ContainerImage._meta.get_field_by_name(u"caption")[0]
+        self.assertEqual(field.__class__, models.CharField)
+        self.assertEqual(field.max_length, 255)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+
+
+class ContainerBoxFields(TestCase):
+
+    def test_title(self):
+        field = ContainerBox._meta.get_field_by_name(u"title")[0]
+        self.assertEqual(field.__class__, models.CharField)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+        self.assertEqual(field.max_length, 140)
+
+    def test_containers(self):
+        field = ContainerBox._meta.get_field_by_name(u"containers")[0]
+        self.assertEqual(field.__class__, models.ManyToManyField)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+        self.assertEqual(field.verbose_name, u"Container")
+
+    def test_queryset(self):
+        field = ContainerBox._meta.get_field_by_name(u"queryset")[0]
+        self.assertEqual(field.__class__, models.ForeignKey)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+        self.assertEqual(field.verbose_name, u"Query Set")
