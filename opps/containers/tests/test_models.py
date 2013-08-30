@@ -122,13 +122,3 @@ class ContainerSourceFields(TestCase):
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
         self.assertEqual(field.verbose_name, u'Container')
-
-
-
-
-
-
-
-
-
-

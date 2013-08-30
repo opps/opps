@@ -1,6 +1,6 @@
 
 .PHONY: test
-test:
+test: pep8
 	coverage run runtests.py
 
 .PHONY: travis
