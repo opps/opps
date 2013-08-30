@@ -33,6 +33,13 @@ class ChannelFields(TestCase):
         self.assertTrue(field.db_index)
         self.assertTrue(field.default)
 
+    def test_description(self):
+        field = Channel._meta.get_field_by_name('description')[0]
+        self.assertEqual(field.__class__, models.CharField)
+        self.assertEqual(field.max_length, 255)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+
 
 class ChannelModelTest(TestCase):
 
