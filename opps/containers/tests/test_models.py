@@ -116,9 +116,20 @@ class ContainerModelTest(TestCase):
 
 class ContainerSourceFields(TestCase):
 
-    def test_containerbox(self):
+    def test_container(self):
         field = ContainerSource._meta.get_field_by_name(u"container")[0]
         self.assertEqual(field.__class__, models.ForeignKey)
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
-        self.assertEqual(field.verbose_name, u'Container')
+        self.assertEqual(field.verbose_name, u"Container")
+
+    def test_order(self):
+        field = ContainerSource._meta.get_field_by_name(u"order")[0]
+        self.assertEqual(field.__class__, models.PositiveIntegerField)
+        self.assertEqual(field.default, 0)
+
+    def test_source(self):
+        field = ContainerSource._meta.get_field_by_name(u"source")[0]
+        self.assertEqual(field.__class__, models.ForeignKey)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
