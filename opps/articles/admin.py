@@ -31,6 +31,7 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
     inlines = [ContainerImageInline, ContainerSourceInline, PostRelatedInline]
     search_fields = ['title', 'headline', 'slug', 'channel_name']
     raw_id_fields = ['main_image', 'channel', 'albums']
+    ordering = ('-date_available',)
 
     fieldsets = (
         (_(u'Identification'), {

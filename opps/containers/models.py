@@ -73,7 +73,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         return val.encode('utf8')
 
     class Meta:
-        ordering = ['-date_available', 'title', 'channel_long_slug']
+        ordering = ['-date_available']
         verbose_name = _(u'Container')
         verbose_name_plural = _(u'Containers')
         unique_together = ("site", "child_class", "channel_long_slug", "slug")
