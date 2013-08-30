@@ -1,16 +1,37 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 from datetime import timedelta
 
 from django.db import IntegrityError
 from django.test import TestCase
+from django.db import models
 from django.core.exceptions import ValidationError
 from django.contrib.sites.models import Site
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 
-from opps.channels.models import Channel
+from ..models import Channel
+
+
+class ChannelFields(TestCase):
+
+    def test_name(self):
+        field = Channel._meta.get_field_by_name('name')[0]
+        self.assertEqual(field.__class__, models.CharField)
+        self.assertEqual(field.max_length, 60)
+
+    def test_long_sland(self):
+        field = Channel._meta.get_field_by_name('long_slug')[0]
+        self.assertEqual(field.__class__, models.SlugField)
+        self.assertEqual(field.max_length, 250)
+        self.assertTrue(field.db_index)
+
+    def test_layout(self):
+        field = Channel._meta.get_field_by_name('layout')[0]
+        self.assertEqual(field.__class__, models.CharField)
+        self.assertEqual(field.max_length, 250)
+        self.assertTrue(field.db_index)
+        self.assertTrue(field.default)
 
 
 class ChannelModelTest(TestCase):
