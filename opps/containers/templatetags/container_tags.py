@@ -66,12 +66,28 @@ def get_containerbox(context, slug, template_name=None):
 
 
 @register.simple_tag
-def get_all_containerbox(channel_long_slug, template_name=None):
+def get_all_containerbox(channel_long_slug=None, template_name=None):
+    """
+    Takes all containers or containers that match the channel name (long slug).
+    
+    Sample usages::
+
+        {% get_all_containerbox "channel" template_name='my_template.html' %}
+        {% get_all_containerbox "channel/subchannel" %}
+        {% get_all_containerbox %}
+
+    channel_long_slug:
+        Long path to channel (including subchannel if is the case)
+    """
+
     boxes = ContainerBox.objects.filter(
-        site=settings.SITE_ID,
-        date_available__lte=timezone.now(),
-        published=True,
-        channel_long_slug=channel_long_slug)
+            site=settings.SITE_ID,
+            date_available__lte=timezone.now(),
+            published=True)
+
+    if channel_long_slug:
+        boxes = boxes.filter(
+                channel_long_slug=channel_long_slug)
 
     t = template.loader.get_template('articles/articlebox_list.html')
     if template_name:
