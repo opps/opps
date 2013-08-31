@@ -206,3 +206,62 @@ class ContainerBoxContainersFields(TestCase):
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
         self.assertEqual(field.verbose_name, u"Container")
+
+    def test_order(self):
+        field = ContainerBoxContainers._meta.get_field_by_name(u"order")[0]
+        self.assertEqual(field.__class__, models.PositiveIntegerField)
+        self.assertEqual(field.default, 0)
+
+    def test_aggregate(self):
+        field = ContainerBoxContainers._meta.get_field_by_name(
+            u"aggregate"
+        )[0]
+        self.assertEqual(field.default, 0)
+
+    def test_date_available(self):
+        field = ContainerBoxContainers._meta.get_field_by_name(
+            u"date_available"
+        )[0]
+        self.assertEqual(field.__class__, models.DateTimeField)
+        self.assertTrue(field.null)
+
+    def test_date_end(self):
+        field = ContainerBoxContainers._meta.get_field_by_name(u"date_end")[0]
+        self.assertEqual(field.__class__, models.DateTimeField)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+
+    def test_title(self):
+        field = ContainerBoxContainers._meta.get_field_by_name(u"title")[0]
+        self.assertEqual(field.__class__, models.CharField)
+        self.assertEqual(field.max_length, 140)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+
+    def test_short_title(self):
+        field = ContainerBoxContainers._meta.get_field_by_name(
+            u"short_title"
+        )[0]
+        self.assertEqual(field.__class__, models.CharField)
+        self.assertEqual(field.max_length, 140)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+
+    def test_main_image(self):
+        field = ContainerBoxContainers._meta.get_field_by_name(
+            u"main_image"
+        )[0]
+        self.assertEqual(field.__class__, models.ForeignKey)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+        self.assertEqual(field.verbose_name, u"Main Image")
+
+    def test_main_image_caption(self):
+        field = ContainerBoxContainers._meta.get_field_by_name(
+            u"main_image_caption"
+        )[0]
+        self.assertEqual(field.__class__, models.CharField)
+        self.assertEqual(field.max_length, 4000)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+        self.assertEqual(field.help_text, u"Maximum characters 4000")
