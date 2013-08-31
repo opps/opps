@@ -75,7 +75,8 @@ class ListView(View, DjangoListView):
         filters['channel_long_slug__in'] = self.channel_long_slug
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
-        filters['show_on_root_channel'] = True
+        if self.channel and self.channel.is_root_node():
+            filters['show_on_root_channel'] = True
         queryset = queryset.filter(**filters).exclude(pk__in=self.excluded_ids)
 
         return queryset._clone()
