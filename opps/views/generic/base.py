@@ -16,6 +16,7 @@ class View(object):
     context_object_name = "context"
     paginate_by = settings.OPPS_PAGINATE_BY
     limit = settings.OPPS_VIEWS_LIMIT
+    page_kwarg = 'page'
 
     def __init__(self):
         self.slug = None
@@ -63,7 +64,9 @@ class View(object):
         filters['channel_long_slug__in'] = self.channel_long_slug
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
-        filters['show_on_root_channel'] = True
+        is_paginated = self.page_kwarg in self.request.GET
+        if self.channel and self.channel.is_root_node() and not is_paginated:
+            filters['show_on_root_channel'] = True
         article = Container.objects.filter(**filters)
 
         context['posts'] = article.filter(

@@ -126,7 +126,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
 
         tag_list = [t for t in self.tags.split(',')[:3]]
         _list = [a for a in Container.objects.filter(
-            reduce(operator.and_, (Q(tags__contains=tag) for tag in tag_list)),
+            reduce(operator.or_, (Q(tags__contains=tag) for tag in tag_list)),
             site_domain=self.site_domain,
             child_class=child_class,
             channel_long_slug=self.channel_long_slug,
