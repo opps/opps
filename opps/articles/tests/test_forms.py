@@ -21,13 +21,13 @@ class PostAdminFormTest(TestCase):
         self.channel = Channel.objects.create(name=u'Home', slug=u'home',
                                               description=u'home page',
                                               site=self.site, user=self.user)
+        self.post = Post.objects.create(title=u'test', user=self.user,
+                                        site=self.site, channel=self.channel)
 
     def test_init(self):
         """
         Test successful init without data
         """
-        self.post = Post.objects.create(title=u'test', user=self.user,
-                                        site=self.site, channel=self.channel)
         form = PostAdminForm(instance=self.post)
         self.assertTrue(isinstance(form.instance, Post))
         self.assertEqual(form.instance.pk, self.post.pk)
@@ -36,8 +36,6 @@ class PostAdminFormTest(TestCase):
         """
         Test default value field multiupload link
         """
-        self.post = Post.objects.create(title=u'test', user=self.user,
-                                        site=self.site, channel=self.channel)
         form = PostAdminForm(instance=self.post)
         self.assertEqual(form.multiupload_link, '/fileupload/image/')
 
@@ -45,8 +43,6 @@ class PostAdminFormTest(TestCase):
         """
         Test auto set field widget Editor
         """
-        self.post = Post.objects.create(title=u'test', user=self.user,
-                                        site=self.site, channel=self.channel)
         form = PostAdminForm(instance=self.post)
         self.assertTrue(isinstance(form.fields['content'].widget,
                                    OppsEditor))
