@@ -12,7 +12,7 @@ from ..models import Post
 from ..forms import PostAdminForm
 
 
-class PostFormTest(TestCase):
+class PostAdminFormTest(TestCase):
 
     def setUp(self):
         User = get_user_model()
