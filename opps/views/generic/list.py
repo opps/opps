@@ -65,9 +65,12 @@ class ListView(View, DjangoListView):
 
         self.articleboxes = ContainerBox.objects.filter(
             channel__long_slug=self.long_slug)
+            
+        is_paginated = self.page_kwarg in self.request.GET
 
-        for box in self.articleboxes:
-            self.excluded_ids.update([a.pk for a in box.ordered_containers()])
+        if not is_paginated:
+            for box in self.articleboxes:
+                self.excluded_ids.update([a.pk for a in box.ordered_containers()])
 
         queryset = super(ListView, self).get_queryset()
         filters = {}
@@ -75,7 +78,6 @@ class ListView(View, DjangoListView):
         filters['channel_long_slug__in'] = self.channel_long_slug
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
-        is_paginated = self.page_kwarg in self.request.GET
         if self.channel and self.channel.is_root_node() and not is_paginated:
             filters['show_on_root_channel'] = True
         queryset = queryset.filter(**filters).exclude(pk__in=self.excluded_ids)
