@@ -87,12 +87,12 @@ class View(object):
         if self.slug:
             try:
                 context['next'] = self.get_object()\
-                    .get_next_by_date_insert()
+                        .get_next_by_date_insert(**obj_filter)
             except self.get_object().DoesNotExist:
                 pass
             try:
                 context['prev'] = self.get_object()\
-                    .get_previous_by_date_insert()
+                    .get_previous_by_date_insert(**obj_filter)
             except self.get_object().DoesNotExist:
                 pass
 
