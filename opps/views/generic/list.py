@@ -65,12 +65,13 @@ class ListView(View, DjangoListView):
 
         self.articleboxes = ContainerBox.objects.filter(
             channel__long_slug=self.long_slug)
-            
+
         is_paginated = self.page_kwarg in self.request.GET
 
         if not is_paginated:
             for box in self.articleboxes:
-                self.excluded_ids.update([a.pk for a in box.ordered_containers()])
+                self.excluded_ids.update(
+                    [a.pk for a in box.ordered_containers()])
 
         queryset = super(ListView, self).get_queryset()
         filters = {}
