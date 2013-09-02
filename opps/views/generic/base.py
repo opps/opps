@@ -62,10 +62,10 @@ class View(object):
         obj_filter = {}
         obj_filter['site_domain'] = self.site.domain
         obj_filter['date_available__lte'] = timezone.now()
+        obj_filter['published'] = True
 
         filters = obj_filter
         filters['channel_long_slug__in'] = self.channel_long_slug
-        filters['published'] = True
         is_paginated = self.page_kwarg in self.request.GET
         if self.channel and self.channel.is_root_node() and not is_paginated:
             filters['show_on_root_channel'] = True
