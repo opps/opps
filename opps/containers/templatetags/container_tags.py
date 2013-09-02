@@ -6,6 +6,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 
+from opps.containers.models import Container
 from opps.containers.models import ContainerBox
 
 
@@ -173,3 +174,10 @@ def get_url(obj, http=False, target=None, url_only=False):
     except Exception as e:
         logger.error("Exception at templatetag get_url: {}".format(e))
         return obj.get_absolute_url()
+
+
+@register.assignment_tag
+def get_containers_by(**filters):
+    """Return a list of containers filtered by given args"""
+    return Container.objects.filter(site=settings.SITE_ID, published=True,
+                                    **filters)
