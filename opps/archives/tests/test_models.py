@@ -6,11 +6,9 @@ from django.test import TestCase
 from django.db import models
 from django.contrib.sites.models import Site
 from django.contrib.auth import get_user_model
-from django.utils import timezone
 from django.core.files import File as DjangoFile
 
 from ..models import Archive, File, get_file_path
-
 
 
 class ArchiveFields(TestCase):
@@ -46,9 +44,9 @@ class ArchiveTest(TestCase):
         self.user = User.objects.create(username=u'test', password='test')
         self.site = Site.objects.filter(name=u'example.com').get()
         self.file = File.objects.create(user=self.user, site=self.site,
-                                             archive=DjangoFile(open("README.rst"),
-                                             "test.png"),
-                                             title=u"Test")
+                                        archive=DjangoFile(
+                                            open("README.rst"), "test.png"),
+                                        title=u"Test")
 
     def test_get_file_path(self):
         path = get_file_path(self.file, "test.png")
@@ -56,17 +54,3 @@ class ArchiveTest(TestCase):
         self.assertTrue(path)
         self.assertIn(u"archives/{}".format(d.strftime("%Y/%m/%d/")), path)
         self.assertIn(self.file.slug[:100], path)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
