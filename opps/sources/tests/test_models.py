@@ -10,6 +10,24 @@ from django.contrib.auth import get_user_model
 from opps.sources.models import Source
 
 
+class SourceFields(TestCase):
+
+    def test_name(self):
+        field = Source._meta.get_field_by_name(u"name")[0]
+        self.assertEqual(field.max_length, 255)
+
+    def test_url(self):
+        field = Source._meta.get_field_by_name(u"url")[0]
+        self.assertEqual(field.max_length, 200)
+        self.assertTrue(field.blank)
+        self.assertTrue(field.null)
+
+    def test_feed(self):
+        field = Source._meta.get_field_by_name(u"feed")[0]
+        self.assertEqual(field.max_length, 200)
+        self.assertTrue(field.blank)
+
+
 class SourceModelTest(TestCase):
 
     def setUp(self):
