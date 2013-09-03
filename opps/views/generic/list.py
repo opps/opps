@@ -21,6 +21,9 @@ class ListView(View, DjangoListView):
 
         list_name = 'list'
 
+        if self.template_name_suffix:
+            list_name = "{}{}".format(list_name, self.template_name_suffix)
+
         if self.channel:
             # Check layout, change via admin
             if self.channel.layout != u'default':
