@@ -11,6 +11,8 @@ from opps.containers.models import ContainerBox
 
 
 class ListView(View, DjangoListView):
+    template_name_suffix = ''
+
     def get_template_names(self):
         templates = []
 
@@ -20,6 +22,9 @@ class ListView(View, DjangoListView):
             return templates
 
         list_name = 'list'
+
+        if self.template_name_suffix:
+            list_name = "{}{}".format(list_name, self.template_name_suffix)
 
         if self.channel:
             # Check layout, change via admin
