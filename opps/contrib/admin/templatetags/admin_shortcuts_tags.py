@@ -13,9 +13,14 @@ register = template.Library()
 def make_url(shortcut, request):
 
     permission = shortcut.get('app_permission')
-    if permission and isinstance(permission, (list, tuple)) and len(permission) >= 2:
-        shortcut['can_add'] = request.user.has_perm('{0}.add_{1}'.format(*permission))
-        shortcut['can_change'] = request.user.has_perm('{0}.change_{1}'.format(*permission))
+    if permission and \
+        isinstance(permission, (list, tuple)) and len(permission) >= 2:
+        shortcut['can_add'] = request.user.has_perm(
+            '{0}.add_{1}'.format(*permission)
+        )
+        shortcut['can_change'] = request.user.has_perm(
+            '{0}.change_{1}'.format(*permission)
+        )
 
     if not shortcut.get('url'):
         try:
@@ -52,6 +57,7 @@ def make_url(shortcut, request):
 def add_permission(parent, child):
     if child.get('can_change', None):
         parent['can_change'] = True
+
 
 @register.inclusion_tag('admin_shortcuts/base.html', takes_context=True)
 def admin_shortcuts(context):
