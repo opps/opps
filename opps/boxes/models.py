@@ -47,6 +47,7 @@ class QuerySet(Publishable):
     )
 
     def clean(self):
+
         if self.filters:
             try:
                 json.loads(self.filters)
@@ -59,6 +60,7 @@ class QuerySet(Publishable):
             raise ValidationError(_(u'Invalid Queryset'))
 
     def get_queryset(self):
+
         _app, _model = self.model.split('.')
         model = models.get_model(_app, _model)
 
