@@ -2,7 +2,10 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
 from django.db import models
+from django.contrib.auth import get_user_model
+from django.contrib.sites.models import Site
 
+from opps.channels.models import Channel
 from ..models import QuerySet, BaseBox
 
 
@@ -60,3 +63,28 @@ class BaseBoxFields(TestCase):
         self.assertTrue(field.db_index)
         self.assertEqual(field.max_length, 150)
         self.assertTrue(field.unique)
+
+
+class QuerySetTest(TestCase):
+
+    def setUp(self):
+        User = get_user_model()
+        self.user = User.objects.create(username=u'test', password='test')
+        self.site = Site.objects.filter(name=u'example.com').get()
+        self.channel = Channel.objects.create(name=u'Home', slug=u'home',
+                                              description=u'home page',
+                                              site=self.site, user=self.user)
+        self.model = u"containers.Container"
+
+        self.queryset = QuerySet.objects.create(name=u"Query",
+                                                slug=u"query",
+                                                user=self.user,
+                                                model=self.model,
+                                                channel=self.channel)
+
+    def test_queryset_fields(self):
+        self.assertEqual(self.queryset.name, u"Query")
+        self.assertEqual(self.queryset.slug, u"query")
+        self.assertEqual(self.queryset.user, self.user)
+        self.assertEqual(self.queryset.model, self.model)
+        self.assertEqual(self.queryset.channel, self.channel)
