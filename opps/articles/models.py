@@ -97,6 +97,7 @@ class Post(Article):
 
 
 class PostRelated(models.Model):
+
     post = models.ForeignKey(
         'articles.Post',
         verbose_name=_(u'Post'),
