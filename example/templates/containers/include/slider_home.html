@@ -1,0 +1,15 @@
+<div id="myCarousel" class="carousel slide">
+  <div class="carousel-inner">
+  {% if articlebox.queryset %}
+    {% for article in  articlebox.queryset.get_queryset %}
+      {% include 'containers/include/slider_content.html' %}
+    {% endfor %}
+  {% else %}
+    {% for article in articlebox.ordered_containers %}
+          {% include 'containers/include/slider_content.html' %}
+    {% endfor %}
+  {% endif %} 
+  </div>
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+</div>

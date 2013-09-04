@@ -1,0 +1,22 @@
+{% for box in articleboxes %}
+    {% if box.slug != 'slider-home' %}
+    <div>
+        <div class='channel-header' > 
+            <h2>{{ box.title }}</h2>
+        </div>
+        <div class='posts'>
+            <ul class="thumbnails">
+                {% if not box.queryset %}
+                    {% for post in box.ordered_containers %}
+                      {% include 'containers/include/channels_content.html' %}
+                    {% endfor %}
+                {% else %}
+                   {% for post in  box.queryset.get_queryset %}
+                      {% include 'containers/include/channels_content.html' %}
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}
