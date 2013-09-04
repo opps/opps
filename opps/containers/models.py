@@ -199,7 +199,9 @@ class ContainerImage(models.Model):
         ordering = ('order',)
 
     def __unicode__(self):
-        return u"{}".format(self.image.title)
+        if self.image:
+            return u"{}".format(self.image.title)
+        return u'Id:{} - Order:{}'.format(self.id, self.order)
 
 
 class ContainerBox(BaseBox):
