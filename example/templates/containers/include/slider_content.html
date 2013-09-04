@@ -1,0 +1,16 @@
+<div class="item {% if forloop.first %} active{% endif %}">
+  <a href="{% url 'containers:open' article.channel.long_slug article.slug %}" >
+    
+    {% if article.get_thumb %}
+      <img src="{{ article.get_thumb.get_absolute_url }}">
+    {% else %}
+      <img alt="800x380" src="http://lorempixel.com/800/380/people">
+    {% endif %}
+  </a>
+  <div class="container">
+      <div class="carousel-caption">
+        <h4> <a href="{% url 'containers:open' article.channel.long_slug article.slug %}" alt="{{ article.short_title }}">{{ article.hat }}</a></h4>
+        <p class="lead"><a href="{% url 'containers:open' article.channel.long_slug article.slug %}" alt="{{ article.short_title }}">{{ article.title }}</a></p>
+      </div>
+  </div>
+</div>

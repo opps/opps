@@ -1,0 +1,41 @@
+{% extends "containers/base.html" %}
+
+{% block content %}
+
+{% include "channels/include/menu.html" %}
+            
+<div class="row-fluid">
+    <div class="span8">
+        <div class="main-slider">
+          {% load container_tags %}
+          <section>
+            {% get_containerbox 'slider-home' template_name='containers/include/slider_home.html' %}
+          </section>
+        </div>
+        <hr>
+        <section>
+            <ul class="thumbnails">
+            {% for container in context %}
+              <li class='span4'>
+                <div class="thumbnail">
+                  <img alt="300x200" src="http://lorempixel.com/300/200/people">
+                  <div class="caption">
+                    <h3>{{ container.hat }}</h3>
+                    <p>
+                      <a href="{% url 'containers:open' container.channel.long_slug container.slug %}" alt="{{ container.short_title }}">{{ container.title }}</a>
+                    </p>
+                  </div>
+                </div>
+              </li>
+            {% endfor %}  
+            </ul>     
+     </section>
+    </div>
+    <div class='span4'>
+      <section>
+        {% get_all_containerbox template_name='containers/include/channels_box.html' %}
+      </section>
+    </div>
+</div> 
+{% endblock %}
+
