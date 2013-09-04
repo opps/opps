@@ -7,12 +7,14 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from ..models import Article, Post
+from ..models import PostRelated, Link
 from opps.channels.models import Channel
 
 from opps.core.tags.models import Tag
 
 
 class ArticleFields(TestCase):
+
     def test_headline(self):
         field = Article._meta.get_field_by_name('headline')[0]
         self.assertEqual(field.__class__, models.TextField)
@@ -26,6 +28,7 @@ class ArticleFields(TestCase):
 
 
 class PostFields(TestCase):
+
     def test_content(self):
         field = Post._meta.get_field_by_name('content')[0]
         self.assertEqual(field.__class__, models.TextField)
@@ -41,6 +44,30 @@ class PostFields(TestCase):
     def test_related_posts(self):
         field = Post._meta.get_field_by_name('related_posts')[0]
         self.assertEqual(field.__class__, models.ManyToManyField)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+
+
+class PostRelatedFields(TestCase):
+
+    def test_post(self):
+        field = PostRelated._meta.get_field_by_name(u"post")[0]
+        self.assertEqual(field.__class__, models.ForeignKey)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+
+    def test_related(self):
+        field = PostRelated._meta.get_field_by_name(u"related")[0]
+        self.assertEqual(field.__class__, models.ForeignKey)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+
+
+class LinkFields(TestCase):
+
+    def test_url(self):
+        field = Link._meta.get_field_by_name(u"url")[0]
+        self.assertEqual(field.__class__, models.URLField)
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
 
