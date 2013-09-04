@@ -1,0 +1,25 @@
+body {
+ 	font-size: 12px;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", "sans-serif";
+	line-height: 1.5em;
+}
+
+.channel-header {
+	background-color: #AAAAAA; 
+	text-align: center;
+}
+
+.channel-header h2 {
+	color: white;
+}
+
+.carousel-caption p > a{
+	border-bottom: 0;
+	color: white;
+	font-size: 12px;
+
+}
+.carousel-caption h4 > a {
+	color: #ffffff;
+}
+
