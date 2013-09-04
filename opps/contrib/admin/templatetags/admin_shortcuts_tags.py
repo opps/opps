@@ -14,7 +14,7 @@ def make_url(shortcut, request):
 
     permission = shortcut.get('app_permission')
     if permission and \
-        isinstance(permission, (list, tuple)) and len(permission) >= 2:
+            isinstance(permission, (list, tuple)) and len(permission) >= 2:
         shortcut['can_add'] = request.user.has_perm(
             '{0}.add_{1}'.format(*permission)
         )
