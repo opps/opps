@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import json
 from django.test import TestCase
 from django.db import models
 from django.contrib.auth import get_user_model
@@ -76,11 +77,15 @@ class QuerySetTest(TestCase):
                                               site=self.site, user=self.user)
         self.model = u"containers.Container"
 
+        self.filters = json.dumps({"employees": [{"firstName": "Anna",
+                                                 "lastName": "Smith"}, ]})
+
         self.queryset = QuerySet.objects.create(name=u"Query",
                                                 slug=u"query",
                                                 user=self.user,
                                                 model=self.model,
-                                                channel=self.channel)
+                                                channel=self.channel,
+                                                filters=self.filters)
 
     def test_queryset_fields(self):
         self.assertEqual(self.queryset.name, u"Query")
@@ -88,3 +93,10 @@ class QuerySetTest(TestCase):
         self.assertEqual(self.queryset.user, self.user)
         self.assertEqual(self.queryset.model, self.model)
         self.assertEqual(self.queryset.channel, self.channel)
+        self.assertEqual(self.queryset.filters, self.filters)
+
+    def test_have_filters_in_clean_function(self):
+        self.assertTrue(self.filters)
+        self.assertEqual(json.loads(self.filters), {u'employees': [{
+            u'lastName': u'Smith',
+            u'firstName': u'Anna'}]})
