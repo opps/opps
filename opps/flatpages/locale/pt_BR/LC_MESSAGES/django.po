@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Translators:
 # Ellison Leão, 2013
@@ -9,19 +9,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"POT-Creation-Date: 2013-09-05 18:25-0300\n"
 "PO-Revision-Date: 2013-08-08 17:32+0000\n"
 "Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: __init__.py:5
-msgid "FlatPages"
-msgstr "Páginas Simples"
+#: __init__.py:5 models.py:16
+msgid "Flatpages"
+msgstr "Páginas simples"
 
 #: admin.py:31
 msgid "Identification"
@@ -52,12 +52,11 @@ msgid "Order"
 msgstr "Ordem"
 
 #: models.py:15
-msgid "Flat page"
-msgstr "Páginas simples"
+msgid "Flatpage"
+msgstr "Página simples"
 
-#: models.py:16
-msgid "Flat pages"
-msgstr "Páginas simples"
+#~ msgid "FlatPages"
+#~ msgstr "Páginas Simples"
 
 #~ msgid "Title"
 #~ msgstr "Title"
