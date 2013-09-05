@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: opps-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-08 15:59-0300\n"
+"PO-Revision-Date: 2013-08-09 13:47+0000\n"
+"Last-Translator: Ellison Leão\n"
+"Language-Team: Korean (http://www.transifex.com/projects/p/opps/language/ko/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ko\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: __init__.py:5 models.py:54
+msgid "Channels"
+msgstr ""
+
+#: admin.py:26
+msgid "Identification"
+msgstr ""
+
+#: admin.py:31
+msgid "Publication"
+msgstr ""
+
+#: forms.py:10
+msgid "Default"
+msgstr ""
+
+#: models.py:26
+msgid "Name"
+msgstr ""
+
+#: models.py:27
+msgid "Path name"
+msgstr ""
+
+#: models.py:29
+msgid "Layout"
+msgstr ""
+
+#: models.py:31
+msgid "Description"
+msgstr ""
+
+#: models.py:33
+msgid "Show in menu?"
+msgstr ""
+
+#: models.py:35
+msgid "Show in main RSS?"
+msgstr ""
+
+#: models.py:39
+msgid "Is home page?"
+msgstr ""
+
+#: models.py:41
+msgid ""
+"Check only if this channel is the homepage. Should have only one homepage "
+"per site"
+msgstr ""
+
+#: models.py:44
+msgid "Group sub-channel?"
+msgstr ""
+
+#: models.py:45
+msgid "Order"
+msgstr ""
+
+#: models.py:53 models.py:78
+msgid "Channel"
+msgstr ""

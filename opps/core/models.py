@@ -10,6 +10,7 @@ from django.contrib.sites.models import Site
 from django.contrib.sites.managers import CurrentSiteManager
 from django.contrib.redirects.models import Redirect
 from django.utils import timezone
+from django.utils.text import slugify
 
 from .managers import PublishableManager
 from .cache import _cache_key
@@ -117,6 +118,14 @@ class Slugged(models.Model):
     )
 
     def clean(self):
+
+        if self.slug == "":
+            try:
+                self.slug = slugify(self.title)
+            except:
+                self.slug = slugify(self.name)
+            else:
+                pass
 
         self.validate_slug()
 
@@ -316,6 +325,8 @@ class Config(Publishable):
     )
 
     class Meta:
+        verbose_name = _(u'Config')
+        verbose_name_plural = _(u'Configs')
         unique_together = ("app_label", "key_group", "key",
                            "site", "channel", "container")
 

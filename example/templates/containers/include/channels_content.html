@@ -1,0 +1,13 @@
+<li class='post'>
+    <div class='thumbnail'>
+        <a href="{% url 'containers:open' post.channel.long_slug post.slug %}" >              
+          <img alt="300x200" src="http://lorempixel.com/300/200/people">
+        </a>
+    </div>
+    <div class="caption">
+        <p class='post-hat'>
+          <a href="{% url 'containers:open' post.channel.long_slug post.slug %}" alt="{{ post.short_title }}">{{ post.hat }}</a>
+        </p>
+        <p class='post-title'><a href="{% url 'containers:open' post.channel.long_slug post.slug %}">{{ post.title }}</a></p>
+    </div>
+</li>               

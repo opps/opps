@@ -51,7 +51,7 @@ if not settings.configured:
 def runtests():
     argv = sys.argv[:1] + ['test'] + ['core', 'containers', 'articles',
                                       'boxes', 'channels', 'images',
-                                      'sources', 'sitemaps', 'flatpages']
+                                      'sources', 'sitemaps', 'flatpages', 'archives']
     execute_from_command_line(argv)
 
 

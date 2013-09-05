@@ -16,8 +16,9 @@ class ContainerImageInline(admin.TabularInline):
     model = ContainerImage
     fk_name = 'container'
     raw_id_fields = ['image']
+    sortable_field_name = "order"
     actions = None
-    extra = 1
+    extra = 0
     verbose_name = _(u"Container image")
     verbose_name_plural = _(u"Container images")
     fieldsets = [(None, {'fields': ('image', 'image_thumb',
@@ -39,8 +40,9 @@ class ContainerSourceInline(admin.TabularInline):
     model = ContainerSource
     fk_name = 'container'
     raw_id_fields = ['source']
+    sortable_field_name = "order"
     actions = None
-    extra = 1
+    extra = 0
     verbose_name = _(u"Container source")
     verbose_name_plural = _(u"Container sources")
     ordering = ('order',)
@@ -54,9 +56,10 @@ class ContainerBoxContainersInline(admin.StackedInline):
     model = ContainerBoxContainers
     fk_name = 'containerbox'
     raw_id_fields = ['container', 'main_image']
+    sortable_field_name = "order"
     actions = None
     ordering = ('order',)
-    extra = 1
+    extra = 0
     fieldsets = [(None, {
         'classes': ('collapse',),
         'fields': ('container', 'aggregate', 'order', 'date_available',

@@ -1,5 +1,29 @@
-<a href="{{ shortcut.url }}" {% if settings.open_new_window or shortcut.open_new_window %} target="_blank"{% endif %} class="{{ shortcut.class }}" {% if shortcut.help %}title="{{shortcut.help}}"{%endif%}>
-	{% if shortcut.title %}<span class="title">{{ shortcut.title }}</span>{% endif %}
-	{% if shortcut.count %}<span class="count">{{ shortcut.count }}</span>{% endif %}
-	{% if shortcut.count_new %}<span class="count_new">{{ shortcut.count_new }}</span>{% endif %}
-</a>
+{% if shortcut.can_change %}
+<li class="clearfix {% if shortcut.children|length > 0 %}has-children{% endif %}">
+    <a href="{{ shortcut.url }}" {% if settings.open_new_window or shortcut.open_new_window %} target="_blank"{% endif %} class="{{ shortcut.class }}" {% if shortcut.help %}title="{{ shortcut.help }}"{%endif%}>
+        {% if shortcut.title %}<span class="title">{{ shortcut.title|safe }}</span>{% endif %}
+        {% if shortcut.count %}<span class="count">{{ shortcut.count }}</span>{% endif %}
+        {% if shortcut.count_new %}<span class="count_new">{{ shortcut.count_new }}</span>{% endif %}
+    </a>
+
+    {% if shortcut.url_name and shortcut.can_add %}
+        {% if shortcut.add_url %}
+        <a href="{{ shortcut.add_url }}" class="add-another">
+        {% else %}
+        <a href="{{ shortcut.url }}add/" class="add-another">
+        {% endif %}
+            <img src="/static/admin/img/icon_addlink.gif" width="10" height="10" alt="Adicionar">
+        </a>
+    {% endif %}
+
+    {% if shortcut.children|length > 0 %}
+    <ul>
+    {% for child in shortcut.children %}
+        {% with 'admin_shortcuts/shortcut.html' as template_name %}
+        {% include template_name with shortcut=child %}
+        {% endwith %}
+    {% endfor %}
+    </ul>
+    {% endif %}
+</li>
+{% endif %}
