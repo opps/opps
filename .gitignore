@@ -41,3 +41,6 @@ settings.py
 
 # SQLite3 databases
 *.db
+
+#translations
+*.mo
