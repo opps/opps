@@ -20,3 +20,10 @@ def get_channel(slug):
                                    published=True)
     except Channel.DoesNotExist:
         return Channel.objects.none()
+
+
+@register.assignment_tag
+def get_channels_by(**filters):
+    """Return a list of channels filtered by given args"""
+    return Channel.objects.filter(site=settings.SITE_ID, published=True,
+                                  **filters)
