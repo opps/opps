@@ -104,7 +104,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
 
     def get_http_absolute_url(self):
         return u"http://{}{}".format(self.site_domain, self.get_absolute_url())
-    get_http_absolute_url.short_description = 'URL'
+    get_http_absolute_url.short_description = _(u'Get HTTP Absolute URL')
 
     def recommendation(self, child_class=False, query_slice=[None, 10]):
 
