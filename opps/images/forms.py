@@ -12,7 +12,7 @@ from opps.core.widgets import OppsEditor
 class ImageModelForm(forms.ModelForm):
     crop_example = forms.CharField(label=_('Crop Example'), required=False,
                                    widget=CropExample())
-    crop_x1 = forms.CharField(label=_(u'Crop X1'),required=False,
+    crop_x1 = forms.CharField(label=_(u'Crop X1'), required=False,
                               widget=forms.HiddenInput())
     crop_x2 = forms.CharField(label=_(u'Crop X2'), required=False,
                               widget=forms.HiddenInput())
