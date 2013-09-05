@@ -100,3 +100,14 @@ class QuerySetTest(TestCase):
         self.assertEqual(json.loads(self.filters), {u'employees': [{
             u'lastName': u'Smith',
             u'firstName': u'Anna'}]})
+
+    def test_not_filters_in_clean_function(self):
+        invalid = QuerySet.objects.create(name=u"Query Test",
+                                          slug=u"query_test",
+                                          user=self.user,
+                                          model=self.model,
+                                          channel=self.channel,
+                                          filters=None)
+
+        self.assertEqual(None, invalid.filters)
+        self.assertFalse(invalid.filters)
