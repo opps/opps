@@ -36,9 +36,9 @@
 <div class="container">
   <form id="fileupload" method="post" action="." enctype="multipart/form-data">
     <div class="well">
-       <h3>Multi image upload</h3>
+      <h3>{% trans 'Multi image upload' %}</h3>
        <strong>{{container.child_class}}</strong>: {{container.title}}<br />
-       <strong>Channel</strong>: {{container.channel}}<br />
+       <strong>{% trans 'Channel' %}</strong>: {{container.channel}}<br />
     </div>
     
     <ul class="grp-object-tools fileupload-buttonbar">
@@ -47,8 +47,8 @@
           <input type="file" name="image" multiple>
         </a>
       </li>
-      <li><a href="#" class="start">Enviar</a></li>
-      <li><a href="#" target="_blank" class="cancel">Cancelar</a></li>
+      <li><a href="#" class="start">{% trans 'Send' %}</a></li>
+      <li><a href="#" target="_blank" class="cancel">{% trans 'Cancel' %}</a></li>
     </ul>
 
     <div class="row fileupload-buttonbar">
