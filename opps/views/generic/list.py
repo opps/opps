@@ -50,6 +50,10 @@ class ListView(View, DjangoListView):
             templates.append('{}/{}/{}.html'.format(
                 domain_folder, self.channel.long_slug, list_name))
 
+            if self.channel != self.channel.root:
+                    templates.append('{}/{}/{}.html'.format(
+                        domain_folder, self.channel.root.long_slug, list_name))
+
         if self.request.GET.get('page') and\
            self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
             templates.append('{}/{}_paginated.html'.format(domain_folder,
