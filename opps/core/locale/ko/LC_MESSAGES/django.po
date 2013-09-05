@@ -1,0 +1,185 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: opps-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-08 15:59-0300\n"
+"PO-Revision-Date: 2013-08-09 13:47+0000\n"
+"Last-Translator: Ellison Leão\n"
+"Language-Team: Korean (http://www.transifex.com/projects/p/opps/language/ko/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ko\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: __init__.py:8
+msgid "Core"
+msgstr ""
+
+#: admin.py:21 models.py:85
+msgid "Channel"
+msgstr ""
+
+#: admin.py:42
+msgid "No channel"
+msgstr ""
+
+#: admin.py:101
+msgid "Publish/Unpublish"
+msgstr ""
+
+#: admin.py:121
+msgid "This item is not in a box"
+msgstr ""
+
+#: admin.py:123
+msgid "Article boxes"
+msgstr ""
+
+#: admin.py:129
+msgid "No Image"
+msgstr ""
+
+#: admin.py:130
+msgid "Thumbnail"
+msgstr ""
+
+#: admin.py:138
+msgid "Images"
+msgstr ""
+
+#: admin.py:145 admin.py:147
+msgid "View on site"
+msgstr ""
+
+#: admin.py:160
+msgid "Identification"
+msgstr ""
+
+#: admin.py:162
+msgid "Relationships"
+msgstr ""
+
+#: admin.py:164
+msgid "Publication"
+msgstr ""
+
+#: models.py:20
+msgid "Date insert"
+msgstr ""
+
+#: models.py:21
+msgid "Date update"
+msgstr ""
+
+#: models.py:38
+msgid "Site id"
+msgstr ""
+
+#: models.py:43
+msgid "Site domain"
+msgstr ""
+
+#: models.py:48
+msgid "Date available"
+msgstr ""
+
+#: models.py:53
+msgid "Published"
+msgstr ""
+
+#: models.py:88
+msgid "Channel name"
+msgstr ""
+
+#: models.py:94
+msgid "Channel long slug"
+msgstr ""
+
+#: models.py:113
+msgid "Slug"
+msgstr ""
+
+#: models.py:135
+msgid "The URL already exists as a redirect"
+msgstr ""
+
+#: models.py:180
+msgid "Slug already exists."
+msgstr ""
+
+#: models.py:208
+msgid "Main Image"
+msgstr ""
+
+#: models.py:211
+msgid "Main image caption"
+msgstr ""
+
+#: models.py:279
+msgid "App label"
+msgstr ""
+
+#: models.py:287
+msgid "Config Key Group"
+msgstr ""
+
+#: models.py:295
+msgid "Config Key"
+msgstr ""
+
+#: models.py:301
+msgid "Format"
+msgstr ""
+
+#: models.py:303
+msgid "Config Value"
+msgstr ""
+
+#: models.py:304
+msgid "Description"
+msgstr ""
+
+#: models.py:309
+msgid "Only published container"
+msgstr ""
+
+#: models.py:342
+#, python-format
+msgid "Can't format the value to %s"
+msgstr ""
+
+#: tags/models.py:10
+msgid "Name"
+msgstr ""
+
+#: tags/models.py:21
+msgid "Tag"
+msgstr ""
+
+#: tags/models.py:22 tags/models.py:27
+msgid "Tags"
+msgstr ""
+
+#: tags/models.py:29
+msgid "A comma-separated list of tags."
+msgstr ""
+
+#~ msgid "Box name"
+#~ msgstr "Box name"
+
+#~ msgid "Text"
+#~ msgstr "Text"
+
+#~ msgid "Json"
+#~ msgstr "Json"
+
+#~ msgid "Yaml"
+#~ msgstr "Yaml"
