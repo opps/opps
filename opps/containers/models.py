@@ -296,7 +296,8 @@ class ContainerBoxContainers(models.Model):
 
     def __unicode__(self):
         if self.container:
-            return u"{0}-{1}".format(self.containerbox.slug, self.container.slug)
+            return u"{0}-{1}".format(self.containerbox.slug,
+                                     self.container.slug)
         else:
             return u"{0}".format(self.containerbox.slug)
 
