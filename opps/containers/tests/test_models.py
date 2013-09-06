@@ -10,6 +10,52 @@ from ..models import ContainerImage, ContainerBox, ContainerBoxContainers
 from opps.channels.models import Channel
 
 
+class ContainerModelTest(TestCase):
+
+    def setUp(self):
+        User = get_user_model()
+        self.user = User.objects.create(username=u'test', password='test')
+        self.site = Site.objects.filter(name=u'example.com').get()
+        self.channel = Channel.objects.create(name=u'Home', slug=u'home',
+                                              description=u'home page',
+                                              site=self.site, user=self.user)
+
+        self.container = Container.objects.create(title=u'test',
+                                                  user=self.user,
+                                                  published=True,
+                                                  site=self.site,
+                                                  channel=self.channel)
+
+    def test_with_containers_exists(self):
+        self.assertTrue(self.container)
+        self.assertEqual(self.container.title, u'test')
+        container = Container.objects.get(title=u'test')
+        self.assertEqual(container, self.container)
+
+    def test_save_with_test_desnomalization(self):
+        self.assertEqual(self.container.channel_name, self.channel.name)
+        self.assertEqual(self.container.channel_long_slug,
+                         self.channel.long_slug)
+        self.assertEqual(self.container.child_class, u"Container")
+        self.assertEqual(self.container.child_module,
+                         u"opps.containers.models")
+        self.assertEqual(self.container.child_app_label, u"containers")
+
+    def test_absolute_url(self):
+        self.assertEqual(self.container.get_absolute_url(),
+                         u"/home/test")
+
+    def test_get_thumb(self):
+        self.assertFalse(self.container.get_thumb())
+
+    def test_search_category(self):
+        self.assertEqual(self.container.search_category, u"Container")
+
+    def test_get_http_absolute_url(self):
+        self.assertEqual(self.container.get_http_absolute_url(),
+                         u'http://example.com/home/test')
+
+
 class ContainerFields(TestCase):
 
     def test_title(self):
@@ -67,52 +113,6 @@ class ContainerFields(TestCase):
         self.assertTrue(field.blank)
         self.assertFalse(field.unique)
         self.assertFalse(field.primary_key)
-
-
-class ContainerModelTest(TestCase):
-
-    def setUp(self):
-        User = get_user_model()
-        self.user = User.objects.create(username=u'test', password='test')
-        self.site = Site.objects.filter(name=u'example.com').get()
-        self.channel = Channel.objects.create(name=u'Home', slug=u'home',
-                                              description=u'home page',
-                                              site=self.site, user=self.user)
-
-        self.container = Container.objects.create(title=u'test',
-                                                  user=self.user,
-                                                  published=True,
-                                                  site=self.site,
-                                                  channel=self.channel)
-
-    def test_with_containers_exists(self):
-        self.assertTrue(self.container)
-        self.assertEqual(self.container.title, u'test')
-        container = Container.objects.get(title=u'test')
-        self.assertEqual(container, self.container)
-
-    def test_save_with_test_desnomalization(self):
-        self.assertEqual(self.container.channel_name, self.channel.name)
-        self.assertEqual(self.container.channel_long_slug,
-                         self.channel.long_slug)
-        self.assertEqual(self.container.child_class, u"Container")
-        self.assertEqual(self.container.child_module,
-                         u"opps.containers.models")
-        self.assertEqual(self.container.child_app_label, u"containers")
-
-    def test_absolute_url(self):
-        self.assertEqual(self.container.get_absolute_url(),
-                         u"/home/test")
-
-    def test_get_thumb(self):
-        self.assertFalse(self.container.get_thumb())
-
-    def test_search_category(self):
-        self.assertEqual(self.container.search_category, u"Container")
-
-    def test_get_http_absolute_url(self):
-        self.assertEqual(self.container.get_http_absolute_url(),
-                         u'http://example.com/home/test')
 
 
 class ContainerSourceFields(TestCase):
