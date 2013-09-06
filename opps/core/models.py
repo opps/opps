@@ -325,6 +325,8 @@ class Config(Publishable):
     )
 
     class Meta:
+        verbose_name = _(u'Config')
+        verbose_name_plural = _(u'Configs')
         unique_together = ("app_label", "key_group", "key",
                            "site", "channel", "container")
 

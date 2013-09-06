@@ -26,10 +26,29 @@ file_filter = opps/containers/locale/<lang>/LC_MESSAGES/django.po
 source_file = opps/containers/locale/en/LC_MESSAGES/django.po
 source_lang = en
 
-[opps-core.contrib]
-file_filter = opps/contrib/locale/<lang>/LC_MESSAGES/django.po
-source_file = opps/contrib/locale/en/LC_MESSAGES/django.po
+[opps-contrib.admin]
+file_filter = opps/contrib/admin/locale/<lang>/LC_MESSAGES/django.po
+source_file = opps/contrib/admin/locale/en/LC_MESSAGES/django.po
 source_lang = en
+type = PO
+
+[opps-contrib.feeds]
+file_filter = opps/contrib/feeds/locale/<lang>/LC_MESSAGES/django.po
+source_file = opps/contrib/feeds/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[opps-contrib.fileupload]
+file_filter = opps/contrib/fileupload/locale/<lang>/LC_MESSAGES/django.po
+source_file = opps/contrib/fileupload/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
+
+[opps-contrib.multisite]
+file_filter = opps/contrib/multisite/locale/<lang>/LC_MESSAGES/django.po
+source_file = opps/contrib/multisite/locale/en/LC_MESSAGES/django.po
+source_lang = en
+type = PO
 
 [opps-core.core]
 file_filter = opps/core/locale/<lang>/LC_MESSAGES/django.po

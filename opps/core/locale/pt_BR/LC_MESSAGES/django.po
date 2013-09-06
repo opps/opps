@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Translators:
 # Ellison Leão, 2013
@@ -9,21 +9,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"POT-Creation-Date: 2013-09-05 11:50-0300\n"
 "PO-Revision-Date: 2013-08-08 17:30+0000\n"
 "Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: __init__.py:8
 msgid "Core"
 msgstr "Core"
 
-#: admin.py:21 models.py:85
+#: admin.py:21 models.py:87
 msgid "Channel"
 msgstr "Canal"
 
@@ -31,127 +31,135 @@ msgstr "Canal"
 msgid "No channel"
 msgstr "Sem canal"
 
-#: admin.py:101
+#: admin.py:91
 msgid "Publish/Unpublish"
 msgstr "Publicar/Despublicar"
 
-#: admin.py:121
+#: admin.py:110
 msgid "This item is not in a box"
 msgstr "Este item não está em um box"
 
-#: admin.py:123
+#: admin.py:112
 msgid "Article boxes"
 msgstr "Boxes de artigos"
 
-#: admin.py:129
+#: admin.py:118
 msgid "No Image"
 msgstr "Sem imagem"
 
-#: admin.py:130
+#: admin.py:119
 msgid "Thumbnail"
 msgstr "Imagem pequena"
 
-#: admin.py:138
+#: admin.py:127
 msgid "Images"
 msgstr "Imagens"
 
-#: admin.py:145 admin.py:147
+#: admin.py:134 admin.py:136
 msgid "View on site"
 msgstr "Ver no site"
 
-#: admin.py:160
+#: admin.py:169
 msgid "Identification"
 msgstr "Identificação"
 
-#: admin.py:162
+#: admin.py:171
 msgid "Relationships"
 msgstr "Relacionamentos"
 
-#: admin.py:164
+#: admin.py:173
 msgid "Publication"
 msgstr "Publicação"
 
-#: models.py:20
+#: models.py:21
 msgid "Date insert"
 msgstr "Data de inserção"
 
-#: models.py:21
+#: models.py:22
 msgid "Date update"
 msgstr "Data de atualização"
 
-#: models.py:38
+#: models.py:40
 msgid "Site id"
 msgstr "ID do Site"
 
-#: models.py:43
+#: models.py:45
 msgid "Site domain"
 msgstr "Domínio do Site"
 
-#: models.py:48
+#: models.py:50
 msgid "Date available"
 msgstr "Data de publicação"
 
-#: models.py:53
+#: models.py:55
 msgid "Published"
 msgstr "Publicado"
 
-#: models.py:88
+#: models.py:90
 msgid "Channel name"
 msgstr "Nome do canal"
 
-#: models.py:94
+#: models.py:96
 msgid "Channel long slug"
 msgstr "Retranca longa do canal"
 
-#: models.py:113
+#: models.py:115
 msgid "Slug"
 msgstr "Retranca"
 
-#: models.py:135
+#: models.py:145
 msgid "The URL already exists as a redirect"
 msgstr "Esta URL já existe para um redirecionamento"
 
-#: models.py:180
+#: models.py:190
 msgid "Slug already exists."
 msgstr "Retranca já existe"
 
-#: models.py:208
+#: models.py:218
 msgid "Main Image"
 msgstr "Imagem Principal"
 
-#: models.py:211
+#: models.py:221
 msgid "Main image caption"
 msgstr "Legenda da Imagem Principal"
 
-#: models.py:279
+#: models.py:288
 msgid "App label"
 msgstr "Nome da App"
 
-#: models.py:287
+#: models.py:296
 msgid "Config Key Group"
 msgstr "Grupo de Chave de Configuração"
 
-#: models.py:295
+#: models.py:304
 msgid "Config Key"
 msgstr "Chave de Configuração"
 
-#: models.py:301
+#: models.py:310
 msgid "Format"
 msgstr "Formato"
 
-#: models.py:303
+#: models.py:312
 msgid "Config Value"
 msgstr "Valor de configuração"
 
-#: models.py:304
+#: models.py:313
 msgid "Description"
 msgstr "Descrição"
 
-#: models.py:309
+#: models.py:318
 msgid "Only published container"
 msgstr "Apenas artigos publicados"
 
-#: models.py:342
+#: models.py:328
+msgid "Config"
+msgstr "Configuração"
+
+#: models.py:329
+msgid "Configs"
+msgstr "Configurações"
+
+#: models.py:353
 #, python-format
 msgid "Can't format the value to %s"
 msgstr "Erro ao formatar o valor para %s"

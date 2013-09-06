@@ -1,62 +1,82 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Ellison Leão, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"POT-Creation-Date: 2013-09-05 13:32-0300\n"
 "PO-Revision-Date: 2013-08-08 17:39+0000\n"
 "Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: __init__.py:5 models.py:86
 msgid "Images"
 msgstr "Imagens"
 
-#: admin.py:20
+#: admin.py:21
 msgid "User"
 msgstr "Usuário"
 
-#: admin.py:67
+#: admin.py:68
 msgid "Identification"
 msgstr "Identificação"
 
-#: admin.py:69
+#: admin.py:70
 msgid "Crop"
 msgstr "Cortar"
 
-#: admin.py:73
+#: admin.py:74
 msgid "Content"
 msgstr "Conteúdo"
 
-#: admin.py:75
+#: admin.py:76
 msgid "Publication"
 msgstr "Publicação"
 
-#: admin.py:92
+#: admin.py:93
 msgid "Select"
 msgstr "Selecionar"
 
-#: admin.py:99
+#: admin.py:100
 msgid "No Image"
 msgstr "Sem imagem"
 
-#: admin.py:100
+#: admin.py:101
 msgid "Thumbnail"
 msgstr "Imagem pequena"
 
-#: admin.py:109
+#: admin.py:110
 msgid "Dimension"
 msgstr "Dimensões"
+
+#: forms.py:13 models.py:22
+msgid "Crop Example"
+msgstr "Exemplo de corte"
+
+#: forms.py:15
+msgid "Crop X1"
+msgstr "Cortar X1"
+
+#: forms.py:17
+msgid "Crop X2"
+msgstr "Cortar X2"
+
+#: forms.py:19
+msgid "Crop Y1"
+msgstr "Cortar Y1"
+
+#: forms.py:21
+msgid "Crop Y2"
+msgstr "Cortar Y2"
 
 #: models.py:10
 msgid "Left"
@@ -82,10 +102,6 @@ msgstr "Meio"
 msgid "Bottom"
 msgstr "Fundo"
 
-#: models.py:22
-msgid "Crop Example"
-msgstr "Exemplo de corte"
-
 #: models.py:32
 msgid "Flip"
 msgstr "Girar"
@@ -94,7 +110,9 @@ msgstr "Girar"
 msgid ""
 "Flag that indicates that thumbor should flip horizontally (on the vertical "
 "axis) the image"
-msgstr "Selecione para indicar que o thumbor deverá rotacionar horizontalmente ( no eixo vertical ) a imagem"
+msgstr ""
+"Selecione para indicar que o thumbor deverá rotacionar horizontalmente ( no "
+"eixo vertical ) a imagem"
 
 #: models.py:37
 msgid "Flop"
@@ -104,7 +122,9 @@ msgstr "Flop"
 msgid ""
 "Flag that indicates that thumbor should flip vertically (on the horizontal "
 "axis) the image"
-msgstr "Selecione para indicar que o thumbor deverá rotacionar verticalmente ( no eixo horizontal ) a imagem"
+msgstr ""
+"Selecione para indicar que o thumbor deverá rotacionar verticalmente ( no "
+"eixo horizontal ) a imagem"
 
 #: models.py:42
 msgid "Horizontal Align"
@@ -127,18 +147,24 @@ msgid "Fit in"
 msgstr "Auto ajustar"
 
 #: models.py:56
+#, fuzzy
 msgid ""
-"flag that indicates that thumbor should fit the image in the box defined by "
+"Flag that indicates that thumbor should fit the image in the box defined by "
 "width x height"
-msgstr "Selecione para indicar ao thumbor que ele deverá ajudar a imagem para auto ajustar-se na box definida com largura x altura"
+msgstr ""
+"Selecione para indicar ao thumbor que ele deverá ajudar a imagem para auto "
+"ajustar-se na box definida com largura x altura"
 
 #: models.py:61
 msgid "Smart"
 msgstr "Inteligente"
 
 #: models.py:62
-msgid "Flag that indicates thatthumbor should use smart cropping;"
-msgstr "Selecione para indiciar ao thumbor que ele deverá realizar um crop inteligente"
+#, fuzzy
+msgid "Flag that indicates that thumbor should use smart cropping"
+msgstr ""
+"Selecione para indiciar ao thumbor que ele deverá realizar um crop "
+"inteligente"
 
 #: models.py:85
 msgid "Image"

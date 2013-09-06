@@ -41,6 +41,8 @@ CONFIG.update(USER_CONFIG)
 INIT_JS = {
     'tinymce': """
              <script src='/static/opps_tinymce.js'></script>
+             <script src='/static/admin/opps/images/js/oppsfilebrowser.js'>
+            </script>
               <script type="text/javascript">
             django.jQuery(document).ready(function(){
             tinymce.init(%s);

@@ -35,9 +35,17 @@ nosetests.xml
 .pydevproject
 *.swp
 
-
 # Django
 settings.py
 
 # SQLite3 databases
 *.db
+
+#translations
+*.mo
+
+# OS
+.DS_Store
+
+# Project
+example/archives/

@@ -9,6 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^admin/filebrowser/', include(site.urls)),
+    url(r'^admin/images/', include('opps.images.urls')),
     url(r'^grappelli/', include('grappelli.urls')),
 
     url(r'^admin/', include(admin.site.urls)),

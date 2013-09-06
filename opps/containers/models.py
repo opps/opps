@@ -104,7 +104,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
 
     def get_http_absolute_url(self):
         return u"http://{}{}".format(self.site_domain, self.get_absolute_url())
-    get_http_absolute_url.short_description = 'URL'
+    get_http_absolute_url.short_description = _(u'Get HTTP Absolute URL')
 
     def recommendation(self, child_class=False, query_slice=[None, 10]):
 
@@ -295,11 +295,15 @@ class ContainerBoxContainers(models.Model):
         ordering = ('order', 'aggregate',)
 
     def __unicode__(self):
-        return u"{0}-{1}".format(self.containerbox.slug, self.container.slug)
+        if self.container:
+            return u"{0}-{1}".format(self.containerbox.slug,
+                                     self.container.slug)
+        else:
+            return u"{0}".format(self.containerbox.slug)
 
     def clean(self):
 
-        if not self.container.published:
+        if self.container and not self.container.published:
             raise ValidationError(_(u'Article not published!'))
 
 

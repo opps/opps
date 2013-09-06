@@ -4,6 +4,7 @@ from django.contrib.syndication.views import Feed
 from django.contrib.sites.models import get_current_site
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 from opps.containers.models import Container
 from opps.channels.models import Channel
@@ -29,10 +30,10 @@ class ContainerFeed(ItemFeed):
         return super(ContainerFeed, self).__call__(request, *args, **kwargs)
 
     def title(self):
-        return "{0}'s news".format(self.site.name)
+        return _("{0}'s news".format(self.site.name))
 
     def description(self):
-        return "Latest news on {0}'s".format(self.site.name)
+        return _("Latest news on {0}'s".format(self.site.name))
 
     def items(self):
         return Container.objects.filter(
@@ -55,14 +56,15 @@ class ChannelFeed(ItemFeed):
                                  long_slug=long_slug)
 
     def link(self, obj):
-        return "{0}RSS".format(obj.get_absolute_url())
+        return _("{0}RSS".format(obj.get_absolute_url()))
 
     def title(self, obj):
-        return u"{0}'s news on channel {1}".format(self.site.name, obj.name)
+        return _(u"{0}'s news on channel {1}".format(self.site.name,
+                                                     obj.name))
 
     def description(self, obj):
-        return u"Latest news on {0}'s channel {1}".format(self.site.name,
-                                                          obj.name)
+        return _(u"Latest news on {0}'s channel {1}".format(self.site.name,
+                                                            obj.name))
 
     def items(self, obj):
         return Container.objects.filter(

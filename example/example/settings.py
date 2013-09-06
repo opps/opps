@@ -130,3 +130,8 @@ URL_TINYMCE = STATIC_URL + "tinymce"
 PATH_TINYMCE = STATIC_URL + "tinymce"
 
 ROOT_URLCONF = 'example.urls'
+
+try:
+    from local_settings import *
+except ImportError:
+    pass

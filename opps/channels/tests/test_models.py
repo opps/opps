@@ -10,6 +10,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.sites.models import Site
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 from ..models import Channel
 
@@ -192,7 +193,7 @@ class ChannelModelTest(TestCase):
         self.assertIsNone(self.parent.get_thumb())
 
     def test_search_category(self):
-        self.assertEqual('Channel', Channel().search_category)
+        self.assertEqual(_(u'Channel'), Channel().search_category)
 
     def test_title(self):
         self.assertEqual(self.parent.title, self.parent.name)

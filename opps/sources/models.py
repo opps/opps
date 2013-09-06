@@ -18,4 +18,4 @@ class Source(Publishable, Slugged):
         unique_together = ("site", "slug")
 
     def __unicode__(self):
-        return self.slug
+        return self.name
