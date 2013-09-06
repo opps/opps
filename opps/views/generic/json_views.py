@@ -21,7 +21,6 @@ class JSONResponse(HttpResponse):
         super(JSONResponse, self).__init__(content, mimetype, *args, **kwargs)
 
 
-
 class JSONResponseMixin(object):
     """
     A mixin that can be used to render a JSON response.
@@ -60,8 +59,6 @@ class JSONView(JSONResponseMixin, TemplateView):
 class JSONDetailView(JSONResponseMixin, BaseDetailView):
     def render_to_response(self, context, **response_kwargs):
         return self.render_to_json_response(context, **response_kwargs)
-
-
 
 
 class HybridDetailView(JSONResponseMixin,
