@@ -35,7 +35,6 @@ nosetests.xml
 .pydevproject
 *.swp
 
-
 # Django
 settings.py
 
@@ -44,3 +43,9 @@ settings.py
 
 #translations
 *.mo
+
+# OS
+.DS_Store
+
+# Project
+example/archives/
