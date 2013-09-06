@@ -11,10 +11,31 @@ from opps.articles.models import Album
 
 class AlbumList(ContainerList):
     model = Album
-    type = 'album'
+    type = 'articles'
+
+    def get_template_names(self):
+        templates = []
+
+        domain_folder = self.get_template_folder()
+        list_name = 'list'
+
+        templates.append('{}/{}/{}.html'.format(
+            self.model._meta.app_label,
+            self.model._meta.module_name, list_name))
+
+        if self.request.GET.get('page') and\
+           self.__class__.__name__ not in\
+           settings.OPPS_PAGINATE_NOT_APP:
+            templates.append('{}/{}/{}/{}_paginated.html'.format(
+                domain_folder, self.model._meta.app_label,
+                self.model._meta.module_name, list_name))
+
+        return templates
 
 
 class AlbumChannelList(ListView):
+    model = Album
+    type = 'articles'
 
     def get_template_names(self):
         templates = []
