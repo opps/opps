@@ -1,0 +1,38 @@
+{% load admin_static i18n %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/opps/images/css/bootstrap/css/bootstrap.min.css' %}" media="all"/>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <form method="POST" enctype="multipart/form-data" action=".">
+          <h2>{% trans 'Add Image'%}</h2>
+          <div class="row">
+            {% csrf_token %}
+            <fieldset class="span4">
+              {% for field in form %}
+              {% if field.name != "crop_example" %}
+              {% if field.is_hidden %}
+                {{ field }}
+              {% else %}
+                <div class="control-group{% if field.errors %} error{% endif %}">
+                  <label for="{{ field.label }}">{{ field.label }}{% if field.field.required %}*{% endif %}</label>
+                  <div class="controls">
+                    {{ field }}
+                  </div>
+                </div>
+                {% if forloop.counter == 4 %}</fieldset><fieldset>{% endif %}
+              {% endif %}
+              {% endif %}
+              {% endfor %}
+              <input type="submit" value="{% trans 'Add' %}" class="btn btn-primary" />
+            </fieldset>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
