@@ -3,7 +3,8 @@
 from django.test import TestCase
 from django.db import models
 
-from ..models import Date, Publisher
+from ..models import Date, Publisher, Slugged, Channeling
+from ..models import Imaged
 
 
 class DateFields(TestCase):
@@ -52,3 +53,57 @@ class PublisherFields(TestCase):
         self.assertEqual(field.__class__, models.BooleanField)
         self.assertFalse(field.default)
         self.assertTrue(field.db_index)
+
+
+class ChannelingFields(TestCase):
+
+    def test_channel(self):
+        field = Channeling._meta.get_field_by_name('channel')[0]
+        self.assertEqual(field.__class__, models.ForeignKey)
+        self.assertEqual(field.verbose_name, u"Channel")
+
+    def test_channel_name(self):
+        field = Channeling._meta.get_field_by_name('channel_name')[0]
+        self.assertEqual(field.__class__, models.CharField)
+        self.assertEqual(field.max_length, 140)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+        self.assertTrue(field.db_index)
+
+    def test_channel_long_slug(self):
+        field = Channeling._meta.get_field_by_name('channel_long_slug')[0]
+        self.assertEqual(field.__class__, models.CharField)
+        self.assertEqual(field.max_length, 250)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+        self.assertTrue(field.db_index)
+
+
+class SluggedTest(TestCase):
+
+    def test_channel(self):
+        field = Slugged._meta.get_field_by_name('slug')[0]
+        self.assertEqual(field.__class__, models.SlugField)
+        self.assertTrue(field.db_index)
+        self.assertEqual(field.max_length, 150)
+
+
+class ImagedTest(TestCase):
+
+    def test_main_image(self):
+        field = Imaged._meta.get_field_by_name('main_image')[0]
+        self.assertEqual(field.__class__, models.ForeignKey)
+        self.assertEqual(field.verbose_name, u'Main Image')
+
+    def test_main_image_caption(self):
+        field = Imaged._meta.get_field_by_name('main_image_caption')[0]
+        self.assertEqual(field.__class__, models.CharField)
+        self.assertEqual(field.max_length, 255)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+
+    def test_images(self):
+        field = Imaged._meta.get_field_by_name('images')[0]
+        self.assertEqual(field.__class__, models.ManyToManyField)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
