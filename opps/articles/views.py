@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib.sites.models import get_current_site
 from django.utils import timezone
+from django.conf import settings
 
 from opps.views.generic.list import ListView
 from opps.containers.views import ContainerList
@@ -37,7 +38,7 @@ class AlbumChannelList(ListView):
     def get_queryset(self):
         self.site = get_current_site(self.request)
 
-        queryset = super(AllList, self).get_queryset()
+        queryset = super(AlbumChannelList, self).get_queryset()
         filters = {}
         filters['site_domain'] = self.site.domain
         filters['date_available__lte'] = timezone.now()
