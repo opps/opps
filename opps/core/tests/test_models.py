@@ -135,3 +135,32 @@ class ConfigTest(TestCase):
         self.assertEqual(field.__class__, models.SlugField)
         self.assertEqual(field.max_length, 150)
         self.assertTrue(field.unique)
+
+    def test_format(self):
+        field = Config._meta.get_field_by_name('format')[0]
+        self.assertEqual(field.__class__, models.CharField)
+        self.assertEqual(field.max_length, 20)
+        self.assertEqual(field.default, 'text')
+
+    def test_value(self):
+        field = Config._meta.get_field_by_name('value')[0]
+        self.assertEqual(field.__class__, models.TextField)
+
+    def test_description(self):
+        field = Config._meta.get_field_by_name('description')[0]
+        self.assertEqual(field.__class__, models.TextField)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+
+    def test_container(self):
+        field = Config._meta.get_field_by_name('container')[0]
+        self.assertEqual(field.__class__, models.ForeignKey)
+        self.assertEqual(field.help_text, u'Only published container')
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+
+    def test_channel(self):
+        field = Config._meta.get_field_by_name('channel')[0]
+        self.assertEqual(field.__class__, models.ForeignKey)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
