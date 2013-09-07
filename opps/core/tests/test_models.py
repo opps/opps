@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 from ..models import Date, Publisher, Slugged, Channeling
 from ..models import Imaged, Config
@@ -60,7 +61,7 @@ class ChannelingFields(TestCase):
     def test_channel(self):
         field = Channeling._meta.get_field_by_name('channel')[0]
         self.assertEqual(field.__class__, models.ForeignKey)
-        self.assertEqual(field.verbose_name, u"Channel")
+        self.assertEqual(field.verbose_name, _(u"Channel"))
 
     def test_channel_name(self):
         field = Channeling._meta.get_field_by_name('channel_name')[0]
