@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.db import models
 
 from ..models import Date, Publisher, Slugged, Channeling
-from ..models import Imaged
+from ..models import Imaged, Config
 
 
 class DateFields(TestCase):
@@ -94,6 +94,8 @@ class ImagedTest(TestCase):
         field = Imaged._meta.get_field_by_name('main_image')[0]
         self.assertEqual(field.__class__, models.ForeignKey)
         self.assertEqual(field.verbose_name, u'Main Image')
+        self.assertTrue(field.blank)
+        self.assertTrue(field.null)
 
     def test_main_image_caption(self):
         field = Imaged._meta.get_field_by_name('main_image_caption')[0]
@@ -107,3 +109,28 @@ class ImagedTest(TestCase):
         self.assertEqual(field.__class__, models.ManyToManyField)
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
+
+
+class ConfigTest(TestCase):
+
+    def test_app_label(self):
+        field = Config._meta.get_field_by_name('app_label')[0]
+        self.assertEqual(field.__class__, models.SlugField)
+        self.assertEqual(field.max_length, 150)
+        self.assertTrue(field.db_index)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+
+    def test_key_group(self):
+        field = Config._meta.get_field_by_name('app_label')[0]
+        self.assertEqual(field.__class__, models.SlugField)
+        self.assertEqual(field.max_length, 150)
+        self.assertTrue(field.db_index)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+
+    def test_app_key(self):
+        field = Config._meta.get_field_by_name('key')[0]
+        self.assertEqual(field.__class__, models.SlugField)
+        self.assertEqual(field.max_length, 150)
+        self.assertTrue(field.unique)
