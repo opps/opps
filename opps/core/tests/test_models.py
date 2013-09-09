@@ -155,7 +155,7 @@ class ConfigTest(TestCase):
     def test_container(self):
         field = Config._meta.get_field_by_name('container')[0]
         self.assertEqual(field.__class__, models.ForeignKey)
-        self.assertEqual(field.help_text, u'Only published container')
+        self.assertEqual(field.help_text, _(u'Only published container'))
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
 
