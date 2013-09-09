@@ -124,7 +124,9 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         if getcache:
             return getcache
 
-        tag_list = [t for t in self.tags.split(',')[:3]]
+        tag_list = []
+        if self.tags:
+            tag_list = [t for t in self.tags.split(',')[:3]]
         _list = [a for a in Container.objects.filter(
             reduce(operator.or_, (Q(tags__contains=tag) for tag in tag_list)),
             site_domain=self.site_domain,
