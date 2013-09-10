@@ -20,6 +20,9 @@ urlpatterns = patterns(
 
     url(r'^api/', include('opps.api.urls')),
 
+    url(r'^', include('opps.flatpages.urls', namespace='flatpages',
+                      app_name='flatpages')),
+
     url(r'^', include('opps.articles.urls', namespace='articles',
                       app_name='articles')),
 
