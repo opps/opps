@@ -7,6 +7,12 @@ from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
 
+def cdata(data):
+    if not data:
+        return u""
+    return u"<!CDATA[ {0} ]]>".format(data)
+
+
 def response_mimetype(request):
     if "application/xml" in request.META['HTTP_ACCEPT']:
         return "application/xml"
