@@ -215,9 +215,9 @@ class ContainerBoxContainersFields(TestCase):
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
 
-    def test_short_title(self):
+    def test_hat(self):
         field = ContainerBoxContainers._meta.get_field_by_name(
-            u"short_title"
+            u"hat"
         )[0]
         self.assertEqual(field.__class__, models.CharField)
         self.assertEqual(field.max_length, 140)
