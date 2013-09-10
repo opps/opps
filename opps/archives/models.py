@@ -33,7 +33,6 @@ class Archive(Publishable, Slugged):
         null=True, blank=True,
         max_length=255)
 
-
     class Meta:
         verbose_name = _(u'Archive')
         verbose_name_plural = _(u'Archives')
