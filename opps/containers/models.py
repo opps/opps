@@ -56,10 +56,10 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         _(u"Show on root channel?"),
         default=True
     )
-    sources = models.ManyToManyField(
-        'sources.Source',
+    source = models.CharField(
+        _('Source'),
         null=True, blank=True,
-        through='containers.ContainerSource')
+        max_length=255)
 
     def __unicode__(self):
         return u"{}".format(self.get_absolute_url())
@@ -144,31 +144,6 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
             return obj.get(container=self.id,
                            containerbox__slug=containerbox)
         return obj.filter(container=self.id)
-
-
-class ContainerSource(models.Model):
-    container = models.ForeignKey(
-        'containers.Container',
-        null=True, blank=True,
-        on_delete=models.SET_NULL,
-        verbose_name=_(u'Container'),
-    )
-    order = models.PositiveIntegerField(_(u'Order'), default=0)
-    source = models.ForeignKey(
-        'sources.Source',
-        null=True, blank=True,
-        on_delete=models.SET_NULL,
-        related_name='containersource_sources',
-        verbose_name=_(u'Source'),
-    )
-
-    class Meta:
-        verbose_name = _(u'Container source')
-        verbose_name_plural = _(u'Container sources')
-        ordering = ('order',)
-
-    def __unicode__(self):
-        return u"{}".format(self.source.slug)
 
 
 class ContainerImage(models.Model):
