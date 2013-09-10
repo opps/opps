@@ -6,7 +6,6 @@ from .models import Post, PostRelated, Album, Link
 from .forms import PostAdminForm, AlbumAdminForm, LinkAdminForm
 
 from opps.containers.admin import ContainerAdmin, ContainerImageInline
-from opps.containers.admin import ContainerSourceInline
 from opps.core.admin import apply_opps_rules
 from opps.contrib.multisite.admin import AdminViewPermission
 
@@ -28,7 +27,7 @@ class PostRelatedInline(admin.TabularInline):
 class PostAdmin(ContainerAdmin, AdminViewPermission):
 
     form = PostAdminForm
-    inlines = [ContainerImageInline, ContainerSourceInline, PostRelatedInline]
+    inlines = [ContainerImageInline, PostRelatedInline]
     search_fields = ['title', 'headline', 'slug', 'channel_name']
     raw_id_fields = ['main_image', 'channel', 'albums']
     ordering = ('-date_available',)
@@ -54,7 +53,7 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
 class AlbumAdmin(ContainerAdmin, AdminViewPermission):
 
     form = AlbumAdminForm
-    inlines = [ContainerImageInline, ContainerSourceInline]
+    inlines = [ContainerImageInline]
     list_display = ['title', 'channel', 'images_count',
                     'date_available', 'published', 'preview_url']
 

@@ -60,7 +60,6 @@ class ImagesAdmin(PublishableAdmin):
                     'date_available', 'published']
     list_filter = [UserListFilter, 'date_available', 'published']
     search_fields = ['title']
-    raw_id_fields = ['source']
     readonly_fields = ['image_thumb']
     exclude = ('user',)
 

@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
 
-from .models import Container, ContainerSource, ContainerImage
+from .models import Container, ContainerImage
 from .models import ContainerBox, ContainerBoxContainers
 from opps.core.admin import PublishableAdmin, apply_opps_rules, BaseBoxAdmin
 from opps.core.admin import ChannelListFilter
@@ -33,22 +33,6 @@ class ContainerImageInline(admin.TabularInline):
         return _(u'No Image')
     image_thumb.short_description = _(u'Thumbnail')
     image_thumb.allow_tags = True
-
-
-@apply_opps_rules('containers')
-class ContainerSourceInline(admin.TabularInline):
-    model = ContainerSource
-    fk_name = 'container'
-    raw_id_fields = ['source']
-    sortable_field_name = "order"
-    actions = None
-    extra = 0
-    verbose_name = _(u"Container source")
-    verbose_name_plural = _(u"Container sources")
-    ordering = ('order',)
-    fieldsets = [(None, {
-        'classes': ('collapse',),
-        'fields': ('source', 'order')})]
 
 
 @apply_opps_rules('containers')

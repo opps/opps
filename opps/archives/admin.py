@@ -12,7 +12,7 @@ from .models import File
 @apply_opps_rules('archives')
 class FileAdmin(AdminViewPermission):
     search_fields = ['title', 'slug']
-    raw_id_fields = ['user', 'source']
+    raw_id_fields = ['user']
     ordering = ('-date_available',)
     list_filter = ['date_available', 'published']
     prepopulated_fields = {"slug": ["title"]}

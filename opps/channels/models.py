@@ -57,7 +57,7 @@ class Channel(MPTTModel, Publishable, Slugged):
 
     class MPTTMeta:
         unique_together = ("site", "long_slug", "slug", "parent")
-        order_insertion_by = ['order', 'name']
+        order_insertion_by = ['order']
 
     def __unicode__(self):
         """ Uniform resource identifier

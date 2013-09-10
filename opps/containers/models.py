@@ -124,16 +124,25 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         if getcache:
             return getcache
 
-        tag_list = [t for t in self.tags.split(',')[:3]]
-        _list = [a for a in Container.objects.filter(
-            reduce(operator.or_, (Q(tags__contains=tag) for tag in tag_list)),
+        containers = Container.objects.filter(
             site_domain=self.site_domain,
             child_class=child_class,
             channel_long_slug=self.channel_long_slug,
             date_available__range=(start, now),
             published=True
         ).exclude(pk=self.pk)
-         .distinct().order_by('-date_available')[slice(*query_slice)]]
+
+        tag_list = []
+        if self.tags:
+            tag_list = [t for t in self.tags.split(',')[:3]]
+            containers = containers.filter(
+                reduce(operator.or_, (Q(tags__contains=tag) for tag in
+                                      tag_list)),
+            )
+        containers = containers.distinct().order_by(
+            '-date_available')[slice(*query_slice)]
+
+        _list = [a for a in containers]
 
         cache.set(cachekey, _list, 3600)
         return _list

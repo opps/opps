@@ -28,7 +28,11 @@ class Archive(Publishable, Slugged):
     archive = models.FileField(upload_to=get_file_path, max_length=255)
     description = models.TextField(_(u"Description"), null=True, blank=True)
 
-    source = models.ForeignKey('sources.Source', null=True, blank=True)
+    source = models.CharField(
+        _('Source'),
+        null=True, blank=True,
+        max_length=255)
+
 
     class Meta:
         verbose_name = _(u'Archive')

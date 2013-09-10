@@ -28,7 +28,6 @@ class Date(models.Model):
 class Owned(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
 
-    #import pdb; pdb.set_trace()
     class Meta:
         abstract = True
 

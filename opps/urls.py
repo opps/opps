@@ -9,6 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^admin/filebrowser/', include(site.urls)),
+    url(r'^admin/images/', include('opps.images.urls')),
     url(r'^grappelli/', include('grappelli.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
@@ -18,6 +19,9 @@ urlpatterns = patterns(
     url(r'^sitemap', include('opps.sitemaps.urls')),
 
     url(r'^api/', include('opps.api.urls')),
+
+    url(r'^', include('opps.articles.urls', namespace='articles',
+                      app_name='articles')),
 
     url(r'^', include('opps.containers.urls', namespace='containers',
                       app_name='containers')),
