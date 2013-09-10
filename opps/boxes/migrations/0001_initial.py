@@ -8,6 +8,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
+
 class Migration(SchemaMigration):
 
     depends_on = (
@@ -43,6 +44,9 @@ class Migration(SchemaMigration):
 
 
     models = {
+        u'%s.%s' % (User._meta.app_label, User._meta.module_name): {
+            'Meta': {'object_name': User.__name__},
+        },
         u'auth.group': {
             'Meta': {'object_name': 'Group'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -55,9 +59,6 @@ class Migration(SchemaMigration):
             'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        u'%s.%s' % (User._meta.app_label, User._meta.module_name): {
-            'Meta': {'object_name': User.__name__},
         },
         u'boxes.queryset': {
             'Meta': {'object_name': 'QuerySet'},
@@ -79,7 +80,7 @@ class Migration(SchemaMigration):
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['%s.%s']" % (User._meta.app_label, User._meta.object_name)})
         },
         u'channels.channel': {
-            'Meta': {'ordering': "['name', 'parent', 'published']", 'unique_together': "(('site', 'long_slug', 'slug', 'parent'),)", 'object_name': 'Channel'},
+            'Meta': {'ordering': "['name', 'parent__id', 'published']", 'unique_together': "(('site', 'long_slug', 'slug', 'parent'),)", 'object_name': 'Channel'},
             'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True', 'db_index': 'True'}),
             'date_insert': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'date_update': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
@@ -88,6 +89,7 @@ class Migration(SchemaMigration):
             'homepage': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'include_in_main_rss': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'layout': ('django.db.models.fields.CharField', [], {'default': "'default'", 'max_length': '250', 'db_index': 'True'}),
             u'level': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             u'lft': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             'long_slug': ('django.db.models.fields.SlugField', [], {'max_length': '250'}),
