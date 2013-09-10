@@ -224,6 +224,14 @@ class ContainerBox(BaseBox):
             containerboxcontainers__date_available__lte=now
         ).order_by('containerboxcontainers__order').distinct()
 
+    def ordered_box_containers(self):
+        now = timezone.now()
+        return self.containerboxcontainers_set.filter(
+            models.Q(date_end__gte=now) |
+            models.Q(date_end__isnull=True),
+            date_available__lte=now
+        ).order_by('order').distinct()
+
     def get_queryset(self):
         """
         for backwards compatibility
@@ -253,11 +261,6 @@ class ContainerBoxContainers(models.Model):
 
     title = models.CharField(_(u"Title"), max_length=140,
                              null=True, blank=True)
-    short_title = models.CharField(
-        _(u"Short title"),
-        max_length=140,
-        null=True, blank=True,
-    )
 
     hat = models.CharField(
         _(u"Hat"),
