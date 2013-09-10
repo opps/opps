@@ -47,7 +47,7 @@ class ContainerBoxContainersInline(admin.StackedInline):
     fieldsets = [(None, {
         'classes': ('collapse',),
         'fields': ('container', 'aggregate', 'order', 'date_available',
-                   'date_end', 'title', 'hat', 'short_title', 'main_image',
+                   'date_end', 'hat', 'title', 'main_image',
                    'main_image_caption')})]
 
 
