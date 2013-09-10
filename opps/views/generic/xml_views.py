@@ -7,6 +7,12 @@ from django.views.generic.detail import BaseDetailView
 from django.views.generic.detail import SingleObjectTemplateResponseMixin
 
 
+def cdata(data):
+    if not data:
+        return u""
+    return u"<!CDATA[ {0} ]]>".format(data)
+
+
 def response_mimetype(request):
     if "application/xml" in request.META['HTTP_ACCEPT']:
         return "application/xml"
@@ -44,11 +50,11 @@ class XMLResponse(HttpResponse):
 
 class XMLResponseMixin(object):
     """
-    A mixin that can be used to render a JSON response.
+    A mixin that can be used to render a XML response.
     """
     def render_to_xml_response(self, context, **response_kwargs):
         """
-        Returns a JSON response, transforming 'context' to make the payload.
+        Returns a XML response, transforming 'context' to make the payload.
         """
         return HttpResponse(
             self.convert_context_to_xml(context),
@@ -56,7 +62,7 @@ class XMLResponseMixin(object):
             **response_kwargs
         )
 
-        # response = JSONResponse(
+        # response = XMLResponse(
         #     self.convert_context_to_xml(context),
         #     {},
         #     response_mimetype(self.request)
@@ -68,7 +74,7 @@ class XMLResponseMixin(object):
         # Note: This is *EXTREMELY* naive; in reality, you'll need
         # to do much more complex handling to ensure that arbitrary
         # objects -- such as Django model instances or querysets
-        # -- can be serialized as JSON.
+        # -- can be serialized as XML.
         return xmltodict.unparse(context)
 
 
