@@ -81,7 +81,6 @@ INSTALLED_APPS = (
     'opps.channels',
     'opps.flatpages',
     'opps.images',
-    'opps.sources',
     'opps.sitemaps',
 
     'south',
