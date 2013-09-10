@@ -35,7 +35,6 @@ if not settings.configured:
             'opps.containers',
             'opps.boxes',
             'opps.channels',
-            'opps.sources',
             'opps.articles',
             'opps.images',
             'opps.sitemaps',

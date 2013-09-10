@@ -5,7 +5,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 
-from ..models import Container, ContainerSource
+from ..models import Container
 from ..models import ContainerImage, ContainerBox, ContainerBoxContainers
 from opps.channels.models import Channel
 
@@ -106,32 +106,9 @@ class ContainerFields(TestCase):
         self.assertEqual(field.__class__, models.BooleanField)
         self.assertTrue(field.default)
 
-    def test_sourcesl(self):
-        field = Container._meta.get_field_by_name('sources')[0]
-        self.assertEqual(field.__class__, models.ManyToManyField)
-        self.assertTrue(field.null)
-        self.assertTrue(field.blank)
-        self.assertFalse(field.unique)
-        self.assertFalse(field.primary_key)
-
-
-class ContainerSourceFields(TestCase):
-
-    def test_container(self):
-        field = ContainerSource._meta.get_field_by_name(u"container")[0]
-        self.assertEqual(field.__class__, models.ForeignKey)
-        self.assertTrue(field.null)
-        self.assertTrue(field.blank)
-        self.assertEqual(field.verbose_name, u"Container")
-
-    def test_order(self):
-        field = ContainerSource._meta.get_field_by_name(u"order")[0]
-        self.assertEqual(field.__class__, models.PositiveIntegerField)
-        self.assertEqual(field.default, 0)
-
     def test_source(self):
-        field = ContainerSource._meta.get_field_by_name(u"source")[0]
-        self.assertEqual(field.__class__, models.ForeignKey)
+        field = Container._meta.get_field_by_name('source')[0]
+        self.assertEqual(field.__class__, models.CharField)
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
 

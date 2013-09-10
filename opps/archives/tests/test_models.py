@@ -32,7 +32,7 @@ class ArchiveFields(TestCase):
 
     def test_source(self):
         field = Archive._meta.get_field_by_name(u"source")[0]
-        self.assertEqual(field.__class__, models.ForeignKey)
+        self.assertEqual(field.__class__, models.CharField)
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
 
