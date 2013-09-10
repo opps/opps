@@ -5,10 +5,7 @@ register = template.Library()
 
 @register.simple_tag
 def upload_js(container):
-    sources = container.sources.through.objects.filter(
-        **{container.sources.source_field_name: container}
-    )
-    container_sources = sources[0].source.name if sources else ''
+    container_sources = container.source if container.source else ''
     return """
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">

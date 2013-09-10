@@ -7,7 +7,6 @@ from django.utils.text import slugify
 from .models import Image
 from .widgets import CropExample
 
-from opps.sources.models import Source
 from opps.core.widgets import OppsEditor
 
 
@@ -38,19 +37,6 @@ class PopUpImageForm(ImageModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
         super(PopUpImageForm, self).__init__(*args, **kwargs)
-
-    def clean_source(self):
-        data = self.cleaned_data.get('source')
-        try:
-            src = Source.objects.filter(name=data).latest('id')
-        except Source.DoesNotExist:
-            src = Source.objects.create(
-                name=data,
-                slug=slugify(data),
-                published=True,
-                user=self.user
-            )
-        return src
 
     def save(self, *args, **kwargs):
         instance = super(PopUpImageForm, self).save(commit=False)
