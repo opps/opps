@@ -258,6 +258,13 @@ class ContainerBoxContainers(models.Model):
         max_length=140,
         null=True, blank=True,
     )
+
+    hat = models.CharField(
+        _(u"Hat"),
+        max_length=140,
+        null=True, blank=True,
+    )
+
     main_image = models.ForeignKey(
         'images.Image',
         null=True, blank=True,
