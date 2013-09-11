@@ -282,6 +282,8 @@ class ContainerBoxContainers(models.Model):
         help_text=_(u'Maximum characters 4000'),
     )
 
+    url = models.URLField(_(u"URL"), null=True, blank=True)
+
     class Meta:
         ordering = ('order',)
         verbose_name = _(u'Article box articles')
