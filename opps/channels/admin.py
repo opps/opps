@@ -54,7 +54,8 @@ class ChannelAdmin(PublishableAdmin):
                 return json.loads(_jsonData)
 
         def _get_json_channel(_obj):
-            return _get_template_path(u'containers/{}/channel.json'.format(_obj.long_slug))
+            return _get_template_path(
+                u'containers/{}/channel.json'.format(_obj.long_slug))
 
         def _get_json_channel_recursivelly(_obj):
             channel_json = []
@@ -67,7 +68,8 @@ class ChannelAdmin(PublishableAdmin):
                     channel_json = _get_json_channel_recursivelly(_obj.parent)
                 elif _is_root:
                     try:
-                        channel_json = _get_template_path(u'containers/channel.json')
+                        channel_json = _get_template_path(
+                            u'containers/channel.json')
                     except:
                         pass
             finally:
