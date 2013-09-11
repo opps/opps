@@ -87,8 +87,6 @@ class Channel(MPTTModel, Publishable, Slugged):
         return self.get_root()
 
     def clean(self):
-        #channel_exist_domain = Channel.objects.filter(
-        #    slug=self.slug, site=self.site)
         channel_is_home = Channel.objects.filter(
             site__id=settings.SITE_ID,
             homepage=True, published=True)
