@@ -29,10 +29,12 @@ from psycopg2 import InterfaceError, ProgrammingError, OperationalError
 
 from django.conf import settings
 from django.db.backends.postgresql_psycopg2.base import *
-from django.db.backends.postgresql_psycopg2.base import DatabaseWrapper as Psycopg2DatabaseWrapper
-from django.db.backends.postgresql_psycopg2.base import CursorWrapper as DjangoCursorWrapper
-from django.db.backends.postgresql_psycopg2.creation import DatabaseCreation as Psycopg2DatabaseCreation
-
+from django.db.backends.postgresql_psycopg2.base import \
+    DatabaseWrapper as Psycopg2DatabaseWrapper
+from django.db.backends.postgresql_psycopg2.base import \
+    CursorWrapper as DjangoCursorWrapper
+from django.db.backends.postgresql_psycopg2.creation \
+    import DatabaseCreation as Psycopg2DatabaseCreation
 
 
 class DatabaseOperations(DatabaseOperations):
@@ -63,8 +65,10 @@ db_pool = manage(Database, **pool_args)
 
 log = logging.getLogger('z.pool')
 
+
 def _log(message, *args):
     log.debug(message)
+
 
 # Only hook up the listeners if we are in debug mode.
 if settings.DEBUG:
@@ -76,20 +80,21 @@ if settings.DEBUG:
 def is_disconnect(e, connection, cursor):
     """
     Connection state check from SQLAlchemy:
-    https://bitbucket.org/sqlalchemy/sqlalchemy/src/tip/lib/sqlalchemy/dialects/postgresql/psycopg2.py
+    https://bitbucket.org/sqlalchemy/sqlalchemy/src/tip/
+        lib/sqlalchemy/dialects/postgresql/psycopg2.py
     """
     if isinstance(e, OperationalError):
         # these error messages from libpq: interfaces/libpq/fe-misc.c.
         # TODO: these are sent through gettext in libpq and we can't
         # check within other locales - consider using connection.closed
         return 'terminating connection' in str(e) or \
-                'closed the connection' in str(e) or \
-                'connection not open' in str(e) or \
-                'could not receive data from server' in str(e)
+               'closed the connection' in str(e) or \
+               'connection not open' in str(e) or \
+               'could not receive data from server' in str(e)
     elif isinstance(e, InterfaceError):
         # psycopg2 client errors, psycopg2/conenction.h, psycopg2/cursor.h
         return 'connection already closed' in str(e) or \
-                'cursor already closed' in str(e)
+               'cursor already closed' in str(e)
     elif isinstance(e, ProgrammingError):
         # not sure where this path is originally from, it may
         # be obsolete.   It really says "losed", not "closed".
@@ -115,28 +120,32 @@ class CursorWrapper(DjangoCursorWrapper):
         try:
             return self.cursor.execute(query, args)
         except Database.IntegrityError, e:
-            raise utils.IntegrityError, utils.IntegrityError(*tuple(e)), sys.exc_info()[2]
+            raise utils.IntegrityError, utils.IntegrityError(
+                *tuple(e)), sys.exc_info()[2]
         except Database.DatabaseError, e:
             if is_disconnect(e, self.connection.connection, self.cursor):
                 log.error("invalidating broken connection")
                 self.connection.invalidate()
-            raise utils.DatabaseError, utils.DatabaseError(*tuple(e)), sys.exc_info()[2]
+            raise utils.DatabaseError, utils.DatabaseError(
+                *tuple(e)), sys.exc_info()[2]
 
     def executemany(self, query, args):
         try:
             return self.cursor.executemany(query, args)
         except Database.IntegrityError, e:
-            raise utils.IntegrityError, utils.IntegrityError(*tuple(e)), sys.exc_info()[2]
+            raise utils.IntegrityError, utils.IntegrityError(
+                *tuple(e)), sys.exc_info()[2]
         except Database.DatabaseError, e:
             if is_disconnect(e, self.connection.connection, self.cursor):
                 log.error("invalidating broken connection")
                 self.connection.invalidate()
-            raise utils.DatabaseError, utils.DatabaseError(*tuple(e)), sys.exc_info()[2]
+            raise utils.DatabaseError, utils.DatabaseError(
+                *tuple(e)), sys.exc_info()[2]
 
 
 class DatabaseCreation(Psycopg2DatabaseCreation):
     def destroy_test_db(self, *args, **kw):
-        """Ensure connection pool is disposed before trying to drop database."""
+        """Ensure conn pool is disposed before trying to drop database."""
         self.connection._dispose()
         super(DatabaseCreation, self).destroy_test_db(*args, **kw)
 
@@ -152,10 +161,11 @@ class DatabaseWrapper(Psycopg2DatabaseWrapper):
         self.ops = DatabaseOperations(self)
 
     def _cursor(self):
-        if self.connection is None or self.connection.is_valid == False:
+        if self.connection is None or self.connection.is_valid is False:
             self.connection = db_pool.connect(**self._get_conn_params())
             self.connection.set_client_encoding('UTF8')
-            tz = 'UTC' if settings.USE_TZ else self.settings_dict.get('TIME_ZONE')
+            tz = 'UTC' if settings.USE_TZ else self.settings_dict.get(
+                'TIME_ZONE')
             if tz:
                 try:
                     get_parameter_status = self.connection.get_parameter_status
@@ -168,9 +178,9 @@ class DatabaseWrapper(Psycopg2DatabaseWrapper):
                 if conn_tz != tz:
                     # Set the time zone in autocommit mode (see #17062)
                     self.connection.set_isolation_level(
-                            psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
+                        psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
                     self.connection.cursor().execute(
-                            self.ops.set_time_zone_sql(), [tz])
+                        self.ops.set_time_zone_sql(), [tz])
             self.connection.set_isolation_level(self.isolation_level)
             self._get_pg_version()
             connection_created.send(sender=self.__class__, connection=self)
