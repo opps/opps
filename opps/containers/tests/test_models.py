@@ -224,6 +224,14 @@ class ContainerBoxContainersFields(TestCase):
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
 
+    def test_url(self):
+        field = ContainerBoxContainers._meta.get_field_by_name(
+            u"url"
+        )[0]
+        self.assertEqual(field.__class__, models.URLField)
+        self.assertTrue(field.null)
+        self.assertTrue(field.blank)
+
     def test_main_image(self):
         field = ContainerBoxContainers._meta.get_field_by_name(
             u"main_image"
