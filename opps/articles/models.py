@@ -61,7 +61,7 @@ class Post(Article):
         )
 
         for album in albums:
-            images = album.images.prefetch_related('source').filter(
+            images = album.images.filter(
                 published=True,
                 date_available__lte=timezone.now(),
             ).exclude(
