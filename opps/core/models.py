@@ -152,7 +152,6 @@ class Slugged(models.Model):
     def validate_slug(self):
         slug = getattr(self, 'slug', None)
         channel = getattr(self, 'channel', None)
-        parent = getattr(self, 'parent', None)
         site = getattr(self, 'site', None)
 
         if settings.OPPS_SMART_SLUG_ENABLED:
@@ -163,8 +162,8 @@ class Slugged(models.Model):
         if channel:
             filters['channel'] = channel
 
-        if parent:
-            filters['parent'] = parent
+        if hasattr(self, 'parent'):
+            filters['parent'] = self.parent
 
         # if model does not have site
         if not getattr(self, 'site', False):
