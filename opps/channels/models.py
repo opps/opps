@@ -95,9 +95,6 @@ class Channel(MPTTModel, Publishable, Slugged):
         if self.pk:
             channel_is_home = channel_is_home.exclude(pk=self.pk)
 
-        #if channel_exist_domain.exists() and not self.pk:
-        #    raise ValidationError('Slug exist in domain!')
-
         if self.homepage and channel_is_home.exists():
             raise ValidationError('Exist home page!')
 
