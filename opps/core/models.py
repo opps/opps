@@ -151,13 +151,12 @@ class Slugged(models.Model):
 
     def validate_slug(self):
         slug = getattr(self, 'slug', None)
-        channel = getattr(self, 'channel', None)
         site = getattr(self, 'site', None)
 
         filters = {'slug': slug, 'site': site}
 
-        if channel:
-            filters['channel'] = channel
+        if hasattr(self, 'channel'):
+            filters['channel'] = self.channel
 
         if hasattr(self, 'parent'):
             filters['parent'] = self.parent
