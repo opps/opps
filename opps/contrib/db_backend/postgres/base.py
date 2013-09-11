@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
+INSTALL:
+    apt-get install postgresql-contrib-9.1
+
+RUN IN DBSHELL
+   CREATE EXTENSION IF NOT EXISTS unaccent;
+
 USAGE:
 
 DATABASES = {
