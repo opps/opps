@@ -87,16 +87,11 @@ class Channel(MPTTModel, Publishable, Slugged):
         return self.get_root()
 
     def clean(self):
-        channel_exist_domain = Channel.objects.filter(
-            slug=self.slug, site=self.site)
         channel_is_home = Channel.objects.filter(
             site__id=settings.SITE_ID,
             homepage=True, published=True)
         if self.pk:
             channel_is_home = channel_is_home.exclude(pk=self.pk)
-
-        if channel_exist_domain.exists() and not self.pk:
-            raise ValidationError('Slug exist in domain!')
 
         if self.homepage and channel_is_home.exists():
             raise ValidationError('Exist home page!')
