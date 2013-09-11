@@ -52,14 +52,28 @@ class ChannelAdmin(PublishableAdmin):
             with open(template) as f:
                 _jsonData = f.read().replace('\n', '')
                 return json.loads(_jsonData)
-        
-        try:
-            channel_json = _get_template_path(u'containers/{}/channel.json'.format(obj.long_slug))
-        except:
+
+        def _get_json_channel(_obj):
+            return _get_template_path(u'containers/{}/channel.json'.format(_obj.long_slug))
+
+        def _get_json_channel_recursivelly(_obj):
+            channel_json = []
             try:
-                channel_json = _get_template_path(u'containers/channel.json')
+                channel_json = _get_json_channel(_obj)
+                print channel_json
             except:
-                pass
+                _is_root = _obj.is_root_node()
+                if not _is_root:
+                    channel_json = _get_json_channel_recursivelly(_obj.parent)
+                elif _is_root:
+                    try:
+                        channel_json = _get_template_path(u'containers/channel.json')
+                    except:
+                        pass
+            finally:
+                return channel_json
+
+        channel_json = _get_json_channel_recursivelly(obj)
 
         if u'layout' in channel_json:
             layout_list = ['default'] + [l for l in channel_json['layout']]
