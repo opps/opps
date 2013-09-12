@@ -18,13 +18,15 @@ def upload_js(container):
 
         <td class="extra">
         <label>
-        """ + unicode(_(u'Title')) + u""": <input type="text" name="title" value='""" + \
+        """ + unicode(_(u'Title')) + u""": <input type="text"
+        name="title" value='""" + \
         container.title + u"""' required></label>
-        <label>"""+ unicode(_(u'Caption')) + u""":
+        <label>""" + unicode(_(u'Caption')) + u""":
             <textarea name="caption" rows="3" colums="1">
                         </textarea>
-        <label>"""+ unicode(_(u'Order')) + u""": <input type="text" name="order" value="0"/></label>
-        <label>"""+ unicode(_(u'Source')) + u""":
+        <label>""" + unicode(_(u'Order')) + u""": <input type="text"
+        name="order" value="0"/></label>
+        <label>""" + unicode(_(u'Source')) + u""":
             <input type="text" name="source" value='""" + \
         container_sources + u"""'></label></td>
         {% if (file.error) { %}
