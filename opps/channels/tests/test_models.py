@@ -225,3 +225,32 @@ class ChannelModelTest(TestCase):
                                        homepage=True, site=self.site,
                                        user=self.user, published=True)
         valid.full_clean()
+
+    def test_long_slug(self):
+        channel1 = Channel.objects.create(name=u'Channel 1', slug=u'channel1',
+                                          parent=self.parent,
+                                          description=u'channel 1',
+                                          site=self.site, user=self.user)
+        channel2 = Channel.objects.create(name=u'Channel 2', slug=u'channel2',
+                                          parent=channel1,
+                                          description=u'channel 2',
+                                          site=self.site, user=self.user)
+        self.assertEqual(self.parent.long_slug, 'home')
+        self.assertEqual(channel1.long_slug, 'home/channel1')
+        self.assertEqual(channel2.long_slug, 'home/channel1/channel2')
+
+    def test_unicode(self):
+        channel1 = Channel.objects.create(name=u'Channel 1', slug=u'channel1',
+                                          parent=self.parent,
+                                          description=u'channel 1',
+                                          site=self.site, user=self.user)
+        channel2 = Channel.objects.create(name=u'Channel 2', slug=u'channel2',
+                                          parent=channel1,
+                                          description=u'channel 2',
+                                          site=self.site, user=self.user)
+        self.assertEqual(self.parent.__unicode__(), '/home/')
+        self.assertEqual(channel1.__unicode__(), '/home/channel1/')
+        self.assertEqual(channel2.__unicode__(), '/home/channel1/channel2/')
+
+    def test_get_absolute_url(self):
+        self.test_unicode()

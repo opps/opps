@@ -64,9 +64,7 @@ class Channel(MPTTModel, Publishable, Slugged):
         """ Uniform resource identifier
         http://en.wikipedia.org/wiki/Uniform_resource_identifier
         """
-        if self.parent:
-            return u"/{}/{}/".format(self.parent.slug, self.slug)
-        return u"/{}/".format(self.slug)
+        return u"/{}/".format(self._set_longo_slug())
 
     def get_absolute_url(self):
         return u"{}".format(self.__unicode__())
@@ -99,8 +97,11 @@ class Channel(MPTTModel, Publishable, Slugged):
 
         super(Channel, self).clean()
 
-    def save(self, *args, **kwargs):
-        self.long_slug = u"{}".format(self.slug)
+    def _set_longo_slug(self):
         if self.parent:
-            self.long_slug = u"{}/{}".format(self.parent.slug, self.slug)
+            return u"{}/{}".format(self.parent.long_slug, self.slug)
+        return u"{}".format(self.slug)
+
+    def save(self, *args, **kwargs):
+        self.long_slug = self._set_longo_slug()
         super(Channel, self).save(*args, **kwargs)
