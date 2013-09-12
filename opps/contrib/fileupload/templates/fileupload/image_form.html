@@ -25,7 +25,7 @@
   {% block breadcrumbs %}
     <ul class="breadcrumb">
       <li>
-      <a href="/admin/articles/{{container.child_class|lower}}/{{container.pk}}/">Back to {{ container.child_class|lower }}</a>
+      <a href="/admin/articles/{{container.child_class|lower}}/{{container.pk}}/">{% trans 'Back to' %} {{ container.child_class|title }} </a>
       </li>
     </ul>
   {% endblock %}

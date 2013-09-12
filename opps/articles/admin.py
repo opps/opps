@@ -19,8 +19,8 @@ class PostRelatedInline(admin.TabularInline):
     ordering = ('order',)
     extra = 1
     classes = ('collapse',)
-    verbose_name = (u'Related post')
-    verbose_name_plural = (u'Related posts')
+    verbose_name = _(u'Related post')
+    verbose_name_plural = _(u'Related posts')
 
 
 @apply_opps_rules('articles')
@@ -39,7 +39,7 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
         (_(u'Content'), {
             'fields': ('hat', 'short_title', 'headline', 'content',
                        ('main_image', 'main_image_caption',
-                        'image_thumb'), 'tags')}),
+                        'image_thumb'), 'source', 'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel', 'albums',)}),
         (_(u'Publication'), {

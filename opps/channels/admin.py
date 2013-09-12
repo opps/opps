@@ -20,7 +20,7 @@ class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
                     'order', 'show_in_menu', 'published']
     list_filter = ['date_available', 'published', 'site', 'homepage', 'parent',
                    'show_in_menu']
-    search_fields = ['name']
+    search_fields = ['name', 'slug', 'long_slug', 'description']
     exclude = ('user', 'long_slug')
     raw_id_fields = ['parent']
     form = ChannelAdminForm

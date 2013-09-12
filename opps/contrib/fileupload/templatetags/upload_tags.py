@@ -1,4 +1,5 @@
 from django import template
+from django.utils.translation import ugettext_lazy as _
 
 register = template.Library()
 
@@ -6,7 +7,7 @@ register = template.Library()
 @register.simple_tag
 def upload_js(container):
     container_sources = container.source if container.source else ''
-    return """
+    return u"""
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
@@ -17,13 +18,17 @@ def upload_js(container):
 
         <td class="extra">
         <label>
-        Title: <input type="text" name="title" value='""" + \
-        container.title + """' required></label>
-        <label>Caption: <textarea name="caption" rows="3" colums="1">
+        """ + unicode(_(u'Title')) + u""": <input type="text"
+        name="title" value='""" + \
+        container.title + u"""' required></label>
+        <label>""" + unicode(_(u'Caption')) + u""":
+            <textarea name="caption" rows="3" colums="1">
                         </textarea>
-        <label>Order: <input type="text" name="order" value="0"/></label>
-        <label>Source: <input type="text" name="source" value='""" + \
-        container_sources + """'></label></td>
+        <label>""" + unicode(_(u'Order')) + u""": <input type="text"
+        name="order" value="0"/></label>
+        <label>""" + unicode(_(u'Source')) + u""":
+            <input type="text" name="source" value='""" + \
+        container_sources + u"""'></label></td>
         {% if (file.error) { %}
             <td class="error" colspan="2">
             <span class="label label-important">

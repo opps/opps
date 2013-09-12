@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-05 19:29-0300\n"
+"POT-Creation-Date: 2013-09-12 12:32-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: templates/fileupload/image_form.html:28
+msgid "Back to"
+msgstr "Voltar para o(a)"
 
 #: templates/fileupload/image_form.html:39
 msgid "Multi image upload"
@@ -33,3 +37,22 @@ msgstr "Enviar"
 #: templates/fileupload/image_form.html:51
 msgid "Cancel"
 msgstr "Cancelar"
+
+#: templatetags/upload_tags.py:21
+msgid "Title"
+msgstr "Título"
+
+#: templatetags/upload_tags.py:24
+msgid "Caption"
+msgstr "Legenda"
+
+#: templatetags/upload_tags.py:27
+msgid "Order"
+msgstr "Ordem"
+
+#: templatetags/upload_tags.py:29
+msgid "Source"
+msgstr "Fonte"
+
+#~ msgid "Back to {{ container.child_class|lower }}"
+#~ msgstr "Voltar para {{ container.child_class|lower }}"
