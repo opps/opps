@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-12 15:31-0300\n"
+"POT-Creation-Date: 2013-09-12 16:02-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,21 +50,25 @@ msgstr "Limpar"
 msgid "Arrange Orders"
 msgstr "Arrumar ordens"
 
-#: templatetags/upload_tags.py:21
+#: templatetags/upload_tags.py:22
 msgid "Title"
 msgstr "Título"
 
-#: templatetags/upload_tags.py:24
+#: templatetags/upload_tags.py:25
 msgid "Caption"
 msgstr "Legenda"
 
-#: templatetags/upload_tags.py:27
+#: templatetags/upload_tags.py:28
 msgid "Order"
 msgstr "Ordem"
 
-#: templatetags/upload_tags.py:29
+#: templatetags/upload_tags.py:30
 msgid "Source"
 msgstr "Fonte"
+
+#: templatetags/upload_tags.py:33
+msgid "Tags"
+msgstr "Marcadores"
 
 #~ msgid "Back to {{ container.child_class|lower }}"
 #~ msgstr "Voltar para {{ container.child_class|lower }}"

@@ -7,6 +7,7 @@ register = template.Library()
 @register.simple_tag
 def upload_js(container):
     container_sources = container.source if container.source else ''
+    container_tags = container.tags if container.tags else ''
     return u"""
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">
@@ -22,13 +23,17 @@ def upload_js(container):
         name="title" value='""" + \
         container.title + u"""' required></label>
         <label>""" + unicode(_(u'Caption')) + u""":
-            <textarea name="caption" rows="3" colums="1">
+            <textarea name="caption" rows="2" colums="1">
                         </textarea>
         <label>""" + unicode(_(u'Order')) + u""": <input type="text"
         name="order" value="0"/></label>
         <label>""" + unicode(_(u'Source')) + u""":
             <input type="text" name="source" value='""" + \
-        container_sources + u"""'></label></td>
+        container_sources + u"""'></label>
+        <label>""" + unicode(_(u'Tags')) + u""":
+            <input type="text" name="tags" value='""" + \
+        container_tags + u"""'></label>
+        </td>
         {% if (file.error) { %}
             <td class="error" colspan="2">
             <span class="label label-important">

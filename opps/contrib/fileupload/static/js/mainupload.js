@@ -80,11 +80,13 @@
     var caption = $("[name='caption']").first().val();
     var source = $("[name='source']").first().val();
     var order = $("[name='order']").first().val();
+    var tags = $("[name='tags']").first().val();
 
     $("[name='title']").val(title);
     $("[name='caption']").val(caption);
     $("[name='source']").val(source);
     $("[name='order']").val(order);
+    $("[name='tags']").val(tags);
 
     arrange_orders();
     e.preventDefault();
@@ -96,16 +98,19 @@
     var caption = $("[name='caption']").first().val();
     var source = $("[name='source']").first().val();
     var order = $("[name='order']").first().val();
+    var tags = $("[name='tags']").first().val();
 
     $("[name='title']").val('');
     $("[name='caption']").val('');
     $("[name='source']").val('');
     $("[name='order']").val('');
+    $("[name='tags']").val('');
 
     $("[name='title']").first().val(title);
     $("[name='caption']").first().val(caption);
     $("[name='source']").first().val(source);
     $("[name='order']").first().val(order);
+    $("[name='tags']").first().val(tags);
 
     e.preventDefault();
     return false;
