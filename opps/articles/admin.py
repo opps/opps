@@ -39,7 +39,7 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
         (_(u'Content'), {
             'fields': ('hat', 'short_title', 'headline', 'content',
                        ('main_image', 'main_image_caption',
-                        'image_thumb'), 'tags')}),
+                        'image_thumb'), 'source', 'tags')}),
         (_(u'Relationships'), {
             'fields': ('channel', 'albums',)}),
         (_(u'Publication'), {
