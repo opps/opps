@@ -2,6 +2,8 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
+from mptt.admin import MPTTModelAdmin
+
 from .models import Channel
 from .forms import ChannelAdminForm
 from opps.core.admin import PublishableAdmin
@@ -12,7 +14,7 @@ import json
 
 
 @apply_opps_rules('channels')
-class ChannelAdmin(PublishableAdmin):
+class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ['name', 'parent', 'site', 'date_available', 'homepage',
                     'order', 'show_in_menu', 'published']
