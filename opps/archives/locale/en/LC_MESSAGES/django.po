@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-08 15:59-0300\n"
+"POT-Creation-Date: 2013-09-12 00:06-0300\n"
 "PO-Revision-Date: 2013-08-05 18:16+0000\n"
 "Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,26 +17,42 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: __init__.py:5 models.py:35
+#: __init__.py:5 models.py:39
 msgid "Archives"
 msgstr "Archives"
+
+#: admin.py:21
+msgid "Identification"
+msgstr ""
+
+#: admin.py:23
+msgid "Content"
+msgstr ""
+
+#: admin.py:25
+msgid "Publication"
+msgstr ""
 
 #: models.py:27
 msgid "Title"
 msgstr "Title"
 
-#: models.py:29
-msgid "Description"
-msgstr "Description"
-
-#: models.py:34
+#: models.py:29 models.py:38
 msgid "Archive"
 msgstr "Archive"
 
-#: models.py:51
+#: models.py:30
+msgid "Description"
+msgstr "Description"
+
+#: models.py:33
+msgid "Source"
+msgstr ""
+
+#: models.py:55
 msgid "File"
 msgstr "File"
 
-#: models.py:52
+#: models.py:56
 msgid "Files"
 msgstr "Files"
