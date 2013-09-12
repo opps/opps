@@ -63,7 +63,6 @@ class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
             channel_json = []
             try:
                 channel_json = _get_json_channel(_obj)
-                print channel_json
             except:
                 _is_root = _obj.is_root_node()
                 if not _is_root:
