@@ -45,7 +45,8 @@ class Channel(MPTTModel, Publishable, Slugged):
     group = models.BooleanField(_(u"Group sub-channel?"), default=False)
     order = models.IntegerField(_(u"Order"), default=0)
     parent = TreeForeignKey('self', related_name='subchannel',
-                            null=True, blank=True)
+                            null=True, blank=True,
+                            verbose_name=_(u'Parent'))
 
     objects = ChannelManager()
 
