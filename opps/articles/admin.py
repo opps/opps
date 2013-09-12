@@ -19,8 +19,8 @@ class PostRelatedInline(admin.TabularInline):
     ordering = ('order',)
     extra = 1
     classes = ('collapse',)
-    verbose_name = (u'Related post')
-    verbose_name_plural = (u'Related posts')
+    verbose_name = _(u'Related post')
+    verbose_name_plural = _(u'Related posts')
 
 
 @apply_opps_rules('articles')

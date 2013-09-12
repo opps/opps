@@ -25,7 +25,8 @@ def get_file_path(instance, filename):
 class Archive(Publishable, Slugged):
 
     title = models.CharField(_(u"Title"), max_length=140, db_index=True)
-    archive = models.FileField(upload_to=get_file_path, max_length=255)
+    archive = models.FileField(upload_to=get_file_path, max_length=255,
+                               verbose_name=_(u'Archive'))
     description = models.TextField(_(u"Description"), null=True, blank=True)
 
     source = models.CharField(

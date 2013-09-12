@@ -2,6 +2,8 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
+from mptt.admin import MPTTModelAdmin
+
 from .models import Channel
 from .forms import ChannelAdminForm
 from opps.core.admin import PublishableAdmin
@@ -12,7 +14,7 @@ import json
 
 
 @apply_opps_rules('channels')
-class ChannelAdmin(PublishableAdmin):
+class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ['name', 'parent', 'site', 'date_available', 'homepage',
                     'order', 'show_in_menu', 'published']
@@ -44,14 +46,38 @@ class ChannelAdmin(PublishableAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(ChannelAdmin, self).get_form(request, obj, **kwargs)
-        try:
-            template = get_template_path(
-                u'containers/{}/channel.json'.format(obj.slug))
-            f = open(template)
-            channel_json = json.loads(f.read().replace('\n', ''))
-            f.close()
-        except:
+
+        channel_json = []
+
+        def _get_template_path(_path):
+            template = get_template_path(_path)
+            with open(template) as f:
+                _jsonData = f.read().replace('\n', '')
+                return json.loads(_jsonData)
+
+        def _get_json_channel(_obj):
+            return _get_template_path(
+                u'containers/{}/channel.json'.format(_obj.long_slug))
+
+        def _get_json_channel_recursivelly(_obj):
             channel_json = []
+            try:
+                channel_json = _get_json_channel(_obj)
+                print channel_json
+            except:
+                _is_root = _obj.is_root_node()
+                if not _is_root:
+                    channel_json = _get_json_channel_recursivelly(_obj.parent)
+                elif _is_root:
+                    try:
+                        channel_json = _get_template_path(
+                            u'containers/channel.json')
+                    except:
+                        pass
+            finally:
+                return channel_json
+
+        channel_json = _get_json_channel_recursivelly(obj)
 
         if u'layout' in channel_json:
             layout_list = ['default'] + [l for l in channel_json['layout']]

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-08 15:59-0300\n"
+"POT-Creation-Date: 2013-09-12 00:17-0300\n"
 "PO-Revision-Date: 2013-08-05 18:19+0000\n"
 "Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,15 +19,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: __init__.py:5 models.py:54
+#: __init__.py:5 models.py:56
 msgid "Channels"
 msgstr "Channels"
 
-#: admin.py:26
+#: admin.py:29
 msgid "Identification"
 msgstr "Identification"
 
-#: admin.py:31
+#: admin.py:34
 msgid "Publication"
 msgstr "Publication"
 
@@ -35,35 +35,35 @@ msgstr "Publication"
 msgid "Default"
 msgstr "Default"
 
-#: models.py:26
+#: models.py:27
 msgid "Name"
 msgstr "Name"
 
-#: models.py:27
+#: models.py:28
 msgid "Path name"
 msgstr "Path name"
 
-#: models.py:29
+#: models.py:30
 msgid "Layout"
 msgstr "Layout"
 
-#: models.py:31
+#: models.py:32
 msgid "Description"
 msgstr "Description"
 
-#: models.py:33
+#: models.py:34
 msgid "Show in menu?"
 msgstr "Show in menu?"
 
-#: models.py:35
+#: models.py:36
 msgid "Show in main RSS?"
 msgstr "Show in menu?"
 
-#: models.py:39
+#: models.py:40
 msgid "Is home page?"
 msgstr "Is home page?"
 
-#: models.py:41
+#: models.py:42
 msgid ""
 "Check only if this channel is the homepage. Should have only one homepage "
 "per site"
@@ -71,14 +71,18 @@ msgstr ""
 "Check only if this channel is the homepage. Should have only one homepage "
 "per site"
 
-#: models.py:44
+#: models.py:45
 msgid "Group sub-channel?"
 msgstr "Group sub-channel?"
 
-#: models.py:45
+#: models.py:46
 msgid "Order"
 msgstr "Order"
 
-#: models.py:53 models.py:78
+#: models.py:49
+msgid "Parent"
+msgstr ""
+
+#: models.py:55 models.py:80 tests/test_models.py:196
 msgid "Channel"
 msgstr "Channel"
