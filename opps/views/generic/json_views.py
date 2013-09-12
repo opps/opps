@@ -20,13 +20,16 @@ class JSONResponse(HttpResponse):
         content = simplejson.dumps(obj, **json_opts)
         super(JSONResponse, self).__init__(content, mimetype, *args, **kwargs)
 
+
 class JSONPResponse(HttpResponse):
     """JSONP response class."""
-    def __init__(self, obj='', json_opts={}, mimetype="application/jsonp", jsonp_callback = 'jsonpCallback',
-                 *args, **kwargs):
+    def __init__(self, obj='', json_opts={}, mimetype="application/jsonp",
+                 jsonp_callback='jsonpCallback', *args, **kwargs):
         _json_content = simplejson.dumps(obj, **json_opts)
         content = "{}({})".format(jsonp_callback, _json_content)
-        super(JSONPResponse, self).__init__(content, mimetype, *args, **kwargs)
+        super(JSONPResponse, self).__init__(content, mimetype, *args,
+                                            **kwargs)
+
 
 class JSONResponseMixin(object):
     """
