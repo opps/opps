@@ -235,9 +235,12 @@ class Imaged(models.Model):
         if getcache:
             return getcache
 
-        self.main_image.caption = self.main_image_caption
+        imgs = []
 
-        imgs = [self.main_image]
+        if self.main_image:
+            self.main_image.caption = self.main_image_caption
+            imgs.append(self.main_image)
+
         images = self.images.filter(
             published=True, date_available__lte=timezone.now()
         ).order_by('containerimage__order')
