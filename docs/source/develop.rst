@@ -8,7 +8,7 @@ South Migrations
 
 For every migration created, make the following modifications.
 
-::
+.. code-block:: python
 
     try:
         from django.contrib.auth import get_user_model
@@ -34,7 +34,7 @@ For every migration created, make the following modifications.
 
             # repeat the following for every freezed model
             "app.model": {
-                user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['%s.%s']"% (User._meta.app_label, User._meta.object_name)})
+                'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['%s.%s']"% (User._meta.app_label, User._meta.object_name)})
             }
         }
 
@@ -56,6 +56,8 @@ The default haystack search template is the same you find in haystack home page,
 
 **Example**
 
+.. code-block:: python
+
     class MyModel(models.Model):
         title = models.CharField(max_length=255) # implemented as field
         slug = models.SlugField()
@@ -74,11 +76,14 @@ The default haystack search template is the same you find in haystack home page,
         def search_category(self):
             return _(' Blog post')
 
+
 With the above in your model, you can now create your search_indexes and template and choose to index those fields/properties/methods or just access directly on template. (see haystack docs)
 
 
 **Example of search template**
 
+
+.. code-block:: html
 
     {% load images_tags %}
 
@@ -125,3 +130,5 @@ With the above in your model, you can now create your search_indexes and templat
             {# Show some example queries to run, maybe query syntax, something else? #}
         {% endif %}
     </form>
+
+
