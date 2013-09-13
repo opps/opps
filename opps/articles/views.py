@@ -6,6 +6,7 @@ from django.conf import settings
 
 from opps.views.generic.list import ListView
 from opps.containers.views import ContainerList
+from opps.containers.models import Container, ContainerBox
 from opps.articles.models import Album
 
 
@@ -31,6 +32,38 @@ class AlbumList(ContainerList):
                 self.model._meta.module_name, list_name))
 
         return templates
+
+    def get_queryset(self):
+        ## TODO: refatoring, used super()
+        self.site = get_current_site(self.request)
+        self.long_slug = self.get_long_slug()
+
+        if not self.long_slug:
+            return None
+
+        self.set_channel_rules()
+
+        self.articleboxes = ContainerBox.objects.filter(
+            channel__long_slug=self.long_slug)
+
+        is_paginated = self.page_kwarg in self.request.GET
+
+        if not is_paginated:
+            for box in self.articleboxes:
+                self.excluded_ids.update(
+                    [a.pk for a in box.ordered_containers()])
+
+        filters = {}
+        filters['site_domain'] = self.site.domain
+        filters['date_available__lte'] = timezone.now()
+        filters['published'] = True
+        filters['child_class'] = 'Album'
+        if self.channel and self.channel.is_root_node() and not is_paginated:
+            filters['show_on_root_channel'] = True
+        queryset = Container.objects.filter(
+            **filters).exclude(pk__in=self.excluded_ids)
+
+        return queryset._clone()
 
 
 class AlbumChannelList(ListView):
