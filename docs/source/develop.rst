@@ -10,12 +10,8 @@ For every migration created, make the following modifications.
 
 .. code-block:: python
 
-    try:
-        from django.contrib.auth import get_user_model
-    except ImportError: # django < 1.5
-        from django.contrib.auth.models import User
-    else:
-        User = get_user_model()
+    from django.contrib.auth import get_user_model
+    User = get_user_model()
 
 
     class Migration(SchemaMigration):
