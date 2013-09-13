@@ -30,6 +30,7 @@ def image_create(request, container_pk):
         title = request.POST.get('title') or container.title
         caption = request.POST.get('caption', '')
         source = request.POST.get('source', '')
+        tags = request.POST.get('tags', '')
         slug = slugify(title)
         slug = "{0}-{1}".format(slug[:100], random.getrandbits(32))
 
@@ -42,7 +43,7 @@ def image_create(request, container_pk):
             archive=f,
             source=source,
             published=True,
-            tags='',
+            tags=tags,
         )
         instance.save()
 

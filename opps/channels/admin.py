@@ -20,7 +20,7 @@ class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
                     'order', 'show_in_menu', 'published']
     list_filter = ['date_available', 'published', 'site', 'homepage', 'parent',
                    'show_in_menu']
-    search_fields = ['name']
+    search_fields = ['name', 'slug', 'long_slug', 'description']
     exclude = ('user', 'long_slug')
     raw_id_fields = ['parent']
     form = ChannelAdminForm
@@ -63,7 +63,6 @@ class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
             channel_json = []
             try:
                 channel_json = _get_json_channel(_obj)
-                print channel_json
             except:
                 _is_root = _obj.is_root_node()
                 if not _is_root:
