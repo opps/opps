@@ -7,12 +7,12 @@ from opps.containers.models import Container
 
 
 def InfoDisct(googlenews=False):
-    article = Container.objects.filter(date_available__lte=timezone.now(),
-                                       published=True)
+    container = Container.objects.filter(date_available__lte=timezone.now(),
+                                         published=True)
     if googlenews:
-        article = article[:1000]
+        container = container[:1000]
     return {
-        'queryset': article,
+        'queryset': container,
         'date_field': 'date_available',
     }
 
