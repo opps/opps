@@ -106,6 +106,12 @@ class PostCreation(TestCase):
         self.post.save()
         self.assertTrue(Tag.objects.count(), 100)
 
+    def test_raiser_tags(self):
+        self.post.tags = "opps, cms, , post"
+        self.post.save()
+        self.assertEqual([t.name for t in self.post.get_tags()],
+                         ['opps', ' cms', ' post'])
+
     def _gen_tags(self, length):
         tags = []
         for i in range(length):
