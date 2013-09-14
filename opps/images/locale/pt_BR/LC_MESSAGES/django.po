@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-05 13:32-0300\n"
+"POT-Creation-Date: 2013-09-14 03:00-0300\n"
 "PO-Revision-Date: 2013-08-08 17:39+0000\n"
 "Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
@@ -18,43 +18,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: __init__.py:5 models.py:86
+#: __init__.py:5 models.py:86 templates/images/all_images.html:11
 msgid "Images"
 msgstr "Imagens"
 
-#: admin.py:21
+#: admin.py:21 templates/images/all_images.html:14
 msgid "User"
 msgstr "Usuário"
 
-#: admin.py:68
+#: admin.py:67
 msgid "Identification"
 msgstr "Identificação"
 
-#: admin.py:70
+#: admin.py:69
 msgid "Crop"
 msgstr "Cortar"
 
-#: admin.py:74
+#: admin.py:73
 msgid "Content"
 msgstr "Conteúdo"
 
-#: admin.py:76
+#: admin.py:75
 msgid "Publication"
 msgstr "Publicação"
 
-#: admin.py:93
+#: admin.py:92
 msgid "Select"
 msgstr "Selecionar"
 
-#: admin.py:100
+#: admin.py:99
 msgid "No Image"
 msgstr "Sem imagem"
 
-#: admin.py:101
+#: admin.py:100
 msgid "Thumbnail"
 msgstr "Imagem pequena"
 
-#: admin.py:110
+#: admin.py:109
 msgid "Dimension"
 msgstr "Dimensões"
 
@@ -77,6 +77,10 @@ msgstr "Cortar Y1"
 #: forms.py:21
 msgid "Crop Y2"
 msgstr "Cortar Y2"
+
+#: forms.py:33
+msgid "Source"
+msgstr "Fonte"
 
 #: models.py:10
 msgid "Left"
@@ -147,7 +151,6 @@ msgid "Fit in"
 msgstr "Auto ajustar"
 
 #: models.py:56
-#, fuzzy
 msgid ""
 "Flag that indicates that thumbor should fit the image in the box defined by "
 "width x height"
@@ -160,12 +163,31 @@ msgid "Smart"
 msgstr "Inteligente"
 
 #: models.py:62
-#, fuzzy
 msgid "Flag that indicates that thumbor should use smart cropping"
 msgstr ""
-"Selecione para indiciar ao thumbor que ele deverá realizar um crop "
+"Selecione para indicar ao thumbor que ele deverá realizar um crop "
 "inteligente"
 
 #: models.py:85
 msgid "Image"
 msgstr "Imagem"
+
+#: templates/images/all_images.html:23
+msgid "Published"
+msgstr "Publicado"
+
+#: templates/images/all_images.html:32
+msgid "Search"
+msgstr "Buscar"
+
+#: templates/images/all_images.html:34 templates/images/image_add.html:11
+msgid "Add Image"
+msgstr "Adicionar Imagem"
+
+#: templates/images/all_images.html:46
+msgid "Insert on Editor"
+msgstr "Inserir no Editor"
+
+#: templates/images/image_add.html:30
+msgid "Add"
+msgstr "Adicionar"
