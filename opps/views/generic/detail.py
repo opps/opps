@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from django.views.generic.detail import DetailView as DjangoDetailView
 from django.contrib.sites.models import get_current_site
+from django.http import HttpResponseRedirect
 from django.utils import timezone
 
 from opps.views.generic.base import View
@@ -29,6 +30,11 @@ class DetailView(View, DjangoDetailView):
         templates.append('{}/detail.html'.format(domain_folder))
 
         return templates
+
+    def render_to_response(self, context):
+        if self.get_object().child_class == 'Link':
+            return HttpResponseRedirect(self.get_object().url)
+        return super(DetailView, self).render_to_response(context)
 
     def get_queryset(self):
         self.site = get_current_site(self.request)
