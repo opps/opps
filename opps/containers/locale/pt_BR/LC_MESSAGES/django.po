@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-05 15:14-0300\n"
+"POT-Creation-Date: 2013-09-13 23:59-0300\n"
 "PO-Revision-Date: 2013-08-08 17:20+0000\n"
 "Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
@@ -18,67 +18,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: admin.py:22 models.py:197
+#: admin.py:22 models.py:181
 msgid "Container image"
 msgstr "Imagem de Container"
 
-#: admin.py:23 models.py:198
+#: admin.py:23 models.py:182
 msgid "Container images"
 msgstr "Imagens de Container"
 
-#: admin.py:33 admin.py:180
+#: admin.py:33 admin.py:164
 msgid "No Image"
 msgstr "Sem imagem"
 
-#: admin.py:34 admin.py:181
+#: admin.py:34 admin.py:165
 msgid "Thumbnail"
 msgstr "Imagem pequena"
 
-#: admin.py:46 models.py:166
-msgid "Container source"
-msgstr "Fonte do Container"
-
-#: admin.py:47 models.py:167
-msgid "Container sources"
-msgstr "Fontes do Container"
-
-#: admin.py:87
+#: admin.py:71
 msgid "Has queryset"
 msgstr "Tem Queryset"
 
-#: admin.py:101
+#: admin.py:85
 msgid "No"
 msgstr "Não"
 
-#: admin.py:102
+#: admin.py:86
 msgid "Yes"
 msgstr "Sim"
 
-#: admin.py:127
+#: admin.py:111
 msgid "Identification"
 msgstr "Identificação"
 
-#: admin.py:129
+#: admin.py:113
 msgid "Relationships"
 msgstr "Relacionamentos"
 
-#: admin.py:131
+#: admin.py:115
 msgid "Publication"
 msgstr "Publicação"
 
-#: admin.py:144
+#: admin.py:128
 msgid "Clean ended containers"
 msgstr "Containers finalizados"
 
-#: admin.py:163
+#: admin.py:147
 msgid "Dynamic"
 msgstr "Dinâmico"
 
-#: models.py:27 models.py:210 models.py:270
+#: models.py:27 models.py:194 models.py:262
 msgid "Title"
 msgstr "Título"
 
-#: models.py:29
+#: models.py:29 models.py:266
 msgid "Hat"
 msgstr "Chapéu"
 
@@ -102,7 +94,11 @@ msgstr "Nome da app Filha"
 msgid "Show on root channel?"
 msgstr "Mostrar no canal pai?"
 
-#: models.py:77 models.py:154 models.py:179 models.py:218 models.py:261
+#: models.py:60
+msgid "Source"
+msgstr "Fonte"
+
+#: models.py:77 models.py:163 models.py:202 models.py:253
 msgid "Container"
 msgstr "Container"
 
@@ -114,71 +110,67 @@ msgstr "Containers"
 msgid "Get HTTP Absolute URL"
 msgstr "URL Completa"
 
-#: models.py:156 models.py:181 models.py:264
+#: models.py:165 models.py:256
 msgid "Order"
 msgstr "Ordem"
 
-#: models.py:162
-msgid "Source"
-msgstr "Fonte"
-
-#: models.py:186
+#: models.py:170
 msgid "Image"
 msgstr "Imagem"
 
-#: models.py:190
+#: models.py:174
 msgid "Caption"
 msgstr "Legenda"
 
-#: models.py:226
+#: models.py:210
 msgid "Query Set"
 msgstr "Queryset"
 
-#: models.py:230
+#: models.py:214
 msgid "Container box"
 msgstr "Box de Container"
 
-#: models.py:231
+#: models.py:215
 msgid "Containers boxes"
 msgstr "Boxes de Containers"
 
-#: models.py:255
+#: models.py:247
 msgid "Container Box"
 msgstr "Box de Container"
 
-#: models.py:265
+#: models.py:257
 msgid "Aggregate container"
 msgstr "Agregar containers"
 
-#: models.py:266
+#: models.py:258
 msgid "Date available"
 msgstr "Data de publicação"
 
-#: models.py:268
+#: models.py:260
 msgid "End date"
 msgstr "Data fim"
 
-#: models.py:273
-msgid "Short title"
-msgstr "URL Curta"
-
-#: models.py:281
+#: models.py:275
 msgid "Main Image"
 msgstr "Imagem Principal"
 
-#: models.py:284
+#: models.py:278
 msgid "Main Image Caption"
 msgstr "Legenda da Imagem Principal"
 
-#: models.py:288
+#: models.py:282
 msgid "Maximum characters 4000"
 msgstr "Máximo caracteres: 4000"
 
-#: models.py:293
+#: models.py:285
+msgid "URL"
+msgstr "URL"
+
+#: models.py:289
 msgid "Article box articles"
 msgstr "Artigos de Box de Artigos"
 
-#: models.py:294
+#: models.py:290
 msgid "Article boxes articles"
 msgstr "Artigos de Boxes de Artigos"
 
@@ -194,5 +186,11 @@ msgstr "Aviso"
 msgid "It is necessary set channel as home page."
 msgstr "É necessário atribuir um canal como home."
 
-#~ msgid "URL"
-#~ msgstr "URL"
+#~ msgid "Container source"
+#~ msgstr "Fonte do Container"
+
+#~ msgid "Container sources"
+#~ msgstr "Fontes do Container"
+
+#~ msgid "Short title"
+#~ msgstr "Título Curto"
