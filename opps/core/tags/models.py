@@ -41,6 +41,8 @@ class Tagged(models.Model):
         if self.tags:
             tags = []
             for tag in self.tags.split(','):
+                if tag in ["", " "]:
+                    continue
                 t, created = Tag.objects.get_or_create(name=tag)
                 tags.append(t)
             return tags
