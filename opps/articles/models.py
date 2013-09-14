@@ -161,5 +161,10 @@ class Link(Article):
         if self.container:
             self.url = self.container.get_absolute_url()
 
+    def get_absolute_url(self):
+        if self.url:
+            return self.url
+        return super(Link, self).get_absolute_url()
+
 
 models.signals.post_save.connect(redirect_generate, sender=Link)
