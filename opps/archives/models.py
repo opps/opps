@@ -29,11 +29,6 @@ class Archive(Publishable, Slugged):
                                verbose_name=_(u'Archive'))
     description = models.TextField(_(u"Description"), null=True, blank=True)
 
-    source = models.CharField(
-        _('Source'),
-        null=True, blank=True,
-        max_length=255)
-
     class Meta:
         verbose_name = _(u'Archive')
         verbose_name_plural = _(u'Archives')

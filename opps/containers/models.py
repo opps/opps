@@ -56,10 +56,6 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         _(u"Show on root channel?"),
         default=True
     )
-    source = models.CharField(
-        _('Source'),
-        null=True, blank=True,
-        max_length=255)
 
     def __unicode__(self):
         return u"{}".format(self.get_absolute_url())
