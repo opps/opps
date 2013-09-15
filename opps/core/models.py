@@ -118,7 +118,7 @@ class Slugged(models.Model):
 
     def clean(self):
 
-        if self.slug == "":
+        if self.slug in ("", None):
             try:
                 self.slug = slugify(self.title)
             except:
