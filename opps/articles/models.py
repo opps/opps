@@ -43,6 +43,7 @@ class Post(Article):
     class Meta:
         verbose_name = _('Post')
         verbose_name_plural = _('Posts')
+        ordering = ['-date_available']
 
     def all_images(self):
         cachekey = _cache_key(
@@ -129,6 +130,7 @@ class Album(Article):
     class Meta:
         verbose_name = _('Album')
         verbose_name_plural = _('Albums')
+        ordering = ['-date_available']
 
 
 class Link(Article):
@@ -142,6 +144,7 @@ class Link(Article):
     class Meta:
         verbose_name = _('Link')
         verbose_name_plural = _('Links')
+        ordering = ['-date_available']
 
     def is_local(self):
         try:
