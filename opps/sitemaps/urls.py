@@ -9,11 +9,11 @@ from opps.sitemaps.sitemaps import GenericSitemap, InfoDisct
 
 
 sitemaps = {
-    'articles': GenericSitemap(InfoDisct(), priority=0.6),
+    'containers': GenericSitemap(InfoDisct(), priority=0.6),
 }
 
 sitemaps_googlenews = {
-    'articles': GenericSitemap(InfoDisct(True), priority=0.6),
+    'containers': GenericSitemap(InfoDisct(True), priority=0.6),
 }
 
 urlpatterns = patterns(
@@ -23,7 +23,7 @@ urlpatterns = patterns(
     url(r'^-googlenews\.xml$', cache_page(86400)(sitemap_views.sitemap),
         {'sitemaps': sitemaps_googlenews,
          'template_name': 'sitemap_googlenews.xml'}),
-    url(r'^-(?P<section>.+)\.xml$', sitemap_views.sitemap,
+    url(r'^-(?P<section>.+)\.xml$', cache_page(86400)(sitemap_views.sitemap),
         {'sitemaps': sitemaps}),
 
 )
