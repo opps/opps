@@ -5,6 +5,7 @@ from django import template
 from django.conf import settings
 from django.utils import timezone
 from django.utils.safestring import mark_safe
+from django.template.defaultfilters import linebreaksbr
 
 from opps.containers.models import Container
 from opps.containers.models import ContainerBox
@@ -127,6 +128,10 @@ def get_post_content(post, template_name='articles/post_related.html',
     if not hasattr(post, content_field):
         return None
     content = getattr(post, content_field, '')
+
+    # REMOVE NEW LINES
+    content = linebreaksbr(content)
+
     if not get_related:
         return content
 
