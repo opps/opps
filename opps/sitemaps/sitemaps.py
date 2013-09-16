@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.contrib.sitemaps import GenericSitemap as DjangoGenericSitemap
 from django.contrib.sitemaps import Sitemap as DjangoSitemap
@@ -7,12 +8,12 @@ from opps.containers.models import Container
 
 
 def InfoDisct(googlenews=False):
-    container = Container.objects.filter(date_available__lte=timezone.now(),
-                                         published=True)
+    containers = Container.objects.filter(date_available__lte=timezone.now(),
+                                          published=True)
     if googlenews:
-        container = container[:1000]
+        containers = containers[:1000]
     return {
-        'queryset': container,
+        'queryset': containers,
         'date_field': 'date_available',
     }
 
