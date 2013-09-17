@@ -25,8 +25,12 @@ class ContainerFeed(ItemFeed):
 
     link = "/rss"
 
-    def __call__(self, request, *args, **kwargs):
+    def __init__(self, child_class=None):
+        self.child_class = child_class
+
+    def __call__(self, request, child_class=None, *args, **kwargs):
         self.site = get_current_site(request)
+        self.child_class = child_class
         return super(ContainerFeed, self).__call__(request, *args, **kwargs)
 
     def title(self):
@@ -36,15 +40,18 @@ class ContainerFeed(ItemFeed):
         return _("Latest news on {0}'s".format(self.site.name))
 
     def items(self):
-        return Container.objects.filter(
+        c = Container.objects.filter(
             site=self.site,
             date_available__lte=timezone.now(),
             published=True,
             channel__include_in_main_rss=True,
             channel__published=True
-        ).order_by(
-            '-date_available'
-        )[:40]
+        )
+
+        if self.child_class:
+            c = c.filter(child_class=self.child_class)
+
+        return c.order_by('-date_available')[:40]
 
 
 class ChannelFeed(ItemFeed):
