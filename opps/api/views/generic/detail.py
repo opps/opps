@@ -4,6 +4,9 @@ from django.contrib.sites.models import get_current_site
 from django.utils import timezone
 
 from rest_framework.generics import ListAPIView as RestListAPIView
+from rest_framework.generics import UpdateAPIView as RestUpdateAPIView
+from rest_framework.generics import (
+    RetrieveUpdateAPIView as RestRetrieveUpdateAPIView)
 
 from opps.views.generic.base import View
 
@@ -31,3 +34,11 @@ class DetailView(View, RestListAPIView):
 
         queryset = super(DetailView, self).get_queryset()
         return queryset.filter(**filters)._clone()
+
+
+class UpdateAPIView(RestUpdateAPIView, DetailView):
+    pass
+
+
+class RetrieveUpdateAPIView(RestRetrieveUpdateAPIView, DetailView):
+    pass
