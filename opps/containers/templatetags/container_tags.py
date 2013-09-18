@@ -211,3 +211,12 @@ def get_container_by_channel(slug, number=10, include_children=True, **kwargs):
     except:
         pass
     return box
+
+
+@register.assignment_tag
+def get_containerbox_by(**filters):
+    """Return a list of containers filtered by given args"""
+    return ContainerBox.objects.filter(site=settings.SITE_ID,
+                                       published=True,
+                                       date_available__lte=timezone.now(),
+                                       **filters)
