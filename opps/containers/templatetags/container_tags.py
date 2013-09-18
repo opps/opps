@@ -7,8 +7,8 @@ from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.template.defaultfilters import linebreaksbr
 
-from opps.containers.models import Container
-from opps.containers.models import ContainerBox
+from opps.containers.models import Container, ContainerBox
+from opps.channels.models import Channel
 
 
 register = template.Library()
@@ -186,3 +186,28 @@ def get_containers_by(**filters):
     """Return a list of containers filtered by given args"""
     return Container.objects.filter(site=settings.SITE_ID, published=True,
                                     **filters)
+
+
+@register.assignment_tag
+def get_container_by_channel(slug, number=10, include_children=True, **kwargs):
+    box = None
+    channels = []
+    if include_children:
+        try:
+            base_channel = Channel.objects.get(long_slug=slug)
+            channels = [
+                channel.long_slug for channel in
+                base_channel.get_descendants(include_self=True)]
+        except Channel.DoesNotExist:
+            base_channel = []
+    try:
+        box = Container.objects.distinct().filter(
+            site=settings.SITE_ID,
+            channel_long_slug__in=channels,
+            show_on_root_channel=include_children,
+            date_available__lte=timezone.now(),
+            published=True,
+            **kwargs).order_by('-date_available')[:number]
+    except:
+        pass
+    return box
