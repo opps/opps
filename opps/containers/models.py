@@ -119,7 +119,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         cachekey = _cache_key(
             u'{}-recommendation'.format(self.__class__.__name__),
             self.__class__, self.site_domain,
-            u"{}-{}".format(self.channel_long_slug, self.slug))
+            u"{}-{}-{}".format(child_class, self.channel_long_slug, self.slug))
         getcache = cache.get(cachekey)
         if getcache:
             return getcache
