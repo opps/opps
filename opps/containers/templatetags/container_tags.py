@@ -189,8 +189,6 @@ def get_containers_by(limit=None, **filters):
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
-    if filters.get('limit'):
-        del filters['limit']
     containers = [i for i in Container.objects.filter(
         site=settings.SITE_ID, published=True, **filters)[:limit]]
     cache.set("getconby-{}".format(cachekey), 3600)
