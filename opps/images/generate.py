@@ -37,7 +37,6 @@ def image_url(image_url, **kwargs):
         encrypted_url = crypto.generate(image_url=image_url,
                                         **dict(settings.THUMBOR_ARGUMENTS,
                                         **kwargs)).strip('/')
+        return u'{}/{}'.format(settings.THUMBOR_SERVER, encrypted_url)
     except:
-        encrypted_url = ""
-    return u'{}/{}'.format(settings.THUMBOR_SERVER, encrypted_url)
-
+        return u""
