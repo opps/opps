@@ -30,6 +30,7 @@ class OppsCoreConf(AppConf):
     LIST_MODELS = ('Post',)
     RECOMMENDATION_RANGE_DAYS = 180
     SMART_SLUG_ENABLED = True
+    MENU = True
 
     # default settings for tinymce
     EDITOR = {
