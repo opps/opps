@@ -39,5 +39,5 @@ def image_url(image_url, **kwargs):
                                         **kwargs)).strip('/')
     except:
         encrypted_url = ""
-        return u'{}/{}'.format(settings.THUMBOR_SERVER, encrypted_url)
+    return u'{}/{}'.format(settings.THUMBOR_SERVER, encrypted_url)
 
