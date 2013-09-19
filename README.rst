@@ -70,3 +70,8 @@ License
 Copyright 2013 *Opps* Project and other contributors.
 
 Licensed under the `MIT License <http://opensource.org/licenses/MIT>`_
+
+.. image:: https://d2weczhvl823v0.cloudfront.net/opps/opps/trend.png
+   :alt: Bitdeli badge
+   :target: https://bitdeli.com/free
+
