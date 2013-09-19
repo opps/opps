@@ -25,7 +25,7 @@ class ContainerFeed(ItemFeed):
 
     link = "/rss"
 
-    def __init__(self, child_class=None):
+    def __init__(self, child_class=False):
         self.child_class = child_class
 
     def __call__(self, request, child_class=None, *args, **kwargs):
