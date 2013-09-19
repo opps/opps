@@ -50,6 +50,14 @@ def get_recommendations(query_slice, child_class, container):
 @register.simple_tag(takes_context=True)
 def get_containerbox(context, slug, template_name=None):
 
+    cachekey = "ContainerBox-{}-{}".format(
+        slug,
+        template_name)
+
+    render = cache.get(cachekey)
+    if render:
+        return render
+
     try:
         box = ContainerBox.objects.get(site=settings.SITE_ID, slug=slug,
                                        date_available__lte=timezone.now(),
@@ -61,11 +69,15 @@ def get_containerbox(context, slug, template_name=None):
     if template_name:
         t = template.loader.get_template(template_name)
 
-    return t.render(template.Context({
+    render = t.render(template.Context({
         'articlebox': box,
         'slug': slug,
         'context': context}
     ))
+
+    cache.set(cachekey, render, settings.OPPS_CACHE_EXPIRE)
+
+    return render
 
 
 @register.simple_tag
@@ -83,6 +95,15 @@ def get_all_containerbox(channel_long_slug=None, template_name=None):
         Long path to channel (including subchannel if is the case)
     """
 
+    cachekey = "get_all_containerbox-{}-{}".format(
+        channel_long_slug,
+        template_name)
+
+    render = cache.get(cachekey)
+    if render:
+        return render
+
+
     boxes = ContainerBox.objects.filter(
         site=settings.SITE_ID,
         date_available__lte=timezone.now(),
@@ -96,7 +117,10 @@ def get_all_containerbox(channel_long_slug=None, template_name=None):
     if template_name:
         t = template.loader.get_template(template_name)
 
-    return t.render(template.Context({'articleboxes': boxes}))
+    render = t.render(template.Context({'articleboxes': boxes}))
+    cache.set(cachekey, render, settings.OPPS_CACHE_EXPIRE)
+
+    return render
 
 
 @register.simple_tag
