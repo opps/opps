@@ -6,9 +6,9 @@ from django.conf import settings
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.template.defaultfilters import linebreaksbr
+from django.core.cache import cache
 
 from opps.containers.models import Container, ContainerBox
-from opps.channels.models import Channel
 
 
 register = template.Library()
@@ -182,31 +182,32 @@ def get_url(obj, http=False, target=None, url_only=False):
 
 
 @register.assignment_tag
-def get_containers_by(**filters):
+def get_containers_by(limit=None, **filters):
     """Return a list of containers filtered by given args"""
-    return Container.objects.filter(site=settings.SITE_ID, published=True,
-                                    **filters)
+    cachekey = hash(frozenset(filters.items()))
+    _cache = cache.get(cachekey)
+    if _cache:
+        return _cache
+    containers = [i for i in Container.objects.filter(
+        site=settings.SITE_ID, published=True, **filters)[:limit]]
+    cache.set("getconby-{}".format(cachekey), 3600)
+    return containers
 
 
 @register.assignment_tag
 def get_container_by_channel(slug, number=10, include_children=True, **kwargs):
     box = None
-    channels = []
+    filters = {}
     if include_children:
-        try:
-            base_channel = Channel.objects.get(long_slug=slug)
-            channels = [
-                channel.long_slug for channel in
-                base_channel.get_descendants(include_self=True)]
-        except Channel.DoesNotExist:
-            base_channel = []
+        filters['channel_long_slug__contains'] = slug
     try:
+        filters['site'] = settings.SITE_ID
+        filters['show_on_root_channel'] = include_children
+        filters['date_available__lte'] = timezone.now()
+        filters['published'] = True
+
         box = Container.objects.distinct().filter(
-            site=settings.SITE_ID,
-            channel_long_slug__in=channels,
-            show_on_root_channel=include_children,
-            date_available__lte=timezone.now(),
-            published=True,
+            filters,
             **kwargs).order_by('-date_available')[:number]
     except:
         pass
