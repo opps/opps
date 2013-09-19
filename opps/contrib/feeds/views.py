@@ -28,9 +28,8 @@ class ContainerFeed(ItemFeed):
     def __init__(self, child_class=False):
         self.child_class = child_class
 
-    def __call__(self, request, child_class=None, *args, **kwargs):
+    def __call__(self, request, *args, **kwargs):
         self.site = get_current_site(request)
-        self.child_class = child_class
         return super(ContainerFeed, self).__call__(request, *args, **kwargs)
 
     def title(self):
@@ -40,7 +39,7 @@ class ContainerFeed(ItemFeed):
         return _("Latest news on {0}'s".format(self.site.name))
 
     def items(self):
-        c = Container.objects.filter(
+        container = Container.objects.filter(
             site=self.site,
             date_available__lte=timezone.now(),
             published=True,
@@ -49,9 +48,9 @@ class ContainerFeed(ItemFeed):
         )
 
         if self.child_class:
-            c = c.filter(child_class=self.child_class)
+            container = container.filter(child_class=self.child_class)
 
-        return c.order_by('-date_available')[:40]
+        return container.order_by('-date_available')[:40]
 
 
 class ChannelFeed(ItemFeed):
