@@ -9,6 +9,7 @@ from django.template.defaultfilters import linebreaksbr
 from django.core.cache import cache
 
 from opps.containers.models import Container, ContainerBox
+from opps.channels.models import Channel
 
 
 register = template.Library()
@@ -197,17 +198,26 @@ def get_containers_by(limit=None, **filters):
 @register.assignment_tag
 def get_container_by_channel(slug, number=10, include_children=True, **kwargs):
     box = None
-    filters = {}
     if include_children:
-        filters['channel_long_slug__contains'] = slug
+        try:
+            kwargs['channel_long_slug__in'] = cache.get(
+                'get_container_by_channel-{}'.format(slug))
+            if not kwargs['channel_long_slug__in']:
+                base_channel = Channel.objects.get(long_slug=slug)
+                kwargs['channel_long_slug__in'] = [base_channel.long_slug]
+                for children in base_channel.get_children():
+                    kwargs['channel_long_slug__in'].append(children.long_slug)
+                cache.set('get_container_by_channel-{}'.format(slug),
+                          kwargs['channel_long_slug__in'],
+                          settings.OPPS_CACHE_EXPIRE)
+        except Channel.DoesNotExist:
+            kwargs['channel_long_slug__in'] = []
     try:
-        filters['site'] = settings.SITE_ID
-        filters['show_on_root_channel'] = include_children
-        filters['date_available__lte'] = timezone.now()
-        filters['published'] = True
-
+        kwargs['site'] = settings.SITE_ID
+        kwargs['show_on_root_channel'] = include_children
+        kwargs['date_available__lte'] = timezone.now()
+        kwargs['published'] = True
         box = Container.objects.distinct().filter(
-            filters,
             **kwargs).order_by('-date_available')[:number]
     except:
         pass
