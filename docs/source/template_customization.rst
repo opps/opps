@@ -8,13 +8,15 @@ Opps default
 * Content: templates/containers/detail.html
 
 
-Custom
-------
+Details
+-------
 
-* templates/containers/<channel-name>/list.html
-* templates/containers/<channel-name>/detail.html
-* templates/containers/<channel-name>/<sub-channel-name>/list.html
-* templates/containers/<channel-name>/<sub-channel-name>/detail.html
+* containers/<channel-slug>/<sub-channel-slug>/<container-slug>/detail.html
+* containers/<channel-slug>/<sub-channel-slug>/<container-child-class>_detail.html
+* containers/<channel-slug>/<sub-channel-slug>/detail.html
+* containers/<channel-slug>/<container-child-class>_detail.html
+* containers/<channel>/detail.html
+* containers/detail.html
 
 
 Channel conf
