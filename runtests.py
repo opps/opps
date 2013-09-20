@@ -12,6 +12,9 @@ if not settings.configured:
                 'ENGINE': 'django.db.backends.sqlite3',
             }
         },
+        TEMPLATE_CONTEXT_PROCESSORS = (
+            'opps.channels.context_processors.channel_context',
+        ),
         MIDDLEWARE_CLASSES = (
             'django.middleware.common.CommonMiddleware',
             'django.contrib.sessions.middleware.SessionMiddleware',
@@ -40,17 +43,20 @@ if not settings.configured:
             'opps.sitemaps',
             'opps.flatpages',
             'opps.archives',
+            'opps.views',
         ),
         SITE_ID = 1,
         ROOT_URLCONF = "opps.urls",
         TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner',
+        STATIC_URL = '/static/',
     )
 
 
 def runtests():
     argv = sys.argv[:1] + ['test'] + ['core', 'containers', 'articles',
                                       'boxes', 'channels', 'images',
-                                      'sitemaps', 'flatpages', 'archives']
+                                      'sitemaps', 'flatpages', 'archives',
+                                      'views']
     execute_from_command_line(argv)
 
 
