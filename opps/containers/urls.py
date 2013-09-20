@@ -32,7 +32,7 @@ urlpatterns = patterns(
     url(r'^(?P<channel__long_slug>[\w//-]+)/(?P<slug>[\w-]+).api$',
         cache_page(settings.OPPS_CACHE_EXPIRE_DETAIL)(
             ContainerAPIDetail.as_view()), name='open-api'),
-    url(r'^(?P<channel__long_slug>[\w//-]+)/(?P<slug>[\w-]+)$',
+    url(r'^(?P<channel__long_slug>[\w//-]+)/(?P<slug>[\w-]+).html$',
         cache_page(settings.OPPS_CACHE_EXPIRE_DETAIL)(
             ContainerDetail.as_view()), name='open'),
 

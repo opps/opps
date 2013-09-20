@@ -92,7 +92,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         super(Container, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return u"/{}/{}".format(self.channel_long_slug, self.slug)
+        return u"/{}/{}.html".format(self.channel_long_slug, self.slug)
 
     def get_thumb(self):
         return self.main_image
