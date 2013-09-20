@@ -43,7 +43,7 @@ class ContainerModelTest(TestCase):
 
     def test_absolute_url(self):
         self.assertEqual(self.container.get_absolute_url(),
-                         u"/home/test")
+                         u"/home/test.html")
 
     def test_get_thumb(self):
         self.assertFalse(self.container.get_thumb())
@@ -53,7 +53,7 @@ class ContainerModelTest(TestCase):
 
     def test_get_http_absolute_url(self):
         self.assertEqual(self.container.get_http_absolute_url(),
-                         u'http://example.com/home/test')
+                         u'http://example.com/home/test.html')
 
 
 class ContainerFields(TestCase):
