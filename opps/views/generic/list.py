@@ -90,6 +90,11 @@ class ListView(View, DjangoListView):
         filters['published'] = True
         if self.channel and self.channel.is_root_node() and not is_paginated:
             filters['show_on_root_channel'] = True
+
+        # CONTAINER FILTERS
+        if self.request.GET.get('type'):
+            filters['child_class'] = self.request.GET.get('type')
+
         queryset = queryset.filter(**filters).exclude(pk__in=self.excluded_ids)
 
         return queryset._clone()
