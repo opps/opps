@@ -11,26 +11,21 @@ from opps.views.generic.base import View
 class DetailView(View, DjangoDetailView):
 
     def get_template_names(self):
-        templates = []
         domain_folder = self.get_template_folder()
         child_class = self.object.child_class.lower()
 
-        templates.append('{}/{}/{}/{}/detail.html'.format(
-            domain_folder, child_class, self.long_slug, self.slug))
-        templates.append('{}/{}/{}/detail.html'.format(
-            domain_folder, self.long_slug, self.slug))
+        templates = ['{}/{}/{}/detail.html'.format(
+            domain_folder, self.long_slug, self.slug)]
 
-        templates.append('{}/{}/{}/detail.html'.format(
-            domain_folder, child_class, self.long_slug))
-
-        templates.append('{}/{}/detail.html'.format(domain_folder,
-                                                    child_class))
-
-        templates.append('{}/{}/detail.html'.format(domain_folder,
-                                                    self.long_slug))
+        all_long_slug = [self.long_slug]
+        all_long_slug += [i.long_slug for i in self.channel.get_ancestors()]
+        for long_slug in all_long_slug:
+            templates.append('{}/{}/{}_detail.html'.format(
+                domain_folder, long_slug, child_class))
+            templates.append('{}/{}/detail.html'.format(domain_folder,
+                                                        long_slug))
 
         templates.append('{}/detail.html'.format(domain_folder))
-
         return templates
 
     def render_to_response(self, context):
