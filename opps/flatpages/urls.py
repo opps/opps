@@ -11,6 +11,6 @@ urlpatterns = patterns(
     '',
 
     # FLATPAGEs
-    url(r'^page/(?P<slug>[\w]+)$',
+    url(r'^page/(?P<slug>[\w]+)/$',
         cache_page(60 * 2)(PageDetail.as_view()), name='open'),
 )
