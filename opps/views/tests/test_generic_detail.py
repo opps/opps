@@ -8,7 +8,7 @@ from opps.articles.models import Post, Link
 from opps.channels.models import Channel
 
 
-class TestTemplateName(TestCase):
+class TemplateNameTest(TestCase):
 
     def setUp(self):
         self.client = Client()
@@ -43,6 +43,7 @@ class TestTemplateName(TestCase):
             response.template_name,
             ['containers/test-channel/a-simple-title/detail.html',
              'containers/test-channel/post_detail.html',
+             'containers/post_detail.html',
              'containers/test-channel/detail.html',
              'containers/detail.html'])
 
@@ -65,13 +66,14 @@ class TestTemplateName(TestCase):
             response.template_name,
             ['containers/test-channel/child/a-simple-title/detail.html',
              'containers/test-channel/child/post_detail.html',
-             'containers/test-channel/child/detail.html',
              'containers/test-channel/post_detail.html',
+             'containers/post_detail.html',
+             'containers/test-channel/child/detail.html',
              'containers/test-channel/detail.html',
              'containers/detail.html'])
 
 
-class TestLinkResponseToRedirec(TestCase):
+class LinkResponseToRedirecTest(TestCase):
 
     def setUp(self):
         self.client = Client()
