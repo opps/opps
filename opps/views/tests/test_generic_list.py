@@ -4,7 +4,6 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-from opps.articles.models import Post, Link
 from opps.channels.models import Channel
 
 
@@ -53,14 +52,10 @@ class TestTemplateName(TestCase):
              'containers/test-channel/list.html',
              'containers/list.html'])
 
-    """
-    def test_querystring_page_is_2(self):
-        response = self.client.get("{}?page=2".format(self.channel.get_absolute_url()))
+    def test_set_custom_not_set_homepage(self):
+        response = self.client.get("/")
         self.assertTrue(response)
-        import pdb; pdb.set_trace()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             response.template_name,
-            ['containers/test-channel/list.html',
-             'containers/list.html'])
-    """
+            ['containers/none.html'])
