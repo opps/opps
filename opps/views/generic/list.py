@@ -15,8 +15,8 @@ class ListView(View, DjangoListView):
 
     def get_template_names(self):
         templates = []
-
         domain_folder = self.get_template_folder()
+
         if not self.long_slug:
             templates.append('{}/none.html'.format(domain_folder))
             return templates
@@ -60,7 +60,6 @@ class ListView(View, DjangoListView):
                                                            list_name))
 
         templates.append('{}/{}.html'.format(domain_folder, list_name))
-
         return templates
 
     def get_queryset(self):
