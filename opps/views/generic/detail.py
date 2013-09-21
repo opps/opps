@@ -17,15 +17,17 @@ class DetailView(View, DjangoDetailView):
         templates = ['{}/{}/{}/detail.html'.format(
             domain_folder, self.long_slug, self.slug)]
 
-        all_long_slug = [self.long_slug]
-        all_long_slug += [i.long_slug for i in self.channel.get_ancestors()]
-        for long_slug in all_long_slug:
+        all_long_slug = [i.long_slug for i in self.channel.get_ancestors()]
+        all_long_slug.append(self.long_slug)
+        for l in all_long_slug[::-1]:
             templates.append('{}/{}/{}_detail.html'.format(
-                domain_folder, long_slug, child_class))
-            templates.append('{}/{}/detail.html'.format(domain_folder,
-                                                        long_slug))
+                domain_folder, l, child_class))
+        templates.append('{}/{}_detail.html'.format(domain_folder, child_class))
 
+        for l in all_long_slug[::-1]:
+            templates.append('{}/{}/detail.html'.format(domain_folder, l))
         templates.append('{}/detail.html'.format(domain_folder))
+
         return templates
 
     def render_to_response(self, context):
