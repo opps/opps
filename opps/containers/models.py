@@ -18,8 +18,9 @@ from polymorphic.showfields import ShowFieldContent
 from .signals import shorturl_generate, delete_container
 from opps.core.cache import _cache_key
 from opps.core.models import Publishable, Slugged, Channeling, Imaged
-from opps.boxes.models import BaseBox
 from opps.core.tags.models import Tagged
+from opps.db.models.fields import JSONField
+from opps.boxes.models import BaseBox
 
 
 class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
@@ -60,6 +61,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         _('Source'),
         null=True, blank=True,
         max_length=255)
+    json = JSONField(null=True, blank=True)
 
     def __unicode__(self):
         return u"{}".format(self.get_absolute_url())
