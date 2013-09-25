@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.utils import simplejson as json
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
@@ -8,6 +9,7 @@ from .forms import PostAdminForm, AlbumAdminForm, LinkAdminForm
 from opps.containers.admin import ContainerAdmin, ContainerImageInline
 from opps.core.admin import apply_opps_rules
 from opps.contrib.multisite.admin import AdminViewPermission
+from opps.fields.models import Field
 
 
 @apply_opps_rules('articles')
@@ -40,6 +42,8 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
             'fields': ('hat', 'short_title', 'headline', 'content',
                        ('main_image', 'main_image_caption',
                         'image_thumb'), 'source', 'tags')}),
+        (_(u'Custom'), {
+            'fields': ('json',)}),
         (_(u'Relationships'), {
             'fields': ('channel', 'albums',)}),
         (_(u'Publication'), {
@@ -48,6 +52,14 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
                        'show_on_root_channel', 'in_containerboxes')}),
     )
 
+    def save_model(self, request, obj, form, change):
+        _json = {}
+        for field in Field.objects.all():
+            _json[field.slug] = request.POST.get(
+                'json_{}'.format(field.slug), '')
+
+        obj.json = json.dumps(_json)
+        obj.save()
 
 @apply_opps_rules('articles')
 class AlbumAdmin(ContainerAdmin, AdminViewPermission):
