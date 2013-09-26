@@ -12,14 +12,15 @@ from opps.fields.models import Field, FieldOption
 
 
 class PostAdminForm(forms.ModelForm):
-    json = JSONFormField(widget=JSONField(), required=False)
+    json = JSONFormField(widget=JSONField(attrs={'_model': 'Post'}), required=False)
 
     multiupload_link = '/fileupload/image/'
 
     def __init__(self, *args, **kwargs):
         super(PostAdminForm, self).__init__(*args, **kwargs)
 
-        for field in Field.objects.all():
+        for field in Field.objects.filter(
+            application__contains=self._meta.model.__name__):
             for fo in FieldOption.objects.filter(field=field):
                 self.fields[
                     'json_{}_{}'.format(
