@@ -1,39 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django import forms
+from opps.core.widgets import OppsEditor
+from opps.containers.forms import ContainerAdminForm
 
 from .models import Post, Album, Link
 
-from opps.core.widgets import OppsEditor
 
-from opps.db.models.fields.jsonf import JSONFormField
-from opps.fields.widgets import JSONField
-from opps.fields.models import Field, FieldOption
-
-
-class PostAdminForm(forms.ModelForm):
-    json = JSONFormField(widget=JSONField(attrs={'_model': 'Post'}), required=False)
-
+class PostAdminForm(ContainerAdminForm):
     multiupload_link = '/fileupload/image/'
-
-    def __init__(self, *args, **kwargs):
-        super(PostAdminForm, self).__init__(*args, **kwargs)
-
-        for field in Field.objects.filter(
-            application__contains=self._meta.model.__name__):
-            for fo in FieldOption.objects.filter(field=field):
-                self.fields[
-                    'json_{}_{}'.format(
-                        field.slug, fo.option.slug
-                    )] = forms.CharField(required=False)
 
     class Meta:
         model = Post
         widgets = {'content': OppsEditor()}
 
 
-class AlbumAdminForm(forms.ModelForm):
-
+class AlbumAdminForm(ContainerAdminForm):
     multiupload_link = '/fileupload/image/'
 
     class Meta:
@@ -43,6 +24,6 @@ class AlbumAdminForm(forms.ModelForm):
         }
 
 
-class LinkAdminForm(forms.ModelForm):
+class LinkAdminForm(ContainerAdminForm):
     class Meta:
         model = Link
