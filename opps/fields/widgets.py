@@ -4,15 +4,19 @@ import json
 from django import forms
 from django.template.loader import render_to_string
 
-from .models import Field, Option, FieldOption
+from .models import Field, FieldOption
 
 
 class JSONField(forms.TextInput):
     model = Field
     def render(self, name, value, attrs=None):
         elements = []
-        values = json.loads(value)
-        objs = self.model.objects.all()
+        try:
+            values = json.loads(value)
+        except TypeError:
+            values = {}
+        objs = self.model.objects.filter(
+            application__contains=self.attrs.get('_model', None))
         for obj in objs:
             o = {}
             o['name'] = obj.name
