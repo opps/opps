@@ -68,8 +68,11 @@ class ContainerAdmin(PublishableAdmin):
         return list_filter
 
     def save_model(self, request, obj, form, change):
+        if not change:
+            super(ContainerAdmin, self).save_model(request, obj, form, change)
         _json = {}
-        for field in Field.objects.all():
+        for field in Field.objects.filter(
+            application__contains=obj.__class__.__name__):
             for fo in FieldOption.objects.filter(field=field):
                 key = "{}_{}".format(field.slug, fo.option.slug)
                 _json[key] = request.POST.get('json_{}'.format(key), '')
