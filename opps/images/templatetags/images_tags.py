@@ -15,6 +15,8 @@ def image_url(image_url, **kwargs):
 
 @register.simple_tag
 def image_obj(image, **kwargs):
+    if image == "":
+        return ""
     if settings.THUMBOR_ENABLED:
         new = {}
         new['flip'] = image.flip
