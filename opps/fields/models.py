@@ -3,8 +3,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from opps.boxes.models import OPPS_APPS
-
 
 FIELD_TYPE = (
     ('checkbox', _('CheckBox')),
@@ -19,7 +17,6 @@ class Field(models.Model):
     slug = models.SlugField(_('Slug'), max_length=255)
     application = models.CharField(_('Application'),
                                    max_length=255,
-                                   choices=OPPS_APPS,
                                    db_index=True)
     type = models.CharField(_("Type"), max_length=15,
                             choices=FIELD_TYPE,
