@@ -27,3 +27,26 @@ class Field(models.Model):
 
     def __unicode__(self):
         return u"{} - {}".format(self.application, self.name)
+
+
+class Option(models.Model):
+    field = models.ForeignKey('fields.Field')
+    name = models.CharField(_('Name'), max_length=100)
+    slug = models.SlugField(_('Slug'), max_length=140)
+    value = models.CharField(_('Value'), max_length=255)
+
+    def __unicode__(self):
+        return u"{} - {}".format(self.field.slug, self.name)
+
+
+
+class FieldOption(models.Model):
+    field = models.ForeignKey('fields.Field')
+    option = models.ForeignKey('fields.Option')
+    order = models.PositiveIntegerField(_(u'Order'), default=0)
+
+    def __unicode__(self):
+        return u"{} - {}".format(self.field.slug, self.option.slug)
+
+    class Meta:
+        ordering = ['-order']
