@@ -69,6 +69,8 @@ class AlbumAdmin(ContainerAdmin, AdminViewPermission):
             'fields': ('hat', 'short_title', 'headline',
                        ('main_image', 'main_image_caption',
                         'image_thumb'), 'tags')}),
+        (_(u'Custom'), {
+            'fields': ('json',)}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
         (_(u'Publication'), {
@@ -90,6 +92,8 @@ class LinkAdmin(ContainerAdmin, AdminViewPermission):
             'fields': ('hat', 'short_title', 'headline', 'url', 'container',
                        ('main_image', 'main_image_caption',
                         'image_thumb'), 'tags')}),
+        (_(u'Custom'), {
+            'fields': ('json',)}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
         (_(u'Publication'), {
