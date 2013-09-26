@@ -44,6 +44,7 @@ if not settings.configured:
             'opps.flatpages',
             'opps.archives',
             'opps.views',
+            'opps.fields',
         ),
         SITE_ID = 1,
         ROOT_URLCONF = "opps.urls",
