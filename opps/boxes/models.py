@@ -10,14 +10,6 @@ from django.core.exceptions import ValidationError
 
 from opps.core.models import Publishable, Channeling
 
-try:
-    OPPS_APPS = tuple([
-        (u"{0}.{1}".format(app._meta.app_label, app._meta.object_name),
-         u"{0} - {1}".format(app._meta.app_label, app._meta.object_name))
-        for app in models.get_models() if 'opps.' in app.__module__])
-except ImportError:
-    OPPS_APPS = tuple([])
-
 
 class QuerySet(Publishable):
     name = models.CharField(_(u"Dynamic queryset name"), max_length=140)
