@@ -61,7 +61,8 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         _('Source'),
         null=True, blank=True,
         max_length=255)
-    json = JSONField(null=True, blank=True)
+    json = JSONField(_(u"Customized"),
+                     null=True, blank=True)
 
     def __unicode__(self):
         return u"{}".format(self.get_absolute_url())
