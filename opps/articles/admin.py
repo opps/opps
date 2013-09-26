@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import json
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
@@ -10,7 +9,6 @@ from .forms import PostAdminForm, AlbumAdminForm, LinkAdminForm
 from opps.containers.admin import ContainerAdmin, ContainerImageInline
 from opps.core.admin import apply_opps_rules
 from opps.contrib.multisite.admin import AdminViewPermission
-from opps.fields.models import Field, FieldOption
 
 
 @apply_opps_rules('articles')
@@ -53,15 +51,6 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
                        'show_on_root_channel', 'in_containerboxes')}),
     )
 
-    def save_model(self, request, obj, form, change):
-        _json = {}
-        for field in Field.objects.all():
-            for fo in FieldOption.objects.filter(field=field):
-                key = "{}_{}".format(field.slug, fo.option.slug)
-                _json[key] = request.POST.get('json_{}'.format(key), '')
-
-        obj.json = json.dumps(_json)
-        obj.save()
 
 
 @apply_opps_rules('articles')
