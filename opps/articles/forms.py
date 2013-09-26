@@ -13,7 +13,6 @@ from opps.fields.models import Field, FieldOption
 
 class PostAdminForm(forms.ModelForm):
     json = JSONFormField(widget=JSONField(), required=False)
-    #json_test = forms.CharField(label='json_test')
 
     multiupload_link = '/fileupload/image/'
 
