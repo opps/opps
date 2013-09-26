@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import copy
+import copy, json
 from django.db import models
 from django.core.serializers.json import DjangoJSONEncoder
 from django.utils.translation import ugettext_lazy as _
 from django.utils import six
-from django.utils import simplejson as json
 from django.forms import fields
 from django.forms.util import ValidationError
 
