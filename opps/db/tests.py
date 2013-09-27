@@ -179,8 +179,10 @@ class JSONFieldTest(TestCase):
         with self.assertRaises(DeserializationError) as cm:
             next(deserialize('json', ser))
         inner = cm.exception.args[0]
-        self.assertTrue(isinstance(inner, ValidationError))
-        self.assertEqual('Enter valid JSON', inner.messages[0])
+        self.assertTrue(isinstance(inner, DeserializationError))
+        self.assertEqual(
+            u"Invalid model identifier: 'jsonfield.jsoncharmodel'",
+            inner[0])
 
     def test_integer_in_string_in_json_field(self):
         """Test saving the Python string '123' in our JSONField"""
