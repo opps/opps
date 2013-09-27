@@ -45,6 +45,7 @@ if not settings.configured:
             'opps.archives',
             'opps.views',
             'opps.fields',
+            'opps.db',
         ),
         SITE_ID = 1,
         ROOT_URLCONF = "opps.urls",
@@ -57,7 +58,7 @@ def runtests():
     argv = sys.argv[:1] + ['test'] + ['core', 'containers', 'articles',
                                       'boxes', 'channels', 'images',
                                       'sitemaps', 'flatpages', 'archives',
-                                      'views', 'fields']
+                                      'views', 'fields', 'db']
     execute_from_command_line(argv)
 
 
