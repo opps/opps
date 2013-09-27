@@ -82,6 +82,7 @@ INSTALLED_APPS = (
     'opps.flatpages',
     'opps.images',
     'opps.sitemaps',
+    'opps.fields',
     'opps.contrib.fileupload',
 
     'south',

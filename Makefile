@@ -1,6 +1,6 @@
 
 .PHONY: test
-test:
+test: pep8
 	coverage run runtests.py
 
 .PHONY: travis
@@ -15,7 +15,7 @@ install:
 
 .PHONY: pep8
 pep8:
-	@flake8 opps --ignore=F403 --exclude=migrations
+	@flake8 opps --ignore=F403,F401 --exclude=migrations
 
 .PHONY: sdist
 sdist: test
