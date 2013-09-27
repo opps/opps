@@ -34,9 +34,9 @@ def image_url(image_url, **kwargs):
     image_url = _remove_schema(image_url)
 
     try:
-        encrypted_url = crypto.generate(image_url=image_url,
-                                        **dict(settings.THUMBOR_ARGUMENTS,
-                                        **kwargs)).strip('/')
+        encrypted_url = crypto.generate(
+            image_url=image_url,
+            **dict(settings.THUMBOR_ARGUMENTS, **kwargs)).strip('/')
         return u'{}/{}'.format(settings.THUMBOR_SERVER, encrypted_url)
     except:
         return u""

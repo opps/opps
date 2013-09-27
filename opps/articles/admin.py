@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
@@ -40,6 +41,8 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
             'fields': ('hat', 'short_title', 'headline', 'content',
                        ('main_image', 'main_image_caption',
                         'image_thumb'), 'source', 'tags')}),
+        (_(u'Custom'), {
+            'fields': ('json',)}),
         (_(u'Relationships'), {
             'fields': ('channel', 'albums',)}),
         (_(u'Publication'), {
@@ -65,6 +68,8 @@ class AlbumAdmin(ContainerAdmin, AdminViewPermission):
             'fields': ('hat', 'short_title', 'headline',
                        ('main_image', 'main_image_caption',
                         'image_thumb'), 'tags')}),
+        (_(u'Custom'), {
+            'fields': ('json',)}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
         (_(u'Publication'), {
@@ -86,6 +91,8 @@ class LinkAdmin(ContainerAdmin, AdminViewPermission):
             'fields': ('hat', 'short_title', 'headline', 'url', 'container',
                        ('main_image', 'main_image_caption',
                         'image_thumb'), 'tags')}),
+        (_(u'Custom'), {
+            'fields': ('json',)}),
         (_(u'Relationships'), {
             'fields': ('channel',)}),
         (_(u'Publication'), {

@@ -1,0 +1,3 @@
+{% for o,ov in list %}
+<input type="checkbox" name="json_{{slug}}_{{o.option.slug}}" value="{{o.option.value}}" {% if ov == o.option.value %}checked{% endif %} />{{o.option.name}}
+{% endfor %}

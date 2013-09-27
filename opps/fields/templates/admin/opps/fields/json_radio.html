@@ -1,0 +1,3 @@
+{% for o in list %}
+<input type="radio" name="json_{{slug}}" value="{{o.option.value}}" {% if obj_value == o.option.value %}checked{% endif %} />{{o.option.name}}
+{% endfor %}

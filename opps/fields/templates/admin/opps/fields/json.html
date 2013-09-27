@@ -1,0 +1,6 @@
+{% for element in elements %}
+  <div class="l-2c-fluid l-d-4">
+    <div class="c-1"><label for="json_{{element.slug}}" class="required">{{element.name}}</label></div>
+    <div class="c-2">{{element.element}}</div>
+  </div>
+{% endfor %}

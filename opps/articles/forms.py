@@ -1,14 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django import forms
+from opps.core.widgets import OppsEditor
+from opps.containers.forms import ContainerAdminForm
 
 from .models import Post, Album, Link
 
-from opps.core.widgets import OppsEditor
 
-
-class PostAdminForm(forms.ModelForm):
-
+class PostAdminForm(ContainerAdminForm):
     multiupload_link = '/fileupload/image/'
 
     class Meta:
@@ -16,8 +14,7 @@ class PostAdminForm(forms.ModelForm):
         widgets = {'content': OppsEditor()}
 
 
-class AlbumAdminForm(forms.ModelForm):
-
+class AlbumAdminForm(ContainerAdminForm):
     multiupload_link = '/fileupload/image/'
 
     class Meta:
@@ -27,6 +24,6 @@ class AlbumAdminForm(forms.ModelForm):
         }
 
 
-class LinkAdminForm(forms.ModelForm):
+class LinkAdminForm(ContainerAdminForm):
     class Meta:
         model = Link

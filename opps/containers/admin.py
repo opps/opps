@@ -1,4 +1,6 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import json
 from django.contrib import admin
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -9,6 +11,7 @@ from .models import ContainerBox, ContainerBoxContainers
 from opps.core.admin import PublishableAdmin, apply_opps_rules, BaseBoxAdmin
 from opps.core.admin import ChannelListFilter
 from opps.images.generate import image_url
+from opps.fields.models import Field, FieldOption
 
 
 @apply_opps_rules('containers')
@@ -63,6 +66,22 @@ class ContainerAdmin(PublishableAdmin):
         list_filter = super(ContainerAdmin, self).list_filter
         list_filter = [ChannelListFilter] + list(list_filter)
         return list_filter
+
+    def save_model(self, request, obj, form, change):
+        super(ContainerAdmin, self).save_model(request, obj, form, change)
+        _json = {}
+        for field in Field.objects.filter(application__contains=
+                                          obj.__class__.__name__):
+            if field.type == 'checkbox':
+                for fo in FieldOption.objects.filter(field=field):
+                    key = "{}_{}".format(field.slug, fo.option.slug)
+                    _json[key] = request.POST.get('json_{}'.format(key), '')
+            else:
+                _json[field.slug] = request.POST.get(
+                    'json_{}'.format(field.slug), '')
+
+        obj.json = json.dumps(_json)
+        obj.save()
 
 
 class HasQuerySet(SimpleListFilter):
