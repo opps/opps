@@ -8,20 +8,19 @@ from django.core.serializers.base import DeserializationError
 from django.db import models
 from django.test import TestCase
 from django.utils import simplejson as json
-from django.forms.util import ValidationError
 
 from opps.db.models.fields.jsonf import JSONField, JSONCharField
 
 
 class JsonModel(models.Model):
     json = JSONField()
-    default_json = JSONField(default={"check":12})
+    default_json = JSONField(default={"check": 12})
     complex_default_json = JSONField(default=[{"checkcheck": 1212}])
 
 
 class JsonCharModel(models.Model):
     json = JSONCharField(max_length=100)
-    default_json = JSONCharField(max_length=100, default={"check":34})
+    default_json = JSONCharField(max_length=100, default={"check": 34})
 
 
 class ComplexEncoder(json.JSONEncoder):
@@ -153,7 +152,6 @@ class JSONFieldTest(TestCase):
                                                 'ary': list(range(5)),
                                                 'dict': {'k': 'v'}}]:
             obj = self.json_model.objects.create(json=json_obj)
-            new_obj = self.json_model.objects.get(id=obj.id)
 
         queryset = self.json_model.objects.all()
         ser = serialize('json', queryset)
@@ -200,17 +198,19 @@ class JSONFieldTest(TestCase):
 
         self.assertEqual(new_obj.json, json_obj)
 
-
     def test_pass_by_reference_pollution(self):
-        """Make sure the default parameter is copied rather than passed by reference"""
+        """Make sure the default parameter is copied rather"""
+        """ than passed by reference"""
         model = JsonModel()
         model.default_json["check"] = 144
         model.complex_default_json[0]["checkcheck"] = 144
         self.assertEqual(model.default_json["check"], 144)
         self.assertEqual(model.complex_default_json[0]["checkcheck"], 144)
 
-        # Make sure when we create a new model, it resets to the default value
-        # and not to what we just set it to (it would be if it were passed by reference)
+        # Make sure when we create a new model, it resets
+        # to the default value
+        # and not to what we just set it to (it would be
+        # if it were passed by reference)
         model = JsonModel()
         self.assertEqual(model.default_json["check"], 12)
         self.assertEqual(model.complex_default_json[0]["checkcheck"], 1212)
@@ -232,8 +232,10 @@ class OrderedDictSerializationTest(TestCase):
     expected_key_order = ['number', 'notes']
 
     def test_ordered_dict_differs_from_normal_dict(self):
-        self.assertEqual(list(self.ordered_dict.keys()), self.expected_key_order)
-        self.assertNotEqual(dict(self.ordered_dict).keys(), self.expected_key_order)
+        self.assertEqual(list(self.ordered_dict.keys()),
+                         self.expected_key_order)
+        self.assertNotEqual(dict(self.ordered_dict).keys(),
+                            self.expected_key_order)
 
     def test_default_behaviour_loses_sort_order(self):
         mod = JsonModel.objects.create(json=self.ordered_dict)
@@ -247,4 +249,5 @@ class OrderedDictSerializationTest(TestCase):
         mod = OrderedJsonModel.objects.create(json=self.ordered_dict)
         self.assertEqual(list(mod.json.keys()), self.expected_key_order)
         mod_from_db = OrderedJsonModel.objects.get(id=mod.id)
-        self.assertEqual(list(mod_from_db.json.keys()), self.expected_key_order)
+        self.assertEqual(list(mod_from_db.json.keys()),
+                         self.expected_key_order)

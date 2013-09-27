@@ -1,25 +1,34 @@
-## This file was copied from django.db.models.fields.subclassing so that we could
-## change the Creator.__set__ behavior. Read the comment below for full details.
+## This file was copied from django.db.models.fields.subclassing
+## so that we could
+## change the Creator.__set__ behavior. Read the comment below
+## for full details.
 
 """
-Convenience routines for creating non-trivial Field subclasses, as well as
+Convenience routines for creating non-trivial Field subclasses,
+as well as
 backwards compatibility utilities.
 
-Add SubfieldBase as the __metaclass__ for your Field subclass, implement
-to_python() and the other necessary methods and everything will work seamlessly.
+Add SubfieldBase as the __metaclass__ for your Field subclass,
+implement
+to_python() and the other necessary methods and everything will
+work seamlessly.
 """
+
 
 class SubfieldBase(type):
     """
-    A metaclass for custom Field subclasses. This ensures the model's attribute
+    A metaclass for custom Field subclasses. This ensures the
+    model's attribute
     has the descriptor protocol attached to it.
     """
     def __new__(cls, name, bases, attrs):
-        new_class = super(SubfieldBase, cls).__new__(cls, name, bases, attrs)
+        new_class = super(SubfieldBase,
+                          cls).__new__(cls, name, bases, attrs)
         new_class.contribute_to_class = make_contrib(
             new_class, attrs.get('contribute_to_class')
         )
         return new_class
+
 
 class Creator(object):
     """

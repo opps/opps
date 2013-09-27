@@ -102,4 +102,5 @@ class LinkResponseToRedirecTest(TestCase):
         response = self.client.get(self.link.get_absolute_url())
         self.assertTrue(response)
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.items()[2][1], u'http://www.oppsproject.org/')
+        self.assertEqual(response.items()[2][1],
+                         u'http://www.oppsproject.org/')

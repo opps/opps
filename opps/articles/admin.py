@@ -52,7 +52,6 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
     )
 
 
-
 @apply_opps_rules('articles')
 class AlbumAdmin(ContainerAdmin, AdminViewPermission):
 

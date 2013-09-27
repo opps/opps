@@ -103,7 +103,6 @@ def get_all_containerbox(channel_long_slug=None, template_name=None):
     if render:
         return render
 
-
     boxes = ContainerBox.objects.filter(
         site=settings.SITE_ID,
         date_available__lte=timezone.now(),
@@ -167,9 +166,8 @@ def get_post_content(post, template_name='articles/post_related.html',
 
     # GET THE TEMPLATE
     t = template.loader.get_template(template_name)
-    related_rendered = t.render(
-        template.Context({'post': post, related_name: related_posts})
-    )
+    related_rendered = t.render(template.Context({
+        'post': post, related_name: related_posts}))
     # EMBED RELATED POSTS
     if placeholder in content:
         return mark_safe(content.replace(

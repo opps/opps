@@ -22,7 +22,8 @@ class DetailView(View, DjangoDetailView):
         for l in all_long_slug[::-1]:
             templates.append('{}/{}/{}_detail.html'.format(
                 domain_folder, l, child_class))
-        templates.append('{}/{}_detail.html'.format(domain_folder, child_class))
+        templates.append('{}/{}_detail.html'.format(domain_folder,
+                                                    child_class))
 
         for l in all_long_slug[::-1]:
             templates.append('{}/{}/detail.html'.format(domain_folder, l))
