@@ -7,11 +7,9 @@ from django.utils.translation import ugettext_lazy as _
 FIELD_TYPE = (
     ('checkbox', _('Checkbox')),
     ('radio', _('Radio')),
-)
-"""
     ('text', _('Text')),
-    ('textarea', _('TextArea')),
-"""
+    ('textarea', _('Textarea')),
+)
 
 
 class Field(models.Model):
