@@ -10,7 +10,7 @@ from django.test import TestCase
 from django.utils import simplejson as json
 from django.forms.util import ValidationError
 
-from .jsonf import JSONField, JSONCharField
+from opps.db.models.fields.jsonf import JSONField, JSONCharField
 
 
 class JsonModel(models.Model):
