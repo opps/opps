@@ -34,6 +34,8 @@ class JSONField(forms.TextInput):
             element_attr['obj_value'] = values.get(obj.slug, '')
             """
 
+            element_attr['obj_value'] = values.get(obj.slug, '')
+
             if obj.type in ["checkbox", "radio"]:
                 fo = FieldOption.objects.filter(field=obj)
                 if obj.type == "checkbox":
@@ -42,9 +44,9 @@ class JSONField(forms.TextInput):
                         key = "{}_{}".format(obj.slug, i.option.slug)
                         obj_value.append(values.get(key, ''))
                     element_attr['list'] = zip(fo, obj_value)
+                    del element_attr['obj_value']
                 else:
                     element_attr['list'] = fo
-                    element_attr['obj_value'] = values.get(obj.slug, '')
 
             o['element'] = render_to_string(
                 "admin/opps/fields/json_{}.html".format(obj.type),
