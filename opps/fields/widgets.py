@@ -9,14 +9,18 @@ from .models import Field, FieldOption
 
 class JSONField(forms.TextInput):
     model = Field
+
     def render(self, name, value, attrs=None):
         elements = []
+
         try:
             values = json.loads(value)
         except TypeError:
             values = {}
+
         objs = self.model.objects.filter(
             application__contains=self.attrs.get('_model', None))
+
         for obj in objs:
             o = {}
             o['name'] = obj.name
@@ -30,13 +34,17 @@ class JSONField(forms.TextInput):
             element_attr['obj_value'] = values.get(obj.slug, '')
             """
 
-            if obj.type in ["checkbox", "radiobox"]:
-                obj_value = []
+            if obj.type in ["checkbox", "radio"]:
                 fo = FieldOption.objects.filter(field=obj)
-                for i in fo:
-                    key = "{}_{}".format(obj.slug, i.option.slug)
-                    obj_value.append(values.get(key, ''))
-                element_attr['list'] = zip(fo, obj_value)
+                if obj.type == "checkbox":
+                    obj_value = []
+                    for i in fo:
+                        key = "{}_{}".format(obj.slug, i.option.slug)
+                        obj_value.append(values.get(key, ''))
+                    element_attr['list'] = zip(fo, obj_value)
+                else:
+                    element_attr['list'] = fo
+                    element_attr['obj_value'] = values.get(obj.slug, '')
 
             o['element'] = render_to_string(
                 "admin/opps/fields/json_{}.html".format(obj.type),
