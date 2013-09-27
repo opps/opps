@@ -15,10 +15,15 @@ class ContainerAdminForm(forms.ModelForm):
             widget=JSONField(
                 attrs={'_model': self._meta.model.__name__}),
             required=False)
-        for field in Field.objects.filter(
-            application__contains=self._meta.model.__name__):
-            for fo in FieldOption.objects.filter(field=field):
+        for field in Field.objects.filter(application__contains=
+                                          self._meta.model.__name__):
+            if field.type == 'checkbox':
+                for fo in FieldOption.objects.filter(field=field):
+                    self.fields[
+                        'json_{}_{}'.format(
+                            field.slug, fo.option.slug
+                        )] = forms.CharField(required=False)
+            else:
                 self.fields[
-                    'json_{}_{}'.format(
-                        field.slug, fo.option.slug
-                    )] = forms.CharField(required=False)
+                    'json_{}'.format(field.slug)
+                ] = forms.CharField(required=False)

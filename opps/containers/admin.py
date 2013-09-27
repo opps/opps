@@ -70,11 +70,15 @@ class ContainerAdmin(PublishableAdmin):
     def save_model(self, request, obj, form, change):
         super(ContainerAdmin, self).save_model(request, obj, form, change)
         _json = {}
-        for field in Field.objects.filter(
-            application__contains=obj.__class__.__name__):
-            for fo in FieldOption.objects.filter(field=field):
-                key = "{}_{}".format(field.slug, fo.option.slug)
-                _json[key] = request.POST.get('json_{}'.format(key), '')
+        for field in Field.objects.filter(application__contains=
+                                          obj.__class__.__name__):
+            if field.type == 'checkbox':
+                for fo in FieldOption.objects.filter(field=field):
+                    key = "{}_{}".format(field.slug, fo.option.slug)
+                    _json[key] = request.POST.get('json_{}'.format(key), '')
+            else:
+                _json[field.slug] = request.POST.get(
+                    'json_{}'.format(field.slug), '')
 
         obj.json = json.dumps(_json)
         obj.save()
