@@ -5,13 +5,14 @@ from django.utils.translation import ugettext_lazy as _
 
 
 FIELD_TYPE = (
-    ('checkbox', _('CheckBox')),
+    ('checkbox', _('Checkbox')),
+    ('radio', _('Radio')),
 )
 """
-    ('radio', _('Radio')),
     ('text', _('Text')),
     ('textarea', _('TextArea')),
 """
+
 
 class Field(models.Model):
     name = models.CharField(_('Name'), max_length=100)
@@ -35,7 +36,6 @@ class Option(models.Model):
 
     def __unicode__(self):
         return u"{} - {}".format(self.field.slug, self.name)
-
 
 
 class FieldOption(models.Model):
