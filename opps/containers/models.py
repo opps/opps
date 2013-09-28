@@ -258,6 +258,7 @@ class ContainerBoxContainers(models.Model):
 
     order = models.PositiveIntegerField(_(u'Order'), default=0)
     aggregate = models.BooleanField(_(u'Aggregate container'), default=False)
+    highlight = models.BooleanField(_(u'Highlight container'), default=False)
     date_available = models.DateTimeField(_(u"Date available"),
                                           default=timezone.now, null=True)
     date_end = models.DateTimeField(_(u"End date"), null=True, blank=True)
