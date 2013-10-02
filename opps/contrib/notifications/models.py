@@ -24,21 +24,12 @@ class Notification(Publishable):
                             type='json')
     message = models.TextField(_('Message'))
 
-    def add(self, container, message, action='message', _type='json',
-            **attrs):
-        notification = Notification.objects.create(
-            container=container,
-            action=action,
-            type=_type,
-            message=message,
-            **attrs
-        )
-
-        _db = Db(notification.container.get_absolute_url(),
-                 notification.container.id)
+    def save(self, *args, **kwargs):
+        _db = Db(self.container.get_absolute_url(),
+                 self.container.id)
         _db.publish(json.dumps({
-            "action": notification.action,
-            "id": notification.id,
-            "published": notification.published,
-            "date": notification.date_available,
-            "message": notification.message}))
+            "action": self.action,
+            "id": self.id,
+            "published": self.published,
+            "date": self.date_available,
+            "message": self.message}))
