@@ -15,3 +15,7 @@ class FlatPagesFields(TestCase):
     def test_content(self):
         field = FlatPage._meta.get_field_by_name('content')[0]
         self.assertEqual(field.__class__, models.TextField)
+
+    def test_order(self):
+        field = FlatPage._meta.get_field_by_name('order')[0]
+        self.assertEqual(field.default, 0)
