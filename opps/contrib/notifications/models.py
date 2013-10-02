@@ -21,7 +21,7 @@ class Notification(Publishable):
                               default="message")
     type = models.CharField(_('Type'), max_length=10,
                             choices=NOTIFICATION_TYPE,
-                            type='json')
+                            default='json')
     message = models.TextField(_('Message'))
 
     def save(self, *args, **kwargs):
