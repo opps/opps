@@ -59,10 +59,12 @@ class View(object):
             for box in context['articleboxes']:
                 self.excluded_ids += [a.pk for a in box.ordered_containers()]
 
-        filters = {}
-        filters['site_domain'] = self.site.domain
+        obj_filter = {}
+        obj_filter['site_domain'] = self.site.domain
+        obj_filter['date_available__lte'] = timezone.now()
+
+        filters = obj_filter
         filters['channel_long_slug__in'] = self.channel_long_slug
-        filters['date_available__lte'] = timezone.now()
         filters['published'] = True
         is_paginated = self.page_kwarg in self.request.GET
         if self.channel and self.channel.is_root_node() and not is_paginated:
@@ -85,12 +87,12 @@ class View(object):
         if self.slug:
             try:
                 context['next'] = self.get_object()\
-                    .get_next_by_date_insert()
+                    .get_next_by_date_insert(**obj_filter)
             except self.get_object().DoesNotExist:
                 pass
             try:
                 context['prev'] = self.get_object()\
-                    .get_previous_by_date_insert()
+                    .get_previous_by_date_insert(**obj_filter)
             except self.get_object().DoesNotExist:
                 pass
 
