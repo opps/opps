@@ -8,7 +8,7 @@ Opps - OPen Publishing System
 
 An *Open Source Content Management Platform* for the **magazine** websites and **high-traffic**, using the Django Framework.
 
-.. image:: https://travis-ci.org/opps/opps.png
+.. image:: https://travis-ci.org/opps/opps.png?branch=master
     :target: https://travis-ci.org/opps/opps
 
 
