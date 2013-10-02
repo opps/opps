@@ -12,7 +12,7 @@ from opps.db import Db
 from .models import Notification
 
 
-class SSEServer(DetailView):
+class AsyncServer(DetailView):
     model = Notification
 
     def _queue(self):
