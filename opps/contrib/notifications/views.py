@@ -1,14 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import json, time
-from django.http import HttpResponse, Http404
+import json
+import time
 from django.http import StreamingHttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
-from opps.api.views.generic.list import ListView as ListAPIView
-from opps.api.views.generic.list import ListCreateView
-from opps.views.generic.list import ListView
 from opps.views.generic.detail import DetailView
 from opps.db import Db
 
@@ -20,7 +17,7 @@ class SSEServer(DetailView):
 
     def _queue(self):
         _db = Db(self.get_object.get_absolute_url(),
-                   self.get_object().id)
+                 self.get_object().id)
         pubsub = _db.object().pubsub()
         pubsub.subscribe(_db.key)
 
@@ -40,5 +37,3 @@ class SSEServer(DetailView):
         response['Access-Control-Allow-Origin'] = '*'
         response.flush()
         return response
-
-
