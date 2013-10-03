@@ -25,11 +25,12 @@ class Notification(Publishable):
     message = models.TextField(_('Message'))
 
     def save(self, *args, **kwargs):
+        super(Notification, self).save(*args, **kwargs)
         _db = Db(self.container.get_absolute_url(),
                  self.container.id)
         _db.publish(json.dumps({
             "action": self.action,
             "id": self.id,
             "published": self.published,
-            "date": self.date_available,
+            "date": self.date_available.strftime("%D %T"),
             "message": self.message}))
