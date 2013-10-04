@@ -28,9 +28,12 @@ class Notification(Publishable):
         super(Notification, self).save(*args, **kwargs)
         _db = Db(self.container.get_absolute_url(),
                  self.container.id)
+        message = self.message
+        if self.type == "json":
+            message = json.dumps(self.message)
         _db.publish(json.dumps({
             "action": self.action,
             "id": self.id,
             "published": self.published,
             "date": self.date_available.strftime("%D %T"),
-            "message": self.message}))
+            "message": message}))
