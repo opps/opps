@@ -6,6 +6,7 @@ from django.http import StreamingHttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
+from opps.api.views.generic.list import ListView as ListAPIView
 from opps.views.generic.detail import DetailView
 from opps.db import Db
 
@@ -37,3 +38,7 @@ class AsyncServer(DetailView):
         response['Access-Control-Allow-Origin'] = '*'
         response.flush()
         return response
+
+
+class APIServer(ListAPIView):
+    pass
