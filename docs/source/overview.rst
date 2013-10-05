@@ -14,6 +14,28 @@ Opps makes use of as few libraries as possible (apart from a standard Django env
 * Django Mptt
 
 
+Features
+--------
+
+* Write in Django
+* Containar manager (**container** is content type in *Opps CMS*)
+* * Save draft and and preview
+* * Dynamic custom field, add field in specific container
+* WYSIWYG editing (more one option)
+* Container Box manager (Custom channel home page, add dynamic/fix box)
+* Channel organize via tree (via mptt, not level limit)
+* Media file manager, default manager images
+* * Multi upload
+* User permission in Admin, manager site access on admin
+* SEO friendly URLs and meta data
+* Configurable dashboard (used grappelli admin theme)
+* API for custom container types
+* Search engine
+* Multi-Site
+* JVM compatible (via Jython)
+* .NET Framework compatible (via IronPython)
+
+
 Browser Support
 ---------------
 
