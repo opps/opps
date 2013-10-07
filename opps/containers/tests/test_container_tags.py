@@ -43,28 +43,29 @@ class GetContainerByTest(TestCase):
 class GetContainerByChannelTest(TestCase):
     def setUp(self):
         User = get_user_model()
-        user = User.objects.create(username=u'test', password='test')
-        site = Site.objects.filter(name=u'example.com').get()
+        self.user = User.objects.create(username=u'test', password='test')
+        self.site = Site.objects.filter(name=u'example.com').get()
         channel = Channel.objects.create(name=u'Home', slug=u'home',
                                               description=u'home page',
-                                              site=site, user=user)
-        channel2 = Channel.objects.create(name=u'Home2', slug=u'home2',
-                                          description=u'home page2',
-                                          site=site, user=user)
+                                              site=self.site, user=self.user)
+        self.channel2 = Channel.objects.create(
+            name=u'Home2', slug=u'home2',
+            description=u'home page2',
+            site=self.site, user=self.user)
 
         self.count_container_create = [1, 2, 3, 4, 5]
 
         for i in self.count_container_create:
             Container.objects.create(title=u'test {}'.format(i),
-                                     user=user,
+                                     user=self.user,
                                      published=True,
-                                     site=site,
+                                     site=self.site,
                                      channel=channel)
         Container.objects.create(title=u'test channel 2',
-                                 user=user,
+                                 user=self.user,
                                  published=True,
-                                 site=site,
-                                 channel=channel2)
+                                 site=self.site,
+                                 channel=self.channel2)
 
     def test_tag_one_channel(self):
         get_container = get_container_by_channel('home')
@@ -76,3 +77,20 @@ class GetContainerByChannelTest(TestCase):
         get_container = get_container_by_channel('home2')
         self.assertEqual(len(get_container), 1)
         self.assertEqual(get_container[0].slug, "test-channel-2")
+
+    def test_get_container_recursive(self):
+        channel3 = Channel.objects.create(
+            name=u'Home3', slug=u'home3',
+            description=u'home page3',
+            parent=self.channel2,
+            site=self.site, user=self.user)
+
+        for i in self.count_container_create:
+            Container.objects.create(title=u'test 3 {}'.format(i),
+                                     user=self.user,
+                                     published=True,
+                                     site=self.site,
+                                     channel=channel3)
+
+        get_container = get_container_by_channel('home2')
+        self.assertEqual(len(get_container), 6)
