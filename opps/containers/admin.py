@@ -49,9 +49,9 @@ class ContainerBoxContainersInline(admin.StackedInline):
     extra = 0
     fieldsets = [(None, {
         'classes': ('collapse',),
-        'fields': ('container', 'aggregate', 'order', 'date_available',
-                   'date_end', 'hat', 'title', 'main_image',
-                   'main_image_caption', 'url')})]
+        'fields': ('container', 'aggregate', 'highlight', 'order',
+                   'date_available', 'date_end', 'hat', 'title',
+                   'main_image', 'main_image_caption', 'url')})]
 
 
 @apply_opps_rules('containers')

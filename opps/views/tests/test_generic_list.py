@@ -59,3 +59,32 @@ class TestTemplateName(TestCase):
         self.assertEqual(
             response.template_name,
             ['containers/none.html'])
+
+    def test_get_template_name_2_subchannel(self):
+        channel = Channel.objects.create(
+            name='test subchannel',
+            slug='test-subchannel',
+            parent=self.channel,
+            user=self.user,
+            published=True,
+            date_available=timezone.now(),
+        )
+        channel2 = Channel.objects.create(
+            name='test subchannel2',
+            slug='test-subchannel2',
+            parent=channel,
+            user=self.user,
+            published=True,
+            date_available=timezone.now(),
+        )
+
+        response = self.client.get(channel2.get_absolute_url())
+        self.assertTrue(response)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.template_name,
+            ['containers/test-channel/test-subchannel/'
+             'test-subchannel2/list.html',
+             'containers/test-channel/test-subchannel/list.html',
+             'containers/test-channel/list.html',
+             'containers/list.html'])

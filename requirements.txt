@@ -11,3 +11,4 @@ django-grappelli
 django-filebrowser
 django-polymorphic
 feedparser
+redis
