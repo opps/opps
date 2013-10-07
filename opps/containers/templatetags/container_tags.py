@@ -218,7 +218,8 @@ def get_containers_by(limit=None, **filters):
 
 
 @register.assignment_tag
-def get_container_by_channel(slug, number=10, depth=1, include_children=True, **kwargs):
+def get_container_by_channel(slug, number=10, depth=1,
+                             include_children=True, **kwargs):
     box = None
     if include_children:
         try:
@@ -236,9 +237,11 @@ def get_container_by_channel(slug, number=10, depth=1, include_children=True, **
                         current_level += 1
 
                     for children in channel.get_children():
-                        kwargs['channel_long_slug__in'].append(children.long_slug)
+                        kwargs['channel_long_slug__in'].append(
+                            children.long_slug)
                         # Recursion
-                        _channel = Channel.objects.get(long_slug=children.long_slug)
+                        _channel = Channel.objects.get(
+                            long_slug=children.long_slug)
                         _append_recursivelly(_channel, current_level)
 
                 _append_recursivelly(base_channel)
