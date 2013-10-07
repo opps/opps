@@ -27,11 +27,12 @@ Features
 * Media file manager, default manager images
 * * Multi upload
 * User permission in Admin, manager site access on admin
-* SEO friendly URLs and meta data
 * Configurable dashboard (used grappelli admin theme)
 * API for custom container types
 * Search engine
 * Multi-Site
+* SEO friendly URLs and meta data
+* Mobile detect
 * JVM compatible (via Jython)
 * .NET Framework compatible (via IronPython)
 
