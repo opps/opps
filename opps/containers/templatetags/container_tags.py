@@ -218,7 +218,7 @@ def get_containers_by(limit=None, **filters):
 
 
 @register.assignment_tag
-def get_container_by_channel(slug, number=10, include_children=True, **kwargs):
+def get_container_by_channel(slug, number=10, depth=1, include_children=True, **kwargs):
     box = None
     if include_children:
         try:
@@ -227,8 +227,21 @@ def get_container_by_channel(slug, number=10, include_children=True, **kwargs):
             if not kwargs['channel_long_slug__in']:
                 base_channel = Channel.objects.get(long_slug=slug)
                 kwargs['channel_long_slug__in'] = [base_channel.long_slug]
-                for children in base_channel.get_children():
-                    kwargs['channel_long_slug__in'].append(children.long_slug)
+
+                def _append_recursivelly(channel, current_level=0):
+                    # Depth test
+                    if current_level >= depth:
+                        return
+                    elif current_level < depth:
+                        current_level += 1
+
+                    for children in channel.get_children():
+                        kwargs['channel_long_slug__in'].append(children.long_slug)
+                        # Recursion
+                        _channel = Channel.objects.get(long_slug=children.long_slug)
+                        _append_recursivelly(_channel, current_level)
+
+                _append_recursivelly(base_channel)
                 cache.set('get_container_by_channel-{}'.format(slug),
                           kwargs['channel_long_slug__in'],
                           settings.OPPS_CACHE_EXPIRE)
