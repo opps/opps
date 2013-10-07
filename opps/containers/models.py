@@ -163,6 +163,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
             return
         return json.loads(self.json)
 
+
 class ContainerImage(models.Model):
     container = models.ForeignKey(
         'containers.Container',
