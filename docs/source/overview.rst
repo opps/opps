@@ -40,7 +40,7 @@ Features
 Browser Support
 ---------------
 
-Opps’s admin (used Bootstrap Twitter) interface works with all modern browsers.
+Opps’s admin (used Django Grappelli) interface works with all modern browsers.
 
 
 Language Translations
