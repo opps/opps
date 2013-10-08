@@ -12,6 +12,10 @@ if not settings.configured:
                 'ENGINE': 'django.db.backends.sqlite3',
             }
         },
+        OPPS_DB_HOST='127.0.0.1',
+        OPPS_DB_PORT=6379,
+        OPPS_DB_NAME='opps',
+        OPPS_DB_ENGINE='opps.db._redis.Redis',
         TEMPLATE_CONTEXT_PROCESSORS = (
             'opps.channels.context_processors.channel_context',
         ),
@@ -46,6 +50,7 @@ if not settings.configured:
             'opps.views',
             'opps.fields',
             'opps.db',
+            'opps.contrib.notifications',
         ),
         SITE_ID = 1,
         ROOT_URLCONF = "opps.urls",
@@ -58,7 +63,7 @@ def runtests():
     argv = sys.argv[:1] + ['test'] + ['core', 'containers', 'articles',
                                       'boxes', 'channels', 'images',
                                       'sitemaps', 'flatpages', 'archives',
-                                      'views', 'fields', 'db']
+                                      'views', 'fields', 'db', 'notifications']
     execute_from_command_line(argv)
 
 

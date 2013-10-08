@@ -157,6 +157,12 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
                            containerbox__slug=containerbox)
         return obj.filter(container=self.id)
 
+    def custom_fields(self):
+        import json
+        if not self.json:
+            return
+        return json.loads(self.json)
+
 
 class ContainerImage(models.Model):
     container = models.ForeignKey(

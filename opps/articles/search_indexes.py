@@ -3,6 +3,7 @@
 from datetime import datetime
 
 from django.conf import settings
+from django.utils import timezone
 
 from haystack.indexes import SearchIndex, CharField, DateTimeField, Indexable
 
@@ -29,5 +30,5 @@ class PostIndex(SearchIndex, Indexable):
 
     def index_queryset(self, using=None):
         return Post.objects.filter(
-            date_available__lte=datetime.now(),
+            date_available__lte=timezone.now(),
             published=True)

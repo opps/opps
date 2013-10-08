@@ -12,11 +12,14 @@ class JSONField(forms.TextInput):
 
     def render(self, name, value, attrs=None):
         elements = []
-
         try:
             values = json.loads(value)
         except TypeError:
             values = {}
+
+        # value sometimes come as unicode and we need to treat it
+        if type(values) == unicode:
+            values = json.loads(values)
 
         objs = self.model.objects.filter(
             application__contains=self.attrs.get('_model', None))
@@ -33,7 +36,6 @@ class JSONField(forms.TextInput):
             element_attr['value'] = '1'
             element_attr['obj_value'] = values.get(obj.slug, '')
             """
-
             element_attr['obj_value'] = values.get(obj.slug, '')
 
             if obj.type in ["checkbox", "radio"]:
