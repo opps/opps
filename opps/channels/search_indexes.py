@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from datetime import datetime
-
+from django.utils import timezone
 from haystack.indexes import SearchIndex, CharField, DateTimeField, Indexable
 
 from .models import Channel
@@ -20,5 +19,5 @@ class ChannelIndex(SearchIndex, Indexable):
 
     def index_queryset(self, using=None):
         return Channel.objects.filter(
-            date_available__lte=datetime.now(),
+            date_available__lte=timezone.now(),
             published=True)
