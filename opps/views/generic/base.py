@@ -128,7 +128,7 @@ class View(object):
         self.long_slug = self.channel.long_slug
 
         self.channel_long_slug = [self.long_slug]
-        for children in self.channel.get_children():
+        for children in self.channel.get_descendants(include_self=False):
             self.channel_long_slug.append(children.long_slug)
 
     def check_template(self, _template):
