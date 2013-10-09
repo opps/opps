@@ -16,7 +16,8 @@ NOTIFICATION_TYPE = (
 
 
 class Notification(Publishable):
-    container = models.ForeignKey('containers.Container')
+    container = models.ForeignKey('containers.Container',
+                                  null=True, blank=True)
     action = models.CharField(_('Action'), max_length=75,
                               default="message")
     type = models.CharField(_('Type'), max_length=10,
