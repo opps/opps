@@ -85,6 +85,11 @@ class Channeling(models.Model):
         'channels.Channel',
         verbose_name=_(u"Channel"),
     )
+    mirror_channel = models.ManyToManyField(
+        'channels.Channel',
+        related_name="%(app_label)s_%(class)s_mirror_channel",
+        verbose_name=_(u"Mirror channel"),
+    )
     channel_name = models.CharField(
         _(u"Channel name"),
         max_length=140,
