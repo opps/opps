@@ -99,7 +99,6 @@ class LongPullingServer(ListView, JSONPResponse):
         templates.append('{}/{}.json'.format(domain_folder, list_name))
         return templates
 
-
     def get_queryset(self):
         query = super(LongPullingServer, self).get_queryset()
         old_id = self.request.GET.get('old_id', 0)
