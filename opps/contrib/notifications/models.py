@@ -38,7 +38,6 @@ class Notification(Publishable):
     message = models.TextField(_('Message'))
 
     def save(self, *args, **kwargs):
-        super(Notification, self).save(*args, **kwargs)
         self.channel_long_slug = self.container.channel_long_slug
         self.slug = self.container.slug
         super(Notification, self).save(*args, **kwargs)
