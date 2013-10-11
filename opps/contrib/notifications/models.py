@@ -37,3 +37,7 @@ class Notification(Publishable):
             "published": self.published,
             "date": self.date_available.strftime("%D %T"),
             "message": message}))
+
+    def get_absolute_url(self):
+        return u"/{}/{}.server".format(self.container.channel_long_slug,
+                                       self.container.slug)
