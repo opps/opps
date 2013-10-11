@@ -18,7 +18,7 @@ class AsyncServer(DetailView):
     model = Notification
 
     def _queue(self):
-        _db = Db(self.get_object.get_absolute_url(),
+        _db = Db(self.get_object().get_absolute_url(),
                  self.get_object().id)
         pubsub = _db.object().pubsub()
         pubsub.subscribe(_db.key)
