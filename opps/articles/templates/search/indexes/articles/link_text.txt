@@ -1,0 +1,6 @@
+{{ object.title|slugify }}
+{{ object.title|striptags }}
+{{ object.headline|slugify }}
+{{ object.headline|striptags }}
+{{ object.short_title|slugify }}
+{{ object.short_title|striptags }}

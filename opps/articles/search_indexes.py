@@ -7,7 +7,7 @@ from django.utils import timezone
 
 from haystack.indexes import SearchIndex, CharField, DateTimeField, Indexable
 
-from .models import Post
+from .models import Post, Album, Link
 
 migration_date = getattr(settings, 'MIGRATION_DATE', None)
 if migration_date:
@@ -30,5 +30,39 @@ class PostIndex(SearchIndex, Indexable):
 
     def index_queryset(self, using=None):
         return Post.objects.filter(
+            date_available__lte=timezone.now(),
+            published=True)
+
+
+class AlbumIndex(SearchIndex, Indexable):
+    text = CharField(document=True, use_template=True)
+    date_available = DateTimeField(model_attr='date_available')
+    date_update = DateTimeField(model_attr='date_update')
+
+    def get_model(self):
+        return Album
+
+    def get_updated_field(self):
+        return 'date_update'
+
+    def index_queryset(self, using=None):
+        return Album.objects.filter(
+            date_available__lte=timezone.now(),
+            published=True)
+
+
+class LinkIndex(SearchIndex, Indexable):
+    text = CharField(document=True, use_template=True)
+    date_available = DateTimeField(model_attr='date_available')
+    date_update = DateTimeField(model_attr='date_update')
+
+    def get_model(self):
+        return Link
+
+    def get_updated_field(self):
+        return 'date_update'
+
+    def index_queryset(self, using=None):
+        return Link.objects.filter(
             date_available__lte=timezone.now(),
             published=True)
