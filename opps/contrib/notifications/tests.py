@@ -51,3 +51,18 @@ class ContainerModelTest(TestCase):
         self.assertTrue(pubsub)
         self.assertEqual(pubsub.channels,
                          set([u'opps_/home/test.html_1']))
+
+    def test_duplicate_notification(self):
+        notification = Notification.objects.create(
+            user=self.user,
+            container=self.container,
+            message='Test new notification',
+            type='text'
+        )
+        get_notification = Notification.objects.all()
+        self.assertTrue(notification)
+        self.assertEqual(len(get_notification), 2)
+        self.assertEqual(get_notification[0].channel_long_slug,
+                         get_notification[1].channel_long_slug)
+        self.assertEqual(get_notification[0].slug,
+                         get_notification[1].slug)
