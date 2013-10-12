@@ -193,16 +193,4 @@ class HideContainerAdmin(PublishableAdmin):
 
 admin.site.register(Container, HideContainerAdmin)
 admin.site.register(ContainerBox, ContainerBoxAdmin)
-
-
-@apply_opps_rules('containers')
-class MirrorAdmin(PublishableAdmin):
-    prepopulated_fields = {"slug": ["title"]}
-    readonly_fields = ['get_http_absolute_url', 'short_url',
-                       'in_containerboxes', 'image_thumb']
-    raw_id_fields = ['main_image', 'channel',
-                     'container', 'mirror_channel']
-    ordering = ('-date_available',)
-
-
-admin.site.register(Mirror, MirrorAdmin)
+admin.site.register(Mirror, HideContainerAdmin)
