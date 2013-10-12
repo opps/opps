@@ -23,6 +23,30 @@ from opps.db.models.fields import JSONField
 from opps.boxes.models import BaseBox
 
 
+def mirror_channel(sender, instance, using, **kwargs):
+    for channel in instance.mirror_channel.all():
+        mirror = Mirror.objects.get(channel=channel,
+                                    container=instance)
+        if mirror:
+            mirror.slug = instance.slug
+            mirror.title = instance.title
+            mirror.published = instance.published
+            mirror.main_image = instance.main_image
+            mirror.channel_long_slug = instance.channel_long_slug
+            mirror.channel_name = instance.channel_name
+            mirror.save()
+        else:
+            Mirror.objects.create(
+                channel=channel,
+                container=instance,
+                slug=instance.slug,
+                title=instance.title,
+                main_image=instance.main_image,
+                channel_long_slug=instance.channel_long_slug,
+                channel_name=instance.channel_name,
+                user=instance.user)
+
+
 class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
                 Channeling, Imaged, Tagged):
     title = models.CharField(_(u"Title"), max_length=140, db_index=True)
@@ -91,6 +115,8 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
             self.slug = slugify(self.title)
 
         models.signals.post_save.connect(shorturl_generate,
+                                         sender=self.__class__)
+        models.signals.post_save.connect(mirror_channel,
                                          sender=self.__class__)
         super(Container, self).save(*args, **kwargs)
 
@@ -311,6 +337,12 @@ class ContainerBoxContainers(models.Model):
 
         if self.container and not self.container.published:
             raise ValidationError(_(u'Article not published!'))
+
+
+class Mirror(Container):
+    container = models.ForeignKey('containers.Container',
+                                  related_name='containers_mirror',
+                                  verbose_name=_(u'Container'))
 
 
 models.signals.post_delete.connect(delete_container, sender=Container)
