@@ -30,7 +30,8 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
     form = PostAdminForm
     inlines = [ContainerImageInline, PostRelatedInline]
     search_fields = ['title', 'headline', 'slug', 'channel_name']
-    raw_id_fields = ['main_image', 'channel', 'albums']
+    raw_id_fields = ['main_image', 'channel',
+                     'mirror_channel', 'albums']
     ordering = ('-date_available',)
 
     fieldsets = (
@@ -44,7 +45,7 @@ class PostAdmin(ContainerAdmin, AdminViewPermission):
         (_(u'Custom'), {
             'fields': ('json',)}),
         (_(u'Relationships'), {
-            'fields': ('channel', 'albums',)}),
+            'fields': ('channel', 'mirror_channel', 'albums',)}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available',
@@ -71,7 +72,7 @@ class AlbumAdmin(ContainerAdmin, AdminViewPermission):
         (_(u'Custom'), {
             'fields': ('json',)}),
         (_(u'Relationships'), {
-            'fields': ('channel',)}),
+            'fields': ('channel', 'mirror_channel')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available',
@@ -82,7 +83,8 @@ class AlbumAdmin(ContainerAdmin, AdminViewPermission):
 @apply_opps_rules('articles')
 class LinkAdmin(ContainerAdmin, AdminViewPermission):
     form = LinkAdminForm
-    raw_id_fields = ['container', 'channel', 'main_image']
+    raw_id_fields = ['container', 'channel',
+                     'mirror_channel', 'main_image']
     fieldsets = (
         (_(u'Identification'), {
             'fields': ('site', 'title', 'slug', 'get_http_absolute_url',
@@ -94,7 +96,7 @@ class LinkAdmin(ContainerAdmin, AdminViewPermission):
         (_(u'Custom'), {
             'fields': ('json',)}),
         (_(u'Relationships'), {
-            'fields': ('channel',)}),
+            'fields': ('channel', 'mirror_channel')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available',
