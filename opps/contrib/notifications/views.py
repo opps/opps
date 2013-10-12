@@ -7,7 +7,6 @@ from django.http import StreamingHttpResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
-from opps.views.generic.detail import DetailView
 from opps.views.generic.list import ListView
 from opps.views.generic.json_views import JSONPResponse
 from opps.db import Db
@@ -15,22 +14,37 @@ from opps.db import Db
 from .models import Notification
 
 
-class AsyncServer(DetailView):
+class AsyncServer(ListView):
     model = Notification
 
-    def _queue(self):
+    def _db(self, obj):
         _db = Db(
-            self.get_object().container.get_absolute_url(),
-            self.get_object().id)
+            obj.container.get_absolute_url(),
+            obj.container.id)
         pubsub = _db.object().pubsub()
         pubsub.subscribe(_db.key)
+        return pubsub
 
-        while True:
-            for m in pubsub.listen():
-                if m['type'] == 'message':
-                    yield u"data: {}\n\n".format(m['data'])
-            yield u"data: {}\n\n".format(json.dumps({"action": "ping"}))
-            time.sleep(0.5)
+    def _queue(self):
+        try:
+            obj = self.get_queryset()[0]
+        except:
+            obj = False
+
+        if not obj:
+            while True:
+                yield u"data: {}\n\n".format(
+                    json.dumps({"action": "error"}))
+                time.sleep(10)
+        else:
+            while True:
+                pubsub = self._db(obj)
+                for m in pubsub.listen():
+                    if m['type'] == 'message':
+                        yield u"data: {}\n\n".format(m['data'])
+                yield u"data: {}\n\n".format(
+                    json.dumps({"action": "ping"}))
+                time.sleep(0.5)
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
