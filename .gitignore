@@ -38,8 +38,9 @@ nosetests.xml
 # Django
 settings.py
 
-# SQLite3 databases
+# Databases
 *.db
+*.rdb
 
 #translations
 *.mo
