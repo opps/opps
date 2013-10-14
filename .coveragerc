@@ -1,0 +1,15 @@
+[run]
+branch = True
+source = opps
+include = opps/*
+omit = opps/*/tests/*
+       opps/*/*/tests/*
+       opps/*/*/*/tests/*
+       opps/tests/*
+       runtest*
+
+[report]
+show_missing = True
+
+[html]
+title = opps coverage report
