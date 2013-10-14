@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import operator
+import celery
 
 from django.db import models
 from django.db.models import Q
@@ -15,36 +16,46 @@ from django.template.defaultfilters import slugify
 from polymorphic import PolymorphicModel
 from polymorphic.showfields import ShowFieldContent
 
-from .signals import shorturl_generate, delete_container
 from opps.core.cache import _cache_key
 from opps.core.models import Publishable, Slugged, Channeling, Imaged
 from opps.core.tags.models import Tagged
 from opps.db.models.fields import JSONField
 from opps.boxes.models import BaseBox
 
+from .signals import shorturl_generate, delete_container
 
-def mirror_channel(sender, instance, using, **kwargs):
+
+@celery.task
+def check_mirror_channel(container_id):
+    if not container_id:
+        return
+    instance = Container.objects.get(id=container_id)
     for channel in instance.mirror_channel.all():
-        mirror = Mirror.objects.get(channel=channel,
-                                    container=instance)
-        if mirror:
-            mirror.slug = instance.slug
+        try:
+            mirror = Mirror.objects.get(
+                channel=channel, container=instance)
+        except Mirror.DoesNotExist:
+            mirror = None
+
+        if not mirror:
+            mirror = Mirror.objects.create(
+                channel=channel,
+                container=instance,
+                user=instance.user,
+                title=instance.title,
+                slug=instance.slug,
+                published=instance.published,
+                channel_long_slug=instance.channel_long_slug,
+                channel_name=instance.channel_name,
+                main_image=instance.main_image)
+        else:
             mirror.title = instance.title
+            mirror.slug = instance.slug
             mirror.published = instance.published
             mirror.main_image = instance.main_image
             mirror.channel_long_slug = instance.channel_long_slug
             mirror.channel_name = instance.channel_name
             mirror.save()
-        else:
-            Mirror.objects.create(
-                channel=channel,
-                container=instance,
-                slug=instance.slug,
-                title=instance.title,
-                main_image=instance.main_image,
-                channel_long_slug=instance.channel_long_slug,
-                channel_name=instance.channel_name,
-                user=instance.user)
 
 
 class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
@@ -116,9 +127,10 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
 
         models.signals.post_save.connect(shorturl_generate,
                                          sender=self.__class__)
-        models.signals.post_save.connect(mirror_channel,
-                                         sender=self.__class__)
         super(Container, self).save(*args, **kwargs)
+        if self.mirror_channel:
+            check_mirror_channel.apply_async(
+                kwargs=dict(container_id=self.id), countdown=15)
 
     def get_absolute_url(self):
         return u"/{}/{}.html".format(self.channel_long_slug, self.slug)
