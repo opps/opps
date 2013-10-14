@@ -1,6 +1,28 @@
+<script type="text/javascript" src="{{ js }}"></script>
+<script src='/static/admin/opps/images/js/oppsfilebrowser.js'></script>
+<script type="text/javascript">
+(function($){
+  $(document).ready(function(){
+    tinyMCE.init({
+      mode : "specific_textareas",
+      theme : "{{ theme }}",
+      plugins : "{{ plugins }}",
+      language: '{{ language }}',
+      editor_selector : "oppsEditor",
+      file_browser_callback: CustomFileBrowser
+      });
+  });
+})(grp.jQuery);
+</script>
 {% for element in elements %}
   <div class="l-2c-fluid l-d-4">
-    <div class="c-1"><label for="json_{{element.slug}}" class="required">{{element.name}}</label></div>
-    <div class="c-2">{{element.element}}</div>
+    <div class="c-1">
+      <label for="json_{{element.slug}}" class="required">
+        {{element.name}}
+      </label>
+    </div>
+    <div class="c-2">
+      {{element.element}}
+    </div>
   </div>
 {% endfor %}
