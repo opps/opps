@@ -7,6 +7,7 @@ from django.contrib.sites.models import Site
 
 from ..models import Container
 from ..models import ContainerImage, ContainerBox, ContainerBoxContainers
+from ..models import Mirror, check_mirror_channel
 from opps.channels.models import Channel
 
 
@@ -54,6 +55,19 @@ class ContainerModelTest(TestCase):
     def test_get_http_absolute_url(self):
         self.assertEqual(self.container.get_http_absolute_url(),
                          u'http://example.com/home/test.html')
+
+    def test_create_channel_mirror(self):
+        channel = Channel.objects.create(name=u'Home2', slug=u'home2',
+                                         description=u'home page2',
+                                         site=self.site, user=self.user)
+        self.container.mirror_channel.add(channel)
+        self.container.save()
+        check_mirror_channel(self.container.id)
+        mirror = Mirror.objects.all()
+
+        self.assertTrue(mirror)
+        self.assertEqual(len(mirror), 1)
+        self.assertEqual(mirror[0].get_absolute_url(), u"/home2/test.html")
 
 
 class ContainerFields(TestCase):
