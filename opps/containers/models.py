@@ -30,7 +30,15 @@ def check_mirror_channel(container_id):
     if not container_id:
         return
     instance = Container.objects.get(id=container_id)
-    for channel in instance.mirror_channel.all():
+    mirror_channel = instance.mirror_channel.all()
+    old_mirror_channel = [
+        c.id for c in Mirror.objects.filter(container=instance)]
+
+    for _id in [i for i in old_mirror_channel if i not in mirror_channel]:
+        m = Mirror.objects.get(id=_id)
+        m.delete()
+
+    for channel in mirror_channel:
         try:
             mirror = Mirror.objects.get(
                 channel=channel, container=instance)
