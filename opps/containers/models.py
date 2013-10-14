@@ -25,7 +25,6 @@ from opps.boxes.models import BaseBox
 from .signals import shorturl_generate, delete_container
 
 
-@celery.task
 def check_mirror_channel(container_id):
     if not container_id:
         return
@@ -64,6 +63,11 @@ def check_mirror_channel(container_id):
             mirror.channel_long_slug = instance.channel_long_slug
             mirror.channel_name = instance.channel_name
             mirror.save()
+
+
+@celery.task
+def task_check_mirror_channel(container_id):
+    check_mirror_channel(container_id)
 
 
 class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
@@ -137,7 +141,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
                                          sender=self.__class__)
         super(Container, self).save(*args, **kwargs)
         if self.mirror_channel:
-            check_mirror_channel.apply_async(
+            task_check_mirror_channel.apply_async(
                 kwargs=dict(container_id=self.id), countdown=15)
 
     def get_absolute_url(self):
