@@ -81,6 +81,11 @@ class NotUserPublishable(Publisher):
 
 
 class Channeling(models.Model):
+
+    def __init__(self, *args, **kwargs):
+        super(Channeling, self).__init__(*args, **kwargs)
+        self.old_mirror_channel = self.mirror_channel
+
     channel = models.ForeignKey(
         'channels.Channel',
         verbose_name=_(u"Channel"),
