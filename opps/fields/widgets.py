@@ -5,7 +5,7 @@ from django import forms
 from django.template.loader import render_to_string
 
 from .models import Field, FieldOption
-
+from opps.core.widgets import CONFIG
 
 class JSONField(forms.TextInput):
     model = Field
@@ -56,8 +56,28 @@ class JSONField(forms.TextInput):
             )
             elements.append(o)
 
+        # OPPS Editor params
+        # This is ugly as hell but for now it was the only way of getting this 
+        # working DRY
+        js = CONFIG.get('js')[0]
+        # must pass an string with commas on plugins
+        plugins = ''
+        for item in CONFIG.get('plugins'):
+            line = ','.join(item.split())
+            line += ','
+            plugins += line
+        language = CONFIG.get('language')
+        theme = CONFIG.get('theme', 'modern')
+        file_browser_callback = CONFIG.get('file_browser_callback')
+
+
         return render_to_string(
             "admin/opps/fields/json.html",
             {"elements": elements,
              "name": name,
-             "value": value})
+             "value": value,
+             "js": js,
+             "theme": theme,
+             "plugins": plugins,
+             "language": language,
+             "file_browser_callback": file_browser_callback })
