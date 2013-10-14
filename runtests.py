@@ -64,7 +64,8 @@ if not settings.configured:
         BROKER_URL = "redis://localhost:6379/0",
         REDIS_DB = 0,
         REDIS_CONNECT_RETRY = True,
-        CELERY_RESULT_BACKEND ='redis'
+        CELERY_RESULT_BACKEND ='redis',
+        OPPS_MIRROR_CHANNEL = True,
     )
 
 
