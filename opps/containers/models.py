@@ -140,7 +140,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         models.signals.post_save.connect(shorturl_generate,
                                          sender=self.__class__)
         super(Container, self).save(*args, **kwargs)
-        if self.mirror_channel:
+        if settings.OPPS_MIRROR_CHANNEL and self.mirror_channel:
             task_check_mirror_channel.apply_async(
                 kwargs=dict(container_id=self.id), countdown=15)
 
