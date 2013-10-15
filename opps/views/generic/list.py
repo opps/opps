@@ -99,8 +99,9 @@ class ListView(View, DjangoListView):
         if self.request.GET.get('type'):
             filters['child_class'] = self.request.GET.get('type')
 
-        if len(self.excluded_ids) > 0:
-            queryset = queryset.filter(**filters).exclude(
+        queryset = queryset.filter(**filters)
+        if self.excluded_ids:
+            queryset = queryset.exclude(
                 pk__in=self.excluded_ids)
 
         return queryset._clone()
