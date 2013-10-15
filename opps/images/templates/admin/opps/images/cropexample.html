@@ -29,7 +29,7 @@
         if (django.jQuery("#id_valign").val()) { src += django.jQuery("#id_valign").val() + '/'; }
         if (django.jQuery("#id_smart").is(':checked')) { src += 'smart/'; }
 
-        img = django.jQuery("#imageExample").attr('src')
+        img = django.jQuery("p.file-upload a").attr('href')
         if (img !== undefined) {
           if (img.split('http').length == 1){
             img = '{{ THUMBOR_MEDIA_URL }}' + img;
@@ -43,10 +43,10 @@
       });
       check_url();
 
-      django.jQuery(".field-crop_x1").hide()
-      django.jQuery(".field-crop_x2").hide()
-      django.jQuery(".field-crop_y1").hide()
-      django.jQuery(".field-crop_y2").hide()
+      django.jQuery(".crop_x1").hide()
+      django.jQuery(".crop_x2").hide()
+      django.jQuery(".crop_y1").hide()
+      django.jQuery(".crop_y2").hide()
     });
   </script>
   <img id="crop_example" />
