@@ -33,17 +33,26 @@ class AsyncServer(ListView):
 
         if not obj:
             while True:
-                yield u"data: {}\n\n".format(
+                msg = u"compatibility: true\n"
+                msg += u"retry: 10000\n"
+                msg += u"data: {}\n\n".format(
                     json.dumps({"action": "error"}))
+                yield msg
                 time.sleep(10)
         else:
             while True:
                 pubsub = self._db(obj)
                 for m in pubsub.listen():
                     if m['type'] == 'message':
-                        yield u"data: {}\n\n".format(m['data'])
-                yield u"data: {}\n\n".format(
+                        msg = u"compatibility: true\n"
+                        msg += u"retry: 10000\n"
+                        msg += u"data: {}\n\n".format(m['data'])
+                        yield msg
+                ping = u"compatibility: true\n"
+                ping += u"retry: 10000\n"
+                ping += u"data: {}\n\n".format(
                     json.dumps({"action": "ping"}))
+                yield ping
                 time.sleep(0.5)
 
     @method_decorator(csrf_exempt)
