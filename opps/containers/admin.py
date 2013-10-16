@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
+from django.conf import settings
 
 from .models import Container, ContainerImage
 from .models import ContainerBox, ContainerBoxContainers
@@ -190,6 +191,13 @@ class HideContainerAdmin(PublishableAdmin):
     def has_add_permission(self, request):
         return False
 
+    def queryset(self, request):
+        qs = super(HideContainerAdmin, self).queryset(request)
+        # TODO: Document this
+        blacklist = getattr(settings, 'OPPS_CONTAINERS_BLACKLIST', [])
+        if blacklist:
+            qs = qs.exclude(child_class__in=blacklist)
+        return qs
 
 admin.site.register(Container, HideContainerAdmin)
 admin.site.register(ContainerBox, ContainerBoxAdmin)
