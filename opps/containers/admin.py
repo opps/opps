@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
+from django.conf import settings
 
 from .models import Container, ContainerImage, Mirror
 from .models import ContainerBox, ContainerBoxContainers
@@ -171,18 +172,14 @@ class ContainerBoxAdmin(BaseBoxAdmin):
 
 class HideContainerAdmin(PublishableAdmin):
 
-    list_display = ['image_thumb', 'child_class', 'title',
+    list_display = ['image_thumb', 'get_child_class', 'title',
                     'channel_name', 'date_available',
                     'published']
     readonly_fields = ['image_thumb']
 
-    def image_thumb(self, obj):
-        if obj.main_image:
-            return u'<img width="60px" height="60px" src="{0}" />'.format(
-                image_url(obj.main_image.archive.url, width=60, height=60))
-        return _(u'No Image')
-    image_thumb.short_description = _(u'Thumbnail')
-    image_thumb.allow_tags = True
+    def get_child_class(self, obj):
+        return _(obj.child_class)
+    get_child_class.short_description = _(u'Child class')
 
     def get_model_perms(self, *args, **kwargs):
         return {}
@@ -190,6 +187,18 @@ class HideContainerAdmin(PublishableAdmin):
     def has_add_permission(self, request):
         return False
 
+    def get_list_filter(self, request):
+        list_filter = super(HideContainerAdmin, self).get_list_filter(request)
+        list_filter += [ChannelListFilter]
+        return list_filter
+
+    def queryset(self, request):
+        qs = super(HideContainerAdmin, self).queryset(request)
+        # TODO: Document this
+        blacklist = getattr(settings, 'OPPS_CONTAINERS_BLACKLIST', [])
+        if blacklist:
+            qs = qs.exclude(child_class__in=blacklist)
+        return qs
 
 admin.site.register(Container, HideContainerAdmin)
 admin.site.register(ContainerBox, ContainerBoxAdmin)
