@@ -172,18 +172,14 @@ class ContainerBoxAdmin(BaseBoxAdmin):
 
 class HideContainerAdmin(PublishableAdmin):
 
-    list_display = ['image_thumb', 'child_class', 'title',
+    list_display = ['image_thumb', 'get_child_class', 'title',
                     'channel_name', 'date_available',
                     'published']
     readonly_fields = ['image_thumb']
 
-    def image_thumb(self, obj):
-        if obj.main_image:
-            return u'<img width="60px" height="60px" src="{0}" />'.format(
-                image_url(obj.main_image.archive.url, width=60, height=60))
-        return _(u'No Image')
-    image_thumb.short_description = _(u'Thumbnail')
-    image_thumb.allow_tags = True
+    def get_child_class(self, obj):
+        return _(obj.child_class)
+    get_child_class.short_description = _(u'Child class')
 
     def get_model_perms(self, *args, **kwargs):
         return {}
