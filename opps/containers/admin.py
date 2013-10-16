@@ -187,6 +187,11 @@ class HideContainerAdmin(PublishableAdmin):
     def has_add_permission(self, request):
         return False
 
+    def get_list_filter(self, request):
+        list_filter = super(HideContainerAdmin, self).get_list_filter(request)
+        list_filter += [ChannelListFilter]
+        return list_filter
+
     def queryset(self, request):
         qs = super(HideContainerAdmin, self).queryset(request)
         # TODO: Document this
