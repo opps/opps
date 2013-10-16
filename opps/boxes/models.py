@@ -58,7 +58,8 @@ class QuerySet(Publishable):
 
         queryset = model.objects.filter(
             published=True,
-            date_available__lte=timezone.now())
+            date_available__lte=timezone.now()
+        ).exclude(child_class='Mirror')
 
         try:
             if model._meta.get_field_by_name('show_on_root_channel'):
