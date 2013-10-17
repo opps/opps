@@ -9,7 +9,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
 from django.contrib.sites.models import get_current_site
 from django.db.models import Max, Count
-from django.contrib.sites.models import get_current_site
 
 from opps.channels.models import Channel
 from opps.images.generate import image_url
@@ -96,9 +95,11 @@ class ChildClassListFilter(SimpleListFilter):
         site = get_current_site(request)
         child_classes = [(i['child_class'], _(i['child_class'])) for i in
                          Container.objects.values('child_class').filter(
-                             published=True, date_available__lte=timezone.now(), site=site
-                         ).annotate(child=Count('child_class'), date=Max('date_available')
-                                    ).order_by('-date')]
+                             published=True,
+                             date_available__lte=timezone.now(), site=site
+                         ).annotate(
+                             child=Count('child_class'),
+                             date=Max('date_available')).order_by('-date')]
         return child_classes
 
     def queryset(self, request, queryset):
