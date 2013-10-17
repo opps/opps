@@ -194,9 +194,10 @@ class HideContainerAdmin(PublishableAdmin):
 
     def queryset(self, request):
         qs = super(HideContainerAdmin, self).queryset(request)
+        # if the queryset comes from a search, we do not exclude the blacklist
         # TODO: Document this
         blacklist = getattr(settings, 'OPPS_CONTAINERS_BLACKLIST', [])
-        if blacklist:
+        if blacklist and not request.GET:
             qs = qs.exclude(child_class__in=blacklist)
         return qs
 
