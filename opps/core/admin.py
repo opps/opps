@@ -8,9 +8,12 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
 from django.contrib.sites.models import get_current_site
+from django.db.models import Max, Count
+from django.contrib.sites.models import get_current_site
 
 from opps.channels.models import Channel
 from opps.images.generate import image_url
+from opps.containers.models import Container
 
 from .models import Config
 
@@ -81,6 +84,30 @@ class ChannelListFilter(SimpleListFilter):
         return queryset
 
 
+class ChildClassListFilter(SimpleListFilter):
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = _(u'Child class')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'child_class'
+
+    def lookups(self, request, model_admin):
+        site = get_current_site(request)
+        child_classes = [(i['child_class'], _(i['child_class'])) for i in
+                         Container.objects.values('child_class').filter(
+                             published=True, date_available__lte=timezone.now(), site=site
+                         ).annotate(child=Count('child_class'), date=Max('date_available')
+                                    ).order_by('-date')]
+        return child_classes
+
+    def queryset(self, request, queryset):
+        child_class = self.value()
+        if child_class:
+            queryset = queryset.filter(child_class=child_class)
+        return queryset
+
+
 class MassPublishMixin(admin.ModelAdmin):
     actions = ['publish']
 
@@ -94,7 +121,7 @@ class MassPublishMixin(admin.ModelAdmin):
 class PublisherAdmin(MassPublishMixin):
     list_display = ['title', 'channel_long_slug',
                     'date_available', 'published', 'preview_url']
-    list_filter = ['child_class', 'date_available', 'published']
+    list_filter = ['date_available', 'published', ChildClassListFilter]
     search_fields = ['title', 'slug', 'channel_name']
 
     def in_containerboxes(self, obj):
