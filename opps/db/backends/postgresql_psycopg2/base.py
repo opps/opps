@@ -11,7 +11,7 @@ USAGE:
 
 DATABASES = {
     'default': {
-        'ENGINE': 'opps.db.postgresql_psycopg2',
+        'ENGINE': 'opps.db.backends.postgresql_psycopg2',
         ...
     }
 }
