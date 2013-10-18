@@ -188,8 +188,8 @@ class HideContainerAdmin(PublishableAdmin):
         return False
 
     def get_list_filter(self, request):
-        list_filter = super(HideContainerAdmin, self).get_list_filter(request)
-        list_filter += [ChannelListFilter]
+        list_filter = super(HideContainerAdmin, self).list_filter
+        list_filter = [ChannelListFilter] + list(list_filter)
         return list_filter
 
     def queryset(self, request):
