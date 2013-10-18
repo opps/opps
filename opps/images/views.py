@@ -33,13 +33,13 @@ class GetImagesView(ListView):
     def dispatch(self, *args, **kwargs):
         return super(GetImagesView, self).dispatch(*args, **kwargs)
 
-    def get(self, *args, **kwargs):
-        self.object_list = self.get_queryset()
+    def get_queryset(self):
+        queryset = super(GetImagesView, self).get_queryset().order_by('-id')
 
         query = Q()
         q = self.request.GET.get("q")
         user = self.request.GET.get("user") or 0
-        published = self.request.GET.get("published")
+        published = self.request.GET.get("published", 1)
 
         if q:
             query &= Q(title__icontains=q) | Q(description__icontains=q)
@@ -50,21 +50,21 @@ class GetImagesView(ListView):
         if published:
             query &= Q(published=int(published))
 
-        self.object_list = self.object_list.filter(query)
-        context = self.get_context_data(object_list=self.object_list,
-                                        user_id=int(user),
-                                        q=q,
-                                        published=published)
-        return self.render_to_response(context)
+        queryset = queryset.filter(query)
+        return queryset._clone()
 
     def get_context_data(self, *args, **kwargs):
+        q = self.request.GET.get("q")
+        user = self.request.GET.get("user") or 0
+        published = self.request.GET.get("published")
+
         context = {
             'users': get_user_model().objects.filter(
                 image__isnull=False
             ).order_by('email').values('id', 'email').distinct(),
-            'user_id': kwargs.get('user_id'),
-            'published': kwargs.get('published'),
-            'q': kwargs.get('q'),
+            'user_id': int(user),
+            'published': published,
+            'q': q,
         }
         context.update(kwargs)
         return super(GetImagesView, self).get_context_data(**context)
