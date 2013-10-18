@@ -19,6 +19,12 @@ class Redis:
                               db=self.db)
         self.conn = RedisClient(connection_pool=pool)
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, tb):
+        self.close()
+
     def object(self):
         return self.conn
 
