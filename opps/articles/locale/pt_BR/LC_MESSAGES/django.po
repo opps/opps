@@ -25,11 +25,11 @@ msgstr "Artigos"
 
 #: admin.py:22
 msgid "Related post"
-msgstr "Post relacionado"
+msgstr "Notícia relacionada"
 
 #: admin.py:23
 msgid "Related posts"
-msgstr "Posts relacionados"
+msgstr "Notícias relacionadas"
 
 #: admin.py:36 admin.py:61 admin.py:82
 msgid "Identification"
@@ -61,15 +61,15 @@ msgstr "Álbuns"
 
 #: models.py:44 models.py:103
 msgid "Post"
-msgstr "Post"
+msgstr "Notícia"
 
 #: models.py:45
 msgid "Posts"
-msgstr "Posts"
+msgstr "Notícias"
 
 #: models.py:111
 msgid "Related Post"
-msgstr "Post relacionado"
+msgstr "Notícia relacionada"
 
 #: models.py:117
 msgid "Order"
