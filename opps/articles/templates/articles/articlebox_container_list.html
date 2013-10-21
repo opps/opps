@@ -1,0 +1,11 @@
+<ul>
+	{% for article_list in articlebox %}
+		<li>
+			<ul>
+				{% for article in article_list %}
+					<li>{{ article.title }}</li>
+				{% endfor %}
+			</ul>
+		</li>
+	{% endfor %}
+</ul>
