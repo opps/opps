@@ -1,8 +1,8 @@
 <ul>
-	{% for article_list in articlebox %}
+	{% for container_list in list_container %}
 		<li>
 			<ul>
-				{% for article in article_list %}
+				{% for article in container_list %}
 					<li>{{ article.title }}</li>
 				{% endfor %}
 			</ul>
