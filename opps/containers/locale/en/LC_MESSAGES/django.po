@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-08 15:59-0300\n"
+"POT-Creation-Date: 2013-10-23 13:35-0200\n"
 "PO-Revision-Date: 2013-08-05 18:20+0000\n"
 "Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,151 +17,175 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: admin.py:21 models.py:181
+#: admin.py:26 models.py:190
 msgid "Container image"
 msgstr "Container image"
 
-#: admin.py:22 models.py:182
+#: admin.py:27 models.py:191
 msgid "Container images"
 msgstr "Container images"
 
-#: admin.py:32 admin.py:175
+#: admin.py:37
 msgid "No Image"
 msgstr "No Image"
 
-#: admin.py:33 admin.py:176
+#: admin.py:38
 msgid "Thumbnail"
 msgstr "Thumbnail"
 
-#: admin.py:44 models.py:150
-msgid "Container source"
-msgstr "Container source"
-
-#: admin.py:45 models.py:151
-msgid "Container sources"
-msgstr "Container sources"
-
-#: admin.py:82
+#: admin.py:91
 msgid "Has queryset"
 msgstr "Has queryset"
 
-#: admin.py:96
+#: admin.py:105
 msgid "No"
 msgstr "No"
 
-#: admin.py:97
+#: admin.py:106
 msgid "Yes"
 msgstr "Yes"
 
-#: admin.py:122
+#: admin.py:131
 msgid "Identification"
 msgstr "Identification"
 
-#: admin.py:124
+#: admin.py:133
 msgid "Relationships"
 msgstr "Relationships"
 
-#: admin.py:126
+#: admin.py:135
 msgid "Publication"
 msgstr "Publication"
 
-#: admin.py:139
+#: admin.py:148
 msgid "Clean ended containers"
 msgstr "Clean ended containers"
 
-#: admin.py:158
+#: admin.py:167
 msgid "Dynamic"
 msgstr "Dynamic"
 
-#: models.py:22 models.py:192
-msgid "Title"
-msgstr "Title"
-
-#: models.py:24
-msgid "Hat"
-msgstr "Hat"
-
-#: models.py:29
-msgid "Short URL"
-msgstr "Short URL"
-
-#: models.py:33
+#: admin.py:182 models.py:39
 msgid "Child class"
 msgstr "Child class"
 
-#: models.py:39
+#: models.py:28 models.py:203 models.py:272
+msgid "Title"
+msgstr "Title"
+
+#: models.py:30 models.py:276
+msgid "Hat"
+msgstr "Hat"
+
+#: models.py:35
+msgid "Short URL"
+msgstr "Short URL"
+
+#: models.py:45
 msgid "Child module"
 msgstr "Child module"
 
-#: models.py:45
+#: models.py:51
 msgid "Child app label"
 msgstr "Child app label"
 
-#: models.py:51
+#: models.py:57
 msgid "Show on root channel?"
 msgstr "Show on root channel?"
 
-#: models.py:64 models.py:138 models.py:163 models.py:200 models.py:246
-msgid "Container"
-msgstr "Container"
-
-#: models.py:65
-msgid "Containers"
-msgstr "Containers"
-
-#: models.py:140 models.py:165 models.py:248
-msgid "Order"
-msgstr "Order"
-
-#: models.py:146
+#: models.py:61
 msgid "Source"
 msgstr "Source"
 
-#: models.py:168
+#: models.py:64
+msgid "Customized"
+msgstr ""
+
+#: models.py:80 models.py:172 models.py:211 models.py:262
+msgid "Container"
+msgstr "Container"
+
+#: models.py:81
+msgid "Containers"
+msgstr "Containers"
+
+#: models.py:110
+msgid "Get HTTP Absolute URL"
+msgstr ""
+
+#: models.py:174 models.py:265
+msgid "Order"
+msgstr "Order"
+
+#: models.py:179
 msgid "Image"
 msgstr "Image"
 
-#: models.py:174
+#: models.py:183
 msgid "Caption"
 msgstr "Caption"
 
-#: models.py:208
+#: models.py:219
 msgid "Query Set"
 msgstr "Query Set"
 
-#: models.py:212
+#: models.py:223
 msgid "Container box"
 msgstr "Container box"
 
-#: models.py:213
+#: models.py:224
 msgid "Containers boxes"
 msgstr "Containers boxes"
 
-#: models.py:240
+#: models.py:256
 msgid "Container Box"
 msgstr "Container Box"
 
-#: models.py:249
+#: models.py:266
 msgid "Aggregate container"
 msgstr "Aggregate container"
 
-#: models.py:250
+#: models.py:267
+msgid "Highlight container"
+msgstr "Highlight container"
+
+#: models.py:268
 msgid "Date available"
 msgstr "Date available"
 
-#: models.py:252
+#: models.py:270
 msgid "End date"
 msgstr "End date"
 
-#: models.py:256
+#: models.py:285
+msgid "Main Image"
+msgstr "Main Image"
+
+#: models.py:288
+msgid "Main Image Caption"
+msgstr ""
+
+#: models.py:292
+msgid "Maximum characters 4000"
+msgstr ""
+
+#: models.py:295
+msgid "URL"
+msgstr ""
+
+#: models.py:299
 msgid "Article box articles"
 msgstr "Article box articles"
 
-#: models.py:257
+#: models.py:300
 msgid "Article boxes articles"
 msgstr "Article boxes articles"
 
-#: models.py:266
+#: models.py:312
+msgid "Please select a Container!"
+msgstr "Please select containers"
+
+#: models.py:315
 msgid "Article not published!"
 msgstr "Article not published!"
 
@@ -172,3 +196,9 @@ msgstr "Warning"
 #: templates/containers/none.html:11
 msgid "It is necessary set channel as home page."
 msgstr "It is necessary set channel as home page."
+
+#~ msgid "Container source"
+#~ msgstr "Container source"
+
+#~ msgid "Container sources"
+#~ msgstr "Container sources"
