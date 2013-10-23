@@ -5,15 +5,15 @@ from django.contrib.sitemaps import views as sitemap_views
 
 from opps.core.cache import cache_page
 
-from opps.sitemaps.sitemaps import GenericSitemap, InfoDisct
+from opps.sitemaps.sitemaps import GenericSitemap, InfoDict
 
 
 sitemaps = {
-    'containers': GenericSitemap(InfoDisct(), priority=0.6),
+    'containers': GenericSitemap(InfoDict(), priority=0.6),
 }
 
 sitemaps_googlenews = {
-    'containers': GenericSitemap(InfoDisct(True), priority=0.6),
+    'containers': GenericSitemap(InfoDict(True), priority=0.6),
 }
 
 urlpatterns = patterns(

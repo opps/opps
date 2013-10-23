@@ -7,7 +7,7 @@ from django.utils import timezone
 from opps.containers.models import Container
 
 
-def InfoDisct(googlenews=False):
+def InfoDict(googlenews=False):
     containers = Container.objects.filter(date_available__lte=timezone.now(),
                                           published=True)
     if googlenews:
