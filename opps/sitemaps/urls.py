@@ -18,8 +18,8 @@ sitemaps_googlenews = {
 
 urlpatterns = patterns(
     '',
-    url(r'^\.xml$', cache_page(86400)(sitemap_views.sitemap),
-        {'sitemaps': sitemaps}),
+    url(r'^\.xml$', cache_page(86400)(sitemap_views.index),
+        {'sitemaps': sitemaps, 'sitemap_url_name': 'sitemaps'},),
     url(r'^-googlenews\.xml$', cache_page(86400)(sitemap_views.sitemap),
         {'sitemaps': sitemaps_googlenews,
          'template_name': 'sitemap_googlenews.xml'}),
