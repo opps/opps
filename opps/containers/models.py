@@ -308,6 +308,8 @@ class ContainerBoxContainers(models.Model):
             return u"{0}".format(self.containerbox.slug)
 
     def clean(self):
+        if not self.container:
+            raise ValidationError(_(u'Please select a Container!'))
 
         if self.container and not self.container.published:
             raise ValidationError(_(u'Article not published!'))
