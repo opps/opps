@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-23 13:35-0200\n"
+"POT-Creation-Date: 2013-10-24 10:15-0200\n"
 "PO-Revision-Date: 2013-08-05 18:20+0000\n"
 "Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,10 +182,10 @@ msgid "Article boxes articles"
 msgstr "Article boxes articles"
 
 #: models.py:312
-msgid "Please select a Container!"
-msgstr "Please select containers"
+msgid "Please select a Container or insert a URL!"
+msgstr "Please select a Container or insert a URL"
 
-#: models.py:315
+#: models.py:316
 msgid "Article not published!"
 msgstr "Article not published!"
 

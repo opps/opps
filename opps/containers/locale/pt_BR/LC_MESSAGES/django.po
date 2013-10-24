@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-23 13:35-0200\n"
+"POT-Creation-Date: 2013-10-24 10:15-0200\n"
 "PO-Revision-Date: 2013-08-08 17:20+0000\n"
 "Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
@@ -183,10 +183,10 @@ msgid "Article boxes articles"
 msgstr "Artigos de Boxes de Artigos"
 
 #: models.py:312
-msgid "Please select a Container!"
-msgstr "Favor selecionar um Container!"
+msgid "Please select a Container or insert a URL!"
+msgstr "Favor selecionar um Container ou inserir uma URL!"
 
-#: models.py:315
+#: models.py:316
 msgid "Article not published!"
 msgstr "Artigo não publicado!"
 
