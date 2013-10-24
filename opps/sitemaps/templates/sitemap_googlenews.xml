@@ -5,8 +5,8 @@
   <loc>{{ url.location }}</loc>
   <news:news>
     <news:publication>
-      <news:name>Opps</news:name>
-      <news:language>en</news:language>
+      <news:name>{{ publication_name }}</news:name>
+      <news:language>{{ sitemap_language }}</news:language>
     </news:publication>
     <news:publication_date>{{ url.lastmod|date:"Y-m-d\TH:i:s-03:00" }}</news:publication_date>
     <news:title>{{ url.item.title|striptags }}</news:title>
