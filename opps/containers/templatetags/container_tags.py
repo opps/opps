@@ -50,9 +50,13 @@ def get_recommendations(query_slice, child_class, container):
 @register.simple_tag(takes_context=True)
 def get_containerbox(context, slug, template_name=None):
 
-    cachekey = "ContainerBox-{}-{}".format(
+    request = context['request']
+
+    cachekey = "ContainerBox-{}-{}-{}".format(
         slug,
-        template_name)
+        template_name,
+        request.is_mobile,
+    )
 
     render = cache.get(cachekey)
     if render:
@@ -276,9 +280,13 @@ def get_containerbox_list(context, slug, num=0, template_name=None):
     """ returns a list of sub-lists of the containerbox specific containers,
         the size of the sub lists is treated with a parameter num """
 
-    cachekey = "ContainerBoxList-{}-{}".format(
+    request = context['request']
+
+    cachekey = "ContainerBoxList-{}-{}-{}".format(
         slug,
-        template_name)
+        template_name,
+        request.is_mobile,
+    )
 
     render = cache.get(cachekey)
     if render:
