@@ -2,6 +2,25 @@
 Changelog
 =========
 
+0.2.1
+=====
+
+* Add method ``get_http_absolute_url`` on channel model class
+* Fix sitemap
+* Remove contrib/db_backend , move to opps/db/backends #240
+* Fix migrate run on postgresql - articles
+* Add ChannelListFilter on HideContainerAdmin list_filter
+* Add lazy translation on child_class list_display on HideContainerAdmin
+* Add OPPS_CONTAINERS_BLACKLIST config on HideContainerAdmin
+* Fix: image crop example
+* Used get_descendants (mptt) on generic base view
+* changing datetime.now to timezone.now on search index
+* Fix unicode treatment JSONField rendering
+* Write test on ``opps.db._redis``
+* Set dynamic db int, on db drive
+* Fix: get_child recursivelly on template tag ``get_container_by_channel``
+* Changelog organize
+
 0.2.0
 =====
 
