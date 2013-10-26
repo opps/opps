@@ -20,6 +20,8 @@ Changelog
 * Set dynamic db int, on db drive
 * Fix: get_child recursivelly on template tag ``get_container_by_channel``
 * Changelog organize
+* Fix docs organize
+* Remove Opps theme docs, used default Read the Docs
 
 0.2.0
 =====
