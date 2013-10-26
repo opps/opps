@@ -18,10 +18,12 @@ Quick links
 
    overview
    getting_started
+   configuration
    template_customization
    content_architecture
    opps_customization
    application
+   packages
    git-tips
    develop
    contributing
