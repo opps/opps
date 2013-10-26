@@ -5,3 +5,4 @@ django-coverage
 transifex-client
 coveralls
 sphinx
+-e git+http://github.com/opps/opps.git#egg=opps
