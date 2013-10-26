@@ -26,6 +26,9 @@ An *Open Source Content Management* for the **magazine** websites and **high-tra
     :alt: Pypi downloads
 
 
+.. include:: ../../CONTRIBUTING.rst
+
+
 Contacts
 ========
 
