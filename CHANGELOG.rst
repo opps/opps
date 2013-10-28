@@ -8,6 +8,7 @@ Changelog
 0.2.1
 =====
 
+* concert bug "List index out of range" in template tag get_containerbox_list
 * Add method ``get_http_absolute_url`` on channel model class
 * Fix sitemap
 * Remove contrib/db_backend , move to opps/db/backends #240
