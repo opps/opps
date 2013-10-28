@@ -297,7 +297,7 @@ def get_containerbox_list(context, slug, num=0, template_name=None):
             site=settings.SITE_ID, slug=slug,
             date_available__lte=timezone.now(),
             published=True)
-        if isinstance(num, int) and num > 0:
+        if isinstance(num, int) and num > 0 and box:
             list_box = box[0].ordered_box_containers()
             box = [list_box[i:i + num] for i in range(0, len(list_box), num)]
     except ContainerBox.DoesNotExist:
