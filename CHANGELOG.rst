@@ -5,6 +5,8 @@ Changelog
 0.2.2
 =====
 
+* Fix bug, mobile detect not bringing this path (url) #265
+
 0.2.1
 =====
 
