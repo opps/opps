@@ -9,6 +9,7 @@ Changelog
 * fix bug "List index out of range" in template tag get_containerbox_list
 * Fix bug, mobile detect not bringing this path (url) #265
 * Fix sitemaps and added a sitemaps index view
+* Fix migration (auto user), ContainerBoxContainers add field highlight
 
 0.2.1
 =====
