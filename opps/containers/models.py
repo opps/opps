@@ -205,6 +205,12 @@ class ContainerBox(BaseBox):
         blank=True,
         max_length=140,
     )
+    title_url = models.CharField(
+        _(u"Title Link"),
+        null=True,
+        blank=True,
+        max_length=250,
+    )
     containers = models.ManyToManyField(
         'containers.Container',
         null=True, blank=True,
