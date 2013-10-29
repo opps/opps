@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#from django.conf import settings
-#from django.utils.importlib import import_module
 import json
 from django.db import models
 from django.utils import timezone
@@ -58,7 +56,8 @@ class QuerySet(Publishable):
 
         queryset = model.objects.filter(
             published=True,
-            date_available__lte=timezone.now()
+            date_available__lte=timezone.now(),
+            site=self.site
         ).exclude(child_class='Mirror')
 
         try:

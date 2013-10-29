@@ -52,3 +52,4 @@ class Notification(Publishable):
             "published": self.published,
             "date": self.date_available.strftime("%D %T"),
             "message": message}))
+        _db.close()

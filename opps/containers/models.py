@@ -255,6 +255,12 @@ class ContainerBox(BaseBox):
         blank=True,
         max_length=140,
     )
+    title_url = models.CharField(
+        _(u"Title Link"),
+        null=True,
+        blank=True,
+        max_length=250,
+    )
     containers = models.ManyToManyField(
         'containers.Container',
         null=True, blank=True,
@@ -358,6 +364,9 @@ class ContainerBoxContainers(models.Model):
             return u"{0}".format(self.containerbox.slug)
 
     def clean(self):
+        if not self.container and not self.url:
+            raise ValidationError(_(u'Please select a Container or insert a '
+                                    u'URL!'))
 
         if self.container and not self.container.published:
             raise ValidationError(_(u'Article not published!'))

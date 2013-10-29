@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-05 19:05-0300\n"
+"POT-Creation-Date: 2013-10-17 22:12-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,10 +87,14 @@ msgid "History"
 msgstr "Histórico"
 
 #: templates/admin/change_form.html:150
+msgid "Preview"
+msgstr "Pré-visualização"
+
+#: templates/admin/change_form.html:151
 msgid "View on site"
 msgstr "Ver no site"
 
-#: templates/admin/change_form.html:170
+#: templates/admin/change_form.html:171
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
 msgstr[0] "Favor corrigir o erro abaixo"
@@ -104,5 +108,6 @@ msgstr "Atalhos"
 msgid ""
 "settings.ADMIN_SHORTCUTS is improperly configured. Please supply either a "
 "\"url\" or a \"url_name\" for each shortcut."
-msgstr "settings.ADMIN_SHORTCUTS não está configurado corretamente. Favor fornecer"
-"uma url ou um url_name para cada atalho"
+msgstr ""
+"settings.ADMIN_SHORTCUTS não está configurado corretamente. Favor "
+"forneceruma url ou um url_name para cada atalho"

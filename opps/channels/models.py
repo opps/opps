@@ -72,6 +72,10 @@ class Channel(MPTTModel, Publishable, Slugged):
     def get_thumb(self):
         return None
 
+    def get_http_absolute_url(self):
+        return u"http://{}{}".format(self.site_domain, self.get_absolute_url())
+    get_http_absolute_url.short_description = _(u'Get HTTP Absolute URL')
+
     @property
     def search_category(self):
         """for use in search result"""
