@@ -8,6 +8,7 @@ Examples of contributions include:
 * Code patches
 * Documentation improvements
 * Bug reports and patch reviews
+* Write CHANGELOG
 
 **Warning: pull requests are ignored!** `File a ticket`__ to suggest changes.
 
