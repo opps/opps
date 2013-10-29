@@ -8,6 +8,7 @@ Changelog
 * fix typo, settings_local.py with the wrong index for the database password 'PASS' is correct and 'PASSWORD'
 * fix bug "List index out of range" in template tag get_containerbox_list
 * Fix bug, mobile detect not bringing this path (url) #265
+* Fix sitemaps and added a sitemaps index view
 
 0.2.1
 =====
