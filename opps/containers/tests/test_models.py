@@ -68,6 +68,7 @@ class ContainerModelTest(TestCase):
         self.assertTrue(mirror)
         self.assertEqual(len(mirror), 1)
         self.assertEqual(mirror[0].get_absolute_url(), u"/home2/test.html")
+        self.assertEqual(len(Container.objects.all()), 2)
 
     def test_remove_channel_mirror(self):
         channel = Channel.objects.create(name=u'Home2', slug=u'home2',

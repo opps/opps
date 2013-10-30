@@ -7,7 +7,7 @@ from django.conf import settings
 
 from opps.views.generic.base import View
 
-from opps.containers.models import ContainerBox
+from opps.containers.models import Mirror, ContainerBox
 
 
 class ListView(View, DjangoListView):
@@ -103,5 +103,10 @@ class ListView(View, DjangoListView):
         if self.excluded_ids:
             queryset = queryset.exclude(
                 pk__in=self.excluded_ids)
+
+        # Excluded mirror on root channel
+        mirror_excluded = [mirror.id for mirror in Mirror.objects.filter(
+            container__channel_long_slug=self.long_slug)]
+        queryset = queryset.exclude(pk__in=mirror_excluded)
 
         return queryset._clone()
