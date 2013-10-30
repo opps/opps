@@ -15,6 +15,9 @@ def image_url(image_url, **kwargs):
 
 @register.simple_tag
 def image_obj(image, **kwargs):
+    HALIGN_VALUES = ("left", "center", "right")
+    VALIGN_VALUES = ("top", "middle", "bottom")
+
     if image == "":
         return ""
     if settings.THUMBOR_ENABLED:
@@ -22,9 +25,9 @@ def image_obj(image, **kwargs):
         new['flip'] = image.flip
         new['flop'] = image.flop
 
-        if image.halign != "":
+        if image.halign and image.halign in HALIGN_VALUES:
             new['halign'] = image.halign
-        if image.valign != "":
+        if image.valign and image.valign in VALIGN_VALUES:
             new['valign'] = image.valign
 
         new['fit_in'] = image.fit_in
