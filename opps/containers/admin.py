@@ -129,7 +129,7 @@ class ContainerBoxAdmin(BaseBoxAdmin):
 
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('site', 'name', 'slug', 'title')}),
+            'fields': ('site', 'name', 'slug', 'title', 'title_url')}),
         (_(u'Relationships'), {
             'fields': ('channel', 'queryset')}),
         (_(u'Publication'), {
