@@ -4,7 +4,7 @@ Changelog
 
 0.2.2
 =====
-
+* fix bug, wrong crop params on image_obj templatetag, added lists of valid values
 * Add field `title_url` on class model `ContainerBox`
 * fix typo, settings_local.py with the wrong index for the database password 'PASS' is correct and 'PASSWORD'
 * fix bug "List index out of range" in template tag get_containerbox_list
