@@ -141,9 +141,8 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
                                          sender=self.__class__)
         super(Container, self).save(*args, **kwargs)
         if settings.OPPS_MIRROR_CHANNEL and self.mirror_channel:
-            check_mirror_channel(self.id)
-            #check_mirror_channel.apply_async(
-            #    kwargs=dict(container_id=self.id), countdown=15)
+            check_mirror_channel.apply_async(
+                kwargs=dict(container_id=self.id), countdown=15)
 
     def get_absolute_url(self):
         return u"/{}/{}.html".format(self.channel_long_slug, self.slug)
