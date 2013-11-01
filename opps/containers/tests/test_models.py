@@ -7,7 +7,8 @@ from django.contrib.sites.models import Site
 
 from ..models import Container
 from ..models import ContainerImage, ContainerBox, ContainerBoxContainers
-from ..models import Mirror, check_mirror_channel
+from ..models import Mirror
+from ..tasks import check_mirror_channel
 from opps.channels.models import Channel
 
 
@@ -62,7 +63,7 @@ class ContainerModelTest(TestCase):
                                          site=self.site, user=self.user)
         self.container.mirror_channel.add(channel)
         self.container.save()
-        check_mirror_channel(self.container.id)
+        check_mirror_channel(self.container, Mirror)
         mirror = Mirror.objects.all()
 
         self.assertTrue(mirror)
@@ -76,10 +77,10 @@ class ContainerModelTest(TestCase):
                                          site=self.site, user=self.user)
         self.container.mirror_channel.add(channel)
         self.container.save()
-        check_mirror_channel(self.container.id)
+        check_mirror_channel(self.container, Mirror)
         self.container.mirror_channel.remove(channel)
         self.container.save()
-        check_mirror_channel(self.container.id)
+        check_mirror_channel(self.container, Mirror)
         mirror = Mirror.objects.all()
 
         self.assertFalse(mirror)

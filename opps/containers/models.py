@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 import operator
-import celery
-from hashlib import md5
-from datetime import datetime
 
 from django.db import models
 from django.db.models import Q
@@ -25,47 +21,7 @@ from opps.db.models.fields import JSONField
 from opps.boxes.models import BaseBox
 
 from .signals import shorturl_generate, delete_container
-
-
-@celery.task
-def check_mirror_channel(container_id):
-    instance = Container.objects.get(id=container_id)
-    mirror_channel = instance.mirror_channel.all()
-    old_mirror_channel = [
-        c.id for c in Mirror.objects.filter(container=instance)]
-
-    for _id in [i for i in old_mirror_channel if i not in mirror_channel]:
-        m = Mirror.objects.get(id=_id)
-        m.delete()
-
-    for channel in mirror_channel:
-        try:
-            mirror = Mirror.objects.get(
-                channel=channel,
-                container=instance,
-                slug=instance.slug,
-                site=instance.site,
-            )
-            mirror.title = instance.title
-            mirror.slug = instance.slug
-            mirror.published = instance.published
-            mirror.main_image = instance.main_image
-            mirror.channel_long_slug = channel.long_slug
-            mirror.channel_name = channel.name
-            mirror.site = instance.site
-            mirror.save()
-        except Mirror.DoesNotExist:
-            mirror = Mirror.objects.create(
-                channel=channel,
-                container=instance,
-                user=instance.user,
-                title=instance.title,
-                slug=instance.slug,
-                published=instance.published,
-                channel_long_slug=channel.long_slug,
-                channel_name=channel.name,
-                site=instance.site,
-                main_image=instance.main_image)
+from .tasks import check_mirror_channel
 
 
 class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
@@ -141,7 +97,8 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
                                          sender=self.__class__)
         super(Container, self).save(*args, **kwargs)
         if settings.OPPS_MIRROR_CHANNEL and self.mirror_channel:
-            check_mirror_channel.delay(self.id)
+            check_mirror_channel.apply_async(
+                kwargs=dict(container=self, Mirror=Mirror), countdown=15)
 
     def get_absolute_url(self):
         return u"/{}/{}.html".format(self.channel_long_slug, self.slug)
