@@ -4,6 +4,8 @@ Changelog
 
 0.2.2
 =====
+
+* More one channel per container (multi channel)
 * Added raw_id_fields on ConfigAdmin
 * fix bug, wrong crop params on image_obj templatetag, added lists of valid values
 * Add field `title_url` on class model `ContainerBox`
