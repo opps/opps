@@ -220,7 +220,7 @@ class ConfigAdmin(PublishableAdmin):
     list_filter = ["key", 'app_label', 'key_group', "channel", "published"]
     search_fields = ["key", "app_label", "key_group", "value"]
 
-    raw_id_fields = ['channel', 'container',]
+    raw_id_fields = ['channel', 'container']
 
 admin.site.register(Config, ConfigAdmin)
 
