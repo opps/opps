@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django import forms
+from django.conf import settings
 
 from opps.db.models.fields.jsonf import JSONFormField
 from opps.fields.widgets import JSONField
@@ -10,6 +11,9 @@ from opps.fields.models import Field, FieldOption
 class ContainerAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ContainerAdminForm, self).__init__(*args, **kwargs)
+
+        if not settings.OPPS_MIRROR_CHANNEL:
+            self.fields['mirror_channel'].widget = forms.HiddenInput()
 
         self.fields['json'] = JSONFormField(
             widget=JSONField(

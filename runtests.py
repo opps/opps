@@ -51,11 +51,21 @@ if not settings.configured:
             'opps.fields',
             'opps.db',
             'opps.contrib.notifications',
+
+            'djcelery',
         ),
         SITE_ID = 1,
         ROOT_URLCONF = "opps.urls",
         TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner',
         STATIC_URL = '/static/',
+        BROKER_BACKEND = "redis",
+        REDIS_PORT = 6379,
+        REDIS_HOST = "localhost",
+        BROKER_URL = "redis://localhost:6379/0",
+        REDIS_DB = 0,
+        REDIS_CONNECT_RETRY = True,
+        CELERY_RESULT_BACKEND ='redis',
+        OPPS_MIRROR_CHANNEL = True,
     )
 
 

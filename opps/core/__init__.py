@@ -31,6 +31,7 @@ class OppsCoreConf(AppConf):
     RECOMMENDATION_RANGE_DAYS = 180
     SMART_SLUG_ENABLED = True
     MENU = True
+    MIRROR_CHANNEL = False
 
     # default settings for tinymce
     EDITOR = {

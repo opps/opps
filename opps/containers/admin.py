@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin import SimpleListFilter
 from django.conf import settings
 
-from .models import Container, ContainerImage
+from .models import Container, ContainerImage, Mirror
 from .models import ContainerBox, ContainerBoxContainers
 from opps.core.admin import PublishableAdmin, apply_opps_rules, BaseBoxAdmin
 from opps.core.admin import ChannelListFilter
@@ -60,7 +60,7 @@ class ContainerAdmin(PublishableAdmin):
     prepopulated_fields = {"slug": ["title"]}
     readonly_fields = ['get_http_absolute_url', 'short_url',
                        'in_containerboxes', 'image_thumb']
-    raw_id_fields = ['main_image', 'channel']
+    raw_id_fields = ['main_image', 'channel', 'mirror_channel']
     ordering = ('-date_available',)
 
     def get_list_filter(self, request):
@@ -202,3 +202,4 @@ class HideContainerAdmin(PublishableAdmin):
 
 admin.site.register(Container, HideContainerAdmin)
 admin.site.register(ContainerBox, ContainerBoxAdmin)
+admin.site.register(Mirror, HideContainerAdmin)

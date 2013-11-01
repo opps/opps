@@ -101,6 +101,9 @@ class View(object):
             context['articleboxes'] = context['articleboxes'].filter(
                 containers__slug=self.slug)
 
+            if self.get_object().child_class == 'Mirror':
+                context['context'] = self.get_object().container
+
         return context
 
     def get_template_folder(self):

@@ -10,5 +10,6 @@ djangorestframework
 django-grappelli
 django-filebrowser
 django-polymorphic
+django-celery
 feedparser
 redis
