@@ -4,6 +4,7 @@ Changelog
 
 0.2.2
 =====
+* Added raw_id_fields on ConfigAdmin
 * fix bug, wrong crop params on image_obj templatetag, added lists of valid values
 * Add field `title_url` on class model `ContainerBox`
 * fix typo, settings_local.py with the wrong index for the database password 'PASS' is correct and 'PASSWORD'
