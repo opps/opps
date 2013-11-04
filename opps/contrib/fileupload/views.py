@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import random, json
+import random
+import json
 
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, get_object_or_404

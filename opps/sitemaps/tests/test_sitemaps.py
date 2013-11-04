@@ -1,6 +1,6 @@
-# coding: utf-8
-from datetime import date
-
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from django import VERSION
 from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.contrib.auth import get_user_model
@@ -29,18 +29,22 @@ class SitemapTest(TestCase):
                                                   channel=self.channel)
 
     def test_sitemap_index(self):
-        response = self.client.get('/sitemap.xml')
-        expected_content = """<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<sitemap><loc>{0}/sitemap-containers.xml</loc></sitemap></sitemapindex>
-""".format(self.base_url).replace('\n', '')
-        self.assertXMLEqual(response.content.decode('utf-8'), expected_content)
+        if VERSION[1] <= 5:
+            response = self.client.get('/sitemap.xml')
+            expected_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <sitemap><loc>{0}/sitemap-containers.xml</loc></sitemap></sitemapindex>
+    """.format(self.base_url).replace('\n', '')
+            self.assertXMLEqual(response.content.decode('utf-8'),
+                                expected_content)
 
     def test_sitemap_container(self):
-        response = self.client.get('/sitemap-containers.xml')
-        expected_content = """<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>{0}</loc><lastmod>{1}</lastmod><priority>0.6</priority></url>
-</urlset>""".format(self.container.get_http_absolute_url(),
-                    self.container.date_available.date()).replace('\n', '')
-        self.assertXMLEqual(response.content.decode('utf-8'), expected_content)
+        if VERSION[1] <= 5:
+            response = self.client.get('/sitemap-containers.xml')
+            expected_content = """<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url><loc>{0}</loc><lastmod>{1}</lastmod><priority>0.6</priority></url>
+    </urlset>""".format(self.container.get_http_absolute_url(),
+                        self.container.date_available.date()).replace('\n', '')
+            self.assertXMLEqual(response.content.decode('utf-8'),
+                                expected_content)
