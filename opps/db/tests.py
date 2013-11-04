@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import json
 from decimal import Decimal
 from collections import OrderedDict
 
@@ -7,7 +8,6 @@ from django.core.serializers import deserialize, serialize
 from django.core.serializers.base import DeserializationError
 from django.db import models
 from django.test import TestCase
-from django.utils import simplejson as json
 
 from opps.db.models.fields.jsonf import JSONField, JSONCharField
 

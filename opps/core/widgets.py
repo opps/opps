@@ -1,11 +1,11 @@
-#coding: utf-8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
 
 from django.forms import widgets
 from django.db.models import Field
 
 from django.utils.safestring import mark_safe
-# from django.core.urlresolvers import reverse
-from django.utils import simplejson as json
 from django.conf import settings
 
 

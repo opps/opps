@@ -1,6 +1,6 @@
-# coding: utf-8
-
-from django.utils import simplejson
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.views.generic.detail import BaseDetailView
@@ -17,7 +17,7 @@ class JSONResponse(HttpResponse):
     """JSON response class."""
     def __init__(self, obj='', json_opts={}, mimetype="application/json",
                  *args, **kwargs):
-        content = simplejson.dumps(obj, **json_opts)
+        content = json.dumps(obj, **json_opts)
         super(JSONResponse, self).__init__(content, mimetype, *args, **kwargs)
 
 
@@ -25,7 +25,7 @@ class JSONPResponse(HttpResponse):
     """JSONP response class."""
     def __init__(self, obj='', json_opts={}, mimetype="application/jsonp",
                  jsonp_callback='jsonpCallback', *args, **kwargs):
-        _json_content = simplejson.dumps(obj, **json_opts)
+        _json_content = json.dumps(obj, **json_opts)
         content = "{}({})".format(jsonp_callback, _json_content)
         super(JSONPResponse, self).__init__(content, mimetype, *args,
                                             **kwargs)
@@ -58,7 +58,7 @@ class JSONResponseMixin(object):
         # to do much more complex handling to ensure that arbitrary
         # objects -- such as Django model instances or querysets
         # -- can be serialized as JSON.
-        return simplejson.dumps(context)
+        return json.dumps(context)
 
 
 class JSONView(JSONResponseMixin, TemplateView):
