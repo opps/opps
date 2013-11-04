@@ -6,7 +6,7 @@ from django.test import TestCase
 from django.db import models
 from django.contrib.auth.models import User
 
-from ..models import Article, Post
+from ..models import Article, Post, Album
 from ..models import PostRelated, Link
 from opps.channels.models import Channel
 
@@ -119,3 +119,67 @@ class PostCreation(TestCase):
                           for x in range(12))
             tags.append(tag)
         return tags
+
+
+class LinkCreation(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(
+            username='test@test.com',
+            email='test@test.com',
+            password=User.objects.make_random_password(),
+        )
+        self.channel = Channel.objects.create(
+            name='test channel',
+            user=self.user,
+        )
+        self.link = Link.objects.create(
+            user=self.user,
+            channel=self.channel,
+            url='http://www.google.com',
+            headline=u'a beatiful headline',
+            short_title=u'a simple short title',
+            title=u'a simple title',
+            hat=u'a simple hat',
+        )
+
+    def test_link_fields(self):
+        self.assertTrue(self.link.url, u'http://www.google.com')
+        self.assertTrue(self.link.channel, self.channel)
+        self.assertTrue(self.link.user, self.user)
+        self.assertTrue(self.link.short_title, u'a simple short title')
+        self.assertTrue(self.link.title, u'a simple title')
+        self.assertTrue(self.link.hat, u'a simple hat')
+
+    def test_is_local(self):
+        self.assertFalse(self.link.is_local())
+
+    def test_is_subdomain(self):
+        self.assertFalse(self.link.is_subdomain())
+
+
+class AlbumCreation(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(
+            username='test@test.com',
+            email='test@test.com',
+            password=User.objects.make_random_password(),
+        )
+        self.channel = Channel.objects.create(
+            name='test channel',
+            user=self.user,
+        )
+        self.album = Album.objects.create(
+            user=self.user,
+            channel=self.channel,
+            headline=u'a beatiful headline',
+            short_title=u'a simple short title',
+            title=u'a simple title',
+            hat=u'a simple hat',
+        )
+
+    def test_album_fields(self):
+        self.assertTrue(self.album.channel, self.channel)
+        self.assertTrue(self.album.user, self.user)
+        self.assertTrue(self.album.short_title, u'a simple short title')
+        self.assertTrue(self.album.title, u'a simple title')
+        self.assertTrue(self.album.hat, u'a simple hat')
