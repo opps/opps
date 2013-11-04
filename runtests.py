@@ -83,12 +83,11 @@ if not settings.configured:
 
 def runtests():
     argv = sys.argv[:1] + ['test'] + sys.argv[1:]
-    if VERSION[2] <= 5:
+    if VERSION[1] <= 5:
         argv = sys.argv[:1] + ['test'] + ['core', 'containers', 'articles',
                                           'boxes', 'channels', 'images',
                                           'sitemaps', 'flatpages', 'archives',
                                           'views', 'fields', 'db', 'notifications']
-    import pdb; pdb.set_trace()
     execute_from_command_line(argv)
 
 
