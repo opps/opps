@@ -1,10 +1,10 @@
-# coding: utf-8
-import random
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import random, json
 
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from django.utils import simplejson
 from django.utils.text import slugify
 from django.contrib.auth.decorators import login_required
 
@@ -76,5 +76,5 @@ class JSONResponse(HttpResponse):
     """JSON response class."""
     def __init__(self, obj='', json_opts={}, mimetype="application/json",
                  *args, **kwargs):
-        content = simplejson.dumps(obj, **json_opts)
+        content = json.dumps(obj, **json_opts)
         super(JSONResponse, self).__init__(content, mimetype, *args, **kwargs)
