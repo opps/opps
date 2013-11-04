@@ -7,6 +7,8 @@ from opps.db.models.fields.jsonf import JSONFormField
 from opps.fields.widgets import JSONField
 from opps.fields.models import Field, FieldOption
 
+from .models import Container
+
 
 class ContainerAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -31,3 +33,6 @@ class ContainerAdminForm(forms.ModelForm):
                 self.fields[
                     'json_{}'.format(field.slug)
                 ] = forms.CharField(required=False)
+
+    class Meta:
+        model = Container
