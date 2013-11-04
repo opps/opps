@@ -5,6 +5,7 @@ Changelog
 0.2.2
 =====
 
+* Fix test running on Django >= 1.6 #145
 * More one channel per container (multi channel)
 * Added raw_id_fields on ConfigAdmin
 * fix bug, wrong crop params on image_obj templatetag, added lists of valid values
