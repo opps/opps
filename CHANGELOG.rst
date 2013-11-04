@@ -5,6 +5,7 @@ Changelog
 0.2.2
 =====
 
+* Used argparse on opps-admin.py (bin) #82
 * Fix test running on Django >= 1.6 #145
 * More one channel per container (multi channel)
 * Added raw_id_fields on ConfigAdmin
