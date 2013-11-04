@@ -52,11 +52,11 @@ if not settings.configured:
 
             'opps.core',
             'opps.core.tags',
+            'opps.images',
             'opps.containers',
             'opps.boxes',
             'opps.channels',
             'opps.articles',
-            'opps.images',
             'opps.sitemaps',
             'opps.flatpages',
             'opps.archives',
