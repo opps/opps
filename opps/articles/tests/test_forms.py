@@ -9,7 +9,7 @@ from opps.channels.models import Channel
 from opps.core.widgets import OppsEditor
 
 from ..models import Post, Album
-from ..forms import PostAdminForm, AlbumAdminForm
+from opps.articles.forms import PostAdminForm, AlbumAdminForm
 
 
 class PostAdminFormTest(TestCase):
