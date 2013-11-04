@@ -1,12 +1,17 @@
 #!/usr/bin/env python
 import sys
 
+from django import VERSION
 from django.conf import settings
 from django.core.management import execute_from_command_line
 
 
 if not settings.configured:
     settings.configure(
+        DEBUG = False,
+        SITE_ID = 1,
+        SECRET_KEY = 'o29a3w)gmsf1d^)yjizb4=f751i*-j92%i1)1sx^_0q%wwwnxs',
+        LANGUAGE_CODE = 'en-us',
         DATABASES={
             'default': {
                 'ENGINE': 'django.db.backends.sqlite3',
@@ -17,6 +22,12 @@ if not settings.configured:
         OPPS_DB_NAME='opps',
         OPPS_DB_ENGINE='opps.db._redis.Redis',
         TEMPLATE_CONTEXT_PROCESSORS = (
+            "django.contrib.auth.context_processors.auth",
+            "django.core.context_processors.i18n",
+            "django.core.context_processors.media",
+            "django.core.context_processors.static",
+            "django.core.context_processors.request",
+            'django.contrib.messages.context_processors.messages',
             'opps.channels.context_processors.channel_context',
         ),
         MIDDLEWARE_CLASSES = (
@@ -28,13 +39,15 @@ if not settings.configured:
             'django.contrib.redirects.middleware.RedirectFallbackMiddleware'
         ),
         INSTALLED_APPS = (
-            'django.contrib.auth',
-            'django.contrib.contenttypes',
-            'django.contrib.sessions',
-            'django.contrib.sites',
             'opps.contrib.admin',
             'opps.contrib.fileupload',
             'django.contrib.admin',
+            'django.contrib.auth',
+            'django.contrib.contenttypes',
+            'django.contrib.sessions',
+            'django.contrib.messages',
+            'django.contrib.staticfiles',
+            'django.contrib.sites',
             'django.contrib.redirects',
 
             'opps.core',
@@ -54,7 +67,6 @@ if not settings.configured:
 
             'djcelery',
         ),
-        SITE_ID = 1,
         ROOT_URLCONF = "opps.urls",
         TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner',
         STATIC_URL = '/static/',
@@ -70,10 +82,13 @@ if not settings.configured:
 
 
 def runtests():
-    argv = sys.argv[:1] + ['test'] + ['core', 'containers', 'articles',
-                                      'boxes', 'channels', 'images',
-                                      'sitemaps', 'flatpages', 'archives',
-                                      'views', 'fields', 'db', 'notifications']
+    argv = sys.argv[:1] + ['test'] + sys.argv[1:]
+    if VERSION[2] <= 5:
+        argv = sys.argv[:1] + ['test'] + ['core', 'containers', 'articles',
+                                          'boxes', 'channels', 'images',
+                                          'sitemaps', 'flatpages', 'archives',
+                                          'views', 'fields', 'db', 'notifications']
+    import pdb; pdb.set_trace()
     execute_from_command_line(argv)
 
 
