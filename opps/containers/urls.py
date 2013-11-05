@@ -3,7 +3,8 @@
 from django.conf.urls import patterns, url
 from django.conf import settings
 
-from opps.contrib.feeds.views import ContainerFeed, ChannelFeed
+from opps.contrib.feeds.views import (ContainerFeed, ChannelFeed,
+                                      ContainerAtomFeed, ChannelAtomFeed)
 from opps.core.tags.views import TagList
 from opps.core.cache import cache_page
 
@@ -18,6 +19,9 @@ urlpatterns = patterns(
     url(r'^(rss|feed)$', cache_page(settings.OPPS_CACHE_EXPIRE)(
         ContainerFeed()), name='feed'),
 
+    url(r'^atom$', cache_page(settings.OPPS_CACHE_EXPIRE)(
+        ContainerAtomFeed()), name='atom_feed'),
+
     url(r'^search/', Search(), name='search'),
 
     url(r'^tag/(?P<tag>[\w//-]+)$',
@@ -27,6 +31,10 @@ urlpatterns = patterns(
     url(r'^(?P<long_slug>[\w\b//-]+)/(rss|feed)$',
         cache_page(settings.OPPS_CACHE_EXPIRE)(
             ChannelFeed()), name='channel_feed'),
+
+    url(r'^(?P<long_slug>[\w\b//-]+)/atom$',
+        cache_page(settings.OPPS_CACHE_EXPIRE)(
+            ChannelAtomFeed()), name='channel_atom_feed'),
 
     url(r'^(?P<channel__long_slug>[\w//-]+)/(?P<slug>[\w-]+)\.html$',
         cache_page(settings.OPPS_CACHE_EXPIRE_DETAIL)(

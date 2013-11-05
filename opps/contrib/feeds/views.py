@@ -5,6 +5,7 @@ from django.contrib.sites.models import get_current_site
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.utils.feedgenerator import Atom1Feed
 
 from opps.containers.models import Container
 from opps.channels.models import Channel
@@ -81,3 +82,12 @@ class ChannelFeed(ItemFeed):
         ).order_by(
             '-date_available'
         ).select_related('publisher')[:40]
+
+
+class ContainerAtomFeed(ContainerFeed):
+    link = "/atom"
+    feed_type = Atom1Feed
+
+
+class ChannelAtomFeed(ChannelFeed):
+    feed_type = Atom1Feed
