@@ -5,6 +5,8 @@ Changelog
 0.2.3
 =====
 
+* Add Atom feed urls #119
+
 0.2.2
 =====
 
