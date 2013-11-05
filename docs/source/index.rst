@@ -1,4 +1,4 @@
-.. title:: Open Source Content Management - Opps (OPen Publishing System)
+.. title:: Open Source Python CMS (Content Management), the magazines, newspappers websites and portals with high-traffic - Opps (OPen Publishing System)
 
 .. include:: ../../README.rst
 
