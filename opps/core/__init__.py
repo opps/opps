@@ -32,6 +32,7 @@ class OppsCoreConf(AppConf):
     SMART_SLUG_ENABLED = True
     MENU = True
     MIRROR_CHANNEL = False
+    CONTAINERS_BLACKLIST = ['Entry']
 
     # default settings for tinymce
     EDITOR = {
