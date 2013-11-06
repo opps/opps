@@ -4,7 +4,7 @@ from django.conf.urls import patterns, url, include
 
 from rest_framework import routers
 
-from opps.containers.views import ContainerAPIList, ContainerAPIDetail
+from .views import ContainerAPIList, ContainerAPIDetail
 
 
 router = routers.DefaultRouter()
