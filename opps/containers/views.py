@@ -13,23 +13,13 @@ from opps.containers.models import Container
 from opps.channels.models import Channel
 from opps.views.generic.list import ListView
 from opps.views.generic.detail import DetailView
-from opps.api.views.generic.list import ListView as ListAPIView
-from opps.api.views.generic.detail import DetailView as DetailAPIView
 
 
 class ContainerList(ListView):
     model = Container
 
 
-class ContainerAPIList(ListAPIView):
-    model = Container
-
-
 class ContainerDetail(DetailView):
-    model = Container
-
-
-class ContainerAPIDetail(DetailAPIView):
     model = Container
 
 
