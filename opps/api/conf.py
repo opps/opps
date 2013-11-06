@@ -7,7 +7,7 @@ from appconf import AppConf
 
 class OppsAPIConf(AppConf):
 
-    PAGINATE_BY = getattr(settings, 'OPPS_API_PAGINATE_BY', 12)
+    NAME = getattr(settings, 'OPPS_API_NAME', u'v1')
 
     class Meta:
         prefix = 'opps_api'
