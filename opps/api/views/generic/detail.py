@@ -8,10 +8,10 @@ from rest_framework.generics import UpdateAPIView as RestUpdateAPIView
 from rest_framework.generics import (
     RetrieveUpdateAPIView as RestRetrieveUpdateAPIView)
 
-from opps.views.generic.base import View
+from .base import BaseView
 
 
-class DetailView(View, RestListAPIView):
+class DetailView(BaseView, RestListAPIView):
     def get_queryset(self):
         self.site = get_current_site(self.request)
         self.slug = self.kwargs.get('slug')

@@ -1,16 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.contrib.sites.models import get_current_site
 from django.utils import timezone
+from django.contrib.sites.models import get_current_site
+
+from opps.containers.models import ContainerBox
 
 from rest_framework.generics import ListAPIView as RestListAPIView
 from rest_framework.generics import ListCreateAPIView
 
-from opps.views.generic.base import View
-from opps.containers.models import ContainerBox
+from .base import BaseView
 
 
-class ListView(View, RestListAPIView):
+class ListView(BaseView, RestListAPIView):
     def get_queryset(self):
         self.long_slug = self.get_long_slug()
         self.site = get_current_site(self.request)
@@ -26,7 +27,7 @@ class ListView(View, RestListAPIView):
         for box in self.articleboxes:
             self.excluded_ids.update([a.pk for a in box.ordered_containers()])
 
-        queryset = super(ListView, self).get_queryset()
+        queryset = super(BaseView, self).get_queryset()
         filters = {}
         filters['site_domain'] = self.site.domain
         try:
@@ -41,5 +42,5 @@ class ListView(View, RestListAPIView):
         return queryset._clone()
 
 
-class ListCreateView(ListCreateAPIView, ListView):
+class ListCreateView(ListView, ListCreateAPIView):
     pass
