@@ -5,6 +5,8 @@ Changelog
 0.2.3
 =====
 
+* Change API Engine restframework to tastypie
+* * easier to polymorphic work
 * Add Atom feed urls #119
 
 0.2.2
