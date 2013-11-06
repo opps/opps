@@ -2,23 +2,18 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import patterns, url, include
 
-from rest_framework import routers
+from tastypie.api import Api
 
-from .views import ContainerAPIList, ContainerAPIDetail
+from opps.containers.api import Container
+from opps.articles.api import Post
 
 
-router = routers.DefaultRouter()
+_api = Api(api_name='v1')
+_api.register(Container())
+_api.register(Post())
+
 
 urlpatterns = patterns(
     '',
-    url(r'^auth/', include('rest_framework.urls', namespace='rest_framework')),
-
-    url(r'^(?P<channel__long_slug>[\w//-]+)/(?P<slug>[\w-]+)\.html$',
-        ContainerAPIDetail.as_view(), name='container'),
-
-    url(r'^(?P<channel__long_slug>[\w\b//-]+)/$',
-        ContainerAPIList.as_view(), name='channel'),
-
-    url(r'^', include(router.urls)),
-
+    url(r'^', include(_api.urls)),
 )
