@@ -16,8 +16,7 @@ urlpatterns = patterns(
 
     url(r'^sitemap', include('opps.sitemaps.urls')),
 
-    url(r'^api/', include('opps.api.urls', namespace='api',
-                          app_name='api')),
+    url(r'^api/', include('opps.api.urls')),
 
     url(r'^', include('opps.flatpages.urls', namespace='flatpages',
                       app_name='flatpages')),
