@@ -4,7 +4,6 @@ from django.utils import timezone
 from django.conf import settings
 
 from tastypie.resources import ModelResource
-from tastypie.constants import ALL
 
 from opps.api import MetaBase
 
@@ -28,15 +27,6 @@ class Container(ModelResource):
             self.api_name,
             bundle.data['child_class'].lower(),
             bundle.data['id'])
-
-
-class ContainerBoxItens(ModelResource):
-    class Meta:
-        queryset = ContainerBoxContainers.objects.all()
-        allowed_methods = ['get']
-        filtering = {
-            "containerbox": ALL
-        }
 
 
 class ContainerBox(ModelResource):
