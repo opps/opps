@@ -18,8 +18,9 @@ def image_obj(image, **kwargs):
     HALIGN_VALUES = ("left", "center", "right")
     VALIGN_VALUES = ("top", "middle", "bottom")
 
-    if image == "":
+    if image == "" or not image:
         return ""
+
     if settings.THUMBOR_ENABLED:
         new = {}
         new['flip'] = image.flip
