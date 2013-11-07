@@ -63,6 +63,7 @@ if not settings.configured:
             'opps.views',
             'opps.fields',
             'opps.db',
+            'opps.api',
             'opps.contrib.notifications',
 
             'djcelery',
