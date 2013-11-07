@@ -87,7 +87,8 @@ def runtests():
         argv = sys.argv[:1] + ['test'] + ['core', 'containers', 'articles',
                                           'boxes', 'channels', 'images',
                                           'sitemaps', 'flatpages', 'archives',
-                                          'views', 'fields', 'db', 'notifications']
+                                          'views', 'fields', 'db', 'notifications',
+                                          'api']
     execute_from_command_line(argv)
 
 
