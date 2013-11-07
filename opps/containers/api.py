@@ -45,3 +45,11 @@ class ContainerBox(ModelResource):
             published=True,
             date_available__lte=timezone.now()
         )
+
+    def dehydrate(self, bundle):
+        box = ContainerBoxContainers.objects.filter(
+            containerbox__id=bundle.data['id'])
+        bundle.data['containers'] = [i.__dict__ for i in box]
+        bundle.data['container_obj'] = [
+            i.container.__dict__ for i in box if 'id' in dir(i.container)]
+        return bundle
