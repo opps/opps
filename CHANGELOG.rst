@@ -8,6 +8,7 @@ Changelog
 * Change API Engine restframework to tastypie
 * * easier to polymorphic work
 * Add Atom feed urls #119
+* Fix image_obj template tag when sending Nonetype image
 
 0.2.2
 =====
