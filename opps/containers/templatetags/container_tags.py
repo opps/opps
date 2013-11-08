@@ -234,6 +234,18 @@ def filter_queryset_by(queryset, **filters):
 
 
 @register.assignment_tag
+def exclude_queryset_by(queryset, **excludes):
+    """Exclude object list"""
+    cachekey = hash(frozenset(excludes.items()))
+    _cache = cache.get(cachekey)
+    if _cache:
+        return _cache
+    containers = queryset.exclude(**excludes)
+    cache.set("excludequerysetby-{}".format(cachekey), 3600)
+    return containers
+
+
+@register.assignment_tag
 def get_container_by_channel(slug, number=10, depth=1,
                              include_children=True, **kwargs):
     box = None

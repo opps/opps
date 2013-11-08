@@ -5,6 +5,7 @@ Changelog
 0.2.3
 =====
 
+* Create template tag `exclude_queryset_by` on Containers application
 * Create template tag `filter_queryset_by` on Containers application
 * Change API Engine restframework to tastypie
 * * easier to polymorphic work
