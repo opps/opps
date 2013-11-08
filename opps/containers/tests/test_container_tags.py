@@ -9,6 +9,34 @@ from opps.channels.models import Channel
 
 from ..templatetags.container_tags import get_containers_by
 from ..templatetags.container_tags import get_container_by_channel
+from ..templatetags.container_tags import filter_queryset_by
+
+
+class FilterQuerysetByTest(TestCase):
+    def setUp(self):
+        User = get_user_model()
+        user = User.objects.create(username=u'test', password='test')
+        site = Site.objects.filter(name=u'example.com').get()
+        channel = Channel.objects.create(name=u'Home', slug=u'home',
+                                         description=u'home page',
+                                         site=site, user=user)
+
+        Container.objects.create(title=u'test',
+                                 user=user,
+                                 published=True,
+                                 site=site,
+                                 channel=channel)
+        Container.objects.create(title=u'test 2',
+                                 user=user,
+                                 site=site,
+                                 channel=channel)
+
+    def test_tag(self):
+        container = Container.objects.all()
+        filter1 = filter_queryset_by(container, published=True)
+        self.assertTrue(filter1)
+        self.assertEqual(len(container), 2)
+        self.assertEqual(len(filter1), 1)
 
 
 class GetContainerByTest(TestCase):

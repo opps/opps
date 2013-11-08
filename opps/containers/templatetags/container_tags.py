@@ -222,6 +222,18 @@ def get_containers_by(limit=None, **filters):
 
 
 @register.assignment_tag
+def filter_queryset_by(queryset, **filters):
+    """Filter object list"""
+    cachekey = hash(frozenset(filters.items()))
+    _cache = cache.get(cachekey)
+    if _cache:
+        return _cache
+    containers = queryset.filter(**filters)
+    cache.set("filterquerysetby-{}".format(cachekey), 3600)
+    return containers
+
+
+@register.assignment_tag
 def get_container_by_channel(slug, number=10, depth=1,
                              include_children=True, **kwargs):
     box = None
