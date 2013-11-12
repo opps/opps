@@ -86,7 +86,6 @@ INSTALLED_APPS = (
     'opps.contrib.fileupload',
 
     'south',
-    'rest_framework',
 )
 
 OPPS_CHECK_MOBILE = True
