@@ -16,8 +16,9 @@ import json
 @apply_opps_rules('channels')
 class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ['name', 'parent', 'site', 'date_available', 'homepage',
-                    'order', 'show_in_menu', 'published']
+    list_display = ['name', 'show_channel_path', 'parent', 'site',
+                    'date_available', 'homepage', 'order', 'show_in_menu',
+                    'published']
     list_filter = ['date_available', 'published', 'site', 'homepage', 'parent',
                    'show_in_menu']
     search_fields = ['name', 'slug', 'long_slug', 'description']
@@ -35,6 +36,10 @@ class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
     )
+
+    def show_channel_path(self, obj):
+        return unicode(obj)
+    show_channel_path.description = _(u'Channel Path')
 
     def save_model(self, request, obj, form, change):
         long_slug = u"{}".format(obj.slug)

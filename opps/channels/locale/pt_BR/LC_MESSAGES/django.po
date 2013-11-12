@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-12 00:17-0300\n"
+"POT-Creation-Date: 2013-11-12 19:23-0200\n"
 "PO-Revision-Date: 2013-08-08 17:14+0000\n"
 "Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
@@ -23,13 +23,17 @@ msgstr ""
 msgid "Channels"
 msgstr "Canais"
 
-#: admin.py:29
+#: admin.py:30
 msgid "Identification"
 msgstr "Identificação"
 
-#: admin.py:34
+#: admin.py:35
 msgid "Publication"
 msgstr "Publicação"
+
+#: admin.py:42
+msgid "Channel Path"
+msgstr "Caminho do canal"
 
 #: forms.py:10
 msgid "Default"
@@ -83,6 +87,10 @@ msgstr "Ordem"
 msgid "Parent"
 msgstr "Categoria Pai"
 
-#: models.py:55 models.py:80 tests/test_models.py:196
+#: models.py:55 models.py:82 tests/test_models.py:196
 msgid "Channel"
 msgstr "Canal"
+
+#: models.py:77
+msgid "Get HTTP Absolute URL"
+msgstr "Mostrar URL Absoluta Completa"
