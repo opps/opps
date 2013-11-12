@@ -63,7 +63,7 @@ VirtualBox
 
 .. code-block:: bash
 
-    vagrant box add opps https://dl.dropboxusercontent.com/s/fm7mzlsg4amzhwg/opps.box
+    vagrant box add opps http://mirror.oppsproject.org/opps.box
     vagrant up
     vagrant ssh
     workon opps
