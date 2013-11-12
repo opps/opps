@@ -66,6 +66,7 @@ VirtualBox
     vagrant box add opps https://dl.dropboxusercontent.com/s/fm7mzlsg4amzhwg/opps.box
     vagrant up
     vagrant ssh
+    workon opps
     cd /home/vagrant/opps/example/
     workon opps
     python manage.py runserver 0.0.0.0:8000
