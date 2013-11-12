@@ -68,7 +68,6 @@ VirtualBox
     vagrant ssh
     workon opps
     cd /home/vagrant/opps/example/
-    workon opps
     python manage.py runserver 0.0.0.0:8000
 
 
