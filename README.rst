@@ -58,6 +58,17 @@ Now you can start a new Opps project
     python manage.py collectstatic --noinput
     python manage.py runserver
 
+VirtualBox
+----------
+
+.. code-block:: bash
+
+    vagrant box add opps https://dl.dropboxusercontent.com/s/fm7mzlsg4amzhwg/opps.box
+    vagrant up
+    vagrant ssh
+    cd /home/vagrant/opps/example/
+    python manage.py runserver 0.0.0.0:8000
+
 
 Sponsor
 =======
