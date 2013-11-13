@@ -65,6 +65,7 @@ class ListView(View, DjangoListView):
                                                            list_name))
 
         templates.append('{}/{}.html'.format(domain_folder, list_name))
+
         return templates
 
     def get_queryset(self):

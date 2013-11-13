@@ -88,3 +88,28 @@ class TestTemplateName(TestCase):
              'containers/test-channel/test-subchannel/list.html',
              'containers/test-channel/list.html',
              'containers/list.html'])
+
+
+class TestAjaxRequests(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create(
+            username='test@test.com',
+            email='test@test.com',
+            password=User.objects.make_random_password(),
+        )
+        self.channel = Channel.objects.create(
+            name='test channel 2',
+            slug='test-channel-2',
+            user=self.user,
+            published=True,
+            date_available=timezone.now(),
+        )
+
+    def test_get_ajax_extends_variable_in_context(self):
+        response = self.client.get(self.channel.get_absolute_url(),
+                                   HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertTrue(response)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['extends_parent'], 'base_ajax.html')

@@ -104,6 +104,10 @@ class View(object):
             if self.get_object().child_class == 'Mirror':
                 context['context'] = self.get_object().container
 
+        if self.request.META.get('HTTP_X_PJAX', False) or\
+           self.request.is_ajax():
+            context['extends_parent'] = 'base_ajax.html'
+
         return context
 
     def get_template_folder(self):

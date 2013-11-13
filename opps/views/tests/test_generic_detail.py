@@ -104,3 +104,44 @@ class LinkResponseToRedirecTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.items()[2][1],
                          u'http://www.oppsproject.org/')
+
+
+class TestAjaxRequests(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create(
+            username='test@test.com',
+            email='test@test.com',
+            password=User.objects.make_random_password(),
+        )
+        self.channel = Channel.objects.create(
+            name='test channel 2',
+            slug='test-channel-2',
+            user=self.user,
+            published=True,
+            date_available=timezone.now(),
+        )
+        self.post = Post.objects.create(
+            headline=u'a simple headline 2',
+            short_title=u'a simple short title 2',
+            title=u'a simple title 2',
+            hat=u'a simple hat 2',
+            channel=self.channel,
+            user=self.user,
+            published=True,
+            date_available=timezone.now(),
+        )
+
+    def test_if_ajax_extends_variable_in_context_is_empty_without_ajax(self):
+        response = self.client.get(self.post.get_absolute_url())
+        self.assertTrue(response)
+        self.assertEqual(response.status_code, 200)
+        self.assertFalse('extends_parent' in response.context.keys())
+
+    def test_get_ajax_extends_variable_in_context(self):
+        response = self.client.get(self.post.get_absolute_url(),
+                                   HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertTrue(response)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['extends_parent'], 'base_ajax.html')
