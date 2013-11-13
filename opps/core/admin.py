@@ -6,107 +6,11 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.admin import SimpleListFilter
-from django.contrib.sites.models import get_current_site
-from django.db.models import Max, Count
 
-from opps.channels.models import Channel
 from opps.images.generate import image_url
-from opps.containers.models import Container
 
 from .models import Config
-
-
-class ChannelListFilter(SimpleListFilter):
-    # Human-readable title which will be displayed in the
-    # right admin sidebar just above the filter options.
-    title = _(u'Channel')
-
-    # Parameter for the filter that will be used in the URL query.
-    parameter_name = 'channel'
-
-    def lookups(self, request, model_admin):
-        """
-        Returns a list of tuples. The first element in each
-        tuple is the coded value for the option that will
-        appear in the URL query. The second element is the
-        human-readable name for the option that will appear
-        in the right sidebar.
-        """
-
-        qs = model_admin.queryset(request)
-        qs = qs.order_by(
-            'channel_long_slug'
-        ).distinct().values('channel_long_slug')
-
-        if qs:
-            channels = set([(item['channel_long_slug'] or 'nochannel',
-                             item['channel_long_slug'] or _(u'No channel'))
-                           for item in qs])
-            items = []
-
-            for channel in channels:
-                items.append(channel)
-                _value = channel[0]
-
-                other_values = [
-                    c[0].split('/')[0] for c in channels if not c[0] == _value
-                ]
-
-                if not '/' in _value and _value in other_values:
-                    value = "{}/*".format(_value)
-                    human_readable = "{}/*".format(_value)
-                    items.append((value, human_readable))
-
-            return sorted(items)
-
-    def queryset(self, request, queryset):
-        """
-        Returns the filtered queryset based on the value
-        provided in the query string and retrievable via
-        `self.value()`.
-        """
-        value = self.value()
-        if value == "nochannel":
-            queryset = queryset.filter(channel_long_slug__isnull=True)
-        elif value and "*" in value:
-            site = get_current_site(request)
-            long_slug = value.replace('/*', '')
-            channel = Channel.objects.filter(site=site, long_slug=long_slug)[0]
-            child_channels = [channel]
-            for children in channel.get_children():
-                child_channels.append(children)
-            queryset = queryset.filter(channel__in=child_channels)
-        elif value:
-            queryset = queryset.filter(channel_long_slug=value)
-
-        return queryset
-
-
-class ChildClassListFilter(SimpleListFilter):
-    # Human-readable title which will be displayed in the
-    # right admin sidebar just above the filter options.
-    title = _(u'Child class')
-
-    # Parameter for the filter that will be used in the URL query.
-    parameter_name = 'child_class'
-
-    def lookups(self, request, model_admin):
-        site = get_current_site(request)
-        child_classes = [(i['child_class'], _(i['child_class'])) for i in
-                         Container.objects.values('child_class').filter(
-                             published=True,
-                             date_available__lte=timezone.now(), site=site
-                         ).annotate(
-                             child=Count('child_class'),
-                             date=Max('date_available')).order_by('-date')]
-        return child_classes
-
-    def queryset(self, request, queryset):
-        child_class = self.value()
-        if child_class:
-            queryset = queryset.filter(child_class=child_class)
-        return queryset
+from .filters import ChildClassListFilter, ChannelListFilter
 
 
 class MassPublishMixin(admin.ModelAdmin):
