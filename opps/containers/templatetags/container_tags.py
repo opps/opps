@@ -51,11 +51,12 @@ def get_recommendations(query_slice, child_class, container):
 def get_containerbox(context, slug, template_name=None):
 
     request = context['request']
+    is_mobile = getattr(request, 'is_mobile', False)
 
     cachekey = "ContainerBox-{}-{}-{}".format(
         slug,
         template_name,
-        request.is_mobile,
+        is_mobile
     )
 
     render = cache.get(cachekey)
