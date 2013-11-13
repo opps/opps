@@ -4,10 +4,6 @@ Opps - OPen Publishing System
 
 An *Open Source Content Management* for the **magazine** websites and **high-traffic**, using the Django Framework.
 
-.. image:: https://drone.io/github.com/opps/opps/status.png
-    :target: https://drone.io/github.com/opps/opps/latest)
-    :alt: Build Status - Drone
-
 .. image:: https://travis-ci.org/opps/opps.png?branch=master
     :target: https://travis-ci.org/opps/opps
     :alt: Build Status - Travis CI
