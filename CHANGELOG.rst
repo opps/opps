@@ -11,6 +11,7 @@ Changelog
 * * easier to polymorphic work
 * Add Atom feed urls #119
 * Fix image_obj template tag when sending Nonetype image
+* Create Opps Vagrant box to help other contributors
 
 0.2.2
 =====
