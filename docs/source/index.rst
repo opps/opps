@@ -21,6 +21,7 @@ Quick links
    configuration
    template_customization
    content_architecture
+   api
    opps_customization
    application
    packages
