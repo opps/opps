@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-05 11:50-0300\n"
+"POT-Creation-Date: 2013-11-14 14:41-0200\n"
 "PO-Revision-Date: 2013-08-08 17:30+0000\n"
 "Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
@@ -23,53 +23,73 @@ msgstr ""
 msgid "Core"
 msgstr "Core"
 
-#: admin.py:21 models.py:87
-msgid "Channel"
-msgstr "Canal"
-
-#: admin.py:42
-msgid "No channel"
-msgstr "Sem canal"
-
-#: admin.py:91
+#: admin.py:23
 msgid "Publish/Unpublish"
 msgstr "Publicar/Despublicar"
 
-#: admin.py:110
+#: admin.py:42
 msgid "This item is not in a box"
 msgstr "Este item não está em um box"
 
-#: admin.py:112
+#: admin.py:44
 msgid "Article boxes"
 msgstr "Boxes de artigos"
 
-#: admin.py:118
+#: admin.py:50
 msgid "No Image"
 msgstr "Sem imagem"
 
-#: admin.py:119
+#: admin.py:51
 msgid "Thumbnail"
 msgstr "Imagem pequena"
 
-#: admin.py:127
+#: admin.py:59
 msgid "Images"
 msgstr "Imagens"
 
-#: admin.py:134 admin.py:136
+#: admin.py:66 admin.py:68
 msgid "View on site"
 msgstr "Ver no site"
 
-#: admin.py:169
+#: admin.py:101
 msgid "Identification"
 msgstr "Identificação"
 
-#: admin.py:171
+#: admin.py:103
 msgid "Relationships"
 msgstr "Relacionamentos"
 
-#: admin.py:173
+#: admin.py:105
 msgid "Publication"
 msgstr "Publicação"
+
+#: filters.py:18 models.py:87 tests/test_models.py:64
+msgid "Channel"
+msgstr "Canal"
+
+#: filters.py:39
+msgid "No channel"
+msgstr "Sem canal"
+
+#: filters.py:84
+msgid "Child class"
+msgstr "Classe filha"
+
+#: filters.py:110
+msgid "Has queryset"
+msgstr "Tem queryset"
+
+#: filters.py:124
+msgid "No"
+msgstr "Não"
+
+#: filters.py:125
+msgid "Yes"
+msgstr "Sim"
+
+#: filters.py:145
+msgid "User"
+msgstr "Usuário"
 
 #: models.py:21
 msgid "Date insert"
@@ -79,87 +99,91 @@ msgstr "Data de inserção"
 msgid "Date update"
 msgstr "Data de atualização"
 
-#: models.py:40
+#: models.py:39
 msgid "Site id"
 msgstr "ID do Site"
 
-#: models.py:45
+#: models.py:44
 msgid "Site domain"
 msgstr "Domínio do Site"
 
-#: models.py:50
+#: models.py:49
 msgid "Date available"
 msgstr "Data de publicação"
 
-#: models.py:55
+#: models.py:54
 msgid "Published"
 msgstr "Publicado"
 
-#: models.py:90
+#: models.py:93
+msgid "Mirror channel"
+msgstr "Canais espelho"
+
+#: models.py:96
 msgid "Channel name"
 msgstr "Nome do canal"
 
-#: models.py:96
+#: models.py:102
 msgid "Channel long slug"
 msgstr "Retranca longa do canal"
 
-#: models.py:115
+#: models.py:121
 msgid "Slug"
 msgstr "Retranca"
 
-#: models.py:145
+#: models.py:151
 msgid "The URL already exists as a redirect"
 msgstr "Esta URL já existe para um redirecionamento"
 
-#: models.py:190
+#: models.py:191
 msgid "Slug already exists."
 msgstr "Retranca já existe"
 
-#: models.py:218
+#: models.py:219
 msgid "Main Image"
 msgstr "Imagem Principal"
 
-#: models.py:221
+#: models.py:222
 msgid "Main image caption"
 msgstr "Legenda da Imagem Principal"
 
-#: models.py:288
+#: models.py:292
 msgid "App label"
 msgstr "Nome da App"
 
-#: models.py:296
+#: models.py:300
 msgid "Config Key Group"
 msgstr "Grupo de Chave de Configuração"
 
-#: models.py:304
+#: models.py:308
 msgid "Config Key"
 msgstr "Chave de Configuração"
 
-#: models.py:310
+#: models.py:314
 msgid "Format"
 msgstr "Formato"
 
-#: models.py:312
+#: models.py:316
 msgid "Config Value"
 msgstr "Valor de configuração"
 
-#: models.py:313
+#: models.py:317
 msgid "Description"
 msgstr "Descrição"
 
-#: models.py:318
+#: models.py:322 tests/test_models.py:158
 msgid "Only published container"
 msgstr "Apenas artigos publicados"
 
-#: models.py:328
+#: models.py:332
 msgid "Config"
 msgstr "Configuração"
 
-#: models.py:329
+#: models.py:333
 msgid "Configs"
 msgstr "Configurações"
 
-#: models.py:353
+#: models.py:357
 #, python-format
 msgid "Can't format the value to %s"
 msgstr "Erro ao formatar o valor para %s"
