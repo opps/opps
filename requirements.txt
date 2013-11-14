@@ -6,7 +6,7 @@ django-googl==0.1.1
 django-haystack>=2.0
 django-mptt
 django-appconf
-django-tastypie
+django-tastypie==0.9.16
 django-grappelli==2.4.8
 django-filebrowser
 django-polymorphic
