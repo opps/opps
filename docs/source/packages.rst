@@ -25,6 +25,27 @@ opps.contrib.feeds
 opps.contrib.fileupload
 -----------------------
 
+opps.contrib.logging
+--------------------
+
+Application to generate log project actions
+
+Example
+*******
+
+.. code-block:: javascript
+
+    $.ajax({
+        type: 'POST',
+        url: '/api/v1/contrib/logging/',
+        data: '{"application": "player", "action": "play"}',
+        dataType: "application/json",
+        processData:  false,
+        contentType: "application/json"
+    });
+
+
+
 opps.contrib.mobile
 -------------------
 
