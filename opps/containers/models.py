@@ -333,5 +333,8 @@ class Mirror(Container):
                                   related_name='containers_mirror',
                                   verbose_name=_(u'Container'))
 
+    class Meta:
+        verbose_name = _(u'Mirror')
+        verbose_name_plural = _(u'Mirrors')
 
 models.signals.post_delete.connect(delete_container, sender=Container)
