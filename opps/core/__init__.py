@@ -163,4 +163,5 @@ settings.INSTALLED_APPS += (
     'appconf',
     'haystack',
     'googl',
-    'mptt',)
+    'mptt',
+    'tastypie',)
