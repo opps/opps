@@ -39,7 +39,7 @@ class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
 
     def show_channel_path(self, obj):
         return unicode(obj)
-    show_channel_path.description = _(u'Channel Path')
+    show_channel_path.short_description = _(u'Channel Path')
 
     def save_model(self, request, obj, form, change):
         long_slug = u"{}".format(obj.slug)
