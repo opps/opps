@@ -30,6 +30,12 @@ Therefore, it's very important to keep some things in mind when contributing wit
 Developer Setup
 ---------------
 
+Software required in OS:
+
+* Redis Server
+* SQLite
+* Image Lib
+
 Check out the code from the `github project`_::
 
     git clone git://github.com/opps/opps.git
