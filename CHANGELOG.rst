@@ -15,6 +15,8 @@ Changelog
 * Create Opps Vagrant box to help other contributors
 * Added support to ajax requests with extends_parent variable in template context
 * Write logging contrib application #275
+* Fixed run tests on celery, because use Calling Tasks
+* Update fixture example
 
 0.2.2
 =====
