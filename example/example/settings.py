@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
+import djcelery
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -89,6 +90,10 @@ INSTALLED_APPS = (
     'djcelery',
     'kombu.transport.django',
 )
+
+djcelery.setup_loader()
+BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 OPPS_CHECK_MOBILE = True
 
