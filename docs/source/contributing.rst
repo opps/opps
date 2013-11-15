@@ -38,7 +38,7 @@ Check out the code from the `github project`_::
 Create a `virtualenv`_ (the example here is with `virtualenvwrapper`_) and install all development packages::
 
     mkvirtualenv opps
-    pip install -r requirements.txt
+    pip install -r requirements_dev.txt
     python setup.py develop
 
 Here is how to run the test suite::
@@ -48,7 +48,6 @@ Here is how to run the test suite::
 Here is how to build the documentation::
 
     cd docs
-    pip install -r requirements.txt
     make html
 
 
