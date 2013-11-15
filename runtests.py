@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import sys
+import djcelery
 
 from django import VERSION
 from django.conf import settings
@@ -73,10 +74,13 @@ if not settings.configured:
         TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner',
         STATIC_URL = '/static/',
 
-        BROKER_URL = 'django://',
+        BROKER_URL = 'redis://localhost:6379/0',
+        CELERY_RESULT_BACKEND = 'redis://localhost:6379/0',
 
         OPPS_MIRROR_CHANNEL = True,
     )
+
+djcelery.setup_loader()
 
 
 def runtests():
