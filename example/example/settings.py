@@ -86,6 +86,8 @@ INSTALLED_APPS = (
     'opps.contrib.fileupload',
 
     'south',
+    'djcelery',
+    'kombu.transport.django',
 )
 
 OPPS_CHECK_MOBILE = True

@@ -67,24 +67,13 @@ if not settings.configured:
             'opps.contrib.notifications',
 
             'djcelery',
+            'kombu.transport.django',
         ),
         ROOT_URLCONF = "opps.urls",
         TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner',
         STATIC_URL = '/static/',
 
-        BROKER_HOST = "localhost",
-        BROKER_BACKEND="redis",
-        REDIS_PORT=6379,
-        REDIS_HOST = "localhost",
-        BROKER_USER = "",
-        BROKER_PASSWORD ="",
-        BROKER_VHOST = "0",
-        REDIS_DB = 0,
-        REDIS_CONNECT_RETRY = True,
-        CELERY_SEND_EVENTS=True,
-        CELERY_RESULT_BACKEND='redis',
-        CELERY_TASK_RESULT_EXPIRES =  10,
-        CELERYBEAT_SCHEDULER="djcelery.schedulers.DatabaseScheduler",
+        BROKER_URL = 'django://',
 
         OPPS_MIRROR_CHANNEL = True,
     )

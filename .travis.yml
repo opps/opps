@@ -3,7 +3,6 @@ python:
   - "2.7"
 services:
   - redis-server
-  - rabbitmq
 env:
   - DJANGO=django==1.5
   #- DJANGO=https://github.com/django/django/archive/stable/1.6.x.tar.gz
