@@ -1,5 +1,5 @@
 django==1.5
-south>=0.7
+South==0.8.2
 Pillow
 libthumbor
 django-googl==0.1.1
