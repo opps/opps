@@ -3,7 +3,7 @@
 from django.test import TestCase
 from django.db import models
 
-from ..models import FlatPage
+from opps.flatpages.models import FlatPage
 
 
 class FlatPagesFields(TestCase):

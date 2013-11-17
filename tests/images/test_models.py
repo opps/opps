@@ -2,7 +2,7 @@
 from django.test import TestCase
 from django.db import models
 
-from ..models import Cropping, HALIGN_CHOICES, VALIGN_CHOICES
+from opps.images.models import Cropping, HALIGN_CHOICES, VALIGN_CHOICES
 
 
 class CroppingFields(TestCase):

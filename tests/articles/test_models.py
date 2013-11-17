@@ -6,8 +6,8 @@ from django.test import TestCase
 from django.db import models
 from django.contrib.auth.models import User
 
-from ..models import Article, Post, Album
-from ..models import PostRelated, Link
+from opps.articles.models import Article, Post, Album
+from opps.articles.models import PostRelated, Link
 from opps.channels.models import Channel
 
 from opps.core.tags.models import Tag

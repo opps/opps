@@ -4,8 +4,8 @@ from django.test import TestCase
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from ..models import Date, Publisher, Slugged, Channeling
-from ..models import Imaged, Config
+from opps.core.models import Date, Publisher, Slugged, Channeling
+from opps.core.models import Imaged, Config
 
 
 class DateFields(TestCase):

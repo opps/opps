@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 from opps.channels.models import Channel
 from opps.core.widgets import OppsEditor
 
-from ..models import Post, Album
+from opps.articles.models import Post, Album
 from opps.articles.forms import PostAdminForm, AlbumAdminForm
 
 

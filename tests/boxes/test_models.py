@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 
 from opps.channels.models import Channel
-from ..models import QuerySet, BaseBox
+from opps.boxes.models import QuerySet, BaseBox
 
 
 class BoxesFields(TestCase):

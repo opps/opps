@@ -1,7 +1,7 @@
 
 .PHONY: test
 test: pep8
-	python tests/manage.py test
+	python runtests.py
 
 .PHONY: travis
 travis:

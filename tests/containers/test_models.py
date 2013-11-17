@@ -5,10 +5,10 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 
-from ..models import Container
-from ..models import ContainerImage, ContainerBox, ContainerBoxContainers
-from ..models import Mirror
-from ..tasks import check_mirror_channel
+from opps.containers.models import Container
+from opps.containers.models import ContainerImage, ContainerBox
+from opps.containers.models import ContainerBoxContainers, Mirror
+from opps.containers.tasks import check_mirror_channel
 from opps.channels.models import Channel
 
 

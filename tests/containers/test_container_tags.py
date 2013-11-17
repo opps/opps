@@ -7,10 +7,10 @@ from django.contrib.sites.models import Site
 from opps.containers.models import Container
 from opps.channels.models import Channel
 
-from ..templatetags.container_tags import get_containers_by
-from ..templatetags.container_tags import get_container_by_channel
-from ..templatetags.container_tags import filter_queryset_by
-from ..templatetags.container_tags import exclude_queryset_by
+from opps.containers.templatetags.container_tags import get_containers_by
+from opps.containers.templatetags.container_tags import get_container_by_channel
+from opps.containers.templatetags.container_tags import filter_queryset_by
+from opps.containers.templatetags.container_tags import exclude_queryset_by
 
 
 class ExcludeQuerysetByTest(TestCase):
