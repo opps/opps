@@ -1,10 +1,13 @@
-
 .PHONY: test
 test: pep8
 	python runtests.py
 
-.PHONY: travis
-travis:
+.PHONY: tox-test
+tox-test: environment
+	@tox
+
+.PHONY: environment
+environment:
 	pip install -r requirements_dev.txt --use-mirrors
 	export OPPS_TRAVIS=True
 	python setup.py develop

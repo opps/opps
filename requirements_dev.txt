@@ -7,4 +7,3 @@ coveralls
 sphinx
 tox
 django-nose
-.

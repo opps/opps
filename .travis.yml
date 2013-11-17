@@ -6,11 +6,10 @@ services:
 env:
   - DJANGO=django==1.6
   - DJANGO=django==1.5
-  #- DJANGO=https://github.com/django/django/archive/stable/1.6.x.tar.gz
-  #- DJANGO=https://github.com/django/django/archive/master.tar.gz
+  - DJANGO=https://github.com/django/django/archive/master.tar.gz
 install:
   - pip install $DJANGO --use-mirrors
-  - make travis
+  - make environment
 script: make test
 notifications:
   irc: "irc.freenode.org#opps"
