@@ -110,7 +110,6 @@ class LinkResponseToRedirecTest(TestCase):
                              u'http://www.oppsproject.org/')
 
 
-
 class TestAjaxRequests(TestCase):
 
     def setUp(self):
