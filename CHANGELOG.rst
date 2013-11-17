@@ -17,6 +17,7 @@ Changelog
 * Write logging contrib application #275
 * Fixed run tests on celery, because use Calling Tasks
 * Update fixture example
+* Fix test running on Django 1.5, 1.6 and 1.7 #145
 
 0.2.2
 =====
