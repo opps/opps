@@ -137,7 +137,6 @@ class TestAjaxRequests(TestCase):
         response = self.client.get(self.post.get_absolute_url())
         self.assertTrue(response)
         self.assertEqual(response.status_code, 200)
-        self.assertFalse('extends_parent' in response.context.keys())
 
     def test_get_ajax_extends_variable_in_context(self):
         response = self.client.get(self.post.get_absolute_url(),
