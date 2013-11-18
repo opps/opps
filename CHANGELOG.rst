@@ -18,6 +18,8 @@ Changelog
 * Fixed run tests on celery, because use Calling Tasks
 * Update fixture example
 * Fix test running on Django 1.5, 1.6 and 1.7 #145
+* * Change test folder, opps/<application>/tests to tests/<application>
+* * Used nose
 
 0.2.2
 =====
