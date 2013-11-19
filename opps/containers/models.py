@@ -21,7 +21,7 @@ from opps.db.models.fields import JSONField
 from opps.boxes.models import BaseBox
 
 from .signals import shorturl_generate, delete_container
-from .tasks import check_mirror_channel
+from .tasks import check_mirror_channel, check_mirror_site
 
 
 class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
@@ -96,8 +96,11 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         models.signals.post_save.connect(shorturl_generate,
                                          sender=self.__class__)
         super(Container, self).save(*args, **kwargs)
-        if settings.OPPS_MIRROR_CHANNEL and self.mirror_channel:
+        if settings.OPPS_MIRROR_CHANNEL and (
+                self.mirror_channel or self.mirror_site):
             check_mirror_channel.delay(
+                container=self, Mirror=Mirror)
+            check_mirror_site.delay(
                 container=self, Mirror=Mirror)
 
     def get_absolute_url(self):

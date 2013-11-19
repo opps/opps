@@ -53,6 +53,12 @@ class Publisher(Date):
         max_length=100,
         null=True, blank=True,
         db_index=True)
+    mirror_site = models.ManyToManyField(
+        'sites.Site',
+        related_name="%(app_label)s_%(class)s_mirror_site",
+        null=True, blank=True,
+        verbose_name=_(u"Mirror site"),
+    )
     date_available = models.DateTimeField(
         _(u"Date available"),
         default=timezone.now,
