@@ -10,6 +10,7 @@ Changelog
 * Change API Engine restframework to tastypie
 * * Easier to polymorphic work
 * * Old api removed
+* * Create `opps.api.ApiAuthentication`
 * Add Atom feed urls #119
 * Fix image_obj template tag when sending Nonetype image
 * Create Opps Vagrant box to help other contributors
