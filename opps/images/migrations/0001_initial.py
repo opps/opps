@@ -10,6 +10,10 @@ User = get_user_model()
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        ("archives", "0001_initial"),
+    )
+
     def forwards(self, orm):
         # Adding model 'Image'
         db.create_table(u'images_image', (
