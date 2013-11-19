@@ -16,11 +16,15 @@ class MetaBase:
 
 
 class ApiAuthentication(ApiKeyAuthentication):
+    def __init__(self, method=[]):
+        self.method = map(str.upper,method)
+
     def is_authenticated(self, request, **kwargs):
         try:
-            ApiKey.objects.get(
-                user__username=request.GET.get('username'),
-                key=request.GET.get('api_key'))
+            if request.method in self.method or len(self.method) == 0:
+                ApiKey.objects.get(
+                    user__username=request.GET.get('username'),
+                    key=request.GET.get('api_key'))
             return True
         except:
             ApiKey.DoesNotExist()
