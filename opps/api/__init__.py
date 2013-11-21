@@ -17,7 +17,7 @@ class MetaBase:
 
 class ApiAuthentication(ApiKeyAuthentication):
     def __init__(self, method=[]):
-        self.method = map(str.upper,method)
+        self.method = map(str.upper, method)
 
     def is_authenticated(self, request, **kwargs):
         try:
