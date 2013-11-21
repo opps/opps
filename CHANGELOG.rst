@@ -5,6 +5,7 @@ Changelog
 0.2.3
 =====
 
+* Add custom sitemap view and OPPS_SITEMAP_LANGUAGE and OPPS_SITEMAP_PUBLICATION_NAME params
 * Create template tag `exclude_queryset_by` on Containers application
 * Create template tag `filter_queryset_by` on Containers application
 * Change API Engine restframework to tastypie
