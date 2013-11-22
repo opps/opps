@@ -229,6 +229,10 @@ def filter_queryset_by(queryset, **filters):
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
+
+    if not queryset.query.can_filter():
+        return queryset
+
     containers = queryset.filter(**filters)
     cache.set("filterquerysetby-{}".format(cachekey), 3600)
     return containers
