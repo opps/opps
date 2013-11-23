@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.utils.translation import ugettext_lazy as _
-from django.conf import settings
 
 from appconf import AppConf
 
@@ -157,11 +156,3 @@ class ThumborConf(AppConf):
 class DjangoConf(AppConf):
     CACHES = {'default': {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}}
-
-
-settings.INSTALLED_APPS += (
-    'appconf',
-    'haystack',
-    'googl',
-    'mptt',
-    'tastypie',)

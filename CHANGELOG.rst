@@ -22,6 +22,7 @@ Changelog
 * Fix test running on Django 1.5, 1.6 and 1.7 #145
 * * Change test folder, opps/<application>/tests to tests/<application>
 * * Used nose
+* Create `OPPS_CORE_APPS`, recommend used on INSTALLED_APPS
 
 0.2.2
 =====

@@ -1,7 +1,6 @@
 import djcelery
 
 from django.conf import settings
-from opps import OPPS_CORE_APPS
 
 
 def configure():
@@ -14,7 +13,33 @@ def configure():
                     'NAME': ':memory:',
                 },
             },
-            'INSTALLED_APPS': OPPS_CORE_APPS,
+            'INSTALLED_APPS': [
+                'opps.contrib.admin',
+                'opps.contrib.fileupload',
+                'django.contrib.admin',
+                'django.contrib.auth',
+                'django.contrib.contenttypes',
+                'django.contrib.sessions',
+                'django.contrib.messages',
+                'django.contrib.staticfiles',
+                'django.contrib.sites',
+                'django.contrib.redirects',
+
+                'opps.core',
+                'opps.core.tags',
+                'opps.images',
+                'opps.containers',
+                'opps.boxes',
+                'opps.channels',
+                'opps.articles',
+                'opps.sitemaps',
+                'opps.flatpages',
+                'opps.archives',
+                'opps.views',
+                'opps.fields',
+                'opps.api',
+                'opps.contrib.notifications',
+            ],
             'TEMPLATE_CONTEXT_PROCESSORS': (
                 'opps.channels.context_processors.channel_context',
             ),

@@ -7,6 +7,7 @@ pkg_resources.declare_namespace(__name__)
 VERSION = (0, 2, 3)
 
 OPPS_CORE_APPS = [
+    # Django core
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -35,14 +36,14 @@ OPPS_CORE_APPS = [
     'opps.flatpages',
     'opps.archives',
     'opps.fields',
+    'opps.api',
 
-    # Opps contrib
-    'opps.contrib.multisite',
-    'opps.contrib.logging',
-    'opps.contrib.notifications',
-
-    # Other apps
+    # Dependence
     'south',
+    'appconf',
+    'haystack',
+    'mptt',
+    'googl',
     'djcelery',
     'tastypie',
 ]
