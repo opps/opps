@@ -23,6 +23,7 @@ Changelog
 * * Change test folder, opps/<application>/tests to tests/<application>
 * * Used nose
 * Create `OPPS_CORE_APPS`, recommend used on INSTALLED_APPS
+* Get queryset (boxes) on get_containerbox (template tags containers), if exist queryset (on containerbox)
 
 0.2.2
 =====
