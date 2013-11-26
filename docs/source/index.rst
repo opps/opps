@@ -19,6 +19,7 @@ Quick links
    overview
    getting_started
    configuration
+   opps-admin
    template_customization
    content_architecture
    api
