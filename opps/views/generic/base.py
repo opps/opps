@@ -85,7 +85,7 @@ class View(object):
         context['channel']['long_slug'] = self.long_slug
         if self.channel:
             context['channel'] = self.channel
-        context['breadcrumb'] = self.channel_get_descendants
+        context['breadcrumb'] = self.channel_descendants
 
         if self.slug:
             try:
@@ -136,9 +136,9 @@ class View(object):
         self.long_slug = self.channel.long_slug
 
         self.channel_long_slug = [self.long_slug]
-        self.channel_get_descendants = self.channel.get_descendants(
+        self.channel_descendants = self.channel.get_descendants(
             include_self=False)
-        for children in self.channel_get_descendants:
+        for children in self.channel_descendants:
             self.channel_long_slug.append(children.long_slug)
 
     def check_template(self, _template):
