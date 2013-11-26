@@ -24,6 +24,7 @@ Changelog
 * * Used nose
 * Create `OPPS_CORE_APPS`, recommend used on INSTALLED_APPS
 * Get queryset (boxes) on get_containerbox (template tags containers), if exist queryset (on containerbox)
+* Add context `breadcrumb` on get_context_data generic views (base)
 
 0.2.2
 =====
