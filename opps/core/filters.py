@@ -38,22 +38,31 @@ class ChannelListFilter(SimpleListFilter):
             channels = set([(item['channel_long_slug'] or 'nochannel',
                              item['channel_long_slug'] or _(u'No channel'))
                            for item in qs])
+
+            long_slug_list = sorted([i[0] for i in channels])
             items = []
 
             for channel in channels:
                 items.append(channel)
                 _value = channel[0]
-
-                other_values = [
-                    c[0].split('/')[0] for c in channels if not c[0] == _value
-                ]
-
-                if not '/' in _value and _value in other_values:
+                if self._get_descendant_count(_value, long_slug_list) > 0:
                     value = "{}/*".format(_value)
                     human_readable = "{}/*".format(_value)
                     items.append((value, human_readable))
 
             return sorted(items)
+
+    def _get_descendant_count(self, item, channel_list):
+        """
+        Search item occurrences on channel_list
+        """
+        children = []
+        item_set = set(item.split('/'))
+        for channel in channel_list:
+            splt = set(channel.split('/'))
+            if item != channel and item_set.issubset(splt):
+                children.append(channel)
+        return len(children)
 
     def queryset(self, request, queryset):
         """
