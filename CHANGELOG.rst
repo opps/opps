@@ -24,6 +24,7 @@ Changelog
 * * Used nose
 * Create `OPPS_CORE_APPS`, recommend used on INSTALLED_APPS
 * Get queryset (boxes) on get_containerbox (template tags containers), if exist queryset (on containerbox)
+* Change ChannelListFilter. Now every parent channel will have an additional /* value on the lookups values
 
 0.2.2
 =====
