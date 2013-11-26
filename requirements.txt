@@ -14,3 +14,4 @@ django-celery
 feedparser
 mimeparse
 redis
+magicdate
