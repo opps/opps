@@ -137,7 +137,7 @@ class JSONFieldBase(six.with_metaclass(SubfieldBase, models.Field)):
 
     def db_type(self, connection):
         if connection.vendor == 'postgresql' and\
-           connection.pg_version >= 90300:
+           connection.pg_version >= 90400:
             return 'json'
         else:
             return super(JSONFieldBase, self).db_type(connection)
