@@ -67,13 +67,8 @@ def get_containerbox(context, slug, template_name=None):
         box = ContainerBox.objects.get(site=settings.SITE_ID, slug=slug,
                                        date_available__lte=timezone.now(),
                                        published=True)
-        if box.queryset:
-            box = box.get_queryset()
-        else:
-            if box.containers.count() == 0:
-                box = None
     except ContainerBox.DoesNotExist:
-        box = None
+        box = ContainerBox.objects.none()
 
     t = template.loader.get_template('articles/articlebox_detail.html')
     if template_name:
