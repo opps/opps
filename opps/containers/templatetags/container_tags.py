@@ -67,6 +67,11 @@ def get_containerbox(context, slug, template_name=None):
         box = ContainerBox.objects.get(site=settings.SITE_ID, slug=slug,
                                        date_available__lte=timezone.now(),
                                        published=True)
+        if box.queryset:
+            box = box.get_queryset()
+        else:
+            if box.containers.count() == 0:
+                box = None
     except ContainerBox.DoesNotExist:
         box = None
 
@@ -77,8 +82,8 @@ def get_containerbox(context, slug, template_name=None):
     render = t.render(template.Context({
         'articlebox': box,
         'slug': slug,
-        'context': context}
-    ))
+        'context': context
+    }))
 
     cache.set(cachekey, render, settings.OPPS_CACHE_EXPIRE)
 
