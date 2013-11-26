@@ -3,6 +3,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
+from django.utils import timezone
 
 from opps.containers.models import Container
 from opps.channels.models import Channel
@@ -101,12 +102,18 @@ class GetContainerByChannelTest(TestCase):
         User = get_user_model()
         self.user = User.objects.create(username=u'test', password='test')
         self.site = Site.objects.filter(name=u'example.com').get()
-        channel = Channel.objects.create(name=u'Home', slug=u'home',
+        self.channel = Channel.objects.create(name=u'Home', slug=u'home',
                                               description=u'home page',
                                               site=self.site, user=self.user)
         self.channel2 = Channel.objects.create(
             name=u'Home2', slug=u'home2',
             description=u'home page2',
+            site=self.site, user=self.user)
+
+        self.channel3 = Channel.objects.create(
+            name=u'Home3', slug=u'home3',
+            description=u'home page3',
+            parent=self.channel2,
             site=self.site, user=self.user)
 
         self.count_container_create = [1, 2, 3, 4, 5]
@@ -116,7 +123,7 @@ class GetContainerByChannelTest(TestCase):
                                      user=self.user,
                                      published=True,
                                      site=self.site,
-                                     channel=channel)
+                                     channel=self.channel)
         Container.objects.create(title=u'test channel 2',
                                  user=self.user,
                                  published=True,
@@ -135,18 +142,28 @@ class GetContainerByChannelTest(TestCase):
         self.assertEqual(get_container[0].slug, "test-channel-2")
 
     def test_get_container_recursive(self):
-        channel3 = Channel.objects.create(
-            name=u'Home3', slug=u'home3',
-            description=u'home page3',
-            parent=self.channel2,
-            site=self.site, user=self.user)
-
         for i in self.count_container_create:
             Container.objects.create(title=u'test 3 {}'.format(i),
                                      user=self.user,
                                      published=True,
                                      site=self.site,
-                                     channel=channel3)
+                                     channel=self.channel3)
 
         get_container = get_container_by_channel('home2')
         self.assertEqual(len(get_container), 6)
+
+    def test_get_channel_with_magicdate(self):
+        date = timezone.now() - timezone.timedelta(days=30)
+        for i in self.count_container_create:
+            Container.objects.create(title=u'test 3 {}'.format(i),
+                                     user=self.user,
+                                     published=True,
+                                     site=self.site,
+                                     channel=self.channel,
+                                     date_available=date
+                                     )
+
+        containers = get_container_by_channel('home',
+                                              magic_date='30 days ago')
+
+        self.assertEqual(containers.count(), len(self.count_container_create))
