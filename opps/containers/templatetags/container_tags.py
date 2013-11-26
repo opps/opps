@@ -11,6 +11,8 @@ from django.core.cache import cache
 from opps.containers.models import Container, ContainerBox
 from opps.channels.models import Channel
 
+from magicdate import magicdate
+
 
 register = template.Library()
 logger = logging.getLogger()
@@ -254,6 +256,14 @@ def exclude_queryset_by(queryset, **excludes):
 def get_container_by_channel(slug, number=10, depth=1,
                              include_children=True, **kwargs):
     box = None
+    magic_date = kwargs.pop('magic_date', False)
+    date = timezone.now()
+    if magic_date:
+        try:
+            date = magicdate(magic_date)
+        except Exception:
+            pass
+
     if include_children:
         try:
             kwargs['channel_long_slug__in'] = cache.get(
@@ -286,7 +296,7 @@ def get_container_by_channel(slug, number=10, depth=1,
     try:
         kwargs['site'] = settings.SITE_ID
         kwargs['show_on_root_channel'] = include_children
-        kwargs['date_available__lte'] = timezone.now()
+        kwargs['date_available__lte'] = date
         kwargs['published'] = True
         box = Container.objects.distinct().filter(
             **kwargs).order_by('-date_available')[:number]
