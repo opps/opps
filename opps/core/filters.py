@@ -68,9 +68,7 @@ class ChannelListFilter(SimpleListFilter):
             site = get_current_site(request)
             long_slug = value.replace('/*', '')
             channel = Channel.objects.filter(site=site, long_slug=long_slug)[0]
-            child_channels = [channel]
-            for children in channel.get_children():
-                child_channels.append(children)
+            child_channels = channel.get_descendants(include_self=True)
             queryset = queryset.filter(channel__in=child_channels)
         elif value:
             queryset = queryset.filter(channel_long_slug=value)
