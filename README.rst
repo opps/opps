@@ -8,10 +8,6 @@ An *Open Source Content Management* for the **magazine** websites and **high-tra
     :target: https://travis-ci.org/opps/opps
     :alt: Build Status - Travis CI
 
-.. image:: https://coveralls.io/repos/opps/opps/badge.png?branch=master
-    :target: https://coveralls.io/r/opps/opps?branch=master
-    :alt: Coverage Status - Coveralls
-
 .. image:: https://pypip.in/v/opps/badge.png
     :target: https://crate.io/packages/opps/
     :alt: Pypi version
