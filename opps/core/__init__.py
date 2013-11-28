@@ -32,6 +32,7 @@ class OppsCoreConf(AppConf):
     MENU = True
     MIRROR_CHANNEL = False
     CONTAINERS_BLACKLIST = ['Entry']
+    CONTAINERS_SITE_ID = None
 
     # default settings for tinymce
     EDITOR = {

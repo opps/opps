@@ -65,12 +65,21 @@ def get_containerbox(context, slug, template_name=None):
     if render:
         return render
 
+    filters = {}
+    filters['site'] = settings.SITE_ID
+    filters['slug'] = slug
+    filters['date_available__lte'] = timezone.now()
+    filters['published'] = True
     try:
-        box = ContainerBox.objects.get(site=settings.SITE_ID, slug=slug,
-                                       date_available__lte=timezone.now(),
-                                       published=True)
+        box = ContainerBox.objects.get(**filters)
     except ContainerBox.DoesNotExist:
         box = ContainerBox.objects.none()
+        if settings.OPPS_CONTAINERS_SITE_ID:
+            filters['site'] = settings.OPPS_CONTAINERS_SITE_ID
+            try:
+                box = ContainerBox.objects.get(**filters)
+            except ContainerBox.DoesNotExist:
+                pass
 
     t = template.loader.get_template('articles/articlebox_detail.html')
     if template_name:
@@ -110,14 +119,17 @@ def get_all_containerbox(channel_long_slug=None, template_name=None):
     if render:
         return render
 
-    boxes = ContainerBox.objects.filter(
-        site=settings.SITE_ID,
-        date_available__lte=timezone.now(),
-        published=True)
+    filters = {}
+    filters['date_available__lte'] = timezone.now()
+    filters['published'] = True
+    filters['site'] = settings.SITE_ID
+    if settings.OPPS_CONTAINERS_SITE_ID:
+        filters['site'] = settings.OPPS_CONTAINERS_SITE_ID
+
+    boxes = ContainerBox.objects.filter(**filters)
 
     if channel_long_slug:
-        boxes = boxes.filter(
-            channel_long_slug=channel_long_slug)
+        boxes = boxes.filter(channel_long_slug=channel_long_slug)
 
     t = template.loader.get_template('articles/articlebox_list.html')
     if template_name:
@@ -218,8 +230,13 @@ def get_containers_by(limit=None, **filters):
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
+
+    site = settings.SITE_ID
+    if settings.OPPS_CONTAINERS_SITE_ID:
+        site = settings.OPPS_CONTAINERS_SITE_ID
+
     containers = [i for i in Container.objects.filter(
-        site=settings.SITE_ID, published=True, **filters)[:limit]]
+        site=site, published=True, **filters)[:limit]]
     cache.set("getconby-{}".format(cachekey), 3600)
     return containers
 
@@ -295,6 +312,8 @@ def get_container_by_channel(slug, number=10, depth=1,
             kwargs['channel_long_slug__in'] = []
     try:
         kwargs['site'] = settings.SITE_ID
+        if settings.OPPS_CONTAINERS_SITE_ID:
+            kwargs['site'] = settings.OPPS_CONTAINERS_SITE_ID
         kwargs['show_on_root_channel'] = include_children
         kwargs['date_available__lte'] = date
         kwargs['published'] = True
@@ -308,7 +327,10 @@ def get_container_by_channel(slug, number=10, depth=1,
 @register.assignment_tag
 def get_containerbox_by(**filters):
     """Return a list of containers filtered by given args"""
-    return ContainerBox.objects.filter(site=settings.SITE_ID,
+    site = settings.SITE_ID
+    if settings.OPPS_CONTAINERS_SITE_ID:
+        site = settings.OPPS_CONTAINERS_SITE_ID
+    return ContainerBox.objects.filter(site=site,
                                        published=True,
                                        date_available__lte=timezone.now(),
                                        **filters)
@@ -331,9 +353,12 @@ def get_containerbox_list(context, slug, num=0, template_name=None):
     if render:
         return render
 
+    site = settings.SITE_ID
+    if settings.OPPS_CONTAINERS_SITE_ID:
+        site = settings.OPPS_CONTAINERS_SITE_ID
     try:
         box = ContainerBox.objects.filter(
-            site=settings.SITE_ID, slug=slug,
+            site=site, slug=slug,
             date_available__lte=timezone.now(),
             published=True)
         if isinstance(num, int) and num > 0 and box:
