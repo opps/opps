@@ -85,7 +85,10 @@ class View(object):
         context['channel']['long_slug'] = self.long_slug
         if self.channel:
             context['channel'] = self.channel
-        context['breadcrumb'] = self.channel_descendants
+
+        # this is a palliative measure as long as we don't fix the real
+        # problem
+        context['breadcrumb'] = getattr(self, 'channel_descendants', [])
 
         if self.slug:
             try:
