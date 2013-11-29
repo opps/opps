@@ -27,6 +27,7 @@ Changelog
 * Change ChannelListFilter. Now every parent channel will have an additional /* value on the lookups values
 * Add context `breadcrumb` on get_context_data generic views (base)
 * Add try_values and cache_obj template tags
+* Change BaseBoxAdmin queryset permissions
 
 0.2.2
 =====
