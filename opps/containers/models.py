@@ -97,7 +97,8 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
                                          sender=self.__class__)
         super(Container, self).save(*args, **kwargs)
         if settings.OPPS_MIRROR_CHANNEL and (
-                self.mirror_channel or self.mirror_site):
+            self.mirror_channel or self.mirror_site)\
+                and self.child_class != u"Mirror":
             check_mirror_channel.delay(
                 container=self, Mirror=Mirror)
             check_mirror_site.delay(
