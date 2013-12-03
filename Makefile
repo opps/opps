@@ -22,6 +22,9 @@ pep8:
 
 .PHONY: sdist
 sdist: test
+	@find ./ -name '*.pyc' -exec rm -f {} \;
+	@find ./ -name 'Thumbs.db' -exec rm -f {} \;
+	@find ./ -name '*~' -exec rm -f {} \;
 	@python setup.py sdist upload
 
 .PHONY: clean
