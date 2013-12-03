@@ -1,5 +1,5 @@
 .PHONY: test
-test: pep8
+test: pep8 clean
 	python runtests.py
 
 .PHONY: tox-test
@@ -22,9 +22,6 @@ pep8:
 
 .PHONY: sdist
 sdist: test
-	@find ./ -name '*.pyc' -exec rm -f {} \;
-	@find ./ -name 'Thumbs.db' -exec rm -f {} \;
-	@find ./ -name '*~' -exec rm -f {} \;
 	@python setup.py sdist upload
 
 .PHONY: clean
