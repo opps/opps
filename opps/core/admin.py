@@ -84,7 +84,8 @@ class PublishableAdmin(PublisherAdmin):
         if not change:
             obj.user = get_user_model().objects.get(pk=request.user.pk)
             obj.date_insert = timezone.now()
-            obj.site = Site.objects.get(pk=settings.SITE_ID)
+            if not obj.site:
+                obj.site = Site.objects.get(pk=settings.SITE_ID)
         obj.date_update = timezone.now()
         obj.save()
 
