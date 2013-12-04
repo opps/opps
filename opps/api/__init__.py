@@ -34,7 +34,6 @@ class ApiKeyAuthentication(object):
         except ApiKey.DoesNotExist:
             return False
 
-        import pdb; pdb.set_trace()
         user = self.auth_func(username=key.user.username,
                               password=key.user.password)
 
