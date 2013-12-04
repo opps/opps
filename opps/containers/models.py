@@ -221,6 +221,19 @@ class ContainerBox(BaseBox):
         blank=True,
         max_length=250,
     )
+    main_image = models.ForeignKey(
+        'images.Image',
+        null=True, blank=True,
+        on_delete=models.SET_NULL,
+        verbose_name=_(u'Main Image'),
+    )
+    main_image_caption = models.CharField(
+        _(u"Main Image Caption"),
+        max_length=4000,
+        blank=True,
+        null=True,
+        help_text=_(u'Maximum characters 4000'),
+    )
     containers = models.ManyToManyField(
         'containers.Container',
         null=True, blank=True,

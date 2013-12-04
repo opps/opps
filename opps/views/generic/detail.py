@@ -10,8 +10,7 @@ from opps.views.generic.base import View
 
 class DetailView(View, DjangoDetailView):
 
-    def get_template_names(self):
-        domain_folder = self.get_template_folder()
+    def get_template_list(self, domain_folder="containers"):
         child_class = self.object.child_class.lower()
 
         templates = ['{}/{}/{}/detail.html'.format(
@@ -30,6 +29,15 @@ class DetailView(View, DjangoDetailView):
         templates.append('{}/detail.html'.format(domain_folder))
 
         return templates
+
+    def get_template_names(self):
+        domain_folder = self.get_template_folder()
+        template_list = self.get_template_list(domain_folder)
+
+        if domain_folder != "containers":
+            template_list.extend(self.get_template_list())
+
+        return template_list
 
     def render_to_response(self, context):
         if self.get_object().child_class == 'Link':

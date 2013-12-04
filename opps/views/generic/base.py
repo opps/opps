@@ -116,7 +116,7 @@ class View(object):
 
     def get_template_folder(self):
         domain_folder = "containers"
-        if settings.SITE_ID > 1:
+        if self.site.id > 1:
             domain_folder = "{}/containers".format(self.site.domain)
         return domain_folder
 

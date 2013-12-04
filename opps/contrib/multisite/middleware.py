@@ -23,7 +23,7 @@ class DynamicSiteMiddleware(object):
         try:
             return Site.objects.get(domain=domain)
         except Site.DoesNotExist:
-            return Site.objects.all()[0]
+            return Site.objects.order_by('id')[0]
 
     def process_request(self, request):
         hosting = request.get_host().lower()

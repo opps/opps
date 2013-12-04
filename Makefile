@@ -1,5 +1,5 @@
 .PHONY: test
-test: pep8
+test: pep8 clean
 	python runtests.py
 
 .PHONY: tox-test

@@ -87,13 +87,14 @@ class ContainerAdmin(PublishableAdmin):
 @apply_opps_rules('containers')
 class ContainerBoxAdmin(BaseBoxAdmin):
     inlines = [ContainerBoxContainersInline]
-    raw_id_fields = ['channel', 'queryset']
+    raw_id_fields = ['channel', 'queryset', 'main_image']
     list_display = ['name', 'channel_name', 'date_available',
                     'published']
 
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('site', 'name', 'slug', 'title', 'title_url')}),
+            'fields': ('site', 'name', 'slug', 'title', 'title_url',
+                       'main_image', 'main_image_caption')}),
         (_(u'Relationships'), {
             'fields': ('channel', 'queryset')}),
         (_(u'Publication'), {

@@ -13,9 +13,8 @@ from opps.containers.models import Mirror, ContainerBox
 class ListView(View, DjangoListView):
     template_name_suffix = ''
 
-    def get_template_names(self):
+    def get_template_list(self, domain_folder="containers"):
         templates = []
-        domain_folder = self.get_template_folder()
 
         if not self.long_slug:
             templates.append('{}/none.html'.format(domain_folder))
@@ -67,6 +66,15 @@ class ListView(View, DjangoListView):
         templates.append('{}/{}.html'.format(domain_folder, list_name))
 
         return templates
+
+    def get_template_names(self):
+        domain_folder = self.get_template_folder()
+        template_list = self.get_template_list(domain_folder)
+
+        if domain_folder != "containers":
+            template_list.extend(self.get_template_list())
+
+        return template_list
 
     def get_queryset(self):
         self.site = get_current_site(self.request)
