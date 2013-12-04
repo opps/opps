@@ -63,7 +63,6 @@ class BaseBoxFields(TestCase):
         self.assertEqual(field.__class__, models.SlugField)
         self.assertTrue(field.db_index)
         self.assertEqual(field.max_length, 150)
-        self.assertTrue(field.unique)
 
 
 class QuerySetTest(TestCase):
