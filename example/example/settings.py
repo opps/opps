@@ -84,6 +84,7 @@ INSTALLED_APPS = (
     'opps.images',
     'opps.sitemaps',
     'opps.fields',
+    'opps.api',
     'opps.contrib.fileupload',
 
     'south',
