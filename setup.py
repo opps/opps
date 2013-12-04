@@ -9,6 +9,7 @@ REQUIREMENTS = [i.strip() for i in open("requirements.txt").readlines()]
 
 dependency_links = [
     'http://github.com/avelino/django-googl/tarball/master#egg=django-googl',
+    'http://github.com/opps/opps-piston/tarball/master#egg=opps-piston',
 ]
 
 classifiers = [

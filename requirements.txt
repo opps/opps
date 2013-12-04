@@ -1,6 +1,6 @@
 django
 South==0.8.2
--e git+https://github.com/opps/opps-piston.git#egg=opps-piston
+opps-piston
 Pillow
 libthumbor
 django-googl==0.1.1
