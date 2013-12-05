@@ -1,45 +1,36 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.utils import timezone
-from django.conf import settings
 
-from tastypie.resources import ModelResource
-
-from opps.api import MetaBase
-
-from .models import Container as ContainerModel
-from .models import ContainerBox as ContainerBoxModel
-from .models import ContainerBoxContainers
+from opps.api import BaseHandler
 
 
-class Container(ModelResource):
-    class Meta(MetaBase):
-        queryset = ContainerModel.objects.filter(
-            published=True,
-            date_available__lte=timezone.now()
-        ).exclude(child_class__in=settings.OPPS_CONTAINERS_BLACKLIST)
-
-    def dehydrate_child_class(self, bundle):
-        return bundle.data['child_class'].lower()
-
-    def dehydrate_resource_uri(self, bundle):
-        return u"/api/{}/{}/{}/".format(
-            self.api_name,
-            bundle.data['child_class'].lower(),
-            bundle.data['id'])
+from .models import Container
+from .models import ContainerBox
 
 
-class ContainerBox(ModelResource):
-    class Meta(MetaBase):
-        queryset = ContainerBoxModel.objects.filter(
-            published=True,
-            date_available__lte=timezone.now()
-        )
+class Handler(BaseHandler):
+    allowed_methods = ('GET',)
 
-    def dehydrate(self, bundle):
-        box = ContainerBoxContainers.objects.filter(
-            containerbox__id=bundle.data['id'])
-        bundle.data['containers'] = [i.__dict__ for i in box]
-        bundle.data['container_obj'] = [
-            i.container.__dict__ for i in box if 'id' in dir(i.container)]
-        return bundle
+    def read(self, request):
+        filters = {}
+        filters['date_available__lte'] = timezone.now()
+        filters['published'] = True
+        return self.model.objects.filter(**filters)
+
+
+class ContainerHandler(Handler):
+    model = Container
+
+
+class ContainerBoxHandler(Handler):
+    model = ContainerBox
+    fields = (
+        'name',
+        'slug',
+        'title',
+        'title_url',
+        'channel',
+        ('containers', ())
+    )
+    exclude = ['queryset']

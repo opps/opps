@@ -84,11 +84,11 @@ class BaseBox(Publishable, Channeling):
         _(u"Slug"),
         db_index=True,
         max_length=150,
-        unique=True,
     )
 
     class Meta:
         abstract = True
+        unique_together = ['site', 'channel_long_slug', 'slug']
 
     def __unicode__(self):
         return u"{}-{}".format(self.slug, self.site.name)

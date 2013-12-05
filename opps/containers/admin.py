@@ -88,7 +88,7 @@ class ContainerAdmin(PublishableAdmin):
 class ContainerBoxAdmin(BaseBoxAdmin):
     inlines = [ContainerBoxContainersInline]
     raw_id_fields = ['channel', 'queryset', 'main_image']
-    list_display = ['name', 'channel_name', 'date_available',
+    list_display = ['name', 'site', 'channel_name', 'date_available',
                     'published']
 
     fieldsets = (

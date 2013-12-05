@@ -1,24 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.conf.urls import patterns, url, include
+from django.conf.urls import patterns, url
 
-from tastypie.api import Api
+from piston.resource import Resource
 
-from opps.containers.api import Container, ContainerBox
-from opps.articles.api import Post, Album, Link
-
-from .conf import settings
+from opps.containers.api import ContainerHandler, ContainerBoxHandler
 
 
-_api = Api(api_name=settings.OPPS_API_NAME)
-_api.register(Container())
-_api.register(ContainerBox())
-_api.register(Post())
-_api.register(Album())
-_api.register(Link())
-
+container = Resource(handler=ContainerHandler)
+containerbox = Resource(handler=ContainerBoxHandler)
 
 urlpatterns = patterns(
     '',
-    url(r'^', include(_api.urls)),
+    url(r'^container/$', container),
+    url(r'^containerbox/$', containerbox),
 )

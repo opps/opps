@@ -45,7 +45,6 @@ OPPS_CORE_APPS = [
     'mptt',
     'googl',
     'djcelery',
-    'tastypie',
 ]
 
 __version__ = ".".join(map(str, VERSION))
