@@ -10,6 +10,20 @@ from django.http import HttpRequest
 from django.conf import settings
 
 
+try:
+    from threading import local
+except ImportError:
+    from django.utils._threading_local import local
+
+# Instead changing ``settings.TEMPLATE_DIRS`` on the fly, what could
+# not work properly when there is concurrent requests, we use
+# thread-local variables to determine the template directory used for
+# mobile requests, so the template loader
+# ``opps.contrib.mobile.template.Loader`` can be used instead to
+# define the right templates in each of your project views.
+THREAD_LOCALS = local()
+
+
 def _set_cookie(self, key, value='', max_age=None, expires=None, path='/',
                 domain=None, secure=False):
     self._resp_cookies[key] = value
@@ -99,9 +113,10 @@ class MobileDetectionMiddleware(object):
                     is_mobile = True
 
         request.is_mobile = is_mobile
-        settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_WEB
+        THREAD_LOCALS.template_dirs = settings.TEMPLATE_DIRS_WEB
+
         if is_mobile and settings.OPPS_CHECK_MOBILE:
-            settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_MOBILE
+            THREAD_LOCALS.template_dirs = settings.TEMPLATE_DIRS_MOBILE
             if settings.OPPS_DOMAIN_MOBILE and \
                request.META.get('HTTP_HOST', '') != \
                settings.OPPS_DOMAIN_MOBILE:
@@ -132,7 +147,7 @@ class MobileRedirectMiddleware(object):
 
         current_cookie = request.COOKIES.get('template_mode', None)
         template_mode = request.GET.get('template_mode', None)
-        settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_WEB
+        THREAD_LOCALS.template_dirs = settings.TEMPLATE_DIRS_WEB
 
         is_mobile_domain = domain == mobile_domain
 
@@ -168,7 +183,7 @@ class MobileRedirectMiddleware(object):
             current_cookie = template_mode
 
         if current_cookie and current_cookie.strip().lower() == u"mobile":
-            settings.TEMPLATE_DIRS = settings.TEMPLATE_DIRS_MOBILE
+            THREAD_LOCALS.template_dirs = settings.TEMPLATE_DIRS_MOBILE
 
     def process_response(self, request, response):
         if hasattr(request, '_resp_cookies') and request._resp_cookies:
