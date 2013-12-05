@@ -17,17 +17,21 @@ from django.utils._os import safe_join
 from opps.contrib.mobile.middleware import THREAD_LOCALS
 
 
-
 class Loader(FileSystemLoader):
 
     def get_template_sources(self, template_name, template_dirs=None):
         if not template_dirs:
-            template_dirs = getattr(THREAD_LOCALS, 'template_dirs', settings.TEMPLATE_DIRS)
+            template_dirs = getattr(
+                THREAD_LOCALS,
+                'template_dirs',
+                settings.TEMPLATE_DIRS
+            )
         for template_dir in template_dirs:
             try:
                 yield safe_join(template_dir, template_name)
             except UnicodeDecodeError:
-                # The template dir name was a bytestring that wasn't valid UTF-8.
+                # The template dir name was a bytestring that wasn't
+                # valid UTF-8.
                 raise
             except ValueError:
                 # The joined path was located outside of this particular
