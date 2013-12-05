@@ -28,19 +28,13 @@ class ApiKeyAuthentication(object):
 
         method = getattr(request, request.method)
         try:
-            key = ApiKey.objects.get(
+            ApiKey.objects.get(
                 user__username=method.get('api_username'),
                 key=method.get('api_key'))
         except ApiKey.DoesNotExist:
             return False
 
-        user = self.auth_func(username=key.user.username,
-                              password=key.user.password)
-
-        if not user:
-            return False
-
-        return request.user.is_authenticated()
+        return True
 
     def challenge(self):
         resp = HttpResponse("Authorization Required")
