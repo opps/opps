@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.views.generic.list import ListView as DjangoListView
-from django.contrib.sites.models import get_current_site
+from django.contrib.sites.models import Site, get_current_site
 from django.utils import timezone
 from django.conf import settings
 
@@ -77,7 +77,9 @@ class ListView(View, DjangoListView):
         return template_list
 
     def get_queryset(self):
+        self.fallback = getattr(settings, 'OPPS_MULTISITE_FALLBACK', False)
         self.site = get_current_site(self.request)
+        self.site_master = Site.objects.order_by('id')[0]
         self.long_slug = self.get_long_slug()
 
         if not self.long_slug:
@@ -97,7 +99,7 @@ class ListView(View, DjangoListView):
 
         queryset = super(ListView, self).get_queryset()
         filters = {}
-        filters['site_domain'] = self.site.domain
+        filters['site_domain__in'] = [self.site.domain]
         filters['channel_long_slug__in'] = self.channel_long_slug
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
@@ -108,6 +110,8 @@ class ListView(View, DjangoListView):
         if self.request.GET.get('type'):
             filters['child_class'] = self.request.GET.get('type')
 
+        if self.fallback and self.site != self.site_master:
+            filters.get('site_domain__in', []).append(self.site_master.domain)
         queryset = queryset.filter(**filters)
         if self.excluded_ids:
             queryset = queryset.exclude(
