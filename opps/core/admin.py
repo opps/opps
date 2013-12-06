@@ -24,7 +24,7 @@ class MassPublishMixin(admin.ModelAdmin):
 
 
 class PublisherAdmin(MassPublishMixin):
-    list_display = ['title', 'channel_long_slug',
+    list_display = ['title', 'site', 'channel_long_slug',
                     'date_available', 'published', 'preview_url']
     list_filter = ['date_available', 'published', ChildClassListFilter]
     search_fields = ['title', 'slug', 'channel_name']
