@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django import template
@@ -131,11 +132,22 @@ class View(object):
         return self.long_slug
 
     def set_channel_rules(self):
-        self.channel = get_object_or_404(Channel,
-                                         site__domain=self.site.domain,
-                                         long_slug=self.long_slug,
-                                         date_available__lte=timezone.now(),
-                                         published=True)
+        self.fallback = getattr(settings, 'OPPS_MULTISITE_FALLBACK', False)
+        filters = dict(
+            site__domain=self.site.domain,
+            long_slug=self.long_slug,
+            date_available__lte=timezone.now(),
+            published=True
+        )
+
+        try:
+            self.channel = Channel.objects.get(**filters)
+        except Channel.DoesNotExist:
+            if not self.fallback:
+                raise Http404('Channel not found and fallback disabled')
+            filters['site__domain'] = self.site_master.domain
+            self.channel = get_object_or_404(Channel, **filters)
+
         self.long_slug = self.channel.long_slug
 
         self.channel_long_slug = [self.long_slug]

@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.views.generic.detail import DetailView as DjangoDetailView
-from django.contrib.sites.models import get_current_site
+from django.contrib.sites.models import Site, get_current_site
 from django.http import HttpResponseRedirect
 from django.utils import timezone
-
+from django.conf import settings
 from opps.views.generic.base import View
 
 
@@ -45,7 +45,9 @@ class DetailView(View, DjangoDetailView):
         return super(DetailView, self).render_to_response(context)
 
     def get_queryset(self):
+        self.fallback = getattr(settings, 'OPPS_MULTISITE_FALLBACK', False)
         self.site = get_current_site(self.request)
+        self.site_master = Site.objects.order_by('id')[0]
         self.slug = self.kwargs.get('slug')
         self.long_slug = self.get_long_slug()
         if not self.long_slug:
@@ -65,4 +67,9 @@ class DetailView(View, DjangoDetailView):
             filters['published'] = True
 
         queryset = super(DetailView, self).get_queryset()
-        return queryset.filter(**filters)._clone()
+
+        qs = queryset.filter(**filters)._clone()
+        if not qs and self.fallback:
+            filters['site_domain'] = self.site_master.domain
+            qs = queryset.filter(**filters)._clone()
+        return qs
