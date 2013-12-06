@@ -143,7 +143,7 @@ class View(object):
         try:
             self.channel = Channel.objects.get(**filters)
         except Channel.DoesNotExist:
-            if not self.fallback:
+            if not self.fallback or self.site == self.site_master:
                 raise Http404('Channel not found and fallback disabled')
             filters['site__domain'] = self.site_master.domain
             self.channel = get_object_or_404(Channel, **filters)

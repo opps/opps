@@ -69,7 +69,7 @@ class DetailView(View, DjangoDetailView):
         queryset = super(DetailView, self).get_queryset()
 
         qs = queryset.filter(**filters)._clone()
-        if not qs and self.fallback:
+        if not qs and self.fallback and self.site_master != self.site:
             filters['site_domain'] = self.site_master.domain
             qs = queryset.filter(**filters)._clone()
         return qs
