@@ -12,6 +12,6 @@ containerbox = Resource(handler=ContainerBoxHandler)
 
 urlpatterns = patterns(
     '',
-    url(r'^container/$', container),
-    url(r'^containerbox/$', containerbox),
+    url(r'^container/$', container, {'emitter_format': 'json'}),
+    url(r'^containerbox/$', containerbox, {'emitter_format': 'json'}),
 )
