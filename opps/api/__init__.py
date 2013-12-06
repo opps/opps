@@ -26,7 +26,11 @@ class ApiKeyAuthentication(object):
         if request.method == 'GET' and 'GET' in self.method:
             return True
 
-        method = getattr(request, request.method)
+        try:
+            method = getattr(request, request.method)
+        except:
+            method = request.GET
+
         try:
             ApiKey.objects.get(
                 user__username=method.get('api_username'),
