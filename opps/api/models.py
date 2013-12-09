@@ -40,4 +40,4 @@ def create_api_key(sender, **kwargs):
         ApiKey.objects.create(user=kwargs.get('instance'))
 
 
-models.signals.post_save.connect(create_api_key, settings.AUTH_USER_MODEL)
+models.signals.post_save.connect(create_api_key, User)
