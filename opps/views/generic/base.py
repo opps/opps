@@ -87,9 +87,7 @@ class View(object):
         if self.channel:
             context['channel'] = self.channel
 
-        # this is a palliative measure as long as we don't fix the real
-        # problem
-        context['breadcrumb'] = getattr(self, 'channel_descendants', [])
+        context['breadcrumb'] = self.get_breadcrumb()
 
         if self.slug:
             try:
@@ -155,6 +153,12 @@ class View(object):
             include_self=False)
         for children in self.channel_descendants:
             self.channel_long_slug.append(children.long_slug)
+
+    def get_breadcrumb(self):
+        if self.channel.is_root_node():
+            return []
+
+        return self.channel.get_ancestors(include_self=True)
 
     def check_template(self, _template):
         try:
