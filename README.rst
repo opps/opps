@@ -17,6 +17,9 @@ An *Open Source Content Management* for the **magazine** websites and **high-tra
     :alt: Pypi downloads
 
 
+.. contents:: Topics
+
+
 .. include:: ../../CONTRIBUTING.rst
 
 
