@@ -17,10 +17,10 @@ class TagList(ListView):
 
     def get_queryset(self):
         self.site = get_current_site(self.request)
-        self.long_slug = self.kwargs['tag']
+        self.tag = self.kwargs['tag']
         self.containers = self.model.objects.filter(
             site_domain=self.site,
-            tags__contains=self.long_slug,
+            tags__contains=self.tag,
             date_available__lte=timezone.now(),
             published=True).all()
         return self.containers
