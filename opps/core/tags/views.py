@@ -17,7 +17,7 @@ class TagList(ListView):
 
     def get_queryset(self):
         self.site = get_current_site(self.request)
-        self.long_slug= self.kwargs['tag']
+        self.long_slug = self.kwargs['tag']
         self.containers = self.model.objects.filter(
             site_domain=self.site,
             tags__icontains=self.long_slug,
