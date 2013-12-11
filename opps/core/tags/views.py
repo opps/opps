@@ -22,5 +22,5 @@ class TagList(ListView):
             site_domain=self.site,
             tags__icontains=self.long_slug,
             date_available__lte=timezone.now(),
-            published=True).all()
+            published=True)
         return self.containers
