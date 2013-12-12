@@ -250,6 +250,9 @@ def filter_queryset_by(queryset, **filters):
         return _cache
 
     if not queryset.query.can_filter():
+        # create new queryset based on the ids and apply filter
+        ids = [i.id for i in queryset]
+        queryset = queryset.model.objects.filter(id__in=ids).filter(**filters)
         return queryset
 
     containers = queryset.filter(**filters)
@@ -264,6 +267,15 @@ def exclude_queryset_by(queryset, **excludes):
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
+
+    if not queryset.query.can_filter():
+        # create new queryset based on the ids and apply filter
+        ids = [i.id for i in queryset]
+        queryset = queryset.model.objects.filter(id__in=ids).exclude(
+            **excludes
+        )
+        return queryset
+
     containers = queryset.exclude(**excludes)
     cache.set("excludequerysetby-{}".format(cachekey), 3600)
     return containers
