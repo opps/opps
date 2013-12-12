@@ -30,6 +30,7 @@ Changelog
 * Change BaseBoxAdmin queryset permissions
 * opps.contrib.mobile.middleware do not change ``settings.TEMPLATE_DIRS`` on the fly any more, it now use a thread-local variable
 * Fix breadcrumb context variable
+* Fix template tag `get_post_content`, change folder name articles to containers (Standard Opps 0.2.x)
 
 0.2.2
 =====
