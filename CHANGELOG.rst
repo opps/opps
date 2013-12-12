@@ -29,6 +29,7 @@ Changelog
 * Add try_values and cache_obj template tags
 * Change BaseBoxAdmin queryset permissions
 * opps.contrib.mobile.middleware do not change ``settings.TEMPLATE_DIRS`` on the fly any more, it now use a thread-local variable
+* Added extra_context to get_containerbox template tag
 
 0.2.2
 =====
