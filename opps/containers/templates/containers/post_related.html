@@ -1,0 +1,12 @@
+{% load container_tags %}
+
+<!-- POST RELATED -->
+{% if related_posts.count %}
+<ul>
+    {% for related in related_posts.all|slice:":5" %}
+        <li>
+            <a {% get_url related %}>{{ related.title }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endif %}

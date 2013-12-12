@@ -146,7 +146,7 @@ def get_all_containerbox(channel_long_slug=None, template_name=None):
 
 
 @register.simple_tag
-def get_post_content(post, template_name='articles/post_related.html',
+def get_post_content(post, template_name='containers/post_related.html',
                      content_field='content', related_name='related_posts',
                      get_related=True, safe=True, divider="<br />",
                      placeholder=settings.OPPS_RELATED_POSTS_PLACEHOLDER):
@@ -254,6 +254,9 @@ def filter_queryset_by(queryset, **filters):
         return _cache
 
     if not queryset.query.can_filter():
+        # create new queryset based on the ids and apply filter
+        ids = [i.id for i in queryset]
+        queryset = queryset.model.objects.filter(id__in=ids).filter(**filters)
         return queryset
 
     containers = queryset.filter(**filters)
@@ -268,6 +271,15 @@ def exclude_queryset_by(queryset, **excludes):
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
+
+    if not queryset.query.can_filter():
+        # create new queryset based on the ids and apply filter
+        ids = [i.id for i in queryset]
+        queryset = queryset.model.objects.filter(id__in=ids).exclude(
+            **excludes
+        )
+        return queryset
+
     containers = queryset.exclude(**excludes)
     cache.set("excludequerysetby-{}".format(cachekey), 3600)
     return containers

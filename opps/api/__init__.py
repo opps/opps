@@ -16,6 +16,13 @@ class BaseHandler(Handler):
             return base.filter(**request.GET.dict())
         return base.all()
 
+    def appendModel(Model, Filters):
+        m = Model.objects.filter(**Filters)
+        l = []
+        for i in m:
+            l.append(i.__dict__)
+        return l
+
 
 class ApiKeyAuthentication(object):
     def __init__(self, auth_func=authenticate, method=['GET']):
