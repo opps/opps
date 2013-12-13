@@ -76,6 +76,12 @@ TEST_RUNNER = 'django_coverage.coverage_runner.CoverageRunner'
 CACHES = {'default': {
     'BACKEND': 'django.core.cache.backends.dummy.DummyCache'}}
 
+HAYSTACK_CONNECTIONS = {
+    "default": {
+        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+    }
+}
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
