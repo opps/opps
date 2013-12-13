@@ -8,6 +8,7 @@ from django.conf import settings
 
 from .models import Container, ContainerImage, Mirror
 from .models import ContainerBox, ContainerBoxContainers
+from .forms import ContainerBoxContainersInlineForm
 from opps.core.admin import PublishableAdmin, apply_opps_rules, BaseBoxAdmin
 from opps.core.filters import ChannelListFilter, HasQuerySet
 from opps.images.generate import image_url
@@ -41,6 +42,7 @@ class ContainerImageInline(admin.TabularInline):
 @apply_opps_rules('containers')
 class ContainerBoxContainersInline(admin.StackedInline):
     model = ContainerBoxContainers
+    form = ContainerBoxContainersInlineForm
     fk_name = 'containerbox'
     raw_id_fields = ['container', 'main_image']
     sortable_field_name = "order"
