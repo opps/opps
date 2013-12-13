@@ -33,6 +33,7 @@ Changelog
 * Fix template tag `get_post_content`, change folder name articles to containers (Standard Opps 0.2.x)
 * Fix filter_queryset_by and exclude_queryset_by when queryset is sliced
 * Added extra_context to get_containerbox template tag
+* Fix spaced and empty string tags creation
 
 0.2.2
 =====
