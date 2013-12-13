@@ -102,20 +102,20 @@ class PostCreation(TestCase):
         self.assertTrue(self.post.user, self.user)
 
     def test_multiple_tags_in_post(self):
-        self.post.tags = ','.join(self._gen_tags(100))
+        self.post.tags = u','.join(self._gen_tags(100))
         self.post.save()
         self.assertTrue(Tag.objects.count(), 100)
 
     def test_raiser_tags(self):
-        self.post.tags = "opps, cms, , post"
+        self.post.tags = u"opps, cms, , post"
         self.post.save()
         self.assertEqual([t.name for t in self.post.get_tags()],
-                         ['opps', ' cms', ' post'])
+                         ['opps', 'cms', 'post'])
 
     def _gen_tags(self, length):
         tags = []
         for i in range(length):
-            tag = ''.join(random.choice(string.ascii_uppercase)
+            tag = u''.join(random.choice(string.ascii_uppercase)
                           for x in range(12))
             tags.append(tag)
         return tags
