@@ -3,6 +3,8 @@
 import os
 import djcelery
 
+from opps import OPPS_CORE_APPS
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -59,39 +61,7 @@ TEMPLATE_DIRS = (os.path.join(PROJECT_PATH, 'templates'),)
 TEMPLATE_DIRS_WEB = TEMPLATE_DIRS
 TEMPLATE_DIRS_MOBILE = (os.path.join(PROJECT_PATH, 'templates', 'mobile'),)
 
-INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.redirects',
-    'django.contrib.formtools',
-
-    'opps.contrib.admin',
-    'grappelli.dashboard',
-    'grappelli',
-    'django.contrib.admin',
-
-    'opps.archives',
-    'opps.articles',
-    'opps.boxes',
-    'opps.core',
-    'opps.core.tags',
-    'opps.containers',
-    'opps.channels',
-    'opps.flatpages',
-    'opps.images',
-    'opps.sitemaps',
-    'opps.fields',
-    'opps.api',
-    'opps.contrib.fileupload',
-
-    'south',
-    'djcelery',
-    'kombu.transport.django',
-)
+INSTALLED_APPS = OPPS_CORE_APPS
 
 djcelery.setup_loader()
 BROKER_URL = 'redis://localhost:6379/0'
