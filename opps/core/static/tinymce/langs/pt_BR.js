@@ -91,7 +91,7 @@ tinymce.addI18n('pt_BR',{
 "None": "Nenhum",
 "Target": "Alvo",
 "Insert\/edit link": "Inserir\/editar link",
-"Insert\/edit video": "Inserir\/editar v\u00eddeo",
+"Insert\/edit video": "Inserir\/editar \u00E1udio ou v\u00eddeo",
 "Poster": "Autor",
 "Alternative source": "Fonte alternativa",
 "Paste your embed code below:": "Insira o c\u00f3digo de incorpora\u00e7\u00e3o abaixo:",
