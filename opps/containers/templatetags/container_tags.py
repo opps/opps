@@ -50,7 +50,7 @@ def get_recommendations(query_slice, child_class, container):
 
 
 @register.simple_tag(takes_context=True)
-def get_containerbox(context, slug, template_name=None):
+def get_containerbox(context, slug, template_name=None, **extra_context):
 
     request = context['request']
     is_mobile = getattr(request, 'is_mobile', False)
@@ -85,11 +85,15 @@ def get_containerbox(context, slug, template_name=None):
     if template_name:
         t = template.loader.get_template(template_name)
 
-    render = t.render(template.Context({
+    context = {
         'articlebox': box,
         'slug': slug,
         'context': context
-    }))
+    }
+
+    context.update(extra_context)
+
+    render = t.render(template.Context(context))
 
     cache.set(cachekey, render, settings.OPPS_CACHE_EXPIRE)
 
@@ -250,6 +254,9 @@ def filter_queryset_by(queryset, **filters):
         return _cache
 
     if not queryset.query.can_filter():
+        # create new queryset based on the ids and apply filter
+        ids = [i.id for i in queryset]
+        queryset = queryset.model.objects.filter(id__in=ids).filter(**filters)
         return queryset
 
     containers = queryset.filter(**filters)
@@ -264,6 +271,15 @@ def exclude_queryset_by(queryset, **excludes):
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
+
+    if not queryset.query.can_filter():
+        # create new queryset based on the ids and apply filter
+        ids = [i.id for i in queryset]
+        queryset = queryset.model.objects.filter(id__in=ids).exclude(
+            **excludes
+        )
+        return queryset
+
     containers = queryset.exclude(**excludes)
     cache.set("excludequerysetby-{}".format(cachekey), 3600)
     return containers

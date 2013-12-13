@@ -31,6 +31,8 @@ Changelog
 * opps.contrib.mobile.middleware do not change ``settings.TEMPLATE_DIRS`` on the fly any more, it now use a thread-local variable
 * Fix breadcrumb context variable
 * Fix template tag `get_post_content`, change folder name articles to containers (Standard Opps 0.2.x)
+* Fix filter_queryset_by and exclude_queryset_by when queryset is sliced
+* Added extra_context to get_containerbox template tag
 
 0.2.2
 =====
