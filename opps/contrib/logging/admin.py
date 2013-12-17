@@ -8,7 +8,7 @@ from .models import Logging
 class LoggingAdmin(admin.ModelAdmin):
     model = Logging
     raw_id_fields = ('user',)
-    exclude = ('site_iid', 'site_domain')
+    exclude = ('site_iid', 'site_domain', 'mirror_site')
 
 
 admin.site.register(Logging, LoggingAdmin)
