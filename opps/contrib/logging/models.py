@@ -10,7 +10,8 @@ from opps.core.models import NotUserPublishable
 class Logging(NotUserPublishable):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        null=True, blank=True)
+        null=True, blank=True,
+    )
     application = models.CharField(
         _(u"Application"),
         max_length=75,
@@ -24,7 +25,7 @@ class Logging(NotUserPublishable):
     text = models.TextField(
         _(u"Text"),
         null=True, blank=True,
-    )
+        db_index=True)
 
     def save(self, *args, **kwargs):
         self.published = True
