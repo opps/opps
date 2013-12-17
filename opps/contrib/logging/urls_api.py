@@ -1,19 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.conf.urls import patterns, url, include
-from django.conf import settings
+from django.conf.urls import patterns, url
 
-from tastypie.api import Api
+from piston.resource import Resource
 
-from .api import Logging
+from opps.api import ApiKeyAuthentication
 
-print settings.OPPS_API_NAME
-_api = Api(
-    api_name=u"{}/contrib".format(settings.OPPS_API_NAME))
-_api.register(Logging())
+from .api import LoggingHandler
 
+
+logging = Resource(handler=LoggingHandler,
+                   authentication=ApiKeyAuthentication())
 
 urlpatterns = patterns(
     '',
-    url(r'^api/', include(_api.urls)),
+    url(r'^api/contrib/logging/$', logging, {'emitter_format': 'json'}),
 )
