@@ -67,7 +67,7 @@ class Post(Article):
                 date_available__lte=timezone.now(),
             ).exclude(
                 pk__in=[i.pk for i in imgs]
-            )
+            ).order_by('containerimage__order')
 
             captions = {
                 ci.image_id: ci.caption for ci in
