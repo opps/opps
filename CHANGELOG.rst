@@ -34,6 +34,7 @@ Changelog
 * Fix filter_queryset_by and exclude_queryset_by when queryset is sliced
 * Added extra_context to get_containerbox template tag
 * Fix spaced and empty string tags creation
+* Fix embedded album image order on Posts
 
 0.2.2
 =====
