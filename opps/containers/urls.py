@@ -43,4 +43,9 @@ urlpatterns = patterns(
     url(r'^(?P<channel__long_slug>[\w\b//-]+)/$',
         cache_page(settings.OPPS_CACHE_EXPIRE_LIST)(
             ContainerList.as_view()), name='channel'),
+
+    url(r'^(?P<slug>[\w-]+)\.html$',
+        cache_page(settings.OPPS_CACHE_EXPIRE_DETAIL)(
+            ContainerDetail.as_view()), name='open'),
+
 )
