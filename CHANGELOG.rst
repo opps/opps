@@ -35,6 +35,7 @@ Changelog
 * Added extra_context to get_containerbox template tag
 * Fix spaced and empty string tags creation
 * Fix embedded album image order on Posts
+* Fix url pattern from flatpages, now accept slugs with dashs
 
 0.2.2
 =====
