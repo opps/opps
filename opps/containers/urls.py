@@ -46,6 +46,6 @@ urlpatterns = patterns(
 
     url(r'^(?P<slug>[\w-]+)\.html$',
         cache_page(settings.OPPS_CACHE_EXPIRE_DETAIL)(
-            ContainerDetail.as_view()), name='open'),
+            ContainerDetail.as_view()), name='homepage_open'),
 
 )
