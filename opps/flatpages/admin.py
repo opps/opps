@@ -7,6 +7,7 @@ from django.contrib.sites.models import Site
 from django.conf import settings
 
 from opps.core.widgets import OppsEditor
+from opps.channels.models import Channel
 
 from .models import FlatPage
 from opps.core.admin import apply_opps_rules
@@ -35,7 +36,7 @@ class FlatPageAdmin(admin.ModelAdmin):
             'fields': ('headline', 'content', ('main_image', 'image_thumb'))}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('channel', 'published', 'date_available')}),
+            'fields': ('published', 'date_available')}),
     )
 
     def image_thumb(self, obj):
@@ -50,6 +51,7 @@ class FlatPageAdmin(admin.ModelAdmin):
         if getattr(obj, 'pk', None) is None:
             obj.user = get_user_model().objects.get(pk=request.user.pk)
             obj.site = Site.objects.get(pk=settings.SITE_ID)
+            obj.channel = Channel.objects.get_homepage(site=obj.site)
         obj.save()
 
 admin.site.register(FlatPage, FlatPageAdmin)
