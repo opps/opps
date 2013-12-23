@@ -155,7 +155,10 @@ class View(object):
             self.channel_long_slug.append(children.long_slug)
 
     def get_breadcrumb(self):
-        if self.channel.is_root_node():
+        try:
+            if self.channel.is_root_node():
+                return []
+        except:
             return []
 
         return self.channel.get_ancestors(include_self=True)
