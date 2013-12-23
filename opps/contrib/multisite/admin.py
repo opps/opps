@@ -3,7 +3,6 @@
 from django.contrib import admin
 from django.conf import settings
 from django.utils import timezone
-
 from .models import SitePermission
 
 
@@ -42,4 +41,8 @@ class AdminViewPermission(admin.ModelAdmin):
         return form
 
 
-admin.site.register(SitePermission)
+class SitePermissionAdmin(admin.ModelAdmin):
+    exclude = ('site_iid', 'mirror_site', 'site_domain')
+
+
+admin.site.register(SitePermission, SitePermissionAdmin)

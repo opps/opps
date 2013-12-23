@@ -105,6 +105,8 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
                 container=self, Mirror=Mirror)
 
     def get_absolute_url(self):
+        if self.channel.homepage:
+            return u"/{}.html".format(self.slug)
         return u"/{}/{}.html".format(self.channel_long_slug, self.slug)
 
     def get_thumb(self):

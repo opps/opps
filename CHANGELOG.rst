@@ -35,6 +35,8 @@ Changelog
 * Added extra_context to get_containerbox template tag
 * Fix spaced and empty string tags creation
 * Fix embedded album image order on Posts
+* Containers in home page have direct url without channel, example: site.com/content_slug.html instead of site.com/home/content_slug.html
+* Fix url pattern from flatpages, now accept slugs with dashs
 
 0.2.2
 =====

@@ -1,9 +1,13 @@
 # -*- encoding: utf-8 -*-
 from django.utils import timezone
 from django.contrib.sites.models import get_current_site
+from django.core.cache import cache
+from django.conf import settings
 
 from opps.views.generic.list import ListView
 from opps.containers.models import Container
+
+from .models import Tag
 
 
 class TagList(ListView):
@@ -17,10 +21,35 @@ class TagList(ListView):
 
     def get_queryset(self):
         self.site = get_current_site(self.request)
-        self.long_slug = self.kwargs['tag']
-        self.containers = self.model.objects.filter(
-            site_domain=self.site,
-            tags__icontains=self.long_slug,
-            date_available__lte=timezone.now(),
-            published=True)
+        # without the long_slug, the queryset will cause an error
+        self.long_slug = 'tags'
+        self.tag = self.kwargs['tag']
+
+        cache_key = 'taglist-{}'.format(self.tag)
+        if cache.get(cache_key):
+            return cache.get(cache_key)
+
+        tags = Tag.objects.filter(slug=self.tag).values_list('name') or []
+        tags_names = []
+        if tags:
+            tags_names = [i[0] for i in tags]
+
+        ids = []
+        for tag in tags_names:
+            result = self.containers = self.model.objects.filter(
+                site_domain=self.site,
+                tags__contains=tag,
+                date_available__lte=timezone.now(),
+                published=True
+            )
+            if result.exists():
+                ids.extend([i.id for i in result])
+
+        # remove the repeated
+        ids = list(set(ids))
+
+        # grab the containers
+        self.containers = self.model.objects.filter(id__in=ids)
+        expires = getattr(settings, 'OPPS_CACHE_EXPIRE', 3600)
+        cache.set(cache_key, list(self.containers), expires)
         return self.containers
