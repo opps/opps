@@ -396,3 +396,13 @@ def get_containerbox_list(context, slug, num=0, template_name=None):
     cache.set(cachekey, render, settings.OPPS_CACHE_EXPIRE)
 
     return render
+
+@register.assignment_tag
+def get_custom_field_value(obj, field_slug):
+    """
+    Return a custom field value
+    """
+    if not getattr(obj, 'custom_fields'):
+        return None
+
+    return obj.custom_fields().get(field_slug)
