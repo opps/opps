@@ -37,6 +37,7 @@ Changelog
 * Fix embedded album image order on Posts
 * Containers in home page have direct url without channel, example: site.com/content_slug.html instead of site.com/home/content_slug.html
 * Fix url pattern from flatpages, now accept slugs with dashs
+* Add `get_custom_field_value` template tag
 
 0.2.2
 =====
