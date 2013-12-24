@@ -397,6 +397,7 @@ def get_containerbox_list(context, slug, num=0, template_name=None):
 
     return render
 
+
 @register.assignment_tag
 def get_custom_field_value(obj, field_slug):
     """
