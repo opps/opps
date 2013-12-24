@@ -52,5 +52,5 @@ class TagList(ListView):
         # grab the containers
         self.containers = self.model.objects.filter(id__in=ids)
         expires = getattr(settings, 'OPPS_CACHE_EXPIRE', 3600)
-        cache.set(cache_key, list(self.containers), expires)
+        cache.set(cache_key, self.containers, expires)
         return self.containers
