@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.sites.models import get_current_site
 from django.core.cache import cache
 from django.conf import settings
+from django.utils.text import slugify
 
 from opps.views.generic.list import ListView
 from opps.containers.models import Container
@@ -25,7 +26,7 @@ class TagList(ListView):
         self.long_slug = 'tags'
         self.tag = self.kwargs['tag']
 
-        cache_key = 'taglist-{}'.format(self.tag)
+        cache_key = u'taglist-{}'.format(slugify(self.tag))
         if cache.get(cache_key):
             return cache.get(cache_key)
 
