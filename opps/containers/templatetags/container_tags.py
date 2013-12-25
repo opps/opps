@@ -403,7 +403,10 @@ def get_custom_field_value(obj, field_slug):
     """
     Return a custom field value
     """
-    if not getattr(obj, 'custom_fields'):
+    if not callable(getattr(obj, 'custom_fields')):
+        return None
+
+    if not obj.custom_fields():
         return None
 
     return obj.custom_fields().get(field_slug)
