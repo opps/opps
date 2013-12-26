@@ -179,6 +179,11 @@ def get_post_content(post, template_name='containers/post_related.html',
     # REMOVE NEW LINES
     content = linebreaksbr(content)
 
+    # Fix embed allowfullscreen
+    # TinyMCE BUG
+    content = content.replace('allowfullscreen="allowfullscreen"',
+                              'allowfullscreen="true"')
+
     if not get_related:
         return content
 
