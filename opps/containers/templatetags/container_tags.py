@@ -258,6 +258,9 @@ def filter_queryset_by(queryset, **filters):
     if _cache:
         return _cache
 
+    if not getattr(queryset, 'query'):
+        return queryset
+
     if not queryset.query.can_filter():
         # create new queryset based on the ids and apply filter
         ids = [i.id for i in queryset]
@@ -276,6 +279,9 @@ def exclude_queryset_by(queryset, **excludes):
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
+
+    if not getattr(queryset, 'query'):
+        return queryset
 
     if not queryset.query.can_filter():
         # create new queryset based on the ids and apply filter
