@@ -258,7 +258,7 @@ def filter_queryset_by(queryset, **filters):
     if _cache:
         return _cache
 
-    if not getattr(queryset, 'query'):
+    if not getattr(queryset, 'query', False):
         return queryset
 
     if not queryset.query.can_filter():
@@ -280,7 +280,7 @@ def exclude_queryset_by(queryset, **excludes):
     if _cache:
         return _cache
 
-    if not getattr(queryset, 'query'):
+    if not getattr(queryset, 'query', False):
         return queryset
 
     if not queryset.query.can_filter():
