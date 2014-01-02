@@ -11,10 +11,6 @@ from opps.api.models import ApiKey
 class BaseHandler(Handler):
     limit = 20
 
-    def dispatch(self, request):
-        import pdb; pdb.set_trace()
-        pass
-
     def read(self, request):
         base = self.model.objects
         if request.GET.items():
