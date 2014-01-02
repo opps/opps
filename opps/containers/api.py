@@ -16,7 +16,8 @@ class Handler(BaseHandler):
         filters = {}
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
-        return self.model.objects.filter(**filters)
+        return self.model.objects.filter(
+            **filters)[self._page(request):self._limit(request)]
 
 
 class ContainerHandler(Handler):
