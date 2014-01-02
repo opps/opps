@@ -9,12 +9,33 @@ from opps.api.models import ApiKey
 
 
 class BaseHandler(Handler):
+    limit = 20
+
+    def dispatch(self, request):
+        import pdb; pdb.set_trace()
+        pass
 
     def read(self, request):
         base = self.model.objects
         if request.GET.items():
-            return base.filter(**request.GET.dict())
+            items = request.GET.dict()
+            if request.GET.get('paginate_limit'):
+                del items['paginate_limit']
+            if request.GET.get('page'):
+                del items['page']
+            return base.filter(**items)
         return base.all()
+
+    def _limit(self, request):
+        limit = request.GET.get('paginate_limit', self.limit)
+        return int(limit)*int(request.GET.get('page', 1))
+
+    def _page(self, request):
+        page = int(request.GET.get('page', 1))
+        if page == 1:
+            return 0
+        limit = int(request.GET.get('paginate_limit', self.limit))
+        return limit*page-page
 
     def appendModel(Model, Filters):
         m = Model.objects.filter(**Filters)
