@@ -54,7 +54,7 @@ class PostAdmin(HaystackModelAdmin, ContainerAdmin, AdminViewPermission):
 
 
 @apply_opps_rules('articles')
-class AlbumAdmin(ContainerAdmin, AdminViewPermission):
+class AlbumAdmin(HaystackModelAdmin, ContainerAdmin, AdminViewPermission):
 
     form = AlbumAdminForm
     inlines = [ContainerImageInline]
