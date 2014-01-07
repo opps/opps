@@ -26,9 +26,9 @@ class TagList(ListView):
         self.long_slug = 'tags'
         self.tag = self.kwargs['tag']
 
-        cache_key = u'taglist-{}'.format(slugify(self.tag))
-        if cache.get(cache_key):
-            return cache.get(cache_key)
+        #cache_key = u'taglist-{}'.format(slugify(self.tag))
+        #if cache.get(cache_key):
+        #    return cache.get(cache_key)
 
         tags = Tag.objects.filter(slug=self.tag).values_list('name') or []
         tags_names = []
@@ -52,5 +52,5 @@ class TagList(ListView):
         # grab the containers
         self.containers = self.model.objects.filter(id__in=ids)
         expires = getattr(settings, 'OPPS_CACHE_EXPIRE', 3600)
-        cache.set(cache_key, self.containers, expires)
+        #cache.set(cache_key, self.containers, expires)
         return self.containers
