@@ -9,8 +9,35 @@ from django.utils.translation import ugettext_lazy as _
 
 from opps.images.generate import image_url
 
+from haystack.query import SearchQuerySet
+from django.contrib.admin.views.main import ChangeList
+
 from .models import Config
 from .filters import ChildClassListFilter, ChannelListFilter
+
+USE_HAYSTACK = getattr(settings, 'OPPS_ADMIN_USE_HAYSTACK', False)
+
+
+class HaystackChangeList(ChangeList):
+    def get_query_set(self, request):
+        if not self.query:
+            return super(HaystackChangeList, self).get_query_set(request)
+        default_qs = self.root_query_set
+        sqs = SearchQuerySet().models(self.model).auto_query(self.query)
+        pks = [obj.pk for obj in sqs]
+        self.root_query_set = self.root_query_set.filter(pk__in=pks)
+        qs = super(HaystackChangeList, self).get_query_set(request)
+        self.root_query_set = default_qs
+        return qs
+
+
+class HaystackModelAdmin(object):
+    def get_changelist(self, request, **kwargs):
+        if not USE_HAYSTACK:
+            return super(
+                HaystackModelAdmin, self
+            ).get_changelist(request)
+        return HaystackChangeList
 
 
 class MassPublishMixin(admin.ModelAdmin):

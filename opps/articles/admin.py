@@ -7,7 +7,7 @@ from .models import Post, PostRelated, Album, Link
 from .forms import PostAdminForm, AlbumAdminForm, LinkAdminForm
 
 from opps.containers.admin import ContainerAdmin, ContainerImageInline
-from opps.core.admin import apply_opps_rules
+from opps.core.admin import apply_opps_rules, HaystackModelAdmin
 from opps.contrib.multisite.admin import AdminViewPermission
 
 
@@ -25,7 +25,7 @@ class PostRelatedInline(admin.TabularInline):
 
 
 @apply_opps_rules('articles')
-class PostAdmin(ContainerAdmin, AdminViewPermission):
+class PostAdmin(HaystackModelAdmin, ContainerAdmin, AdminViewPermission):
 
     form = PostAdminForm
     inlines = [ContainerImageInline, PostRelatedInline]
