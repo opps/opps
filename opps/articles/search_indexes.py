@@ -6,6 +6,7 @@ from django.conf import settings
 from django.utils import timezone
 
 from haystack.indexes import SearchIndex, CharField, DateTimeField, Indexable
+from haystack.indexes import MultiValueField
 
 from .models import Post, Album, Link
 
@@ -21,6 +22,16 @@ class PostIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
     date_available = DateTimeField(model_attr='date_available')
     date_update = DateTimeField(model_attr='date_update')
+    tags = MultiValueField(null=True)
+
+    def prepare_tags(self, obj):
+        if not obj.tags:
+            return
+        tags = []
+        for tag in obj.get_tags() or []:
+            tags.append(tag.slug)
+            tags.append(tag.name)
+        return tags
 
     def get_model(self):
         return Post
@@ -38,6 +49,16 @@ class AlbumIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
     date_available = DateTimeField(model_attr='date_available')
     date_update = DateTimeField(model_attr='date_update')
+    tags = MultiValueField(null=True)
+
+    def prepare_tags(self, obj):
+        if not obj.tags:
+            return
+        tags = []
+        for tag in obj.get_tags() or []:
+            tags.append(tag.slug)
+            tags.append(tag.name)
+        return tags
 
     def get_model(self):
         return Album
@@ -55,6 +76,16 @@ class LinkIndex(SearchIndex, Indexable):
     text = CharField(document=True, use_template=True)
     date_available = DateTimeField(model_attr='date_available')
     date_update = DateTimeField(model_attr='date_update')
+    tags = MultiValueField(null=True)
+
+    def prepare_tags(self, obj):
+        if not obj.tags:
+            return
+        tags = []
+        for tag in obj.get_tags() or []:
+            tags.append(tag.slug)
+            tags.append(tag.name)
+        return tags
 
     def get_model(self):
         return Link

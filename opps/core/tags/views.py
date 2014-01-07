@@ -1,14 +1,18 @@
 # -*- encoding: utf-8 -*-
 from django.utils import timezone
 from django.contrib.sites.models import get_current_site
-from django.core.cache import cache
 from django.conf import settings
-from django.utils.text import slugify
+
+from haystack.query import SearchQuerySet
 
 from opps.views.generic.list import ListView
 from opps.containers.models import Container
 
+from opps.articles.models import Post, Album, Link
+
 from .models import Tag
+
+USE_HAYSTACK = getattr(settings, 'OPPS_TAGS_USE_HAYSTACK', False)
 
 
 class TagList(ListView):
@@ -26,9 +30,17 @@ class TagList(ListView):
         self.long_slug = 'tags'
         self.tag = self.kwargs['tag']
 
-        #cache_key = u'taglist-{}'.format(slugify(self.tag))
-        #if cache.get(cache_key):
-        #    return cache.get(cache_key)
+        if USE_HAYSTACK:
+            return self.get_queryset_from_haystack()
+        return self.get_queryset_from_db()
+
+    def get_queryset_from_haystack(self):
+        sqs = SearchQuerySet().models(Post, Album, Link).filter(
+            tags=self.tag).order_by('-date_available')
+        sqs.model = Container
+        return sqs
+
+    def get_queryset_from_db(self):
 
         tags = Tag.objects.filter(slug=self.tag).values_list('name') or []
         tags_names = []
@@ -51,6 +63,5 @@ class TagList(ListView):
 
         # grab the containers
         self.containers = self.model.objects.filter(id__in=ids)
-        #expires = getattr(settings, 'OPPS_CACHE_EXPIRE', 3600)
-        #cache.set(cache_key, self.containers, expires)
+
         return self.containers
