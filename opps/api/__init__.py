@@ -24,14 +24,14 @@ class BaseHandler(Handler):
 
     def _limit(self, request):
         limit = request.GET.get('paginate_limit', self.limit)
-        return int(limit)*int(request.GET.get('page', 1))
+        return int(limit) * int(request.GET.get('page', 1))
 
     def _page(self, request):
         page = int(request.GET.get('page', 1))
         if page == 1:
             return 0
         limit = int(request.GET.get('paginate_limit', self.limit))
-        return limit*page-page
+        return limit * page - page
 
     def appendModel(Model, Filters):
         m = Model.objects.filter(**Filters)
