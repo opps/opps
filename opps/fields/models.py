@@ -25,6 +25,10 @@ class Field(models.Model):
     def __unicode__(self):
         return u"{} - {}".format(self.application, self.name)
 
+    class Meta:
+        verbose_name = _(u'Field')
+        verbose_name_plural = _(u'Fields')
+
 
 class Option(models.Model):
     field = models.ForeignKey('fields.Field')
@@ -34,6 +38,10 @@ class Option(models.Model):
 
     def __unicode__(self):
         return u"{} - {}".format(self.field.slug, self.name)
+
+    class Meta:
+        verbose_name = _(u'Option')
+        verbose_name_plural = _(u'Options')
 
 
 class FieldOption(models.Model):
@@ -46,3 +54,5 @@ class FieldOption(models.Model):
 
     class Meta:
         ordering = ['-order']
+        verbose_name = _('Field option')
+        verbose_name_plural = _('Field options')
