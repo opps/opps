@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse
 from django.contrib.auth import authenticate
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from piston.handler import BaseHandler as Handler
 
@@ -10,17 +11,56 @@ from opps.api.models import ApiKey
 
 class BaseHandler(Handler):
     limit = 20
+    meta = {
+        #'paginate_limit': None,
+        #'page': 1,
+        #'num_pages': 1,
+        #'pages_range': [1],
+        #'has_next': False,
+        #'has_previous': False,
+        #'total_objects': 0
+    }
+
+    def include_meta(self, d):
+        obj = {'meta': self.meta, 'objects': d}
+        return obj
+
+    def paginate_queryset(self, queryset):
+        paginator = Paginator(queryset,
+                              self.meta.get('paginate_limit', self.limit))
+        self.meta['num_pages'] = paginator.num_pages
+        self.meta['page_range'] = paginator.page_range
+        page = self.meta.get('page', 1)
+        try:
+            results = paginator.page(page)
+        except PageNotAnInteger:
+            results = paginator.page(1)
+        except EmptyPage:
+            results = paginator.page(paginator.num_pages)
+
+        self.meta['has_next'] = results.has_next()
+        self.meta['has_previous'] = results.has_previous()
+        self.meta['has_other_pages'] = results.has_other_pages()
+        self.meta['end_index'] = results.end_index()
+        self.meta['start_index'] = results.start_index()
+        self.meta['page_number'] = results.number
+        self.meta['total_objects'] = paginator.count
+        self.meta['per_page'] = paginator.per_page
+        return results
 
     def read(self, request):
         base = self.model.objects
+
         if request.GET.items():
             items = request.GET.dict()
-            if request.GET.get('paginate_limit'):
-                del items['paginate_limit']
-            if request.GET.get('page'):
-                del items['page']
-            return base.filter(**items)
-        return base.all()
+            self.meta['paginate_limit'] = items.pop('paginate_limit', None)
+            self.meta['page'] = items.pop('page', 1)
+            qs = base.filter(**items)
+        else:
+            qs = base.all()
+
+        self.meta['total_objects'] = qs.count()
+        return qs
 
     def _limit(self, request):
         limit = request.GET.get('paginate_limit', self.limit)
