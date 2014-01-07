@@ -258,6 +258,15 @@ def filter_queryset_by(queryset, **filters):
     if _cache:
         return _cache
 
+    # check for __in lookups and split the param
+    found_in_lookup = None
+    for key in filters.keys():
+        if '__in' in key:
+            found_in_lookup = key
+
+    if found_in_lookup:
+        filters[found_in_lookup] = filters[found_in_lookup].split(',')
+
     if not getattr(queryset, 'query', False):
         return queryset
 
@@ -279,6 +288,15 @@ def exclude_queryset_by(queryset, **excludes):
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
+
+    # check for __in lookups and split the param
+    found_in_lookup = None
+    for key in excludes.keys():
+        if '__in' in key:
+            found_in_lookup = key
+
+    if found_in_lookup:
+        excludes[found_in_lookup] = excludes[found_in_lookup].split(',')
 
     if not getattr(queryset, 'query', False):
         return queryset
