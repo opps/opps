@@ -1,0 +1,83 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-07 11:33-0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: models.py:8
+msgid "Checkbox"
+msgstr ""
+
+#: models.py:9
+msgid "Radio"
+msgstr ""
+
+#: models.py:10
+msgid "Text"
+msgstr "Texto"
+
+#: models.py:11
+msgid "Textarea"
+msgstr ""
+
+#: models.py:16 models.py:35
+msgid "Name"
+msgstr "Nome"
+
+#: models.py:17 models.py:36
+msgid "Slug"
+msgstr "Retranca"
+
+#: models.py:18
+msgid "Application"
+msgstr "Aplicação"
+
+#: models.py:21
+msgid "Type"
+msgstr "Tipo"
+
+#: models.py:29
+msgid "Field"
+msgstr "Campo customizado"
+
+#: models.py:30
+msgid "Fields"
+msgstr "Campos customizados"
+
+#: models.py:37
+msgid "Value"
+msgstr "Valor"
+
+#: models.py:43
+msgid "Option"
+msgstr "Opção"
+
+#: models.py:44
+msgid "Options"
+msgstr "Opções"
+
+#: models.py:50
+msgid "Order"
+msgstr "Ordem"
+
+#: models.py:57
+msgid "Field option"
+msgstr "Opção para campo customizado"
+
+#: models.py:58
+msgid "Field options"
+msgstr "Opções para campos customizados"
