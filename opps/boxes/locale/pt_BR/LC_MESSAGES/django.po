@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Translators:
 # Ellison Leão, 2013
@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"POT-Creation-Date: 2014-01-08 18:05-0200\n"
 "PO-Revision-Date: 2013-08-08 17:12+0000\n"
 "Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: __init__.py:5
@@ -39,47 +39,47 @@ msgstr "Publicação"
 msgid "Data sample"
 msgstr "Exemplo de data"
 
-#: models.py:23
+#: models.py:13
 msgid "Dynamic queryset name"
 msgstr "Nome do Queryset dinâmico"
 
-#: models.py:25 models.py:90
+#: models.py:15 models.py:84
 msgid "Slug"
 msgstr "Retranca"
 
-#: models.py:31
+#: models.py:21
 msgid "Model"
 msgstr "Modelo"
 
-#: models.py:32
+#: models.py:22
 msgid "Limit"
 msgstr "Limite"
 
-#: models.py:33
+#: models.py:23
 msgid "Order"
 msgstr "Ordem"
 
-#: models.py:37
+#: models.py:27
 msgid "Channel"
 msgstr "Canal"
 
-#: models.py:43
+#: models.py:33
 msgid "Filters"
 msgstr "Filtros"
 
-#: models.py:44
+#: models.py:34
 msgid "Json format extra filters for queryset"
 msgstr "Filtros extras para queryset no formato JSON"
 
-#: models.py:54
+#: models.py:45
 msgid "Invalid JSON"
 msgstr "JSON inválido"
 
-#: models.py:59
+#: models.py:50
 msgid "Invalid Queryset"
 msgstr "Queryset inválido"
 
-#: models.py:88
+#: models.py:82
 msgid "Box name"
 msgstr "Nome da Box"
 
