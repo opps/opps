@@ -5,6 +5,7 @@ import hmac
 
 from django.db import models
 from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 
 try:
@@ -18,9 +19,10 @@ User = get_user_model()
 
 
 class ApiKey(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    key = models.CharField(u"Key", max_length=255)
-    date_insert = models.DateTimeField(u"Date insert", auto_now_add=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             verbose_name=_(u"User"))
+    key = models.CharField(_(u"Key"), max_length=255)
+    date_insert = models.DateTimeField(_(u"Date insert"), auto_now_add=True)
 
     def __unicode__(self):
         return u"{} for {}".format(self.key, self.user)
@@ -33,6 +35,10 @@ class ApiKey(models.Model):
     def generate_key(self):
         new_uuid = uuid.uuid4()
         return hmac.new(new_uuid.bytes, digestmod=sha1).hexdigest()
+
+    class Meta:
+        verbose_name = _(u"API Key")
+        verbose_name_plural = _(u"API Keys")
 
 
 def create_api_key(sender, **kwargs):
