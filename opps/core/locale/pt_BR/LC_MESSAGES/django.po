@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-14 14:41-0200\n"
+"POT-Creation-Date: 2014-01-08 09:44-0200\n"
 "PO-Revision-Date: 2013-08-08 17:30+0000\n"
 "Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
@@ -19,51 +19,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: __init__.py:8
+#: __init__.py:7
 msgid "Core"
 msgstr "Core"
 
-#: admin.py:23
+#: admin.py:50
 msgid "Publish/Unpublish"
 msgstr "Publicar/Despublicar"
 
-#: admin.py:42
+#: admin.py:69
 msgid "This item is not in a box"
 msgstr "Este item não está em um box"
 
-#: admin.py:44
+#: admin.py:71
 msgid "Article boxes"
 msgstr "Boxes de artigos"
 
-#: admin.py:50
+#: admin.py:77
 msgid "No Image"
 msgstr "Sem imagem"
 
-#: admin.py:51
+#: admin.py:78
 msgid "Thumbnail"
 msgstr "Imagem pequena"
 
-#: admin.py:59
+#: admin.py:86
 msgid "Images"
 msgstr "Imagens"
 
-#: admin.py:66 admin.py:68
+#: admin.py:93 admin.py:95
 msgid "View on site"
 msgstr "Ver no site"
 
-#: admin.py:101
+#: admin.py:129
 msgid "Identification"
 msgstr "Identificação"
 
-#: admin.py:103
+#: admin.py:131
 msgid "Relationships"
 msgstr "Relacionamentos"
 
-#: admin.py:105
+#: admin.py:133
 msgid "Publication"
 msgstr "Publicação"
 
-#: filters.py:18 models.py:87 tests/test_models.py:64
+#: filters.py:18 models.py:101
 msgid "Channel"
 msgstr "Canal"
 
@@ -71,23 +71,23 @@ msgstr "Canal"
 msgid "No channel"
 msgstr "Sem canal"
 
-#: filters.py:84
+#: filters.py:91
 msgid "Child class"
 msgstr "Classe filha"
 
-#: filters.py:110
+#: filters.py:117
 msgid "Has queryset"
 msgstr "Tem queryset"
 
-#: filters.py:124
+#: filters.py:131
 msgid "No"
 msgstr "Não"
 
-#: filters.py:125
+#: filters.py:132
 msgid "Yes"
 msgstr "Sim"
 
-#: filters.py:145
+#: filters.py:152
 msgid "User"
 msgstr "Usuário"
 
@@ -99,91 +99,95 @@ msgstr "Data de inserção"
 msgid "Date update"
 msgstr "Data de atualização"
 
-#: models.py:39
+#: models.py:47
 msgid "Site id"
 msgstr "ID do Site"
 
-#: models.py:44
+#: models.py:52
 msgid "Site domain"
 msgstr "Domínio do Site"
 
-#: models.py:49
+#: models.py:60
+msgid "Mirror site"
+msgstr "Sites espelho"
+
+#: models.py:63
 msgid "Date available"
 msgstr "Data de publicação"
 
-#: models.py:54
+#: models.py:68
 msgid "Published"
 msgstr "Publicado"
 
-#: models.py:93
+#: models.py:107
 msgid "Mirror channel"
 msgstr "Canais espelho"
 
-#: models.py:96
+#: models.py:110
 msgid "Channel name"
 msgstr "Nome do canal"
 
-#: models.py:102
+#: models.py:116
 msgid "Channel long slug"
 msgstr "Retranca longa do canal"
 
-#: models.py:121
+#: models.py:135
 msgid "Slug"
 msgstr "Retranca"
 
-#: models.py:151
+#: models.py:165
 msgid "The URL already exists as a redirect"
 msgstr "Esta URL já existe para um redirecionamento"
 
-#: models.py:191
+#: models.py:205
 msgid "Slug already exists."
 msgstr "Retranca já existe"
 
-#: models.py:219
+#: models.py:233
 msgid "Main Image"
 msgstr "Imagem Principal"
 
-#: models.py:222
+#: models.py:236
 msgid "Main image caption"
 msgstr "Legenda da Imagem Principal"
 
-#: models.py:292
+#: models.py:306
 msgid "App label"
 msgstr "Nome da App"
 
-#: models.py:300
+#: models.py:314
 msgid "Config Key Group"
 msgstr "Grupo de Chave de Configuração"
 
-#: models.py:308
+#: models.py:322
 msgid "Config Key"
 msgstr "Chave de Configuração"
 
-#: models.py:314
+#: models.py:328
 msgid "Format"
 msgstr "Formato"
 
-#: models.py:316
+#: models.py:330
 msgid "Config Value"
 msgstr "Valor de configuração"
 
-#: models.py:317
+#: models.py:331
 msgid "Description"
 msgstr "Descrição"
 
-#: models.py:322 tests/test_models.py:158
+#: models.py:336
 msgid "Only published container"
 msgstr "Apenas artigos publicados"
 
-#: models.py:332
+#: models.py:346
 msgid "Config"
 msgstr "Configuração"
 
-#: models.py:333
+#: models.py:347
 msgid "Configs"
 msgstr "Configurações"
 
-#: models.py:357
+#: models.py:371
 #, python-format
 msgid "Can't format the value to %s"
 msgstr "Erro ao formatar o valor para %s"
