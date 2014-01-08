@@ -11,26 +11,23 @@ from opps.api.models import ApiKey
 
 class BaseHandler(Handler):
     limit = 20
-    meta = {
-        #'paginate_limit': None,
-        #'page': 1,
-        #'num_pages': 1,
-        #'pages_range': [1],
-        #'has_next': False,
-        #'has_previous': False,
-        #'total_objects': 0
-    }
+    meta = {}
 
     def include_meta(self, d):
         obj = {'meta': self.meta, 'objects': d}
         return obj
 
-    def paginate_queryset(self, queryset):
-        paginator = Paginator(queryset,
-                              self.meta.get('paginate_limit', self.limit))
+    def paginate_queryset(self, queryset, request):
+        paginator = Paginator(
+            queryset,
+            self.meta.get(
+                'paginate_limit',
+                request.GET.get('paginate_limit', self.limit)
+            )
+        )
         self.meta['num_pages'] = paginator.num_pages
         self.meta['page_range'] = paginator.page_range
-        page = self.meta.get('page', 1)
+        page = self.meta.get('page', request.GET.get('page', 1))
         try:
             results = paginator.page(page)
         except PageNotAnInteger:
