@@ -334,12 +334,14 @@ class Config(Publishable):
         'containers.Container',
         null=True, blank=True,
         help_text=_(u'Only published container'),
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
+        verbose_name=_(u'Container')
     )
     channel = models.ForeignKey(
         'channels.Channel',
         null=True, blank=True,
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
+        verbose_name=_(u'Channel')
     )
 
     class Meta:
