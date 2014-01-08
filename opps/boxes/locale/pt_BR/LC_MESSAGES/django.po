@@ -37,7 +37,7 @@ msgstr "Publicação"
 
 #: admin.py:30 admin.py:49
 msgid "Data sample"
-msgstr "Exemplo de data"
+msgstr "Exemplo de dado"
 
 #: forms.py:12 models.py:21
 msgid "Model"
