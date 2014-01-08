@@ -11,6 +11,7 @@ from opps.api.models import ApiKey
 
 class BaseHandler(Handler):
     limit = 20
+    limit_arg = 'paginate_limit'
     meta = {}
 
     def include_meta(self, d):
@@ -18,16 +19,16 @@ class BaseHandler(Handler):
         return obj
 
     def paginate_queryset(self, queryset, request):
-        paginator = Paginator(
-            queryset,
-            self.meta.get(
-                'paginate_limit',
-                request.GET.get('paginate_limit', self.limit)
-            )
-        )
+        limit = request.GET.get(self.limit_arg, self.meta.get(self.limit_arg))
+        paginator = Paginator(queryset, limit or self.limit)
+
         self.meta['num_pages'] = paginator.num_pages
         self.meta['page_range'] = paginator.page_range
+        self.meta['total_objects'] = paginator.count
+        self.meta['per_page'] = paginator.per_page
+
         page = self.meta.get('page', request.GET.get('page', 1))
+
         try:
             results = paginator.page(page)
         except PageNotAnInteger:
@@ -41,8 +42,7 @@ class BaseHandler(Handler):
         self.meta['end_index'] = results.end_index()
         self.meta['start_index'] = results.start_index()
         self.meta['page_number'] = results.number
-        self.meta['total_objects'] = paginator.count
-        self.meta['per_page'] = paginator.per_page
+
         return results
 
     def read(self, request):
@@ -50,7 +50,7 @@ class BaseHandler(Handler):
 
         if request.GET.items():
             items = request.GET.dict()
-            self.meta['paginate_limit'] = items.pop('paginate_limit', None)
+            self.meta[self.limit_arg] = items.pop(self.limit_arg, None)
             self.meta['page'] = items.pop('page', 1)
             qs = base.filter(**items)
         else:
@@ -60,14 +60,14 @@ class BaseHandler(Handler):
         return qs
 
     def _limit(self, request):
-        limit = request.GET.get('paginate_limit', self.limit)
+        limit = request.GET.get(self.limit_arg, self.limit)
         return int(limit) * int(request.GET.get('page', 1))
 
     def _page(self, request):
         page = int(request.GET.get('page', 1))
         if page == 1:
             return 0
-        limit = int(request.GET.get('paginate_limit', self.limit))
+        limit = int(request.GET.get(self.limit_arg, self.limit))
         return limit * page - page
 
     def appendModel(Model, Filters):
