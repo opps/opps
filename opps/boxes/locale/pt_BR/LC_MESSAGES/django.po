@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 18:05-0200\n"
+"POT-Creation-Date: 2014-01-08 18:10-0200\n"
 "PO-Revision-Date: 2013-08-08 17:12+0000\n"
 "Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
@@ -39,6 +39,10 @@ msgstr "Publicação"
 msgid "Data sample"
 msgstr "Exemplo de data"
 
+#: forms.py:12 models.py:21
+msgid "Model"
+msgstr "Modelo"
+
 #: models.py:13
 msgid "Dynamic queryset name"
 msgstr "Nome do Queryset dinâmico"
@@ -46,10 +50,6 @@ msgstr "Nome do Queryset dinâmico"
 #: models.py:15 models.py:84
 msgid "Slug"
 msgstr "Retranca"
-
-#: models.py:21
-msgid "Model"
-msgstr "Modelo"
 
 #: models.py:22
 msgid "Limit"
