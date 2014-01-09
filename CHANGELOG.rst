@@ -40,6 +40,7 @@ Changelog
 * Add `get_custom_field_value` template tag
 * Fix None hat field on Mirror creation
 * Fix `main_image` caption population on Albums
+* Add new `hat` field on Channel model
 
 0.2.2
 =====
