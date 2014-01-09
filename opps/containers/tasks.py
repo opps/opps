@@ -29,7 +29,8 @@ def check_mirror_site(container, Mirror):
                 slug=container.slug,
                 channel_long_slug=container.channel.long_slug,
                 channel_name=container.channel.name,
-                main_image=container.main_image
+                main_image=container.main_image,
+                hat=container.hat,
             )
         )
 
@@ -41,6 +42,7 @@ def check_mirror_site(container, Mirror):
             mirror.channel_long_slug = container.channel.long_slug
             mirror.channel_name = container.channel.name
             mirror.site = site
+            mirror.hat = container.hat
             mirror.save()
 
 
@@ -74,7 +76,8 @@ def check_mirror_channel(container, Mirror):
                 slug=container.slug,
                 channel_long_slug=channel.long_slug,
                 channel_name=channel.name,
-                main_image=container.main_image
+                main_image=container.main_image,
+                hat=container.hat
             )
         )
 
@@ -85,4 +88,5 @@ def check_mirror_channel(container, Mirror):
             mirror.main_image = container.main_image
             mirror.channel_long_slug = channel.long_slug
             mirror.channel_name = channel.name
+            mirror.hat = container.hat
             mirror.save()
