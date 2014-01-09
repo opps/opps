@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-12 19:23-0200\n"
+"POT-Creation-Date: 2014-01-09 12:49-0200\n"
 "PO-Revision-Date: 2013-08-08 17:14+0000\n"
 "Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: __init__.py:5 models.py:56
+#: __init__.py:5 models.py:59
 msgid "Channels"
 msgstr "Canais"
 
@@ -56,18 +56,22 @@ msgid "Description"
 msgstr "Descrição"
 
 #: models.py:34
+msgid "Hat"
+msgstr "Chapéu"
+
+#: models.py:37
 msgid "Show in menu?"
 msgstr "Mostrar no menu?"
 
-#: models.py:36
+#: models.py:39
 msgid "Show in main RSS?"
 msgstr "Mostrar no menu?"
 
-#: models.py:40
+#: models.py:43
 msgid "Is home page?"
 msgstr "É página principal?"
 
-#: models.py:42
+#: models.py:45
 msgid ""
 "Check only if this channel is the homepage. Should have only one homepage "
 "per site"
@@ -75,22 +79,22 @@ msgstr ""
 "Marque apenas se o canal for do tipo home. Apenas um canal pode ser "
 "considerado com esse tipo"
 
-#: models.py:45
+#: models.py:48
 msgid "Group sub-channel?"
 msgstr "Agrupar sub-canais?"
 
-#: models.py:46
+#: models.py:49
 msgid "Order"
 msgstr "Ordem"
 
-#: models.py:49
+#: models.py:52
 msgid "Parent"
 msgstr "Categoria Pai"
 
-#: models.py:55 models.py:82 tests/test_models.py:196
+#: models.py:58 models.py:85
 msgid "Channel"
 msgstr "Canal"
 
-#: models.py:77
+#: models.py:80
 msgid "Get HTTP Absolute URL"
 msgstr "Mostrar URL Absoluta Completa"
