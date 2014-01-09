@@ -28,7 +28,7 @@ class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
 
     fieldsets = (
         (_(u'Identification'), {
-            'fields': ('site', 'parent', 'name', 'slug', 'layout',
+            'fields': ('site', 'parent', 'name', 'slug', 'layout', 'hat',
                        'description', 'order', ('show_in_menu',
                                                 'include_in_main_rss'),
                        'homepage', 'group')}),
