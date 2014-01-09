@@ -274,6 +274,9 @@ class Imaged(models.Model):
             ci.image_id: ci.caption for ci in self.containerimage_set.all()
         }
 
+        if self.main_image:
+            captions[self.main_image.id] = self.main_image.caption
+
         for im in imgs:
             caption = captions.get(im.pk)
             if caption:
