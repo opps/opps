@@ -39,6 +39,7 @@ Changelog
 * Fix url pattern from flatpages, now accept slugs with dashs
 * Add `get_custom_field_value` template tag
 * Fix None hat field on Mirror creation
+* Fix `main_image` caption population on Albums
 
 0.2.2
 =====
