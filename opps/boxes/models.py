@@ -20,6 +20,7 @@ class QuerySet(Publishable):
 
     model = models.CharField(_(u'Model'), max_length=150)
     limit = models.PositiveIntegerField(_(u'Limit'), default=7)
+    offset = models.PositiveIntegerField(_(u'Offset'), default=0)
     order = models.CharField(_('Order'), max_length=1, choices=(
         ('-', 'DESC'), ('+', 'ASC')))
     channel = models.ForeignKey(
@@ -49,6 +50,9 @@ class QuerySet(Publishable):
         except:
             raise ValidationError(_(u'Invalid Queryset'))
 
+        if self.offset >= self.limit:
+            raise ValidationError(_(u'Offset can\'t be equal or higher than limit'))
+
     def get_queryset(self):
 
         _app, _model = self.model.split('.')
@@ -72,10 +76,11 @@ class QuerySet(Publishable):
         if self.filters:
             filters = json.loads(self.filters)
             queryset = queryset.filter(**filters)
+
         if self.order == '-':
             queryset = queryset.order_by('-id')
 
-        return queryset[:self.limit]
+        return queryset[self.offset:self.limit]
 
 
 class BaseBox(Publishable, Channeling):

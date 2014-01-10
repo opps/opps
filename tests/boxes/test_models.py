@@ -34,6 +34,11 @@ class BoxesFields(TestCase):
         self.assertEqual(field.__class__, models.PositiveIntegerField)
         self.assertEqual(field.default, 7)
 
+    def test_offset(self):
+        field = QuerySet._meta.get_field_by_name(u"offset")[0]
+        self.assertEqual(field.__class__, models.PositiveIntegerField)
+        self.assertEqual(field.default, 0)
+
     def test_order(self):
         field = QuerySet._meta.get_field_by_name(u"order")[0]
         self.assertEqual(field.__class__, models.CharField)
