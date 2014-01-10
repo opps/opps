@@ -5,9 +5,13 @@ register = template.Library()
 
 
 @register.simple_tag
-def upload_js(container):
-    container_sources = container.source if container.source else ''
-    container_tags = container.tags if container.tags else ''
+def upload_js(container=None):
+    if container:
+        container_sources = container.source if container.source else ''
+        container_tags = container.tags if container.tags else ''
+        title = container.title
+    else:
+        container_sources = container_tags = title = ''
     return u"""
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">
@@ -21,7 +25,7 @@ def upload_js(container):
         <label>
         """ + unicode(_(u'Title')) + u""": <input type="text"
         name="title" value='""" + \
-        container.title + u"""' required></label>
+        title + u"""' required></label>
         <label>""" + unicode(_(u'Caption')) + u""":
             <textarea name="caption" rows="2" colums="1">
                         </textarea>

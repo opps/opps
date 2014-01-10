@@ -6,8 +6,10 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.utils import timezone
 from django.utils.text import slugify
 from django.contrib.auth.decorators import login_required
+from django.contrib.sites.models import get_current_site
 
 from opps.images.models import Image
 from opps.containers.models import Container, ContainerImage
@@ -22,9 +24,21 @@ def response_mimetype(request):
 
 @csrf_exempt
 @login_required(login_url='/admin/')
-def image_create(request, container_pk):
+def image_create(request, container_pk=None):
 
-    container = get_object_or_404(Container, pk=int(container_pk))
+    if container_pk:
+        container = get_object_or_404(Container, pk=int(container_pk))
+        title = container.title
+        site = container.site
+        user = request.user or container.user
+        date_available = container.date_available
+    else:
+        container = None
+        title = 'Uploaded Image'
+        site = get_current_site(request)
+        user = request.user
+        date_available = timezone.now()
+
     if request.method == "POST":
         f = request.FILES.get('image')
 
@@ -36,25 +50,27 @@ def image_create(request, container_pk):
         slug = "{0}-{1}".format(slug[:100], random.getrandbits(32))
 
         instance = Image(
-            site=container.site,
-            user=container.user,
-            date_available=container.date_available,
+            site=site,
+            user=user,
+            date_available=date_available,
             title=title,
             slug=slug,
             archive=f,
             source=source,
             published=True,
             tags=tags,
+            description=caption
         )
         instance.save()
 
-        order = request.POST.get('order', 0)
-        ContainerImage.objects.create(
-            container=container,
-            image=instance,
-            caption=caption,
-            order=int(order)
-        )
+        if container:
+            order = request.POST.get('order', 0)
+            ContainerImage.objects.create(
+                container=container,
+                image=instance,
+                caption=caption,
+                order=int(order)
+            )
 
         data = [{'name': f.name,
                  'url': "%s" % instance.archive.url,
