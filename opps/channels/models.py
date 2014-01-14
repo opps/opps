@@ -50,7 +50,7 @@ class Channel(MPTTModel, Publishable, Slugged):
     parent = TreeForeignKey('self', related_name='subchannel',
                             null=True, blank=True,
                             verbose_name=_(u'Parent'))
-
+    paginate_by = models.IntegerField(_("Paginate by"), null=True, blank=True)
     objects = ChannelManager()
 
     class Meta:

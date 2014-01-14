@@ -36,9 +36,11 @@ class View(object):
                                                        queryset.model.
                                                        __name__).upper()
 
-        paginate_by = getattr(settings, setting_name, self.paginate_by)
+        by_settings = getattr(settings, setting_name, self.paginate_by)
+        by_request = self.request.GET.get('paginate_by')
+        by_channel = getattr(self.channel, 'paginate_by', None)
 
-        return paginate_by
+        return by_request or by_channel or by_settings
 
     def get_context_data(self, **kwargs):
         if not self.long_slug:

@@ -31,7 +31,7 @@ class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
             'fields': ('site', 'parent', 'name', 'slug', 'layout', 'hat',
                        'description', 'order', ('show_in_menu',
                                                 'include_in_main_rss'),
-                       'homepage', 'group')}),
+                       'homepage', 'group', 'paginate_by')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
