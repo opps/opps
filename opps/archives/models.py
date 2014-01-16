@@ -4,6 +4,7 @@ import os
 import random
 from datetime import datetime
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
@@ -25,14 +26,29 @@ def get_file_path(instance, filename):
 class Archive(Publishable, Slugged):
 
     title = models.CharField(_(u"Title"), max_length=140, db_index=True)
-    archive = models.FileField(upload_to=get_file_path, max_length=255,
-                               verbose_name=_(u'Archive'))
+    archive = models.FileField(upload_to=get_file_path,
+                               max_length=255,
+                               verbose_name=_(u'Archive'),
+                               null=True,
+                               blank=True)
+    archive_link = models.URLField(_(u"Archive URL"),
+                                   max_length=255,
+                                   null=True,
+                                   blank=True)
     description = models.TextField(_(u"Description"), null=True, blank=True)
 
     source = models.CharField(
         _('Source'),
         null=True, blank=True,
-        max_length=255)
+        max_length=255
+    )
+
+    def clean(self):
+        items = [self.archive, self.archive_link]
+        if not any(items):
+            raise ValidationError(_(u"You must fill archive or archive URL"))
+        if all(items):
+            raise ValidationError(_(u"Cannot set archive and archive URL"))
 
     class Meta:
         verbose_name = _(u'Archive')
@@ -45,7 +61,7 @@ class Archive(Publishable, Slugged):
 
     def get_absolute_url(self):
         if self.date_available <= timezone.now() and self.published:
-            return self.archive.url
+            return self.archive_link or self.archive.url
         return u""
 
 

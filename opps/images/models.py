@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from opps.archives.models import Archive
 from opps.core.tags.models import Tagged
+from .generate import image_url as url
 
 HALIGN_CHOICES = (
     ('left', _('Left')),
@@ -67,19 +69,39 @@ class Cropping(models.Model):
         abstract = True
 
     def clean(self):
-        self.crop_x1 = len(self.crop_x1) == 0 if self.crop_x1 else 0
-        self.crop_x2 = len(self.crop_x2) == 0 if self.crop_x2 else 0
-        self.crop_y1 = len(self.crop_y1) == 0 if self.crop_y1 else 0
-        self.crop_y2 = len(self.crop_y2) == 0 if self.crop_y2 else 0
-
+        #self.crop_x1 = len(self.crop_x1) == 0 if self.crop_x1 else 0
+        #self.crop_x2 = len(self.crop_x2) == 0 if self.crop_x2 else 0
+        #self.crop_y1 = len(self.crop_y1) == 0 if self.crop_y1 else 0
+        #self.crop_y2 = len(self.crop_y2) == 0 if self.crop_y2 else 0
         super(Cropping, self).clean()
 
     def save(self, *args, **kwargs):
-        self.crop_example = self.archive.url
+        if self.archive and settings.THUMBOR_ENABLED:
+            self.crop_example = self.archive.url
+        else:
+            self.crop_example = self.image_url()
+
         super(Cropping, self).save(*args, **kwargs)
 
 
 class Image(Archive, Cropping, Tagged):
+
+    def clean(self):
+        items = ['x1', 'x2', 'y1', 'y2']
+        for item in items:
+            prop = getattr(self, 'crop_' + item, None)
+            if not prop or prop is None or prop in ['', ' ']:
+                setattr(self, 'crop_' + item, 0)
+
+        self.crop_example = self.archive_link or self.archive.url
+        super(Image, self).clean()
+
+    def image_url(self, *args, **kwargs):
+        if self.archive:
+            return url(self.archive.url, *args, **kwargs)
+        elif self.archive_link:
+            return self.archive_link
+        return ''
 
     class Meta:
         verbose_name = _(u'Image')

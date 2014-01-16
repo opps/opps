@@ -18,53 +18,53 @@
   <script type="text/javascript">
     django.jQuery(function(){
       function concatAndResolveUrl(url, concat) {
-        var url1 = url.split('/');
-        var url2 = concat.split('/');
-        var url3 = [ ];
-        for (var i = 0, l = url1.length; i < l; i ++) {
-          if (url1[i] == '..') {
-            url3.pop();
-          } else if (url1[i] == '.') {
-            continue;
-          } else {
-            url3.push(url1[i]);
-          }
-        }
-        for (var i = 0, l = url2.length; i < l; i ++) {
-          if (url2[i] == '..') {
-            url3.pop();
-          } else if (url2[i] == '.') {
-            continue;
-          } else {
-            url3.push(url2[i]);
-          }
-        }
-        return url3.join('/');
+	var url1 = url.split('/');
+	var url2 = concat.split('/');
+	var url3 = [ ];
+	for (var i = 0, l = url1.length; i < l; i ++) {
+	  if (url1[i] == '..') {
+	    url3.pop();
+	  } else if (url1[i] == '.') {
+	    continue;
+	  } else {
+	    url3.push(url1[i]);
+	  }
+	}
+	for (var i = 0, l = url2.length; i < l; i ++) {
+	  if (url2[i] == '..') {
+	    url3.pop();
+	  } else if (url2[i] == '.') {
+	    continue;
+	  } else {
+	    url3.push(url2[i]);
+	  }
+	}
+	return url3.join('/');
       }
 
       var check_url = function() {
-        var src = "{{ THUMBOR_SERVER }}/unsafe/";
-        var l = 800;
-        var r = 600;
-        if (django.jQuery("#id_fit_in").is(':checked')) { src += 'fit-in/'; }
-        if (django.jQuery("#id_flip").is(':checked')) { l = '-' + l; }
-        if (django.jQuery("#id_flop").is(':checked')) { r = '-' + r; }
-        src += l + "x" + r + "/";
-        if (django.jQuery("#id_halign").val()) { src += django.jQuery("#id_halign").val() + '/'; }
-        if (django.jQuery("#id_valign").val()) { src += django.jQuery("#id_valign").val() + '/'; }
-        if (django.jQuery("#id_smart").is(':checked')) { src += 'smart/'; }
+	var src = "{{ THUMBOR_SERVER }}/unsafe/";
+	var l = 800;
+	var r = 600;
+	if (django.jQuery("#id_fit_in").is(':checked')) { src += 'fit-in/'; }
+	if (django.jQuery("#id_flip").is(':checked')) { l = '-' + l; }
+	if (django.jQuery("#id_flop").is(':checked')) { r = '-' + r; }
+	src += l + "x" + r + "/";
+	if (django.jQuery("#id_halign").val()) { src += django.jQuery("#id_halign").val() + '/'; }
+	if (django.jQuery("#id_valign").val()) { src += django.jQuery("#id_valign").val() + '/'; }
+	if (django.jQuery("#id_smart").is(':checked')) { src += 'smart/'; }
 
-        img = django.jQuery("p.file-upload a").text()
-        if (img !== undefined) {
-          if (img.split('http').length == 1){
-            img = concatAndResolveUrl('{{ THUMBOR_MEDIA_URL }}', img);
-          }
-          django.jQuery("#crop_example").attr('src', src + img)
-        }
+	img = django.jQuery("p.file-upload a").text()
+	if (img !== undefined) {
+	  if (img.split('http').length == 1){
+	    img = concatAndResolveUrl('{{ THUMBOR_MEDIA_URL }}', img);
+	  }
+	  django.jQuery("#crop_example").attr('src', src + img)
+	}
       }
 
       django.jQuery("#id_meta, #id_flip, #id_flop, #id_fit_in, #id_smart, #id_halign, #id_valign").change(function(){
-        check_url();
+	check_url();
       });
       check_url();
 
@@ -74,5 +74,9 @@
       django.jQuery(".crop_y2").hide()
     });
   </script>
+  {% if THUMBOR_ENABLED %}
   <img id="crop_example" />
+  {% else %}
+  <img src='{{value}}' style='max-width:500px;'>
+  {% endif %}
 </div>

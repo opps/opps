@@ -21,7 +21,7 @@ class FileAdmin(AdminViewPermission):
         (_(u'Identification'), {
             'fields': ('site', 'title', 'slug',)}),
         (_(u'Content'), {
-            'fields': ('description', 'archive', 'tags')}),
+            'fields': ('description', 'archive', 'archive_link', 'tags')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available',)}),
