@@ -51,7 +51,8 @@ class QuerySet(Publishable):
             raise ValidationError(_(u'Invalid Queryset'))
 
         if self.offset >= self.limit:
-            raise ValidationError(_(u'Offset can\'t be equal or higher than limit'))
+            raise ValidationError(_(u'Offset can\'t be equal or higher than'
+                                    u'limit'))
 
     def get_queryset(self):
 
