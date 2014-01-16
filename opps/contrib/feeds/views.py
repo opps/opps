@@ -32,6 +32,7 @@ class ItemFeed(Feed):
                 image_url = "http://" + self.site.domain + image_url
             return image_url
 
+
 class ContainerFeed(ItemFeed):
 
     link = "/rss"
