@@ -1,19 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from django.conf import settings
 from django.contrib.syndication.views import Feed
 from django.contrib.sites.models import get_current_site
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from django.utils.feedgenerator import Atom1Feed
-
+from django.utils import feedgenerator
 from opps.containers.models import Container
 from opps.channels.models import Channel
 
 
 class ItemFeed(Feed):
 
+    feed_type = feedgenerator.Rss201rev2Feed
     description_template = 'articles/feed_item_description.html'
+    item_enclosure_length = 1
+    item_enclosure_mime_type = "image/jpeg"
 
     def item_title(self, item):
         return item.title
@@ -21,6 +24,13 @@ class ItemFeed(Feed):
     def item_link(self, item):
         return item.get_absolute_url()
 
+    def item_enclosure_url(self, item):
+        if item.main_image:
+            image_url = item.main_image.image_url()
+            media_url = getattr(settings, 'MEDIA_URL', '')
+            if not media_url.startswith('http'):
+                image_url = "http://" + self.site.domain + image_url
+            return image_url
 
 class ContainerFeed(ItemFeed):
 
@@ -86,8 +96,8 @@ class ChannelFeed(ItemFeed):
 
 class ContainerAtomFeed(ContainerFeed):
     link = "/atom"
-    feed_type = Atom1Feed
+    feed_type = feedgenerator.Atom1Feed
 
 
 class ChannelAtomFeed(ChannelFeed):
-    feed_type = Atom1Feed
+    feed_type = feedgenerator.Atom1Feed
