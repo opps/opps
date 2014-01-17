@@ -93,7 +93,11 @@ class Image(Archive, Cropping, Tagged):
             if not prop or prop is None or prop in ['', ' ']:
                 setattr(self, 'crop_' + item, 0)
 
-        self.crop_example = self.archive_link or self.archive.url
+        if self.archive and settings.THUMBOR_ENABLED:
+            self.crop_example = self.archive.url
+        else:
+            self.crop_example = self.image_url()
+
         super(Image, self).clean()
 
     def image_url(self, *args, **kwargs):
