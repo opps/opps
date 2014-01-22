@@ -235,7 +235,7 @@ def get_url(obj, http=False, target=None, url_only=False):
 @register.assignment_tag
 def get_containers_by(limit=None, **filters):
     """Return a list of containers filtered by given args"""
-    cachekey = hash(frozenset(filters.items()))
+    cachekey = u'getcontainersby-{}'.format(hash(frozenset(filters.items())))
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
@@ -246,14 +246,15 @@ def get_containers_by(limit=None, **filters):
 
     containers = [i for i in Container.objects.filter(
         site=site, published=True, **filters)[:limit]]
-    cache.set("getconby-{}".format(cachekey), 3600)
+
+    cache.set(cachekey, containers, 3600)
     return containers
 
 
 @register.assignment_tag
 def filter_queryset_by(queryset, **filters):
     """Filter object list"""
-    cachekey = hash(frozenset(filters.items()))
+    cachekey = u'filterquerysetby-{}'.format(hash(frozenset(filters.items())))
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
@@ -277,14 +278,15 @@ def filter_queryset_by(queryset, **filters):
         return queryset
 
     containers = queryset.filter(**filters)
-    cache.set("filterquerysetby-{}".format(cachekey), 3600)
+    cache.set(cachekey, containers, 3600)
     return containers
 
 
 @register.assignment_tag
 def exclude_queryset_by(queryset, **excludes):
     """Exclude object list"""
-    cachekey = hash(frozenset(excludes.items()))
+    cachekey = u'excludequerysetby-{}'.format(
+        hash(frozenset(excludes.items())))
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
@@ -320,7 +322,7 @@ def exclude_queryset_by(queryset, **excludes):
         if bad_ids:
             containers = containers.exclude(pk__in=bad_ids)
 
-    cache.set("excludequerysetby-{}".format(cachekey), 3600)
+    cache.set(cachekey, containers, 3600)
     return containers
 
 
