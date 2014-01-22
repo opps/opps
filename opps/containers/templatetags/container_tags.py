@@ -304,12 +304,22 @@ def exclude_queryset_by(queryset, **excludes):
     if not queryset.query.can_filter():
         # create new queryset based on the ids and apply filter
         ids = [i.id for i in queryset]
-        queryset = queryset.model.objects.filter(id__in=ids).exclude(
+        containers = queryset.model.objects.filter(id__in=ids).exclude(
             **excludes
         )
-        return queryset
+    else:
+        containers = queryset.exclude(**excludes)
 
-    containers = queryset.exclude(**excludes)
+    if 'child_class' in excludes:
+        # we need to exclude the mirrors containing the child_class that
+        # we want to exclude
+        mirrors = containers.filter(child_class='Mirror')
+        bad_child_class = excludes['child_class']
+        bad_ids = [i.id for i in mirrors if
+                   i.container.child_class == bad_child_class]
+        if bad_ids:
+            containers = containers.exclude(pk__in=bad_ids)
+
     cache.set("excludequerysetby-{}".format(cachekey), 3600)
     return containers
 
