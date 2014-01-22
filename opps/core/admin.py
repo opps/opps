@@ -7,8 +7,6 @@ from django.contrib.sites.models import Site
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 
-from opps.images.generate import image_url
-
 from haystack.query import SearchQuerySet
 from django.contrib.admin.views.main import ChangeList
 
