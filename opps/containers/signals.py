@@ -3,6 +3,8 @@
 from googl.short import GooglUrlShort
 from django.conf import settings
 
+from opps.channels.models import Channel
+
 GENERATE_SHORT_URL = getattr(settings, 'GENERATE_SHORT_URL', False)
 
 
@@ -27,6 +29,6 @@ def delete_container(sender, instance, using, **kwargs):
             channel=instance.channel,
             site=instance.site
         ).delete()
-    except instance.__class__.DoesNotExist:
+    except (instance.__class__.DoesNotExist, Channel.DoesNotExist):
         # object not exists
         pass
