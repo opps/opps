@@ -40,11 +40,11 @@ class ItemFeed(Feed):
 
     def item_enclosure_url(self, item):
         if item.main_image:
-            image_url = item.main_image.image_url()
-            media_url = getattr(settings, 'MEDIA_URL', '')
-            if not media_url.startswith('http'):
-                image_url = "http://" + self.site.domain + image_url
-            return image_url
+            i_url = item.main_image.image_url()
+            m_url = getattr(settings, 'MEDIA_URL', '')
+            if not m_url.startswith('http') and not i_url.startswith('http'):
+                i_url = "http://" + self.site.domain + i_url
+            return i_url
 
 
 class ContainerFeed(ItemFeed):
