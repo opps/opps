@@ -18,8 +18,22 @@ class ItemFeed(Feed):
     item_enclosure_length = 1
     item_enclosure_mime_type = "image/jpeg"
 
+    def item_categories(self, obj):
+        cats = []
+        if obj.channel:
+            cats.append(obj.channel.name)
+        if getattr(obj, 'tags', None) is not None:
+            cats.extend(obj.get_tags())
+        return cats
+
     def item_title(self, item):
         return item.title
+
+    def item_pubdate(self, item):
+        return item.date_available
+
+    def item_updateddate(self, item):
+        return item.date_update
 
     def item_link(self, item):
         return item.get_absolute_url()
