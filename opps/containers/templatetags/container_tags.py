@@ -254,7 +254,10 @@ def get_containers_by(limit=None, **filters):
 @register.assignment_tag
 def filter_queryset_by(queryset, **filters):
     """Filter object list"""
-    cachekey = u'filterquerysetby-{}'.format(hash(frozenset(filters.items())))
+    if not getattr(queryset, 'query', False):
+        return queryset
+
+    cachekey = u'filterquerysetby-{}'.format(hash(unicode(queryset.query)))
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
@@ -267,9 +270,6 @@ def filter_queryset_by(queryset, **filters):
 
     if found_in_lookup:
         filters[found_in_lookup] = filters[found_in_lookup].split(',')
-
-    if not getattr(queryset, 'query', False):
-        return queryset
 
     if not queryset.query.can_filter():
         # create new queryset based on the ids and apply filter
@@ -285,8 +285,11 @@ def filter_queryset_by(queryset, **filters):
 @register.assignment_tag
 def exclude_queryset_by(queryset, **excludes):
     """Exclude object list"""
-    cachekey = u'excludequerysetby-{}'.format(
-        hash(frozenset(excludes.items())))
+
+    if not getattr(queryset, 'query', False):
+        return queryset
+
+    cachekey = u'excludequerysetby-{}'.format(hash(unicode(queryset.query)))
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
@@ -299,9 +302,6 @@ def exclude_queryset_by(queryset, **excludes):
 
     if found_in_lookup:
         excludes[found_in_lookup] = excludes[found_in_lookup].split(',')
-
-    if not getattr(queryset, 'query', False):
-        return queryset
 
     if not queryset.query.can_filter():
         # create new queryset based on the ids and apply filter
