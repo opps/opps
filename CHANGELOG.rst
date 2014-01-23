@@ -41,7 +41,6 @@ Changelog
 * Fix None hat field on Mirror creation
 * Fix `main_image` caption population on Albums
 * Add new `hat` field on Channel model
-* Fix channel delete when it has some containers on it.
 
 0.2.2
 =====
