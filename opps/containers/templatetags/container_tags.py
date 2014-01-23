@@ -251,18 +251,10 @@ def get_containers_by(limit=None, **filters):
     return containers
 
 
-@register.assignment_tag(takes_context=True)
-def filter_queryset_by(context, queryset, cachekey='' , **filters):
+@register.assignment_tag
+def filter_queryset_by(queryset, **filters):
     """Filter object list"""
-    channel = ''
-    try:
-        channel = context.channel.long_slug
-    except Exception:
-        pass
-    cachekey = '{}-{}-{}'.format(
-            cachekey,
-            channel,
-            hash(frozenset(filters.items())))
+    cachekey = u'filterquerysetby-{}'.format(hash(frozenset(filters.items())))
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
@@ -286,22 +278,15 @@ def filter_queryset_by(context, queryset, cachekey='' , **filters):
         return queryset
 
     containers = queryset.filter(**filters)
-    cache.set("filterquerysetby-{}".format(cachekey), 3600)
+    cache.set(cachekey, containers, 3600)
     return containers
 
 
-@register.assignment_tag(takes_context=True)
-def exclude_queryset_by(context, queryset, cachekey='', **excludes):
+@register.assignment_tag
+def exclude_queryset_by(queryset, **excludes):
     """Exclude object list"""
-    channel = ''
-    try:
-        channel = context.channel.long_slug
-    except Exception:
-        pass
-    cachekey = '{}-{}-{}'.format(
-            cachekey,
-            channel,
-            hash(frozenset(filters.items())))
+    cachekey = u'excludequerysetby-{}'.format(
+        hash(frozenset(excludes.items())))
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
@@ -321,13 +306,23 @@ def exclude_queryset_by(context, queryset, cachekey='', **excludes):
     if not queryset.query.can_filter():
         # create new queryset based on the ids and apply filter
         ids = [i.id for i in queryset]
-        queryset = queryset.model.objects.filter(id__in=ids).exclude(
+        containers = queryset.model.objects.filter(id__in=ids).exclude(
             **excludes
         )
-        return queryset
+    else:
+        containers = queryset.exclude(**excludes)
 
-    containers = queryset.exclude(**excludes)
-    cache.set("excludequerysetby-{}".format(cachekey), 3600)
+    if 'child_class' in excludes:
+        # we need to exclude the mirrors containing the child_class that
+        # we want to exclude
+        mirrors = containers.filter(child_class='Mirror')
+        bad_child_class = excludes['child_class']
+        bad_ids = [i.id for i in mirrors if
+                   i.container.child_class == bad_child_class]
+        if bad_ids:
+            containers = containers.exclude(pk__in=bad_ids)
+
+    cache.set(cachekey, containers, 3600)
     return containers
 
 
