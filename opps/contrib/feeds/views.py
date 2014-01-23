@@ -76,6 +76,8 @@ class ContainerFeed(ItemFeed):
         if self.child_class:
             container = container.filter(child_class=self.child_class)
 
+        container = container.exclude(child_class__in=['Mirror', 'Entry'])
+
         return container.order_by('-date_available')[:40]
 
 
@@ -104,6 +106,8 @@ class ChannelFeed(ItemFeed):
             channel_long_slug=obj.long_slug,
             date_available__lte=timezone.now(),
             published=True,
+        ).exclude(
+            child_class__in=['Mirror', 'Entry']
         ).order_by(
             '-date_available'
         ).select_related('publisher')[:40]
