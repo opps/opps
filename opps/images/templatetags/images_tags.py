@@ -40,5 +40,4 @@ def image_obj(image, **kwargs):
                            (image.crop_x2, image.crop_y2))
 
         kwargs = dict(new, **kwargs)
-
-    return url(image_url=image.archive.url, **kwargs)
+    return image.image_url(**kwargs)
