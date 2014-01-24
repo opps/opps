@@ -23,7 +23,7 @@ class ItemFeed(Feed):
         if obj.channel:
             cats.append(obj.channel.name)
         if getattr(obj, 'tags', None) is not None:
-            cats.extend(obj.get_tags())
+            cats.extend(obj.get_tags() or [])
         return cats
 
     def item_title(self, item):
