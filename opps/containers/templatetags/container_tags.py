@@ -8,7 +8,7 @@ from django.utils.safestring import mark_safe
 from django.template.defaultfilters import linebreaksbr
 from django.core.cache import cache
 
-from opps.containers.models import Container, ContainerBox
+from opps.containers.models import Container, ContainerBox, Mirror
 from opps.channels.models import Channel
 
 from magicdate import magicdate
@@ -315,12 +315,12 @@ def exclude_queryset_by(queryset, **excludes):
     if 'child_class' in excludes:
         # we need to exclude the mirrors containing the child_class that
         # we want to exclude
-        mirrors = containers.filter(child_class='Mirror')
         bad_child_class = excludes['child_class']
-        bad_ids = [i.id for i in mirrors if
-                   i.container.child_class == bad_child_class]
-        if bad_ids:
-            containers = containers.exclude(pk__in=bad_ids)
+        mirrors = Mirror.objects.filter(
+            container__child_class=bad_child_class
+        ).values_list('id', flat=True)
+        if mirrors:
+            containers = containers.exclude(pk__in=mirrors)
 
     cache.set(cachekey, containers, 3600)
     return containers
