@@ -4,7 +4,8 @@
 Text parsing, analysing and searching utilities
 """
 
-import re, htmlentitydefs
+import re
+import htmlentitydefs
 
 
 def unescape(text):
@@ -14,7 +15,7 @@ def unescape(text):
     @param text The HTML (or XML) source text.
     @return The plain text, as a Unicode string, if necessary.
     """
-    
+
     def fixup(m):
         text = m.group(0)
         if text[:2] == "&#":
@@ -34,4 +35,3 @@ def unescape(text):
                 pass
         return text  # leave as is
     return re.sub("&#?\w+;", fixup, text)
-    
