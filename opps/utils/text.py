@@ -16,6 +16,9 @@ def unescape(text):
     @return The plain text, as a Unicode string, if necessary.
     """
 
+    if not text:
+        return text
+
     def fixup(m):
         text = m.group(0)
         if text[:2] == "&#":
