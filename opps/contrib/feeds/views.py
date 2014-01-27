@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import json
 from django.conf import settings
 from django.contrib.syndication.views import Feed
 from django.contrib.sites.models import get_current_site
@@ -46,6 +47,21 @@ class ItemFeed(Feed):
                 i_url = "http://" + self.site.domain + i_url
             return i_url
 
+    def build_filters(self):
+        if not hasattr(self, 'request'):
+            return {}
+
+        data = {"filter": {}, "exclude": {}}
+        r_data = self.request.GET.dict()
+        for k, v in r_data.items():
+            if k.startswith(('filter',  'exclude')):
+                v = json.loads(v)
+                for lookup, value in v.items():
+                    if lookup.endswith('__in'):
+                        v[lookup] = value.split(',')
+                data[k].update(v)
+        return data
+
 
 class ContainerFeed(ItemFeed):
 
@@ -56,6 +72,7 @@ class ContainerFeed(ItemFeed):
 
     def __call__(self, request, *args, **kwargs):
         self.site = get_current_site(request)
+        self.request = request
         return super(ContainerFeed, self).__call__(request, *args, **kwargs)
 
     def title(self):
@@ -82,12 +99,27 @@ class ContainerFeed(ItemFeed):
 
 
 class ChannelFeed(ItemFeed):
+    """
+    Items can be filtered using "filter" and "exclude" querystring args.
+    examples:
+
+    - get only entries with images
+    rss?filter={"main_image__isnull": false}
+
+    - exclude specific child_class
+    rss?exclude={"child_class__in": "Album,Poll"}
+
+    The format is json
+    """
 
     def get_object(self, request, long_slug):
         self.site = get_current_site(request)
-        return get_object_or_404(Channel,
-                                 site=self.site,
-                                 long_slug=long_slug)
+        self.request = request
+        channel = get_object_or_404(Channel,
+                                    site=self.site,
+                                    long_slug=long_slug)
+        self.channel_descendants = channel.get_descendants(include_self=True)
+        return channel
 
     def link(self, obj):
         return _("{0}RSS".format(obj.get_absolute_url()))
@@ -101,16 +133,31 @@ class ChannelFeed(ItemFeed):
                                                             obj.name))
 
     def items(self, obj):
-        return Container.objects.filter(
+        filters = self.build_filters().get('filter', {})
+        excludes = self.build_filters().get('exclude', {})
+
+        channel_long_slugs = [
+            children.long_slug for children in
+            self.channel_descendants
+        ]
+
+        qs = Container.objects.filter(
             site=self.site,
-            channel_long_slug=obj.long_slug,
+            channel_long_slug__in=channel_long_slugs,
             date_available__lte=timezone.now(),
             published=True,
+            **filters
         ).exclude(
-            child_class__in=['Mirror', 'Entry']
-        ).order_by(
+            child_class__in=['Mirror', 'Entry'],
+        ).exclude(
+            **excludes
+        )
+
+        qs = qs.order_by(
             '-date_available'
         ).select_related('publisher')[:40]
+
+        return qs
 
 
 class ContainerAtomFeed(ContainerFeed):
