@@ -54,7 +54,7 @@ class ItemFeed(Feed):
         data = {"filter": {}, "exclude": {}}
         r_data = self.request.GET.dict()
         for k, v in r_data.items():
-            if k.startswith(('filter',  'exclude')):
+            if k.startswith(('filter', 'exclude')):
                 v = json.loads(v)
                 for lookup, value in v.items():
                     if lookup.endswith('__in'):
