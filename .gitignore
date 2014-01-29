@@ -42,9 +42,6 @@ settings.py
 *.db
 *.rdb
 
-#translations
-*.mo
-
 # OS
 .DS_Store
 
