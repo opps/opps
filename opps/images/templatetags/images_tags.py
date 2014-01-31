@@ -18,7 +18,7 @@ def image_obj(image, **kwargs):
     HALIGN_VALUES = ("left", "center", "right")
     VALIGN_VALUES = ("top", "middle", "bottom")
 
-    if not image.archive_link and not image:
+    if not image and not image.archive_link:
         return ""
 
     if settings.THUMBOR_ENABLED:
