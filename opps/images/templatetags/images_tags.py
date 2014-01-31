@@ -38,9 +38,9 @@ def image_obj(image, **kwargs):
 
         kwargs = dict(new, **kwargs)
 
-    if image != "" or image:
-        return image.image_url(**kwargs)
-    elif image.archive_link:
+    if image.archive_link:
         return url(image_url=image.archive_link, **kwargs)
+    elif image != "" or image:
+        return image.image_url(**kwargs)
 
     return ""
