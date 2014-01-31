@@ -18,6 +18,9 @@ def image_obj(image, **kwargs):
     HALIGN_VALUES = ("left", "center", "right")
     VALIGN_VALUES = ("top", "middle", "bottom")
 
+    if not image.archive_link and not image:
+        return ""
+
     if settings.THUMBOR_ENABLED:
         new = {}
         new['flip'] = image.flip
@@ -40,7 +43,5 @@ def image_obj(image, **kwargs):
 
     if image.archive_link:
         return url(image_url=image.archive_link, **kwargs)
-    elif image != "" or image:
-        return image.image_url(**kwargs)
 
-    return ""
+    return image.image_url(**kwargs)
