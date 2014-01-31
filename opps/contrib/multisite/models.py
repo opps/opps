@@ -11,3 +11,6 @@ class SitePermission(Publishable):
     class Meta:
         verbose_name = _(u'Site Permission')
         verbose_name_plural = _(u'Site Permissions')
+
+    def __unicode__(self):
+        return u'{} em {}'.format(self.user, self.site)
