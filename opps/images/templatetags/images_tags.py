@@ -18,9 +18,6 @@ def image_obj(image, **kwargs):
     HALIGN_VALUES = ("left", "center", "right")
     VALIGN_VALUES = ("top", "middle", "bottom")
 
-    if image == "" or not image:
-        return ""
-
     if settings.THUMBOR_ENABLED:
         new = {}
         new['flip'] = image.flip
@@ -40,4 +37,10 @@ def image_obj(image, **kwargs):
                            (image.crop_x2, image.crop_y2))
 
         kwargs = dict(new, **kwargs)
-    return image.image_url(**kwargs)
+
+    if image != "" or image:
+        return image.image_url(**kwargs)
+    elif image.archive_link:
+        return url(image_url=image.archive_link, **kwargs)
+
+    return ""
