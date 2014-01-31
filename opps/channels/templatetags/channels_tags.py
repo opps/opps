@@ -26,7 +26,7 @@ def get_channel(slug):
 @register.assignment_tag
 def get_channels_by(**filters):
     """Return a list of channels filtered by given args"""
-    cache_key = u'getchannelsby-{}'.format(hash(frozenset(filters)))
+    cache_key = u'getchannelsby-{}'.format(hash(frozenset(filters.items())))
     if cache.get(cache_key):
         return cache.get(cache_key)
 
