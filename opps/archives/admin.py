@@ -1,3 +1,4 @@
+# coding: utf-8
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.utils import timezone
@@ -13,6 +14,7 @@ from .models import File
 class FileAdmin(AdminViewPermission):
     search_fields = ['title', 'slug']
     raw_id_fields = ['user']
+    list_display = ['title', 'slug', 'download_link', 'published']
     ordering = ('-date_available',)
     list_filter = ['date_available', 'published']
     prepopulated_fields = {"slug": ["title"]}
@@ -26,6 +28,13 @@ class FileAdmin(AdminViewPermission):
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available',)}),
     )
+
+    def download_link(self, obj):
+        html = '<a href="{}">{}</a>'.format(obj.archive.url,
+                                            unicode(_(u'Download')))
+        return html
+    download_link.short_description = _(u'download')
+    download_link.allow_tags = True
 
     def save_model(self, request, obj, form, change):
         if not change:
