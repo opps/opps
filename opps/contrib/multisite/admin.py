@@ -7,6 +7,7 @@ from .models import SitePermission
 
 
 class AdminViewPermission(admin.ModelAdmin):
+    raw_id_fields = ('user',)
 
     def queryset(self, request):
         queryset = super(AdminViewPermission, self).queryset(request)
