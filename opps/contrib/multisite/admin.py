@@ -7,8 +7,6 @@ from .models import SitePermission
 
 
 class AdminViewPermission(admin.ModelAdmin):
-    raw_id_fields = ('user',)
-
     def queryset(self, request):
         queryset = super(AdminViewPermission, self).queryset(request)
         if not settings.OPPS_MULTISITE_ADMIN:
@@ -43,6 +41,7 @@ class AdminViewPermission(admin.ModelAdmin):
 
 
 class SitePermissionAdmin(admin.ModelAdmin):
+    raw_id_fields = ('user',)
     exclude = ('site_iid', 'mirror_site', 'site_domain')
 
 
