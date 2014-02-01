@@ -20,7 +20,7 @@ def image_obj(image, **kwargs):
 
     if not image:
         return ""
-        
+
     if image.archive_link:
         return url(image_url=image.archive_link, **kwargs)
 
