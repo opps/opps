@@ -55,10 +55,11 @@ def get_containerbox(context, slug, template_name=None, **extra_context):
     request = context['request']
     is_mobile = getattr(request, 'is_mobile', False)
 
-    cachekey = "ContainerBox-{}-{}-{}".format(
+    cachekey = "ContainerBox-{}-{}-{}-{}".format(
         slug,
         template_name,
-        is_mobile
+        is_mobile,
+        request.site.id
     )
 
     render = cache.get(cachekey)
@@ -66,7 +67,7 @@ def get_containerbox(context, slug, template_name=None, **extra_context):
         return render
 
     filters = {}
-    filters['site'] = settings.SITE_ID
+    filters['site'] = request.site
     filters['slug'] = slug
     filters['date_available__lte'] = timezone.now()
     filters['published'] = True
