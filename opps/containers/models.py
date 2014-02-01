@@ -254,6 +254,14 @@ class ContainerBox(BaseBox):
         verbose_name = _(u'Container box')
         verbose_name_plural = _(u'Containers boxes')
 
+    @property
+    def has_content(self):
+        if self.containers.exists():
+            return True
+        qs = self.get_queryset()
+        if qs and qs.exists():
+            return True
+
     def ordered_containers(self, field='order'):
         now = timezone.now()
         return self.containers.filter(

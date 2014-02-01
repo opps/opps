@@ -71,16 +71,20 @@ def get_containerbox(context, slug, template_name=None, **extra_context):
     filters['slug'] = slug
     filters['date_available__lte'] = timezone.now()
     filters['published'] = True
+
+    master_site_id = settings.OPPS_CONTAINERS_SITE_ID or 1
+
     try:
         box = ContainerBox.objects.get(**filters)
     except ContainerBox.DoesNotExist:
         box = ContainerBox.objects.none()
-        if settings.OPPS_CONTAINERS_SITE_ID:
-            filters['site'] = settings.OPPS_CONTAINERS_SITE_ID
-            try:
-                box = ContainerBox.objects.get(**filters)
-            except ContainerBox.DoesNotExist:
-                pass
+
+    if request.site.id != master_site_id and not box or not box.has_content:
+        filters['site'] = master_site_id
+        try:
+            box = ContainerBox.objects.get(**filters)
+        except ContainerBox.DoesNotExist:
+            pass
 
     t = template.loader.get_template('articles/articlebox_detail.html')
     if template_name:
