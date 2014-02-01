@@ -18,11 +18,8 @@ def image_obj(image, **kwargs):
     HALIGN_VALUES = ("left", "center", "right")
     VALIGN_VALUES = ("top", "middle", "bottom")
 
-    if not image:
+    if image == "" or not image:
         return ""
-
-    if image.archive_link:
-        return url(image_url=image.archive_link, **kwargs)
 
     if settings.THUMBOR_ENABLED:
         new = {}
@@ -43,5 +40,8 @@ def image_obj(image, **kwargs):
                            (image.crop_x2, image.crop_y2))
 
         kwargs = dict(new, **kwargs)
+
+    if image.archive_link:
+        return url(image_url=image.archive_link, **kwargs)
 
     return image.image_url(**kwargs)
