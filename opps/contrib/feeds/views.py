@@ -41,7 +41,13 @@ class ItemFeed(Feed):
 
     def item_enclosure_url(self, item):
         if item.main_image:
-            i_url = item.main_image.image_url()
+            if item.main_image.archive:
+                i_url = item.main_image.archive.url
+            elif item.main_image.archive_link:
+                i_url = item.main_image.archive_link
+            else:
+                i_url = item.main_image.image_url()
+
             m_url = getattr(settings, 'MEDIA_URL', '')
             if not m_url.startswith('http') and not i_url.startswith('http'):
                 i_url = "http://" + self.site.domain + i_url
