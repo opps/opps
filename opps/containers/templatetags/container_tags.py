@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.template.defaultfilters import linebreaksbr
 from django.core.cache import cache
+from django.contrib.sites.models import Site
 
 from opps.containers.models import Container, ContainerBox, Mirror
 from opps.channels.models import Channel
@@ -53,13 +54,18 @@ def get_recommendations(query_slice, child_class, container):
 def get_containerbox(context, slug, template_name=None, **extra_context):
 
     request = context['request']
+    current_site = getattr(
+        request,
+        'site',
+        Site.objects.get(pk=settings.SITE_ID)
+    )
     is_mobile = getattr(request, 'is_mobile', False)
 
     cachekey = "ContainerBox-{}-{}-{}-{}".format(
         slug,
         template_name,
         is_mobile,
-        request.site.id
+        current_site.id
     )
 
     render = cache.get(cachekey)
@@ -67,7 +73,7 @@ def get_containerbox(context, slug, template_name=None, **extra_context):
         return render
 
     filters = {}
-    filters['site'] = request.site
+    filters['site'] = current_site
     filters['slug'] = slug
     filters['date_available__lte'] = timezone.now()
     filters['published'] = True
@@ -79,7 +85,7 @@ def get_containerbox(context, slug, template_name=None, **extra_context):
     except ContainerBox.DoesNotExist:
         box = None
 
-    if request.site.id != master_site and \
+    if current_site.id != master_site and \
        not box or not getattr(box, 'has_content', False):
         filters['site'] = master_site
         try:
