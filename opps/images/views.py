@@ -3,25 +3,26 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.db.models import Q
-from django.views.generic import ListView
+from django.views.generic import ListView, FormView
 from django.utils.decorators import method_decorator
 
 from .forms import PopUpImageForm
 from .models import Image
 
 
-#TODO: Change to a FormView CBV
-@login_required(login_url='/admin/')
-def image_add(request):
-    if request.method == "POST":
-        f = PopUpImageForm(request.POST, request.FILES, user=request.user)
-        if f.is_valid():
-            instance = f.save()
-            return render(request, 'images/popup_done.html', {'image':
-                                                              instance})
-    else:
-        f = PopUpImageForm(user=request.user)
-    return render(request, 'images/image_add.html', {'form': f})
+class PopUpImageView(FormView):
+    form_class = PopUpImageForm
+    template_name = 'images/image_add.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(PopUpImageView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        instance = form.save()
+        return render(self.request, 'images/popup_done.html',
+                      {'image': instance})
 
 
 class GetImagesView(ListView):
