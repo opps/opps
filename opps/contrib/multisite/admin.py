@@ -17,7 +17,7 @@ class AdminViewPermission(admin.ModelAdmin):
                 user=request.user,
                 date_available__lte=timezone.now(),
                 published=True
-            ).values_list('id', flat=True)
+            ).values_list('site__id', flat=True)
 
             if db_field.name in ['site']:
                 kwargs['queryset'] = Site.objects.filter(id__in=sites_id)
@@ -37,7 +37,7 @@ class AdminViewPermission(admin.ModelAdmin):
             user=request.user,
             date_available__lte=timezone.now(),
             published=True
-        ).values_list('id', flat=True)
+        ).values_list('site__id', flat=True)
 
         return qs.filter(site_iid__in=sites_id)
 
@@ -51,7 +51,7 @@ class AdminViewPermission(admin.ModelAdmin):
             user=request.user,
             date_available__lte=timezone.now(),
             published=True
-        ).values_list('id', flat=True)
+        ).values_list('site__id', flat=True)
 
         try:
             attrs = {}
