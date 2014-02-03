@@ -1,40 +1,71 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from django.contrib.sites.models import Site
 from django.conf import settings
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
+from django.contrib.admin.widgets import FilteredSelectMultiple
 from .models import SitePermission
 
 
 class AdminViewPermission(admin.ModelAdmin):
-    def queryset(self, request):
-        queryset = super(AdminViewPermission, self).queryset(request)
-        if not settings.OPPS_MULTISITE_ADMIN:
-            return queryset
-        try:
-            sitepermission = SitePermission.objects.get(
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if settings.OPPS_MULTISITE_ADMIN and not request.user.is_superuser:
+            sites_id = SitePermission.objects.filter(
                 user=request.user,
                 date_available__lte=timezone.now(),
-                published=True)
-            return queryset.filter(site_iid=sitepermission.site_iid)
-        except SitePermission.DoesNotExist:
-            pass
-        return queryset
+                published=True
+            ).values_list('id', flat=True)
+
+            if db_field.name in ['site']:
+                kwargs['queryset'] = Site.objects.filter(id__in=sites_id)
+
+
+        result = super(AdminViewPermission, self).formfield_for_foreignkey(
+            db_field, request, **kwargs
+        )
+
+        return result
+
+    def queryset(self, request):
+        qs = super(AdminViewPermission, self).queryset(request)
+        if not settings.OPPS_MULTISITE_ADMIN or request.user.is_superuser:
+            return qs
+
+        sites_id = SitePermission.objects.filter(
+            user=request.user,
+            date_available__lte=timezone.now(),
+            published=True
+        ).values_list('id', flat=True)
+
+        return qs.filter(site_iid__in=sites_id)
 
     def get_form(self, request, obj=None, **kwargs):
+
+
         form = super(AdminViewPermission, self).get_form(request, obj,
-                                                         **kwargs)
-        if not settings.OPPS_MULTISITE_ADMIN:
-            return form
+                                                          **kwargs)
+
+        sites_id = SitePermission.objects.filter(
+            user=request.user,
+            date_available__lte=timezone.now(),
+            published=True
+        ).values_list('id', flat=True)
+
         try:
-            sitepermission = SitePermission.objects.get(
-                user=request.user,
-                date_available__lte=timezone.now(),
-                published=True)
-            form.base_fields['site'].initial = sitepermission.site
-            form.base_fields['site'].choices = ((sitepermission.site.id,
-                                                 sitepermission.site.domain),)
-        except SitePermission.DoesNotExist:
+            attrs = {}
+            if settings.OPPS_MULTISITE_ADMIN and not request.user.is_superuser:
+                qs = form.base_fields['mirror_site'].queryset
+                form.base_fields['mirror_site'].queryset = qs.filter(
+                    id__in=sites_id
+                )
+                attrs = {'disabled': 'disabled'}
+            form.base_fields['mirror_site'].widget = FilteredSelectMultiple(
+                _("Mirror site"), is_stacked=False, attrs=attrs
+            )
+        except:
             pass
 
         return form
