@@ -10,6 +10,7 @@ from .models import Container, ContainerImage, Mirror
 from .models import ContainerBox, ContainerBoxContainers
 from .forms import ContainerBoxContainersInlineForm
 from opps.core.admin import PublishableAdmin, apply_opps_rules, BaseBoxAdmin
+from opps.contrib.multisite.admin import AdminViewPermission
 from opps.core.filters import ChannelListFilter, HasQuerySet
 from opps.images.generate import image_url
 from opps.fields.models import Field, FieldOption
@@ -87,7 +88,7 @@ class ContainerAdmin(PublishableAdmin):
 
 
 @apply_opps_rules('containers')
-class ContainerBoxAdmin(BaseBoxAdmin):
+class ContainerBoxAdmin(BaseBoxAdmin, AdminViewPermission):
     inlines = [ContainerBoxContainersInline]
     raw_id_fields = ['channel', 'queryset', 'main_image']
     list_display = ['name', 'site', 'channel_name', 'date_available',
