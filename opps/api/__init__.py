@@ -5,8 +5,26 @@ from django.contrib.auth import authenticate
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from piston.handler import BaseHandler as Handler
+from piston.emitters import JSONEmitter, Emitter
 
 from opps.api.models import ApiKey
+
+
+class UncachedEmitter(JSONEmitter):
+    """ In websites running under varnish or another cache
+    caching the api can mess the results and return the wrong data
+    this emmitter injects No-Cache headers in response"""
+
+    def render(self, request):
+        content = super(UncachedEmitter, self).render(request)
+        response = HttpResponse(content)
+        response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+        response['Content-Type'] = 'application/json; charset=utf-8'
+        response['Pragma'] = 'no-cache'
+        response['Expires'] = 0
+        return response
+
+Emitter.register('json', UncachedEmitter, 'application/json; charset=utf-8')
 
 
 class BaseHandler(Handler):
