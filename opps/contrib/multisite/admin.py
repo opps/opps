@@ -22,7 +22,6 @@ class AdminViewPermission(admin.ModelAdmin):
             if db_field.name in ['site']:
                 kwargs['queryset'] = Site.objects.filter(id__in=sites_id)
 
-
         result = super(AdminViewPermission, self).formfield_for_foreignkey(
             db_field, request, **kwargs
         )
@@ -44,9 +43,9 @@ class AdminViewPermission(admin.ModelAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
 
-
-        form = super(AdminViewPermission, self).get_form(request, obj,
-                                                          **kwargs)
+        form = super(
+            AdminViewPermission, self
+        ).get_form(request, obj, **kwargs)
 
         sites_id = SitePermission.objects.filter(
             user=request.user,
