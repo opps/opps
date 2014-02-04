@@ -58,7 +58,7 @@ class ContainerBoxContainersInline(admin.StackedInline):
 
 
 @apply_opps_rules('containers')
-class ContainerAdmin(PublishableAdmin):
+class ContainerAdmin(PublishableAdmin, AdminViewPermission):
     prepopulated_fields = {"slug": ["title"]}
     readonly_fields = ['get_http_absolute_url', 'short_url',
                        'in_containerboxes', 'image_thumb']
@@ -138,7 +138,7 @@ class ContainerBoxAdmin(BaseBoxAdmin, AdminViewPermission):
     actions = ('clean_ended_entries',)
 
 
-class HideContainerAdmin(PublishableAdmin):
+class HideContainerAdmin(PublishableAdmin, AdminViewPermission):
 
     list_display = ['image_thumb', 'get_child_class', 'title',
                     'channel_name', 'date_available',
