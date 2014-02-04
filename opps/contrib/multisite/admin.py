@@ -11,6 +11,8 @@ from .models import SitePermission
 
 class AdminViewPermission(admin.ModelAdmin):
 
+    site_lookup = 'site_iid__in'
+
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if settings.OPPS_MULTISITE_ADMIN and not request.user.is_superuser:
             sites_id = SitePermission.objects.filter(
@@ -39,7 +41,7 @@ class AdminViewPermission(admin.ModelAdmin):
             published=True
         ).values_list('site__id', flat=True)
 
-        return qs.filter(site_iid__in=sites_id)
+        return qs.filter(**{self.site_lookup: sites_id})
 
     def get_form(self, request, obj=None, **kwargs):
 
