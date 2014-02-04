@@ -256,7 +256,8 @@ class ContainerBox(BaseBox):
 
     @property
     def has_content(self):
-        if self.containers.exists():
+        # TODO: should check start/end available_dates
+        if self.containerboxcontainers_set.exists():
             return True
         qs = self.get_queryset()
         if qs and qs.exists():
