@@ -21,6 +21,12 @@ class QuerySet(Publishable):
     model = models.CharField(_(u'Model'), max_length=150)
     limit = models.PositiveIntegerField(_(u'Limit'), default=7)
     offset = models.PositiveIntegerField(_(u'Offset'), default=0)
+    order_field = models.CharField(
+        _(u"Order Field"),
+        max_length=100,
+        default='id',
+        help_text=_(u"Take care, should be an existing field or lookup")
+    )
     order = models.CharField(_('Order'), max_length=1, choices=(
         ('-', 'DESC'), ('+', 'ASC')))
     channel = models.ForeignKey(
@@ -37,6 +43,9 @@ class QuerySet(Publishable):
         null=True
     )
 
+    def __unicode__(self):
+        return u"{} {} {}".format(self.name, self.slug, self.model)
+
     def clean(self):
 
         if self.filters:
@@ -47,8 +56,10 @@ class QuerySet(Publishable):
 
         try:
             self.get_queryset().all()
-        except:
-            raise ValidationError(_(u'Invalid Queryset'))
+        except Exception as e:
+            raise ValidationError(
+                u'Invalid Queryset: {}'.format(str(e))
+            )
 
         if self.offset >= self.limit:
             raise ValidationError(_(u'Offset can\'t be equal or higher than'
@@ -79,7 +90,11 @@ class QuerySet(Publishable):
             queryset = queryset.filter(**filters)
 
         if self.order == '-':
-            queryset = queryset.order_by('-id')
+            order_term = "-{}".format(self.order_field or 'id')
+        else:
+            order_term = self.order_field or 'id'
+
+        queryset = queryset.order_by(order_term)
 
         return queryset[self.offset:self.limit]
 

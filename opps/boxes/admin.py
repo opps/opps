@@ -23,7 +23,7 @@ class QuerySetAdmin(PublishableAdmin):
         (_(u'Identification'), {
             'fields': ('site', 'name', 'slug')}),
         (_(u'Rules'), {
-            'fields': ('model', 'order', 'offset', 'limit', 'channel',
+            'fields': ('model', 'order', 'order_field', 'offset', 'limit', 'channel',
                        'filters')}),
         (_(u'Publication'), {
             'classes': ('extrapretty',),
@@ -35,16 +35,16 @@ class QuerySetAdmin(PublishableAdmin):
 
     def data_sample(self, obj):
         html = []
-
-        qs = obj.get_queryset().all()
+        qs = obj.get_queryset()
         count = qs.count()
+
         if count:
-            html.append('<strong>Items:</strong> {0}<ul>'.format(count))
+            html.append(u'<strong>Items:</strong> {0}<ul>'.format(count))
             for item in qs:
-                html.append("<li>{0}</li>".format(item))
-            html.append('</ul>')
+                html.append(u"<li>{0}</li>".format(item))
+            html.append(u'</ul>')
         else:
-            html.append('<ul><li>No data</li></ul>')
+            html.append(u'<ul><li>No data</li></ul>')
 
         return u''.join(html)
     data_sample.short_description = _(u'Data sample')
