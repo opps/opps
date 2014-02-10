@@ -35,22 +35,22 @@ class JSONResponseMixin(object):
     """
     A mixin that can be used to render a JSON response.
     """
+    HEADERS = {}
+
     def render_to_json_response(self, context, **response_kwargs):
         """
         Returns a JSON response, transforming 'context' to make the payload.
         """
-        return HttpResponse(
+        response = HttpResponse(
             self.convert_context_to_json(context),
             content_type='application/json',
             **response_kwargs
         )
 
-        # response = JSONResponse(
-        #     self.convert_context_to_json(context),
-        #     {},
-        #     response_mimetype(self.request)
-        # )
-        # response['Content-Disposition'] = 'inline; filename=files.json'
+        for key, value in self.HEADERS.items():
+            response[key] = value
+
+        return response
 
     def convert_context_to_json(self, context):
         "Convert the context dictionary into a JSON object"
