@@ -8,18 +8,16 @@ register = template.Library()
 
 CONFIG_DICT = getattr(settings, 'OPPS_GET_CONFIG_DICT', None)
 
-
-@register.simple_tag
-def get_config(app_label, key, **kwargs):
+@register.assignment_tag
+def get_config(key, app_label=None, **kwargs):
     """
     {% load config %}
-    {% get_config 'polls' 'key_slug' %}
-    {% get_config 'infographics' 'key_slug' %}
-    {% get_config 'promos' 'key_slug' %}
-    {% get_config 'channels' 'color' channel__long_slug='/home' %}
+    {% get_config 'key_slug' %}
+    {% get_config 'key_slug' app_label='promos'  %}
+    {% get_config 'color' app_label='channels' channel__long_slug='/home' %}
 
     Also works
-    {% get_config 'opps.polls' 'key_slug' %}
+    {% get_config app_label='opps.polls' key='key_slug' %}
     """
     if CONFIG_DICT:
         try:
