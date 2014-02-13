@@ -1,7 +1,9 @@
 {% extends "admin/base.html" %}
-{% load i18n grp_tags admin_shortcuts_tags admin_static %}
+{% load i18n grp_tags admin_shortcuts_tags admin_static config %}
 
-{% block title %}{{ title }} | {% trans 'Opps site admin' %}{% endblock %}
+{% block title %}
+{{ title }} | {% trans 'Opps site admin' %}
+{% endblock %}
 
 {% block branding %}
     <h1 id="site-name">{% trans 'Opps administration' %}</h1>
@@ -11,7 +13,7 @@
 {% block pretitle %}
     {% if not is_popup and not 'pop' in request.GET and not '_popup' in request.GET %}
     <div class="admin_shortcuts {%if request.path != '/admin/'%} grp-collapse collapse grp-closed {%else%}grp-collapse collapse grp-open{%endif%}">
-        {% admin_shortcuts %}
+	{% admin_shortcuts %}
     </div>
     {% endif %}
 {{ block.super }}
@@ -26,7 +28,18 @@
 {{ block.super }}
 
 <link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
-
+<style>
+{% get_config key='admincolor' as color %}
+header#grp-header #grp-navigation{
+background-image: -webkit-gradient(linear, left top, right top, from({{color}}), to(#373b3d));
+background-image: -webkit-linear-gradient(right center, {{color}}, #373b3d);
+background-image: -moz-linear-gradient(right center, {{color}}, #373b3d);
+background-image: -o-linear-gradient(left, {{color}}, #373b3d);
+background-image: -khtml-gradient(linear, left top, right top, from({{color}}), to(#373b3d));
+filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='{{color}}', EndColorStr='#373b3d', GradientType=1);
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='{{color}}', EndColorStr='#373b3d', GradientType=1))";
+}
+</style>
 {% endblock %}
 
 {% block extrahead %}{{ block.super }}{% admin_shortcuts_js %}{% endblock %}
