@@ -28,8 +28,13 @@
 {{ block.super }}
 
 <link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
+
 <style>
 {% get_config key='admincolor' as color %}
+{% get_config key='adminlinkcolor' as linkcolor %}
+{% get_config key='admincss' as admincss %}
+
+{% if color %}
 header#grp-header #grp-navigation{
 background-image: -webkit-gradient(linear, left top, right top, from({{color}}), to(#373b3d));
 background-image: -webkit-linear-gradient(right center, {{color}}, #373b3d);
@@ -39,6 +44,17 @@ background-image: -khtml-gradient(linear, left top, right top, from({{color}}), 
 filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='{{color}}', EndColorStr='#373b3d', GradientType=1);
 -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='{{color}}', EndColorStr='#373b3d', GradientType=1))";
 }
+{% endif %}
+
+{% if linkcolor %}
+a {
+   color: {{linkcolor}};
+}
+{% endif %}
+
+{% if admincss %}
+   {{admincss}}
+{% endif %}
 </style>
 {% endblock %}
 
