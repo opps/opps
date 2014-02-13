@@ -8,6 +8,7 @@ register = template.Library()
 
 CONFIG_DICT = getattr(settings, 'OPPS_GET_CONFIG_DICT', None)
 
+
 @register.assignment_tag
 def get_config(key, app_label=None, **kwargs):
     """
