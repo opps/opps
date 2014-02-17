@@ -9,6 +9,7 @@ from opps.views.generic.list import ListView
 from opps.containers.models import Container
 
 from opps.articles.models import Post, Album, Link
+from opps.channels.models import Channel
 
 from .models import Tag
 
@@ -22,6 +23,8 @@ class TagList(ListView):
     def get_context_data(self, **kwargs):
         context = super(TagList, self).get_context_data(**kwargs)
         context['tag'] = self.kwargs['tag']
+        site = get_current_site(self.request)
+        context['channel'] = Channel.objects.get_homepage(site)
         return context
 
     def get_queryset(self):
