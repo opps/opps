@@ -10,6 +10,7 @@ from django.core.cache import cache
 from django.utils import timezone
 from django.conf import settings
 from django.template.defaultfilters import slugify
+from django.contrib.sites.models import Site
 
 from polymorphic import PolymorphicModel
 from polymorphic.showfields import ShowFieldContent
@@ -265,13 +266,33 @@ class ContainerBox(BaseBox):
 
     def ordered_containers(self, field='order'):
         now = timezone.now()
-        return self.containers.filter(
-            models.Q(containerboxcontainers__date_end__gte=now) |
-            models.Q(containerboxcontainers__date_end__isnull=True),
-            published=True,
-            date_available__lte=now,
-            containerboxcontainers__date_available__lte=now
-        ).order_by('containerboxcontainers__order').distinct()
+        fallback = getattr(settings, 'OPPS_MULTISITE_FALLBACK', False)
+        site_master = Site.objects.order_by('id')[0]
+        if not fallback or site_master == self.site:
+            qs = self.containers.filter(
+                models.Q(containerboxcontainers__date_end__gte=now) |
+                models.Q(containerboxcontainers__date_end__isnull=True),
+                published=True,
+                date_available__lte=now,
+                containerboxcontainers__date_available__lte=now
+            ).order_by('containerboxcontainers__order').distinct()
+        else:
+            try:
+                master_box = self.__class__.objects.get(
+                    site=site_master, slug=self.slug
+                )
+            except self.__class__.DoesNotExist:
+                master_box = None
+
+            qs = ContainerBoxContainers.objects.filter(
+                models.Q(date_end__gte=now) |
+                models.Q(date_end__isnull=True),
+                containerbox__in=[master_box, self],
+                container__published=True,
+                container__date_available__lte=now,
+                date_available__lte=now,
+            ).order_by('-containerbox__site', 'order').distinct()
+        return qs
 
     def ordered_box_containers(self):
         now = timezone.now()
