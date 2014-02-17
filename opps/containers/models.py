@@ -268,30 +268,26 @@ class ContainerBox(BaseBox):
         now = timezone.now()
         fallback = getattr(settings, 'OPPS_MULTISITE_FALLBACK', False)
         site_master = Site.objects.order_by('id')[0]
-        if not fallback or site_master == self.site:
-            qs = self.containers.filter(
-                models.Q(containerboxcontainers__date_end__gte=now) |
-                models.Q(containerboxcontainers__date_end__isnull=True),
-                published=True,
-                date_available__lte=now,
-                containerboxcontainers__date_available__lte=now
-            ).order_by('containerboxcontainers__order').distinct()
-        else:
+        boxes = [self]
+        if fallback and site_master != self.site:
             try:
                 master_box = self.__class__.objects.get(
                     site=site_master, slug=self.slug
                 )
+                boxes.insert(0, master_box)
             except self.__class__.DoesNotExist:
-                master_box = None
+                pass
 
-            qs = ContainerBoxContainers.objects.filter(
-                models.Q(date_end__gte=now) |
-                models.Q(date_end__isnull=True),
-                containerbox__in=[master_box, self],
-                container__published=True,
-                container__date_available__lte=now,
-                date_available__lte=now,
-            ).order_by('-containerbox__site', 'order').distinct()
+        qs = ContainerBoxContainers.objects.filter(
+            models.Q(date_end__gte=now) |
+            models.Q(date_end__isnull=True),
+            models.Q(container__published=True,
+                     container__date_available__lte=now) |
+            models.Q(container__isnull=True),
+            containerbox__in=boxes,
+            date_available__lte=now,
+        ).order_by('-containerbox__site', 'order').distinct()
+
         return qs
 
     def ordered_box_containers(self):
