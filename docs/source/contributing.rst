@@ -74,18 +74,7 @@ The core team behind **opps** (in order of joining the project):
 
 * `Thiago Avelino <https://github.com/avelino>`_ (technical leader of this project)
 * `Bruno Rocha <https://github.com/rochacbruno>`_
-
-Patches and Suggestions
-***********************
-
-* Gilson Filho
-* Rael Max
-* André Melo
-* Ellison Leão
-* Guilherme Gondim
-* arloc
-* Sergio Oliveira
-* Diego Yungh
+* `Patches and suggestions <https://github.com/orgs/opps/members>`_
 
 
 Other contributors
@@ -101,3 +90,10 @@ We're very happy to have you, guys!
 .. _`github project`: https://github.com/opps/opps
 .. _virtualenv: http://www.virtualenv.org/
 .. _virtualenvwrapper: http://virtualenvwrapper.readthedocs.org/
+
+
+Add member on TEAM
+******************
+
+
+Clone repo `oppsproject.org <https://github.com/opps/oppsproject.org>`_ and add user on `permissions.cfg <https://github.com/opps/oppsproject.org/blob/master/permissions.cfg>`_ in *[team:contributors]*
