@@ -291,6 +291,9 @@ class ContainerBox(BaseBox):
         return qs
 
     def ordered_box_containers(self):
+        return self.ordered_containers()
+        # for backwards compatibility
+        # this method is useless now
         now = timezone.now()
         return self.containerboxcontainers_set.filter(
             models.Q(date_end__gte=now) |
