@@ -267,6 +267,15 @@ class ContainerBox(BaseBox):
     def ordered_containers(self, field='order'):
         now = timezone.now()
         fallback = getattr(settings, 'OPPS_MULTISITE_FALLBACK', False)
+        if not fallback:
+            return self.containers.filter(
+                models.Q(containerboxcontainers__date_end__gte=now) |
+                models.Q(containerboxcontainers__date_end__isnull=True),
+                published=True,
+                date_available__lte=now,
+                containerboxcontainers__date_available__lte=now
+            ).order_by('containerboxcontainers__order').distinct()
+
         site_master = Site.objects.order_by('id')[0]
         boxes = [self]
         if fallback and site_master != self.site:
