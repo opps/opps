@@ -56,6 +56,8 @@ class MobileDetectionMiddleware(object):
     3226e5393033115c8bf/django_mobile/middleware.py
     """
 
+    IGNORE_AGENTS = getattr(settings, 'OPPS_MOBILE_IGNORE_USER_AGENTS', [])
+
     user_agents_test_match = (
         "w3c ", "acs-", "alav", "alca", "amoi", "audi",
         "avan", "benq", "bird", "blac", "blaz", "brew",
@@ -111,6 +113,10 @@ class MobileDetectionMiddleware(object):
             if not is_mobile:
                 if self.user_agents_test_match_regex.match(user_agent):
                     is_mobile = True
+
+            # Check for ignore user agents
+            if self.IGNORE_AGENTS and user_agent in self.IGNORE_AGENTS:
+                is_mobile = False
 
         request.is_mobile = is_mobile
         THREAD_LOCALS.template_dirs = settings.TEMPLATE_DIRS_WEB
