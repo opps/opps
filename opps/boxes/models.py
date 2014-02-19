@@ -68,7 +68,7 @@ class QuerySet(Publishable):
     def get_queryset(self, content_group='default'):
 
         # TODO: populate exclude_ids from some global key/value quick db
-        exclude_ids = []
+        #exclude_ids = []
 
         _app, _model = self.model.split('.')
         model = models.get_model(_app, _model)
@@ -93,14 +93,14 @@ class QuerySet(Publishable):
             queryset = queryset.filter(**filters)
 
         # importing here to avoid circular imports
-        from opps.containers.models import Container
-        if issubclass(model, Container):
-            queryset = queryset.exclude(
-                id__in=exclude_ids
-            )
+        #from opps.containers.models import Container
+        #if issubclass(model, Container):
+        #    queryset = queryset.exclude(
+        #        id__in=exclude_ids
+        #    )
 
-            [exclude_ids.append(i.id)
-             for i in queryset if not i.id in exclude_ids]
+        #    [exclude_ids.append(i.id)
+        #     for i in queryset if not i.id in exclude_ids]
 
         if self.order == '-':
             order_term = "-{}".format(self.order_field or 'id')
