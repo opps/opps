@@ -19,8 +19,8 @@ from opps.core.cache import _cache_key
 from opps.core.models import Publishable, Slugged, Channeling, Imaged
 from opps.core.tags.models import Tagged
 from opps.db.models.fields import JSONField
-from opps.boxes.models import BaseBox
-from opps.contrib.middleware.global_request import get_request
+from opps.boxes.models import BaseBox, threadlocals
+#from opps.contrib.middleware.global_request import get_request
 
 from .signals import shorturl_generate, delete_container
 from .tasks import check_mirror_channel, check_mirror_site
@@ -273,7 +273,7 @@ class ContainerBox(BaseBox):
             return True
 
     def ordered_containers(self, field='order'):
-        global_request = get_request()
+        global_request = threadlocals()
         exclude_ids = global_request.box_exclude.setdefault(
             self.content_group, []
         )
@@ -324,7 +324,7 @@ class ContainerBox(BaseBox):
         if fallback:
             return self.ordered_containers()
 
-        global_request = get_request()
+        global_request = threadlocals()
         exclude_ids = global_request.box_exclude.setdefault(
             self.content_group, []
         )
