@@ -300,9 +300,10 @@ class ContainerBox(BaseBox):
         return qs
 
     def ordered_box_containers(self):
-        return self.ordered_containers()
-        # for backwards compatibility
-        # this method is useless now
+        fallback = getattr(settings, 'OPPS_MULTISITE_FALLBACK', False)
+        if fallback:
+            return self.ordered_containers()
+
         now = timezone.now()
         return self.containerboxcontainers_set.filter(
             models.Q(date_end__gte=now) |
