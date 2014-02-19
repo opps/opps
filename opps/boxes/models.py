@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 
 from opps.core.models import Publishable, Channeling
+from opps.contrib.middleware.global_request import get_request
 
 
 class QuerySet(Publishable):
@@ -65,7 +66,11 @@ class QuerySet(Publishable):
             raise ValidationError(_(u'Offset can\'t be equal or higher than'
                                     u'limit'))
 
-    def get_queryset(self):
+    def get_queryset(self, content_group='default'):
+        global_request = get_request()
+        exclude_ids = global_request.box_exclude.setdefault(
+            content_group, []
+        )
 
         _app, _model = self.model.split('.')
         model = models.get_model(_app, _model)
@@ -89,6 +94,16 @@ class QuerySet(Publishable):
             filters = json.loads(self.filters)
             queryset = queryset.filter(**filters)
 
+        # importing here to avoid circular imports
+        from opps.containers.models import Container
+        if issubclass(model, Container):
+            queryset = queryset.exclude(
+                id__in=exclude_ids
+            )
+
+            [exclude_ids.append(i.id)
+             for i in queryset if not i.id in exclude_ids]
+
         if self.order == '-':
             order_term = "-{}".format(self.order_field or 'id')
         else:
@@ -101,6 +116,7 @@ class QuerySet(Publishable):
 
 class BaseBox(Publishable, Channeling):
     name = models.CharField(_(u"Box name"), max_length=140)
+
     slug = models.SlugField(
         _(u"Slug"),
         db_index=True,

@@ -20,6 +20,7 @@ from opps.core.models import Publishable, Slugged, Channeling, Imaged
 from opps.core.tags.models import Tagged
 from opps.db.models.fields import JSONField
 from opps.boxes.models import BaseBox
+from opps.contrib.middleware.global_request import get_request
 
 from .signals import shorturl_generate, delete_container
 from .tasks import check_mirror_channel, check_mirror_site
@@ -272,37 +273,49 @@ class ContainerBox(BaseBox):
             return True
 
     def ordered_containers(self, field='order'):
+        global_request = get_request()
+        exclude_ids = global_request.box_exclude.setdefault(
+            self.content_group, []
+        )
         now = timezone.now()
         fallback = getattr(settings, 'OPPS_MULTISITE_FALLBACK', False)
         if not fallback:
-            return self.containers.filter(
+            qs = self.containers.filter(
                 models.Q(containerboxcontainers__date_end__gte=now) |
                 models.Q(containerboxcontainers__date_end__isnull=True),
                 published=True,
                 date_available__lte=now,
                 containerboxcontainers__date_available__lte=now
+            ).exclude(
+                id__in=exclude_ids
             ).order_by('containerboxcontainers__order').distinct()
+            [exclude_ids.append(i.id) for i in qs if not i.id in exclude_ids]
+        else:
+            site_master = Site.objects.order_by('id')[0]
+            boxes = [self]
+            if fallback and site_master != self.site:
+                try:
+                    master_box = self.__class__.objects.get(
+                        site=site_master, slug=self.slug
+                    )
+                    boxes.insert(0, master_box)
+                except self.__class__.DoesNotExist:
+                    pass
 
-        site_master = Site.objects.order_by('id')[0]
-        boxes = [self]
-        if fallback and site_master != self.site:
-            try:
-                master_box = self.__class__.objects.get(
-                    site=site_master, slug=self.slug
-                )
-                boxes.insert(0, master_box)
-            except self.__class__.DoesNotExist:
-                pass
+            qs = ContainerBoxContainers.objects.filter(
+                models.Q(date_end__gte=now) |
+                models.Q(date_end__isnull=True),
+                models.Q(container__published=True,
+                         container__date_available__lte=now) |
+                models.Q(container__isnull=True),
+                containerbox__in=boxes,
+                date_available__lte=now,
+            ).exclude(
+                container__id__in=exclude_ids
+            ).order_by('-containerbox__site', 'order').distinct()
 
-        qs = ContainerBoxContainers.objects.filter(
-            models.Q(date_end__gte=now) |
-            models.Q(date_end__isnull=True),
-            models.Q(container__published=True,
-                     container__date_available__lte=now) |
-            models.Q(container__isnull=True),
-            containerbox__in=boxes,
-            date_available__lte=now,
-        ).order_by('-containerbox__site', 'order').distinct()
+        [exclude_ids.append(i.container.id)
+         for i in qs if i.container and not i.container.id in exclude_ids]
 
         return qs
 
@@ -311,18 +324,31 @@ class ContainerBox(BaseBox):
         if fallback:
             return self.ordered_containers()
 
+        global_request = get_request()
+        exclude_ids = global_request.box_exclude.setdefault(
+            self.content_group, []
+        )
         now = timezone.now()
-        return self.containerboxcontainers_set.filter(
+        qs = self.containerboxcontainers_set.filter(
             models.Q(date_end__gte=now) |
             models.Q(date_end__isnull=True),
             date_available__lte=now
+        ).exclude(
+            container__id__in=exclude_ids
         ).order_by('order').distinct()
+
+        [exclude_ids.append(i.container.id)
+         for i in qs if i.container and not i.container.id in exclude_ids]
+
+        return qs
 
     def get_queryset(self):
         """
         for backwards compatibility
         """
-        return self.queryset and self.queryset.get_queryset()
+        return self.queryset and self.queryset.get_queryset(
+            content_group=self.content_group
+        )
 
 
 class ContainerBoxContainers(models.Model):
