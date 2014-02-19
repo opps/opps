@@ -102,7 +102,7 @@ class ContainerBoxAdmin(BaseBoxAdmin, AdminViewPermission):
             'fields': ('channel', 'queryset')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('published', 'date_available')}),
+            'fields': ('content_group', 'published', 'date_available')}),
     )
 
     def clean_ended_entries(self, request, queryset):

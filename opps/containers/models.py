@@ -251,6 +251,13 @@ class ContainerBox(BaseBox):
         verbose_name=_(u'Query Set')
     )
 
+    content_group = models.CharField(
+        _(u"Content Group"),
+        max_length=255,
+        default='default',
+        help_text=_(u"Boxes in the same group do not allow repetitions")
+    )
+
     class Meta:
         verbose_name = _(u'Container box')
         verbose_name_plural = _(u'Containers boxes')
