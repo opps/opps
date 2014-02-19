@@ -7,17 +7,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
 
 from opps.core.models import Publishable, Channeling
-#from opps.contrib.middleware.global_request import get_request
-
-from threading import local
-
-
-lo = local()
-
-
-def threadlocals():
-    lo.box_exclude = getattr(lo, 'box_exclude', {})
-    return lo
 
 
 class QuerySet(Publishable):
@@ -77,10 +66,9 @@ class QuerySet(Publishable):
                                     u'limit'))
 
     def get_queryset(self, content_group='default'):
-        global_request = threadlocals()
-        exclude_ids = global_request.box_exclude.setdefault(
-            content_group, []
-        )
+
+        # TODO: populate exclude_ids from some global key/value quick db
+        exclude_ids = []
 
         _app, _model = self.model.split('.')
         model = models.get_model(_app, _model)

@@ -5,7 +5,6 @@ from threading import current_thread
 
 class FakeRequest(object):
     def __init__(self, *args, **kwargs):
-        self.box_exclude = {}
         warnings.warn(
             ("You must include "
              "opps.contrib.middleware.global_request.GlobalRequest"
@@ -42,7 +41,4 @@ class GlobalRequest(object):
 
 
 def get_request():
-    global_request = GlobalRequest.get_request()
-    if not getattr(global_request, 'box_exclude', None):
-        global_request.box_exclude = {}
-    return global_request
+    return GlobalRequest.get_request()
