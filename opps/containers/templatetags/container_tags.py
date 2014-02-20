@@ -93,7 +93,7 @@ def load_boxes(context, slugs=None, **filters):
             [exclude_ids.append(i.pk)
              for i in results
              if not i.pk in exclude_ids
-             and issubclass(i, Container)]
+             and issubclass(i.__class__, Container)]
         elif fallback:
             [exclude_ids.append(i.container_id)
              for i in results
