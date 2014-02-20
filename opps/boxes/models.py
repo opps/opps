@@ -43,6 +43,16 @@ class QuerySet(Publishable):
         null=True
     )
 
+    def __init__(self, *args, **kwargs):
+        """
+        to avoid re-execution of methods
+        its results are cached in a local storage
+        per instance cache
+        """
+        super(QuerySet, self).__init__(*args, **kwargs)
+        if not hasattr(self, 'local_cache'):
+            self.local_cache = {}
+
     def __unicode__(self):
         return u"{} {} {}".format(self.name, self.slug, self.model)
 
@@ -65,10 +75,13 @@ class QuerySet(Publishable):
             raise ValidationError(_(u'Offset can\'t be equal or higher than'
                                     u'limit'))
 
-    def get_queryset(self, content_group='default'):
+    def get_queryset(self, content_group='default',
+                     exclude_ids=None, use_local_cache=True):
+        cached = self.local_cache.get('get_queryset')
+        if use_local_cache and cached:
+            return cached
 
-        # TODO: populate exclude_ids from some global key/value quick db
-        #exclude_ids = []
+        exclude_ids = exclude_ids or []
 
         _app, _model = self.model.split('.')
         model = models.get_model(_app, _model)
@@ -93,14 +106,14 @@ class QuerySet(Publishable):
             queryset = queryset.filter(**filters)
 
         # importing here to avoid circular imports
-        #from opps.containers.models import Container
-        #if issubclass(model, Container):
-        #    queryset = queryset.exclude(
-        #        id__in=exclude_ids
-        #    )
+        from opps.containers.models import Container
+        if issubclass(model, Container):
+            queryset = queryset.exclude(
+                id__in=exclude_ids
+            )
 
-        #    [exclude_ids.append(i.id)
-        #     for i in queryset if not i.id in exclude_ids]
+            #[exclude_ids.append(i.id)
+            # for i in queryset if not i.id in exclude_ids]
 
         if self.order == '-':
             order_term = "-{}".format(self.order_field or 'id')
@@ -109,7 +122,10 @@ class QuerySet(Publishable):
 
         queryset = queryset.order_by(order_term)
 
-        return queryset[self.offset:self.limit]
+        result = queryset[self.offset:self.limit]
+        if use_local_cache:
+            self.local_cache['get_queryset'] = result
+        return result
 
 
 class BaseBox(Publishable, Channeling):
