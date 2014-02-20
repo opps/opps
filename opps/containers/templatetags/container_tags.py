@@ -9,6 +9,7 @@ from django.template.defaultfilters import linebreaksbr
 from django.core.cache import cache
 from django.contrib.sites.models import Site
 
+from opps.contrib.middleware.global_request import get_request
 from opps.containers.models import Container, ContainerBox, Mirror
 from opps.channels.models import Channel
 
@@ -50,9 +51,6 @@ def get_recommendations(query_slice, child_class, container):
     return container.recommendation(child_class, bits)
 
 
-from opps.contrib.middleware.global_request import get_request
-
-
 @register.assignment_tag(takes_context=True)
 def load_boxes(context, slugs=None, **filters):
     if slugs:
@@ -86,7 +84,10 @@ def load_boxes(context, slugs=None, **filters):
         )
 
     for box in boxes:
-        results = box.ordered_containers(exclude_ids=exclude_ids)
+        if box.queryset:
+            results = box.get_queryset(exclude_ids=exclude_ids)
+        else:
+            results = box.ordered_containers(exclude_ids=exclude_ids)
 
         if fallback:
             [exclude_ids.append(i.container_id)
