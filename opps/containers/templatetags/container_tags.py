@@ -9,6 +9,7 @@ from django.template.defaultfilters import linebreaksbr
 from django.core.cache import cache
 from django.contrib.sites.models import Site
 
+from opps.contrib.middleware.global_request import get_request
 from opps.containers.models import Container, ContainerBox, Mirror
 from opps.channels.models import Channel
 
@@ -50,6 +51,63 @@ def get_recommendations(query_slice, child_class, container):
     return container.recommendation(child_class, bits)
 
 
+@register.assignment_tag(takes_context=True)
+def load_boxes(context, slugs=None, **filters):
+    if slugs:
+        filters['slug__in'] = ordered_slugs = slugs.split(',')
+
+    request = context['request']
+    current_site = getattr(
+        request,
+        'site',
+        Site.objects.get(pk=settings.SITE_ID)
+    )
+
+    filters['site__in'] = [current_site]
+    master_site = settings.OPPS_CONTAINERS_SITE_ID or 1
+    if current_site.id != master_site:
+        filters['site__in'].append(master_site)
+
+    filters['date_available__lte'] = timezone.now()
+    filters['published'] = True
+
+    boxes = ContainerBox.objects.filter(**filters).order_by('-site')
+    fallback = getattr(settings, 'OPPS_MULTISITE_FALLBACK', False)
+
+    exclude_ids = []
+
+    if slugs:
+        ob = lambda i, ordered_slugs=ordered_slugs: ordered_slugs.index(i.slug)
+        boxes = sorted(
+            boxes,
+            key=ob
+        )
+
+    for box in boxes:
+        if box.queryset:
+            results = box.get_queryset(exclude_ids=exclude_ids)
+        else:
+            results = box.ordered_containers(exclude_ids=exclude_ids)
+
+        if box.queryset:
+            [exclude_ids.append(i.pk)
+             for i in results
+             if not i.pk in exclude_ids
+             and issubclass(i.__class__, Container)]
+        elif fallback:
+            [exclude_ids.append(i.container_id)
+             for i in results
+             if i.container_id and not i.container_id in exclude_ids]
+        else:
+            [exclude_ids.append(i.pk)
+             for i in results
+             if not i.pk in exclude_ids]
+
+    results = {box.slug: box for box in boxes}
+    get_request().container_boxes = results
+    return results
+
+
 @register.simple_tag(takes_context=True)
 def get_containerbox(context, slug, template_name=None, **extra_context):
 
@@ -72,29 +130,32 @@ def get_containerbox(context, slug, template_name=None, **extra_context):
     if render:
         return render
 
-    filters = {}
-    filters['site'] = current_site
-    filters['slug'] = slug
-    filters['date_available__lte'] = timezone.now()
-    filters['published'] = True
+    box = getattr(get_request(), 'container_boxes', {}).get(slug, None)
 
-    master_site = settings.OPPS_CONTAINERS_SITE_ID or 1
+    if not box:
+        filters = {}
+        filters['site'] = current_site
+        filters['slug'] = slug
+        filters['date_available__lte'] = timezone.now()
+        filters['published'] = True
 
-    try:
-        box = ContainerBox.objects.get(**filters)
-    except ContainerBox.DoesNotExist:
-        box = None
+        master_site = settings.OPPS_CONTAINERS_SITE_ID or 1
 
-    if current_site.id != master_site and \
-       not box or not getattr(box, 'has_content', False):
-        filters['site'] = master_site
         try:
             box = ContainerBox.objects.get(**filters)
         except ContainerBox.DoesNotExist:
             box = None
 
-    if not box:
-        box = ContainerBox.objects.none()
+        if current_site.id != master_site and \
+           not box or not getattr(box, 'has_content', False):
+            filters['site'] = master_site
+            try:
+                box = ContainerBox.objects.get(**filters)
+            except ContainerBox.DoesNotExist:
+                box = None
+
+        if not box:
+            box = ContainerBox.objects.none()
 
     t = template.loader.get_template('articles/articlebox_detail.html')
     if template_name:

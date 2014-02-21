@@ -262,20 +262,31 @@ class ContainerBox(BaseBox):
         verbose_name = _(u'Container box')
         verbose_name_plural = _(u'Containers boxes')
 
+    def __init__(self, *args, **kwargs):
+        """
+        to avoid re-execution of methods
+        its results are cached in a local storage
+        per instance cache
+        """
+        super(ContainerBox, self).__init__(*args, **kwargs)
+        if not hasattr(self, 'local_cache'):
+            self.local_cache = {}
+
     @property
     def has_content(self):
         # TODO: should check start/end available_dates
         if self.containerboxcontainers_set.exists():
             return True
-        qs = self.get_queryset()
+        qs = self.get_queryset(use_local_cache=False)
         if qs and qs.exists():
             return True
 
-    def ordered_containers(self, field='order'):
+    def ordered_containers(self, field='order', exclude_ids=None):
+        cached = self.local_cache.get('ordered_containers', None)
+        if cached:
+            return cached
 
-        # TODO: populate exclude_ids from key/value db
-        # global request should be used to store global key
-        exclude_ids = []
+        exclude_ids = exclude_ids or []
 
         now = timezone.now()
         fallback = getattr(settings, 'OPPS_MULTISITE_FALLBACK', False)
@@ -317,15 +328,21 @@ class ContainerBox(BaseBox):
             #[exclude_ids.append(i.container.id)
             # for i in qs if i.container and not i.container.id in exclude_ids]
 
+        self.local_cache['ordered_containers'] = qs
         return qs
 
-    def ordered_box_containers(self):
+    def ordered_box_containers(self, exclude_ids=None):
+
         fallback = getattr(settings, 'OPPS_MULTISITE_FALLBACK', False)
         if fallback:
-            return self.ordered_containers()
+            return self.ordered_containers(exclude_ids=exclude_ids)
+
+        cached = self.local_cache.get('ordered_box_containers')
+        if cached:
+            return cached
 
         # TODO: populate exclude_ids from kwy/value db
-        exclude_ids = []
+        exclude_ids = exclude_ids or []
 
         now = timezone.now()
         qs = self.containerboxcontainers_set.filter(
@@ -338,16 +355,22 @@ class ContainerBox(BaseBox):
 
         #[exclude_ids.append(i.container.id)
         # for i in qs if i.container and not i.container.id in exclude_ids]
-
+        self.local_cache['ordered_box_containers'] = qs
         return qs
 
-    def get_queryset(self):
-        """
-        for backwards compatibility
-        """
-        return self.queryset and self.queryset.get_queryset(
-            content_group=self.content_group
+    def get_queryset(self, exclude_ids=None, use_local_cache=True):
+        cached = self.local_cache.get('get_queryset')
+        if use_local_cache and cached:
+            return cached
+
+        queryset = self.queryset and self.queryset.get_queryset(
+            content_group=self.content_group,
+            exclude_ids=exclude_ids,
+            use_local_cache=use_local_cache
         )
+        if use_local_cache:
+            self.local_cache['get_queryset'] = queryset
+        return queryset
 
 
 class ContainerBoxContainers(models.Model):
