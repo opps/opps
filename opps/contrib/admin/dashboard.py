@@ -85,12 +85,7 @@ class CustomIndexDashboard(Dashboard):
                     'title': _('Opps Documentation'),
                     'url': 'http://www.oppsproject.org/',
                     'external': True,
-                },
-                {
-                    'title': _('YACOWS'),
-                    'url': 'http://www.yacows.com.br/',
-                    'external': True,
-                },
+                }
             ]
         ))
 
