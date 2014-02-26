@@ -259,7 +259,7 @@ class ContainerBoxContainersFields(TestCase):
         field = ContainerBoxContainers._meta.get_field_by_name(
             u"url"
         )[0]
-        self.assertEqual(field.__class__, models.URLField)
+        self.assertEqual(field.__class__, models.CharField)
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
 
