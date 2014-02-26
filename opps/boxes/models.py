@@ -112,9 +112,6 @@ class QuerySet(Publishable):
                 id__in=exclude_ids
             )
 
-            #[exclude_ids.append(i.id)
-            # for i in queryset if not i.id in exclude_ids]
-
         if self.order == '-':
             order_term = "-{}".format(self.order_field or 'id')
         else:

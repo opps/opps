@@ -77,7 +77,10 @@ def load_boxes(context, slugs=None, **filters):
     exclude_ids = []
 
     if slugs:
-        ob = lambda i, ordered_slugs=ordered_slugs: ordered_slugs.index(i.slug)
+        ob = lambda i, o=ordered_slugs: (
+            i.site != current_site, i.site.id, o.index(i.slug)
+        )
+
         boxes = sorted(
             boxes,
             key=ob
@@ -103,7 +106,11 @@ def load_boxes(context, slugs=None, **filters):
              for i in results
              if not i.pk in exclude_ids]
 
-    results = {box.slug: box for box in boxes}
+    results = {}
+    for box in boxes:
+        if not box.slug in results:
+            results[box.slug] = box
+
     get_request().container_boxes = results
     return results
 

@@ -325,9 +325,6 @@ class ContainerBox(BaseBox):
                 container__id__in=exclude_ids
             ).order_by('-containerbox__site', 'order').distinct()
 
-            #[exclude_ids.append(i.container.id)
-            # for i in qs if i.container and not i.container.id in exclude_ids]
-
         self.local_cache['ordered_containers'] = qs
         return qs
 
@@ -341,7 +338,6 @@ class ContainerBox(BaseBox):
         if cached:
             return cached
 
-        # TODO: populate exclude_ids from kwy/value db
         exclude_ids = exclude_ids or []
 
         now = timezone.now()
@@ -353,8 +349,6 @@ class ContainerBox(BaseBox):
             container__id__in=exclude_ids
         ).order_by('order').distinct()
 
-        #[exclude_ids.append(i.container.id)
-        # for i in qs if i.container and not i.container.id in exclude_ids]
         self.local_cache['ordered_box_containers'] = qs
         return qs
 
