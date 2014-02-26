@@ -411,7 +411,7 @@ class ContainerBoxContainers(models.Model):
         help_text=_(u'Maximum characters 4000'),
     )
 
-    url = models.URLField(_(u"URL"), null=True, blank=True)
+    url = models.CharField(_(u"URL"), max_length=255, null=True, blank=True)
 
     class Meta:
         ordering = ('order',)
