@@ -38,6 +38,9 @@ OPPS_CORE_APPS = [
     'opps.fields',
     'opps.api',
 
+    # Opps contrib
+    'opps.contrib.fileupload',
+
     # Dependence
     'south',
     'appconf',
