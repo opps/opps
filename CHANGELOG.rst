@@ -42,6 +42,7 @@ Changelog
 * Fix `main_image` caption population on Albums
 * Add new `hat` field on Channel model
 * Fix channel delete when it has some containers on it.
+* Fix TagList when home channel has a different layout. Issue #308
 
 
 0.2.2
