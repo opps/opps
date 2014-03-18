@@ -42,6 +42,7 @@ Changelog
 * Fix `main_image` caption population on Albums
 * Add new `hat` field on Channel model
 * Fix channel delete when it has some containers on it.
+* Fix bug on mirror channel, if not used mirror channel resource, ref #310
 
 
 0.2.2
