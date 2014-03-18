@@ -17,6 +17,7 @@ class QuerySetAdmin(PublishableAdmin):
     list_filter = ['date_available', 'published']
     raw_id_fields = ['channel']
     readonly_fields = ['data_sample']
+    search_fields = ['channel__name', 'channel__long_slug', 'name', 'slug']
     exclude = ('user',)
 
     fieldsets = (
@@ -24,7 +25,7 @@ class QuerySetAdmin(PublishableAdmin):
             'fields': ('site', 'name', 'slug')}),
         (_(u'Rules'), {
             'fields': ('model', 'order', 'order_field',
-                       'offset', 'limit', 'channel', 'filters')}),
+                       'offset', 'limit', 'channel', 'filters', 'excludes')}),
         (_(u'Publication'), {
             'classes': ('extrapretty',),
             'fields': ('published', 'date_available')}),

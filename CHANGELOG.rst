@@ -43,7 +43,8 @@ Changelog
 * Add new `hat` field on Channel model
 * Fix channel delete when it has some containers on it.
 * Fix bug on mirror channel, if not used mirror channel resource, ref #310
-
+* Fix TagList when home channel has a different layout. Issue #308
+* Add Exclude field on QuerySet model of Boxes app. Issue #309
 
 0.2.2
 =====

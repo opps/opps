@@ -83,13 +83,16 @@ class QuerySetTest(TestCase):
 
         self.filters = json.dumps({"employees": [{"firstName": "Anna",
                                                  "lastName": "Smith"}, ]})
+        self.excludes= json.dumps({"employees": [{"lastName": "McDonald"}, ]})
+
 
         self.queryset = QuerySet.objects.create(name=u"Query",
                                                 slug=u"query",
                                                 user=self.user,
                                                 model=self.model,
                                                 channel=self.channel,
-                                                filters=self.filters)
+                                                filters=self.filters,
+                                                excludes=self.excludes)
 
     def test_queryset_fields(self):
         self.assertEqual(self.queryset.name, u"Query")
@@ -105,13 +108,23 @@ class QuerySetTest(TestCase):
             u'lastName': u'Smith',
             u'firstName': u'Anna'}]})
 
-    def test_not_filters_in_clean_function(self):
+
+    def test_have_excludes_in_clean_function(self):
+        self.assertTrue(self.excludes)
+        self.assertEqual(json.loads(self.excludes), {u'employees': [{
+            u'lastName': u'McDonald'},]})
+
+
+    def test_not_filters_and_excludes_in_clean_function(self):
         invalid = QuerySet.objects.create(name=u"Query Test",
                                           slug=u"query_test",
                                           user=self.user,
                                           model=self.model,
                                           channel=self.channel,
-                                          filters=None)
+                                          filters=None,
+                                          excludes=None)
 
         self.assertEqual(None, invalid.filters)
+        self.assertEqual(None, invalid.excludes)
         self.assertFalse(invalid.filters)
+        self.assertFalse(invalid.excludes)
