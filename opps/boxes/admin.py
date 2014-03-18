@@ -17,6 +17,7 @@ class QuerySetAdmin(PublishableAdmin):
     list_filter = ['date_available', 'published']
     raw_id_fields = ['channel']
     readonly_fields = ['data_sample']
+    search_fields = ['channel__name', 'channel__long_slug', 'name', 'slug']
     exclude = ('user',)
 
     fieldsets = (
