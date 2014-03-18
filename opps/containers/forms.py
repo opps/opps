@@ -25,8 +25,7 @@ class ContainerAdminForm(forms.ModelForm):
         super(ContainerAdminForm, self).__init__(*args, **kwargs)
 
         if not settings.OPPS_MIRROR_CHANNEL:
-            self.fields['mirror_channel'] = forms.CharField
-            self.fields['mirror_channel'].widget.attrs['readonly'] = True
+            self.fields['mirror_channel'].widget.attrs['disabled'] = True
 
         self.fields['json'] = JSONFormField(
             widget=JSONField(
