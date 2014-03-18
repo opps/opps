@@ -18,7 +18,19 @@ USE_HAYSTACK = getattr(settings, 'OPPS_TAGS_USE_HAYSTACK', False)
 
 class TagList(ListView):
     model = Container
-    template_name_suffix = '_tags'
+
+    def get_template_list(self, domain_folder="containers"):
+        templates = []
+
+        list_name = 'list_tags'
+
+        if self.request.GET.get('page') and\
+           self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
+            templates.append('{}/{}_paginated.html'.format(domain_folder,
+                                                           list_name))
+
+        templates.append('{}/{}.html'.format(domain_folder, list_name))
+        return templates
 
     def get_context_data(self, **kwargs):
         context = super(TagList, self).get_context_data(**kwargs)
