@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 18:10-0200\n"
+"POT-Creation-Date: 2014-03-13 12:36-0300\n"
 "PO-Revision-Date: 2013-08-08 17:12+0000\n"
 "Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
@@ -31,11 +31,11 @@ msgstr "Identificação"
 msgid "Rules"
 msgstr "Regras"
 
-#: admin.py:27
+#: admin.py:28
 msgid "Publication"
 msgstr "Publicação"
 
-#: admin.py:30 admin.py:49
+#: admin.py:31 admin.py:50
 msgid "Data sample"
 msgstr "Exemplo de dado"
 
@@ -47,7 +47,7 @@ msgstr "Modelo"
 msgid "Dynamic queryset name"
 msgstr "Nome do Queryset dinâmico"
 
-#: models.py:15 models.py:84
+#: models.py:15 models.py:149
 msgid "Slug"
 msgstr "Retranca"
 
@@ -56,32 +56,59 @@ msgid "Limit"
 msgstr "Limite"
 
 #: models.py:23
+msgid "Offset"
+msgstr ""
+
+#: models.py:25
+msgid "Order Field"
+msgstr "Campo Ordem"
+
+#: models.py:28
+msgid "Take care, should be an existing field or lookup"
+msgstr ""
+
+#: models.py:30
 msgid "Order"
 msgstr "Ordem"
 
-#: models.py:27
+#: models.py:34
 msgid "Channel"
 msgstr "Canal"
 
-#: models.py:33
+#: models.py:40
 msgid "Filters"
 msgstr "Filtros"
 
-#: models.py:34
+#: models.py:41
 msgid "Json format extra filters for queryset"
 msgstr "Filtros extras para queryset no formato JSON"
 
-#: models.py:45
-msgid "Invalid JSON"
-msgstr "JSON inválido"
+#: models.py:47
+msgid "Excludes"
+msgstr ""
 
-#: models.py:50
-msgid "Invalid Queryset"
-msgstr "Queryset inválido"
+#: models.py:48
+msgid "Json format for queryset excludes"
+msgstr "Excludes de queryset no formato JSON"
 
-#: models.py:82
+#: models.py:72
+msgid "Invalid JSON for filters"
+msgstr "JSON inválido para os Filtros"
+
+#: models.py:78
+msgid "Invalid JSON for excludes"
+msgstr "JSON inválido para os Excludes"
+
+#: models.py:88
+msgid "Offset can't be equal or higher thanlimit"
+msgstr "Offset não pode ser igual ou maior que o limite"
+
+#: models.py:146
 msgid "Box name"
 msgstr "Nome da Box"
+
+#~ msgid "Invalid Queryset"
+#~ msgstr "Queryset inválido"
 
 #~ msgid "Relationships"
 #~ msgstr "Relationships"

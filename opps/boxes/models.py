@@ -43,6 +43,13 @@ class QuerySet(Publishable):
         null=True
     )
 
+    excludes = models.TextField(
+        _(u'Excludes'),
+        help_text=_(u'Json format for queryset excludes'),
+        blank=True,
+        null=True
+    )
+
     def __init__(self, *args, **kwargs):
         """
         to avoid re-execution of methods
@@ -62,7 +69,13 @@ class QuerySet(Publishable):
             try:
                 json.loads(self.filters)
             except:
-                raise ValidationError(_(u'Invalid JSON'))
+                raise ValidationError(_(u'Invalid JSON for filters'))
+
+        if self.excludes:
+            try:
+                json.loads(self.excludes)
+            except:
+                raise ValidationError(_(u'Invalid JSON for excludes'))
 
         try:
             self.get_queryset().all()
@@ -104,6 +117,10 @@ class QuerySet(Publishable):
         if self.filters:
             filters = json.loads(self.filters)
             queryset = queryset.filter(**filters)
+
+        if self.excludes:
+            excludes = json.loads(self.excludes)
+            queryset = queryset.exclude(**excludes)
 
         # importing here to avoid circular imports
         from opps.containers.models import Container
