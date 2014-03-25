@@ -368,6 +368,13 @@ class ContainerBox(BaseBox):
 
 
 class ContainerBoxContainers(models.Model):
+    URL_TARGET_CHOICES = (
+        ('_blank', _(u'Load in a new window')),
+        ('_self', _(u'Load in the same frame as it was clicked')),
+        ('_parent', _(u'Load in the parent frameset')),
+        ('_top', _(u'Load in the full body of the window'))
+    )
+
     containerbox = models.ForeignKey(
         'containers.ContainerBox',
         null=True, blank=True,
@@ -412,6 +419,9 @@ class ContainerBoxContainers(models.Model):
     )
 
     url = models.CharField(_(u"URL"), max_length=255, null=True, blank=True)
+    url_target = models.CharField(_(u"URL Target"), max_length=255,
+                                  choices=URL_TARGET_CHOICES, default="_self",
+                                  null=True, blank=True)
 
     class Meta:
         ordering = ('order',)

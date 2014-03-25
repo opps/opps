@@ -54,7 +54,7 @@ class ContainerBoxContainersInline(admin.StackedInline):
         'classes': ('collapse',),
         'fields': ('container', 'aggregate', 'highlight', 'order',
                    'date_available', 'date_end', 'hat', 'title',
-                   'main_image', 'main_image_caption', 'url')})]
+                   'main_image', 'main_image_caption', 'url', 'url_target')})]
 
 
 @apply_opps_rules('containers')
