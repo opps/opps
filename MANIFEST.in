@@ -3,4 +3,4 @@ include CHANGELOG.rst
 include CONTRIBUTING.rst
 include requirements.txt
 recursive-include docs *.rst
-recursive-include opps *.html *.css *.js *.png *.gif *.woff *.ttf *.svg *.eot
+recursive-include opps *.html *.css *.js *.png *.gif *.woff *.ttf *.svg *.eot *.txt
