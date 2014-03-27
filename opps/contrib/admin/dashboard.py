@@ -7,7 +7,6 @@ To activate your index dashboard add the following to your settings.py::
 """
 
 from django.utils.translation import ugettext_lazy as _
-#from django.core.urlresolvers import reverse
 
 from grappelli.dashboard import modules, Dashboard
 
@@ -21,29 +20,6 @@ class CustomIndexDashboard(Dashboard):
 
     def init_with_context(self, context):
         site = context.get("site")
-
-        #site_name = get_admin_site_name(context)
-        # append a group for "Administration" & "Applications"
-        #self.children.append(modules.Group(
-            #_('Group: Administration & Applications'),
-            #column=1,
-            #collapsible=True,
-            #children=[
-                #modules.AppList(
-                    #_('Administration'),
-                    #column=1,
-                    #collapsible=True,
-                    #css_classes=('collapse closed',),
-                    #models=('django.contrib.*',),
-                #),
-                #modules.AppList(
-                    #_('Applications'),
-                    #column=1,
-                    #css_classes=('collapse closed',),
-                    #exclude=('django.contrib.*',),
-                #)
-            #]
-        #))
 
         # append an app list module for "Applications"
         self.children.append(modules.AppList(

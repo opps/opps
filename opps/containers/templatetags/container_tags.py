@@ -94,21 +94,20 @@ def load_boxes(context, slugs=None, **filters):
 
         if box.queryset:
             [exclude_ids.append(i.pk)
-             for i in results
-             if not i.pk in exclude_ids
+             for i in results if i.pk not in exclude_ids
              and issubclass(i.__class__, Container)]
         elif fallback:
             [exclude_ids.append(i.container_id)
              for i in results
-             if i.container_id and not i.container_id in exclude_ids]
+             if i.container_id and i.container_id not in exclude_ids]
         else:
             [exclude_ids.append(i.pk)
              for i in results
-             if not i.pk in exclude_ids]
+             if i.pk not in exclude_ids]
 
     results = {}
     for box in boxes:
-        if not box.slug in results:
+        if box.slug not in results:
             results[box.slug] = box
 
     get_request().container_boxes = results

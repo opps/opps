@@ -34,7 +34,7 @@ class AlbumList(ContainerList):
         return templates
 
     def get_queryset(self):
-        ## TODO: refatoring, used super()
+        # TODO: refatoring, used super()
         self.site = get_current_site(self.request)
         self.long_slug = self.get_long_slug()
 

@@ -300,7 +300,6 @@ class ContainerBox(BaseBox):
             ).exclude(
                 id__in=exclude_ids
             ).order_by('containerboxcontainers__order').distinct()
-            #[exclude_ids.append(i.id) for i in qs if not i.id in exclude_ids]
         else:
             site_master = Site.objects.order_by('id')[0]
             boxes = [self]

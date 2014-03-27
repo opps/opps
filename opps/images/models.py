@@ -69,10 +69,6 @@ class Cropping(models.Model):
         abstract = True
 
     def clean(self):
-        #self.crop_x1 = len(self.crop_x1) == 0 if self.crop_x1 else 0
-        #self.crop_x2 = len(self.crop_x2) == 0 if self.crop_x2 else 0
-        #self.crop_y1 = len(self.crop_y1) == 0 if self.crop_y1 else 0
-        #self.crop_y2 = len(self.crop_y2) == 0 if self.crop_y2 else 0
         super(Cropping, self).clean()
 
     def save(self, *args, **kwargs):

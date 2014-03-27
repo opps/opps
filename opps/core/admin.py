@@ -275,7 +275,7 @@ def apply_rules(admin_class, app):
     specific_keys = list(attrs) + ['form', 'field_overrides',
                                    'fieldsets', 'inlines']
     for k, v in rules.iteritems():
-        if not k in specific_keys:
+        if k not in specific_keys:
             setattr(admin_class, k, v)
 
     return admin_class

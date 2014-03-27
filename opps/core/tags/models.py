@@ -30,7 +30,7 @@ class Tagged(models.Model):
 
     def save(self, *args, **kwargs):
         if self.tags:
-            #Remove empty and repeated strings on list
+            # Remove empty and repeated strings on list
             tags = filter(None, set(self.tags.split(',')))
             tags = map(unicode.strip, tags)
             for tag in tags:

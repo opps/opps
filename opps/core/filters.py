@@ -95,13 +95,14 @@ class ChildClassListFilter(SimpleListFilter):
 
     def lookups(self, request, model_admin):
         site = get_current_site(request)
-        child_classes = [(i['child_class'], _(i['child_class'])) for i in
-                         Container.objects.values('child_class').filter(
-                             published=True,
-                             date_available__lte=timezone.now(), site=site
-                         ).annotate(
-                             child=Count('child_class'),
-                             date=Max('date_available')).order_by('-date')]
+        child_classes = [
+            (i['child_class'], _(i['child_class'])) for i in
+            Container.objects.values('child_class').filter(
+                published=True,
+                date_available__lte=timezone.now(),
+                site=site).annotate(child=Count('child_class'),
+                                    date=Max('date_available')
+                                    ).order_by('-date')]
         return child_classes
 
     def queryset(self, request, queryset):

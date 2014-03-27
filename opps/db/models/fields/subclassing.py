@@ -1,7 +1,7 @@
-## This file was copied from django.db.models.fields.subclassing
-## so that we could
-## change the Creator.__set__ behavior. Read the comment below
-## for full details.
+# This file was copied from django.db.models.fields.subclassing
+# so that we could
+# change the Creator.__set__ behavior. Read the comment below
+# for full details.
 
 """
 Convenience routines for creating non-trivial Field subclasses,
