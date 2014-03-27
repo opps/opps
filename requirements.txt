@@ -11,6 +11,7 @@ django-grappelli==2.4.8
 django-filebrowser
 django-polymorphic
 django-celery
+django-endless-pagination
 feedparser
 mimeparse
 redis

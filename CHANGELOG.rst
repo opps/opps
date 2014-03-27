@@ -5,6 +5,8 @@ Changelog
 0.2.4
 =====
 
+* Add endless pagination on requirements file, used on opps editor for locate image
+
 
 0.2.3
 =====
