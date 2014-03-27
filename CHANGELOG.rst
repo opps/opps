@@ -6,6 +6,7 @@ Changelog
 =====
 
 * Add endless pagination on requirements file, used on opps editor for locate image
+* Add missing Notification model migration
 
 
 0.2.3
