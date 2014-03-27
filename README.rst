@@ -48,7 +48,7 @@ Now you can start a new Opps project
 
     opps-admin.py startproject PROJECT_NAME
     cd PROJECT_NAME
-    python manage.py syncdb
+    python manage.py syncdb --noinput
     python manage.py migrate
     python manage.py collectstatic --noinput
     python manage.py runserver

@@ -7,6 +7,7 @@ Changelog
 
 * Add endless pagination on requirements file, used on opps editor for locate image
 * Add missing Notification model migration
+* Update README file, add noimput in syncdb run
 
 
 0.2.3
