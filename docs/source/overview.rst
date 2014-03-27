@@ -60,3 +60,5 @@ Sites Using Opps
 * `Brands and Values <http://brandsandvalues.com.br>`_
 * `Brigh Thouse <http://brighthouse.com.br>`_
 * `Brand Insights <http://brandinsights.com.br>`_
+* `JovemPan AM <http://jovempan.com.br>`_
+* `JovemPan FM <http://jovempanfm.com.br>`_
