@@ -15,6 +15,20 @@ from opps.contrib.multisite.admin import AdminViewPermission
 from opps.images.generate import image_url
 
 
+class FlatPageAdminForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(FlatPageAdminForm, self).__init__(*args, **kwargs)
+        self.fields['channel'].required = False
+
+    def clean_channel(self):
+        if self.cleaned_data['channel']:
+            return self.cleaned_data["channel"]
+        return Channel.objects.get_homepage(site=self.cleaned_data['site'])
+
+    class Meta:
+        model = FlatPage
+        widgets = {'content': OppsEditor()}
+
 
 @apply_opps_rules('flatpages')
 class FlatPageAdmin(AdminViewPermission):
