@@ -136,7 +136,6 @@ class QuerySet(Publishable):
                 queryset = queryset.filter(
                     channel_long_slug=self.channel.long_slug)
 
-
         if self.filters:
             filters = json.loads(self.filters)
             queryset = queryset.filter(**filters)
