@@ -53,6 +53,24 @@ Now you can start a new Opps project
     python manage.py collectstatic --noinput
     python manage.py runserver
 
+
+Tests
+=====
+
+To run the test you must have an Redis instance running locally on the 6379 port (default one). Then, just type the following
+
+.. code-block:: bash
+
+    make test
+    
+To run tests in multiple python versions, first install tox and then run the tox command:
+
+.. code-block:: bash
+
+    pip install tox
+    tox
+
+
 VirtualBox
 ----------
 
