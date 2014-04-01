@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
@@ -11,21 +12,32 @@ from opps.channels.models import Channel
 
 from .models import FlatPage
 from opps.core.admin import apply_opps_rules
+from opps.contrib.multisite.admin import AdminViewPermission
 from opps.images.generate import image_url
 
 
 class FlatPageAdminForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(FlatPageAdminForm, self).__init__(*args, **kwargs)
+        self.fields['channel'].required = False
+
+    def clean_channel(self):
+        if self.cleaned_data['channel']:
+            return self.cleaned_data["channel"]
+        return Channel.objects.get_homepage(site=self.cleaned_data['site'])
+
     class Meta:
         model = FlatPage
         widgets = {'content': OppsEditor()}
 
 
 @apply_opps_rules('flatpages')
-class FlatPageAdmin(admin.ModelAdmin):
+class FlatPageAdmin(AdminViewPermission):
     form = FlatPageAdminForm
     prepopulated_fields = {"slug": ["title"]}
     readonly_fields = ['get_http_absolute_url', 'short_url', 'image_thumb']
-    list_display = ['title', 'site', 'published', 'date_available']
+    list_display = ['title', 'site', 'channel_long_slug', 'published',
+                    'date_available']
     raw_id_fields = ['main_image', 'channel']
 
     fieldsets = (
@@ -36,7 +48,7 @@ class FlatPageAdmin(admin.ModelAdmin):
             'fields': ('headline', 'content', ('main_image', 'image_thumb'))}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('published', 'date_available')}),
+            'fields': ('channel', 'published', 'date_available')}),
     )
 
     def image_thumb(self, obj):
@@ -51,7 +63,8 @@ class FlatPageAdmin(admin.ModelAdmin):
         if getattr(obj, 'pk', None) is None:
             obj.user = get_user_model().objects.get(pk=request.user.pk)
             obj.site = Site.objects.get(pk=settings.SITE_ID)
-            obj.channel = Channel.objects.get_homepage(site=obj.site)
+            if not obj.channel:
+                obj.channel = Channel.objects.get_homepage(site=obj.site)
         obj.save()
 
 admin.site.register(FlatPage, FlatPageAdmin)

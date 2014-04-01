@@ -36,6 +36,12 @@ class QuerySet(Publishable):
         null=True
     )
 
+    recursive = models.BooleanField(
+        _("Recusibve"),
+        help_text=_("Bring the content channels and subchannels (tree)"),
+        default=False
+    )
+
     filters = models.TextField(
         _(u'Filters'),
         help_text=_(u'Json format extra filters for queryset'),
@@ -88,6 +94,11 @@ class QuerySet(Publishable):
             raise ValidationError(_(u'Offset can\'t be equal or higher than'
                                     u'limit'))
 
+        if self.recursive:
+            if not self.channel:
+                raise ValidationError(_(u"To use recursion (channel) is "
+                                        u"necessary to select a channel"))
+
     def get_queryset(self, content_group='default',
                      exclude_ids=None, use_local_cache=True):
         cached = self.local_cache.get('get_queryset')
@@ -112,7 +123,18 @@ class QuerySet(Publishable):
             pass  # silently pass when FieldDoesNotExists
 
         if self.channel and not self.channel.homepage:
-            queryset = queryset.filter(channel=self.channel)
+            if self.recursive:
+                channel_long_slug = [self.channel.long_slug]
+                channel_descendants = self.channel.get_descendants(
+                    include_self=False)
+                for children in channel_descendants:
+                    channel_long_slug.append(children.long_slug)
+
+                queryset = queryset.filter(
+                    channel_long_slug__in=channel_long_slug)
+            else:
+                queryset = queryset.filter(
+                    channel_long_slug=self.channel.long_slug)
 
         if self.filters:
             filters = json.loads(self.filters)
@@ -129,10 +151,9 @@ class QuerySet(Publishable):
                 id__in=exclude_ids
             )
 
+        order_term = self.order_field or 'id'
         if self.order == '-':
             order_term = "-{}".format(self.order_field or 'id')
-        else:
-            order_term = self.order_field or 'id'
 
         queryset = queryset.order_by(order_term)
 

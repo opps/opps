@@ -57,6 +57,7 @@ def configure():
                     'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
                 }
             },
+            'OPPS_MULTISITE_FALLBACK': False,
             'ROOT_URLCONF': 'tests._site.urls',
             'STATIC_URL': '/static/',
             'ADMINS': ('admin@example.com',),
