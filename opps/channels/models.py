@@ -19,7 +19,8 @@ class ChannelManager(TreeManager):
             return super(ChannelManager, self).get_query_set().filter(
                 site__domain=site, homepage=True, published=True).get()
         except Channel.DoesNotExist:
-            return None
+             return super(ChannelManager, self).get_query_set().filter(
+                homepage=True, published=True)[0]
 
 
 class Channel(MPTTModel, Publishable, Slugged):
