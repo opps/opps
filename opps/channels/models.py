@@ -19,7 +19,7 @@ class ChannelManager(TreeManager):
             return super(ChannelManager, self).get_query_set().filter(
                 site__domain=site, homepage=True, published=True).get()
         except Channel.DoesNotExist:
-             return super(ChannelManager, self).get_query_set().filter(
+            return super(ChannelManager, self).get_query_set().filter(
                 homepage=True, published=True)[0]
 
 
