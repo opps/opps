@@ -185,9 +185,10 @@ class ChannelModelTest(TestCase):
         not set channel home page, return none
         """
 
+        main_channel = Channel.objects.get_homepage(site=self.site)
         channel = Channel.objects.get_homepage(site=self.parent.site)
-        self.assertEqual(None, channel)
-        self.assertFalse(channel)
+        self.assertEqual(main_channel, channel)
+        self.assertTrue(channel)
 
     def test_get_thumb(self):
         self.assertIsNone(self.parent.get_thumb())
