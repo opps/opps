@@ -10,6 +10,7 @@ from django.core.cache import cache
 from .signals import redirect_generate
 from opps.containers.models import Container, ContainerImage
 from opps.core.cache import _cache_key
+from opps.core.managers import PublishableManager
 
 
 class Article(Container):
@@ -39,6 +40,8 @@ class Post(Article):
         related_name='post_relatedposts',
         through='articles.PostRelated',
     )
+
+    objects = PublishableManager()
 
     class Meta:
         verbose_name = _('Post')

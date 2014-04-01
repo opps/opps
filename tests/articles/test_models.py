@@ -11,6 +11,7 @@ from opps.articles.models import PostRelated, Link
 from opps.channels.models import Channel
 
 from opps.core.tags.models import Tag
+from opps.core.managers import PublishableManager
 
 
 class ArticleFields(TestCase):
@@ -80,10 +81,12 @@ class PostCreation(TestCase):
             email='test@test.com',
             password=User.objects.make_random_password(),
         )
+
         self.channel = Channel.objects.create(
             name='test channel',
             user=self.user,
         )
+
         self.post = Post.objects.create(
             headline=u'a simple headline',
             short_title=u'a simple short title',
@@ -183,3 +186,41 @@ class AlbumCreation(TestCase):
         self.assertTrue(self.album.short_title, u'a simple short title')
         self.assertTrue(self.album.title, u'a simple title')
         self.assertTrue(self.album.hat, u'a simple hat')
+
+
+class PostPublishableManager(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(
+            username='test@test.com',
+            email='test@test.com',
+            password=User.objects.make_random_password(),
+        )
+
+        self.channel = Channel.objects.create(
+            name='test channel',
+            user=self.user,
+        )
+
+        self.post = Post.objects.create(
+            headline=u'a simple headline',
+            short_title=u'a simple short title',
+            title=u'a simple title',
+            hat=u'a simple hat',
+            channel=self.channel,
+            user=self.user,
+        )
+
+        from django.db.models import Model
+
+        class ModelYet(Model):
+            objects = PublishableManager()
+        self.Model = ModelYet
+
+
+    def test_custom_manager(self):
+        self.assertEquals(Post.objects.all_published().count(), 0)
+
+        self.post.published = True
+        self.post.save()
+
+        self.assertEquals(Post.objects.all_published().count(), 1)
