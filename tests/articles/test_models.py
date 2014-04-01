@@ -11,6 +11,7 @@ from opps.articles.models import PostRelated, Link
 from opps.channels.models import Channel
 
 from opps.core.tags.models import Tag
+from .fixtures import create_post
 
 
 class ArticleFields(TestCase):
@@ -75,23 +76,7 @@ class LinkFields(TestCase):
 class PostCreation(TestCase):
 
     def setUp(self):
-        self.user = User.objects.create(
-            username='test@test.com',
-            email='test@test.com',
-            password=User.objects.make_random_password(),
-        )
-        self.channel = Channel.objects.create(
-            name='test channel',
-            user=self.user,
-        )
-        self.post = Post.objects.create(
-            headline=u'a simple headline',
-            short_title=u'a simple short title',
-            title=u'a simple title',
-            hat=u'a simple hat',
-            channel=self.channel,
-            user=self.user,
-        )
+        self.post = create_post()
 
     def test_post_fields(self):
         self.assertTrue(self.post.headline, u'a simple headline')
@@ -183,3 +168,9 @@ class AlbumCreation(TestCase):
         self.assertTrue(self.album.short_title, u'a simple short title')
         self.assertTrue(self.album.title, u'a simple title')
         self.assertTrue(self.album.hat, u'a simple hat')
+
+
+class PostPublishableManager(TestCase):
+    def setUp(self):
+        pass
+
