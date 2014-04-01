@@ -6,7 +6,7 @@ from django.utils import timezone
 from polymorphic import PolymorphicManager
 
 
-class PublishableManager(PolymorphicManager):
+class PublishableManager(models.Manager):
 
     def all_published(self):
         return super(PublishableManager, self).get_query_set().filter(
