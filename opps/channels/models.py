@@ -19,8 +19,10 @@ class ChannelManager(TreeManager):
             return super(ChannelManager, self).get_query_set().filter(
                 site__domain=site, homepage=True, published=True).get()
         except Channel.DoesNotExist:
-            return super(ChannelManager, self).get_query_set().filter(
-                homepage=True, published=True)[0]
+            if getattr(settings, 'OPPS_MULTISITE_FALLBACK', None):
+                return super(ChannelManager, self).get_query_set().filter(
+                    homepage=True, published=True)[0]
+            return None
 
 
 class Channel(MPTTModel, Publishable, Slugged):
