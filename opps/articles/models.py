@@ -48,29 +48,29 @@ class Post(Article):
         verbose_name_plural = _('Posts')
         ordering = ['-date_available']
 
-    def all_images(self):
+    def all_images(self, check_published=True):
         cachekey = _cache_key(
             '{}main-all_images'.format(self.__class__.__name__),
             self.__class__, self.site_domain,
             u"{}-{}".format(self.channel_long_slug, self.slug))
         getcache = cache.get(cachekey)
-        if getcache:
+        if getcache and check_published:
             return getcache
 
         imgs = super(Post, self).all_images()
 
-        albums = self.albums.filter(
-            published=True,
-            date_available__lte=timezone.now(),
-        )
+        albums = self.albums.filter(date_available__lte=timezone.now())
+        if check_published:
+            albums = albums.filter(published=True)
 
         for album in albums:
             images = album.images.filter(
-                published=True,
                 date_available__lte=timezone.now(),
             ).exclude(
                 pk__in=[i.pk for i in imgs]
             ).order_by('containerimage__order')
+            if check_published:
+                images = images.filter(published=True)
 
             captions = {
                 ci.image_id: ci.caption for ci in
