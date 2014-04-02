@@ -25,7 +25,6 @@ class AllImagesCheckPermissionForObjectsNode(Node):
         except:
             pass
 
-        print check_published
         obj = self.obj.resolve(context)
         context[self.name] = obj.all_images(check_published)
         return ''
