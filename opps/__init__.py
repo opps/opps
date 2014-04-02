@@ -4,7 +4,7 @@ import pkg_resources
 
 pkg_resources.declare_namespace(__name__)
 
-VERSION = (0, 2, 4)
+VERSION = (0, 2, 5)
 
 OPPS_CORE_APPS = [
     # Django core
