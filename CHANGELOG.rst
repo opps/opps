@@ -10,6 +10,7 @@ Changelog
 * Update README file, add noimput in syncdb run
 * Add new field recursive on Boxe (app) QuerySet, #320
 * Fixed version dependency Pillow/Django-Filebrowser, #322
+* Update MANIFEST.in and include all the search templates, #315
 
 
 0.2.3
