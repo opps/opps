@@ -43,15 +43,22 @@ class View(object):
         return by_request or by_channel or by_settings
 
     def get_context_data(self, **kwargs):
-        if not self.long_slug:
-            context = []
-            return context
-        context = super(View, self).get_context_data(**kwargs)
+        context = {}
 
         # channel is needed everywhere
         self.channel = self.channel or Channel.objects.get_homepage(
             site=get_current_site(self.request)
         )
+
+        if not self.channel and getattr(
+                settings, 'OPPS_MULTISITE_FALLBACK', None):
+            self.channel = Channel.objects.filter(
+                homepage=True, published=True)[:1].get()
+            context['channel'] = self.channel
+
+        if not self.long_slug:
+            return context
+        context = super(View, self).get_context_data(**kwargs)
 
         if hasattr(self, 'articleboxes'):
             context['articleboxes'] = self.articleboxes
