@@ -31,8 +31,8 @@ class ContainerAdminForm(forms.ModelForm):
             widget=JSONField(
                 attrs={'_model': self._meta.model.__name__}),
             required=False)
-        for field in Field.objects.filter(application__contains=
-                                          self._meta.model.__name__):
+        for field in Field.objects.filter(
+                application__contains=self._meta.model.__name__):
             if field.type == 'checkbox':
                 for fo in FieldOption.objects.filter(field=field):
                     self.fields[
