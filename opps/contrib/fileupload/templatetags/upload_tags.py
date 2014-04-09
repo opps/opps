@@ -18,7 +18,6 @@ def upload_js(container=None):
 {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-upload fade">
         <td class="preview"><span class="fade"></span></td>
-        <td class="name"><span>{%=file.name%}</span></td>
         <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
 
         <td class="extra">
@@ -28,7 +27,7 @@ def upload_js(container=None):
         title + u"""' required></label>
         <label>""" + unicode(_(u'Caption')) + u""":
             <textarea name="caption" rows="2" colums="1">
-                        </textarea>
+                        </textarea></label>
         <label>""" + unicode(_(u'Order')) + u""": <input type="text"
         name="order" value="0"/></label>
         <label>""" + unicode(_(u'Source')) + u""":
@@ -94,7 +93,7 @@ def upload_js(container=None):
             </td>
             <td class="size">
             <span>{%=o.formatFileSize(file.size)%}</span></td>
-            <td colspan="2"></td>
+            <td class="success-message" colspan="2">Sucesso!</td>
         {% } %}
         <!-- td class="delete">
             <button class="btn btn-danger"

@@ -13,7 +13,11 @@
 {% endblock %}
 
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/admin/css/forms.css" />{% endblock %}
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}admin/css/forms.css" />
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery_file_upload.css" />
+{% endblock %}
 
 
 {% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
@@ -78,7 +82,9 @@
         </div>
     </div>
     <div class="fileupload-loading"></div>
-    <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
+    <table class="table table-striped table-files">
+      <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
+    </table>
   </form>
   <div class="fileupload-content">
       <table class="files"></table>
@@ -97,7 +103,7 @@
 <script src="{{ STATIC_URL }}js/jquery.iframe-transport.js"></script>
 <script src="{{ STATIC_URL }}js/jquery.fileupload.js"></script>
 <script src="{{ STATIC_URL }}js/jquery.fileupload-ui.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.fileupload-fp.js"></script>
+{# <script src="{{ STATIC_URL }}js/jquery.fileupload-fp.js"></script> #}
 <script src="{{ STATIC_URL }}js/locale.js"></script>
 <script src="{{ STATIC_URL }}js/mainupload.js"></script>
 <script src="{{ STATIC_URL }}js/csrf.js"></script>
