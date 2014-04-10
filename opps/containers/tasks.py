@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import celery
+from django.utils import timezone
 
 
 @celery.task
@@ -90,3 +91,17 @@ def check_mirror_channel(container, Mirror):
             mirror.channel_name = channel.name
             mirror.hat = container.hat
             mirror.save()
+
+
+@celery.task.periodic_task(run_every=timezone.timedelta(minutes=30))
+def check_all_mirror_channel():
+    from .models import Container, Mirror
+
+    mirror = Container.objects.all().exclude(mirror_channel=None)
+    for obj in mirror:
+        try:
+            for channel in obj.mirror_channel:
+                Mirror.objects.get(channel=channel, container=mirror,
+                                   site=mirror.site)
+        except:
+            obj.save()
