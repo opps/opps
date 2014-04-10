@@ -5,6 +5,10 @@ Changelog
 0.2.5
 =====
 
+* Fixed fileupload error in fileupload-fp and add new file upload styles
+* Fix home (channel) if not exist in mult-site child
+* periodic task to supoprt recheck create mirror channel
+
 
 0.2.4
 =====
