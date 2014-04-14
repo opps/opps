@@ -322,7 +322,7 @@ class ContainerBox(BaseBox):
                 date_available__lte=now,
             ).exclude(
                 container__id__in=exclude_ids
-            ).order_by('-containerbox__site', 'order').distinct()
+            ).order_by('-containerbox__site__id', 'order').distinct()
 
         self.local_cache['ordered_containers'] = qs
         return qs

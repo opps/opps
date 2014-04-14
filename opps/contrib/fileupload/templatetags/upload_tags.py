@@ -94,7 +94,9 @@ def upload_js(container=None):
             </td>
             <td class="size">
             <span>{%=o.formatFileSize(file.size)%}</span></td>
-            <td class="success-message" colspan="2">{%=locale.fileupload.success%}</td>
+            <td class="success-message" colspan="2">
+                {%=locale.fileupload.success%}
+            </td>
         {% } %}
         <!-- td class="delete">
             <button class="btn btn-danger"

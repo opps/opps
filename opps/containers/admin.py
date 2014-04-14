@@ -93,6 +93,7 @@ class ContainerBoxAdmin(BaseBoxAdmin, AdminViewPermission):
     raw_id_fields = ['channel', 'queryset', 'main_image']
     list_display = ['name', 'site', 'channel_name', 'date_available',
                     'published']
+    save_as = True
 
     fieldsets = (
         (_(u'Identification'), {
