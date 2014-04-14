@@ -18,6 +18,7 @@ def upload_js(container=None):
 {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-upload fade">
         <td class="preview"><span class="fade"></span></td>
+        <td class="name"><span>{%=file.name%}</span></td>
         <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
 
         <td class="extra">
@@ -93,7 +94,7 @@ def upload_js(container=None):
             </td>
             <td class="size">
             <span>{%=o.formatFileSize(file.size)%}</span></td>
-            <td class="success-message" colspan="2">Sucesso!</td>
+            <td class="success-message" colspan="2">{%=locale.fileupload.success%}</td>
         {% } %}
         <!-- td class="delete">
             <button class="btn btn-danger"
