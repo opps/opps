@@ -19,6 +19,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Framework :: Django",
+    "Framework :: Opps",
     'Programming Language :: Python',
     "Programming Language :: Python :: 2.7",
     "Operating System :: OS Independent",
