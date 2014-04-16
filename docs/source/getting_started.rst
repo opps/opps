@@ -14,7 +14,7 @@ Start
 
 .. code-block:: bash
 
-    git clone git@github.com:opps/opps.git
+    git clone https://github.com/opps/opps.git
     cd opps
     python setup.py develop
     opps-admin.py startproject PROJECT_NAME
