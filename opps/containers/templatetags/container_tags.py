@@ -414,11 +414,20 @@ def get_container_by_channel(slug, number=10, depth=1,
     box = None
     magic_date = kwargs.pop('magic_date', False)
     date = timezone.now()
+
     if magic_date:
         try:
             date = magicdate(magic_date)
         except Exception:
             pass
+
+    # __in split treatment
+    splited = {
+        key: value.split(',')
+        for key, value
+        in kwargs.items()
+        if key.endswith('__in') and type(value) is not list}
+    kwargs.update(splited)
 
     if include_children:
         try:
