@@ -170,7 +170,8 @@ def get_containerbox(context, slug, template_name=None, **extra_context):
     context = {
         'articlebox': box,
         'slug': slug,
-        'context': context
+        'context': context,
+        'request': request
     }
 
     context.update(extra_context)
