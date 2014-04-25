@@ -7,7 +7,8 @@ Changelog
 
 * Fixed fileupload error in fileupload-fp and add new file upload styles
 * Fix home (channel) if not exist in mult-site child
-* periodic task to supoprt recheck create mirror channel
+* Periodic task to support recheck create mirror channel
+* Fix `get_containerbox` templatetag recursion parameter issue
 
 
 0.2.4
