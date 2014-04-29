@@ -1,14 +1,18 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 import os
+import sys
 import djcelery
+
+PROJECT_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..')
+
+sys.path.append(os.path.join(PROJECT_PATH, "../"))
 
 from opps import OPPS_CORE_APPS
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-PROJECT_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), '..')
 
 DATABASES = {
     'default': {

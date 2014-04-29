@@ -4,54 +4,22 @@ Opps CMS Example
 ## First things first
 
 Create a virtualenv environment ( if you don't know what this is read
-[this]("http://virtualenvwrapper.readthedocs.org/en/latest/")).
+[this](http://virtualenvwrapper.readthedocs.org/en/latest/)).
 
 After the virtual environment creation you should do:
 
-    $ pip install opps
-
-or
-
-    $ pip install -r requirements.txt
-
-Trouble installing Opps? Go
-[here]("http://www.oppsproject.org/en/latest/installation.html")
+	$ pip install -r ../requirements.txt
 
 
-## Create a project
-
-    $ django-admin.py createproject mysite
-
-Since the Opps CMS is modularized with several apps, we need to add the
-base apps in the INSTALLED_APPS tuple: 
-
-    INSTALLED_APPS (
-		...
-		'opps.core',
-        'opps.articles',
-        'opps.channels',
-        'opps.images',
-        'opps.search',
-        'opps.sitemaps',
-        'opps.sources',
-    )
-
-Now you can run:
+### Run it!
 
 	$ python manage.py syncdb
 	$ python manage.py migrate
 
+Now you can run:
 
-If you are having trouble to configure your project settings.py you can
-look at our settings.py example.
+	$ python manage.py runserver
 
-And that's it! Don't forget to enable Django's admin to start adding
-content!
 
 Got any issues? Go to the [Opps Github
-Issues]('http://github.com/opps/opps/issues')
-
-
-
-
-
+Issues](http://github.com/opps/opps/issues)
