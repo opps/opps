@@ -1,5 +1,5 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 import os
 import random
 from datetime import datetime
@@ -8,7 +8,6 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
-
 
 from opps.core.models import Publishable, Slugged
 from opps.core.tags.models import Tagged

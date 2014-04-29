@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from urlparse import urlparse
 
 from django.db import models
@@ -8,6 +9,7 @@ from django.core.exceptions import ValidationError
 from django.core.cache import cache
 
 from .signals import redirect_generate
+from opps.archives.models import get_file_path
 from opps.containers.models import Container, ContainerImage
 from opps.core.cache import _cache_key
 from opps.core.managers import PublishableManager
@@ -133,6 +135,19 @@ class Album(Article):
     class Meta:
         verbose_name = _('Album')
         verbose_name_plural = _('Albums')
+        ordering = ['-date_available']
+
+
+class Document(Article):
+    archive = models.FileField(upload_to=get_file_path,
+                               max_length=255,
+                               verbose_name=_(u'Archive'),
+                               null=True,
+                               blank=True)
+
+    class Meta:
+        verbose_name = _('Document')
+        verbose_name_plural = _('Documents')
         ordering = ['-date_available']
 
 

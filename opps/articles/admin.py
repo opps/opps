@@ -1,10 +1,11 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Post, PostRelated, Album, Link
-from .forms import PostAdminForm, AlbumAdminForm, LinkAdminForm
+from .models import Post, PostRelated, Album, Link, Document
+from .forms import (
+    PostAdminForm, AlbumAdminForm, LinkAdminForm, DocumentAdminForm)
 
 from opps.containers.admin import ContainerAdmin, ContainerImageInline
 from opps.core.admin import apply_opps_rules, HaystackModelAdmin
@@ -104,6 +105,28 @@ class LinkAdmin(ContainerAdmin, AdminViewPermission):
     )
 
 
+@apply_opps_rules('articles')
+class DocumentAdmin(ContainerAdmin, AdminViewPermission):
+    form = DocumentAdminForm
+    raw_id_fields = ['channel', 'mirror_channel', 'main_image']
+    fieldsets = (
+        (_(u'Identification'), {
+            'fields': ('site', 'title', 'slug', 'get_http_absolute_url',
+                       'short_url',)}),
+        (_(u'Content'), {
+            'fields': ('archive', 'tags')}),
+        (_(u'Custom'), {
+            'fields': ('json',)}),
+        (_(u'Relationships'), {
+            'fields': ('channel', 'mirror_channel')}),
+        (_(u'Publication'), {
+            'classes': ('extrapretty'),
+            'fields': ('published', 'date_available',
+                       'show_on_root_channel')}),
+    )
+
+
 admin.site.register(Post, PostAdmin)
 admin.site.register(Album, AlbumAdmin)
 admin.site.register(Link, LinkAdmin)
+admin.site.register(Document, DocumentAdmin)
