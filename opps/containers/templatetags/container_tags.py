@@ -547,14 +547,18 @@ def get_custom_field_value(obj, field_slug):
 
 @register.assignment_tag
 def get_postrelated_by(obj, **filters):
-    """Return a list of containers filtered by given args"""
-    cachekey = u'getpostrelatedby-{}'.format(hash(frozenset(filters.items())))
-    _cache = cache.get(cachekey)
-    if _cache:
-        return _cache
+    """Return a list of post related filtered by given args"""
+    if getattr(obj, 'postrelated_post', False):
+        cachekey = u'getpostrelatedby-{}'.format(hash(
+                                                 frozenset(filters.items())))
 
-    containers = [i.related for i in obj.postrelated_post.filter(**filters)
-                                                         .order_by('order')]
+        _cache = cache.get(cachekey)
+        if _cache:
+            return _cache
 
-    cache.set(cachekey, containers, 3600)
-    return containers
+        containers = [i.related for i in obj.postrelated_post.filter(**filters)
+                                            .order_by('order')]
+
+        cache.set(cachekey, containers, 3600)
+        return containers
+    return ''
