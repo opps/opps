@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import json
+
+from datetime import datetime
+
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -138,10 +141,20 @@ class QuerySet(Publishable):
 
         if self.filters:
             filters = json.loads(self.filters)
+
+            for key, value in filters.iteritems():
+                if value == "datetime.now()":
+                    filters[key] = datetime.now()
+
             queryset = queryset.filter(**filters)
 
         if self.excludes:
             excludes = json.loads(self.excludes)
+
+            for key, value in excludes.iteritems():
+                if value == "datetime.now()":
+                    excludes[key] = datetime.now()
+
             queryset = queryset.exclude(**excludes)
 
         # importing here to avoid circular imports
