@@ -98,3 +98,7 @@ msgstr "Canal"
 #: models.py:80
 msgid "Get HTTP Absolute URL"
 msgstr "Mostrar URL Absoluta Completa"
+
+#: models.py:53
+msgid "Paginate by"
+msgstr "Paginar em"
