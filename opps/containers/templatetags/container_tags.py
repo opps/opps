@@ -553,11 +553,19 @@ def get_postrelated_by(obj, **filters):
                                                  frozenset(filters.items())))
 
         _cache = cache.get(cachekey)
+
         if _cache:
             return _cache
 
-        containers = [i.related for i in obj.postrelated_post.filter(**filters)
-                                            .order_by('order')]
+        if 'exclude' in filters.keys():
+            del filters['exclude']
+            containers = [i.related for i in obj.postrelated_post
+                                                .exclude(**filters)
+                                                .order_by('order')]
+        else:
+            containers = [i.related for i in obj.postrelated_post
+                                                .filter(**filters)
+                                                .order_by('order')]
 
         cache.set(cachekey, containers, 3600)
         return containers
