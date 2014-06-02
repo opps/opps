@@ -549,8 +549,8 @@ def get_custom_field_value(obj, field_slug):
 def get_postrelated_by(obj, **filters):
     """Return a list of post related filtered by given args"""
     if getattr(obj, 'postrelated_post', False):
-        cachekey = u'getpostrelatedby-{}'.format(hash(
-                                                 frozenset(filters.items())))
+        cachekey = u'getpostrelatedby-{}-{}'.format(hash(frozenset(
+                                                    filters.items())), obj.pk)
 
         _cache = cache.get(cachekey)
 
