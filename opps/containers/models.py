@@ -301,9 +301,16 @@ class ContainerBox(BaseBox):
                 id__in=exclude_ids
             ).order_by('containerboxcontainers__order').distinct()
         else:
-            site_master = Site.objects.order_by('id')[0]
+
+            site_master = cache.get("site_master")
+
+            if not site_master:
+                site_master = Site.objects.order_by('id')[0]
+                cache.set('site_master', site_master, 3600)
+
             boxes = [self]
-            if fallback and site_master != self.site:
+
+            if fallback and site_master.pk != self.site_id:
                 try:
                     master_box = self.__class__.objects.get(
                         site=site_master, slug=self.slug
