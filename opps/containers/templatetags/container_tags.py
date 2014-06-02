@@ -557,15 +557,15 @@ def get_postrelated_by(obj, **filters):
         if _cache:
             return _cache
 
+        queryset = obj.postrelated_post.filter(post__pk=obj.pk)
+
         if 'exclude' in filters.keys():
             del filters['exclude']
-            containers = [i.related for i in obj.postrelated_post
-                                                .exclude(**filters)
-                                                .order_by('order')]
+            containers = [i.related for i in queryset.exclude(**filters)
+                                                     .order_by('order')]
         else:
-            containers = [i.related for i in obj.postrelated_post
-                                                .filter(**filters)
-                                                .order_by('order')]
+            containers = [i.related for i in queryset.filter(**filters)
+                                                     .order_by('order')]
 
         cache.set(cachekey, containers, 3600)
         return containers
