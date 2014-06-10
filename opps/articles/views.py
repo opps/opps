@@ -69,25 +69,63 @@ class AlbumList(ContainerList):
 class AlbumChannelList(ListView):
     model = Album
     type = 'articles'
+    template_name_suffix = 'album'
 
-    def get_template_names(self):
+    def get_template_list(self, domain_folder="containers"):
         templates = []
-
-        domain_folder = self.get_template_folder()
         list_name = 'list'
 
-        templates.append('{}/{}/{}.html'.format(
-            self.model._meta.app_label,
-            self.model._meta.module_name, list_name))
+        if self.template_name_suffix:
+            list_fullname = "{}_{}".format(self.template_name_suffix,
+                                           list_name)
+
+        if self.channel:
+            if self.channel.group and self.channel.parent:
+                templates.append('{}/{}/{}.html'.format(
+                    domain_folder,
+                    self.channel.parent.long_slug,
+                    list_fullname))
+
+                if self.request.GET.get('page') and\
+                   self.__class__.__name__ not in\
+                   settings.OPPS_PAGINATE_NOT_APP:
+                    templates.append('{}/{}/{}_paginated.html'.format(
+                        domain_folder, self.channel.parent.long_slug,
+                        list_fullname))
+
+            if self.request.GET.get('page') and\
+               self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
+                templates.append('{}/{}/{}_paginated.html'.format(
+                    domain_folder, self.channel.long_slug, list_fullname))
+
+            templates.append('{}/{}/{}.html'.format(
+                domain_folder, self.channel.long_slug, list_fullname))
+
+            for t in self.channel.get_ancestors()[::-1]:
+                templates.append('{}/{}/{}.html'.format(
+                    domain_folder, t.long_slug, list_fullname))
+                if self.request.GET.get('page') and\
+                   self.__class__.__name__ not in\
+                   settings.OPPS_PAGINATE_NOT_APP:
+                    templates.append('{}/{}/{}_paginated.html'.format(
+                        domain_folder, t.long_slug, list_fullname))
 
         if self.request.GET.get('page') and\
-           self.__class__.__name__ not in\
-           settings.OPPS_PAGINATE_NOT_APP:
-            templates.append('{}/{}/{}/{}_paginated.html'.format(
-                domain_folder, self.model._meta.app_label,
-                self.model._meta.module_name, list_name))
+           self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
+            templates.append('{}/{}_paginated.html'.format(domain_folder,
+                                                           list_fullname))
+
+        templates.append('{}/{}/{}.html'.format(self.model._meta.app_label,
+                                                self.model._meta.module_name,
+                                                list_name))
 
         return templates
+
+    def get_template_names(self):
+        domain_folder = self.get_template_folder()
+        template_list = self.get_template_list(domain_folder)
+
+        return template_list
 
     def get_queryset(self):
         self.site = get_current_site(self.request)
