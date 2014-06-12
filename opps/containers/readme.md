@@ -47,5 +47,5 @@ Mirror
 ======
 
 It is a workaround for many-2-many relations between Containers.Container and Channels.
-Creates clones of the Container object to be associated in other channels and is updates by a Celery task.
+Creates clones of the Container object to be associated in other channels and is updated by a Celery task.
 *Should be obsolete in Opps 0.3*
