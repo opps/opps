@@ -52,7 +52,7 @@ Theming the Channel
 Channels have a special options called *Layout* this option let you choose a template type for this channel, which is mapped to a html.
 This option is manually controlled by a file named **channel.json**.
 
-This file is hierarquically loaded like templates, and allows to create new template names wich can be switched in the channel dashboard.
+This file is hierarquically loaded like templates, and allows to create new template names which can be switched in the channel dashboard.
 
 A example of this file could be /containers/channel.json:
 
