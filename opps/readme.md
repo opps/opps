@@ -39,6 +39,8 @@ Caching Routes
 
 Caching entire routes is very simple there is a method for that:
 
+    from opps.core.cache import cache_page
+    
     (r'^route_pattern$', cache_page(<seconds>)(<page_content>)),
 
 	# real example
