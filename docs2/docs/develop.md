@@ -4,8 +4,7 @@ Develop
 South Migrations
 ----------------
 
-Note:
-Remember this for every South migration created!
+`Remember this for every South migration created!`
 
 For every migration created, make the following modifications.
 
@@ -39,8 +38,7 @@ For every migration created, make the following modifications.
 Haystack
 ---------
 
-Note:
-This is required in order to use the default Haystack setup
+`This is required in order to use the default Haystack setup`
 
 The default haystack search template is the same you find in haystack home page, the difference in opps 
 is that for every indexed Model you should implement some fields, properties or methods.
