@@ -17,7 +17,7 @@ the ``Post``, ``Album`` or ``Link`` model, you can simply create your own models
 from ``Container``. For example if we wanted to have content that were **music**, **author** and **studio**:
 
 
-```
+```python
 
     # -*- coding: utf-8 -*-
     from django.db import models
@@ -39,7 +39,7 @@ If your content type only exposes some new fields that you’d like to make edit
 you can simply register your model using the ``opps.containers.admin.ContainerAdmin`` class:
 
 
-```
+```python
 
     # -*- coding: utf-8 -*-
     from django.contrib import admin
