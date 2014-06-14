@@ -89,6 +89,6 @@ Add member on TEAM
 ******************
 
 
-Clone repo `oppsproject.org <https://github.com/opps/oppsproject.org>`_ and add user on
- `permissions.cfg <https://github.com/opps/oppsproject.org/blob/master/permissions.cfg>`_ in *[team:contributors]*
+Clone repo [oppsproject.org](https://github.com/opps/oppsproject.org) and add user on
+ [permissions.cfg](https://github.com/opps/oppsproject.org/blob/master/permissions.cfg) in *[team:contributors]*
 
