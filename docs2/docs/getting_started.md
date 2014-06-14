@@ -1,4 +1,4 @@
-ng Started
+Getting Started
 ===============
 
 

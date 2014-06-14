@@ -53,7 +53,7 @@ is that for every indexed Model you should implement some fields, properties or 
 
 **Example**
 
-```
+```python
 
     class MyModel(models.Model):
         title = models.CharField(max_length=255) # implemented as field

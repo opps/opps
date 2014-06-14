@@ -1,4 +1,4 @@
-Opps Application
+Opps Applications
 ================
 
 * [opps.polls](https://github.com/opps/opps-polls)

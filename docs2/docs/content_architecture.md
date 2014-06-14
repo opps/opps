@@ -1,4 +1,4 @@
-ontent Architecture
+Content Architecture
 ====================
 
 The ``Container`` Model
