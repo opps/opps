@@ -6,4 +6,4 @@ github:
 
 .PHONY: serve 
 serve:
-	@mkdocs build
+	@mkdocs serve
