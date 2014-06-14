@@ -4,6 +4,7 @@ coverage
 django-coverage
 transifex-client
 coveralls
-sphinx
 tox
 django-nose
+mkdocs
+ghp-import
