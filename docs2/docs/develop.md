@@ -8,7 +8,7 @@ South Migrations
 
 For every migration created, make the following modifications.
 
-```
+```python
 
     from django.contrib.auth import get_user_model
     User = get_user_model()
@@ -81,7 +81,7 @@ fields/properties/methods or just access directly on template. (see haystack doc
 **Example of search template**
 
 
-```
+```html
 
     {% load images_tags %}
 
