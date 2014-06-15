@@ -3,7 +3,7 @@ Admin Menu
 ==========
 
 Referenced in code as *ADMIN_SHORTCUTS* on settings.py.
-It is a non-dynamic way of choosing wich module will be available in the top menu.
+It is a non-dynamic way of choosing which module will be available in the top menu.
 
 Simple dict with the following structure:
 
