@@ -8,7 +8,7 @@ They group content and give flexibility in templating.
 Personalizing a Channel
 -----------------------
 
-To extend a Channel template as channel is a container you must have a folder structure like the following:
+To extend a Channel template as channel is a [container](https://github.com/opps/opps/tree/master/opps/containers#container) you must have a folder structure like the following:
 
     .../templates/containers/<channel-slug>/template-name.html
     .../templates/containers/<channel-slug>/<sub-channel-slug>/template-name.html
