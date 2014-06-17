@@ -24,16 +24,16 @@
 
 ### opps.containers
 
-### opps.contrib.feeds
+### opps.contrib
+#### opps.contrib.feeds
 
-### opps.contrib.fileupload
+#### opps.contrib.fileupload
 
-### opps.contrib.logging
+#### opps.contrib.logging
 
 Application to generate log project actions
 
-Example
-*******
+###### Example
 
 
     $.ajax({
@@ -47,15 +47,16 @@ Example
 
 
 
-### opps.contrib.mobile
+#### opps.contrib.mobile
 
-### opps.contrib.multisite
+#### opps.contrib.multisite
 
-### opps.contrib.notifications
+#### opps.contrib.notifications
 
-### opps.core.tags
+### opps.core
+#### opps.core.tags
 
-### opps.core.templatetags
+#### opps.core.templatetags
 
 ### opps.db
 
