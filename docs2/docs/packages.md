@@ -57,9 +57,11 @@ Example
 
 ### opps.core.templatetags
 
-### opps.db._redis
+### opps.db
 
-### opps.db.backends.postgresql_psycopg2
+#### opps.db._redis
+
+#### opps.db.backends.postgresql_psycopg2
 
 ### opps.fields
 
