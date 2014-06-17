@@ -1,45 +1,34 @@
-# Packages
+## Packages
 
-opps.api
---------
+### opps.api
 
-Get all containers object
--------------------------
+##### Get all containers object
 
 * /api/v1/container/?format=json
 
 
-Get container object
---------------------
+##### Get container object
 
-* /api/v1/<child class>/<id>/?format=json
-* /api/v1/post/<id>/?format=json
-* /api/v1/album/<id>/?format=json
-* /api/v1/link/<id>/?format=json
+* /api/v1/{child class}/{id}/?format=json
+* /api/v1/post/{id}/?format=json
+* /api/v1/album/{id}/?format=json
+* /api/v1/link/{id}/?format=json
 
-opps.archives
--------------
+### opps.archives
 
-opps.articles
--------------
+### opps.articles
 
-opps.boxes
-----------
+### opps.boxes
 
-opps.channels
--------------
+### opps.channels
 
-opps.containers
----------------
+### opps.containers
 
-opps.contrib.feeds
-------------------
+### opps.contrib.feeds
 
-opps.contrib.fileupload
------------------------
+### opps.contrib.fileupload
 
-opps.contrib.logging
---------------------
+### opps.contrib.logging
 
 Application to generate log project actions
 
@@ -58,46 +47,33 @@ Example
 
 
 
-opps.contrib.mobile
--------------------
+### opps.contrib.mobile
 
-opps.contrib.multisite
-----------------------
+### opps.contrib.multisite
 
-opps.contrib.notifications
---------------------------
+### opps.contrib.notifications
 
-opps.core.tags
---------------
+### opps.core.tags
 
-opps.core.templatetags
-----------------------
+### opps.core.templatetags
 
-opps.db._redis
---------------
+### opps.db._redis
 
-opps.db.backends.postgresql_psycopg2
-------------------------------------
+### opps.db.backends.postgresql_psycopg2
 
-opps.fields
------------
+### opps.fields
 
-opps.flatpages
---------------
+### opps.flatpages
 
-opps.images
------------
+### opps.images
 
-opps.search
------------
+### opps.search
 
-opps.sitemaps
--------------
+### opps.sitemaps
 
-opps.views
-----------
+### opps.views
 
-# Opps Apps
+## Opps Apps
 
 * [opps.polls](https://github.com/opps/opps-polls)
 * [opps.infographics](https://github.com/opps/opps-infographics)

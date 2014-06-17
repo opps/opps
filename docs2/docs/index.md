@@ -19,7 +19,7 @@ content portals. Furthermore the Opps has a flexible structure for creating new 
 * Configurable dashboard (used grappelli admin theme)
 * API for custom container types
 * Search engine
-* Multi-Site
+* Multi-Site (for real)
 * SEO friendly URLs and meta data
 * Mobile detect
 * JVM compatible (via Jython)
