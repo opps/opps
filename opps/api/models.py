@@ -46,4 +46,5 @@ def create_api_key(sender, **kwargs):
         ApiKey.objects.create(user=kwargs.get('instance'))
 
 
-models.signals.post_save.connect(create_api_key, User)
+if 'opps.api' in settings.INSTALLED_APPS:
+    models.signals.post_save.connect(create_api_key, User)
