@@ -28,7 +28,11 @@ class PopUpImageView(FormView):
 class GetImagesView(ListView):
     model = Image
     context_object_name = 'images'
-    template_name = 'images/all_images.html'
+
+    def get_template_names(self):
+        if self.request.GET.get('template_name'):
+            return ['images/{}'.format(self.request.GET.get('template_name'))]
+        return ['images/all_images.html']
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):

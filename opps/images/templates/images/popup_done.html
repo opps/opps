@@ -1,10 +1,23 @@
-{% load images_tags %}
+{% load images_tags admin_list i18n %}
 <!DOCTYPE html>
 <html>
-  <head><title></title></head>
+  <head>
+  <title></title>
+  	<style type="text/css">
+  		h2{
+  			font-size: 27px;
+  			line-height: 36px;
+  			color: inherit;
+			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  		}
+  	</style>
+  </head>
   <body>
     <script type="text/javascript">
       top.opps_editor_popup_selector('{% image_url image.archive.url %}')
     </script>
+
+    <h2>{% trans "Image added with success!" %}</h2>
+
   </body>
 </html>
