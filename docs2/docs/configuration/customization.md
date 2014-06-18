@@ -3,8 +3,7 @@ OPPS_EDITOR
 
 By default it uses `Tinymce <http://www.tinymce.com/>`_
 
-To use aloha
-************
+### To use aloha
 
     OPPS_EDITOR = {
         'editor': 'aloha',
@@ -13,8 +12,7 @@ To use aloha
     }
 
 
-To use redactor
-***************
+### To use redactor
 
 Install redactor:
 
@@ -47,4 +45,4 @@ Set your own static paths:
     }
 
 
-See also opps.contrib.admin for Django Admin customization
+See also ``opps.contrib.admin`` for Django Admin customization.

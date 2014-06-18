@@ -1,10 +1,7 @@
-Content Architecture
+The ``Container`` Model
 ====================
 
-The ``Container`` Model
------------------------
-
-Container is the basic model for everything in Opps.
+The content architecture starts with the Container Model. The Container is the basic model for everything in Opps.
 And it is important that most objects used in frontend should extend Container.
 
 When querying for overall objects it will query for ``Containers.Container`` in this case if you don't extend it, your object 
@@ -25,11 +22,8 @@ from ``Container``. For example if we wanted to have content that were **music**
 
 
 ```python
-
-    # -*- coding: utf-8 -*-
     from django.db import models
     from opps.containers.models import Container
-
 
     class Musics(Container):
         music = models.CharField(_(u"Music"), max_length=140)
@@ -47,8 +41,6 @@ you can simply register your model using the ``opps.containers.admin.ContainerAd
 
 
 ```python
-
-    # -*- coding: utf-8 -*-
     from django.contrib import admin
     from opps.containers.admin import ContainerAdmin
     from .models import Musics
@@ -101,7 +93,7 @@ Creates clones of the Container object to be associated in other channels and is
 
 
 The ``Channel`` Model
-----------------------
+====================
 
 Channel objects are used like categories and/or sections in Opps.
 They group content and give flexibility in templating.
@@ -183,7 +175,7 @@ If you choose this option in the dashboard it will look for this template:
 This way you can prepare special templates for holidays and other temporary changes.
 
 The ``Article`` Model
-----------------------
+====================
 
 Post
 ----
@@ -210,7 +202,7 @@ Representation of external links(normally) but can point to internal objects(Con
 This behavior is controlled by the flag **is_local**.
 
 QuerySet
---------
+====================
 
 The Queryset feature is inside in the ``Box`` Model, is used to gatter automatic data.
 It is used together(but not uniquely) with [Containerbox](https://github.com/opps/opps/tree/master/opps/containers) this way we can make the box 

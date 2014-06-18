@@ -111,7 +111,6 @@ is that for every indexed Model you should implement some fields, properties or 
 **Example**
 
 ```python
-
     class MyModel(models.Model):
         title = models.CharField(max_length=255) # implemented as field
         slug = models.SlugField()
@@ -139,7 +138,6 @@ fields/properties/methods or just access directly on template. (see haystack doc
 
 
 ```html
-
     {% load images_tags %}
 
 
