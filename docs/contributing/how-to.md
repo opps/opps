@@ -1,4 +1,4 @@
-## How to contributing
+## How to contribute
 
 Contributions are very welcome. Specially roles. If you implement a role that you think others might be using, please contribute.
 
