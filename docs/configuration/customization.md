@@ -1,15 +1,9 @@
-Opps Customization
-==================
-
-Opps Editor
+OPPS_EDITOR
 -----------
 
 By default it uses `Tinymce <http://www.tinymce.com/>`_
 
-To use aloha
-************
-
-.. code-block:: python
+### To use aloha
 
     OPPS_EDITOR = {
         'editor': 'aloha',
@@ -18,23 +12,18 @@ To use aloha
     }
 
 
-To use redactor
-***************
+### To use redactor
 
 Install redactor:
-
-.. code-block:: bash
 
     pip install django-wysiwyg-redactor
 
 Add django redactor to your INSTALLED_APPS:
 
-.. code-block:: python
     INSTALLED_APPS += ('redactor')
 
 Add django redactor to your urls.py:
 
-.. code-block:: python
     
     urlpatterns = patterns(
         '',
@@ -47,7 +36,6 @@ Add django redactor to your urls.py:
 
 Set your own static paths:
 
-.. code-block:: python
 
     OPPS_EDITOR = {
         'editor': 'redactor',
@@ -55,3 +43,6 @@ Set your own static paths:
         "css": ('redactor/css/redactor.css',
                 'redactor/css/django_admin.css')
     }
+
+
+See also ``opps.contrib.admin`` for Django Admin customization.

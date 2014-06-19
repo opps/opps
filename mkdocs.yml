@@ -1,0 +1,13 @@
+site_name: Opps Project
+dev_addr: 0.0.0.0:8000
+pages:
+- ['index.md', 'Home']
+- ['documentation/getting-started.md', 'Documentation', 'Getting Started']
+- ['documentation/content_architecture.md', 'Documentation', 'Content Architecture']
+- ['documentation/packages.md', 'Documentation', 'General Packages']
+- ['documentation/opps-apps.md', 'Documentation', 'Opps Plugins']
+- ['configuration/cache.md', 'Configuration', 'Cache']
+- ['configuration/customization.md', 'Configuration', 'Customization']
+- ['contributing/how-to.md', 'Contribute', 'How to contribute']
+- ['contributing/git-tips.md', 'Contribute', 'Git tips']
+- ['contributing/team.md', 'Contribute', 'The Opps team']

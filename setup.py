@@ -1,11 +1,16 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-
+import sys
 from setuptools import setup, find_packages
 
 import opps
 
+
 REQUIREMENTS = [i.strip() for i in open("requirements.txt").readlines()]
+if sys.argv[1] == 'develop':
+    REQUIREMENTS += [i.strip()
+                     for i in open("requirements_dev.txt").readlines()]
+
 
 dependency_links = [
     'http://github.com/avelino/django-googl/tarball/master#egg=django-googl',
