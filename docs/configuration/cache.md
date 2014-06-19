@@ -1,2 +1,11 @@
+OPPS_CACHE_PREFIX
+-----------
+
 OPPS_CACHE_EXPIRE
+-----------
+
+OPPS_CACHE_EXPIRE_LIST
+-----------
+
+OPPS_CACHE_EXPIRE_DETAIL
 -----------

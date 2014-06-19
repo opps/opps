@@ -6,6 +6,7 @@ pages:
 - ['documentation/content_architecture.md', 'Documentation', 'Content Architecture']
 - ['documentation/packages.md', 'Documentation', 'General Packages']
 - ['documentation/opps-apps.md', 'Documentation', 'Opps Plugins']
+- ['configuration/core.md', 'Configuration', 'Core Settings']
 - ['configuration/cache.md', 'Configuration', 'Cache']
 - ['configuration/customization.md', 'Configuration', 'Customization']
 - ['contributing/how-to.md', 'Contribute', 'How to contribute']
