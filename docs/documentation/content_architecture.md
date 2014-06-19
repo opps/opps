@@ -1,3 +1,9 @@
+The Content Archicteture
+====================
+
+![Opps Archicterure Details](https://raw.githubusercontent.com/opps/opps/master/docs/_static/opps_full_architecture.png)
+
+
 The ``Container`` Model
 ====================
 
@@ -200,6 +206,12 @@ Link
 -----
 Representation of external links(normally) but can point to internal objects(Container).
 This behavior is controlled by the flag **is_local**.
+
+------------------------
+
+##### Representation
+![Opps Content Details](https://raw.githubusercontent.com/opps/opps/master/docs/_static/opps_content_archicteture.png)
+
 
 QuerySet
 ====================
