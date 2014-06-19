@@ -17,71 +17,10 @@ An *Open Source Content Management* for the **magazine** websites and **high-tra
     :alt: Pypi downloads
 
 
-.. contents:: Topics
+Documentation
+=======
 
-
-.. include:: ../../CONTRIBUTING.rst
-
-
-Contacts
-========
-
-The place to create issues is `opps's github issues <https://github.com/opps/opps/issues>`_. The more information you send about an issue, the greater the chance it will get fixed fast.
-
-If you are not sure about something, have a doubt or feedback, or just want to ask for a feature, feel free to join `our mailing list <http://groups.google.com/group/opps-developers>`_, or, if you're on FreeNode (IRC), you can join the chat `#opps <http://webchat.freenode.net/?channels=opps>`_.
-
-
-Run example
-===========
-
-Download and install Opps
-
-.. code-block:: bash
-
-    git clone https://github.com/opps/opps.git
-    cd opps
-    python setup.py develop
-
-Now you can start a new Opps project
-
-.. code-block:: bash
-
-    opps-admin.py startproject PROJECT_NAME
-    cd PROJECT_NAME
-    python manage.py syncdb --noinput
-    python manage.py migrate
-    python manage.py collectstatic --noinput
-    python manage.py runserver
-
-
-Tests
-=====
-
-To run the test you must have an Redis instance running locally on the 6379 port (default one). Then, just type the following
-
-.. code-block:: bash
-
-    make test
-    
-To run tests in multiple python versions, first install tox and then run the tox command:
-
-.. code-block:: bash
-
-    pip install tox
-    tox
-
-
-VirtualBox
-----------
-
-.. code-block:: bash
-
-    vagrant box add opps http://mirror.oppsproject.org/opps.box
-    vagrant up
-    vagrant ssh
-    workon opps
-    cd /home/vagrant/opps/example/
-    python manage.py runserver 0.0.0.0:8000
+See here the `full documentation <http://www.oppsproject.org/>`_.
 
 
 Sponsor
