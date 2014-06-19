@@ -7,13 +7,13 @@ content portals. Furthermore the Opps has a flexible structure for creating new 
 Features
 ---------
 
-* Write in Django
-* Containar manager (**container** is content type in *Opps CMS*)
+* Written in Django
+* Container manager (**container** is content type in *Opps CMS*)
 * * Save draft and and preview
 * * Dynamic custom field, add field in specific container
-* WYSIWYG editing (more one option)
+* WYSIWYG editors (more than one option)
 * Container Box manager (Custom channel home page, add dynamic/fix box)
-* Channel organize via tree (via mptt, not level limit)
+* Channel organization via tree structure (via mptt, unlimited levels)
 * Media file manager, default manager images
 * * Multi upload
 * User permission in Admin, manager site access on admin
