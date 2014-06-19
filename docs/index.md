@@ -43,17 +43,12 @@ Opps makes use of as few libraries as possible (apart from a standard Django env
 Sites using
 -----------
 
-* [Portal Virgula](http://virgula.uol.com.br)
-* [Portal Guiame](http://guiame.com.br)
-* [Grupo Troiano](http://grupotroiano.com.br)
-* [Troiano](http://troiano.com.br)
-* [Brands and Values](http://brandsandvalues.com.br)
-* [Brigh Thouse](http://brighthouse.com.br)
-* [Brand Insights](http://brandinsights.com.br)
-* [JovemPan AM](http://jovempan.com.br)
-* [JovemPan FM](http://jovempanfm.com.br)
-* [Rede Vida](http://www.redevida.com.br)
-
+|  |  |  |
+| ------------ | ------------- | ------------ |
+| [![Portal Virgula](http://placehold.it/300x200)](http://virgula.uol.com.br) | [![Portal Guiame](http://placehold.it/300x200)](http://guiame.com.br) | [![Grupo Troiano](http://placehold.it/300x200)](http://grupotroiano.com.br) |
+| [![Troiano](http://placehold.it/300x200)](http://troiano.com.br) | [![Brands and Values](http://placehold.it/300x200)](http://brandsandvalues.com.br) | [![Brigh Thouse](http://placehold.it/300x200)](http://brighthouse.com.br) |
+| [![Brand Insights](http://placehold.it/300x200)](http://brandinsights.com.br) | [![Jovem Pan](http://placehold.it/300x200)](http://jovempan.com.br) | [![Jovem Pan FM](http://placehold.it/300x200)](http://jovempanfm.com.br) |
+| [![Rede Vida](http://placehold.it/300x200)](http://redevida.com.br) | | |
 
 Report a bug
 --------
@@ -67,7 +62,7 @@ If you are not sure about something, have a doubt or feedback, or just want to a
 [our mailing list](http://groups.google.com/group/opps-developers), or, 
 if you’re on FreeNode (IRC), you can join the chat [#opps](http://webchat.freenode.net/?channels=opps).
 
-Sponsor
+Sponsors
 --------
 * [YACOWS](http://www.yacows.com.br)
 * [Digital Oceans](http://digitalocean.com/)
