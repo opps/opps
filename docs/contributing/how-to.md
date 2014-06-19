@@ -57,7 +57,7 @@ Here is how to build the documentation::
 Architecture
 ------------
 
-![Opps Architecture](https://raw.githubusercontent.com/opps/opps/master/docs/source/_static/opps_visualized.png)
+![Opps Architecture](https://raw.githubusercontent.com/opps/opps/master/docs/_static/opps_visualized.png)
 
 
 ## South Migrations
