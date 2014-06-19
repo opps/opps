@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+        <title>Git tips - Opps Project</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../../css/prettify-1.0.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">Opps Project</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../../documentation/getting-started/">Getting Started</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../documentation/content_architecture/">Content Architecture</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../documentation/packages/">General Packages</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../documentation/opps-apps/">Opps Plugins</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuration <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../../configuration/cache/">Cache</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../configuration/customization/">Customization</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contribute <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../how-to/">How to contribute</a>
+                            </li>
+                        
+                            <li class="active">
+                                <a href="./">Git tips</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../team/">The Opps team</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                <li >
+                    <a rel="next" href="../how-to/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../team/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                
+            </ul>
+            
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#git-tips">Git tips</a></li>
+        
+    
+        <li class="main "><a href="#forking-opps">Forking Opps</a></li>
+        
+    
+        <li class="main "><a href="#making-your-changes">Making your changes</a></li>
+        
+    
+        <li class="main "><a href="#issuing-a-pull-request">Issuing a pull request</a></li>
+        
+    
+        <li class="main "><a href="#squashing-commits">Squashing commits</a></li>
+        
+    
+        <li class="main "><a href="#relevant-resources">Relevant Resources</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h2 id="git-tips">Git tips</h2>
+<p>While some of this information repeats documentation that is already available on <a href="https://help.github.com/">GitHub Help</a>, 
+we thought it might be useful to collect and publish some of the most relevant information.</p>
+<h2 id="forking-opps">Forking Opps</h2>
+<p>Assuming you have already <a href="https://help.github.com/articles/set-up-git">set up Git</a>, the first step is to navigate to 
+the <a href="https://github.com/opps/opps">Opps project</a> page and select the Fork button at top-right.</p>
+<p>Next, clone your fork (replace GH-USER with your GitHub username):</p>
+<pre class="prettyprint well"><code>git clone https://github.com/GH-USER/opps.git
+</code></pre>
+<p>This adds a "remote" for your fork called "origin". Add the canonical Opps project as an additional remote called "upstream":</p>
+<pre class="prettyprint well"><code>cd opps
+git remote add upstream https://github.com/opps/opps.git
+</code></pre>
+<h2 id="making-your-changes">Making your changes</h2>
+<p>Create and switch to a new branch to house your feature or bugfix (replace <code>newfeaturebranch</code> with an appropriate name):</p>
+<pre class="prettyprint well"><code>git fetch upstream
+git checkout -b newfeaturebranch upstream/master
+</code></pre>
+<p>Once you are satisfied with your changes, run the tests and check coding standards:</p>
+<pre class="prettyprint well"><code>make test
+</code></pre>
+<p>Once the tests all pass and you are comfortable that your code complies with the suggested coding standards, add and commit your changes:</p>
+<pre class="prettyprint well"><code>git add changedfile1 changedfile2
+git commit
+</code></pre>
+<p>Push your new branch, and the commit(s) within, to your fork:</p>
+<pre class="prettyprint well"><code>git push origin newfeaturebranch
+</code></pre>
+<h2 id="issuing-a-pull-request">Issuing a pull request</h2>
+<p>Read the <a href="https://help.github.com/articles/using-pull-requests">GitHub pull request documentation</a> first. Then navigate to your 
+Opps fork at <code>https://github.com/GH-USER/opps</code>, select the new branch from the drop-down, and select "Pull Request". Enter a title and description 
+for your pull request, review the proposed changes using the "Commits" and "Files Changed" tabs, and select "Send pull request".</p>
+<p>If someone reviews your contribution and ask you to make more changes, do so and then rebase to upstream master:</p>
+<pre class="prettyprint well"><code>git checkout newfeaturebranch
+git fetch upstream
+git rebase -p upstream/master
+</code></pre>
+<p>When prompted, include a relevant commit message, describing all your changes. Finally, push your changes via:</p>
+<pre class="prettyprint well"><code>git push --force origin newfeaturebranch
+</code></pre>
+<h2 id="squashing-commits">Squashing commits</h2>
+<p>If you are asked to squash your commits:</p>
+<pre class="prettyprint well"><code>git checkout newfeaturebranch
+git fetch upstream
+git rebase upstream/master
+git rebase -i
+</code></pre>
+<p>When prompted, mark your initial commit with pick, and all your follow-on commits with squash.</p>
+<p>Then edit the commit message to make sense, taking out any extraneous information and succinctly describing your changes. Finally, push your changes via:</p>
+<pre class="prettyprint well"><code>git push --force origin newfeaturebranch
+</code></pre>
+<h2 id="relevant-resources">Relevant Resources</h2>
+<ul>
+<li><a href="http://mislav.uniqpath.com/2013/02/merge-vs-rebase/">Git merge vs. rebase</a></li>
+</ul>
+</div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/prettify-1.0.min.js"></script>
+        <script src="../../js/base.js"></script>
+        
+    </body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+        <title>Content Architecture - Opps Project</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../../css/prettify-1.0.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">Opps Project</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../getting-started/">Getting Started</a>
+                            </li>
+                        
+                            <li class="active">
+                                <a href="./">Content Architecture</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../packages/">General Packages</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../opps-apps/">Opps Plugins</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuration <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../../configuration/cache/">Cache</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../configuration/customization/">Customization</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contribute <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../../contributing/how-to/">How to contribute</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../contributing/git-tips/">Git tips</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../contributing/team/">The Opps team</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                <li >
+                    <a rel="next" href="../getting-started/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../packages/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                
+            </ul>
+            
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#the-container-model">The Container Model</a></li>
+        
+            <li><a href="#creating-custom-content-type">Creating Custom Content Type</a></li>
+        
+            <li><a href="#containerbox">ContainerBox</a></li>
+        
+            <li><a href="#content-group">Content Group</a></li>
+        
+            <li><a href="#methods">Methods</a></li>
+        
+            <li><a href="#containerboxcontainers-inline">ContainerBoxContainers (Inline)</a></li>
+        
+            <li><a href="#mirror">Mirror</a></li>
+        
+    
+        <li class="main "><a href="#the-channel-model">The Channel Model</a></li>
+        
+            <li><a href="#personalizing-a-channel">Personalizing a Channel</a></li>
+        
+            <li><a href="#theming-the-channel">Theming the Channel</a></li>
+        
+    
+        <li class="main "><a href="#the-article-model">The Article Model</a></li>
+        
+            <li><a href="#post">Post</a></li>
+        
+            <li><a href="#album">Album</a></li>
+        
+            <li><a href="#link">Link</a></li>
+        
+    
+        <li class="main "><a href="#queryset">QuerySet</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="the-container-model">The <code>Container</code> Model</h1>
+<p>The content architecture starts with the Container Model. The Container is the basic model for everything in Opps.
+And it is important that most objects used in frontend should extend Container.</p>
+<p>When querying for overall objects it will query for <code>Containers.Container</code> in this case if you don't extend it, your object 
+might stay out of the list, making you create a query only for it(redundant), instead of querying Containers.Container with a 
+filter using your specific child_class.</p>
+<p>The conventions of a Opps site is the model <code>opps.containers.models.Container</code>. Each <code>container</code>
+instance is stored in a hierarchical tree to form the content navigation, and an interface for
+managing the structure of the navigation tree is provided in the admin via <code>opps.containers.admin.ContainerAdmin</code>.</p>
+<h2 id="creating-custom-content-type">Creating Custom Content Type</h2>
+<p>In order to handle different content type that require more structured content than provided by
+the <code>Post</code>, <code>Album</code> or <code>Link</code> model, you can simply create your own models that inherit 
+from <code>Container</code>. For example if we wanted to have content that were <strong>music</strong>, <strong>author</strong> and <strong>studio</strong>:</p>
+<pre class="prettyprint well"><code class="python">    from django.db import models
+    from opps.containers.models import Container
+
+    class Musics(Container):
+        music = models.CharField(_(u&quot;Music&quot;), max_length=140)
+        author = models.CharField(_(u&quot;Author&quot;), max_length=140)
+        studio = models.CharField(_(u&quot;Studio&quot;), max_length=200)
+
+        class META:
+            verbose_name = _('Music')
+            verbose_name_plural = _('Musics')
+</code></pre>
+
+<p>Next you’ll need to register your model with Django’s admin to make it available as a content type.
+If your content type only exposes some new fields that you’d like to make editable in the admin, 
+you can simply register your model using the <code>opps.containers.admin.ContainerAdmin</code> class:</p>
+<pre class="prettyprint well"><code class="python">    from django.contrib import admin
+    from opps.containers.admin import ContainerAdmin
+    from .models import Musics
+
+    admin.site.register(Musics, ContainerAdmin)
+</code></pre>
+
+<h2 id="containerbox">ContainerBox</h2>
+<p>Probably the most accessed class in the dashboard.
+With ContainerBox you can group Containers to be fetched in the front.
+You can fetch manually by picking containers in the inlines or you can use <a href="https://github.com/opps/opps/tree/master/opps/boxes">QuerySet</a> to fetch automaticaly.
+They do not affect each other, it will depend on the front to choose between who to render, automatic or manual.
+Normally the best way to go is by giving priority to manual inputs(Inlines) and when those are missing/empty then you render the Queryset results in it's place.</p>
+<h2 id="content-group">Content Group</h2>
+<p>The ContainerBox.content_group attribute is used to give context and the ability to query for unique items(excluding repetitions).
+So you can fragment your page into N ContainerBoxes and make all of them use querysets from the same place and they won't repeat content as long as they share the same Content Group.</p>
+<h2 id="methods">Methods</h2>
+<p>Two methods are widely used here:</p>
+<ul>
+<li>ContainerBox.ordered_box_containers (Will fetch containers from the Inlines ordered by it's order field)</li>
+<li>ContainerBox.get_queryset (Will fetch the containers from the Queryset associated on the ContainerBox)</li>
+</ul>
+<p>One important thing is that he returns the Inline element, not the container itself, since the Inline have fields that might override the original container fields. <em>To get the original container</em> associated you must access the ".container" property like bellow:</p>
+<pre class="prettyprint well"><code>{% set containerbox.ordered_box_containers as items %}
+{{items.0}} {# this is a Inline element #}
+{{items.0.container}} {# this is the container held by the inline element #}
+</code></pre>
+<h2 id="containerboxcontainers-inline">ContainerBoxContainers (Inline)</h2>
+<p>It is a row like structure where you can bind containers inside it to form a group inside a ContainerBox.
+When binding a container and saving, it will load the matching fields content into the ContainerBoxContainer.
+It is important to have the same container displayed a little differently on many locations.</p>
+<h2 id="mirror">Mirror</h2>
+<p>It is a workaround for many-2-many relations between Containers.Container and Channels.
+Creates clones of the Container object to be associated in other channels and is updated by a Celery task.
+<em>Should be obsolete in Opps 0.3</em></p>
+<h1 id="the-channel-model">The <code>Channel</code> Model</h1>
+<p>Channel objects are used like categories and/or sections in Opps.
+They group content and give flexibility in templating.</p>
+<h2 id="personalizing-a-channel">Personalizing a Channel</h2>
+<p>To extend a Channel template as channel is a container you must have a folder structure like the following:</p>
+<pre class="prettyprint well"><code>.../templates/containers/&lt;channel-slug&gt;/template-name.html
+.../templates/containers/&lt;channel-slug&gt;/&lt;sub-channel-slug&gt;/template-name.html
+</code></pre>
+<p>To personalize any channel template you must understand how template
+hierarchy works.
+Let's suppose the folowing structure:</p>
+<ul>
+<li>/<ul>
+<li>news/</li>
+<li>cars/</li>
+<li>economy/<ul>
+<li>country/</li>
+<li>international/</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>From this point, the templates that target <em>All</em> the hypothetical channels are:</p>
+<pre class="prettyprint well"><code>/containers/list.html
+/containers/detail.html
+</code></pre>
+<p>In case I want to specify a template only for <em>/news/cars</em>:</p>
+<pre class="prettyprint well"><code>  # Symbolic functions
+mkdir /containers/news/cars
+vim /containers/news/cars/list.html
+vim /containers/news/cars/detail.html
+</code></pre>
+<p>Now only for <em>/news</em>:</p>
+<pre class="prettyprint well"><code>mkdir /containers/news
+vim /containers/news/list.html
+vim /containers/news/detail.html
+</code></pre>
+<p>Some more examples for:</p>
+<h4 id="channel">Channel:</h4>
+<p>templates/containers/list.html</p>
+<h4 id="content">Content:</h4>
+<p>templates/containers/detail.html</p>
+<pre class="prettyprint well"><code>containers/&lt;channel-slug&gt;/&lt;sub-channel-slug&gt;/&lt;container-slug&gt;/detail.html
+containers/&lt;channel-slug}/&lt;sub-channel-slug&gt;/&lt;container-child-class&gt;_detail.html
+containers/&lt;channel-slug&gt;/&lt;sub-channel-slug&gt;/detail.html
+containers/&lt;channel-slug&gt;/&lt;container-child-class&gt;_detail.html
+containers/channel/detail.html
+containers/detail.html
+</code></pre>
+<p><strong>BUT</strong> when we create a template for <em>/news</em> <strong>All</strong> channels below will now consider this template.
+The only channel not affected by this template is <em>/news/cars</em> whose has it's own template structure.
+It won't be affected.</p>
+<h2 id="theming-the-channel">Theming the Channel</h2>
+<p>Channels have a special options called <em>Layout</em> this option let you choose a template type for this channel, which is mapped to a html.
+This option is manually controlled by a file named <strong>channel.json</strong>.</p>
+<p>This file is hierarquically loaded like templates, and allows to create new template names which can be switched in the channel dashboard.</p>
+<p>A example of this file could be /containers/channel.json:</p>
+<pre class="prettyprint well"><code>{"layout": ["my_template"]}
+</code></pre>
+<p>If you choose this option in the dashboard it will look for this template:</p>
+<pre class="prettyprint well"><code>.../templates/containers/my_template.html
+</code></pre>
+<p>This way you can prepare special templates for holidays and other temporary changes.</p>
+<h1 id="the-article-model">The <code>Article</code> Model</h1>
+<h2 id="post">Post</h2>
+<p>Not only a simple Post but you can bind separately:</p>
+<ul>
+<li>Album</li>
+<li>Container</li>
+</ul>
+<p>When rendering Album inside a Post there is a simple rule for the image order:</p>
+<ol>
+<li>Post main image</li>
+<li>Album main image</li>
+<li>Album binded images</li>
+</ol>
+<h2 id="album">Album</h2>
+<p>Group of Image objects can be binded on other Containers or rendered by itself.</p>
+<h2 id="link">Link</h2>
+<p>Representation of external links(normally) but can point to internal objects(Container).
+This behavior is controlled by the flag <strong>is_local</strong>.</p>
+<h1 id="queryset">QuerySet</h1>
+<p>The Queryset feature is inside in the <code>Box</code> Model, is used to gatter automatic data.
+It is used together(but not uniquely) with <a href="https://github.com/opps/opps/tree/master/opps/containers">Containerbox</a> this way we can make the box 
+update by itself based on some params:</p>
+<ul>
+<li>Model (Which model to get, for example <code>Containers.Container</code> or <code>Post</code>)</li>
+<li><code>Channel</code> (Specific channel to grab data from)</li>
+<li>Recursive (Look into this channels childs(subchannels) recursivelly)</li>
+<li>Filters (Json filters based on <a href="https://docs.djangoproject.com/en/dev/topics/db/queries/#retrieving-specific-objects-with-filters">django query language</a> will be passed to .filters(**kwargs))</li>
+<li>Excludes (same as filters but will be passed to .excludes(**kwargs) check the <a href="https://docs.djangoproject.com/en/dev/topics/db/queries/#retrieving-specific-objects-with-filters">docs</a>)</li>
+<li>Order (Passed to order_by as DESC(-) and ASC(+) if no order_field is passed, it will order by ID)</li>
+<li>Limit and Offset (Use like you would use python slice [offset:limit])</li>
+</ul>
+</div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/prettify-1.0.min.js"></script>
+        <script src="../../js/base.js"></script>
+        
+    </body>
+</html>

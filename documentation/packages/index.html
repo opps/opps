@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+        <title>General Packages - Opps Project</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../../css/prettify-1.0.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">Opps Project</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../getting-started/">Getting Started</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../content_architecture/">Content Architecture</a>
+                            </li>
+                        
+                            <li class="active">
+                                <a href="./">General Packages</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../opps-apps/">Opps Plugins</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuration <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../../configuration/cache/">Cache</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../configuration/customization/">Customization</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contribute <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../../contributing/how-to/">How to contribute</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../contributing/git-tips/">Git tips</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../contributing/team/">The Opps team</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                <li >
+                    <a rel="next" href="../content_architecture/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../opps-apps/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                
+            </ul>
+            
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#general-packages">General Packages</a></li>
+        
+            <li><a href="#oppsapi">opps.api</a></li>
+        
+            <li><a href="#oppsarchives">opps.archives</a></li>
+        
+            <li><a href="#oppscontrib">opps.contrib</a></li>
+        
+            <li><a href="#oppscore">opps.core</a></li>
+        
+            <li><a href="#oppsdb">opps.db</a></li>
+        
+            <li><a href="#oppsfields">opps.fields</a></li>
+        
+            <li><a href="#oppsflatpages">opps.flatpages</a></li>
+        
+            <li><a href="#oppsimages">opps.images</a></li>
+        
+            <li><a href="#oppssearch">opps.search</a></li>
+        
+            <li><a href="#oppssitemaps">opps.sitemaps</a></li>
+        
+            <li><a href="#oppsviews">opps.views</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="general-packages">General Packages</h1>
+<h2 id="oppsapi">opps.api</h2>
+<p>Get all containers object</p>
+<ul>
+<li>/api/v1/container/?format=json</li>
+</ul>
+<p>Get container object</p>
+<ul>
+<li>/api/v1/{child class}/{id}/?format=json</li>
+<li>/api/v1/post/{id}/?format=json</li>
+<li>/api/v1/album/{id}/?format=json</li>
+<li>/api/v1/link/{id}/?format=json</li>
+</ul>
+<h2 id="oppsarchives">opps.archives</h2>
+<h2 id="oppscontrib">opps.contrib</h2>
+<h3 id="oppscontribadmin">opps.contrib.admin</h3>
+<p>Referenced in code as <em>ADMIN_SHORTCUTS</em> on settings.py.
+It is a non-dynamic way of choosing which module will be available in the top menu.</p>
+<p>Simple dict with the following structure:</p>
+<pre class="prettyprint well"><code>'shortcuts': [
+    {
+        'url': '/&lt;url&gt;/', # url of the top option or root node
+        'title': '&lt;title&gt;', # title of the root node
+        'class': '&lt;class_names&gt;', # class to be added to html class attribute
+        'open_new_window': True, # should open in new window or not
+        'children': [ 
+            'url_name': 'admin:&lt;moule_name&gt;_&lt;class_name&gt;_changelist', # pointer to module admin url(check the real example below)
+            'title': '&lt;title&gt;', # option title
+            'include_add_link': True, # if should or not include the add option
+            'help': '&lt;help_text&gt;', # help text when hovering
+            'app_permission': (&lt;module_name&gt;, &lt;class_name&gt;)
+        ],
+        'can_change': True, # Used only when not a module so can't check for user permission (more like visible or not to the user)
+    },
+    ...
+]
+</code></pre>
+<p>Real examplewith static options and generated ones:</p>
+<pre class="prettyprint well"><code>ADMIN_SHORTCUTS = [
+{
+    'shortcuts': [
+        {
+            'url': '/admin/',
+            'title': 'Home'
+        },
+        {
+            'url': '#',
+            'title': 'Conteúdo',
+            'class': 'file2',
+            'children': [
+                {
+                    'url_name': 'admin:%s_changelist' % item[0],
+                    'title': item[1],
+                    'include_add_link': True,
+                    'help': 'Listar %s' % item[1],
+                    'app_permission': (item[0].split('_')[0], item[0].split('_')[1])
+                } for item in (
+                    ('channels_channel', 'Channels'),
+                    ('articles_post', 'Posts'),
+                    ('articles_album', 'Albums'),
+                    ('articles_link', 'Links'),
+                    ('flatpages_flatpage', 'Flatpages'),
+                    ('polls_poll', 'Polls'),
+                    ('tags_tag', 'Tags'),
+                    ('encurtador_shortener', 'Shorteners')
+                )
+            ] + [
+                 {'url': '/admin/feedcrawler/entry/', 'title': 'News Crawler',
+                 'app_permission': ('feedcrawler', 'entry')}
+            ]
+        },
+
+        {
+            'url': '#',
+            'title': 'Multimedia',
+            'class': 'file2',
+            'children': [
+                {
+                    'url_name': 'admin:%s_changelist' % item[0],
+                    'title': item[1],
+                    'help': 'Listar %s' % item[1],
+                    'app_permission': (item[0].split('_')[0], item[0].split('_')[1])
+                } for item in (
+                    ('images_image', 'Images'),
+                    ('multimedias_video', 'Videos'),
+                    ('multimedias_audio', 'Audios'),
+                    ('hubcasts_streaming', 'Streamings')
+                )
+            ]
+        },
+
+        {
+            'url': '/',
+            'title': 'See Website',
+            'open_new_window': True,
+            'help': 'Click to check your website',
+            'can_change': True,
+            'children': []
+        }
+    ]
+}]
+</code></pre>
+<p>As you can see we have a loop for the module dict-objects and a static option example.</p>
+<p>Static option</p>
+<pre class="prettyprint well"><code>{
+    'url': '/',
+    'title': 'See Website',
+    'open_new_window': True,
+    'help': 'Click to check your website',
+    'can_change': True,
+    'children': []
+}
+</code></pre>
+<p>In this case as it is not a module you need <strong>can_change</strong> flag to make it appear.</p>
+<p>Module option</p>
+<pre class="prettyprint well"><code>{
+    'url':'/admin/feedcrawler/entry/',
+    'title': 'News Crawler',
+    'app_permission': ('feedcrawler', 'entry')
+}
+</code></pre>
+<p>This options will be based on feedcrawler.entry object data.</p>
+<p>And the dynamic(loop) approach, can be changed if necessary or even create a module to replace this logic</p>
+<pre class="prettyprint well"><code>{
+    'url': '#',
+    'title': 'Multimedia',
+    'class': 'file2',
+    'children': [
+        {
+            'url_name': 'admin:%s_changelist' % item[0],
+            'title': item[1],
+            'help': 'Listar %s' % item[1],
+            'app_permission': (item[0].split('_')[0], item[0].split('_')[1])
+        } for item in (
+            ('images_image', 'Images'),
+            ('multimedias_video', 'Videos'),
+            ('multimedias_audio', 'Audios'),
+            ('hubcasts_streaming', 'Streamings')
+        )
+    ]
+}
+</code></pre>
+<p>This way you just have to list your modules and they will be rendered under the group name in this case "Multimedia".</p>
+<hr />
+<h3 id="oppscontribfeeds">opps.contrib.feeds</h3>
+<h3 id="oppscontribfileupload">opps.contrib.fileupload</h3>
+<h3 id="oppscontriblogging">opps.contrib.logging</h3>
+<p>Application to generate log project actions</p>
+<p>Example</p>
+<pre class="prettyprint well"><code>$.ajax({
+    type: 'POST',
+    url: '/api/v1/contrib/logging/',
+    data: '{"application": "player", "action": "play"}',
+    dataType: "application/json",
+    processData:  false,
+    contentType: "application/json"
+});
+</code></pre>
+<h3 id="oppscontribmobile">opps.contrib.mobile</h3>
+<h3 id="oppscontribmultisite">opps.contrib.multisite</h3>
+<h3 id="oppscontribnotifications">opps.contrib.notifications</h3>
+<h2 id="oppscore">opps.core</h2>
+<h3 id="oppscorecache">opps.core.cache</h3>
+<p>Cache in Opps is very simple.
+It uses <em>django.core.cache</em> and the current pattern to use it is to define a unique <strong>cachekey</strong> based on context and store objects or rendered response in it.</p>
+<h5 id="caching-on-templatetags">Caching on Templatetags</h5>
+<p>Example of storing:</p>
+<pre class="prettyprint well"><code>from django.core.cache import cache
+cachekey = "ContainerBox-{}-{}-{}-{}".format(
+    slug,
+    template_name,
+    is_mobile,
+    current_site.id)
+
+# now we can test if there is something here to render:
+
+render = cache.get(cachekey)
+if render:
+    return render
+
+# else we do our business and save in this cachekey
+
+...
+
+render = our_rendered_content
+cache.set(cachekey, render, settings.OPPS_CACHE_EXPIRE)
+return render
+</code></pre>
+<p>To store objects is the same proccess instead of html, you can pass the object list to cache.set and it will work fine.
+This method could be used on views too.</p>
+<h5 id="caching-routes">Caching Routes</h5>
+<p>Caching entire routes is very simple there is a method for that:</p>
+<pre class="prettyprint well"><code>from opps.core.cache import cache_page
+
+(r'^route_pattern$', cache_page(&lt;seconds&gt;)(&lt;page_content&gt;)),
+
+# real example
+
+url(r'^(rss|feed)$', cache_page(settings.OPPS_CACHE_EXPIRE)(
+    ContainerFeed()), name='feed')
+</code></pre>
+<h5 id="caching-views">Caching Views</h5>
+<p>Caching views are as simples as adding the following decorator above your view function:</p>
+<pre class="prettyprint well"><code>from opps.core.cache import cache_page
+
+@cache_page(&lt;seconds&gt;)
+def my_view_function():
+    ...
+</code></pre>
+<h5 id="caching-inside-templates">Caching inside templates</h5>
+<p>On front you can use cache methods to cache a single fragment of the page like a menu, list or anything that might break your application.</p>
+<pre class="prettyprint well"><code>{% load cache %}
+{% cache &lt;seconds&gt; &lt;cache_identifier&gt; &lt;params&gt; %}
+    ...&lt;your content&gt;...
+{% endcache %}
+
+# real example
+{% cache 3600 menu %}
+    ...menu here...
+{% endcache %}
+</code></pre>
+<p>You can find much more information about caching on <a href="https://docs.djangoproject.com/en/dev/topics/cache/">django docs here</a></p>
+<hr />
+<h3 id="oppscoretags">opps.core.tags</h3>
+<h3 id="oppscoretemplatetags">opps.core.templatetags</h3>
+<h2 id="oppsdb">opps.db</h2>
+<h3 id="oppsdb_redis">opps.db._redis</h3>
+<h3 id="oppsdbbackendspostgresql_psycopg2">opps.db.backends.postgresql_psycopg2</h3>
+<h2 id="oppsfields">opps.fields</h2>
+<h2 id="oppsflatpages">opps.flatpages</h2>
+<h2 id="oppsimages">opps.images</h2>
+<h2 id="oppssearch">opps.search</h2>
+<h2 id="oppssitemaps">opps.sitemaps</h2>
+<h2 id="oppsviews">opps.views</h2>
+</div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/prettify-1.0.min.js"></script>
+        <script src="../../js/base.js"></script>
+        
+    </body>
+</html>

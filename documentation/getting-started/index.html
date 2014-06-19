@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+        <title>Getting Started - Opps Project</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../../css/prettify-1.0.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">Opps Project</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li class="active">
+                                <a href="./">Getting Started</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../content_architecture/">Content Architecture</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../packages/">General Packages</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../opps-apps/">Opps Plugins</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuration <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../../configuration/cache/">Cache</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../configuration/customization/">Customization</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contribute <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../../contributing/how-to/">How to contribute</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../contributing/git-tips/">Git tips</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../contributing/team/">The Opps team</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                <li >
+                    <a rel="next" href="../..">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../content_architecture/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                
+            </ul>
+            
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#getting-started">Getting Started</a></li>
+        
+            <li><a href="#installation">Installation</a></li>
+        
+            <li><a href="#start-project">Start project</a></li>
+        
+            <li><a href="#opps-admin-command-line">Opps Admin Command line</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="getting-started">Getting Started</h1>
+<h2 id="installation">Installation</h2>
+<p>You can use pip to install Opps and requirements</p>
+<pre class="prettyprint well"><code>pip install opps
+</code></pre>
+<p>or</p>
+<pre class="prettyprint well"><code>git clone git@github.com:opps/opps.git
+cd opps
+python setup.py install
+</code></pre>
+<h2 id="start-project">Start project</h2>
+<p>You can use opps-admin.py to start new project</p>
+<pre class="prettyprint well"><code>opps-admin.py startproject PROJECT_NAME
+</code></pre>
+<h2 id="opps-admin-command-line">Opps Admin Command line</h2>
+<p><em>opps-admin.py</em> is Opps’s command-line utility for administrative tasks.</p>
+<h3 id="usage">Usage</h3>
+<p><em>command</em> should be one of the commands listed in this document. <em>options</em>, which is optional, should be zero or more of the options available for the given command.</p>
+<pre class="prettyprint well"><code>opps-admin.py &lt;command&gt; [options]
+</code></pre>
+<h4 id="getting-runtime-help">Getting runtime help</h4>
+<p>Run <em>opps-admin.py</em> help to display usage information and a list of the commands provided by each application.</p>
+<h4 id="startproject-wzxhzdk1">startproject <projectname></h4>
+<p>Creates a Opps project directory structure for the given project name in the current directory or the given destination.
+For example:</p>
+<pre class="prettyprint well"><code>opps-admin.py startproject myproject
+</code></pre>
+<p>Opps will also accept URLs (http, https, ftp) to compressed archives with the project template files, downloading and extracting them on the fly.</p>
+</div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/prettify-1.0.min.js"></script>
+        <script src="../../js/base.js"></script>
+        
+    </body>
+</html>
