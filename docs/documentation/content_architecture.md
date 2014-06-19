@@ -19,8 +19,7 @@ instance is stored in a hierarchical tree to form the content navigation, and an
 managing the structure of the navigation tree is provided in the admin via ``opps.containers.admin.ContainerAdmin``.
 
 
-Creating Custom Content Type
-----------------------------
+### Creating Custom Content Type
 
 In order to handle different content type that require more structured content than provided by
 the ``Post``, ``Album`` or ``Link`` model, you can simply create your own models that inherit 
@@ -54,8 +53,7 @@ you can simply register your model using the ``opps.containers.admin.ContainerAd
     admin.site.register(Musics, ContainerAdmin)
 ```
 
-ContainerBox
--------------
+### ContainerBox
 
 Probably the most accessed class in the dashboard.
 With ContainerBox you can group Containers to be fetched in the front.
@@ -63,14 +61,12 @@ You can fetch manually by picking containers in the inlines or you can use [Quer
 They do not affect each other, it will depend on the front to choose between who to render, automatic or manual.
 Normally the best way to go is by giving priority to manual inputs(Inlines) and when those are missing/empty then you render the Queryset results in it's place.
 
-Content Group
---------------
+### Content Group
 
 The ContainerBox.content_group attribute is used to give context and the ability to query for unique items(excluding repetitions).
 So you can fragment your page into N ContainerBoxes and make all of them use querysets from the same place and they won't repeat content as long as they share the same Content Group.
 
-Methods
---------
+### Methods
 
 Two methods are widely used here:
 
@@ -83,15 +79,13 @@ One important thing is that he returns the Inline element, not the container its
     {{items.0}} {# this is a Inline element #}
     {{items.0.container}} {# this is the container held by the inline element #}
 
-ContainerBoxContainers (Inline)
---------------------------------
+### ContainerBoxContainers (Inline)
 
 It is a row like structure where you can bind containers inside it to form a group inside a ContainerBox.
 When binding a container and saving, it will load the matching fields content into the ContainerBoxContainer.
 It is important to have the same container displayed a little differently on many locations.
 
-Mirror
-------
+### Mirror
 
 It is a workaround for many-2-many relations between Containers.Container and Channels.
 Creates clones of the Container object to be associated in other channels and is updated by a Celery task.
@@ -104,8 +98,7 @@ The ``Channel`` Model
 Channel objects are used like categories and/or sections in Opps.
 They group content and give flexibility in templating.
 
-Personalizing a Channel
-------------------------
+### Personalizing a Channel
 
 To extend a Channel template as channel is a container you must have a folder structure like the following:
 
@@ -162,8 +155,7 @@ templates/containers/detail.html
 The only channel not affected by this template is */news/cars* whose has it's own template structure.
 It won't be affected.
 
-Theming the Channel
--------------------
+### Theming the Channel
 
 Channels have a special options called *Layout* this option let you choose a template type for this channel, which is mapped to a html.
 This option is manually controlled by a file named **channel.json**.
@@ -183,8 +175,7 @@ This way you can prepare special templates for holidays and other temporary chan
 The ``Article`` Model
 ====================
 
-Post
-----
+### Post
 
 Not only a simple Post but you can bind separately:
 
@@ -197,13 +188,11 @@ When rendering Album inside a Post there is a simple rule for the image order:
   2. Album main image
   3. Album binded images
 
-Album
-------
+### Album
 
 Group of Image objects can be binded on other Containers or rendered by itself.
 
-Link
------
+### Link
 Representation of external links(normally) but can point to internal objects(Container).
 This behavior is controlled by the flag **is_local**.
 
