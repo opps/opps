@@ -152,7 +152,10 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#the-container-model">The Container Model</a></li>
+        <li class="main active"><a href="#the-content-archicteture">The Content Archicteture</a></li>
+        
+    
+        <li class="main "><a href="#the-container-model">The Container Model</a></li>
         
             <li><a href="#creating-custom-content-type">Creating Custom Content Type</a></li>
         
@@ -186,10 +189,15 @@
         <li class="main "><a href="#queryset">QuerySet</a></li>
         
     
+        <li class="main "><a href="#custom-fields">Custom fields</a></li>
+        
+    
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
+<h1 id="the-content-archicteture">The Content Archicteture</h1>
+<p><img alt="Opps Archicterure Details" src="https://raw.githubusercontent.com/opps/opps/master/docs/_static/opps_full_architecture.png" /></p>
 <h1 id="the-container-model">The <code>Container</code> Model</h1>
 <p>The content architecture starts with the Container Model. The Container is the basic model for everything in Opps.
 And it is important that most objects used in frontend should extend Container.</p>
@@ -336,6 +344,9 @@ This option is manually controlled by a file named <strong>channel.json</strong>
 <h2 id="link">Link</h2>
 <p>Representation of external links(normally) but can point to internal objects(Container).
 This behavior is controlled by the flag <strong>is_local</strong>.</p>
+<hr />
+<h5 id="representation">Representation</h5>
+<p><img alt="Opps Content Details" src="https://raw.githubusercontent.com/opps/opps/master/docs/_static/opps_content_archicteture.png" /></p>
 <h1 id="queryset">QuerySet</h1>
 <p>The Queryset feature is inside in the <code>Box</code> Model, is used to gatter automatic data.
 It is used together(but not uniquely) with <a href="https://github.com/opps/opps/tree/master/opps/containers">Containerbox</a> this way we can make the box 
@@ -349,6 +360,7 @@ update by itself based on some params:</p>
 <li>Order (Passed to order_by as DESC(-) and ASC(+) if no order_field is passed, it will order by ID)</li>
 <li>Limit and Offset (Use like you would use python slice [offset:limit])</li>
 </ul>
+<h1 id="custom-fields">Custom fields</h1>
 </div>
         </div>
 
