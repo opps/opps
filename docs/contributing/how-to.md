@@ -4,8 +4,6 @@ Contributions are very welcome. Specially roles. If you implement a role that yo
 
 To contribute head to [opps's github page](https://github.com/opps/opps), fork it and create a pull request.
 
-----------
-
 We strive to keep the internal quality of opps to the best that we can;
 Therefore, it's very important to keep some things in mind when contributing with code for opps:
 
@@ -185,7 +183,7 @@ fields/properties/methods or just access directly on template. (see haystack doc
     </form>
 ```
 
-## Tests
+## Running Tests
 
 To run the test you must have an Redis instance running locally on the 6379 port (default one). Then, just type the following
 

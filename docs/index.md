@@ -26,6 +26,7 @@ Features
 * Mobile detect
 * JVM compatible (via Jython)
 * .NET Framework compatible (via IronPython)
+* Opps’s admin (used Django Grappelli) interface works with all modern browsers.
 
 Dependencies
 -------------
@@ -38,13 +39,6 @@ Opps makes use of as few libraries as possible (apart from a standard Django env
 * South - for database migrations
 * Django Taggit
 * Django Mptt
-
-
-Support
---------
-
-Opps’s admin (used Django Grappelli) interface works with all modern browsers.
-
 
 Sites using
 -----------
@@ -61,12 +55,14 @@ Sites using
 * [Rede Vida](http://www.redevida.com.br)
 
 
-Contact
+Report a bug
 --------
 
 The place to create issues is [opps’s github issues](https://github.com/opps/opps/issues). 
 The more information you send about an issue, the greater the chance it will get fixed fast.
 
+Getting help
+--------
 If you are not sure about something, have a doubt or feedback, or just want to ask for a feature, feel free to join 
 [our mailing list](http://groups.google.com/group/opps-developers), or, 
 if you’re on FreeNode (IRC), you can join the chat [#opps](http://webchat.freenode.net/?channels=opps).

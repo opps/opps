@@ -227,3 +227,7 @@ update by itself based on some params:
  - Excludes (same as filters but will be passed to .excludes(**kwargs) check the [docs](https://docs.djangoproject.com/en/dev/topics/db/queries/#retrieving-specific-objects-with-filters))
  - Order (Passed to order_by as DESC(-) and ASC(+) if no order_field is passed, it will order by ID)
  - Limit and Offset (Use like you would use python slice [offset:limit])
+
+
+Custom fields
+====================
