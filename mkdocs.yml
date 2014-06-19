@@ -11,3 +11,4 @@ pages:
 - ['contributing/how-to.md', 'Contribute', 'How to contribute']
 - ['contributing/git-tips.md', 'Contribute', 'Git tips']
 - ['contributing/team.md', 'Contribute', 'The Opps team']
+theme: 'cerulean'

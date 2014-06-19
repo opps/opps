@@ -1,3 +1,4 @@
+![Opps CMS](_static/opps_logo.png)
 # Opps - OPen Publishing System
 
 Opps is a platform or toolkit to build a CMS developed with Django, accompanies many packages that aim to meet the need of major 
