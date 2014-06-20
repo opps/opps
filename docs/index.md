@@ -50,6 +50,10 @@ Sites using
 | [![Brand Insights](https://raw.githubusercontent.com/opps/opps/master/docs/_static/thumbs/brandins.png)](http://brandinsights.com.br) | [![Jovem Pan](https://raw.githubusercontent.com/opps/opps/master/docs/_static/thumbs/jpam.png)](http://jovempan.com.br) | [![Jovem Pan FM](https://raw.githubusercontent.com/opps/opps/master/docs/_static/thumbs/jpfm.png)](http://jovempanfm.com.br) |
 | [![Rede Vida](https://raw.githubusercontent.com/opps/opps/master/docs/_static/thumbs/redevida.png)](http://redevida.com.br) | | |
 
+Source Code
+--------
+[https://github.com/opps/opps](https://github.com/opps/opps)
+
 Report a bug
 --------
 
