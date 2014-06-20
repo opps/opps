@@ -43,17 +43,12 @@ Opps makes use of as few libraries as possible (apart from a standard Django env
 Sites using
 -----------
 
-* [Portal Virgula](http://virgula.uol.com.br)
-* [Portal Guiame](http://guiame.com.br)
-* [Grupo Troiano](http://grupotroiano.com.br)
-* [Troiano](http://troiano.com.br)
-* [Brands and Values](http://brandsandvalues.com.br)
-* [Brigh Thouse](http://brighthouse.com.br)
-* [Brand Insights](http://brandinsights.com.br)
-* [JovemPan AM](http://jovempan.com.br)
-* [JovemPan FM](http://jovempanfm.com.br)
-* [Rede Vida](http://www.redevida.com.br)
-
+|  |  |  |
+| ------------ | ------------- | ------------ |
+| [![Portal Virgula](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/virgula.png)](http://virgula.uol.com.br) | [![Portal Guiame](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/guiame.png)](http://guiame.com.br) | [![Grupo Troiano](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/grupotroiano.png)](http://grupotroiano.com.br) |
+| [![Troiano](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/troiano.png)](http://troiano.com.br) | [![Brands and Values](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/brandsandvalues.png)](http://brandsandvalues.com.br) | [![Brigh Thouse](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/bhbr.png)](http://brighthouse.com.br) |
+| [![Brand Insights](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/brandins.png)](http://brandinsights.com.br) | [![Jovem Pan](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/jpam.png)](http://jovempan.com.br) | [![Jovem Pan FM](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/jpfm.png)](http://jovempanfm.com.br) |
+| [![Rede Vida](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/redevida.png)](http://redevida.com.br) | | |
 
 Report a bug
 --------
@@ -67,7 +62,7 @@ If you are not sure about something, have a doubt or feedback, or just want to a
 [our mailing list](http://groups.google.com/group/opps-developers), or, 
 if you’re on FreeNode (IRC), you can join the chat [#opps](http://webchat.freenode.net/?channels=opps).
 
-Sponsor
+Sponsors
 --------
 * [YACOWS](http://www.yacows.com.br)
 * [Digital Oceans](http://digitalocean.com/)
