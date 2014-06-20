@@ -9,7 +9,7 @@
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
 
-        <title>Cache - Opps Project</title>
+        <title>Core Settings - Opps Project</title>
 
         <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -89,12 +89,12 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuration <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
-                            <li >
-                                <a href="../core/">Core Settings</a>
+                            <li class="active">
+                                <a href="./">Core Settings</a>
                             </li>
                         
-                            <li class="active">
-                                <a href="./">Cache</a>
+                            <li >
+                                <a href="../cache/">Cache</a>
                             </li>
                         
                             <li >
@@ -135,12 +135,12 @@
                 
                 
                 <li >
-                    <a rel="next" href="../core/">
+                    <a rel="next" href="../../documentation/opps-apps/">
                         <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
                 <li >
-                    <a rel="prev" href="../customization/">
+                    <a rel="prev" href="../cache/">
                         Next <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -156,26 +156,122 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#opps_cache_prefix">OPPS_CACHE_PREFIX</a></li>
+        <li class="main active"><a href="#opps_core_apps">OPPS_CORE_APPS</a></li>
         
     
-        <li class="main "><a href="#opps_cache_expire">OPPS_CACHE_EXPIRE</a></li>
+        <li class="main "><a href="#opps_containers_blacklist">OPPS_CONTAINERS_BLACKLIST</a></li>
         
     
-        <li class="main "><a href="#opps_cache_expire_list">OPPS_CACHE_EXPIRE_LIST</a></li>
+        <li class="main "><a href="#opps_check_mobile">OPPS_CHECK_MOBILE</a></li>
         
     
-        <li class="main "><a href="#opps_cache_expire_detail">OPPS_CACHE_EXPIRE_DETAIL</a></li>
+        <li class="main "><a href="#opps_domain_mobile">OPPS_DOMAIN_MOBILE</a></li>
+        
+    
+        <li class="main "><a href="#opps_domain_web">OPPS_DOMAIN_WEB</a></li>
+        
+    
+        <li class="main "><a href="#opps_mobile_ignore_user_agents">OPPS_MOBILE_IGNORE_USER_AGENTS</a></li>
+        
+    
+        <li class="main "><a href="#opps_travis">OPPS_TRAVIS</a></li>
+        
+    
+        <li class="main "><a href="#opps_menu">OPPS_MENU</a></li>
+        
+    
+        <li class="main "><a href="#opps_mirror_channel">OPPS_MIRROR_CHANNEL</a></li>
+        
+    
+        <li class="main "><a href="#opps_recommendation_range_days">OPPS_RECOMMENDATION_RANGE_DAYS</a></li>
+        
+    
+        <li class="main "><a href="#opps_multisite_admin">OPPS_MULTISITE_ADMIN</a></li>
+        
+    
+        <li class="main "><a href="#opps_multisite_fallback">OPPS_MULTISITE_FALLBACK</a></li>
+        
+    
+        <li class="main "><a href="#opps_paginate_by">OPPS_PAGINATE_BY</a></li>
+        
+    
+        <li class="main "><a href="#opps_paginate_not_app">OPPS_PAGINATE_NOT_APP</a></li>
+        
+    
+        <li class="main "><a href="#opps_containers_site_id">OPPS_CONTAINERS_SITE_ID</a></li>
+        
+    
+        <li class="main "><a href="#opps_related_posts_placeholder">OPPS_RELATED_POSTS_PLACEHOLDER</a></li>
+        
+    
+        <li class="main "><a href="#opps_protocol_mobile">OPPS_PROTOCOL_MOBILE</a></li>
+        
+    
+        <li class="main "><a href="#opps_protocol_web">OPPS_PROTOCOL_WEB</a></li>
+        
+    
+        <li class="main "><a href="#opps_default_urls">OPPS_DEFAULT_URLS</a></li>
+        
+    
+        <li class="main "><a href="#opps_admin_use_haystack">OPPS_ADMIN_USE_HAYSTACK</a></li>
+        
+    
+        <li class="main "><a href="#opps_admin_rules">OPPS_ADMIN_RULES</a></li>
+        
+    
+        <li class="main "><a href="#opps_smart_slug_enabled">OPPS_SMART_SLUG_ENABLED</a></li>
+        
+    
+        <li class="main "><a href="#opps_sitemap_language">OPPS_SITEMAP_LANGUAGE</a></li>
+        
+    
+        <li class="main "><a href="#opps_sitemap_publication_name">OPPS_SITEMAP_PUBLICATION_NAME</a></li>
+        
+    
+        <li class="main "><a href="#opps_get_config_dict">OPPS_GET_CONFIG_DICT</a></li>
+        
+    
+        <li class="main "><a href="#opps_rss_link_template">OPPS_RSS_LINK_TEMPLATE</a></li>
+        
+    
+        <li class="main "><a href="#opps_views_limit">OPPS_VIEWS_LIMIT</a></li>
+        
+    
+        <li class="main "><a href="#opps_channel_conf">OPPS_CHANNEL_CONF</a></li>
         
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<h2 id="opps_cache_prefix">OPPS_CACHE_PREFIX</h2>
-<h2 id="opps_cache_expire">OPPS_CACHE_EXPIRE</h2>
-<h2 id="opps_cache_expire_list">OPPS_CACHE_EXPIRE_LIST</h2>
-<h2 id="opps_cache_expire_detail">OPPS_CACHE_EXPIRE_DETAIL</h2>
+<h2 id="opps_core_apps">OPPS_CORE_APPS</h2>
+<h2 id="opps_containers_blacklist">OPPS_CONTAINERS_BLACKLIST</h2>
+<h2 id="opps_check_mobile">OPPS_CHECK_MOBILE</h2>
+<h2 id="opps_domain_mobile">OPPS_DOMAIN_MOBILE</h2>
+<h2 id="opps_domain_web">OPPS_DOMAIN_WEB</h2>
+<h2 id="opps_mobile_ignore_user_agents">OPPS_MOBILE_IGNORE_USER_AGENTS</h2>
+<h2 id="opps_travis">OPPS_TRAVIS</h2>
+<h2 id="opps_menu">OPPS_MENU</h2>
+<h2 id="opps_mirror_channel">OPPS_MIRROR_CHANNEL</h2>
+<h2 id="opps_recommendation_range_days">OPPS_RECOMMENDATION_RANGE_DAYS</h2>
+<h2 id="opps_multisite_admin">OPPS_MULTISITE_ADMIN</h2>
+<h2 id="opps_multisite_fallback">OPPS_MULTISITE_FALLBACK</h2>
+<h2 id="opps_paginate_by">OPPS_PAGINATE_BY</h2>
+<h2 id="opps_paginate_not_app">OPPS_PAGINATE_NOT_APP</h2>
+<h2 id="opps_containers_site_id">OPPS_CONTAINERS_SITE_ID</h2>
+<h2 id="opps_related_posts_placeholder">OPPS_RELATED_POSTS_PLACEHOLDER</h2>
+<h2 id="opps_protocol_mobile">OPPS_PROTOCOL_MOBILE</h2>
+<h2 id="opps_protocol_web">OPPS_PROTOCOL_WEB</h2>
+<h2 id="opps_default_urls">OPPS_DEFAULT_URLS</h2>
+<h2 id="opps_admin_use_haystack">OPPS_ADMIN_USE_HAYSTACK</h2>
+<h2 id="opps_admin_rules">OPPS_ADMIN_RULES</h2>
+<h2 id="opps_smart_slug_enabled">OPPS_SMART_SLUG_ENABLED</h2>
+<h2 id="opps_sitemap_language">OPPS_SITEMAP_LANGUAGE</h2>
+<h2 id="opps_sitemap_publication_name">OPPS_SITEMAP_PUBLICATION_NAME</h2>
+<h2 id="opps_get_config_dict">OPPS_GET_CONFIG_DICT</h2>
+<h2 id="opps_rss_link_template">OPPS_RSS_LINK_TEMPLATE</h2>
+<h2 id="opps_views_limit">OPPS_VIEWS_LIMIT</h2>
+<h2 id="opps_channel_conf">OPPS_CHANNEL_CONF</h2>
 </div>
         </div>
 

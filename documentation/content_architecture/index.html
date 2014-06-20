@@ -90,6 +90,10 @@
                         <ul class="dropdown-menu">
                         
                             <li >
+                                <a href="../../configuration/core/">Core Settings</a>
+                            </li>
+                        
+                            <li >
                                 <a href="../../configuration/cache/">Cache</a>
                             </li>
                         
@@ -207,7 +211,7 @@ filter using your specific child_class.</p>
 <p>The conventions of a Opps site is the model <code>opps.containers.models.Container</code>. Each <code>container</code>
 instance is stored in a hierarchical tree to form the content navigation, and an interface for
 managing the structure of the navigation tree is provided in the admin via <code>opps.containers.admin.ContainerAdmin</code>.</p>
-<h2 id="creating-custom-content-type">Creating Custom Content Type</h2>
+<h3 id="creating-custom-content-type">Creating Custom Content Type</h3>
 <p>In order to handle different content type that require more structured content than provided by
 the <code>Post</code>, <code>Album</code> or <code>Link</code> model, you can simply create your own models that inherit 
 from <code>Container</code>. For example if we wanted to have content that were <strong>music</strong>, <strong>author</strong> and <strong>studio</strong>:</p>
@@ -234,16 +238,16 @@ you can simply register your model using the <code>opps.containers.admin.Contain
     admin.site.register(Musics, ContainerAdmin)
 </code></pre>
 
-<h2 id="containerbox">ContainerBox</h2>
+<h3 id="containerbox">ContainerBox</h3>
 <p>Probably the most accessed class in the dashboard.
 With ContainerBox you can group Containers to be fetched in the front.
 You can fetch manually by picking containers in the inlines or you can use <a href="https://github.com/opps/opps/tree/master/opps/boxes">QuerySet</a> to fetch automaticaly.
 They do not affect each other, it will depend on the front to choose between who to render, automatic or manual.
 Normally the best way to go is by giving priority to manual inputs(Inlines) and when those are missing/empty then you render the Queryset results in it's place.</p>
-<h2 id="content-group">Content Group</h2>
+<h3 id="content-group">Content Group</h3>
 <p>The ContainerBox.content_group attribute is used to give context and the ability to query for unique items(excluding repetitions).
 So you can fragment your page into N ContainerBoxes and make all of them use querysets from the same place and they won't repeat content as long as they share the same Content Group.</p>
-<h2 id="methods">Methods</h2>
+<h3 id="methods">Methods</h3>
 <p>Two methods are widely used here:</p>
 <ul>
 <li>ContainerBox.ordered_box_containers (Will fetch containers from the Inlines ordered by it's order field)</li>
@@ -254,18 +258,18 @@ So you can fragment your page into N ContainerBoxes and make all of them use que
 {{items.0}} {# this is a Inline element #}
 {{items.0.container}} {# this is the container held by the inline element #}
 </code></pre>
-<h2 id="containerboxcontainers-inline">ContainerBoxContainers (Inline)</h2>
+<h3 id="containerboxcontainers-inline">ContainerBoxContainers (Inline)</h3>
 <p>It is a row like structure where you can bind containers inside it to form a group inside a ContainerBox.
 When binding a container and saving, it will load the matching fields content into the ContainerBoxContainer.
 It is important to have the same container displayed a little differently on many locations.</p>
-<h2 id="mirror">Mirror</h2>
+<h3 id="mirror">Mirror</h3>
 <p>It is a workaround for many-2-many relations between Containers.Container and Channels.
 Creates clones of the Container object to be associated in other channels and is updated by a Celery task.
 <em>Should be obsolete in Opps 0.3</em></p>
 <h1 id="the-channel-model">The <code>Channel</code> Model</h1>
 <p>Channel objects are used like categories and/or sections in Opps.
 They group content and give flexibility in templating.</p>
-<h2 id="personalizing-a-channel">Personalizing a Channel</h2>
+<h3 id="personalizing-a-channel">Personalizing a Channel</h3>
 <p>To extend a Channel template as channel is a container you must have a folder structure like the following:</p>
 <pre class="prettyprint well"><code>.../templates/containers/&lt;channel-slug&gt;/template-name.html
 .../templates/containers/&lt;channel-slug&gt;/&lt;sub-channel-slug&gt;/template-name.html
@@ -315,7 +319,7 @@ containers/detail.html
 <p><strong>BUT</strong> when we create a template for <em>/news</em> <strong>All</strong> channels below will now consider this template.
 The only channel not affected by this template is <em>/news/cars</em> whose has it's own template structure.
 It won't be affected.</p>
-<h2 id="theming-the-channel">Theming the Channel</h2>
+<h3 id="theming-the-channel">Theming the Channel</h3>
 <p>Channels have a special options called <em>Layout</em> this option let you choose a template type for this channel, which is mapped to a html.
 This option is manually controlled by a file named <strong>channel.json</strong>.</p>
 <p>This file is hierarquically loaded like templates, and allows to create new template names which can be switched in the channel dashboard.</p>
@@ -327,7 +331,7 @@ This option is manually controlled by a file named <strong>channel.json</strong>
 </code></pre>
 <p>This way you can prepare special templates for holidays and other temporary changes.</p>
 <h1 id="the-article-model">The <code>Article</code> Model</h1>
-<h2 id="post">Post</h2>
+<h3 id="post">Post</h3>
 <p>Not only a simple Post but you can bind separately:</p>
 <ul>
 <li>Album</li>
@@ -339,9 +343,9 @@ This option is manually controlled by a file named <strong>channel.json</strong>
 <li>Album main image</li>
 <li>Album binded images</li>
 </ol>
-<h2 id="album">Album</h2>
+<h3 id="album">Album</h3>
 <p>Group of Image objects can be binded on other Containers or rendered by itself.</p>
-<h2 id="link">Link</h2>
+<h3 id="link">Link</h3>
 <p>Representation of external links(normally) but can point to internal objects(Container).
 This behavior is controlled by the flag <strong>is_local</strong>.</p>
 <hr />
