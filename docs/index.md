@@ -45,10 +45,10 @@ Sites using
 
 |  |  |  |
 | ------------ | ------------- | ------------ |
-| [![Portal Virgula](http://placehold.it/300x200)](http://virgula.uol.com.br) | [![Portal Guiame](http://placehold.it/300x200)](http://guiame.com.br) | [![Grupo Troiano](http://placehold.it/300x200)](http://grupotroiano.com.br) |
-| [![Troiano](http://placehold.it/300x200)](http://troiano.com.br) | [![Brands and Values](http://placehold.it/300x200)](http://brandsandvalues.com.br) | [![Brigh Thouse](http://placehold.it/300x200)](http://brighthouse.com.br) |
-| [![Brand Insights](http://placehold.it/300x200)](http://brandinsights.com.br) | [![Jovem Pan](http://placehold.it/300x200)](http://jovempan.com.br) | [![Jovem Pan FM](http://placehold.it/300x200)](http://jovempanfm.com.br) |
-| [![Rede Vida](http://placehold.it/300x200)](http://redevida.com.br) | | |
+| [![Portal Virgula](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/virgula.png)](http://virgula.uol.com.br) | [![Portal Guiame](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/guiame.png)](http://guiame.com.br) | [![Grupo Troiano](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/grupotroiano.png)](http://grupotroiano.com.br) |
+| [![Troiano](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/troiano.png)](http://troiano.com.br) | [![Brands and Values](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/brandsandvalues.png)](http://brandsandvalues.com.br) | [![Brigh Thouse](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/bhbr.png)](http://brighthouse.com.br) |
+| [![Brand Insights](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/brandins.png)](http://brandinsights.com.br) | [![Jovem Pan](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/jpam.png)](http://jovempan.com.br) | [![Jovem Pan FM](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/jpfm.png)](http://jovempanfm.com.br) |
+| [![Rede Vida](https://raw.githubusercontent.com/opps/opps/sites_using/docs/_static/thumbs/redevida.png)](http://redevida.com.br) | | |
 
 Report a bug
 --------
