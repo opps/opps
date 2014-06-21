@@ -9,7 +9,7 @@
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
 
-        <title>Cache - Opps Project</title>
+        <title>Feed - Opps Project</title>
 
         <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -93,12 +93,12 @@
                                 <a href="../core/">Core Settings</a>
                             </li>
                         
-                            <li class="active">
-                                <a href="./">Cache</a>
+                            <li >
+                                <a href="../cache/">Cache</a>
                             </li>
                         
-                            <li >
-                                <a href="../feed/">Feed</a>
+                            <li class="active">
+                                <a href="./">Feed</a>
                             </li>
                         
                             <li >
@@ -143,12 +143,12 @@
                 
                 
                 <li >
-                    <a rel="next" href="../core/">
+                    <a rel="next" href="../cache/">
                         <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
                 <li >
-                    <a rel="prev" href="../feed/">
+                    <a rel="prev" href="../customization/">
                         Next <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -164,34 +164,30 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#opps_cache_prefix">OPPS_CACHE_PREFIX</a></li>
+        <li class="main active"><a href="#opps_feed_filter_default">OPPS_FEED_FILTER_DEFAULT</a></li>
         
     
-        <li class="main "><a href="#opps_cache_expire">OPPS_CACHE_EXPIRE</a></li>
-        
-    
-        <li class="main "><a href="#opps_cache_expire_list">OPPS_CACHE_EXPIRE_LIST</a></li>
-        
-    
-        <li class="main "><a href="#opps_cache_expire_detail">OPPS_CACHE_EXPIRE_DETAIL</a></li>
+        <li class="main "><a href="#opps_feed_exclude_default">OPPS_FEED_EXCLUDE_DEFAULT</a></li>
         
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<h2 id="opps_cache_prefix">OPPS_CACHE_PREFIX</h2>
-<p>Default: <code>'opps'</code></p>
-<p>String to prefix opps cache name.</p>
-<h2 id="opps_cache_expire">OPPS_CACHE_EXPIRE</h2>
-<p>Default: <code>300</code></p>
-<p>Default timeout to Opps cache expires.</p>
-<h2 id="opps_cache_expire_list">OPPS_CACHE_EXPIRE_LIST</h2>
-<p>Default: <code>300</code></p>
-<p>Default timeout to Opps cache expires on list pages.</p>
-<h2 id="opps_cache_expire_detail">OPPS_CACHE_EXPIRE_DETAIL</h2>
-<p>Default: <code>300</code></p>
-<p>Default timeout to Opps cache expires on detail pages.</p>
+<h2 id="opps_feed_filter_default">OPPS_FEED_FILTER_DEFAULT</h2>
+<p><strong>Default:</strong> <code>{}</code> (empty dict)</p>
+<p>Default queryset to "filter" on feed.</p>
+<p><strong>Example:</strong></p>
+<pre class="prettyprint well"><code class="python">OPPS_FEED_FILTER_DEFAULT = {&quot;child_class__in&quot;: [&quot;Post&quot;, &quot;Mirror&quot;]}
+</code></pre>
+
+<h2 id="opps_feed_exclude_default">OPPS_FEED_EXCLUDE_DEFAULT</h2>
+<p><strong>Default:</strong> <code>{}</code> (empty dict)</p>
+<p>Default queryset to "exclude" on feed.</p>
+<p><strong>Example:</strong></p>
+<pre class="prettyprint well"><code class="python">OPPS_FEED_EXCLUDE_DEFAULT = {&quot;child_class__in&quot;: [&quot;Post&quot;, &quot;Mirror&quot;]}
+</code></pre>
+
 </div>
         </div>
 

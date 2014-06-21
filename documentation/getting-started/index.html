@@ -98,6 +98,10 @@
                             </li>
                         
                             <li >
+                                <a href="../../configuration/feed/">Feed</a>
+                            </li>
+                        
+                            <li >
                                 <a href="../../configuration/customization/">Customization</a>
                             </li>
                         
@@ -186,6 +190,8 @@ python setup.py install
 <h2 id="start-project">Start project</h2>
 <p>You can use opps-admin.py to start new project</p>
 <pre class="prettyprint well"><code>opps-admin.py startproject PROJECT_NAME
+python manage.py syncdb --noinput
+python manage.py migrate
 </code></pre>
 <h2 id="opps-admin-command-line">Opps Admin Command line</h2>
 <p><em>opps-admin.py</em> is Opps’s command-line utility for administrative tasks.</p>
