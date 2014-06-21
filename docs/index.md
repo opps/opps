@@ -34,11 +34,26 @@ Dependencies
 Opps makes use of as few libraries as possible (apart from a standard Django environment), with the following dependencies
 
 * Python 2.7
-* Django >= 1.5
+* Django >=1.5
 * Python Imaging Library - for image resizing
 * South - for database migrations
 * Django Taggit
 * Django Mptt
+
+
+Release Notes
+-------------
+###### current version: 0.2.6
+
+#### Opps 0.2.6
+* Django 1.6 compatibility
+* Grappelli Admin 2.5.3
+
+#### Opps 0.2.5
+* Django 1.5
+* Grappelli Admin 2.4.10
+
+Check here the full [**CHANGELOG**](https://github.com/opps/opps/blob/master/CHANGELOG.rst).
 
 Sites using
 -----------
