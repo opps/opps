@@ -8,6 +8,7 @@ pages:
 - ['documentation/opps-apps.md', 'Documentation', 'Opps Plugins']
 - ['configuration/core.md', 'Configuration', 'Core Settings']
 - ['configuration/cache.md', 'Configuration', 'Cache']
+- ['configuration/feed.md', 'Configuration', 'Feed']
 - ['configuration/customization.md', 'Configuration', 'Customization']
 - ['configuration/mobile.md', 'Configuration', 'Mobile']
 - ['contributing/how-to.md', 'Contribute', 'How to contribute']

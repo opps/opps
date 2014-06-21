@@ -12,6 +12,10 @@ from opps.containers.models import Container
 from opps.channels.models import Channel
 
 
+OPPS_FEED_FILTER_DEFAULT = getattr(settings, 'OPPS_FEED_FILTER_DEFAULT', {})
+OPPS_FEED_EXCLUDE_DEFAULT = getattr(settings, 'OPPS_FEED_EXCLUDE_DEFAULT', {})
+
+
 class ItemFeed(Feed):
 
     feed_type = feedgenerator.Rss201rev2Feed
@@ -57,8 +61,14 @@ class ItemFeed(Feed):
         if not hasattr(self, 'request'):
             return {}
 
-        data = {"filter": {}, "exclude": {}}
+        default = {
+            "filter": OPPS_FEED_FILTER_DEFAULT,
+            "exclude": OPPS_FEED_EXCLUDE_DEFAULT, }
+
+        data = {"filter": {}, "exclude": {}, }
+
         r_data = self.request.GET.dict()
+
         for k, v in r_data.items():
             if k.startswith(('filter', 'exclude')):
                 v = json.loads(v)
@@ -66,6 +76,11 @@ class ItemFeed(Feed):
                     if lookup.endswith('__in'):
                         v[lookup] = value.split(',')
                 data[k].update(v)
+
+        # merges defaults with request.GET data.
+        for k, v in data.items():
+            data[k] = dict(default[k].items() + v.items())
+
         return data
 
 
