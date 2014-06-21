@@ -13,6 +13,6 @@ u"high-traffic, using the Django Framework."
 
 __author__ = u"Thiago Avelino"
 __credits__ = ['Bruno Rocha']
-__email__ = u"opps-developers@googlegroups.com"
+__email__ = u"thiago@avelino.xxx"
 __license__ = u"MIT"
 __copyright__ = u"Copyright 2014, Thiago Avelino"
