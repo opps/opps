@@ -8,7 +8,7 @@ tox-test: environment
 
 .PHONY: environment
 environment:
-	pip install -r requirements_dev.txt --use-mirrors
+	pip install -r requirements_dev.txt
 	export OPPS_TRAVIS=True
 	python setup.py develop
 
