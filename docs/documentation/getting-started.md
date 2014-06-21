@@ -18,6 +18,8 @@ or
 You can use opps-admin.py to start new project
 
     opps-admin.py startproject PROJECT_NAME
+    python manage.py syncdb --noinput
+    python manage.py migrate
 
 
 ## Opps Admin Command line
