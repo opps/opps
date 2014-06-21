@@ -3,7 +3,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from appconf import AppConf
 
+
 trans_app_label = _('Core')
+
 
 class OppsCoreConf(AppConf):
     DEFAULT_URLS = ('127.0.0.1', 'localhost',)
