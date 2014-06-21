@@ -45,11 +45,11 @@ Release Notes
 -------------
 ###### current version: 0.2.6
 
-#### Opps 0.2.6
+#### Opps 0.2.6 (develop)
 * Django 1.6 compatibility
 * Grappelli Admin 2.5.3
 
-#### Opps 0.2.5
+#### Opps 0.2.5 (stable)
 * Django 1.5
 * Grappelli Admin 2.4.10
 
