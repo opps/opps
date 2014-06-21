@@ -18,7 +18,7 @@ install:
 
 .PHONY: pep8
 pep8:
-	@flake8 opps --ignore=F403,F401 --exclude=mirrorsgrations
+	@flake8 opps --ignore=F403,F401 --exclude=migrations
 
 .PHONY: sdist
 sdist: test
@@ -27,7 +27,7 @@ sdist: test
 .PHONY: clean
 clean:
 	@find ./ -name '*.pyc' -exec rm -f {} \;
-	@find ./ -rmname 'Thumbs.db' -exec rm -f {} \;
+	@find ./ -name 'Thumbs.db' -exec rm -f {} \;
 	@find ./ -name '*~' -exec rm -f {} 	\;
 
 .PHONY: makemessages
