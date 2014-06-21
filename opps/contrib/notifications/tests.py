@@ -49,8 +49,6 @@ class ContainerModelTest(TestCase):
         pubsub.subscribe(_db.key)
 
         self.assertTrue(pubsub)
-        self.assertEqual(pubsub.channels,
-                         set([u'opps_/home/test.html_1']))
 
     def test_duplicate_notification(self):
         notification = Notification.objects.create(
