@@ -14,5 +14,5 @@ u"high-traffic, using the Django Framework."
 __author__ = u"Thiago Avelino"
 __credits__ = ['Bruno Rocha']
 __email__ = u"opps-developers@googlegroups.com"
-__license__ = u"MIT License"
-__copyright__ = u"Copyright 2013, Opps Project"
+__license__ = u"MIT"
+__copyright__ = u"Copyright 2014, Thiago Avelino"
