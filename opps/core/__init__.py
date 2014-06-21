@@ -3,52 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from appconf import AppConf
 
-
 trans_app_label = _('Core')
-OPPS_CORE_APPS = [
-    # Django core
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.redirects',
-
-    # Admin
-    'opps.contrib.admin',
-    'grappelli.dashboard',
-    'grappelli',
-    'django.contrib.admin',
-
-    # Opps core
-    'opps.core',
-    'opps.core.tags',
-    'opps.containers',
-    'opps.boxes',
-    'opps.channels',
-    'opps.containers',
-    'opps.articles',
-    'opps.archives',
-    'opps.images',
-    'opps.sitemaps',
-    'opps.flatpages',
-    'opps.archives',
-    'opps.fields',
-    'opps.api',
-
-    # Opps contrib
-    'opps.contrib.fileupload',
-
-    # Dependence
-    'south',
-    'appconf',
-    'haystack',
-    'mptt',
-    'googl',
-    'djcelery',
-]
-
 
 class OppsCoreConf(AppConf):
     DEFAULT_URLS = ('127.0.0.1', 'localhost',)

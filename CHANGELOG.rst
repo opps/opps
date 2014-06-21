@@ -2,6 +2,13 @@
 Changelog
 =========
 
+0.2.6
+=====
+* Improves Django 1.6 integration
+* Uses Grappelli 2.5.3
+* Remove OPPS_CORE_APPS
+
+
 0.2.5
 =====
 
