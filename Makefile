@@ -6,12 +6,6 @@ test: pep8 clean
 tox-test: environment
 	@tox
 
-.PHONY: environment
-environment:
-	pip install -r requirements_dev.txt
-	export OPPS_TRAVIS=True
-	python setup.py develop
-
 .PHONY: install
 install:
 	python setup.py develop

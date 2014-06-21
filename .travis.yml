@@ -7,7 +7,7 @@ env:
   - DJANGO=django==1.6
 install:
   - pip install $DJANGO --use-mirrors
-  - make environment
+  - make install
 script: make test
 notifications:
   irc: "irc.freenode.org#opps"
