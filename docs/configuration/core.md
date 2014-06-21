@@ -1,6 +1,3 @@
-OPPS_CORE_APPS
------------
-
 OPPS_CONTAINERS_BLACKLIST
 -----------
 
