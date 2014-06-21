@@ -43,7 +43,7 @@ Opps makes use of as few libraries as possible (apart from a standard Django env
 
 Release Notes
 -------------
-###### current version: 0.2.6
+###### current stable version: 0.2.5
 
 #### Opps 0.2.6 (develop)
 * Django 1.6 compatibility

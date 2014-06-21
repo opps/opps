@@ -14,7 +14,7 @@ Changelog
 
 * Added OPPS_FEED_FILTER_DEFAULT and OPPS_FEED_EXCLUDE_DEFAULT for feed views.
 * Fixed fileupload error in fileupload-fp and add new file upload styles
-* Fix home (channel) if not exist in mult-site child
+* Fix home (channel) if not exist in multi-site child
 * Periodic task to support recheck create mirror channel
 * Fix `get_containerbox` templatetag recursion parameter issue
 
