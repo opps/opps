@@ -55,4 +55,5 @@ setup(name='opps',
       dependency_links=dependency_links,
       scripts=['opps/bin/opps-admin.py'],
       include_package_data=True,
-      test_suite='runtests')
+      test_suite='runtests',
+      zip_safe=False)
