@@ -16,6 +16,7 @@ from polymorphic import PolymorphicModel
 from polymorphic.showfields import ShowFieldContent
 
 from opps.core.cache import _cache_key
+from opps.core.managers import PublishableManager
 from opps.core.models import Publishable, Slugged, Channeling, Imaged
 from opps.core.tags.models import Tagged
 from opps.db.models.fields import JSONField
@@ -27,6 +28,7 @@ from .tasks import check_mirror_channel, check_mirror_site
 
 class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
                 Channeling, Imaged, Tagged):
+    objects = PublishableManager()
     title = models.CharField(_(u"Title"), max_length=140, db_index=True)
     hat = models.CharField(
         _(u"Hat"),
