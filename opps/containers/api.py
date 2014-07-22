@@ -13,7 +13,7 @@ class Handler(BaseHandler):
     allowed_methods = ('GET',)
 
     def read(self, request):
-        filters = {}
+        filters = request.GET.dict()
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
         return self.model.objects.filter(
