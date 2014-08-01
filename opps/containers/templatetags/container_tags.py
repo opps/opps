@@ -20,6 +20,11 @@ register = template.Library()
 logger = logging.getLogger()
 
 
+@register.filter
+def values_list_flat(queryset, field='pk'):
+    return queryset.values_list(field, flat=True)
+
+
 @register.assignment_tag
 def get_recommendations(query_slice, child_class, container):
     """
