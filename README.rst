@@ -1,12 +1,13 @@
-.. image:: https://badge.waffle.io/opps/opps.png?label=ready&title=Ready 
- :target: https://waffle.io/opps/opps
- :alt: 'Stories in Ready'
 =============================
 Opps - OPen Publishing System
 =============================
 
 An *Open Source Content Management* for the **magazine** websites and **high-traffic**, using the Django Framework.
 
+.. image:: https://badge.waffle.io/opps/opps.png?label=ready&title=Ready 
+    :target: https://waffle.io/opps/opps
+    :alt: Stories in Ready
+ 
 .. image:: https://travis-ci.org/opps/opps.png?branch=master
     :target: https://travis-ci.org/opps/opps
     :alt: Build Status - Travis CI
