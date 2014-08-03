@@ -8,7 +8,6 @@ from haystack.query import SearchQuerySet
 from opps.views.generic.list import ListView
 from opps.containers.models import Container
 
-from opps.articles.models import Post, Album, Link
 from opps.channels.models import Channel
 
 from .models import Tag
@@ -50,7 +49,8 @@ class TagList(ListView):
         return self.get_queryset_from_db()
 
     def get_queryset_from_haystack(self):
-        sqs = SearchQuerySet().models(Post, Album, Link).filter(
+        models = Container.get_children_models()
+        sqs = SearchQuerySet().models(*models).filter(
             tags=self.tag).order_by('-date_available')
         sqs.model = Container
         return sqs

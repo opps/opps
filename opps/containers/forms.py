@@ -1,7 +1,8 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 from django import forms
 from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 
 from opps.db.models.fields.jsonf import JSONFormField
 from opps.fields.widgets import JSONField
@@ -43,6 +44,20 @@ class ContainerAdminForm(forms.ModelForm):
                 self.fields[
                     'json_{}'.format(field.slug)
                 ] = forms.CharField(required=False)
+
+    def clean(self):
+        msg = _('The slug "%s" already exists on channel "%s" at site "%s"')
+        data = self.cleaned_data
+        if data['site'] and data['channel']:
+            qs = self._meta.model.objects.filter(
+                site=data['site'], channel=data['channel'], slug=data['slug'])
+            if self.instance:
+                qs = qs.exclude(pk=self.instance.pk)
+            if qs.exists():
+                args = (data['slug'], data['channel'], data['site'])
+                msg = msg % args
+                self._errors["slug"] = self.error_class([msg])
+        return data
 
     class Meta:
         model = Container

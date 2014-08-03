@@ -112,6 +112,15 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
             return u"/{}.html".format(self.slug)
         return u"/{}/{}.html".format(self.channel_long_slug, self.slug)
 
+    @classmethod
+    def get_children_models(cls):
+        children = models.get_models()
+        print 'models', children
+        return [model for model in children
+                if (model is not None and
+                    issubclass(model, cls) and
+                    model is not cls)]
+
     def get_thumb(self):
         return self.main_image
 
