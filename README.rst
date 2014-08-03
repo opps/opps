@@ -1,3 +1,6 @@
+.. image:: https://badge.waffle.io/opps/opps.png?label=ready&title=Ready 
+ :target: https://waffle.io/opps/opps
+ :alt: 'Stories in Ready'
 =============================
 Opps - OPen Publishing System
 =============================
