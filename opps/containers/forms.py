@@ -50,7 +50,7 @@ class ContainerAdminForm(forms.ModelForm):
         data = self.cleaned_data
         if data['site'] and data['channel']:
             qs = self._meta.model.objects.filter(
-                site=data['site'], channel=data['channel'])
+                site=data['site'], channel=data['channel'], slug=data['slug'])
             if self.instance:
                 qs = qs.exclude(pk=self.instance.pk)
             if qs.exists():
