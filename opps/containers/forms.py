@@ -48,7 +48,7 @@ class ContainerAdminForm(forms.ModelForm):
     def clean(self):
         msg = _('The slug "%s" already exists on channel "%s" at site "%s"')
         data = self.cleaned_data
-        if data['site'] and data['channel']:
+        if data['site'] and data['channel'] and data['slug']:
             qs = self._meta.model.objects.filter(
                 site=data['site'], channel=data['channel'], slug=data['slug'])
             if self.instance:
