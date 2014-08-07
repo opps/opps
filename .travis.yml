@@ -11,6 +11,7 @@ install:
 script: make test
 notifications:
   irc: "irc.freenode.org#opps"
+  slack: yacows:Dm0D2qLJnx8e7Ax7JfIcPLry
   on_success: "never"
 after_success:
   - coveralls
