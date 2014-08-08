@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django import template
 from django.template import Node, TemplateSyntaxError, Variable
