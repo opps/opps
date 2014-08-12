@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.utils import timezone
-from polymorphic.manager import PolymorphicManager
+from django.db.models import Manager
 
 
-class PublishableManager(PolymorphicManager):
+class PublishableManager(Manager):
 
     def all_published(self):
         return super(PublishableManager, self).get_query_set().filter(

@@ -15,7 +15,6 @@ from polymorphic import PolymorphicModel
 from polymorphic.showfields import ShowFieldContent
 
 from opps.core.cache import _cache_key
-from opps.core.managers import PublishableManager
 from opps.core.models import Publishable, Slugged, Channeling, Imaged
 from opps.core.tags.models import Tagged
 from opps.db.models.fields import JSONField
@@ -65,8 +64,6 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         max_length=255)
     json = JSONField(_(u"Customized"),
                      null=True, blank=True)
-
-    objects = PublishableManager()
 
     def __unicode__(self):
         return u"{}".format(self.get_absolute_url())
