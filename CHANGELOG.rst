@@ -7,6 +7,8 @@ Changelog
 * Improves Django 1.6 integration
 * Uses Grappelli 2.5.3
 * Remove OPPS_CORE_APPS
+* Used opps.core.manager on Container
+* * Extend Polymorphic Manager 
 
 
 0.2.5

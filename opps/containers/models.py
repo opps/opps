@@ -27,7 +27,6 @@ from .tasks import check_mirror_channel, check_mirror_site
 
 class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
                 Channeling, Imaged, Tagged):
-    objects = PublishableManager()
     title = models.CharField(_(u"Title"), max_length=140, db_index=True)
     hat = models.CharField(
         _(u"Hat"),
@@ -66,6 +65,8 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         max_length=255)
     json = JSONField(_(u"Customized"),
                      null=True, blank=True)
+
+    objects = PublishableManager()
 
     def __unicode__(self):
         return u"{}".format(self.get_absolute_url())
