@@ -9,6 +9,7 @@ Changelog
 * Remove OPPS_CORE_APPS
 * Used opps.core.manager on Container
 * * Extend Polymorphic Manager 
+* Used channel_id on container unique_together
 
 
 0.2.5

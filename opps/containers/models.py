@@ -80,7 +80,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         ordering = ['-date_available']
         verbose_name = _(u'Container')
         verbose_name_plural = _(u'Containers')
-        unique_together = ("site", "channel_long_slug", "slug")
+        unique_together = ("site", "channel", "slug")
 
     def save(self, *args, **kwargs):
         if not self.channel_name:
