@@ -5,8 +5,6 @@
 # Translators:
 # Translators:
 # Translators:
-# Anh Phan <vietnamesel10n@gmail.com>, 2013
-# Anh Phan <vietnamesel10n@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
@@ -14,70 +12,70 @@ msgstr ""
 "POT-Creation-Date: 2013-09-12 00:17-0300\n"
 "PO-Revision-Date: 2014-08-05 19:26+0000\n"
 "Last-Translator: Thiago Avelino <thiago@avelino.xxx>\n"
-"Language-Team: Vietnamese (http://www.transifex.com/projects/p/opps-core/language/vi/)\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/opps-core/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: vi\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: __init__.py:5 models.py:56
 msgid "Channels"
-msgstr "Các kênh dữ liệu"
+msgstr ""
 
 #: admin.py:29
 msgid "Identification"
-msgstr "Định danh"
+msgstr ""
 
 #: admin.py:34
 msgid "Publication"
-msgstr "Công bố"
+msgstr ""
 
 #: forms.py:10
 msgid "Default"
-msgstr "Mặc định"
+msgstr ""
 
 #: models.py:27
 msgid "Name"
-msgstr "Tên"
+msgstr ""
 
 #: models.py:28
 msgid "Path name"
-msgstr "Tên đường dẫn"
+msgstr ""
 
 #: models.py:30
 msgid "Layout"
-msgstr "Bố trí"
+msgstr ""
 
 #: models.py:32
 msgid "Description"
-msgstr "Mô tả"
+msgstr ""
 
 #: models.py:34
 msgid "Show in menu?"
-msgstr "Hiển thị trong menu?"
+msgstr ""
 
 #: models.py:36
 msgid "Show in main RSS?"
-msgstr "Hiển thị trong menu?"
+msgstr ""
 
 #: models.py:40
 msgid "Is home page?"
-msgstr "Đây có phải là trang chủ không?"
+msgstr ""
 
 #: models.py:42
 msgid ""
 "Check only if this channel is the homepage. Should have only one homepage "
 "per site"
-msgstr "Chỉ đánh dấu phần này nếu kênh dữ liệu là trang chủ. Chỉ nên có duy nhất một trang chủ cho mỗi trang"
+msgstr ""
 
 #: models.py:45
 msgid "Group sub-channel?"
-msgstr "Gom nhóm các kênh dữ liệu bổ sung?"
+msgstr ""
 
 #: models.py:46
 msgid "Order"
-msgstr "Trật tự"
+msgstr ""
 
 #: models.py:49
 msgid "Parent"
@@ -85,4 +83,4 @@ msgstr ""
 
 #: models.py:55 models.py:80 tests/test_models.py:196
 msgid "Channel"
-msgstr "Kênh dữ liệu"
+msgstr ""

@@ -4,8 +4,6 @@
 # 
 # Translators:
 # Translators:
-# Anh Phan <vietnamesel10n@gmail.com>, 2013
-# Anh Phan <vietnamesel10n@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
@@ -13,120 +11,120 @@ msgstr ""
 "POT-Creation-Date: 2013-08-08 15:59-0300\n"
 "PO-Revision-Date: 2014-08-05 19:26+0000\n"
 "Last-Translator: Thiago Avelino <thiago@avelino.xxx>\n"
-"Language-Team: Vietnamese (http://www.transifex.com/projects/p/opps-core/language/vi/)\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/opps-core/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: vi\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: __init__.py:5 models.py:86
 msgid "Images"
-msgstr "Các hình ảnh"
+msgstr ""
 
 #: admin.py:20
 msgid "User"
-msgstr "Người dùng"
+msgstr ""
 
 #: admin.py:67
 msgid "Identification"
-msgstr "Định dan"
+msgstr ""
 
 #: admin.py:69
 msgid "Crop"
-msgstr "Lược bỏ"
+msgstr ""
 
 #: admin.py:73
 msgid "Content"
-msgstr "Nội dung"
+msgstr ""
 
 #: admin.py:75
 msgid "Publication"
-msgstr "Công bố"
+msgstr ""
 
 #: admin.py:92
 msgid "Select"
-msgstr "Chọn"
+msgstr ""
 
 #: admin.py:99
 msgid "No Image"
-msgstr "Không có hình ảnh"
+msgstr ""
 
 #: admin.py:100
 msgid "Thumbnail"
-msgstr "Hình ảnh thu nhỏ"
+msgstr ""
 
 #: admin.py:109
 msgid "Dimension"
-msgstr "Chiều"
+msgstr ""
 
 #: models.py:10
 msgid "Left"
-msgstr "Lề trái"
+msgstr ""
 
 #: models.py:11
 msgid "Center"
-msgstr "Chính giữa"
+msgstr ""
 
 #: models.py:12
 msgid "Right"
-msgstr "Lề phải"
+msgstr ""
 
 #: models.py:15
 msgid "Top"
-msgstr "Trên cùng"
+msgstr ""
 
 #: models.py:16
 msgid "Middle"
-msgstr "Ở chính giữa trung tâm"
+msgstr ""
 
 #: models.py:17
 msgid "Bottom"
-msgstr "Tận cùng"
+msgstr ""
 
 #: models.py:22
 msgid "Crop Example"
-msgstr "Lược bỏ ví dụ"
+msgstr ""
 
 #: models.py:32
 msgid "Flip"
-msgstr "Lật đối xứng"
+msgstr ""
 
 #: models.py:33
 msgid ""
 "Flag that indicates that thumbor should flip horizontally (on the vertical "
 "axis) the image"
-msgstr "Cờ đánh dấu chỉ ra các hình ảnh nên được lật đối xứng theo chiều ngang (dựa theo hướng thẳng đứng) của hình ảnh"
+msgstr ""
 
 #: models.py:37
 msgid "Flop"
-msgstr "Lắc lư"
+msgstr ""
 
 #: models.py:38
 msgid ""
 "Flag that indicates that thumbor should flip vertically (on the horizontal "
 "axis) the image"
-msgstr "Cờ đánh dấu chỉ ra các hình ảnh nên được lật đối xứng theo chiều thẳng đứng (dựa theo hướng nằm ngang) của hình ảnh"
+msgstr ""
 
 #: models.py:42
 msgid "Horizontal Align"
-msgstr "Canh chỉnh theo chiều ngang"
+msgstr ""
 
 #: models.py:46
 msgid "Horizontal alignment that thumbor should use for cropping"
-msgstr "Canh chỉnh theo chiều ngang khi sử dụng tính năng lược bỏ phần hình ảnh thu nhỏ"
+msgstr ""
 
 #: models.py:48
 msgid "Vertical Align"
-msgstr "Canh chỉnh theo chiều dọc"
+msgstr ""
 
 #: models.py:52
 msgid "Vertical alignment that thumbor should use for cropping"
-msgstr "Canh chỉnh theo chiều dọc khi sử dụng tính năng lược bỏ phần hình ảnh thu nhỏ"
+msgstr ""
 
 #: models.py:55
 msgid "Fit in"
-msgstr "Vừa vặn"
+msgstr ""
 
 #: models.py:56
 msgid ""
@@ -136,7 +134,7 @@ msgstr ""
 
 #: models.py:61
 msgid "Smart"
-msgstr "Thông minh"
+msgstr ""
 
 #: models.py:62
 msgid "Flag that indicates that thumbor should use smart cropping"
@@ -144,4 +142,4 @@ msgstr ""
 
 #: models.py:85
 msgid "Image"
-msgstr "Hình ảnh"
+msgstr ""

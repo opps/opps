@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: opps-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-08 15:59-0300\n"
+"PO-Revision-Date: 2013-08-05 18:19+0000\n"
+"Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/opps-core/language/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: __init__.py:5
+msgid "Boxes"
+msgstr ""
+
+#: admin.py:23
+msgid "Identification"
+msgstr ""
+
+#: admin.py:25
+msgid "Rules"
+msgstr ""
+
+#: admin.py:27
+msgid "Publication"
+msgstr ""
+
+#: admin.py:30 admin.py:49
+msgid "Data sample"
+msgstr ""
+
+#: models.py:23
+msgid "Dynamic queryset name"
+msgstr ""
+
+#: models.py:25 models.py:90
+msgid "Slug"
+msgstr ""
+
+#: models.py:31
+msgid "Model"
+msgstr ""
+
+#: models.py:32
+msgid "Limit"
+msgstr ""
+
+#: models.py:33
+msgid "Order"
+msgstr ""
+
+#: models.py:37
+msgid "Channel"
+msgstr ""
+
+#: models.py:43
+msgid "Filters"
+msgstr ""
+
+#: models.py:44
+msgid "Json format extra filters for queryset"
+msgstr ""
+
+#: models.py:54
+msgid "Invalid JSON"
+msgstr ""
+
+#: models.py:59
+msgid "Invalid Queryset"
+msgstr ""
+
+#: models.py:88
+msgid "Box name"
+msgstr ""
+
+#~ msgid "Relationships"
+#~ msgstr "Relationships"
+
+#~ msgid "Query Set"
+#~ msgstr "Query Set"

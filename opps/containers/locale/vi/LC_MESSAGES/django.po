@@ -1,0 +1,207 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Translators:
+# Anh Phan <vietnamesel10n@gmail.com>, 2013
+# Anh Phan <vietnamesel10n@gmail.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: opps-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-24 10:15-0200\n"
+"PO-Revision-Date: 2014-08-05 19:26+0000\n"
+"Last-Translator: Thiago Avelino <thiago@avelino.xxx>\n"
+"Language-Team: Vietnamese (http://www.transifex.com/projects/p/opps-core/language/vi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: admin.py:26 models.py:190
+msgid "Container image"
+msgstr "Hình ảnh phần chứa dữ liệu"
+
+#: admin.py:27 models.py:191
+msgid "Container images"
+msgstr "Các hình ảnh phần chứa dữ liệu"
+
+#: admin.py:37
+msgid "No Image"
+msgstr "Không có hình ảnh"
+
+#: admin.py:38
+msgid "Thumbnail"
+msgstr "Hình ảnh thu nhỏ"
+
+#: admin.py:91
+msgid "Has queryset"
+msgstr "Có cài đặt truy vấn"
+
+#: admin.py:105
+msgid "No"
+msgstr "Không"
+
+#: admin.py:106
+msgid "Yes"
+msgstr "Có"
+
+#: admin.py:131
+msgid "Identification"
+msgstr "Định danh"
+
+#: admin.py:133
+msgid "Relationships"
+msgstr "Các mối liên hệ"
+
+#: admin.py:135
+msgid "Publication"
+msgstr "Công bố"
+
+#: admin.py:148
+msgid "Clean ended containers"
+msgstr "Dọn dẹp các phần chứa dữ liệu cuối cùng"
+
+#: admin.py:167
+msgid "Dynamic"
+msgstr "Động"
+
+#: admin.py:182 models.py:39
+msgid "Child class"
+msgstr "Lớp con"
+
+#: models.py:28 models.py:203 models.py:272
+msgid "Title"
+msgstr "Tiêu đề"
+
+#: models.py:30 models.py:276
+msgid "Hat"
+msgstr "Mũ"
+
+#: models.py:35
+msgid "Short URL"
+msgstr "Đường dẫn liên kết ngắn"
+
+#: models.py:45
+msgid "Child module"
+msgstr "Module con"
+
+#: models.py:51
+msgid "Child app label"
+msgstr "Nhãn ứng dụng con"
+
+#: models.py:57
+msgid "Show on root channel?"
+msgstr "Hiển thị ở kênh dữ liệu gốc?"
+
+#: models.py:61
+msgid "Source"
+msgstr "Nguồn"
+
+#: models.py:64
+msgid "Customized"
+msgstr ""
+
+#: models.py:80 models.py:172 models.py:211 models.py:262
+msgid "Container"
+msgstr "Phần chứa dữ liệu"
+
+#: models.py:81
+msgid "Containers"
+msgstr "Các phần chứa dữ liệu"
+
+#: models.py:110
+msgid "Get HTTP Absolute URL"
+msgstr ""
+
+#: models.py:174 models.py:265
+msgid "Order"
+msgstr "Trật tự"
+
+#: models.py:179
+msgid "Image"
+msgstr "Hình ảnh"
+
+#: models.py:183
+msgid "Caption"
+msgstr "Đầu đề"
+
+#: models.py:219
+msgid "Query Set"
+msgstr "Cài Đặt Truy Vấn"
+
+#: models.py:223
+msgid "Container box"
+msgstr "Hộp chứa dữ liệu"
+
+#: models.py:224
+msgid "Containers boxes"
+msgstr "Các hộp thuộc phần chứa dữ liệu"
+
+#: models.py:256
+msgid "Container Box"
+msgstr "Hộp chứa dữ liệu"
+
+#: models.py:266
+msgid "Aggregate container"
+msgstr "Gom nhóm các phần chứa dữ liệu"
+
+#: models.py:267
+msgid "Highlight container"
+msgstr ""
+
+#: models.py:268
+msgid "Date available"
+msgstr "Ngày hiện có"
+
+#: models.py:270
+msgid "End date"
+msgstr "Ngày kết thúc"
+
+#: models.py:285
+msgid "Main Image"
+msgstr ""
+
+#: models.py:288
+msgid "Main Image Caption"
+msgstr ""
+
+#: models.py:292
+msgid "Maximum characters 4000"
+msgstr ""
+
+#: models.py:295
+msgid "URL"
+msgstr ""
+
+#: models.py:299
+msgid "Article box articles"
+msgstr "Các tiêu đề của hộp tiêu đề"
+
+#: models.py:300
+msgid "Article boxes articles"
+msgstr "Các tiêu đề của hộp tiêu đề"
+
+#: models.py:312
+msgid "Please select a Container or insert a URL!"
+msgstr ""
+
+#: models.py:316
+msgid "Article not published!"
+msgstr "Tiêu đề vẫn chưa được đăng!"
+
+#: templates/containers/none.html:10
+msgid "Warning"
+msgstr "Cảnh báo"
+
+#: templates/containers/none.html:11
+msgid "It is necessary set channel as home page."
+msgstr "Đặt kênh dữ liệu làm trang chủ là điều nên làm."
+
+#~ msgid "Container source"
+#~ msgstr "Container source"
+
+#~ msgid "Container sources"
+#~ msgstr "Container sources"

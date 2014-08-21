@@ -1,28 +1,30 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
+# Translators:
+# Ellison Leão, 2013
 # Ellison Leão, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-14 03:00-0300\n"
-"PO-Revision-Date: 2013-08-08 17:39+0000\n"
-"Last-Translator: Ellison Leão\n"
-"Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
-"Language: pt_BR\n"
+"POT-Creation-Date: 2013-08-08 15:59-0300\n"
+"PO-Revision-Date: 2014-08-05 19:26+0000\n"
+"Last-Translator: Thiago Avelino <thiago@avelino.xxx>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/opps-core/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: __init__.py:5 models.py:86 templates/images/all_images.html:11
+#: __init__.py:5 models.py:86
 msgid "Images"
 msgstr "Imagens"
 
-#: admin.py:21 templates/images/all_images.html:14
+#: admin.py:20
 msgid "User"
 msgstr "Usuário"
 
@@ -58,30 +60,6 @@ msgstr "Imagem pequena"
 msgid "Dimension"
 msgstr "Dimensões"
 
-#: forms.py:13 models.py:22
-msgid "Crop Example"
-msgstr "Exemplo de corte"
-
-#: forms.py:15
-msgid "Crop X1"
-msgstr "Cortar X1"
-
-#: forms.py:17
-msgid "Crop X2"
-msgstr "Cortar X2"
-
-#: forms.py:19
-msgid "Crop Y1"
-msgstr "Cortar Y1"
-
-#: forms.py:21
-msgid "Crop Y2"
-msgstr "Cortar Y2"
-
-#: forms.py:33
-msgid "Source"
-msgstr "Fonte"
-
 #: models.py:10
 msgid "Left"
 msgstr "Esquerda"
@@ -106,6 +84,10 @@ msgstr "Meio"
 msgid "Bottom"
 msgstr "Fundo"
 
+#: models.py:22
+msgid "Crop Example"
+msgstr "Exemplo de corte"
+
 #: models.py:32
 msgid "Flip"
 msgstr "Girar"
@@ -114,9 +96,7 @@ msgstr "Girar"
 msgid ""
 "Flag that indicates that thumbor should flip horizontally (on the vertical "
 "axis) the image"
-msgstr ""
-"Selecione para indicar que o thumbor deverá rotacionar horizontalmente ( no "
-"eixo vertical ) a imagem"
+msgstr "Selecione para indicar que o thumbor deverá rotacionar horizontalmente ( no eixo vertical ) a imagem"
 
 #: models.py:37
 msgid "Flop"
@@ -126,9 +106,7 @@ msgstr "Flop"
 msgid ""
 "Flag that indicates that thumbor should flip vertically (on the horizontal "
 "axis) the image"
-msgstr ""
-"Selecione para indicar que o thumbor deverá rotacionar verticalmente ( no "
-"eixo horizontal ) a imagem"
+msgstr "Selecione para indicar que o thumbor deverá rotacionar verticalmente ( no eixo horizontal ) a imagem"
 
 #: models.py:42
 msgid "Horizontal Align"
@@ -154,9 +132,7 @@ msgstr "Auto ajustar"
 msgid ""
 "Flag that indicates that thumbor should fit the image in the box defined by "
 "width x height"
-msgstr ""
-"Selecione para indicar ao thumbor que ele deverá ajudar a imagem para auto "
-"ajustar-se na box definida com largura x altura"
+msgstr "Selecione para indicar ao thumbor que ele deverá ajudar a imagem para auto ajustar-se na box definida com largura x altura"
 
 #: models.py:61
 msgid "Smart"
@@ -164,30 +140,8 @@ msgstr "Inteligente"
 
 #: models.py:62
 msgid "Flag that indicates that thumbor should use smart cropping"
-msgstr ""
-"Selecione para indicar ao thumbor que ele deverá realizar um crop "
-"inteligente"
+msgstr "Selecione para indiciar ao thumbor que ele deverá realizar um crop inteligente"
 
 #: models.py:85
 msgid "Image"
 msgstr "Imagem"
-
-#: templates/images/all_images.html:23
-msgid "Published"
-msgstr "Publicado"
-
-#: templates/images/all_images.html:32
-msgid "Search"
-msgstr "Buscar"
-
-#: templates/images/all_images.html:34 templates/images/image_add.html:11
-msgid "Add Image"
-msgstr "Adicionar Imagem"
-
-#: templates/images/all_images.html:46
-msgid "Insert on Editor"
-msgstr "Inserir no Editor"
-
-#: templates/images/image_add.html:30
-msgid "Add"
-msgstr "Adicionar"

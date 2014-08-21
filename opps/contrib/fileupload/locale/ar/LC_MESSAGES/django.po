@@ -10,12 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2013-09-12 16:02-0300\n"
 "PO-Revision-Date: 2014-08-05 19:26+0000\n"
 "Last-Translator: Thiago Avelino <thiago@avelino.xxx>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/opps-contrib/language/pt_BR/)\n"
+"Language-Team: Arabic (http://www.transifex.com/projects/p/opps-contrib/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: templates/fileupload/image_form.html:28
 msgid "Back to"
@@ -23,19 +23,19 @@ msgstr ""
 
 #: templates/fileupload/image_form.html:39
 msgid "Multi image upload"
-msgstr "Upload múltipo de imagens"
+msgstr ""
 
 #: templates/fileupload/image_form.html:41
 msgid "Channel"
-msgstr "Canal"
+msgstr ""
 
 #: templates/fileupload/image_form.html:50
 msgid "Send"
-msgstr "Enviar"
+msgstr ""
 
 #: templates/fileupload/image_form.html:51
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr ""
 
 #: templates/fileupload/image_form.html:52
 msgid "Copy first image data to the others."

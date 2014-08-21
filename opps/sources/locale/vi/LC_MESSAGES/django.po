@@ -4,15 +4,16 @@
 # 
 # Translators:
 # Translators:
+# Translators:
 # Anh Phan <vietnamesel10n@gmail.com>, 2013
 # Anh Phan <vietnamesel10n@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-12 00:06-0300\n"
-"PO-Revision-Date: 2014-08-05 19:26+0000\n"
-"Last-Translator: Thiago Avelino <thiago@avelino.xxx>\n"
+"POT-Creation-Date: 2013-08-08 15:59-0300\n"
+"PO-Revision-Date: 2013-08-08 18:39+0000\n"
+"Last-Translator: Anh Phan <vietnamesel10n@gmail.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/projects/p/opps-core/language/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,42 +21,37 @@ msgstr ""
 "Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: __init__.py:5 models.py:39
-msgid "Archives"
-msgstr "Các phần lưu trữ"
+#: __init__.py:5 models.py:17
+msgid "Sources"
+msgstr "Các nguồn"
+
+#: admin.py:17
+msgid "Identification"
+msgstr "Định danh"
+
+#: admin.py:19
+msgid "Content"
+msgstr "Nội dung"
 
 #: admin.py:21
-msgid "Identification"
-msgstr ""
-
-#: admin.py:23
-msgid "Content"
-msgstr ""
-
-#: admin.py:25
 msgid "Publication"
-msgstr ""
+msgstr "Công bố"
 
-#: models.py:27
-msgid "Title"
-msgstr "Tiêu đề"
+#: models.py:10
+msgid "Name"
+msgstr "Tên"
 
-#: models.py:29 models.py:38
-msgid "Archive"
-msgstr "Phần lưu trữ"
+#: models.py:11
+msgid "URL"
+msgstr "Đường dẫn liên kết"
 
-#: models.py:30
-msgid "Description"
-msgstr "Mô tả"
+#: models.py:12
+msgid "Feed URL"
+msgstr "Đường dẫn liên kết Feed"
 
-#: models.py:33
+#: models.py:16
 msgid "Source"
-msgstr ""
+msgstr "Các nguồn"
 
-#: models.py:55
-msgid "File"
-msgstr "Tập tin"
-
-#: models.py:56
-msgid "Files"
-msgstr "Các tập tin"
+#~ msgid "Slug"
+#~ msgstr "Slug"
