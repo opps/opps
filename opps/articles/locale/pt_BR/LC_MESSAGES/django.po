@@ -7,12 +7,13 @@
 # Translators:
 # Ellison Leão, 2013
 # Ellison Leão, 2013
+# Thiago Avelino <thiago@avelino.xxx>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-09-12 00:30-0300\n"
-"PO-Revision-Date: 2014-08-05 19:26+0000\n"
+"PO-Revision-Date: 2014-08-21 20:28+0000\n"
 "Last-Translator: Thiago Avelino <thiago@avelino.xxx>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/opps-core/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -27,11 +28,11 @@ msgstr "Artigos"
 
 #: admin.py:22
 msgid "Related post"
-msgstr ""
+msgstr "Noticia relacionada"
 
 #: admin.py:23
 msgid "Related posts"
-msgstr ""
+msgstr "Noticias relacionadas"
 
 #: admin.py:36 admin.py:61 admin.py:82
 msgid "Identification"

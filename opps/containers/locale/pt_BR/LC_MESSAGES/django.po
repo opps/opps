@@ -1,21 +1,25 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
+# Translators:
+# Edipo Maciel <shu.hikari@gmail.com>, 2014
 # Ellison Leão, 2013
+# Ellison Leão, 2013
+# Thiago Avelino <thiago@avelino.xxx>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-21 16:16-0300\n"
-"PO-Revision-Date: 2013-08-08 17:20+0000\n"
-"Last-Translator: Ellison Leão\n"
-"Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
-"Language: pt_BR\n"
+"PO-Revision-Date: 2014-08-21 20:31+0000\n"
+"Last-Translator: Thiago Avelino <thiago@avelino.xxx>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/opps-core/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: admin.py:27 models.py:211
@@ -93,7 +97,7 @@ msgstr "Fonte"
 
 #: models.py:65
 msgid "Customized"
-msgstr "Customizado"
+msgstr "Personalizado"
 
 #: models.py:81 models.py:193 models.py:251 models.py:402 models.py:465
 msgid "Container"
@@ -105,7 +109,7 @@ msgstr "Containers"
 
 #: models.py:131
 msgid "Get HTTP Absolute URL"
-msgstr "URL Completa"
+msgstr "URL exata com HTTP"
 
 #: models.py:195 models.py:405
 msgid "Order"
@@ -121,7 +125,7 @@ msgstr "Legenda"
 
 #: models.py:230
 msgid "Title Link"
-msgstr "Título do Link"
+msgstr "Link do titulo"
 
 #: models.py:239 models.py:425
 msgid "Main Image"
@@ -133,7 +137,7 @@ msgstr "Legenda da Imagem Principal"
 
 #: models.py:246 models.py:432
 msgid "Maximum characters 4000"
-msgstr "Máximo caracteres: 4000"
+msgstr "Máximo de caracteres 4000"
 
 #: models.py:259
 msgid "Query Set"
@@ -141,11 +145,11 @@ msgstr "Queryset"
 
 #: models.py:263
 msgid "Content Group"
-msgstr ""
+msgstr "Grupo de conteúdo"
 
 #: models.py:266
 msgid "Boxes in the same group do not allow repetitions"
-msgstr ""
+msgstr "Boxes no mesmo grupo não permitem repetições."
 
 #: models.py:270
 msgid "Container box"
@@ -161,7 +165,7 @@ msgstr "Abrir em nova janela"
 
 #: models.py:387
 msgid "Load in the same frame as it was clicked"
-msgstr "Abrir no mesmo frame em que foi clicado"
+msgstr "Abrir no mesmo frame onde foi clicado"
 
 #: models.py:388
 msgid "Load in the parent frameset"
@@ -169,7 +173,7 @@ msgstr "Abrir no frameset pai"
 
 #: models.py:389
 msgid "Load in the full body of the window"
-msgstr "Abrir em mesma janela"
+msgstr "Abrir na mesma janela"
 
 #: models.py:396
 msgid "Container Box"
@@ -181,7 +185,7 @@ msgstr "Agregar containers"
 
 #: models.py:407
 msgid "Highlight container"
-msgstr "Realçar container"
+msgstr "Container em destaque"
 
 #: models.py:408
 msgid "Date available"
@@ -197,7 +201,7 @@ msgstr "URL"
 
 #: models.py:436
 msgid "URL Target"
-msgstr ""
+msgstr "URL destino"
 
 #: models.py:442
 msgid "Article box articles"
@@ -209,7 +213,7 @@ msgstr "Artigos de Boxes de Artigos"
 
 #: models.py:455
 msgid "Please select a Container or insert a URL!"
-msgstr "Favor selecionar um Container ou inserir uma URL!"
+msgstr "Por favor, selecione um Container ou insira uma URL"
 
 #: models.py:459
 msgid "Article not published!"
@@ -217,11 +221,11 @@ msgstr "Artigo não publicado!"
 
 #: models.py:468
 msgid "Mirror"
-msgstr "Canal Espelho"
+msgstr "Espelho"
 
 #: models.py:469
 msgid "Mirrors"
-msgstr "Canais Espelhos"
+msgstr "Espelhos"
 
 #: templates/containers/none.html:10
 msgid "Warning"
@@ -229,25 +233,22 @@ msgstr "Aviso"
 
 #: templates/containers/none.html:11
 msgid "You don't have any channels set as home page. Please set one"
-msgstr "Você não possui nenhum canal setado como Home. Favor atribuir um."
+msgstr "Não existe nem um canal marcado como pagina inicial. Por favor marque um"
 
 #~ msgid "Has queryset"
-#~ msgstr "Tem Queryset"
+#~ msgstr "Has queryset"
 
 #~ msgid "No"
-#~ msgstr "Não"
+#~ msgstr "No"
 
 #~ msgid "Yes"
-#~ msgstr "Sim"
+#~ msgstr "Yes"
 
 #~ msgid "It is necessary set channel as home page."
-#~ msgstr "É necessário atribuir um canal como home."
+#~ msgstr "It is necessary set channel as home page."
 
 #~ msgid "Container source"
-#~ msgstr "Fonte do Container"
+#~ msgstr "Container source"
 
 #~ msgid "Container sources"
-#~ msgstr "Fontes do Container"
-
-#~ msgid "Short title"
-#~ msgstr "Título Curto"
+#~ msgstr "Container sources"
