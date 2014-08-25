@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Translators:
 # Translators:
@@ -59,7 +59,7 @@ msgstr "Hiển thị trong menu?"
 
 #: models.py:36
 msgid "Show in main RSS?"
-msgstr "Hiển thị trong menu?"
+msgstr "Hiện tại chính RSS?"
 
 #: models.py:40
 msgid "Is home page?"
