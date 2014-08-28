@@ -1,14 +1,3 @@
-OPPS_CHANNEL_LAYOUT
------------
-
-Default: `(('default', _('Default')),)`
-
-Define the default availables layouts for channels if no **channel.json** is
-avaiable.
-
-OPPS_TRAVIS
------------
-
 OPPS_CONTAINERS_BLACKLIST
 -----------
 
@@ -24,7 +13,7 @@ OPPS_TRAVIS
 
 OPPS_MENU
 -----------
-
+    
 OPPS_MIRROR_CHANNEL
 -----------
 
@@ -100,7 +89,7 @@ OPPS_VIEWS_LIMIT
 
 Default: `None`
 
-Integer to define the number of `posts` and `albums` on context of channel page.
+Integer to define the number of `posts` and `albums` on context of channel page. 
 
 OPPS_CHANNEL_CONF
 -----------
