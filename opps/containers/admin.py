@@ -65,6 +65,10 @@ class ContainerAdmin(PublishableAdmin, AdminViewPermission):
     raw_id_fields = ['main_image', 'channel', 'mirror_channel']
     ordering = ('-date_available',)
 
+    autocomplete_lookup_fields = {
+        'fk': ['channel'],
+    }
+
     def get_list_filter(self, request):
         list_filter = super(ContainerAdmin, self).list_filter
         list_filter = [ChannelListFilter] + list(list_filter)
@@ -105,6 +109,10 @@ class ContainerBoxAdmin(BaseBoxAdmin, AdminViewPermission):
             'classes': ('extrapretty'),
             'fields': ('content_group', 'published', 'date_available')}),
     )
+
+    autocomplete_lookup_fields = {
+        'fk': ['channel'],
+    }
 
     def clean_ended_entries(self, request, queryset):
         now = timezone.now()
