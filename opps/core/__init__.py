@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from django.utils.translation import ugettext_lazy as _
 
 from appconf import AppConf
@@ -12,6 +13,7 @@ class OppsCoreConf(AppConf):
     SHORT = 'googl'
     SHORT_URL = 'googl.short.GooglUrlShort'
     CHANNEL_CONF = {}
+    CHANNEL_LAYOUT = (('default', _('Default')),)
     VIEWS_LIMIT = None
     PAGINATE_BY = 10
     PAGINATE_SUFFIX = u''
