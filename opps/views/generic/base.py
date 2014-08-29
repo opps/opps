@@ -18,17 +18,15 @@ class View(object):
     paginate_by = settings.OPPS_PAGINATE_BY
     limit = settings.OPPS_VIEWS_LIMIT
     page_kwarg = 'page'
-    slug = None
-    channel = None
-    long_slug = None
-    article = None
-    child_class = u'container'
 
     def __init__(self, *args, **kwargs):
-        kwargs.update({
-            'channel_long_slug': [],
-            'excluded_ids': set(),
-        })
+        self.slug = None
+        self.channel = None
+        self.long_slug = None
+        self.article = None
+        self.child_class = u'container'
+        self.channel_long_slug = []
+        self.excluded_ids = set()
         super(View, self).__init__(*args, **kwargs)
 
     def get_paginate_by(self, queryset):
