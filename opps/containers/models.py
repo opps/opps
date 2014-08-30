@@ -20,6 +20,7 @@ from opps.core.tags.models import Tagged
 from opps.db.models.fields import JSONField
 from opps.boxes.models import BaseBox
 
+from .managers import ContainerManager
 from .signals import shorturl_generate, delete_container
 from .tasks import check_mirror_channel, check_mirror_site
 
@@ -64,6 +65,8 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         max_length=255)
     json = JSONField(_(u"Customized"),
                      null=True, blank=True)
+
+    objects = ContainerManager()
 
     def __unicode__(self):
         return u"{}".format(self.get_absolute_url())
