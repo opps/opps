@@ -13,7 +13,7 @@ OPPS_TRAVIS
 
 OPPS_MENU
 -----------
-    
+
 OPPS_MIRROR_CHANNEL
 -----------
 
@@ -89,7 +89,7 @@ OPPS_VIEWS_LIMIT
 
 Default: `None`
 
-Integer to define the number of `posts` and `albums` on context of channel page. 
+Integer to define the number of `posts` and `albums` on context of channel page.
 
 OPPS_CHANNEL_CONF
 -----------
