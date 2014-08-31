@@ -32,6 +32,7 @@ Sponsor
 
 * `YACOWS <http://yacows.com.br/>`_
 * `Digital Ocean <http://digitalocean.com/>`_
+* `Campus Party <http://www.campus-party.org/>`_
 
 
 License

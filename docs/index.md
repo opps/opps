@@ -85,6 +85,7 @@ Sponsors
 --------
 * [YACOWS](http://www.yacows.com.br)
 * [Digital Oceans](http://digitalocean.com/)
+* [Campus Party](http://www.campus-party.org/)
 
 
 License
