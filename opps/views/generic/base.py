@@ -1,5 +1,5 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
@@ -19,14 +19,15 @@ class View(object):
     limit = settings.OPPS_VIEWS_LIMIT
     page_kwarg = 'page'
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.slug = None
         self.channel = None
         self.long_slug = None
-        self.channel_long_slug = []
         self.article = None
-        self.excluded_ids = set()
         self.child_class = u'container'
+        self.channel_long_slug = []
+        self.excluded_ids = set()
+        super(View, self).__init__(*args, **kwargs)
 
     def get_paginate_by(self, queryset):
         queryset = self.get_queryset()
