@@ -366,6 +366,12 @@ class ContainerBox(BaseBox):
         self.local_cache['ordered_box_containers'] = qs
         return qs
 
+    def get_containers_queryset(self):
+        if self.queryset:
+            return self.queryset.get_queryset()
+        else:
+            return self.ordered_containers()
+
     def get_queryset(self, exclude_ids=None, use_local_cache=True):
         cached = self.local_cache.get('get_queryset')
         if use_local_cache and cached:
