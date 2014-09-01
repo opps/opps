@@ -40,7 +40,7 @@ class QuerySet(Publishable):
     )
 
     recursive = models.BooleanField(
-        _("Recusibve"),
+        _("Recursive"),
         help_text=_("Bring the content channels and subchannels (tree)"),
         default=False
     )
