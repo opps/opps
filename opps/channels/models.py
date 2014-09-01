@@ -79,6 +79,10 @@ class Channel(MPTTModel, Publishable, Slugged):
         return u"http://{}{}".format(self.site_domain, self.get_absolute_url())
     get_http_absolute_url.short_description = _(u'Get HTTP Absolute URL')
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return ("id__iexact", "name__icontains", "long_slug__icontains", )
+
     @property
     def search_category(self):
         """for use in search result"""
