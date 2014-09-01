@@ -112,7 +112,6 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
     @classmethod
     def get_children_models(cls):
         children = models.get_models()
-        print 'models', children
         return [model for model in children
                 if (model is not None and
                     issubclass(model, cls) and
