@@ -9,6 +9,7 @@ from django.template.defaultfilters import linebreaksbr
 from django.core.cache import cache
 from django.contrib.sites.models import Site
 
+from opps.channels.models import Channel
 from opps.contrib.middleware.global_request import get_request
 from opps.containers.models import Container, ContainerBox, Mirror
 
@@ -437,7 +438,26 @@ def get_container_by_channel(slug, number=10, depth=1,
     kwargs.update(splited)
 
     if include_children:
-        kwargs['channel_long_slug__startswith'] = slug
+        k = 'channel_id__in'
+        kwargs[k] = cache.get(
+            'get_container_by_channel-{}'.format(slug))
+        if not kwargs[k]:
+
+            try:
+                channel = Channel.objects.get(long_slug=slug)
+                qs = channel.get_descendants(include_self=True)
+                qs = qs.filter(level__lte=channel.level + depth)
+                print 'qs', qs
+                kwargs[k] = \
+                    qs.values_list("id", flat=True)
+                cache.set(
+                    'get_container_by_channel-{}'.format(slug),
+                    kwargs[k],
+                    settings.OPPS_CACHE_EXPIRE)
+
+            except Channel.DoesNotExist:
+                kwargs[k] = []
+
     try:
         kwargs['site'] = settings.SITE_ID
         if settings.OPPS_CONTAINERS_SITE_ID:
