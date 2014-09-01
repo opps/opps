@@ -447,7 +447,6 @@ def get_container_by_channel(slug, number=10, depth=1,
                 channel = Channel.objects.get(long_slug=slug)
                 qs = channel.get_descendants(include_self=True)
                 qs = qs.filter(level__lte=channel.level + depth)
-                print 'qs', qs
                 kwargs[k] = \
                     qs.values_list("id", flat=True)
                 cache.set(
