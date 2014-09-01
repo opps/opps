@@ -10,6 +10,7 @@ Changelog
 * Used opps.core.manager on Container
 * * Extend Polymorphic Manager 
 * Used channel_id on container unique_together
+* Upgrade Django version to 1.5.9 (Security releases issued https://www.djangoproject.com/weblog/2014/aug/20/security/)
 
 
 0.2.5
