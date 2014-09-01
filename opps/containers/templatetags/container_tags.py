@@ -11,7 +11,6 @@ from django.contrib.sites.models import Site
 
 from opps.contrib.middleware.global_request import get_request
 from opps.containers.models import Container, ContainerBox, Mirror
-from opps.channels.models import Channel
 
 from magicdate import magicdate
 
@@ -332,8 +331,10 @@ def get_containers_by(limit=None, **filters):
     if settings.OPPS_CONTAINERS_SITE_ID:
         site = settings.OPPS_CONTAINERS_SITE_ID
 
-    containers = [i for i in Container.objects.filter(
-        site=site, published=True, **filters)[:limit]]
+    qs = Container.objects.all_published()
+    qs = qs.filter(site=site, **filters)
+    qs = qs[:limit]
+    containers = [i for i in qs]
 
     cache.set(cachekey, containers, 3600)
     return containers
@@ -436,34 +437,7 @@ def get_container_by_channel(slug, number=10, depth=1,
     kwargs.update(splited)
 
     if include_children:
-        try:
-            kwargs['channel_long_slug__in'] = cache.get(
-                'get_container_by_channel-{}'.format(slug))
-            if not kwargs['channel_long_slug__in']:
-                base_channel = Channel.objects.get(long_slug=slug)
-                kwargs['channel_long_slug__in'] = [base_channel.long_slug]
-
-                def _append_recursivelly(channel, current_level=0):
-                    # Depth test
-                    if current_level >= depth:
-                        return
-                    elif current_level < depth:
-                        current_level += 1
-
-                    for children in channel.get_children():
-                        kwargs['channel_long_slug__in'].append(
-                            children.long_slug)
-                        # Recursion
-                        _channel = Channel.objects.get(
-                            long_slug=children.long_slug)
-                        _append_recursivelly(_channel, current_level)
-
-                _append_recursivelly(base_channel)
-                cache.set('get_container_by_channel-{}'.format(slug),
-                          kwargs['channel_long_slug__in'],
-                          settings.OPPS_CACHE_EXPIRE)
-        except Channel.DoesNotExist:
-            kwargs['channel_long_slug__in'] = []
+        kwargs['channel_long_slug__startswith'] = slug
     try:
         kwargs['site'] = settings.SITE_ID
         if settings.OPPS_CONTAINERS_SITE_ID:
