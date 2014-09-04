@@ -1,3 +1,14 @@
+OPPS_CHANNEL_LAYOUT
+-----------
+
+Default: `(('default', _('Default')),)`
+
+Define the default availables layouts for channels if no **channel.json** is
+avaiable.
+
+OPPS_TRAVIS
+-----------
+
 OPPS_CONTAINERS_BLACKLIST
 -----------
 

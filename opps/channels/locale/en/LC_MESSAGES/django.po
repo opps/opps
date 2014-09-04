@@ -57,7 +57,7 @@ msgstr "Show in menu?"
 
 #: models.py:36
 msgid "Show in main RSS?"
-msgstr "Show in menu?"
+msgstr "Show in main RSS?"
 
 #: models.py:40
 msgid "Is home page?"
