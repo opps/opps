@@ -25,15 +25,6 @@ OPPS_TRAVIS
 OPPS_MENU
 -----------
 
-OPPS_MENU_ONLY_WITH_PUBLISHED_CONTAINERS
------------
-
-Default: `False`
-
-Filter the context variable **opps_menu** to only show items that have published
-Containers.
-
-
 OPPS_MIRROR_CHANNEL
 -----------
 
