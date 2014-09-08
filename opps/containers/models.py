@@ -130,7 +130,6 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
     get_http_absolute_url.short_description = _(u'Get HTTP Absolute URL')
 
     def recommendation(self, child_class=False, query_slice=[None, 10]):
-
         if not child_class:
             child_class = self.child_class
 
