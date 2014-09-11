@@ -14,8 +14,10 @@ class ListView(View, DjangoListView):
     template_name_suffix = ''
 
     def get_template_list(self, domain_folder="containers"):
-        templates = []
+        if self.template_name:
+            return [self.template_name]
 
+        templates = []
         if not self.long_slug:
             templates.append('{}/none.html'.format(domain_folder))
             return templates
