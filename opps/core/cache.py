@@ -8,7 +8,7 @@ from hashlib import md5
 
 
 def _cache_key(_type, model, site, channel_long_slug):
-    return md5((u'{}:{}:{}:{}:{}'.format(
+    return md5((u'{0}:{1}:{2}:{3}:{4}'.format(
         _type,
         settings.OPPS_CACHE_PREFIX,
         model._meta.db_table,
@@ -24,7 +24,7 @@ def cache_page(*dec_args, **dec_kwargs):
     def decorator(func):
         def wrapped(*func_args, **func_kwargs):
             request = func_args[0]
-            cache_prefix = u'{}-{}-{}'.format(
+            cache_prefix = u'{0}-{1}-{2}'.format(
                 key_prefix,
                 get_current_site(request).domain,
                 getattr(request, 'is_mobile', False)

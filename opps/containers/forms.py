@@ -37,12 +37,12 @@ class ContainerAdminForm(forms.ModelForm):
             if field.type == 'checkbox':
                 for fo in FieldOption.objects.filter(field=field):
                     self.fields[
-                        'json_{}_{}'.format(
+                        'json_{0}_{1}'.format(
                             field.slug, fo.option.slug
                         )] = forms.CharField(required=False)
             else:
                 self.fields[
-                    'json_{}'.format(field.slug)
+                    'json_{0}'.format(field.slug)
                 ] = forms.CharField(required=False)
 
     def clean(self):

@@ -130,7 +130,7 @@ def get_containerbox(context, slug, template_name=None, **extra_context):
     )
     is_mobile = getattr(request, 'is_mobile', False)
 
-    cachekey = "ContainerBox-{}-{}-{}-{}".format(
+    cachekey = "ContainerBox-{0}-{1}-{2}-{3}".format(
         slug,
         template_name,
         is_mobile,
@@ -203,7 +203,7 @@ def get_all_containerbox(channel_long_slug=None, template_name=None):
         Long path to channel (including subchannel if is the case)
     """
 
-    cachekey = "get_all_containerbox-{}-{}".format(
+    cachekey = "get_all_containerbox-{0}-{1}".format(
         channel_long_slug,
         template_name)
 
@@ -309,21 +309,21 @@ def get_url(obj, http=False, target=None, url_only=False):
             _target = '_blank'
         # Determine url type
         if http:
-            _url = 'http://{}{}'.format(
+            _url = 'http://{0}{1}'.format(
                 obj.site,
                 obj.get_absolute_url())
         if url_only:
             return _url
-        return 'href="{}" target="{}"'.format(_url, _target)
+        return 'href="{0}" target="{1}"'.format(_url, _target)
     except Exception as e:
-        logger.error("Exception at templatetag get_url: {}".format(e))
+        logger.error("Exception at templatetag get_url: {0}".format(e))
         return obj.get_absolute_url()
 
 
 @register.assignment_tag
 def get_containers_by(limit=None, **filters):
     """Return a list of containers filtered by given args"""
-    cachekey = u'getcontainersby-{}'.format(hash(frozenset(filters.items())))
+    cachekey = u'getcontainersby-{0}'.format(hash(frozenset(filters.items())))
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
@@ -347,7 +347,7 @@ def filter_queryset_by(queryset, **filters):
     if not getattr(queryset, 'query', False):
         return queryset
 
-    cachekey = u'filterquerysetby-{}'.format(hash(unicode(queryset.query)))
+    cachekey = u'filterquerysetby-{0}'.format(hash(unicode(queryset.query)))
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
@@ -379,7 +379,7 @@ def exclude_queryset_by(queryset, **excludes):
     if not getattr(queryset, 'query', False):
         return queryset
 
-    cachekey = u'excludequerysetby-{}'.format(hash(unicode(queryset.query)))
+    cachekey = u'excludequerysetby-{0}'.format(hash(unicode(queryset.query)))
     _cache = cache.get(cachekey)
     if _cache:
         return _cache
@@ -430,17 +430,17 @@ def get_container_by_channel(slug, number=10, depth=1,
             pass
 
     # __in split treatment
-    splited = {
-        key: value.split(',')
+    splited = dict([
+        (key, value.split(','))
         for key, value
         in kwargs.items()
-        if key.endswith('__in') and type(value) is not list}
+        if key.endswith('__in') and type(value) is not list])
     kwargs.update(splited)
 
     if include_children:
         k = 'channel_id__in'
         kwargs[k] = cache.get(
-            'get_container_by_channel-{}'.format(slug))
+            'get_container_by_channel-{0}'.format(slug))
         if not kwargs[k]:
 
             try:
@@ -490,7 +490,7 @@ def get_containerbox_list(context, slug, num=0, template_name=None):
 
     request = context['request']
 
-    cachekey = "ContainerBoxList-{}-{}-{}".format(
+    cachekey = "ContainerBoxList-{0}-{1}-{2}".format(
         slug,
         template_name,
         request.is_mobile,
@@ -547,8 +547,8 @@ def get_custom_field_value(obj, field_slug):
 def get_postrelated_by(obj, **filters):
     """Return a list of post related filtered by given args"""
     if getattr(obj, 'postrelated_post', False):
-        cachekey = u'getpostrelatedby-{}-{}'.format(hash(frozenset(
-                                                    filters.items())), obj.pk)
+        cachekey = u'getpostrelatedby-{0}-{1}'.format(
+            hash(frozenset(filters.items())), obj.pk)
 
         _cache = cache.get(cachekey)
 

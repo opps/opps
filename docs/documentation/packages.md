@@ -34,7 +34,7 @@ Simple dict with the following structure:
             'title': '<title>', # title of the root node
             'class': '<class_names>', # class to be added to html class attribute
             'open_new_window': True, # should open in new window or not
-            'children': [ 
+            'children': [
                 'url_name': 'admin:<moule_name>_<class_name>_changelist', # pointer to module admin url(check the real example below)
                 'title': '<title>', # option title
                 'include_add_link': True, # if should or not include the add option
@@ -202,7 +202,7 @@ It uses *django.core.cache* and the current pattern to use it is to define a uni
 Example of storing:
 
     from django.core.cache import cache
-    cachekey = "ContainerBox-{}-{}-{}-{}".format(
+    cachekey = "ContainerBox-{0}-{1}-{2}-{3}".format(
     	slug,
     	template_name,
     	is_mobile,
@@ -230,7 +230,7 @@ This method could be used on views too.
 Caching entire routes is very simple there is a method for that:
 
     from opps.core.cache import cache_page
-    
+
     (r'^route_pattern$', cache_page(<seconds>)(<page_content>)),
 
 	# real example
@@ -264,7 +264,7 @@ On front you can use cache methods to cache a single fragment of the page like a
 
 You can find much more information about caching on [django docs here](https://docs.djangoproject.com/en/dev/topics/cache/)
 
----------------    
+---------------
 
 ### opps.core.tags
 

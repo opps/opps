@@ -25,7 +25,7 @@ class ApiKey(models.Model):
     date_insert = models.DateTimeField(_(u"Date insert"), auto_now_add=True)
 
     def __unicode__(self):
-        return u"{} for {}".format(self.key, self.user)
+        return u"{0} for {1}".format(self.key, self.user)
 
     def save(self, *args, **kwargs):
         if not self.key:

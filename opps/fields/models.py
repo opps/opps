@@ -23,7 +23,7 @@ class Field(models.Model):
                             db_index=True)
 
     def __unicode__(self):
-        return u"{} - {}".format(self.application, self.name)
+        return u"{0} - {1}".format(self.application, self.name)
 
     class Meta:
         verbose_name = _(u'Field')
@@ -37,7 +37,7 @@ class Option(models.Model):
     value = models.CharField(_('Value'), max_length=255)
 
     def __unicode__(self):
-        return u"{} - {}".format(self.field.slug, self.name)
+        return u"{0} - {1}".format(self.field.slug, self.name)
 
     class Meta:
         verbose_name = _(u'Option')
@@ -50,7 +50,7 @@ class FieldOption(models.Model):
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
     def __unicode__(self):
-        return u"{} - {}".format(self.field.slug, self.option.slug)
+        return u"{0} - {1}".format(self.field.slug, self.option.slug)
 
     class Meta:
         ordering = ['-order']

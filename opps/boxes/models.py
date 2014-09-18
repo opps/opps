@@ -70,7 +70,7 @@ class QuerySet(Publishable):
             self.local_cache = {}
 
     def __unicode__(self):
-        return u"{} {} {}".format(self.name, self.slug, self.model)
+        return u"{0} {1} {2}".format(self.name, self.slug, self.model)
 
     def clean(self):
 
@@ -90,7 +90,7 @@ class QuerySet(Publishable):
             self.get_queryset().all()
         except Exception as e:
             raise ValidationError(
-                u'Invalid Queryset: {}'.format(str(e))
+                u'Invalid Queryset: {0}'.format(str(e))
             )
 
         if self.offset >= self.limit:
@@ -166,7 +166,7 @@ class QuerySet(Publishable):
 
         order_term = self.order_field or 'id'
         if self.order == '-':
-            order_term = "-{}".format(self.order_field or 'id')
+            order_term = "-{0}".format(self.order_field or 'id')
 
         queryset = queryset.order_by(order_term)
 
@@ -190,4 +190,4 @@ class BaseBox(Publishable, Channeling):
         unique_together = ['site', 'channel_long_slug', 'slug']
 
     def __unicode__(self):
-        return u"{}-{}".format(self.slug, self.site.name)
+        return u"{0}-{1}".format(self.slug, self.site.name)
