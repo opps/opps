@@ -10,7 +10,6 @@ from django.core.cache import cache
 from .signals import redirect_generate
 from opps.containers.models import Container, ContainerImage
 from opps.core.cache import _cache_key
-from opps.core.managers import PublishableManager
 
 
 class Article(Container):
@@ -41,8 +40,6 @@ class Post(Article):
         through='articles.PostRelated',
     )
 
-    objects = PublishableManager()
-
     class Meta:
         verbose_name = _('Post')
         verbose_name_plural = _('Posts')
@@ -72,12 +69,12 @@ class Post(Article):
             if check_published:
                 images = images.filter(published=True)
 
-            captions = {
-                ci.image_id: ci.caption for ci in
+            captions = dict([
+                (ci.image_id, ci.caption) for ci in
                 ContainerImage.objects.filter(
                     container_id=album.pk
                 )
-            }
+            ])
 
             for image in images:
                 caption = captions.get(image.pk)

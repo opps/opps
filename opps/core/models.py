@@ -272,9 +272,8 @@ class Imaged(models.Model):
             images = images.exclude(pk=self.main_image.pk)
         imgs += [i for i in images.distinct()]
 
-        captions = {
-            ci.image_id: ci.caption for ci in self.containerimage_set.all()
-        }
+        captions = dict(
+            (ci.image_id, ci.caption) for ci in self.containerimage_set.all())
 
         if self.main_image:
             captions[self.main_image.id] = self.main_image.caption
@@ -390,13 +389,12 @@ class Config(Publishable):
         itemsqs = cls.objects.values('key', 'value', 'format')
         if kwargs:
             itemsqs = itemsqs.filter(**kwargs)
-        data = {
-            item['key']: {
+        data = dict(
+            [(item['key'], {
                 'raw': item['value'],
                 'format': item['format'],
                 'value': cls.format_value(item['value'], item['format'])
-            } for item in itemsqs
-        }
+            }) for item in itemsqs])
         return data
 
     @classmethod

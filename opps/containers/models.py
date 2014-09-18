@@ -4,8 +4,9 @@ import operator
 from django.db import models
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
-from django.core.exceptions import ValidationError
 from django.core.cache import cache
+from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.conf import settings
 from django.template.defaultfilters import slugify
@@ -14,11 +15,11 @@ from django.contrib.sites.models import Site
 from polymorphic import PolymorphicModel
 from polymorphic.showfields import ShowFieldContent
 
+from opps.boxes.models import BaseBox
 from opps.core.cache import _cache_key
 from opps.core.models import Publishable, Slugged, Channeling, Imaged
 from opps.core.tags.models import Tagged
 from opps.db.models.fields import JSONField
-from opps.boxes.models import BaseBox
 
 from .managers import ContainerManager
 from .signals import shorturl_generate, delete_container
@@ -109,8 +110,12 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
 
     def get_absolute_url(self):
         if self.channel.homepage:
-            return u"/{}.html".format(self.slug)
-        return u"/{}/{}.html".format(self.channel_long_slug, self.slug)
+            url = 'containers:homepage_open'
+            args = (self.slug, )
+        else:
+            url = 'containers:open'
+            args = (self.channel_long_slug, self.slug, )
+        return reverse(url, args=args)
 
     @classmethod
     def get_children_models(cls):
@@ -133,7 +138,6 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
     get_http_absolute_url.short_description = _(u'Get HTTP Absolute URL')
 
     def recommendation(self, child_class=False, query_slice=[None, 10]):
-
         if not child_class:
             child_class = self.child_class
 
