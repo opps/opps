@@ -32,10 +32,10 @@ class View(object):
     def get_paginate_by(self, queryset):
         queryset = self.get_queryset()
 
-        setting_name = 'OPPS_{}_{}_PAGINATE_BY'.format(queryset.
-                                                       model._meta.app_label,
-                                                       queryset.model.
-                                                       __name__).upper()
+        setting_name = 'OPPS_{0}_{1}_PAGINATE_BY'.format(queryset.
+                                                         model._meta.app_label,
+                                                         queryset.model.
+                                                         __name__).upper()
 
         by_settings = getattr(settings, setting_name, self.paginate_by)
         by_request = self.request.GET.get('paginate_by')
@@ -126,7 +126,7 @@ class View(object):
     def get_template_folder(self):
         domain_folder = "containers"
         if self.site.id > 1:
-            domain_folder = "{}/containers".format(self.site.domain)
+            domain_folder = "{0}/containers".format(self.site.domain)
         return domain_folder
 
     def get_long_slug(self):

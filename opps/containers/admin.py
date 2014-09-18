@@ -81,11 +81,11 @@ class ContainerAdmin(PublishableAdmin, AdminViewPermission):
                 application__contains=obj.__class__.__name__):
             if field.type == 'checkbox':
                 for fo in FieldOption.objects.filter(field=field):
-                    key = "{}_{}".format(field.slug, fo.option.slug)
-                    _json[key] = request.POST.get('json_{}'.format(key), '')
+                    key = "{0}_{1}".format(field.slug, fo.option.slug)
+                    _json[key] = request.POST.get('json_{0}'.format(key), '')
             else:
                 _json[field.slug] = request.POST.get(
-                    'json_{}'.format(field.slug), '')
+                    'json_{0}'.format(field.slug), '')
 
         obj.json = json.dumps(_json)
         obj.save()

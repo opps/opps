@@ -19,13 +19,13 @@ class ListView(View, DjangoListView):
 
         templates = []
         if not self.long_slug:
-            templates.append('{}/none.html'.format(domain_folder))
+            templates.append('{0}/none.html'.format(domain_folder))
             return templates
 
         list_name = 'list'
 
         if self.template_name_suffix:
-            list_name = "{}{}".format(list_name, self.template_name_suffix)
+            list_name = "{0}{1}".format(list_name, self.template_name_suffix)
 
         if self.channel:
             # Check layout, change via admin
@@ -33,39 +33,39 @@ class ListView(View, DjangoListView):
                 list_name = self.channel.layout
 
             if self.channel.group and self.channel.parent:
-                templates.append('{}/{}/{}.html'.format(
+                templates.append('{0}/{1}/{2}.html'.format(
                     domain_folder, self.channel.parent.long_slug, list_name))
 
                 if self.request.GET.get('page') and\
                    self.__class__.__name__ not in\
                    settings.OPPS_PAGINATE_NOT_APP:
-                    templates.append('{}/{}/{}_paginated.html'.format(
+                    templates.append('{0}/{1}/{2}_paginated.html'.format(
                         domain_folder, self.channel.parent.long_slug,
                         list_name))
 
             if self.request.GET.get('page') and\
                self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
-                templates.append('{}/{}/{}_paginated.html'.format(
+                templates.append('{0}/{1}/{2}_paginated.html'.format(
                     domain_folder, self.channel.long_slug, list_name))
 
-            templates.append('{}/{}/{}.html'.format(
+            templates.append('{0}/{1}/{2}.html'.format(
                 domain_folder, self.channel.long_slug, list_name))
 
             for t in self.channel.get_ancestors()[::-1]:
-                templates.append('{}/{}/{}.html'.format(
+                templates.append('{0}/{1}/{2}.html'.format(
                     domain_folder, t.long_slug, list_name))
                 if self.request.GET.get('page') and\
                    self.__class__.__name__ not in\
                    settings.OPPS_PAGINATE_NOT_APP:
-                    templates.append('{}/{}/{}_paginated.html'.format(
+                    templates.append('{0}/{1}/{2}_paginated.html'.format(
                         domain_folder, t.long_slug, list_name))
 
         if self.request.GET.get('page') and\
            self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
-            templates.append('{}/{}_paginated.html'.format(domain_folder,
-                                                           list_name))
+            templates.append('{0}/{1}_paginated.html'.format(domain_folder,
+                                                             list_name))
 
-        templates.append('{}/{}.html'.format(domain_folder, list_name))
+        templates.append('{0}/{1}.html'.format(domain_folder, list_name))
 
         return templates
 

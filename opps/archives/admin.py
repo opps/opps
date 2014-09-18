@@ -30,8 +30,9 @@ class FileAdmin(AdminViewPermission):
     )
 
     def download_link(self, obj):
-        html = '<a href="{}">{}</a>'.format(obj.archive.url,
-                                            unicode(_(u'Download')))
+        html = '<a href="{0}">{1}</a>'.format(
+            obj.archive.url,
+            unicode(_(u'Download')))
         return html
     download_link.short_description = _(u'download')
     download_link.allow_tags = True

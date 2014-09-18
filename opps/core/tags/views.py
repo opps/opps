@@ -25,10 +25,10 @@ class TagList(ListView):
 
         if self.request.GET.get('page') and\
            self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
-            templates.append('{}/{}_paginated.html'.format(domain_folder,
-                                                           list_name))
+            templates.append('{0}/{1}_paginated.html'.format(domain_folder,
+                                                             list_name))
 
-        templates.append('{}/{}.html'.format(domain_folder, list_name))
+        templates.append('{0}/{1}.html'.format(domain_folder, list_name))
         return templates
 
     def get_context_data(self, **kwargs):

@@ -14,7 +14,7 @@ def export_to_csv(modeladmin, request, queryset):
             # generate response and filename
             response = HttpResponse(mimetype="text/csv")
             today = timezone.now().strftime("%Y-%M-%d_%H:%M:%S")
-            filename = "{}-{}.csv".format(queryset.model, today)
+            filename = "{0}-{1}.csv".format(queryset.model, today)
             response["Content-Disposition"] = ('attachment; filename="%s"' %
                                                filename)
             writer = csv.writer(response)

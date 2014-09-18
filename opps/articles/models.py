@@ -47,9 +47,9 @@ class Post(Article):
 
     def all_images(self, check_published=True):
         cachekey = _cache_key(
-            '{}main-all_images'.format(self.__class__.__name__),
+            '{0}main-all_images'.format(self.__class__.__name__),
             self.__class__, self.site_domain,
-            u"{}-{}".format(self.channel_long_slug, self.slug))
+            u"{0}-{1}".format(self.channel_long_slug, self.slug))
         getcache = cache.get(cachekey)
         if getcache and check_published:
             return getcache

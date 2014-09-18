@@ -34,9 +34,9 @@ class Redis:
 
     @property
     def key(self):
-        return u'{}_{}_{}'.format(settings.OPPS_DB_NAME,
-                                  self.key_prefix,
-                                  self.key_sufix).lower()
+        return u'{0}_{1}_{2}'.format(settings.OPPS_DB_NAME,
+                                     self.key_prefix,
+                                     self.key_sufix).lower()
 
     def save(self, document):
         return self.conn.set(self.key, document)

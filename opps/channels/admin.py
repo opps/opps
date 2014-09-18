@@ -42,9 +42,9 @@ class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
     show_channel_path.short_description = _(u'Channel Path')
 
     def save_model(self, request, obj, form, change):
-        long_slug = u"{}".format(obj.slug)
+        long_slug = u"{0}".format(obj.slug)
         if obj.parent:
-            long_slug = u"{}/{}".format(obj.parent.slug, obj.slug)
+            long_slug = u"{0}/{1}".format(obj.parent.slug, obj.slug)
         obj.long_slug = long_slug
 
         super(ChannelAdmin, self).save_model(request, obj, form, change)
@@ -62,7 +62,7 @@ class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
 
         def _get_json_channel(_obj):
             return _get_template_path(
-                u'containers/{}/channel.json'.format(_obj.long_slug))
+                u'containers/{0}/channel.json'.format(_obj.long_slug))
 
         def _get_json_channel_recursivelly(_obj):
             channel_json = []

@@ -11,7 +11,7 @@ Caching on Templatetags
 Example of storing:
 
     from django.core.cache import cache
-    cachekey = "ContainerBox-{}-{}-{}-{}".format(
+    cachekey = "ContainerBox-{0}-{1}-{2}-{3}".format(
     	slug,
     	template_name,
     	is_mobile,
@@ -40,7 +40,7 @@ Caching Routes
 Caching entire routes is very simple there is a method for that:
 
     from opps.core.cache import cache_page
-    
+
     (r'^route_pattern$', cache_page(<seconds>)(<page_content>)),
 
 	# real example
@@ -75,5 +75,5 @@ On front you can use cache methods to cache a single fragment of the page like a
 	{% endcache %}
 
 You can find much more information about caching on [django docs here](https://docs.djangoproject.com/en/dev/topics/cache/)
-    
+
 

@@ -35,7 +35,7 @@ class AsyncServer(ListView):
             while True:
                 msg = u"compatibility: true\n"
                 msg += u"retry: 10000\n"
-                msg += u"data: {}\n\n".format(
+                msg += u"data: {0}\n\n".format(
                     json.dumps({"action": "error"}))
                 yield msg
                 time.sleep(10)
@@ -46,11 +46,11 @@ class AsyncServer(ListView):
                     if m['type'] == 'message':
                         msg = u"compatibility: true\n"
                         msg += u"retry: 10000\n"
-                        msg += u"data: {}\n\n".format(m['data'])
+                        msg += u"data: {0}\n\n".format(m['data'])
                         yield msg
                 ping = u"compatibility: true\n"
                 ping += u"retry: 10000\n"
-                ping += u"data: {}\n\n".format(
+                ping += u"data: {0}\n\n".format(
                     json.dumps({"action": "ping"}))
                 yield ping
                 time.sleep(0.5)
@@ -74,13 +74,13 @@ class LongPullingServer(ListView, JSONPResponse):
         domain_folder = self.get_template_folder()
 
         if not self.long_slug:
-            templates.append('{}/none.json'.format(domain_folder))
+            templates.append('{0}/none.json'.format(domain_folder))
             return templates
 
         list_name = 'list'
 
         if self.template_name_suffix:
-            list_name = "{}{}".format(list_name, self.template_name_suffix)
+            list_name = "{0}{1}".format(list_name, self.template_name_suffix)
 
         if self.channel:
             # Check layout, change via admin
@@ -88,39 +88,39 @@ class LongPullingServer(ListView, JSONPResponse):
                 list_name = self.channel.layout
 
             if self.channel.group and self.channel.parent:
-                templates.append('{}/{}/{}.json'.format(
+                templates.append('{0}/{1}/{2}.json'.format(
                     domain_folder, self.channel.parent.long_slug, list_name))
 
                 if self.request.GET.get('page') and\
                    self.__class__.__name__ not in\
                    settings.OPPS_PAGINATE_NOT_APP:
-                    templates.append('{}/{}/{}_paginated.json'.format(
+                    templates.append('{0}/{1}/{2}_paginated.json'.format(
                         domain_folder, self.channel.parent.long_slug,
                         list_name))
 
             if self.request.GET.get('page') and\
                self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
-                templates.append('{}/{}/{}_paginated.json'.format(
+                templates.append('{0}/{1}/{2}_paginated.json'.format(
                     domain_folder, self.channel.long_slug, list_name))
 
-            templates.append('{}/{}/{}.json'.format(
+            templates.append('{0}/{1}/{2}.json'.format(
                 domain_folder, self.channel.long_slug, list_name))
 
             for t in self.channel.get_ancestors()[::-1]:
-                templates.append('{}/{}/{}.json'.format(
+                templates.append('{0}/{1}/{2}.json'.format(
                     domain_folder, t.long_slug, list_name))
                 if self.request.GET.get('page') and\
                    self.__class__.__name__ not in\
                    settings.OPPS_PAGINATE_NOT_APP:
-                    templates.append('{}/{}/{}_paginated.json'.format(
+                    templates.append('{0}/{1}/{2}_paginated.json'.format(
                         domain_folder, t.long_slug, list_name))
 
         if self.request.GET.get('page') and\
            self.__class__.__name__ not in settings.OPPS_PAGINATE_NOT_APP:
-            templates.append('{}/{}_paginated.json'.format(domain_folder,
-                                                           list_name))
+            templates.append('{0}/{1}_paginated.json'.format(domain_folder,
+                                                             list_name))
 
-        templates.append('{}/{}.json'.format(domain_folder, list_name))
+        templates.append('{0}/{1}.json'.format(domain_folder, list_name))
         return templates
 
     def get_queryset(self):

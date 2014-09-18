@@ -67,7 +67,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
                      null=True, blank=True)
 
     def __unicode__(self):
-        return u"{}".format(self.get_absolute_url())
+        return u"{0}".format(self.get_absolute_url())
 
     def __repr__(self):
         val = self.__unicode__()
@@ -131,7 +131,8 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         return _(self.child_class)
 
     def get_http_absolute_url(self):
-        return u"http://{}{}".format(self.site_domain, self.get_absolute_url())
+        return u"http://{0}{1}".format(self.site_domain,
+                                       self.get_absolute_url())
     get_http_absolute_url.short_description = _(u'Get HTTP Absolute URL')
 
     def recommendation(self, child_class=False, query_slice=[None, 10]):
@@ -144,9 +145,10 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         )
 
         cachekey = _cache_key(
-            u'{}-recommendation'.format(self.__class__.__name__),
+            u'{0}-recommendation'.format(self.__class__.__name__),
             self.__class__, self.site_domain,
-            u"{}-{}-{}".format(child_class, self.channel_long_slug, self.slug))
+            u"{0}-{1}-{2}".format(child_class, self.channel_long_slug,
+                                  self.slug))
         getcache = cache.get(cachekey)
         if getcache:
             return getcache
@@ -217,8 +219,8 @@ class ContainerImage(models.Model):
 
     def __unicode__(self):
         if self.image:
-            return u"{}".format(self.image.title)
-        return u'Id:{} - Order:{}'.format(self.id, self.order)
+            return u"{0}".format(self.image.title)
+        return u'Id:{0} - Order:{1}'.format(self.id, self.order)
 
 
 class ContainerBox(BaseBox):

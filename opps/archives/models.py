@@ -16,10 +16,10 @@ from opps.core.tags.models import Tagged
 
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
-    filename = u"{}-{}.{}".format(random.getrandbits(32),
-                                  instance.slug[:100], ext)
+    filename = u"{0}-{1}.{2}".format(random.getrandbits(32),
+                                     instance.slug[:100], ext)
     d = datetime.now()
-    folder = u"archives/{}".format(d.strftime("%Y/%m/%d/"))
+    folder = u"archives/{0}".format(d.strftime("%Y/%m/%d/"))
     return os.path.join(folder, filename)
 
 
@@ -57,7 +57,7 @@ class Archive(Publishable, Slugged):
         abstract = True
 
     def __unicode__(self):
-        return u"{}-{}".format(self.site, self.slug)
+        return u"{0}-{1}".format(self.site, self.slug)
 
     def get_absolute_url(self):
         if self.date_available <= timezone.now() and self.published:
