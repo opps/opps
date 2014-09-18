@@ -389,13 +389,12 @@ class Config(Publishable):
         itemsqs = cls.objects.values('key', 'value', 'format')
         if kwargs:
             itemsqs = itemsqs.filter(**kwargs)
-        data = {
-            item['key']: {
+        data = dict(
+            [(item['key'], {
                 'raw': item['value'],
                 'format': item['format'],
                 'value': cls.format_value(item['value'], item['format'])
-            } for item in itemsqs
-        }
+            }) for item in itemsqs])
         return data
 
     @classmethod

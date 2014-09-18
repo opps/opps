@@ -69,12 +69,12 @@ class Post(Article):
             if check_published:
                 images = images.filter(published=True)
 
-            captions = {
-                ci.image_id: ci.caption for ci in
+            captions = dict([
+                (ci.image_id, ci.caption) for ci in
                 ContainerImage.objects.filter(
                     container_id=album.pk
                 )
-            }
+            ])
 
             for image in images:
                 caption = captions.get(image.pk)

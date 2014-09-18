@@ -428,11 +428,11 @@ def get_container_by_channel(slug, number=10, depth=1,
             pass
 
     # __in split treatment
-    splited = {
-        key: value.split(',')
+    splited = dict([
+        (key, value.split(','))
         for key, value
         in kwargs.items()
-        if key.endswith('__in') and type(value) is not list}
+        if key.endswith('__in') and type(value) is not list])
     kwargs.update(splited)
 
     if include_children:
