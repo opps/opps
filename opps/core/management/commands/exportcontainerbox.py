@@ -8,7 +8,7 @@ from opps.boxes.models import QuerySet
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        models = [Channels, ContainerBox, QuerySet]
+        models = [Channel, ContainerBox, QuerySet]
         for m in models:
             data = serializers.serialize("json", m.objects.all())
             out = open("opps_{}.json".format(m.__name__), "w")
