@@ -94,7 +94,7 @@ class OppsEditor(widgets.Textarea):
         editor = CONFIG.get('editor')
 
         if editor in ('tinymce',):
-            options = self.get_options(selector="#{}".format(id_))
+            options = self.get_options(selector="#{0}".format(id_))
             html += INIT_JS.get(CONFIG.get('editor')) % options
             html = html.replace('"CustomFileBrowser"', "CustomFileBrowser")
             html = html.replace("---editorid---", id_)

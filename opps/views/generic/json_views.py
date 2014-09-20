@@ -26,7 +26,7 @@ class JSONPResponse(HttpResponse):
     def __init__(self, obj='', json_opts={}, mimetype="application/jsonp",
                  jsonp_callback='jsonpCallback', *args, **kwargs):
         _json_content = json.dumps(obj, **json_opts)
-        content = "{}({})".format(jsonp_callback, _json_content)
+        content = "{0}({1})".format(jsonp_callback, _json_content)
         super(JSONPResponse, self).__init__(content, mimetype, *args,
                                             **kwargs)
 

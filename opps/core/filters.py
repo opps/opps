@@ -46,8 +46,8 @@ class ChannelListFilter(SimpleListFilter):
                 items.append(channel)
                 _value = channel[0]
                 if self._get_descendant_count(_value, long_slug_list) > 0:
-                    value = "{}/*".format(_value)
-                    human_readable = "{}/*".format(_value)
+                    value = "{0}/*".format(_value)
+                    human_readable = "{0}/*".format(_value)
                     items.append((value, human_readable))
 
             return sorted(items)

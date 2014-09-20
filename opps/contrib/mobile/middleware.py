@@ -131,7 +131,7 @@ class MobileDetectionMiddleware(object):
             if settings.OPPS_DOMAIN_MOBILE and \
                request.META.get('HTTP_HOST', '') != \
                settings.OPPS_DOMAIN_MOBILE:
-                return HttpResponseRedirect(u"{}://{}{}".format(
+                return HttpResponseRedirect(u"{0}://{1}{2}".format(
                     settings.OPPS_PROTOCOL_MOBILE,
                     settings.OPPS_DOMAIN_MOBILE,
                     request.path
@@ -178,14 +178,15 @@ class MobileRedirectMiddleware(object):
         if request_is_mobile and template_mode == u'desktop':
             prot = settings.OPPS_PROTOCOL_WEB
             web_domain = settings.OPPS_DOMAIN_WEB
-            url = u"{}://{}/?template_mode=desktop".format(prot, web_domain)
+            url = u"{0}://{1}/?template_mode=desktop".format(prot, web_domain)
             return HttpResponseRedirect(url)
         elif not request_is_mobile and template_mode == u'mobile':
             prot = settings.OPPS_PROTOCOL_MOBILE
-            url = u"{}://{}/?template_mode=mobile".format(prot, mobile_domain)
+            url = u"{0}://{1}/?template_mode=mobile".format(prot,
+                                                            mobile_domain)
 
             # set cache prefix randon in mobile device
-            settings.CACHE_MIDDLEWARE_KEY_PREFIX = u"opps_site-{}-{}".format(
+            settings.CACHE_MIDDLEWARE_KEY_PREFIX = u"opps_site-{0}-{1}".format(
                 settings.SITE_ID, random.getrandbits(32))
 
             return HttpResponseRedirect(url)

@@ -67,16 +67,17 @@ class Channel(MPTTModel, Publishable, Slugged):
         """ Uniform resource identifier
         http://en.wikipedia.org/wiki/Uniform_resource_identifier
         """
-        return u"/{}/".format(self._set_long_slug())
+        return u"/{0}/".format(self._set_long_slug())
 
     def get_absolute_url(self):
-        return u"{}".format(self.__unicode__())
+        return u"{0}".format(self.__unicode__())
 
     def get_thumb(self):
         return None
 
     def get_http_absolute_url(self):
-        return u"http://{}{}".format(self.site_domain, self.get_absolute_url())
+        return u"http://{0}{1}".format(self.site_domain,
+                                       self.get_absolute_url())
     get_http_absolute_url.short_description = _(u'Get HTTP Absolute URL')
 
     @staticmethod
@@ -110,8 +111,8 @@ class Channel(MPTTModel, Publishable, Slugged):
 
     def _set_long_slug(self):
         if self.parent:
-            return u"{}/{}".format(self.parent.long_slug, self.slug)
-        return u"{}".format(self.slug)
+            return u"{0}/{1}".format(self.parent.long_slug, self.slug)
+        return u"{0}".format(self.slug)
 
     def save(self, *args, **kwargs):
         self.long_slug = self._set_long_slug()

@@ -44,7 +44,7 @@ class JSONField(forms.TextInput):
                 if obj.type == "checkbox":
                     obj_value = []
                     for i in fo:
-                        key = "{}_{}".format(obj.slug, i.option.slug)
+                        key = "{0}_{1}".format(obj.slug, i.option.slug)
                         obj_value.append(values.get(key, ''))
                     element_attr['list'] = zip(fo, obj_value)
                     del element_attr['obj_value']
@@ -52,7 +52,7 @@ class JSONField(forms.TextInput):
                     element_attr['list'] = fo
 
             o['element'] = render_to_string(
-                "admin/opps/fields/json_{}.html".format(obj.type),
+                "admin/opps/fields/json_{0}.html".format(obj.type),
                 dictionary=element_attr
             )
             elements.append(o)

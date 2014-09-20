@@ -69,7 +69,7 @@ class CustomIndexDashboard(Dashboard):
         self.children.append(modules.Feed(
             _('Latest Publications'),
             column=2,
-            feed_url='http://{}/rss'.format(site.domain),
+            feed_url='http://{0}/rss'.format(site.domain),
             limit=10
         ))
 

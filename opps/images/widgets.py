@@ -7,7 +7,7 @@ class MultipleUpload(forms.FileInput):
     def render(self, name, value, attrs=None):
         value = ""
         if value:
-            _value = "{}{}".format(settings.MEDIA_URL, value)
+            _value = "{0}{1}".format(settings.MEDIA_URL, value)
         return render_to_string(
             "admin/opps/images/multiupload.html",
             {"name": name, "value": _value, "STATIC_URL": settings.STATIC_URL}

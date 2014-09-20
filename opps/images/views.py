@@ -31,7 +31,7 @@ class GetImagesView(ListView):
 
     def get_template_names(self):
         if self.request.GET.get('template_name'):
-            return ['images/{}'.format(self.request.GET.get('template_name'))]
+            return ['images/{0}'.format(self.request.GET.get('template_name'))]
         return ['images/all_images.html']
 
     @method_decorator(login_required)

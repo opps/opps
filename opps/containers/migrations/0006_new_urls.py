@@ -19,23 +19,23 @@ class Migration(DataMigration):
             )
         )
         for container in orm.Container.objects.all():
-            old_path = u'/{}/{}'.format(
+            old_path = u'/{0}/{1}'.format(
                 container.channel_long_slug,
                 container.slug
             )
             if old_path not in current_redirects:
                 Redirect.objects.create(
                     old_path=old_path,
-                    new_path=u'{}.html'.format(old_path),
+                    new_path=u'{0}.html'.format(old_path),
                     site_id=container.site_id
                 )
                 current_redirects.add(old_path)
 
-            old_path2 = u'{}/'.format(old_path)
+            old_path2 = u'{0}/'.format(old_path)
             if old_path2 not in current_redirects:
                 Redirect.objects.create(
                     old_path=old_path2,
-                    new_path=u'{}.html'.format(old_path),
+                    new_path=u'{1}.html'.format(old_path),
                     site_id=container.site_id
                 )
                 current_redirects.add(old_path2)

@@ -13,4 +13,4 @@ class SitePermission(Publishable):
         verbose_name_plural = _(u'Site Permissions')
 
     def __unicode__(self):
-        return u'{} em {}'.format(self.user, self.site)
+        return u'{0} em {1}'.format(self.user, self.site)

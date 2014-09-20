@@ -8,10 +8,9 @@ from django.utils import timezone
 from opps.containers.models import Container
 from opps.channels.models import Channel
 
-from opps.containers.templatetags.container_tags import get_containers_by
-from opps.containers.templatetags.container_tags import get_container_by_channel
-from opps.containers.templatetags.container_tags import filter_queryset_by
-from opps.containers.templatetags.container_tags import exclude_queryset_by
+from opps.containers.templatetags.container_tags import \
+    get_containers_by, get_container_by_channel, filter_queryset_by, \
+    exclude_queryset_by
 
 
 class ExcludeQuerysetByTest(TestCase):
@@ -119,7 +118,7 @@ class GetContainerByChannelTest(TestCase):
         self.count_container_create = [1, 2, 3, 4, 5]
 
         for i in self.count_container_create:
-            Container.objects.create(title=u'test {}'.format(i),
+            Container.objects.create(title=u'test {0}'.format(i),
                                      user=self.user,
                                      published=True,
                                      site=self.site,
@@ -134,7 +133,7 @@ class GetContainerByChannelTest(TestCase):
         get_container = get_container_by_channel('home')
         self.assertEqual(len(get_container), len(self.count_container_create))
         for c, i in zip(self.count_container_create[::-1], get_container):
-            self.assertEqual(i.slug, "test-{}".format(c))
+            self.assertEqual(i.slug, "test-{0}".format(c))
 
     def test_tag_another_channel(self):
         get_container = get_container_by_channel('home2')
@@ -143,7 +142,7 @@ class GetContainerByChannelTest(TestCase):
 
     def test_get_container_recursive(self):
         for i in self.count_container_create:
-            Container.objects.create(title=u'test 3 {}'.format(i),
+            Container.objects.create(title=u'test 3 {0}'.format(i),
                                      user=self.user,
                                      published=True,
                                      site=self.site,
@@ -155,7 +154,7 @@ class GetContainerByChannelTest(TestCase):
     def test_get_channel_with_magicdate(self):
         date = timezone.now() - timezone.timedelta(days=30)
         for i in self.count_container_create:
-            Container.objects.create(title=u'test 3 {}'.format(i),
+            Container.objects.create(title=u'test 3 {0}'.format(i),
                                      user=self.user,
                                      published=True,
                                      site=self.site,

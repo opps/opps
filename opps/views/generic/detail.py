@@ -13,20 +13,20 @@ class DetailView(View, DjangoDetailView):
     def get_template_list(self, domain_folder="containers"):
         child_class = self.object.child_class.lower()
 
-        templates = ['{}/{}/{}/detail.html'.format(
+        templates = ['{0}/{1}/{2}/detail.html'.format(
             domain_folder, self.long_slug, self.slug)]
 
         all_long_slug = [i.long_slug for i in self.channel.get_ancestors()]
         all_long_slug.append(self.long_slug)
         for l in all_long_slug[::-1]:
-            templates.append('{}/{}/{}_detail.html'.format(
+            templates.append('{0}/{1}/{2}_detail.html'.format(
                 domain_folder, l, child_class))
-        templates.append('{}/{}_detail.html'.format(domain_folder,
-                                                    child_class))
+        templates.append('{0}/{1}_detail.html'.format(domain_folder,
+                                                      child_class))
 
         for l in all_long_slug[::-1]:
-            templates.append('{}/{}/detail.html'.format(domain_folder, l))
-        templates.append('{}/detail.html'.format(domain_folder))
+            templates.append('{0}/{1}/detail.html'.format(domain_folder, l))
+        templates.append('{0}/detail.html'.format(domain_folder))
 
         return templates
 
