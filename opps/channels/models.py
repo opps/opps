@@ -34,6 +34,13 @@ class Channel(MPTTModel, Publishable, Slugged):
     hat = models.CharField(_(u"Hat"),
                            max_length=255, null=True, blank=True)
 
+    main_image = models.ForeignKey(
+        'images.Image',
+        null=True, blank=True,
+        on_delete=models.SET_NULL,
+        verbose_name=_(u'Main Image'),
+    )
+
     show_in_menu = models.BooleanField(_(u"Show in menu?"), default=False)
     include_in_main_rss = models.BooleanField(
         _(u"Show in main RSS?"),

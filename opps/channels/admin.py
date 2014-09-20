@@ -23,14 +23,14 @@ class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
                    'show_in_menu']
     search_fields = ['name', 'slug', 'long_slug', 'description']
     exclude = ('user', 'long_slug')
-    raw_id_fields = ['parent']
+    raw_id_fields = ['parent', 'main_image']
     form = ChannelAdminForm
 
     fieldsets = (
         (_(u'Identification'), {
             'fields': ('site', 'parent', 'name', 'slug', 'layout', 'hat',
-                       'description', 'order', ('show_in_menu',
-                                                'include_in_main_rss'),
+                       'description', 'main_image',
+                       'order', ('show_in_menu', 'include_in_main_rss'),
                        'homepage', 'group', 'paginate_by')}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
