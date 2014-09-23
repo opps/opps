@@ -109,8 +109,8 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
 
     def get_absolute_url(self):
         if self.channel.homepage:
-            return u"/{}.html".format(self.slug)
-        return u"/{}/{}.html".format(self.channel_long_slug, self.slug)
+            return u"/{0}.html".format(self.slug)
+        return u"/{0}/{1}.html".format(self.channel_long_slug, self.slug)
 
     @classmethod
     def get_children_models(cls):

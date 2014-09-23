@@ -450,7 +450,7 @@ def get_container_by_channel(slug, number=10, depth=1,
                 kwargs[k] = \
                     qs.values_list("id", flat=True)
                 cache.set(
-                    'get_container_by_channel-{}'.format(slug),
+                    'get_container_by_channel-{0}'.format(slug),
                     kwargs[k],
                     settings.OPPS_CACHE_EXPIRE)
 
