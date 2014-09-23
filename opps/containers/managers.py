@@ -1,7 +1,12 @@
-from polymorphic.manager import PolymorphicManager
+from opps.core.managers import PublishableManager, PublishableQuerySet
 
-from opps.core.managers import PublishableManager
+from polymorphic.manager import PolymorphicManager
+from polymorphic.query import PolymorphicQuerySet
+
+
+class ContainerQuerySet(PolymorphicQuerySet, PublishableQuerySet):
+    pass
 
 
 class ContainerManager(PolymorphicManager, PublishableManager):
-    pass
+    queryset_class = ContainerQuerySet
