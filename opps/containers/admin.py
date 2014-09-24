@@ -51,7 +51,6 @@ class ContainerBoxContainersInline(admin.StackedInline):
     ordering = ('order',)
     extra = 0
     fieldsets = [(None, {
-        'classes': ('collapse',),
         'fields': ('container', 'aggregate', 'highlight', 'order',
                    'date_available', 'date_end', 'hat', 'title',
                    'main_image', 'main_image_caption', 'url', 'url_target')})]
@@ -176,6 +175,7 @@ class HideContainerAdmin(PublishableAdmin, AdminViewPermission):
         if blacklist:
             qs = qs.exclude(child_class__in=blacklist)
         return qs
+
 
 admin.site.register(Container, HideContainerAdmin)
 admin.site.register(ContainerBox, ContainerBoxAdmin)
