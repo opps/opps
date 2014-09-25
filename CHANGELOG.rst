@@ -2,6 +2,12 @@
 Changelog
 =========
 
+0.2.7
+=====
+
+* Create a management command exportcontainerbox to easy dump channel and box data
+* Create a management command update_channel_denormalization to update denormalized data
+
 0.2.6
 =====
 * Improves Django 1.6 integration
