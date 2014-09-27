@@ -5,6 +5,7 @@ Changelog
 0.2.7
 =====
 
+* opps DetailView and ListView accepts template_name parameter via custom urls.
 * Create a management command exportcontainerbox to easy dump channel and box data
 * Create a management command update_channel_denormalization to update denormalized data
 
@@ -14,7 +15,7 @@ Changelog
 * Uses Grappelli 2.5.3
 * Remove OPPS_CORE_APPS
 * Used opps.core.manager on Container
-* * Extend Polymorphic Manager 
+* * Extend Polymorphic Manager
 * Used channel_id on container unique_together
 * Upgrade Django version to 1.5.9 (Security releases issued https://www.djangoproject.com/weblog/2014/aug/20/security/)
 
