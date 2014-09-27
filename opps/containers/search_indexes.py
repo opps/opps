@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from django.utils import timezone
-
 from haystack.indexes import \
-    CharField, DateTimeField, MultiValueField, SearchIndex
+    CharField, DateTimeField, MultiValueField, SearchIndex, IntegerField
 
 
 class ContainerIndex(SearchIndex):
     text = CharField(document=True, use_template=True)
+    channel_id = IntegerField(model_attr="channel_id")
     date_available = DateTimeField(model_attr='date_available')
     date_update = DateTimeField(model_attr='date_update')
     tags = MultiValueField(null=True)
@@ -25,6 +24,4 @@ class ContainerIndex(SearchIndex):
         return 'date_update'
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(
-            date_available__lte=timezone.now(),
-            published=True)
+        return self.get_model().objects.all_published()
