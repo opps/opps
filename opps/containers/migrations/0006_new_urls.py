@@ -35,7 +35,7 @@ class Migration(DataMigration):
             if old_path2 not in current_redirects:
                 Redirect.objects.create(
                     old_path=old_path2,
-                    new_path=u'{1}.html'.format(old_path),
+                    new_path=u'{0}.html'.format(old_path),
                     site_id=container.site_id
                 )
                 current_redirects.add(old_path2)
