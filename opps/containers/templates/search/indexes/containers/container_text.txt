@@ -1,0 +1,7 @@
+{% load encoding_tags %}
+{% block indexes %}
+{{ object.title|slugify }}
+{{ object.title|striptags }}
+{% endblock %}
+{% block extra_indexes %}
+{% endblock %}
