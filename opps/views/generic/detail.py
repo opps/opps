@@ -31,6 +31,9 @@ class DetailView(View, DjangoDetailView):
         return templates
 
     def get_template_names(self):
+        if self.template_name:
+            return [self.template_name]
+
         domain_folder = self.get_template_folder()
         template_list = self.get_template_list(domain_folder)
 
