@@ -120,7 +120,8 @@ def load_boxes(context, slugs=None, **filters):
 
 
 @register.simple_tag(takes_context=True)
-def get_containerbox(context, slug, template_name=None, **extra_context):
+def get_containerbox(
+        context, slug, template_name=None, channel=None, **extra_context):
 
     request = context['request']
     current_site = getattr(
@@ -149,6 +150,8 @@ def get_containerbox(context, slug, template_name=None, **extra_context):
         filters['slug'] = slug
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
+        if channel is not None:
+            filters['channel'] = channel
 
         master_site = settings.OPPS_CONTAINERS_SITE_ID or 1
 
