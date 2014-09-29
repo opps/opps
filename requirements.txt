@@ -1,4 +1,4 @@
-Django==1.5.9
+Django==1.5.10
 django-grappelli==2.4.8
 South==0.8.2
 opps-piston
