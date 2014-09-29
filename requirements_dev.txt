@@ -1,6 +1,6 @@
 flake8
 mock
-coverage
+coverage==3.7.1
 django-coverage
 transifex-client
 coveralls
