@@ -1,5 +1,5 @@
 Django==1.5.10
-django-grappelli==2.4.8
+django-grappelli==2.4.10
 South==0.8.2
 opps-piston
 Pillow==2.3.0
