@@ -13,15 +13,19 @@ class PageDetail(DetailView):
     context_object_name = "context"
     type = 'flatpages'
 
-    @property
-    def template_name(self):
-        domain_folder = self.type
-        if self.site.id > 1:
-            domain_folder = "{0}/{1}".format(self.site, self.type)
+    def get_template_names(self):
+        _template_names = super(PageDetail, self).get_template_names()
 
-        _template = '{0}/{1}.html'.format(
-            domain_folder, self.page.get().slug)
-        return _template
+        template_names = []
+
+        base_path = '{}/{}.html'.format(self.type, self.page.get().slug)
+
+        if self.site.id > 1:
+            template_names.append('{}/{}'.format(self.site, base_path))
+
+        template_names.append(base_path)
+
+        return template_names + _template_names
 
     @property
     def queryset(self):
