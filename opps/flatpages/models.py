@@ -8,6 +8,7 @@ from opps.articles.models import Article
 
 class FlatPage(Article):
     show_in_menu = models.BooleanField(_(u"Show in menu?"), default=False)
+    global_page = models.BooleanField(_(u"Show in all sites?"), default=False)
     content = models.TextField(_(u"Content"))
     order = models.IntegerField(_(u"Order"), default=0)
 

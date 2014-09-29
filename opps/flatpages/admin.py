@@ -48,7 +48,8 @@ class FlatPageAdmin(AdminViewPermission):
             'fields': ('headline', 'content', ('main_image', 'image_thumb'))}),
         (_(u'Publication'), {
             'classes': ('extrapretty'),
-            'fields': ('channel', 'published', 'date_available')}),
+            'fields': ('channel', 'published', 'global_page',
+                       'date_available')}),
     )
 
     def image_thumb(self, obj):

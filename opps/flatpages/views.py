@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from django.views.generic.detail import DetailView
 from django.contrib.sites.models import get_current_site
+from django.db.models import Q
 from django.utils import timezone
 
 from .models import FlatPage
@@ -27,13 +28,12 @@ class PageDetail(DetailView):
 
         return template_names + _template_names
 
-    @property
-    def queryset(self):
+    def get_queryset(self):
         self.site = get_current_site(self.request)
         self.slug = self.kwargs.get('slug')
 
         self.page = self.model.objects.filter(
-            site=self.site,
+            Q(global_page=True) | Q(site=self.site),
             slug=self.slug,
             date_available__lte=timezone.now(),
             published=True)
