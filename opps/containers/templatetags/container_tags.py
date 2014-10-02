@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collections import Counter
 import logging
 
 from django import template
@@ -18,6 +19,21 @@ from magicdate import magicdate
 
 register = template.Library()
 logger = logging.getLogger()
+
+
+@register.assignment_tag
+def get_tags_counter(queryset=None, n=None):
+    if queryset is None:
+        queryset = Container.objects.all_published()
+
+    counter = Counter()
+    qs = queryset.filter(tags__isnull=False).exclude(tags="").order_by()
+    print qs.count()
+    for tags in qs.values_list("tags", flat=True).distinct():
+        l = [i.strip() for i in tags.split(",") if i.strip()]
+        counter.update(l)
+
+    return counter.most_common(n)
 
 
 @register.filter
