@@ -1,12 +1,10 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 from django.utils import timezone
 
 from opps.api import BaseHandler
 
-
-from .models import Container
-from .models import ContainerBox
+from .models import Container, ContainerBox
 
 
 class Handler(BaseHandler):
@@ -16,6 +14,9 @@ class Handler(BaseHandler):
         filters = request.GET.dict()
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
+        if 'paginate_limit' in filters:
+            del filters['paginate_limit']
+
         return self.model.objects.filter(
             **filters)[self._page(request):self._limit(request)]
 
