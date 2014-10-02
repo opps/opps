@@ -5,6 +5,9 @@ Changelog
 0.2.7
 =====
 
+* Adds new templatetags:
+    1. get_tags_count on container_tags
+
 * opps DetailView and ListView accepts template_name parameter via custom urls.
 * Create a management command exportcontainerbox to easy dump channel and box data
 * Create a management command update_channel_denormalization to update denormalized data
