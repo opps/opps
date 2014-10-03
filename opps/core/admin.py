@@ -50,10 +50,12 @@ class MassPublishMixin(admin.ModelAdmin):
 
 
 class MassDuplicateMixin(admin.ModelAdmin):
+
     actions = ['duplicate']
 
-    def duplicate(self, request, queryset): 
-        for obj in queryset: 
+    def duplicate(self, request, queryset):
+
+        for obj in queryset:
             snapshot = {}
             remove_field = [
                 'id', 'container_ptr', 'related_posts',
