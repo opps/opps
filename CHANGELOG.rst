@@ -11,7 +11,10 @@ Changelog
 * opps DetailView and ListView accepts template_name parameter via custom urls.
 * Create a management command exportcontainerbox to easy dump channel and box data
 * Create a management command update_channel_denormalization to update denormalized data
+* Fix bug Opps API set page limit via query string, ref #386
 * Create admin duplication action
+* Clean haystack view, not necessary page build
+* Upgrade django grappelli 2.4.8 to 2.4.10
 
 
 0.2.6
