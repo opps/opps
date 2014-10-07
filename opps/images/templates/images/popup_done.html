@@ -14,7 +14,7 @@
   </head>
   <body>
     <script type="text/javascript">
-      top.opps_editor_popup_selector('{% image_url image.archive.url %}')
+      top.opps_editor_popup_selector('{% image_url image.get_absolute_url %}')
     </script>
 
     <h2>{% trans "Image added with success!" %}</h2>
