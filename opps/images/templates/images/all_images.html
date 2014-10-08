@@ -43,7 +43,7 @@
               <img src="{% image_url image.get_absolute_url width=80 height=80 %}" />
               <div class="caption">
                 <p><b>{{ image.title }}</b></p>
-                <a class="btn btn-primary" href="#" onclick="top.opps_editor_popup_selector('{% image_url image.archive.url %}')">{% trans 'Insert on Editor' %}</a>
+                <a class="btn btn-primary" href="#" onclick="top.opps_editor_popup_selector('{% image_url image.get_absolute_url %}')">{% trans 'Insert on Editor' %}</a>
               </div>
             </div>
           </li>
