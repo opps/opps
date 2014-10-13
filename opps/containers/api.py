@@ -14,8 +14,9 @@ class Handler(BaseHandler):
         filters = request.GET.dict()
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
-        if 'paginate_limit' in filters:
-            del filters['paginate_limit']
+
+        # Removed field from automatic filtering
+        [filters.pop(b, None) for b in self.blackfield]
 
         return self.model.objects.filter(
             **filters)[self._page(request):self._limit(request)]
