@@ -32,6 +32,10 @@ class BaseHandler(Handler):
     limit_arg = 'paginate_limit'
     meta = {}
 
+    blackfield = ['num_pages', 'page_range', 'total_objects', 'per_page',
+                  'page', 'has_next', 'has_previous', 'has_other_pages',
+                  'end_index', 'start_index', 'start_index']
+
     def include_meta(self, d):
         obj = {'meta': self.meta, 'objects': d}
         return obj
