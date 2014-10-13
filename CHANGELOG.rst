@@ -2,8 +2,14 @@
 Changelog
 =========
 
+0.2.7.2
+=======
+
+* Fix bug Opps API, remove page fields on query string
+
+   
 0.2.7.1
-=====
+=======
 
 * Fix bug Image model calls for field "archive.url" to get_absolute_url.
 * Change Pillow version to <= 2.3.0
