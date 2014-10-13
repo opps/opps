@@ -2,8 +2,11 @@
 Changelog
 =========
 
-0.2.8
+0.2.7.1
 =====
+
+* Fix bug Image model calls for field "archive.url" to get_absolute_url.
+* Change Pillow version to <= 2.3.0
 
 
 0.2.7

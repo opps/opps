@@ -38,11 +38,11 @@
           {% for image in images %}
           <li class="span3 text-center">
             <div class="thumbnail">
-              <a class="add-link-image" href="{% image_url image.archive.url %}">
+              <a class="add-link-image" href="{% image_url image.get_absolute_url %}">
               	<img src="{% image_url image.get_absolute_url width=80 height=80 %}" />
               </a>
               <div class="caption">
-                <a class="add-link-image" href="{% image_url image.archive.url %}">
+                <a class="add-link-image" href="{% image_url image.get_absolute_url %}">
                 	<p><b>{{ image.title }}</b></p>
                 </a>
               </div>
