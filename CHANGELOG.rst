@@ -2,6 +2,10 @@
 Changelog
 =========
 
+0.2.8
+=======
+* Fix Article link duplicated redirect
+
 0.2.7.2
 =======
 
