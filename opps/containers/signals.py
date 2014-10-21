@@ -26,8 +26,8 @@ def delete_container(sender, instance, using, **kwargs):
         instance.__class__.objects.filter(
             child_class=instance.child_class,
             slug=instance.slug,
-            channel=instance.channel,
-            site=instance.site
+            channel_id=instance.channel_id,
+            site_id=instance.site_id
         ).delete()
     except (instance.__class__.DoesNotExist, Channel.DoesNotExist):
         # object not exists

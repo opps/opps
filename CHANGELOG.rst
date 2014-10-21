@@ -2,9 +2,14 @@
 Changelog
 =========
 
-0.2.8
+Development version
+====================
+
+
+0.2.7.3
 =======
 * Fix Article link duplicated redirect
+* Fix queryset on delete signal of container, using absolute reference to site and channel.
 
 0.2.7.2
 =======
