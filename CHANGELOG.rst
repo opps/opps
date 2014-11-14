@@ -4,6 +4,7 @@ Changelog
 
 0.2.7.4
 =======
+* Update Django ver. minor 1.6 and South ver. to 1.0.1
 * Improves get_channels_by template tag, if site=False, removes current site of the queryset. Add option to to get unpublished items.
 
 0.2.7.3
