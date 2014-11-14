@@ -4,6 +4,7 @@ Changelog
 
 Development version
 ====================
+* Improves OPPS generic views queryset to return Containers
 
 
 0.2.7.3
@@ -16,7 +17,7 @@ Development version
 
 * Fix bug Opps API, remove page fields on query string
 
-   
+
 0.2.7.1
 =======
 
