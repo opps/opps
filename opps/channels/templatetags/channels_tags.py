@@ -26,14 +26,12 @@ def get_channel(slug):
 @register.assignment_tag
 def get_channels_by(**filters):
     """Return a list of channels filtered by given args"""
-    filters['site'] = filters.get('site', settings.SITE_ID)
-    filters['published'] = filters.get('published', True)
 
-    if not filters['site']:
-        del filters['site']
+    filters['site'] = settings.SITE_ID
+    filters['published'] = True
 
     cache_key = u'getchannelsby-{0}'.format(hash(frozenset(filters.items())))
-    cache_timeout = getattr(settings, 'OPPS_CACHE_EXPIRE')
+    cache_timeout = getattr(settings, 'OPPS_CACHE_EXPIRE', 0)
 
     if cache_timeout and cache.get(cache_key):
         return cache.get(cache_key)
