@@ -2,6 +2,10 @@
 Changelog
 =========
 
+0.2.7.5
+=======
+* Adds TinyMCE plugin called 'oppsembed' for embed content on opps editor.
+
 0.2.7.4
 =======
 * Update Django ver. to 1.5.11 and South ver. to 1.0.1
