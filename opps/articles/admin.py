@@ -6,7 +6,8 @@ from django.utils.translation import ugettext_lazy as _
 from .models import Post, PostRelated, Album, Link
 from .forms import PostAdminForm, AlbumAdminForm, LinkAdminForm
 
-from opps.containers.admin import ContainerAdmin, ContainerImageInline
+from opps.containers.admin import (
+    ContainerAdmin, ContainerImageInline, ContainerRelatedInline)
 from opps.core.admin import apply_opps_rules, HaystackModelAdmin
 from opps.contrib.multisite.admin import AdminViewPermission
 
@@ -28,7 +29,7 @@ class PostRelatedInline(admin.TabularInline):
 class PostAdmin(HaystackModelAdmin, ContainerAdmin, AdminViewPermission):
 
     form = PostAdminForm
-    inlines = [ContainerImageInline, PostRelatedInline]
+    inlines = [ContainerImageInline, ContainerRelatedInline]
     search_fields = ['title', 'headline', 'slug', 'channel_name']
     raw_id_fields = ['main_image', 'channel',
                      'mirror_channel', 'albums']
@@ -57,7 +58,7 @@ class PostAdmin(HaystackModelAdmin, ContainerAdmin, AdminViewPermission):
 class AlbumAdmin(HaystackModelAdmin, ContainerAdmin, AdminViewPermission):
 
     form = AlbumAdminForm
-    inlines = [ContainerImageInline]
+    inlines = [ContainerImageInline, ContainerRelatedInline]
     list_display = ['title', 'channel', 'images_count',
                     'date_available', 'published', 'preview_url']
 

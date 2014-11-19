@@ -469,6 +469,34 @@ class ContainerBoxContainers(models.Model):
             raise ValidationError(_(u'Article not published!'))
 
 
+class ContainerRelated(models.Model):
+    container = models.ForeignKey(
+        'containers.Container',
+        verbose_name=_(u'Post'),
+        null=True,
+        blank=True,
+        related_name='containerrelated_container',
+        on_delete=models.SET_NULL
+    )
+    related = models.ForeignKey(
+        'containers.Container',
+        verbose_name=_(u'Related Post'),
+        null=True,
+        blank=True,
+        related_name='containerrelated_related',
+        on_delete=models.SET_NULL
+    )
+    order = models.PositiveIntegerField(_(u'Order'), default=0)
+
+    class Meta:
+        verbose_name = _('Related content')
+        verbose_name_plural = _('Related contents')
+        ordering = ('order',)
+
+    def __unicode__(self):
+        return u"{0}->{1}".format(self.related.slug, self.container.slug)
+
+
 class Mirror(Container):
     container = models.ForeignKey('containers.Container',
                                   related_name='containers_mirror',
