@@ -36,12 +36,6 @@ class Post(Article):
         related_name='post_albums',
         verbose_name=_(u"Albums")
     )
-    related_posts = models.ManyToManyField(
-        'containers.Container',
-        null=True, blank=True,
-        related_name='post_relatedposts',
-        through='articles.PostRelated',
-    )
 
     objects = PublishableManager()
 

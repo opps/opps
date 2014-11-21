@@ -42,8 +42,8 @@ class PostFields(TestCase):
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
 
-    def test_related_posts(self):
-        field = Post._meta.get_field_by_name('related_posts')[0]
+    def test_related_containers(self):
+        field = Post._meta.get_field_by_name('related_containers')[0]
         self.assertEqual(field.__class__, models.ManyToManyField)
         self.assertTrue(field.null)
         self.assertTrue(field.blank)
