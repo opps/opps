@@ -13,7 +13,6 @@ from opps.channels.models import Channel
 
 
 class View(object):
-
     context_object_name = "context"
     paginate_by = settings.OPPS_PAGINATE_BY
     limit = settings.OPPS_VIEWS_LIMIT
@@ -107,12 +106,12 @@ class View(object):
 
         if self.slug:
             try:
-                context['next'] = self.get_object()\
+                context['next'] = self.get_object() \
                     .get_next_by_date_insert(**obj_filter)
             except self.get_object().DoesNotExist:
                 pass
             try:
-                context['prev'] = self.get_object()\
+                context['prev'] = self.get_object() \
                     .get_previous_by_date_insert(**obj_filter)
             except self.get_object().DoesNotExist:
                 pass
@@ -123,7 +122,7 @@ class View(object):
             if self.get_object().child_class == 'Mirror':
                 context['context'] = self.get_object().container
 
-        if self.request.META.get('HTTP_X_PJAX', False) or\
+        if self.request.META.get('HTTP_X_PJAX', False) or \
            self.request.is_ajax():
             context['extends_parent'] = 'base_ajax.html'
 
