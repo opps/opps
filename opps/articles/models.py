@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import warnings
+
 from urlparse import urlparse
 
 from django.db import models
@@ -98,6 +100,12 @@ class Post(Article):
         ).order_by(
             'postrelated_related__order'
         ).distinct()
+
+    @property
+    def related_posts(self):
+        warn = "related_posts will be removed, must use related_containers."
+        warnings.warn(warn, DeprecationWarning)
+        return self.related_containers
 
 
 class PostRelated(models.Model):

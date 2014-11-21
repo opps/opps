@@ -65,6 +65,12 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         max_length=255)
     json = JSONField(_(u"Customized"),
                      null=True, blank=True)
+    related_containers = models.ManyToManyField(
+        'containers.Container',
+        null=True, blank=True,
+        related_name='container_relatedcontainers',
+        through='containers.ContainerRelated',
+    )
 
     objects = ContainerManager()
 
