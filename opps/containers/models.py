@@ -472,7 +472,7 @@ class ContainerBoxContainers(models.Model):
 class ContainerRelated(models.Model):
     container = models.ForeignKey(
         'containers.Container',
-        verbose_name=_(u'Post'),
+        verbose_name=_(u'Container'),
         null=True,
         blank=True,
         related_name='containerrelated_container',
@@ -480,10 +480,10 @@ class ContainerRelated(models.Model):
     )
     related = models.ForeignKey(
         'containers.Container',
-        verbose_name=_(u'Related Post'),
+        verbose_name=_(u'Related Container'),
         null=True,
         blank=True,
-        related_name='containerrelated_related',
+        related_name="%(app_label)s_%(class)s_container",
         on_delete=models.SET_NULL
     )
     order = models.PositiveIntegerField(_(u'Order'), default=0)
