@@ -28,11 +28,14 @@ class View(object):
         super(View, self).__init__(*args, **kwargs)
 
     def get_channel_descendants_lookup(self):
-        return {
-            'channel__tree_id': self.channel.tree_id,
-            'channel__lft__gt': self.channel.lft,
-            'channel__rght__lt': self.channel.rght,
-        }
+        if self.channel:
+            return {
+                'channel__tree_id': self.channel.tree_id,
+                'channel__lft__gt': self.channel.lft,
+                'channel__rght__lt': self.channel.rght,
+            }
+        else:
+            return {}
 
     def get_paginate_by(self, queryset):
         queryset = self.get_queryset()
