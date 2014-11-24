@@ -102,8 +102,8 @@ class ListView(View, DjangoListView):
 
         queryset = super(ListView, self).get_queryset()
         filters = {}
+        filters.update(self.get_channel_descendants_lookup())
         filters['site_domain__in'] = [self.site.domain]
-        filters['channel_long_slug__in'] = self.channel_long_slug
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
         if self.channel and self.channel.is_root_node() and not is_paginated:

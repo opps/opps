@@ -13,7 +13,6 @@ from opps.channels.models import Channel
 
 
 class View(object):
-
     context_object_name = "context"
     paginate_by = settings.OPPS_PAGINATE_BY
     limit = settings.OPPS_VIEWS_LIMIT
@@ -25,9 +24,18 @@ class View(object):
         self.long_slug = None
         self.article = None
         self.child_class = u'container'
-        self.channel_long_slug = []
         self.excluded_ids = set()
         super(View, self).__init__(*args, **kwargs)
+
+    def get_channel_descendants_lookup(self):
+        if self.channel:
+            return {
+                'channel__tree_id': self.channel.tree_id,
+                'channel__lft__gt': self.channel.lft,
+                'channel__rght__lt': self.channel.rght,
+            }
+        else:
+            return {}
 
     def get_paginate_by(self, queryset):
         queryset = self.get_queryset()
@@ -77,7 +85,7 @@ class View(object):
         obj_filter['published'] = True
 
         filters = obj_filter
-        filters['channel_long_slug__in'] = self.channel_long_slug
+        filters.update(self.get_channel_descendants_lookup())
 
         is_paginated = self.page_kwarg in self.request.GET
         if self.channel and self.channel.is_root_node() and not is_paginated:
@@ -101,12 +109,12 @@ class View(object):
 
         if self.slug:
             try:
-                context['next'] = self.get_object()\
+                context['next'] = self.get_object() \
                     .get_next_by_date_insert(**obj_filter)
             except self.get_object().DoesNotExist:
                 pass
             try:
-                context['prev'] = self.get_object()\
+                context['prev'] = self.get_object() \
                     .get_previous_by_date_insert(**obj_filter)
             except self.get_object().DoesNotExist:
                 pass
@@ -117,7 +125,7 @@ class View(object):
             if self.get_object().child_class == 'Mirror':
                 context['context'] = self.get_object().container
 
-        if self.request.META.get('HTTP_X_PJAX', False) or\
+        if self.request.META.get('HTTP_X_PJAX', False) or \
            self.request.is_ajax():
             context['extends_parent'] = 'base_ajax.html'
 
@@ -157,12 +165,6 @@ class View(object):
             self.channel = get_object_or_404(Channel, **filters)
 
         self.long_slug = self.channel.long_slug
-
-        self.channel_long_slug = [self.long_slug]
-        self.channel_descendants = self.channel.get_descendants(
-            include_self=False)
-        for children in self.channel_descendants:
-            self.channel_long_slug.append(children.long_slug)
 
     def get_breadcrumb(self):
         try:

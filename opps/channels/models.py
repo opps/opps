@@ -1,12 +1,15 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+
+from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.db.models.signals import post_save
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.core.exceptions import ValidationError
-from django.conf import settings
 
-from mptt.models import MPTTModel, TreeForeignKey
 from mptt.managers import TreeManager
+from mptt.models import MPTTModel, TreeForeignKey
 
 from opps.core.models import Publishable
 from opps.core.models import Slugged
@@ -71,10 +74,7 @@ class Channel(MPTTModel, Publishable, Slugged):
         order_insertion_by = ['order']
 
     def __unicode__(self):
-        """ Uniform resource identifier
-        http://en.wikipedia.org/wiki/Uniform_resource_identifier
-        """
-        return u"/{0}/".format(self._set_long_slug())
+        return u"/{0}/".format(self.long_slug)
 
     def get_absolute_url(self):
         return u"{0}".format(self.__unicode__())
@@ -116,11 +116,30 @@ class Channel(MPTTModel, Publishable, Slugged):
 
         super(Channel, self).clean()
 
-    def _set_long_slug(self):
+    def update_long_slug(self):
         if self.parent:
-            return u"{0}/{1}".format(self.parent.long_slug, self.slug)
-        return u"{0}".format(self.slug)
+            self.long_slug = "{0}/{1}".format(
+                self.parent.long_slug, self.slug)
+        else:
+            self.long_slug = self.slug
 
-    def save(self, *args, **kwargs):
-        self.long_slug = self._set_long_slug()
-        super(Channel, self).save(*args, **kwargs)
+
+def channel_post_save(sender, instance, created, raw, using, update_fields,
+                      *args, **kwargs):
+
+    if update_fields is None or 'slug' in update_fields:
+        instance.update_long_slug()
+        instance.save(update_fields=['long_slug'])
+        qs = Channel.objects.filter(
+            tree_id=instance.tree_id,
+            lft__gt=instance.lft,
+            rght__lt=instance.rght)
+
+        d = {instance.pk: instance.long_slug}
+        for pk, slug, parent in qs.values_list("pk", "slug", "parent"):
+            long_slug = "%s/%s" % (d[parent], slug)
+            Channel.objects.filter(pk=pk).update(long_slug=long_slug)
+            d[pk] = long_slug
+
+
+post_save.connect(channel_post_save, sender=Channel)

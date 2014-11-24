@@ -16,7 +16,7 @@ import json
 @apply_opps_rules('channels')
 class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    list_display = ['name', 'show_channel_path', 'parent', 'site',
+    list_display = ['name', 'show_channel_path', 'get_parent', 'site',
                     'date_available', 'homepage', 'order', 'show_in_menu',
                     'published']
     list_filter = ['date_available', 'published', 'site', 'homepage', 'parent',
@@ -36,6 +36,14 @@ class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
             'classes': ('extrapretty'),
             'fields': ('published', 'date_available')}),
     )
+
+    def get_parent(self, obj):
+        if obj.parent_id:
+            long_slug, slug = obj.long_slug.rsplit("/", 1)
+            return long_slug
+
+    get_parent.admin_order_field = "parent"
+    get_parent.short_description = "Parent"
 
     def show_channel_path(self, obj):
         return unicode(obj)
