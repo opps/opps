@@ -65,6 +65,12 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         max_length=255)
     json = JSONField(_(u"Customized"),
                      null=True, blank=True)
+    related_containers = models.ManyToManyField(
+        'containers.Container',
+        null=True, blank=True,
+        related_name='container_relatedcontainers',
+        through='containers.ContainerRelated',
+    )
 
     objects = ContainerManager()
 
@@ -467,6 +473,34 @@ class ContainerBoxContainers(models.Model):
 
         if self.container and not self.container.published:
             raise ValidationError(_(u'Article not published!'))
+
+
+class ContainerRelated(models.Model):
+    container = models.ForeignKey(
+        'containers.Container',
+        verbose_name=_(u'Container'),
+        null=True,
+        blank=True,
+        related_name='containerrelated_container',
+        on_delete=models.SET_NULL
+    )
+    related = models.ForeignKey(
+        'containers.Container',
+        verbose_name=_(u'Related Container'),
+        null=True,
+        blank=True,
+        related_name="%(app_label)s_%(class)s_container",
+        on_delete=models.SET_NULL
+    )
+    order = models.PositiveIntegerField(_(u'Order'), default=0)
+
+    class Meta:
+        verbose_name = _('Related content')
+        verbose_name_plural = _('Related contents')
+        ordering = ('order',)
+
+    def __unicode__(self):
+        return u"{0}->{1}".format(self.related.slug, self.container.slug)
 
 
 class Mirror(Container):

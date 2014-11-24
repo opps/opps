@@ -7,13 +7,26 @@ from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
 from .models import Container, ContainerImage, Mirror
-from .models import ContainerBox, ContainerBoxContainers
+from .models import ContainerBox, ContainerBoxContainers, ContainerRelated
 from .forms import ContainerBoxContainersInlineForm
 from opps.core.admin import PublishableAdmin, apply_opps_rules, BaseBoxAdmin
 from opps.contrib.multisite.admin import AdminViewPermission
 from opps.core.filters import ChannelListFilter, HasQuerySet
 from opps.images.generate import image_url
 from opps.fields.models import Field, FieldOption
+
+
+@apply_opps_rules('containers')
+class ContainerRelatedInline(admin.TabularInline):
+    model = ContainerRelated
+    fk_name = 'container'
+    raw_id_fields = ['related']
+    actions = None
+    ordering = ('order',)
+    extra = 1
+    classes = ('collapse',)
+    verbose_name = _(u'Related content')
+    verbose_name_plural = _(u'Related content')
 
 
 @apply_opps_rules('containers')
@@ -58,6 +71,7 @@ class ContainerBoxContainersInline(admin.StackedInline):
 
 @apply_opps_rules('containers')
 class ContainerAdmin(PublishableAdmin, AdminViewPermission):
+    inlines = [ContainerRelatedInline]
     prepopulated_fields = {"slug": ["title"]}
     readonly_fields = ['get_http_absolute_url', 'short_url',
                        'in_containerboxes', 'image_thumb']

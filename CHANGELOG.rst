@@ -2,6 +2,12 @@
 Changelog
 =========
 
+0.2.8
+=======
+* Post.related_posts is now DEPRECATED and will removed soon.
+    1. Now you can use related_containers instead of related_posts and all Containers have this feature.
+
+
 0.2.7.4
 =======
 * Update Django ver. to 1.5.11 and South ver. to 1.0.1
