@@ -6,7 +6,7 @@ Changelog
 =======
 * Improves OPPS generic views queryset to return Containers.
 * `Post.related_posts` is now DEPRECATED and will removed soon.
-    1. Now you can use related_containers instead of related_posts and all Containers have this feature.
+* * Now you can use related_containers instead of related_posts and all Containers have this feature.
 
 0.2.7.4
 =======
