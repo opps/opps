@@ -1,5 +1,5 @@
 ![Opps CMS](https://raw.githubusercontent.com/opps/opps/master/docs/_static/new_logo.png)
-# Opps - OPen Publishing System
+# Opps - Open Platform Publishing System
 
 Opps is a platform or toolkit to build a CMS developed with Django, accompanies many packages that aim to meet the need of major 
 content portals. Furthermore the Opps has a flexible structure for creating new apps.
@@ -43,15 +43,8 @@ Opps makes use of as few libraries as possible (apart from a standard Django env
 
 Release Notes
 -------------
-###### current stable version: 0.2.5
 
-#### Opps 0.2.6 (develop)
-* Django 1.6 compatibility
-* Grappelli Admin 2.5.3
-
-#### Opps 0.2.5 (stable)
-* Django 1.5
-* Grappelli Admin 2.4.10
+###### current stable version: 0.2.7.4
 
 Check here the full [**CHANGELOG**](https://github.com/opps/opps/blob/master/CHANGELOG.rst).
 
