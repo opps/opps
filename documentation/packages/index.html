@@ -218,7 +218,7 @@ It is a non-dynamic way of choosing which module will be available in the top me
         'title': '&lt;title&gt;', # title of the root node
         'class': '&lt;class_names&gt;', # class to be added to html class attribute
         'open_new_window': True, # should open in new window or not
-        'children': [ 
+        'children': [
             'url_name': 'admin:&lt;moule_name&gt;_&lt;class_name&gt;_changelist', # pointer to module admin url(check the real example below)
             'title': '&lt;title&gt;', # option title
             'include_add_link': True, # if should or not include the add option
@@ -361,7 +361,7 @@ It uses <em>django.core.cache</em> and the current pattern to use it is to defin
 <h5 id="caching-on-templatetags">Caching on Templatetags</h5>
 <p>Example of storing:</p>
 <pre class="prettyprint well"><code>from django.core.cache import cache
-cachekey = "ContainerBox-{}-{}-{}-{}".format(
+cachekey = "ContainerBox-{0}-{1}-{2}-{3}".format(
     slug,
     template_name,
     is_mobile,
