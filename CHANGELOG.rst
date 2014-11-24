@@ -6,6 +6,16 @@ Development version
 ====================
 * Improves OPPS generic views queryset to return Containers
 
+0.2.8
+=======
+* Post.related_posts is now DEPRECATED and will removed soon.
+    1. Now you can use related_containers instead of related_posts and all Containers have this feature.
+
+0.2.7.4
+=======
+* Update Django ver. to 1.5.11 and South ver. to 1.0.1
+* Improves get_channels_by template tag.
+* Adds TinyMCE plugin called 'oppsembed' for embed content on opps editor.
 
 0.2.7.3
 =======
