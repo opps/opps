@@ -13,6 +13,10 @@ User = get_user_model()
 
 class Migration(DataMigration):
 
+    depends_on = (
+        ("articles", "0001_initial"),
+    )
+
     def forwards(self, orm):
         for post in Post.objects.all():
             for r in post.postrelated_post.all():
