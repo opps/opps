@@ -20,7 +20,8 @@ class Migration(DataMigration):
     def forwards(self, orm):
         for post in Post.objects.all():
             for r in post.postrelated_post.all():
-                p, c = post.containerrelated_container.get_or_create(related=r)
+                p, c = post.containerrelated_container.get_or_create(
+                    related=r.related)
 
     def backwards(self, orm):
         raise RuntimeError("Cannot reverse this migration.")
