@@ -2,9 +2,13 @@
 Changelog
 =========
 
+0.2.8.1
+=======
+* Refatoring filter channel (used mptt fields) on generic views (detail and list)
+
 0.2.8
 =======
-* Improves OPPS generic views queryset to return Containers.
+* Improves OPPS generic views queryset to return Containers, very very performance
 * `Post.related_posts` is now DEPRECATED and will removed soon.
 * * Now you can use related_containers instead of related_posts and all Containers have this feature.
 
