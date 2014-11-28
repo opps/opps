@@ -28,14 +28,16 @@ class View(object):
         super(View, self).__init__(*args, **kwargs)
 
     def get_channel_descendants_lookup(self):
+        obj = {'channel__tree_id': self.channel.tree_id}
         if self.channel:
-            return {
-                'channel__tree_id': self.channel.tree_id,
-                'channel__lft__gt': self.channel.lft,
-                'channel__rght__lt': self.channel.rght,
-            }
-        else:
-            return {}
+            if self.__class__.__module__ == "opps.containers.list":
+                # TODO: Study be worth keeping this logic
+                obj['channel__lft__gt'] = self.channel.lft
+                obj['channel__rght__lt'] = self.channel.rght
+            elif self.__class__.__module__ == "opps.containers.detail":
+                obj['channel__lft'] = self.channel.lft
+                obj['channel__rght'] = self.channel.rght
+        return obj
 
     def get_paginate_by(self, queryset):
         queryset = self.get_queryset()
