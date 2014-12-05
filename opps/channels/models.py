@@ -123,23 +123,11 @@ class Channel(MPTTModel, Publishable, Slugged):
         else:
             self.long_slug = self.slug
 
+    def _set_long_slug(self):
+        if self.parent:
+            return u"{0}/{1}".format(self.parent.long_slug, self.slug)
+        return self.slug
 
-def channel_post_save(sender, instance, created, raw, using, update_fields,
-                      *args, **kwargs):
-
-    if update_fields is None or 'slug' in update_fields:
-        instance.update_long_slug()
-        instance.save(update_fields=['long_slug'])
-        qs = Channel.objects.filter(
-            tree_id=instance.tree_id,
-            lft__gt=instance.lft,
-            rght__lt=instance.rght)
-
-        d = {instance.pk: instance.long_slug}
-        for pk, slug, parent in qs.values_list("pk", "slug", "parent"):
-            long_slug = "%s/%s" % (d[parent], slug)
-            Channel.objects.filter(pk=pk).update(long_slug=long_slug)
-            d[pk] = long_slug
-
-
-post_save.connect(channel_post_save, sender=Channel)
+    def save(self, *args, **kwargs):
+        self.long_slug = self._set_long_slug()
+        super(Channel, self).save(*args, **kwargs)
