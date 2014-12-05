@@ -2,6 +2,10 @@
 Changelog
 =========
 
+0.2.8.2
+=======
+* Recovery create (fixed) channel using parent
+
 0.2.8.1
 =======
 * Refatoring filter channel (used mptt fields) on generic views (detail and list)
