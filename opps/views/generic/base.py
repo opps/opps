@@ -25,9 +25,13 @@ class View(object):
         self.article = None
         self.child_class = u'container'
         self.excluded_ids = set()
+        self.channel_long_slug = []
         super(View, self).__init__(*args, **kwargs)
 
     def get_channel_descendants_lookup(self):
+        """ It's a great idea to work with "mptt keys", so we need to rewrite
+        this method!
+        """
         obj = {'channel__tree_id': self.channel.tree_id}
         if self.channel:
             if self.__class__.__module__ == "opps.containers.list":
@@ -87,7 +91,7 @@ class View(object):
         obj_filter['published'] = True
 
         filters = obj_filter
-        filters.update(self.get_channel_descendants_lookup())
+        filters['channel_long_slug__in'] = self.channel_long_slug
 
         is_paginated = self.page_kwarg in self.request.GET
         if self.channel and self.channel.is_root_node() and not is_paginated:
@@ -167,6 +171,11 @@ class View(object):
             self.channel = get_object_or_404(Channel, **filters)
 
         self.long_slug = self.channel.long_slug
+        self.channel_long_slug = [self.long_slug]
+        self.channel_descendants = self.channel.get_descendants(
+            include_self=False)
+        for children in self.channel_descendants:
+            self.channel_long_slug.append(children.long_slug)
 
     def get_breadcrumb(self):
         try:

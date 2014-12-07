@@ -60,7 +60,7 @@ class DetailView(View, DjangoDetailView):
 
         filters = {}
         filters['site_domain'] = self.site.domain
-        filters.update(self.get_channel_descendants_lookup())
+        filters['channel_long_slug'] = self.long_slug
         filters['slug'] = self.slug
 
         preview_enabled = self.request.user and self.request.user.is_staff
