@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
+import re
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import slugify
 
+from opps.utils.text import split_tags
 from opps.core.models import Date, Slugged
 
 
@@ -31,8 +34,7 @@ class Tagged(models.Model):
     def save(self, *args, **kwargs):
         if self.tags:
             # Remove empty and repeated strings on list
-            tags = filter(None, set(self.tags.split(',')))
-            tags = map(unicode.strip, tags)
+            tags = split_tags(self.tags)
             for tag in tags:
                 Tag.objects.get_or_create(name=tag)
             self.tags = ','.join(tags)
@@ -40,14 +42,13 @@ class Tagged(models.Model):
         super(Tagged, self).save(*args, **kwargs)
 
     def get_tags(self):
-        if self.tags:
-            tags = []
-            for tag in self.tags.split(','):
-                if tag in ["", " "]:
-                    continue
-                t, created = Tag.objects.get_or_create(name=tag)
-                tags.append(t)
-            return tags
+        tags = []
+
+        for tag in split_tags(self.tags):
+            t, created = Tag.objects.get_or_create(name=tag)
+            tags.append(t)
+
+        return tags
 
     class Meta:
         abstract = True
