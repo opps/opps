@@ -2,6 +2,11 @@
 Changelog
 =========
 
+0.2.8.3
+=======
+* Create function split_tags in utils.text app and apply on Tagged model #408
+* Recovery mptt search channel, use denormalized query
+
 0.2.8.2
 =======
 * Recovery create (fixed) channel using parent
