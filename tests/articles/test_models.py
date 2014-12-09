@@ -107,7 +107,7 @@ class PostCreation(TestCase):
     def test_multiple_tags_in_post(self):
         self.post.tags = u','.join(self._gen_tags(100))
         self.post.save()
-        self.assertTrue(Tag.objects.count(), 100)
+        self.assertEqual(Tag.objects.count(), 100)
 
     def test_raiser_tags(self):
         self.post.tags = u"opps, cms, , post"
@@ -115,11 +115,17 @@ class PostCreation(TestCase):
         self.assertEqual([t.name for t in self.post.get_tags()],
                          ['opps', 'cms', 'post'])
 
+    def test_ordered_tags(self):
+        self.post.tags = u"zyx,opps,cms,opps,post"
+        self.post.save()
+        self.assertEqual([t.name for t in self.post.get_tags()],
+                         [u'zyx', u'opps', u'cms', u'post'])
+
     def _gen_tags(self, length):
         tags = []
         for i in range(length):
             tag = u''.join(random.choice(string.ascii_uppercase)
-                          for x in range(12))
+                           for x in range(12))
             tags.append(tag)
         return tags
 
@@ -215,7 +221,6 @@ class PostPublishableManager(TestCase):
         class ModelYet(Model):
             objects = PublishableManager()
         self.Model = ModelYet
-
 
     def test_custom_manager(self):
         self.assertEquals(Post.objects.all_published().count(), 0)

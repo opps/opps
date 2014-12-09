@@ -6,6 +6,7 @@ Text parsing, analysing and searching utilities
 
 import re
 import htmlentitydefs
+from collections import OrderedDict
 
 
 def unescape(text):
@@ -38,3 +39,24 @@ def unescape(text):
                 pass
         return text  # leave as is
     return re.sub("&#?\w+;", fixup, text)
+
+
+def split_tags(tags, separator=','):
+    """
+    Splits string tag list using comma or another separator char, maintain
+    order and removes duplicate items.
+
+    @param tags List of tags separated by attribute separator (default: ,)
+    @param separator Separator char.
+    @return Ordered list of tags.
+    """
+
+    if not tags:
+        return []
+
+    tags = re.sub('\s*{0}+\s*'.format(re.escape(separator)), separator, tags)
+    tags = re.sub('[\n\t\r]', '', tags)
+    tags = tags.strip().split(separator)
+    tags = filter(None, tags)
+
+    return OrderedDict.fromkeys(tags).keys()  # Removes repeated items
