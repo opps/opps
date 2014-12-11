@@ -125,21 +125,28 @@ class QuerySet(Publishable):
             if model._meta.get_field_by_name('show_on_root_channel'):
                 queryset = queryset.filter(show_on_root_channel=True)
         except:
-            pass  # silently pass when FieldDoesNotExists
+            # silently pass when FieldDoesNotExists
+            pass
 
-        if self.channel and not self.channel.homepage:
+        if self.channel.exists():
+            ch_long_slug_in=[
+                ch.long_slug for ch in self.channel.all()
+                if ch.published and not ch.homepage]
+
             if self.recursive:
-                channel_long_slug = [self.channel.long_slug]
-                channel_descendants = self.channel.get_descendants(
-                    include_self=False)
+                channel_descendants = [
+                    ch.get_descendants(include_self=False)
+                    for ch in  self.channel.all()
+                    if ch.published and not ch.homepage]
                 for children in channel_descendants:
-                    channel_long_slug.append(children.long_slug)
+                    [ch_long_slug_in.append(chi.long_slug)
+                     for chi in children if chi.published]
 
                 queryset = queryset.filter(
-                    channel_long_slug__in=channel_long_slug)
+                    channel_long_slug__in=ch_long_slug_in)
             else:
                 queryset = queryset.filter(
-                    channel_long_slug=self.channel.long_slug)
+                    channel_long_slug__in=ch_long_slug_in)
 
         if self.filters:
             filters = json.loads(self.filters)
