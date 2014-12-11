@@ -2,6 +2,10 @@
 Changelog
 =========
 
+0.2.9
+=====
+* QuerySet of containerbox select more one channel
+
 0.2.8.3
 =======
 * Create function split_tags in utils.text app and apply on Tagged model #408
