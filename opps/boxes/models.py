@@ -89,7 +89,9 @@ class QuerySet(Publishable):
                 raise ValidationError(_(u'Invalid JSON for excludes'))
 
         try:
-            self.get_queryset().all()
+            # TODO: See how to test queryset before channel exist
+            #self.get_queryset().all()
+            pass
         except Exception as e:
             raise ValidationError(
                 u'Invalid Queryset: {0}'.format(str(e))
