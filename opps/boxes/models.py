@@ -32,11 +32,13 @@ class QuerySet(Publishable):
     )
     order = models.CharField(_('Order'), max_length=1, choices=(
         ('-', 'DESC'), ('+', 'ASC')))
-    channel = models.ForeignKey(
+
+    channel = models.ManyToManyField(
         'channels.Channel',
         verbose_name=_(u"Channel"),
         blank=True,
-        null=True
+        null=True,
+        default=None
     )
 
     recursive = models.BooleanField(
