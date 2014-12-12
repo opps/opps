@@ -1,6 +1,6 @@
 .PHONY: test
 test: pep8 clean
-	python runtests.py
+	python runtests.py -s
 
 .PHONY: tox-toxtest
 tox-test: environment
