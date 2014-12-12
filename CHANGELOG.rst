@@ -2,6 +2,10 @@
 Changelog
 =========
 
+0.2.8.4
+=======
+* Refactoring related post to container migration
+
 0.2.8.3
 =======
 * Create function split_tags in utils.text app and apply on Tagged model #408
