@@ -7,7 +7,6 @@ from django.contrib.auth import get_user_model
 
 from opps.articles.models import Post
 
-
 User = get_user_model()
 
 
@@ -18,10 +17,20 @@ class Migration(DataMigration):
     )
 
     def forwards(self, orm):
-        for post in Post.objects.all():
-            for r in post.postrelated_post.all():
-                p, c = post.containerrelated_container.get_or_create(
-                    related=r.related)
+        ContainerRelated = orm['containers.containerrelated']
+
+        post_with_related = Post.objects.filter(postrelated_post__isnull=False).only('id')
+
+        bulk_list = []
+
+        for current_post in post_with_related.iterator():
+            for r in current_post.postrelated_post.values('related_id', 'order'):
+                if r['related_id']:
+                    bulk_list.append(ContainerRelated(
+                        container_id=current_post.id,
+                        related_id=r['related_id'],
+                        order=r['order']))
+        ContainerRelated.objects.bulk_create(bulk_list)
 
     def backwards(self, orm):
         raise RuntimeError("Cannot reverse this migration.")
