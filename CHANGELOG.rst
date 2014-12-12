@@ -2,6 +2,11 @@
 Changelog
 =========
 
+0.2.8.4
+=======
+* Improves Container  admin queryset.
+* Redirects Container objects in admin to respective child_class edit page.
+
 0.2.8.3
 =======
 * Create function split_tags in utils.text app and apply on Tagged model #408

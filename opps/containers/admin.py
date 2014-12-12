@@ -5,6 +5,8 @@ from django.contrib import admin
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
 
 from .models import Container, ContainerImage, Mirror
 from .models import ContainerBox, ContainerBoxContainers, ContainerRelated
@@ -162,20 +164,31 @@ class ContainerBoxAdmin(BaseBoxAdmin, AdminViewPermission):
 
 class HideContainerAdmin(PublishableAdmin, AdminViewPermission):
 
-    list_display = ['image_thumb', 'get_child_class', 'title',
-                    'channel_name', 'date_available',
-                    'published']
+    list_display = ['image_thumb', 'get_child_class', 'title', 'channel_name',
+                    'date_available', 'published']
+
+    list_display_links = ['image_thumb', 'title']
+
     readonly_fields = ['image_thumb']
 
     def get_child_class(self, obj):
         return _(obj.child_class)
     get_child_class.short_description = _(u'Child class')
+    get_child_class.admin_order_field = 'child_class'
 
     def get_model_perms(self, *args, **kwargs):
         return {}
 
     def has_add_permission(self, request):
         return False
+
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        """
+        Redirects to specific child_class admin change form.
+        """
+        obj = self.queryset(request).get(pk=object_id)
+        return redirect(reverse('admin:{}_{}_change'.format(
+            obj._meta.app_label, obj._meta.module_name), args=(obj.pk,)))
 
     def get_list_filter(self, request):
         list_filter = super(HideContainerAdmin, self).list_filter
@@ -188,7 +201,7 @@ class HideContainerAdmin(PublishableAdmin, AdminViewPermission):
         blacklist = getattr(settings, 'OPPS_CONTAINERS_BLACKLIST', [])
         if blacklist:
             qs = qs.exclude(child_class__in=blacklist)
-        return qs
+        return qs.select_related('main_image')
 
 
 admin.site.register(Container, HideContainerAdmin)
