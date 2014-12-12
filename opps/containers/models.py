@@ -479,19 +479,15 @@ class ContainerRelated(models.Model):
     container = models.ForeignKey(
         'containers.Container',
         verbose_name=_(u'Container'),
-        null=True,
-        blank=True,
-        related_name='containerrelated_container',
-        on_delete=models.SET_NULL
+        related_name='containerrelated_container'
     )
+
     related = models.ForeignKey(
         'containers.Container',
         verbose_name=_(u'Related Container'),
-        null=True,
-        blank=True,
-        related_name="%(app_label)s_%(class)s_container",
-        on_delete=models.SET_NULL
+        related_name="%(app_label)s_%(class)s_container"
     )
+
     order = models.PositiveIntegerField(_(u'Order'), default=0)
 
     class Meta:

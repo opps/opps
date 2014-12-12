@@ -28,7 +28,7 @@ class ContainerRelatedInline(admin.TabularInline):
     extra = 1
     classes = ('collapse',)
     verbose_name = _(u'Related content')
-    verbose_name_plural = _(u'Related content')
+    verbose_name_plural = _(u'Related contents')
 
 
 @apply_opps_rules('containers')
@@ -39,8 +39,8 @@ class ContainerImageInline(admin.TabularInline):
     sortable_field_name = "order"
     actions = None
     extra = 0
-    verbose_name = _(u"Container image")
-    verbose_name_plural = _(u"Container images")
+    verbose_name = _(u"Image")
+    verbose_name_plural = _(u"Images")
     fieldsets = [(None, {'fields': ('image', 'image_thumb',
                          'order', 'caption')})]
     ordering = ('order',)
