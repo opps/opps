@@ -1,70 +1,33 @@
 # -*- coding: utf-8 -*-
 from south.utils import datetime_utils as datetime
 from south.db import db
-from south.v2 import DataMigration
+from south.v2 import SchemaMigration
 from django.db import models
 from django.contrib.auth import get_user_model
-
-from opps.articles.models import Post
 
 User = get_user_model()
 
 
-class Migration(DataMigration):
-
-    depends_on = (
-        ("articles", "0001_initial"),
-    )
+class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        ContainerRelated = orm['containers.containerrelated']
+        # Changing field 'ContainerRelated.container'
+        db.alter_column(u'containers_containerrelated', 'container_id', self.gf('django.db.models.fields.related.ForeignKey')(default=0, to=orm['containers.Container']))
 
-        post_with_related = Post.objects.filter(postrelated_post__isnull=False).only('id')
-
-        bulk_list = []
-
-        for current_post in post_with_related.iterator():
-            for r in current_post.postrelated_post.values('related_id', 'order'):
-                if r['related_id']:
-                    bulk_list.append(ContainerRelated(
-                        container_id=current_post.id,
-                        related_id=r['related_id'],
-                        order=r['order']))
-        ContainerRelated.objects.bulk_create(bulk_list)
+        # Changing field 'ContainerRelated.related'
+        db.alter_column(u'containers_containerrelated', 'related_id', self.gf('django.db.models.fields.related.ForeignKey')(default=0, to=orm['containers.Container']))
 
     def backwards(self, orm):
-        raise RuntimeError("Cannot reverse this migration.")
 
+        # Changing field 'ContainerRelated.container'
+        db.alter_column(u'containers_containerrelated', 'container_id', self.gf('django.db.models.fields.related.ForeignKey')(null=True, to=orm['containers.Container'], on_delete=models.SET_NULL))
+
+        # Changing field 'ContainerRelated.related'
+        db.alter_column(u'containers_containerrelated', 'related_id', self.gf('django.db.models.fields.related.ForeignKey')(null=True, to=orm['containers.Container'], on_delete=models.SET_NULL))
 
     models = {
         u'%s.%s' % (User._meta.app_label, User._meta.module_name): {
             'Meta': {'object_name': User.__name__},
-        },
-        u'articles.album': {
-            u'container_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['containers.Container']", 'unique': 'True', 'primary_key': 'True'}),
-            'headline': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'short_title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'})
-        },
-        u'articles.link': {
-            'container': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'link_containers'", 'null': 'True', 'to': u"orm['containers.Container']"}),
-            u'container_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['containers.Container']", 'unique': 'True', 'primary_key': 'True'}),
-            'headline': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'short_title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'}),
-            'url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'})
-        },
-        u'articles.post': {
-            'albums': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'post_albums'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['articles.Album']"}),
-            u'container_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['containers.Container']", 'unique': 'True', 'primary_key': 'True'}),
-            'content': ('django.db.models.fields.TextField', [], {}),
-            'headline': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'related_posts': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'post_relatedposts'", 'to': u"orm['containers.Container']", 'through': u"orm['articles.PostRelated']", 'blank': 'True', 'symmetrical': 'False', 'null': 'True'}),
-            'short_title': ('django.db.models.fields.CharField', [], {'max_length': '140', 'null': 'True', 'blank': 'True'})
-        },
-        u'articles.postrelated': {
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'order': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
-            'post': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'postrelated_post'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': u"orm['articles.Post']"}),
-            'related': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'postrelated_related'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': u"orm['containers.Container']"})
         },
         u'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -104,7 +67,7 @@ class Migration(DataMigration):
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['%s.%s']" % (User._meta.app_label, User._meta.object_name)})
         },
         u'channels.channel': {
-            'Meta': {'ordering': "['name', 'parent__id', 'published']", 'unique_together': "(('site', 'long_slug', 'slug', 'parent'),)", 'object_name': 'Channel'},
+            'Meta': {'ordering': "[u'name', u'parent__id', u'published']", 'unique_together': "((u'site', u'long_slug', u'slug', u'parent'),)", 'object_name': 'Channel'},
             'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True', 'db_index': 'True'}),
             'date_insert': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'date_update': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
@@ -114,7 +77,7 @@ class Migration(DataMigration):
             'homepage': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'include_in_main_rss': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'layout': ('django.db.models.fields.CharField', [], {'default': "'default'", 'max_length': '250', 'db_index': 'True'}),
+            'layout': ('django.db.models.fields.CharField', [], {'default': "u'default'", 'max_length': '250', 'db_index': 'True'}),
             u'level': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             u'lft': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             'long_slug': ('django.db.models.fields.SlugField', [], {'max_length': '250'}),
@@ -123,7 +86,7 @@ class Migration(DataMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '60'}),
             'order': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'paginate_by': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'parent': ('mptt.fields.TreeForeignKey', [], {'blank': 'True', 'related_name': "'subchannel'", 'null': 'True', 'to': u"orm['channels.Channel']"}),
+            'parent': ('mptt.fields.TreeForeignKey', [], {'blank': 'True', 'related_name': "u'subchannel'", 'null': 'True', 'to': u"orm['channels.Channel']"}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'db_index': 'True'}),
             u'rght': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             'show_in_menu': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
@@ -220,10 +183,10 @@ class Migration(DataMigration):
         },
         u'containers.containerrelated': {
             'Meta': {'ordering': "('order',)", 'object_name': 'ContainerRelated'},
-            'container': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'containerrelated_container'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': u"orm['containers.Container']"}),
+            'container': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'containerrelated_container'", 'to': u"orm['containers.Container']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'order': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
-            'related': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'containerrelated_related'", 'null': 'True', 'on_delete': 'models.SET_NULL', 'to': u"orm['containers.Container']"})
+            'related': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'containers_containerrelated_container'", 'to': u"orm['containers.Container']"})
         },
         u'containers.mirror': {
             'Meta': {'ordering': "['-date_available']", 'object_name': 'Mirror', '_ormbases': [u'containers.Container']},
@@ -276,5 +239,4 @@ class Migration(DataMigration):
         }
     }
 
-    complete_apps = ['articles', 'containers']
-    symmetrical = True
+    complete_apps = ['containers']

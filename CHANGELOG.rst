@@ -5,6 +5,9 @@ Changelog
 0.2.9
 =====
 * QuerySet of containerbox select more one channel
+* Improves Container  admin queryset.
+* Redirects Container objects in admin to respective child_class edit page.
+* Refactoring related post to container migration
 
 0.2.8.3
 =======

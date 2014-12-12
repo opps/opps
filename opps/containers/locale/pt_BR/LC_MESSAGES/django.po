@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Translators:
 # Edipo Maciel <shu.hikari@gmail.com>, 2014
@@ -12,218 +12,233 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-21 16:16-0300\n"
-"PO-Revision-Date: 2014-08-21 20:31+0000\n"
-"Last-Translator: Thiago Avelino <thiago@avelino.xxx>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/opps-core/language/pt_BR/)\n"
+"POT-Creation-Date: 2014-12-12 16:57-0200\n"
+"PO-Revision-Date: 2014-12-12 16:53-0300\n"
+"Last-Translator: Paulo Roberto <proberto.macedo@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/opps-"
+"core/language/pt_BR/)\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.5.4\n"
 
-#: admin.py:27 models.py:211
+#: admin.py:30 models.py:494
+msgid "Related content"
+msgstr "Conteúdo relacionado"
+
+#: admin.py:31 models.py:495
+msgid "Related contents"
+msgstr "Conteúdos relacionados"
+
+#: admin.py:42 models.py:221
 msgid "Container image"
 msgstr "Imagem de Container"
 
-#: admin.py:28 models.py:212
+#: admin.py:43 models.py:222
 msgid "Container images"
 msgstr "Imagens de Container"
 
-#: admin.py:38
+#: admin.py:53
 msgid "No Image"
 msgstr "Sem imagem"
 
-#: admin.py:39
+#: admin.py:54
 msgid "Thumbnail"
 msgstr "Imagem pequena"
 
-#: admin.py:99
+#: admin.py:118
 msgid "Identification"
 msgstr "Identificação"
 
-#: admin.py:102
+#: admin.py:121
 msgid "Relationships"
 msgstr "Relacionamentos"
 
-#: admin.py:104
+#: admin.py:123
 msgid "Publication"
 msgstr "Publicação"
 
-#: admin.py:117
+#: admin.py:140
 msgid "Clean ended containers"
 msgstr "Containers finalizados"
 
-#: admin.py:136
+#: admin.py:159
 msgid "Dynamic"
 msgstr "Dinâmico"
 
-#: admin.py:151 models.py:40
+#: admin.py:176 models.py:41
 msgid "Child class"
 msgstr "Classe filha"
 
 #: forms.py:49
 #, python-format
 msgid "The slug \"%s\" already exists on channel \"%s\" at site \"%s\""
-msgstr ""
+msgstr "O slug \"%s\" já existe no canal \"%s\" do site \"%s\""
 
-#: models.py:29 models.py:224 models.py:412
+#: models.py:30 models.py:234 models.py:428
 msgid "Title"
 msgstr "Título"
 
-#: models.py:31 models.py:416
+#: models.py:32 models.py:432
 msgid "Hat"
 msgstr "Chapéu"
 
-#: models.py:36
+#: models.py:37
 msgid "Short URL"
 msgstr "URL Curta"
 
-#: models.py:46
+#: models.py:47
 msgid "Child module"
 msgstr "Módulo filho"
 
-#: models.py:52
+#: models.py:53
 msgid "Child app label"
 msgstr "Nome da app Filha"
 
-#: models.py:58
+#: models.py:59
 msgid "Show on root channel?"
 msgstr "Mostrar no canal pai?"
 
-#: models.py:62
+#: models.py:63
 msgid "Source"
 msgstr "Fonte"
 
-#: models.py:65
+#: models.py:66
 msgid "Customized"
 msgstr "Personalizado"
 
-#: models.py:81 models.py:193 models.py:251 models.py:402 models.py:465
+#: models.py:90 models.py:203 models.py:261 models.py:418 models.py:481
+#: models.py:505
 msgid "Container"
 msgstr "Container"
 
-#: models.py:82
+#: models.py:91
 msgid "Containers"
 msgstr "Containers"
 
-#: models.py:131
+#: models.py:140
 msgid "Get HTTP Absolute URL"
 msgstr "URL exata com HTTP"
 
-#: models.py:195 models.py:405
+#: models.py:205 models.py:421 models.py:491
 msgid "Order"
 msgstr "Ordem"
 
-#: models.py:200
+#: models.py:210
 msgid "Image"
 msgstr "Imagem"
 
-#: models.py:204
+#: models.py:214
 msgid "Caption"
 msgstr "Legenda"
 
-#: models.py:230
+#: models.py:240
 msgid "Title Link"
 msgstr "Link do titulo"
 
-#: models.py:239 models.py:425
+#: models.py:249 models.py:441
 msgid "Main Image"
 msgstr "Imagem Principal"
 
-#: models.py:242 models.py:428
+#: models.py:252 models.py:444
 msgid "Main Image Caption"
 msgstr "Legenda da Imagem Principal"
 
-#: models.py:246 models.py:432
+#: models.py:256 models.py:448
 msgid "Maximum characters 4000"
 msgstr "Máximo de caracteres 4000"
 
-#: models.py:259
+#: models.py:269
 msgid "Query Set"
 msgstr "Queryset"
 
-#: models.py:263
+#: models.py:273
 msgid "Content Group"
 msgstr "Grupo de conteúdo"
 
-#: models.py:266
+#: models.py:276
 msgid "Boxes in the same group do not allow repetitions"
 msgstr "Boxes no mesmo grupo não permitem repetições."
 
-#: models.py:270
+#: models.py:280
 msgid "Container box"
 msgstr "Box de Container"
 
-#: models.py:271
+#: models.py:281
 msgid "Containers boxes"
 msgstr "Boxes de Containers"
 
-#: models.py:386
+#: models.py:402
 msgid "Load in a new window"
 msgstr "Abrir em nova janela"
 
-#: models.py:387
+#: models.py:403
 msgid "Load in the same frame as it was clicked"
 msgstr "Abrir no mesmo frame onde foi clicado"
 
-#: models.py:388
+#: models.py:404
 msgid "Load in the parent frameset"
 msgstr "Abrir no frameset pai"
 
-#: models.py:389
+#: models.py:405
 msgid "Load in the full body of the window"
 msgstr "Abrir na mesma janela"
 
-#: models.py:396
+#: models.py:412
 msgid "Container Box"
 msgstr "Box de Container"
 
-#: models.py:406
+#: models.py:422
 msgid "Aggregate container"
 msgstr "Agregar containers"
 
-#: models.py:407
+#: models.py:423
 msgid "Highlight container"
 msgstr "Container em destaque"
 
-#: models.py:408
+#: models.py:424
 msgid "Date available"
 msgstr "Data de publicação"
 
-#: models.py:410
+#: models.py:426
 msgid "End date"
 msgstr "Data fim"
 
-#: models.py:435
+#: models.py:451
 msgid "URL"
 msgstr "URL"
 
-#: models.py:436
+#: models.py:452
 msgid "URL Target"
 msgstr "URL destino"
 
-#: models.py:442
+#: models.py:458
 msgid "Article box articles"
 msgstr "Artigos de Box de Artigos"
 
-#: models.py:443
+#: models.py:459
 msgid "Article boxes articles"
 msgstr "Artigos de Boxes de Artigos"
 
-#: models.py:455
+#: models.py:471
 msgid "Please select a Container or insert a URL!"
 msgstr "Por favor, selecione um Container ou insira uma URL"
 
-#: models.py:459
+#: models.py:475
 msgid "Article not published!"
 msgstr "Artigo não publicado!"
 
-#: models.py:468
+#: models.py:487
+msgid "Related Container"
+msgstr "Container relacionado"
+
+#: models.py:508
 msgid "Mirror"
 msgstr "Espelho"
 
-#: models.py:469
+#: models.py:509
 msgid "Mirrors"
 msgstr "Espelhos"
 
@@ -233,7 +248,8 @@ msgstr "Aviso"
 
 #: templates/containers/none.html:11
 msgid "You don't have any channels set as home page. Please set one"
-msgstr "Não existe nem um canal marcado como pagina inicial. Por favor marque um"
+msgstr ""
+"Não existe nem um canal marcado como pagina inicial. Por favor marque um"
 
 #~ msgid "Has queryset"
 #~ msgstr "Has queryset"
