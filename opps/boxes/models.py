@@ -90,7 +90,7 @@ class QuerySet(Publishable):
 
         try:
             # TODO: See how to test queryset before channel exist
-            #self.get_queryset().all()
+            # self.get_queryset().all()
             pass
         except Exception as e:
             raise ValidationError(
@@ -131,14 +131,14 @@ class QuerySet(Publishable):
             pass
 
         if self.channel.exists():
-            ch_long_slug_in=[
+            ch_long_slug_in = [
                 ch.long_slug for ch in self.channel.all()
                 if ch.published and not ch.homepage]
 
             if self.recursive:
                 channel_descendants = [
                     ch.get_descendants(include_self=False)
-                    for ch in  self.channel.all()
+                    for ch in self.channel.all()
                     if ch.published and not ch.homepage]
                 for children in channel_descendants:
                     [ch_long_slug_in.append(chi.long_slug)
