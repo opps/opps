@@ -83,23 +83,22 @@ class QuerySetTest(TestCase):
 
         self.filters = json.dumps({"employees": [{"firstName": "Anna",
                                                  "lastName": "Smith"}, ]})
-        self.excludes= json.dumps({"employees": [{"lastName": "McDonald"}, ]})
+        self.excludes = json.dumps({"employees": [{"lastName": "McDonald"}, ]})
 
-
-        self.queryset = QuerySet.objects.create(name=u"Query",
-                                                slug=u"query",
-                                                user=self.user,
-                                                model=self.model,
-                                                channel=self.channel,
-                                                filters=self.filters,
-                                                excludes=self.excludes)
+        self.queryset = QuerySet.objects.create(
+            name=u"Query", slug=u"query", user=self.user, model=self.model,
+            filters=self.filters, excludes=self.excludes)
+        self.queryset.channel.add(self.channel)
+        self.queryset.save()
 
     def test_queryset_fields(self):
         self.assertEqual(self.queryset.name, u"Query")
         self.assertEqual(self.queryset.slug, u"query")
         self.assertEqual(self.queryset.user, self.user)
         self.assertEqual(self.queryset.model, self.model)
-        self.assertEqual(self.queryset.channel, self.channel)
+        self.assertEqual(self.queryset.channel.all()[0], self.channel)
+        self.assertEqual([ch for ch in self.queryset.channel.all()],
+                         [self.channel])
         self.assertEqual(self.queryset.filters, self.filters)
 
     def test_have_filters_in_clean_function(self):
@@ -108,21 +107,17 @@ class QuerySetTest(TestCase):
             u'lastName': u'Smith',
             u'firstName': u'Anna'}]})
 
-
     def test_have_excludes_in_clean_function(self):
         self.assertTrue(self.excludes)
         self.assertEqual(json.loads(self.excludes), {u'employees': [{
-            u'lastName': u'McDonald'},]})
-
+            u'lastName': u'McDonald'}]})
 
     def test_not_filters_and_excludes_in_clean_function(self):
-        invalid = QuerySet.objects.create(name=u"Query Test",
-                                          slug=u"query_test",
-                                          user=self.user,
-                                          model=self.model,
-                                          channel=self.channel,
-                                          filters=None,
-                                          excludes=None)
+        invalid = QuerySet.objects.create(
+            name=u"Query Test", slug=u"query_test", user=self.user,
+            model=self.model, filters=None, excludes=None)
+        invalid.channel.add(self.channel)
+        invalid.save()
 
         self.assertEqual(None, invalid.filters)
         self.assertEqual(None, invalid.excludes)
