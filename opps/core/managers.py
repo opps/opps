@@ -14,6 +14,8 @@ class PublishableQuerySet(models.query.QuerySet):
         return {
             '%sdate_available__lte' % prefix: timezone.now(),
             '%spublished' % prefix: True,
+            '%schannel__date_available__lte' % prefix: timezone.now(),
+            '%schannel__published' % prefix: True,
         }
 
 
