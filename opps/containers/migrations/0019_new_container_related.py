@@ -23,7 +23,7 @@ class Migration(DataMigration):
 
         bulk_list = []
 
-        for current_post in post_with_related.iterator():
+        for current_post in post_with_related.distinct().iterator():
             for r in current_post.postrelated_post.values('related_id', 'order'):
                 if r['related_id']:
                     bulk_list.append(ContainerRelated(
