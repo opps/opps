@@ -1,6 +1,9 @@
 =========
 Changelog
 =========
+0.2.9.2
+=======
+* improves support for Thumbor including 'filters' param.
 
 0.2.9.1
 =======
