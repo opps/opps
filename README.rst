@@ -22,7 +22,7 @@ An *Open Source Content Management* for the **magazine** websites and **high-tra
 
 
 Documentation
-=======
+=============
 
 See here the `full documentation <http://www.oppsproject.org/>`_.
 
