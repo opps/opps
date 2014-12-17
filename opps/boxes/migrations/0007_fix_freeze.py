@@ -11,28 +11,10 @@ User = get_user_model()
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding M2M table for field channel on 'QuerySet'
-        m2m_table_name = db.shorten_name(u'boxes_queryset_channel')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('queryset', models.ForeignKey(orm[u'boxes.queryset'], null=False)),
-            ('channel', models.ForeignKey(orm[u'channels.channel'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['queryset_id', 'channel_id'])
-
-        # Close your eyes
-        queryset_channels = list(orm.QuerySet.objects.filter(channel_id__isnull=False).values_list('pk', 'channel_id'))
-        pivot_model = orm.QuerySet.channel.through
-        for i in queryset_channels:
-            pivot_model.objects.get_or_create(queryset_id=i[0], channel_id=i[1])
-
-        # Deleting field 'QuerySet.channel'
-        db.delete_column(u'boxes_queryset', 'channel_id')
-
+        pass
 
     def backwards(self, orm):
-        raise RuntimeError("Cannot reverse this migration.")
-
+        pass
 
     models = {
         u'%s.%s' % (User._meta.app_label, User._meta.module_name): {
@@ -53,7 +35,6 @@ class Migration(SchemaMigration):
         },
         u'boxes.queryset': {
             'Meta': {'object_name': 'QuerySet'},
-            'channel_id': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}), # This fucking field does not exists on model but is added manually here to accessing old value in the "forward" method...
             'channel': ('django.db.models.fields.related.ManyToManyField', [], {'default': 'None', 'to': u"orm['channels.Channel']", 'null': 'True', 'symmetrical': 'False', 'blank': 'True'}),
             'date_available': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now', 'null': 'True', 'db_index': 'True'}),
             'date_insert': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),

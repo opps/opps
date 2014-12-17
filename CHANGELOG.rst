@@ -2,6 +2,10 @@
 Changelog
 =========
 
+0.2.9.1
+=======
+* opps.boxes and opps.containers migrations important fixes.
+
 0.2.9
 =====
 * QuerySet of containerbox select more one channel
