@@ -1,13 +1,11 @@
 =========
 Changelog
 =========
-0.2.9.2
-=======
-* improves support for Thumbor including 'filters' param.
 
 0.2.9.1
 =======
 * opps.boxes and opps.containers migrations important fixes.
+* improves support for Thumbor including 'filters' param.
 
 0.2.9
 =====
