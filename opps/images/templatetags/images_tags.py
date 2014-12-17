@@ -74,6 +74,11 @@ def image_obj(image, **kwargs):
         new['fit_in'] = image.fit_in
         new['smart'] = image.smart
 
+        if 'filters' in kwargs:
+            kw = [kwargs['filters']]
+            new['filters'] = kw
+            del kwargs['filters']
+
         if image.crop_x1 > 0 or image.crop_x2 > 0 or image.crop_y1 > 0 or \
            image.crop_y2 > 0:
             new['crop'] = ((image.crop_x1, image.crop_y1),
