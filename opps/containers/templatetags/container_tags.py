@@ -356,7 +356,7 @@ def get_containers_by(limit=None, **filters):
     qs = qs[:limit]
     containers = [i for i in qs]
 
-    cache.set(cachekey, containers, 3600)
+    cache.set(cachekey, containers, settings.OPPS_CACHE_EXPIRE)
     return containers
 
 
@@ -387,7 +387,7 @@ def filter_queryset_by(queryset, **filters):
         return queryset
 
     containers = queryset.filter(**filters)
-    cache.set(cachekey, containers, 3600)
+    cache.set(cachekey, containers, settings.OPPS_CACHE_EXPIRE)
     return containers
 
 
@@ -431,7 +431,7 @@ def exclude_queryset_by(queryset, **excludes):
         if mirrors:
             containers = containers.exclude(pk__in=mirrors)
 
-    cache.set(cachekey, containers, 3600)
+    cache.set(cachekey, containers, settings.OPPS_CACHE_EXPIRE)
     return containers
 
 
@@ -584,6 +584,6 @@ def get_postrelated_by(obj, **filters):
             containers = [i.related for i in queryset.filter(**filters)
                                                      .order_by('order')]
 
-        cache.set(cachekey, containers, 3600)
+        cache.set(cachekey, containers, settings.OPPS_CACHE_EXPIRE)
         return containers
     return ''
