@@ -13,11 +13,12 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Cleanup registers
         ContainerRelated = orm['containers.containerrelated']
-        to_remove = ContainerRelated.objects.filter(models.Q(container_id__isnull=True) | models.Q(related_id__isnull=True))
-
-        print u" - Cleanup {} registers.".format(to_remove.count())
-
-        to_remove.delete()
+        try:
+            to_remove = ContainerRelated.objects.filter(models.Q(container_id__isnull=True) | models.Q(related_id__isnull=True))
+            print u" - Cleanup {} registers.".format(to_remove.count())
+            to_remove.delete()
+        except:
+            pass
 
     def backwards(self, orm):
         pass

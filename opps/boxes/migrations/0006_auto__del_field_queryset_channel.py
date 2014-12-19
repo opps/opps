@@ -21,13 +21,16 @@ class Migration(SchemaMigration):
         db.create_unique(m2m_table_name, ['queryset_id', 'channel_id'])
 
         # Close your eyes
-        queryset_channels = list(orm.QuerySet.objects.filter(channel_id__isnull=False).values_list('pk', 'channel_id'))
-        pivot_model = orm.QuerySet.channel.through
-        for i in queryset_channels:
-            pivot_model.objects.get_or_create(queryset_id=i[0], channel_id=i[1])
+        try:
+            queryset_channels = list(orm.QuerySet.objects.filter(channel_id__isnull=False).values_list('pk', 'channel_id'))
+            pivot_model = orm.QuerySet.channel.through
+            for i in queryset_channels:
+                pivot_model.objects.get_or_create(queryset_id=i[0], channel_id=i[1])
 
-        # Deleting field 'QuerySet.channel'
-        db.delete_column(u'boxes_queryset', 'channel_id')
+            # Deleting field 'QuerySet.channel'
+            db.delete_column(u'boxes_queryset', 'channel_id')
+        except:
+            pass
 
 
     def backwards(self, orm):
