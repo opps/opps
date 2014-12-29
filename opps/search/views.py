@@ -33,7 +33,7 @@ try:
 
     CLASSES.update({'blog': BlogPost})
 except ImportError:
-    pass 
+    pass
 
 
 class SearchOrdered(SearchView):
