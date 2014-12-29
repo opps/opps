@@ -3,19 +3,37 @@ from haystack.views import SearchView
 from haystack.query import SearchQuerySet
 
 from opps.articles.models import Post, Album
-from opps.multimedias.models import Audio, Video
-from opps.polls.models import Poll
-from opps.blogs.models import BlogPost
 
 
 CLASSES = {
-    'video': Video,
     'album': Album,
-    'audio': Audio,
     'post': Post,
-    'pool': Poll,
-    'blog': BlogPost
 }
+
+# Opps thirdy-apps
+try:
+    from opps.multimedias.models import Audio, Video
+
+    CLASSES.update({
+        'video': Video,
+        'audio': Audio
+    })
+except ImportError:
+    pass
+
+try:
+    from opps.polls.models import Poll
+
+    CLASSES.update({'pool': Poll})
+except ImportError:
+    pass
+
+try:
+    from opps.blogs.models import BlogPost
+
+    CLASSES.update({'blog': BlogPost})
+except ImportError:
+    pass 
 
 
 class SearchOrdered(SearchView):
