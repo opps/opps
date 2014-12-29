@@ -2,6 +2,10 @@
 Changelog
 =========
 
+dev
+=======
+* opps.search.views now provides a basic view for haystack.
+
 0.2.9.1
 =======
 * opps.boxes and opps.containers migrations important fixes.
