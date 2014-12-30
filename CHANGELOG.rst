@@ -2,6 +2,11 @@
 Changelog
 =========
 
+dev
+=======
+* opps.search.views now provides a basic view for haystack.
+* * Add `OPPS_HAYSTACK_APPS` settings for thirdy-apps autoload.
+
 0.2.9.1
 =======
 * opps.boxes and opps.containers migrations important fixes.

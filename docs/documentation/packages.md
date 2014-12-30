@@ -289,6 +289,18 @@ opps.images
 opps.search
 ------------
 
+Opps uses django-haystack as wrapper for search engines like Solr and elasticsearch. This module provides a basic view and url for use haystack, see this example.
+
+	OPPS_HAYSTACK_APPS = {
+	    'video': 'opps.multimedias.models.Video',
+	    'blog': 'opps.blogs.models.BlogPost'
+	}
+
+And in your urls.py you use this way.
+
+	url(r'^search/', include('opps.search.urls')),
+
+
 opps.sitemaps
 -------------
 
