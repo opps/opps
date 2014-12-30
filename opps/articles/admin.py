@@ -9,7 +9,7 @@ from .forms import PostAdminForm, AlbumAdminForm, LinkAdminForm
 from opps.containers.admin import (
     ContainerAdmin, ContainerImageInline, ContainerRelatedInline)
 from opps.core.admin import apply_opps_rules, HaystackModelAdmin
-from opps.contrib.multisite.admin import AdminViewPermission
+from opps.core.permissions.admin import AdminViewPermission
 
 
 @apply_opps_rules('articles')
