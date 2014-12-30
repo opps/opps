@@ -91,7 +91,6 @@ def admin_shortcuts(context):
                 add_permission(shortcut, child)
                 # TODO: make it recursive for submenus
 
-
     return {
         'admin_shortcuts': admin_shortcuts,
         'settings': admin_shortcuts_settings,
