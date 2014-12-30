@@ -94,6 +94,17 @@ class NotUserPublishable(Publisher):
         abstract = True
 
 
+class ManyChanneling(models.Model):
+    channel = models.ManyToManyField(
+        'channels.Channel',
+        verbose_name=_(u"Channels"),
+        null=True, blank=True,
+    )
+
+    class Meta:
+        abstract = True
+
+
 class Channeling(models.Model):
 
     channel = models.ForeignKey(
