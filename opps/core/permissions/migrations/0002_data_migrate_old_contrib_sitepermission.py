@@ -3,8 +3,8 @@ from south.utils import datetime_utils as datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
-from django.core.serializers import serialize
 from django.contrib.auth import get_user_model
+from django.db import transaction
 from opps.core.permissions.models import Permission
 
 
@@ -25,8 +25,8 @@ class Migration(SchemaMigration):
                 obj = i.__dict__
                 [obj.pop(item) for item in ['_state']]
                 Permission.objects.get_or_create(**obj)
-        except ImportError:
-            pass
+        except:
+            transaction.rollback()
 
     def backwards(self, orm):
         for i in Permission.objects.all():
