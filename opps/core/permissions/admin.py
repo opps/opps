@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import warnings
 from django.contrib import admin
 from django.contrib.sites.models import Site
 from django.conf import settings
@@ -15,6 +16,7 @@ class AdminViewPermission(admin.ModelAdmin):
 
     @property
     def site_lookup(self):
+        warnings.warn("site_lookup will be removed!", DeprecationWarning)
         return 'site_iid__in'
 
     def permission_in(self, user):
