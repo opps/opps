@@ -2,10 +2,13 @@
 Changelog
 =========
 
-dev
+0.2.9.2
 =======
 * opps.search.views now provides a basic view for haystack.
 * * Add `OPPS_HAYSTACK_APPS` settings for thirdy-apps autoload.
+* opps.core.permissions generic package to permission, #402
+* * Data migration opps.contrib.multisite to opps.core.permissions
+* * Return warning if call opps.contrib.multisite
 
 0.2.9.1
 =======
