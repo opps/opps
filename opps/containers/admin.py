@@ -12,7 +12,7 @@ from .models import Container, ContainerImage, Mirror
 from .models import ContainerBox, ContainerBoxContainers, ContainerRelated
 from .forms import ContainerBoxContainersInlineForm
 from opps.core.admin import PublishableAdmin, apply_opps_rules, BaseBoxAdmin
-from opps.contrib.multisite.admin import AdminViewPermission
+from opps.core.permissions.admin import AdminViewPermission
 from opps.core.filters import ChannelListFilter, HasQuerySet
 from opps.images.generate import image_url
 from opps.fields.models import Field, FieldOption

@@ -1,16 +1,7 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from opps.core.models import Publishable
 from django.utils.translation import ugettext_lazy as _
+from opps.core.permissions.models import Permission
 
 
-class SitePermission(Publishable):
-    """
-    Join user in site
-    """
-    class Meta:
-        verbose_name = _(u'Site Permission')
-        verbose_name_plural = _(u'Site Permissions')
-
-    def __unicode__(self):
-        return u'{0} em {1}'.format(self.user, self.site)
+class SitePermission(Permission):
+    pass

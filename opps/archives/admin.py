@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from opps.core.admin import apply_opps_rules
-from opps.contrib.multisite.admin import AdminViewPermission
+from opps.core.permissions.admin import AdminViewPermission
 
 from .models import File
 
