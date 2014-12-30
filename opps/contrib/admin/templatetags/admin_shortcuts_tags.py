@@ -3,7 +3,7 @@ import inspect
 from django import template
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.translation import ugettext_lazy as _
 from django.utils.importlib import import_module
 
@@ -33,12 +33,17 @@ def make_url(shortcut, request):
             )
         current_app = shortcut.get('app_name')
         if isinstance(url_name, list):
-            shortcut['url'] = reverse(
-                url_name[0], args=url_name[1:], current_app=current_app
-            )
+            try:
+                shortcut['url'] = reverse(
+                    url_name[0], args=url_name[1:], current_app=current_app)
+            except NoReverseMatch:
+                shortcut['url'] = ''
         else:
-            shortcut['url'] = reverse(
-                url_name, current_app=current_app)
+            try:
+                shortcut['url'] = reverse(
+                    url_name, current_app=current_app)
+            except NoReverseMatch:
+                shortcut['url'] = ''
 
         shortcut['url'] += shortcut.get('url_extra', '')
 
@@ -85,6 +90,7 @@ def admin_shortcuts(context):
                 make_url(child, request)
                 add_permission(shortcut, child)
                 # TODO: make it recursive for submenus
+
 
     return {
         'admin_shortcuts': admin_shortcuts,
