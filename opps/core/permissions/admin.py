@@ -27,7 +27,7 @@ class AdminViewPermission(admin.ModelAdmin):
             date_available__lte=timezone.now(),
             published=True
         ).values_list('site__id', 'channel__id')
-        for s,c in p:
+        for s, c in p:
             sites_id.append(s)
             channels_id.append(c)
 
