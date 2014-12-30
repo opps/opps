@@ -2,6 +2,10 @@
 from haystack.views import SearchView
 from haystack.query import SearchQuerySet
 
+from importlib import import_module
+
+from django.conf import settings
+
 from opps.articles.models import Post, Album
 
 
@@ -10,30 +14,22 @@ CLASSES = {
     'post': Post,
 }
 
+OPPS_HAYSTACK_APPS = getattr(
+    settings, 'OPPS_HAYSTACK_APPS', {})
+
 # Opps thirdy-apps
-try:
-    from opps.multimedias.models import Audio, Video
+for app in OPPS_HAYSTACK_APPS.keys():
+    if app:
+        try:
+            _import = OPPS_HAYSTACK_APPS[app].split('.')[-1]
+            _from = u".".join(OPPS_HAYSTACK_APPS[app].split('.')[:-1])
+            CLASSES[app] = getattr(
+                __import__(_from, fromlist=[_import]), _import)
 
-    CLASSES.update({
-        'video': Video,
-        'audio': Audio
-    })
-except ImportError:
-    pass
-
-try:
-    from opps.polls.models import Poll
-
-    CLASSES.update({'pool': Poll})
-except ImportError:
-    pass
-
-try:
-    from opps.blogs.models import BlogPost
-
-    CLASSES.update({'blog': BlogPost})
-except ImportError:
-    pass
+        except ImportError:
+            pass
+    else:
+        CLASSES.pop(app)
 
 
 class SearchOrdered(SearchView):
