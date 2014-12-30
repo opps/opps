@@ -2,6 +2,10 @@
 Changelog
 =========
 
+0.2.10.1
+========
+* Hot fix opps.core.permissions data migration if not installed opps.contrib.multisite, #402
+
 0.2.10
 ======
 * opps.search.views now provides a basic view for haystack.
