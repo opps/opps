@@ -8,13 +8,14 @@ from .models import Channel
 from .forms import ChannelAdminForm
 from opps.core.admin import PublishableAdmin
 from opps.core.admin import apply_opps_rules
+from opps.core.permissions.admin import AdminViewPermission
 from opps.core.utils import get_template_path
 
 import json
 
 
 @apply_opps_rules('channels')
-class ChannelAdmin(PublishableAdmin, MPTTModelAdmin):
+class ChannelAdmin(PublishableAdmin, MPTTModelAdmin, AdminViewPermission):
     prepopulated_fields = {"slug": ("name",)}
     list_display = ['name', 'show_channel_path', 'get_parent', 'site',
                     'date_available', 'homepage', 'order', 'show_in_menu',
