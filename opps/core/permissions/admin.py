@@ -73,6 +73,7 @@ class AdminViewPermission(admin.ModelAdmin):
 
 class PermissionAdmin(admin.ModelAdmin):
     raw_id_fields = ('user',)
+    filter_horizontal = ('channel',)
     exclude = ('site_iid', 'mirror_site', 'site_domain')
 
 
