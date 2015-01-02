@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 import operator
 
 from django.db import models
@@ -189,9 +190,8 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         return obj.filter(container=self.id)
 
     def custom_fields(self):
-        import json
         if not self.json:
-            return
+            return {}
         return json.loads(self.json)
 
 
