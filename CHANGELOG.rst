@@ -7,6 +7,7 @@ Changelog
 
 * Automatic conversion of opps.fields for the context of the template, #430
 * * Normalization of the name of the variable to use in django template
+* Check `opps.contrib.multisite` is installed and return depends_on else depends_on is empty, #432
 
 0.2.10.1
 ========
