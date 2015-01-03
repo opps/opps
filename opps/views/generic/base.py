@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
@@ -10,6 +9,7 @@ from django.contrib.sites.models import get_current_site
 from opps.articles.models import Album
 from opps.containers.models import Container, ContainerBox
 from opps.channels.models import Channel
+from opps.fields.utils import field_template_read
 
 
 class View(object):
@@ -134,6 +134,13 @@ class View(object):
         if self.request.META.get('HTTP_X_PJAX', False) or \
            self.request.is_ajax():
             context['extends_parent'] = 'base_ajax.html'
+
+        try:
+            # opps.field append on context
+            context['context'].fields = field_template_read(
+                context['context'].custom_fields())
+        except AttributeError:
+            pass
 
         return context
 
