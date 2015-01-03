@@ -5,17 +5,30 @@ from south.v2 import SchemaMigration
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.db import transaction
+from django.conf import settings
 from opps.core.permissions.models import Permission
 
 
 User = get_user_model()
 
 
+class ClassProperty(object):
+    def __init__(self, func):
+        self.func = func
+
+    def __get__(self, inst, cls):
+        return self.func(cls)
+
+
 class Migration(SchemaMigration):
 
-    depends_on = (
-        ("multisite", "0002_auto"),
-    )
+    @ClassProperty
+    def depends_on(self):
+        if 'opps.contrib.multisite' in settings.INSTALLED_APPS:
+            return (
+                ("multisite", "0002_auto"),
+            )
+        return ()
 
     def forwards(self, orm):
         try:
