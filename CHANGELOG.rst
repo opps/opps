@@ -2,8 +2,8 @@
 Changelog
 =========
 
-0.2.11 - dev
-============
+0.2.11
+======
 
 * Automatic conversion of opps.fields for the context of the template, #430
 * * Normalization of the name of the variable to use in django template
