@@ -2,6 +2,12 @@
 Changelog
 =========
 
+0.2.11 - dev
+============
+
+* Automatic conversion of opps.fields for the context of the template, #430
+* * Normalization of the name of the variable to use in django template
+
 0.2.10.1
 ========
 * Hot fix opps.core.permissions data migration if not installed opps.contrib.multisite, #402

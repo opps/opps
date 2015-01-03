@@ -220,3 +220,13 @@ update by itself based on some params:
 
 Custom fields
 ====================
+
+To work with custom fields need to create the field in `admin` and use the context in the template:
+
+    {% if context.fields.articlespost_checkbox_show_main_image_yes == 1 %}
+
+or via templatetag:
+
+    {% get_custom_field_value context 'articlespost-checkbox-show-main-image_yes' as new_name_you_var %}
+    {% if new_name_you_var == 1 %}
+
