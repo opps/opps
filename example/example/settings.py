@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     # Opps core
     'opps.core',
     'opps.core.tags',
+    'opps.core.permissions',
     'opps.containers',
     'opps.boxes',
     'opps.channels',
