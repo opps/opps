@@ -365,12 +365,15 @@ class ContainerBox(BaseBox):
         exclude_ids = exclude_ids or []
 
         now = timezone.now()
-        qs = self.containerboxcontainers_set.filter(
+        qs = self.containerboxcontainers_set.prefetch_related(
+            'main_image', 'container', 'container__main_image',
+            'container__channel')
+        qs = qs.filter(
             models.Q(date_end__gte=now) |
             models.Q(date_end__isnull=True),
             date_available__lte=now
         ).exclude(
-            container__id__in=exclude_ids
+            container_id__in=exclude_ids
         ).order_by('order').distinct()
 
         self.local_cache['ordered_box_containers'] = qs
