@@ -99,7 +99,7 @@ def load_boxes(context, slugs=None, **filters):
 
     if slugs:
         ob = lambda i, o=ordered_slugs: (
-            i.site != current_site, i.site.id, o.index(i.slug)
+            i.site_id != current_site, i.site_id, o.index(i.slug)
         )
 
         boxes = sorted(
