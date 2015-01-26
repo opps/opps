@@ -3,7 +3,6 @@ import warnings
 from django.contrib import admin
 from django.contrib.sites.models import Site
 from django.conf import settings
-from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import FilteredSelectMultiple
 
@@ -19,23 +18,9 @@ class AdminViewPermission(admin.ModelAdmin):
         warnings.warn("site_lookup will be removed!", DeprecationWarning)
         return 'site_iid__in'
 
-    def permission_in(self, user):
-        sites_id = []
-        channels_id = []
-        p = Permission.objects.filter(
-            user=user,
-            date_available__lte=timezone.now(),
-            published=True
-        ).values_list('site__id', 'channel__id')
-        for s, c in p:
-            sites_id.append(s)
-            channels_id.append(c)
-
-        return {'sites_id': set(sites_id), 'channels_id': channels_id}
-
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if settings.OPPS_MULTISITE_ADMIN and not request.user.is_superuser:
-            obj = self.permission_in(request.user)
+            obj = Permission.get_by_user(request.user)
 
             if db_field.name in ['site']:
                 kwargs['queryset'] = Site.objects.filter(
@@ -53,7 +38,7 @@ class AdminViewPermission(admin.ModelAdmin):
         if not settings.OPPS_MULTISITE_ADMIN or request.user.is_superuser:
             return qs
 
-        obj = self.permission_in(request.user)
+        obj = Permission.get_by_user(request.user)
 
         if self.__class__.__name__ == 'ChannelAdmin':
             return qs.filter(**{
@@ -66,7 +51,7 @@ class AdminViewPermission(admin.ModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         form = super(AdminViewPermission, self).get_form(
             request, obj, **kwargs)
-        obj = self.permission_in(request.user)
+        obj = Permission.get_by_user(request.user)
 
         try:
             attrs_mirror = {}
