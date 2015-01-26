@@ -13,7 +13,7 @@ class OppsAutocompleteLookup(AutocompleteLookup):
     def get_queryset(self):
         qs = super(OppsAutocompleteLookup, self).get_queryset()
 
-        if (not settings.OPPS_MULTISITE_ADMIN or 
+        if (not settings.OPPS_MULTISITE_ADMIN or
                 self.request.user.is_superuser):
             return qs
 
