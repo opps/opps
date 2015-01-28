@@ -20,7 +20,7 @@ class Permission(Publishable, ManyChanneling):
             sites_id.append(s)
             channels_id.append(c)
 
-        return {'sites_id': set(sites_id), 'channels_id': channels_id}
+        return {'sites_id': sites_id, 'channels_id': channels_id}
 
     class Meta:
         verbose_name = _(u'Permission')

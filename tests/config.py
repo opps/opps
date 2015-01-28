@@ -27,6 +27,7 @@ def configure():
 
                 'opps.core',
                 'opps.core.tags',
+                'opps.core.permissions',
                 'opps.images',
                 'opps.containers',
                 'opps.boxes',
@@ -70,6 +71,7 @@ def configure():
             'OPPS_DB_PORT': 6379,
             'OPPS_DB_NAME': 'opps',
             'OPPS_DB_ENGINE': 'opps.db._redis.Redis',
+            'OPPS_MULTISITE_ADMIN': True,
         }
 
         djcelery.setup_loader()
