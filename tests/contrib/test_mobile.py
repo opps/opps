@@ -32,7 +32,7 @@ class TestMobileTemplatesDir(TestCase):
             'opps.contrib.mobile.template.Loader',
             'django.template.loaders.app_directories.Loader',
         )
-        TEMPLATE_DIRS_MOBILE = ('mobile-templates',) 
+        TEMPLATE_DIRS_MOBILE = ('mobile-templates',)
         TEMPLATE_DIRS_WEB = ('web-templates',)
 
         custom_settings = self.settings(
@@ -41,20 +41,23 @@ class TestMobileTemplatesDir(TestCase):
             TEMPLATE_DIRS_MOBILE=TEMPLATE_DIRS_MOBILE,
             TEMPLATE_DIRS_WEB=TEMPLATE_DIRS_WEB,
             OPPS_CHECK_MOBILE=True,
-            OPPS_DOMAIN_MOBILE = 'm.testserver'
+            OPPS_DOMAIN_MOBILE='m.testserver'
         )
         with custom_settings:
             mobile_request = self.factory.get('/', HTTP_USER_AGENT='mobi')
-            desktop_request = self.factory.get('/', HTTP_USER_AGENT='Mozilla/5.0')
+            desktop_request = self.factory.get('/',
+                                               HTTP_USER_AGENT='Mozilla/5.0')
+
+            get_template_sources = self.template_loader.get_template_sources
 
             self.detection_middleware.process_request(desktop_request)
             self.assertEqual(
-                self.template_loader.get_template_sources('index.html').next(),
-                self.template_loader.get_template_sources('index.html', TEMPLATE_DIRS_WEB).next()
+                get_template_sources('index.html').next(),
+                get_template_sources('index.html', TEMPLATE_DIRS_WEB).next()
             )
 
             self.detection_middleware.process_request(mobile_request)
             self.assertEqual(
-                self.template_loader.get_template_sources('index.html').next(),
-                self.template_loader.get_template_sources('index.html', TEMPLATE_DIRS_MOBILE).next()
+                get_template_sources('index.html').next(),
+                get_template_sources('index.html', TEMPLATE_DIRS_MOBILE).next()
             )

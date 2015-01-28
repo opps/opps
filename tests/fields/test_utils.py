@@ -23,7 +23,6 @@ class FieldTemplateReadlTest(TestCase):
         self.assertFalse(read_on_template)
         self.assertEqual(read_on_template, {})
 
-
     def test_down_case(self):
         read_on_template = field_template_read(self.dict_out)
         self.assertEqual(read_on_template, self.dict_out)
