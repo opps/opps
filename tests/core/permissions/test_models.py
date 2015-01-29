@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from datetime import datetime
-
-from django.test import TestCase, Client
+from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.contrib.auth import get_user_model
 
