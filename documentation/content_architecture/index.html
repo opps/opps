@@ -373,6 +373,13 @@ update by itself based on some params:</p>
 <li>Limit and Offset (Use like you would use python slice [offset:limit])</li>
 </ul>
 <h1 id="custom-fields">Custom fields</h1>
+<p>To work with custom fields need to create the field in <code>admin</code> and use the context in the template:</p>
+<pre class="prettyprint well"><code>{% if context.fields.articlespost_checkbox_show_main_image_yes == 1 %}
+</code></pre>
+<p>or via templatetag:</p>
+<pre class="prettyprint well"><code>{% get_custom_field_value context 'articlespost-checkbox-show-main-image_yes' as new_name_you_var %}
+{% if new_name_you_var == 1 %}
+</code></pre>
 </div>
         </div>
 

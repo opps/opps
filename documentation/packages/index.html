@@ -425,6 +425,15 @@ def my_view_function():
 <h2 id="oppsflatpages">opps.flatpages</h2>
 <h2 id="oppsimages">opps.images</h2>
 <h2 id="oppssearch">opps.search</h2>
+<p>Opps uses django-haystack as wrapper for search engines like Solr and elasticsearch. This module provides a basic view and url for use haystack, see this example.</p>
+<pre class="prettyprint well"><code>OPPS_HAYSTACK_APPS = {
+    'video': 'opps.multimedias.models.Video',
+    'blog': 'opps.blogs.models.BlogPost'
+}
+</code></pre>
+<p>And in your urls.py you use this way.</p>
+<pre class="prettyprint well"><code>url(r'^search/', include('opps.search.urls')),
+</code></pre>
 <h2 id="oppssitemaps">opps.sitemaps</h2>
 <h2 id="oppsviews">opps.views</h2>
 </div>
