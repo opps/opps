@@ -105,6 +105,17 @@ class ManyChanneling(models.Model):
         abstract = True
 
 
+class ManySites(models.Model):
+    site = models.ManyToManyField(
+        Site,
+        verbose_name=_(u"Sites"),
+        null=True, blank=True,
+    )
+
+    class Meta:
+        abstract = True
+
+
 class Channeling(models.Model):
 
     channel = models.ForeignKey(
