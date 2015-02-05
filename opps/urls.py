@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import patterns, url, include
 from django.contrib import admin
+from django.conf import settings
+
 
 admin.autodiscover()
 
@@ -27,3 +29,11 @@ urlpatterns = patterns(
     url(r'^', include('opps.containers.urls', namespace='containers',
                       app_name='containers')),
 )
+
+if 'opps.core.permissions' in settings.INSTALLED_APPS:
+    urlpatterns = patterns(
+        '',
+        url(r'^', include('opps.core.permissions.urls',
+                          namespace='permissions',
+                          app_name='permissions')),
+    ) + urlpatterns

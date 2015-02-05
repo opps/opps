@@ -30,7 +30,8 @@ class SplitTags(TestCase):
         self.assertEqual(split_tags(source.format('#'), separator="#"), output)
 
         # Multiple chars
-        self.assertEqual(split_tags(source.format('%%'), separator="%%"), output)
+        self.assertEqual(split_tags(source.format('%%'), separator="%%"),
+                         output)
 
     def test_empty(self):
         self.assertEqual(split_tags(' '), [])

@@ -3,8 +3,6 @@ import warnings
 from django.contrib import admin
 from django.db.models import Q
 from django.contrib.sites.models import Site
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import PermissionsMixin
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import FilteredSelectMultiple
@@ -12,9 +10,6 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 from opps.channels.models import Channel
 
 from .models import Permission, PermissionGroup
-
-User = get_user_model()
-USE_DJANGO_GROUPS = issubclass(User, PermissionsMixin)
 
 
 class AdminViewPermission(admin.ModelAdmin):
@@ -24,62 +19,9 @@ class AdminViewPermission(admin.ModelAdmin):
         warnings.warn("site_lookup will be removed!", DeprecationWarning)
         return 'site_iid__in'
 
-    def permission_in(self, user):
-        channels_id = set()
-        channels_sites_id = set()
-
-        # get user permissions
-        sites_id = set(Permission.objects.filter(
-            user=user
-        ).values_list('site__id', flat=True))
-
-        channels_qs = Permission.objects.filter(
-            user=user
-        ).values_list('channel__id', 'channel__site_id', 'channel_recursive')
-
-        channels_recursive = set()
-        for channel_id, site_id, channel_recursive in channels_qs:
-            channels_id.add(channel_id)
-            channels_sites_id.add(site_id)
-            if channel_recursive:
-                channels_recursive.add(channel_id)
-
-        # get groups permissions
-        if USE_DJANGO_GROUPS:
-            sites_id = sites_id.union(set(PermissionGroup.objects.filter(
-                group__in=user.groups.all()
-            ).values_list('site__id', flat=True)))
-
-            channels_qs = PermissionGroup.objects.filter(
-                group__in=user.groups.all()
-            ).values_list(
-                'channel__id', 'channel__site_id', 'channel_recursive'
-            )
-
-            for channel_id, site_id, channel_recursive in channels_qs:
-                channels_id.add(channel_id)
-                channels_sites_id.add(site_id)
-                if channel_recursive:
-                    channels_recursive.add(channel_id)
-
-        if channels_recursive:
-            descendants = Channel.objects.get_queryset_descendants(
-                Channel.objects.filter(
-                    pk__in=channels_recursive
-                )
-            ).values_list('pk', flat=True)
-            channels_id = channels_id.union(descendants)
-
-        return {
-            'sites_id': sites_id,
-            'channels_id': channels_id,
-            'channels_sites_id': channels_sites_id,
-            'all_sites_id': sites_id.union(channels_sites_id)
-        }
-
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if settings.OPPS_MULTISITE_ADMIN and not request.user.is_superuser:
-            obj = self.permission_in(request.user)
+            obj = Permission.get_by_user(request.user)
 
             if db_field.name in ['site']:
                 kwargs['queryset'] = Site.objects.filter(
@@ -100,7 +42,7 @@ class AdminViewPermission(admin.ModelAdmin):
         if not settings.OPPS_MULTISITE_ADMIN or request.user.is_superuser:
             return qs
 
-        obj = self.permission_in(request.user)
+        obj = Permission.get_by_user(request.user)
 
         if self.__class__.__name__ == 'ChannelAdmin':
             return qs.filter(
@@ -116,7 +58,7 @@ class AdminViewPermission(admin.ModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         form = super(AdminViewPermission, self).get_form(
             request, obj, **kwargs)
-        obj = self.permission_in(request.user)
+        obj = Permission.get_by_user(request.user)
 
         try:
             attrs_mirror = {}

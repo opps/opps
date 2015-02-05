@@ -22,7 +22,7 @@ class ChannelFields(TestCase):
         self.assertEqual(field.__class__, models.CharField)
         self.assertEqual(field.max_length, 60)
 
-    def test_long_sland(self):
+    def test_long_slug(self):
         field = Channel._meta.get_field_by_name('long_slug')[0]
         self.assertEqual(field.__class__, models.SlugField)
         self.assertEqual(field.max_length, 250)
