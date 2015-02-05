@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import warnings
 from django.contrib import admin
+from django.db.models import Q
 from django.contrib.sites.models import Site
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
@@ -8,7 +9,7 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 
 from opps.channels.models import Channel
 
-from .models import Permission
+from .models import Permission, PermissionGroup
 
 
 class AdminViewPermission(admin.ModelAdmin):
@@ -24,11 +25,14 @@ class AdminViewPermission(admin.ModelAdmin):
 
             if db_field.name in ['site']:
                 kwargs['queryset'] = Site.objects.filter(
-                    id__in=obj.get('sites_id', []))
+                    id__in=obj.get('all_sites_id', [])
+                )
 
             if db_field.name in ['channel']:
                 kwargs['queryset'] = Channel.objects.filter(
-                    id__in=obj.get('channels_id', []))
+                    Q(id__in=obj.get('channels_id', [])) |
+                    Q(site_id__in=obj.get('sites_id', []))
+                )
 
         return super(AdminViewPermission, self).formfield_for_foreignkey(
             db_field, request, **kwargs)
@@ -41,12 +45,15 @@ class AdminViewPermission(admin.ModelAdmin):
         obj = Permission.get_by_user(request.user)
 
         if self.__class__.__name__ == 'ChannelAdmin':
-            return qs.filter(**{
-                'site__id__in': obj.get('sites_id', []),
-                'id__in': obj.get('channels_id', [])})
-        return qs.filter(**{
-            'site_iid__in': obj.get('sites_id', []),
-            'channel__id__in': obj.get('channels_id', [])})
+            return qs.filter(
+                Q(site_id__in=obj.get('sites_id', [])) |
+                Q(id__in=obj.get('channels_id', []))
+            )
+
+        return qs.filter(
+            Q(site_iid__in=obj.get('sites_id', [])) |
+            Q(channel_id__in=obj.get('channels_id', []))
+        )
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(AdminViewPermission, self).get_form(
@@ -58,7 +65,8 @@ class AdminViewPermission(admin.ModelAdmin):
             if settings.OPPS_MULTISITE_ADMIN and not request.user.is_superuser:
                 qs_mirror = form.base_fields['mirror_site'].queryset
                 form.base_fields['mirror_site'].queryset = qs_mirror.filter(
-                    id__in=obj.get('sites_id', []))
+                    id__in=obj.get('all_sites_id', [])
+                )
                 attrs_mirror = {'disabled': 'disabled'}
 
             form.base_fields['mirror_site'].widget = FilteredSelectMultiple(
@@ -70,7 +78,9 @@ class AdminViewPermission(admin.ModelAdmin):
             if settings.OPPS_MULTISITE_ADMIN and not request.user.is_superuser:
                 qs_channel = form.base_fields['channel'].queryset
                 form.base_fields['channel'].queryset = qs_channel.filter(
-                    id__in=obj.get('channels_id', []))
+                    Q(site_id__in=obj.get('sites_id', [])) |
+                    Q(id__in=obj.get('channels_id', []))
+                )
         except:
             pass
 
@@ -78,9 +88,16 @@ class AdminViewPermission(admin.ModelAdmin):
 
 
 class PermissionAdmin(admin.ModelAdmin):
+    fields = ('user', 'channel', 'channel_recursive', 'site')
     raw_id_fields = ('user',)
     filter_horizontal = ('channel',)
-    exclude = ('site_iid', 'mirror_site', 'site_domain')
-
 
 admin.site.register(Permission, PermissionAdmin)
+
+
+class PermissionGroupAdmin(admin.ModelAdmin):
+    fields = ('group', 'channel', 'channel_recursive', 'site')
+    raw_id_fields = ('group',)
+    filter_horizontal = ('channel',)
+
+admin.site.register(PermissionGroup, PermissionGroupAdmin)
