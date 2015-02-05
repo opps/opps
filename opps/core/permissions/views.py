@@ -25,6 +25,6 @@ class OppsAutocompleteLookup(AutocompleteLookup):
             qs = qs.filter(channel__id__in=permissions.get('channels_id', []))
 
         if issubclass(self.model, Publisher):
-            qs = qs.filter(site_iid__in=permissions.get('sites_id', []))
+            qs = qs.filter(site_iid__in=permissions.get('all_sites_id', []))
 
         return qs

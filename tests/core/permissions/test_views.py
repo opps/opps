@@ -44,10 +44,7 @@ class OppsAutocompleteLookupTest(TestCase):
             site=self.site,
             user=self.user
         )
-        self.permission = Permission.objects.create(
-            user=self.user,
-            published=True
-        )
+        self.permission = Permission.objects.create(user=self.user)
         self.permission.channel.add(self.channel_allowed)
         self.permission.save()
 
