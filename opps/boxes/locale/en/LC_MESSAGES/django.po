@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-08 15:59-0300\n"
+"POT-Creation-Date: 2015-02-20 19:05-0300\n"
 "PO-Revision-Date: 2013-08-05 18:19+0000\n"
 "Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,65 +23,108 @@ msgstr ""
 msgid "Boxes"
 msgstr "Boxes"
 
-#: admin.py:23
+#: admin.py:24
 msgid "Identification"
 msgstr "Identification"
 
-#: admin.py:25
+#: admin.py:26
 msgid "Rules"
 msgstr "Rules"
 
-#: admin.py:27
+#: admin.py:30
 msgid "Publication"
 msgstr "Publication"
 
-#: admin.py:30 admin.py:49
+#: admin.py:33 admin.py:52
 msgid "Data sample"
 msgstr "Data sample"
 
-#: models.py:23
-msgid "Dynamic queryset name"
-msgstr "Dynamic queryset name"
-
-#: models.py:25 models.py:90
-msgid "Slug"
-msgstr "Slug"
-
-#: models.py:31
+#: forms.py:12 models.py:24
 msgid "Model"
 msgstr "Model"
 
-#: models.py:32
+#: models.py:16
+msgid "Dynamic queryset name"
+msgstr "Dynamic queryset name"
+
+#: models.py:18 models.py:194
+msgid "Slug"
+msgstr "Slug"
+
+#: models.py:25
 msgid "Limit"
 msgstr "Limit"
+
+#: models.py:26
+msgid "Offset"
+msgstr ""
+
+#: models.py:28
+#, fuzzy
+msgid "Order Field"
+msgstr "Order"
+
+#: models.py:31
+msgid "Take care, should be an existing field or lookup"
+msgstr ""
 
 #: models.py:33
 msgid "Order"
 msgstr "Order"
 
-#: models.py:37
+#: models.py:38
 msgid "Channel"
 msgstr "Channel"
 
-#: models.py:43
+#: models.py:45
+msgid "Recursive"
+msgstr ""
+
+#: models.py:46
+msgid "Bring the content channels and subchannels (tree)"
+msgstr ""
+
+#: models.py:51
 msgid "Filters"
 msgstr "Filters"
 
-#: models.py:44
+#: models.py:52
 msgid "Json format extra filters for queryset"
 msgstr "Json format extra filters for queryset"
 
-#: models.py:54
-msgid "Invalid JSON"
-msgstr "Invalid JSON"
+#: models.py:58
+msgid "Excludes"
+msgstr ""
 
 #: models.py:59
-msgid "Invalid Queryset"
-msgstr "Invalid Queryset"
+#, fuzzy
+msgid "Json format for queryset excludes"
+msgstr "Json format extra filters for queryset"
 
-#: models.py:88
+#: models.py:83
+#, fuzzy
+msgid "Invalid JSON for filters"
+msgstr "Invalid JSON"
+
+#: models.py:89
+#, fuzzy
+msgid "Invalid JSON for excludes"
+msgstr "Invalid JSON"
+
+#: models.py:101
+msgid "Offset can't be equal or higher thanlimit"
+msgstr ""
+
+#: models.py:106
+msgid "To use recursion (channel) is necessary to select a channel"
+msgstr ""
+
+#: models.py:191
 msgid "Box name"
 msgstr "Box name"
+
+#~ msgid "Invalid Queryset"
+#~ msgstr "Invalid Queryset"
 
 #~ msgid "Relationships"
 #~ msgstr "Relationships"

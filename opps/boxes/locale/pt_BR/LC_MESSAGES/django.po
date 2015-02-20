@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-13 12:36-0300\n"
+"POT-Creation-Date: 2015-02-20 19:05-0300\n"
 "PO-Revision-Date: 2013-08-08 17:12+0000\n"
 "Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
@@ -23,87 +23,99 @@ msgstr ""
 msgid "Boxes"
 msgstr "Boxes"
 
-#: admin.py:23
+#: admin.py:24
 msgid "Identification"
 msgstr "Identificação"
 
-#: admin.py:25
+#: admin.py:26
 msgid "Rules"
 msgstr "Regras"
 
-#: admin.py:28
+#: admin.py:30
 msgid "Publication"
 msgstr "Publicação"
 
-#: admin.py:31 admin.py:50
+#: admin.py:33 admin.py:52
 msgid "Data sample"
 msgstr "Exemplo de dado"
 
-#: forms.py:12 models.py:21
+#: forms.py:12 models.py:24
 msgid "Model"
 msgstr "Modelo"
 
-#: models.py:13
+#: models.py:16
 msgid "Dynamic queryset name"
 msgstr "Nome do Queryset dinâmico"
 
-#: models.py:15 models.py:149
+#: models.py:18 models.py:194
 msgid "Slug"
 msgstr "Retranca"
 
-#: models.py:22
+#: models.py:25
 msgid "Limit"
 msgstr "Limite"
 
-#: models.py:23
+#: models.py:26
 msgid "Offset"
-msgstr ""
+msgstr "Offset"
 
-#: models.py:25
+#: models.py:28
 msgid "Order Field"
 msgstr "Campo Ordem"
 
-#: models.py:28
+#: models.py:31
 msgid "Take care, should be an existing field or lookup"
-msgstr ""
+msgstr "Atenção, deve ser um campo ou um lookup existente"
 
-#: models.py:30
+#: models.py:33
 msgid "Order"
 msgstr "Ordem"
 
-#: models.py:34
+#: models.py:38
 msgid "Channel"
 msgstr "Canal"
 
-#: models.py:40
+#: models.py:45
+msgid "Recursive"
+msgstr "Recursivo"
+
+#: models.py:46
+msgid "Bring the content channels and subchannels (tree)"
+msgstr "Retornar o conteúdo de canais e subcanais (árvore)"
+
+#: models.py:51
 msgid "Filters"
 msgstr "Filtros"
 
-#: models.py:41
+#: models.py:52
 msgid "Json format extra filters for queryset"
 msgstr "Filtros extras para queryset no formato JSON"
 
-#: models.py:47
+#: models.py:58
 msgid "Excludes"
 msgstr ""
 
-#: models.py:48
+#: models.py:59
 msgid "Json format for queryset excludes"
 msgstr "Excludes de queryset no formato JSON"
 
-#: models.py:72
+#: models.py:83
 msgid "Invalid JSON for filters"
 msgstr "JSON inválido para os Filtros"
 
-#: models.py:78
+#: models.py:89
 msgid "Invalid JSON for excludes"
 msgstr "JSON inválido para os Excludes"
 
-#: models.py:88
+#: models.py:101
 msgid "Offset can't be equal or higher thanlimit"
 msgstr "Offset não pode ser igual ou maior que o limite"
 
-#: models.py:146
+#: models.py:106
+msgid "To use recursion (channel) is necessary to select a channel"
+msgstr ""
+
+#: models.py:191
 msgid "Box name"
 msgstr "Nome da Box"
 

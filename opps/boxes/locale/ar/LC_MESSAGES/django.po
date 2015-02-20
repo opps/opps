@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Translators:
 # Translators:
@@ -9,77 +9,115 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-08 15:59-0300\n"
+"POT-Creation-Date: 2015-02-20 19:05-0300\n"
 "PO-Revision-Date: 2013-08-05 18:19+0000\n"
 "Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
-"Language-Team: Arabic (http://www.transifex.com/projects/p/opps-core/language/ar/)\n"
+"Language-Team: Arabic (http://www.transifex.com/projects/p/opps-core/"
+"language/ar/)\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ar\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: __init__.py:5
 msgid "Boxes"
 msgstr ""
 
-#: admin.py:23
+#: admin.py:24
 msgid "Identification"
 msgstr ""
 
-#: admin.py:25
+#: admin.py:26
 msgid "Rules"
 msgstr ""
 
-#: admin.py:27
+#: admin.py:30
 msgid "Publication"
 msgstr ""
 
-#: admin.py:30 admin.py:49
+#: admin.py:33 admin.py:52
 msgid "Data sample"
 msgstr ""
 
-#: models.py:23
-msgid "Dynamic queryset name"
-msgstr ""
-
-#: models.py:25 models.py:90
-msgid "Slug"
-msgstr ""
-
-#: models.py:31
+#: forms.py:12 models.py:24
 msgid "Model"
 msgstr ""
 
-#: models.py:32
+#: models.py:16
+msgid "Dynamic queryset name"
+msgstr ""
+
+#: models.py:18 models.py:194
+msgid "Slug"
+msgstr ""
+
+#: models.py:25
 msgid "Limit"
+msgstr ""
+
+#: models.py:26
+msgid "Offset"
+msgstr ""
+
+#: models.py:28
+msgid "Order Field"
+msgstr ""
+
+#: models.py:31
+msgid "Take care, should be an existing field or lookup"
 msgstr ""
 
 #: models.py:33
 msgid "Order"
 msgstr ""
 
-#: models.py:37
+#: models.py:38
 msgid "Channel"
 msgstr ""
 
-#: models.py:43
+#: models.py:45
+msgid "Recursive"
+msgstr ""
+
+#: models.py:46
+msgid "Bring the content channels and subchannels (tree)"
+msgstr ""
+
+#: models.py:51
 msgid "Filters"
 msgstr ""
 
-#: models.py:44
+#: models.py:52
 msgid "Json format extra filters for queryset"
 msgstr ""
 
-#: models.py:54
-msgid "Invalid JSON"
+#: models.py:58
+msgid "Excludes"
 msgstr ""
 
 #: models.py:59
-msgid "Invalid Queryset"
+msgid "Json format for queryset excludes"
 msgstr ""
 
-#: models.py:88
+#: models.py:83
+msgid "Invalid JSON for filters"
+msgstr ""
+
+#: models.py:89
+msgid "Invalid JSON for excludes"
+msgstr ""
+
+#: models.py:101
+msgid "Offset can't be equal or higher thanlimit"
+msgstr ""
+
+#: models.py:106
+msgid "To use recursion (channel) is necessary to select a channel"
+msgstr ""
+
+#: models.py:191
 msgid "Box name"
 msgstr ""
 
