@@ -1,11 +1,10 @@
 
 from HTMLParser import HTMLParser
 from django import template
+import xml.parsers.expat
 
 register = template.Library()
 parser = HTMLParser()
-
-import xml.parsers.expat
 
 
 def unescape(s):
