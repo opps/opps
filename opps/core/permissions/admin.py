@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import FilteredSelectMultiple
 
 from opps.channels.models import Channel
+from opps.core.models import Channeling, Publisher
 
 from .models import Permission, PermissionGroup
 
@@ -50,10 +51,15 @@ class AdminViewPermission(admin.ModelAdmin):
                 Q(id__in=obj.get('channels_id', []))
             )
 
-        return qs.filter(
-            Q(site_iid__in=obj.get('sites_id', [])) |
-            Q(channel_id__in=obj.get('channels_id', []))
-        )
+        filters = Q()
+
+        if issubclass(qs.model, Publisher):
+            filters |= Q(site_iid__in=obj.get('sites_id', []))
+
+        if issubclass(qs.model, Channeling):
+            filters |= Q(channel_id__in=obj.get('channels_id', []))
+
+        return qs.filter(filters)
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(AdminViewPermission, self).get_form(

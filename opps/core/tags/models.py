@@ -18,9 +18,7 @@ class Tag(Date, Slugged):
         super(Tag, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        return u'{0}'.format(
-            self.name
-        )
+        return self.name
 
     class Meta:
         verbose_name = _(u'Tag')

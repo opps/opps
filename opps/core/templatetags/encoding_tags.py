@@ -1,4 +1,5 @@
 
+from xml.parsers import expat
 from HTMLParser import HTMLParser
 from django import template
 import xml.parsers.expat
@@ -17,7 +18,7 @@ def unescape(s):
     list = []
 
     # create and initialize a parser object
-    p = xml.parsers.expat.ParserCreate("utf-8")
+    p = expat.ParserCreate("utf-8")
     p.buffer_text = True
     p.returns_unicode = want_unicode
     p.CharacterDataHandler = list.append

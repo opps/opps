@@ -98,14 +98,10 @@ def load_boxes(context, slugs=None, **filters):
     exclude_ids = []
 
     if slugs:
-        ob = lambda i, o=ordered_slugs: (
-            i.site != current_site, i.site.id, o.index(i.slug)
-        )
+        def ob(i, o=ordered_slugs):
+            return (i.site_id != current_site, i.site_id, o.index(i.slug))
 
-        boxes = sorted(
-            boxes,
-            key=ob
-        )
+        boxes = sorted(boxes, key=ob)
 
     for box in boxes:
         if box.queryset:
@@ -114,17 +110,17 @@ def load_boxes(context, slugs=None, **filters):
             results = box.ordered_containers(exclude_ids=exclude_ids)
 
         if box.queryset:
-            [exclude_ids.append(i.pk)
-             for i in results if i.pk not in exclude_ids
-             and issubclass(i.__class__, Container)]
+            for i in results:
+                if i.pk not in exclude_ids and isinstance(i, Container):
+                    exclude_ids.append(i.pk)
         elif fallback:
-            [exclude_ids.append(i.container_id)
-             for i in results
-             if i.container_id and i.container_id not in exclude_ids]
+            for i in results:
+                if i.container_id and i.container_id not in exclude_ids:
+                    exclude_ids.append(i.container_id)
         else:
-            [exclude_ids.append(i.pk)
-             for i in results
-             if i.pk not in exclude_ids]
+            for i in results:
+                if i.pk not in exclude_ids:
+                    exclude_ids.append(i.pk)
 
     results = {}
     for box in boxes:
