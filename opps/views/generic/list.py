@@ -98,7 +98,7 @@ class ListView(View, DjangoListView):
         if not is_paginated:
             for box in self.articleboxes:
                 self.excluded_ids.update(
-                    [a.pk for a in box.ordered_containers()])
+                    box.ordered_containers().values_list('pk', flat=True))
 
         queryset = super(ListView, self).get_queryset()
         filters = {}

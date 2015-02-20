@@ -18,7 +18,8 @@ class Tag(Date, Slugged):
             self.slug = slugify(self.name)
         super(Tag, self).save(*args, **kwargs)
 
-    __unicode__ = lambda self: self.name
+    def __unicode__(self):
+        return self.name
 
     class Meta:
         verbose_name = _(u'Tag')
