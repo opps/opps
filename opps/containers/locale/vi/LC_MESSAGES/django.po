@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Translators:
 # Anh Phan <vietnamesel10n@gmail.com>, 2013
@@ -10,218 +10,240 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-21 16:16-0300\n"
+"POT-Creation-Date: 2015-02-20 20:32-0300\n"
 "PO-Revision-Date: 2014-08-21 19:51+0000\n"
 "Last-Translator: Thiago Avelino <thiago@avelino.xxx>\n"
-"Language-Team: Vietnamese (http://www.transifex.com/projects/p/opps-core/language/vi/)\n"
+"Language-Team: Vietnamese (http://www.transifex.com/projects/p/opps-core/"
+"language/vi/)\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: admin.py:27 models.py:211
-msgid "Container image"
-msgstr "Hình ảnh phần chứa dữ liệu"
+#: admin.py:30 models.py:497
+msgid "Related content"
+msgstr ""
 
-#: admin.py:28 models.py:212
-msgid "Container images"
-msgstr "Các hình ảnh phần chứa dữ liệu"
+#: admin.py:31 models.py:498
+msgid "Related contents"
+msgstr ""
 
-#: admin.py:38
+#: admin.py:42 models.py:210
+msgid "Image"
+msgstr "Hình ảnh"
+
+#: admin.py:43
+#, fuzzy
+msgid "Images"
+msgstr "Hình ảnh"
+
+#: admin.py:53
 msgid "No Image"
 msgstr "Không có hình ảnh"
 
-#: admin.py:39
+#: admin.py:54
 msgid "Thumbnail"
 msgstr "Hình ảnh thu nhỏ"
 
-#: admin.py:99
+#: admin.py:118
 msgid "Identification"
 msgstr "Định danh"
 
-#: admin.py:102
+#: admin.py:121
 msgid "Relationships"
 msgstr "Các mối liên hệ"
 
-#: admin.py:104
+#: admin.py:123
 msgid "Publication"
 msgstr "Công bố"
 
-#: admin.py:117
+#: admin.py:140
 msgid "Clean ended containers"
 msgstr "Dọn dẹp các phần chứa dữ liệu cuối cùng"
 
-#: admin.py:136
+#: admin.py:159
 msgid "Dynamic"
 msgstr "Động"
 
-#: admin.py:151 models.py:40
+#: admin.py:176 models.py:42
 msgid "Child class"
 msgstr "Lớp con"
 
 #: forms.py:49
 #, python-format
-msgid "The slug \"%s\" already exists on channel \"%s\" at site \"%s\""
+msgid ""
+"The slug \"%(slug)s\" already exists on channel \"%(channel)s\"         at "
+"site \"%(site)s\""
 msgstr ""
 
-#: models.py:29 models.py:224 models.py:412
+#: models.py:31 models.py:234 models.py:431
 msgid "Title"
 msgstr "Tiêu đề"
 
-#: models.py:31 models.py:416
+#: models.py:33 models.py:435
 msgid "Hat"
 msgstr "Mũ"
 
-#: models.py:36
+#: models.py:38
 msgid "Short URL"
 msgstr "Đường dẫn liên kết ngắn"
 
-#: models.py:46
+#: models.py:48
 msgid "Child module"
 msgstr "Module con"
 
-#: models.py:52
+#: models.py:54
 msgid "Child app label"
 msgstr "Nhãn ứng dụng con"
 
-#: models.py:58
+#: models.py:60
 msgid "Show on root channel?"
 msgstr "Hiển thị ở kênh dữ liệu gốc?"
 
-#: models.py:62
+#: models.py:64
 msgid "Source"
 msgstr "Nguồn"
 
-#: models.py:65
+#: models.py:67
 msgid "Customized"
 msgstr ""
 
-#: models.py:81 models.py:193 models.py:251 models.py:402 models.py:465
+#: models.py:91 models.py:203 models.py:261 models.py:421 models.py:484
+#: models.py:508
 msgid "Container"
 msgstr "Phần chứa dữ liệu"
 
-#: models.py:82
+#: models.py:92
 msgid "Containers"
 msgstr "Các phần chứa dữ liệu"
 
-#: models.py:131
+#: models.py:141
 msgid "Get HTTP Absolute URL"
 msgstr ""
 
-#: models.py:195 models.py:405
+#: models.py:205 models.py:424 models.py:494
 msgid "Order"
 msgstr "Trật tự"
 
-#: models.py:200
-msgid "Image"
-msgstr "Hình ảnh"
-
-#: models.py:204
+#: models.py:214
 msgid "Caption"
 msgstr "Đầu đề"
 
-#: models.py:230
+#: models.py:221
+msgid "Container image"
+msgstr "Hình ảnh phần chứa dữ liệu"
+
+#: models.py:222
+msgid "Container images"
+msgstr "Các hình ảnh phần chứa dữ liệu"
+
+#: models.py:240
 msgid "Title Link"
 msgstr ""
 
-#: models.py:239 models.py:425
+#: models.py:249 models.py:444
 msgid "Main Image"
 msgstr ""
 
-#: models.py:242 models.py:428
+#: models.py:252 models.py:447
 msgid "Main Image Caption"
 msgstr ""
 
-#: models.py:246 models.py:432
+#: models.py:256 models.py:451
 msgid "Maximum characters 4000"
 msgstr ""
 
-#: models.py:259
+#: models.py:269
 msgid "Query Set"
 msgstr "Cài Đặt Truy Vấn"
 
-#: models.py:263
+#: models.py:273
 msgid "Content Group"
 msgstr ""
 
-#: models.py:266
+#: models.py:276
 msgid "Boxes in the same group do not allow repetitions"
 msgstr ""
 
-#: models.py:270
+#: models.py:280
 msgid "Container box"
 msgstr "Hộp chứa dữ liệu"
 
-#: models.py:271
+#: models.py:281
 msgid "Containers boxes"
 msgstr "Các hộp thuộc phần chứa dữ liệu"
 
-#: models.py:386
+#: models.py:405
 msgid "Load in a new window"
 msgstr ""
 
-#: models.py:387
+#: models.py:406
 msgid "Load in the same frame as it was clicked"
 msgstr ""
 
-#: models.py:388
+#: models.py:407
 msgid "Load in the parent frameset"
 msgstr ""
 
-#: models.py:389
+#: models.py:408
 msgid "Load in the full body of the window"
 msgstr ""
 
-#: models.py:396
+#: models.py:415
 msgid "Container Box"
 msgstr "Hộp chứa dữ liệu"
 
-#: models.py:406
+#: models.py:425
 msgid "Aggregate container"
 msgstr "Gom nhóm các phần chứa dữ liệu"
 
-#: models.py:407
+#: models.py:426
 msgid "Highlight container"
 msgstr ""
 
-#: models.py:408
+#: models.py:427
 msgid "Date available"
 msgstr "Ngày hiện có"
 
-#: models.py:410
+#: models.py:429
 msgid "End date"
 msgstr "Ngày kết thúc"
 
-#: models.py:435
+#: models.py:454
 msgid "URL"
 msgstr ""
 
-#: models.py:436
+#: models.py:455
 msgid "URL Target"
 msgstr ""
 
-#: models.py:442
+#: models.py:461
 msgid "Article box articles"
 msgstr "Các tiêu đề của hộp tiêu đề"
 
-#: models.py:443
+#: models.py:462
 msgid "Article boxes articles"
 msgstr "Các tiêu đề của hộp tiêu đề"
 
-#: models.py:455
+#: models.py:474
 msgid "Please select a Container or insert a URL!"
 msgstr ""
 
-#: models.py:459
+#: models.py:478
 msgid "Article not published!"
 msgstr "Tiêu đề vẫn chưa được đăng!"
 
-#: models.py:468
+#: models.py:490
+#, fuzzy
+msgid "Related Container"
+msgstr "Gom nhóm các phần chứa dữ liệu"
+
+#: models.py:511
 msgid "Mirror"
 msgstr ""
 
-#: models.py:469
+#: models.py:512
 msgid "Mirrors"
 msgstr ""
 

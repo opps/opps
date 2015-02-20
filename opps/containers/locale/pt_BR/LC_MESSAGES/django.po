@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-12 16:57-0200\n"
+"POT-Creation-Date: 2015-02-20 20:32-0300\n"
 "PO-Revision-Date: 2014-12-12 16:53-0300\n"
 "Last-Translator: Paulo Roberto <proberto.macedo@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/opps-"
@@ -24,21 +24,21 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: admin.py:30 models.py:494
+#: admin.py:30 models.py:497
 msgid "Related content"
 msgstr "Conteúdo relacionado"
 
-#: admin.py:31 models.py:495
+#: admin.py:31 models.py:498
 msgid "Related contents"
 msgstr "Conteúdos relacionados"
 
-#: admin.py:42 models.py:221
-msgid "Container image"
-msgstr "Imagem de Container"
+#: admin.py:42 models.py:210
+msgid "Image"
+msgstr "Imagem"
 
-#: admin.py:43 models.py:222
-msgid "Container images"
-msgstr "Imagens de Container"
+#: admin.py:43
+msgid "Images"
+msgstr "Imagens"
 
 #: admin.py:53
 msgid "No Image"
@@ -68,85 +68,90 @@ msgstr "Containers finalizados"
 msgid "Dynamic"
 msgstr "Dinâmico"
 
-#: admin.py:176 models.py:41
+#: admin.py:176 models.py:42
 msgid "Child class"
 msgstr "Classe filha"
 
 #: forms.py:49
-#, python-format
-msgid "The slug \"%s\" already exists on channel \"%s\" at site \"%s\""
-msgstr "O slug \"%s\" já existe no canal \"%s\" do site \"%s\""
+msgid ""
+"The slug \"%(slug)s\" already exists on channel \"%(channel)s\"         at "
+"site \"%(site)s\""
+msgstr "O slug \"%(slug)s\" já existe no canal \"%(channel)s\" do site \"%(site)s\""
 
-#: models.py:30 models.py:234 models.py:428
+#: models.py:31 models.py:234 models.py:431
 msgid "Title"
 msgstr "Título"
 
-#: models.py:32 models.py:432
+#: models.py:33 models.py:435
 msgid "Hat"
 msgstr "Chapéu"
 
-#: models.py:37
+#: models.py:38
 msgid "Short URL"
 msgstr "URL Curta"
 
-#: models.py:47
+#: models.py:48
 msgid "Child module"
 msgstr "Módulo filho"
 
-#: models.py:53
+#: models.py:54
 msgid "Child app label"
 msgstr "Nome da app Filha"
 
-#: models.py:59
+#: models.py:60
 msgid "Show on root channel?"
 msgstr "Mostrar no canal pai?"
 
-#: models.py:63
+#: models.py:64
 msgid "Source"
 msgstr "Fonte"
 
-#: models.py:66
+#: models.py:67
 msgid "Customized"
 msgstr "Personalizado"
 
-#: models.py:90 models.py:203 models.py:261 models.py:418 models.py:481
-#: models.py:505
+#: models.py:91 models.py:203 models.py:261 models.py:421 models.py:484
+#: models.py:508
 msgid "Container"
 msgstr "Container"
 
-#: models.py:91
+#: models.py:92
 msgid "Containers"
 msgstr "Containers"
 
-#: models.py:140
+#: models.py:141
 msgid "Get HTTP Absolute URL"
 msgstr "URL exata com HTTP"
 
-#: models.py:205 models.py:421 models.py:491
+#: models.py:205 models.py:424 models.py:494
 msgid "Order"
 msgstr "Ordem"
-
-#: models.py:210
-msgid "Image"
-msgstr "Imagem"
 
 #: models.py:214
 msgid "Caption"
 msgstr "Legenda"
 
+#: models.py:221
+msgid "Container image"
+msgstr "Imagem de Container"
+
+#: models.py:222
+msgid "Container images"
+msgstr "Imagens de Container"
+
 #: models.py:240
 msgid "Title Link"
 msgstr "Link do titulo"
 
-#: models.py:249 models.py:441
+#: models.py:249 models.py:444
 msgid "Main Image"
 msgstr "Imagem Principal"
 
-#: models.py:252 models.py:444
+#: models.py:252 models.py:447
 msgid "Main Image Caption"
 msgstr "Legenda da Imagem Principal"
 
-#: models.py:256 models.py:448
+#: models.py:256 models.py:451
 msgid "Maximum characters 4000"
 msgstr "Máximo de caracteres 4000"
 
@@ -170,75 +175,75 @@ msgstr "Box de Container"
 msgid "Containers boxes"
 msgstr "Boxes de Containers"
 
-#: models.py:402
+#: models.py:405
 msgid "Load in a new window"
 msgstr "Abrir em nova janela"
 
-#: models.py:403
+#: models.py:406
 msgid "Load in the same frame as it was clicked"
 msgstr "Abrir no mesmo frame onde foi clicado"
 
-#: models.py:404
+#: models.py:407
 msgid "Load in the parent frameset"
 msgstr "Abrir no frameset pai"
 
-#: models.py:405
+#: models.py:408
 msgid "Load in the full body of the window"
 msgstr "Abrir na mesma janela"
 
-#: models.py:412
+#: models.py:415
 msgid "Container Box"
 msgstr "Box de Container"
 
-#: models.py:422
+#: models.py:425
 msgid "Aggregate container"
 msgstr "Agregar containers"
 
-#: models.py:423
+#: models.py:426
 msgid "Highlight container"
 msgstr "Container em destaque"
 
-#: models.py:424
+#: models.py:427
 msgid "Date available"
 msgstr "Data de publicação"
 
-#: models.py:426
+#: models.py:429
 msgid "End date"
 msgstr "Data fim"
 
-#: models.py:451
+#: models.py:454
 msgid "URL"
 msgstr "URL"
 
-#: models.py:452
+#: models.py:455
 msgid "URL Target"
 msgstr "URL destino"
 
-#: models.py:458
+#: models.py:461
 msgid "Article box articles"
 msgstr "Artigos de Box de Artigos"
 
-#: models.py:459
+#: models.py:462
 msgid "Article boxes articles"
 msgstr "Artigos de Boxes de Artigos"
 
-#: models.py:471
+#: models.py:474
 msgid "Please select a Container or insert a URL!"
 msgstr "Por favor, selecione um Container ou insira uma URL"
 
-#: models.py:475
+#: models.py:478
 msgid "Article not published!"
 msgstr "Artigo não publicado!"
 
-#: models.py:487
+#: models.py:490
 msgid "Related Container"
 msgstr "Container relacionado"
 
-#: models.py:508
+#: models.py:511
 msgid "Mirror"
 msgstr "Espelho"
 
-#: models.py:509
+#: models.py:512
 msgid "Mirrors"
 msgstr "Espelhos"
 

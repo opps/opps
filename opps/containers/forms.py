@@ -46,7 +46,8 @@ class ContainerAdminForm(forms.ModelForm):
                 ] = forms.CharField(required=False)
 
     def clean(self):
-        msg = _('The slug "%s" already exists on channel "%s" at site "%s"')
+        msg = _('The slug "%(slug)s" already exists on channel "%(channel)s"\
+         at site "%(site)s"')
         data = self.cleaned_data
         if data.get('site') and data.get('channel') and data.get('slug'):
             qs = Container.objects.filter(
@@ -54,8 +55,7 @@ class ContainerAdminForm(forms.ModelForm):
             if self.instance.pk is not None:
                 qs = qs.exclude(pk=self.instance.pk)
             if qs.exists():
-                args = (data['slug'], data['channel'], data['site'])
-                msg = msg % args
+                msg = msg % data
                 self._errors["slug"] = self.error_class([msg])
         return data
 

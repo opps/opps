@@ -105,7 +105,7 @@ msgstr "Canal"
 
 #: models.py:88
 msgid "Get HTTP Absolute URL"
-msgstr "Obter URL HTTP Absoluta"
+msgstr "URL exata com HTTP"
 
 #~ msgid "Default"
 #~ msgstr "Padrão"
