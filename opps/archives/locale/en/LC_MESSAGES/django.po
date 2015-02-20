@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-12 00:06-0300\n"
+"POT-Creation-Date: 2015-02-20 18:27-0300\n"
 "PO-Revision-Date: 2013-08-05 18:16+0000\n"
 "Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,42 +17,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: __init__.py:5 models.py:39
+#: __init__.py:5 models.py:55
 msgid "Archives"
 msgstr "Archives"
 
-#: admin.py:21
+#: admin.py:23
 msgid "Identification"
 msgstr ""
 
-#: admin.py:23
+#: admin.py:25
 msgid "Content"
 msgstr ""
 
-#: admin.py:25
+#: admin.py:27
 msgid "Publication"
 msgstr ""
 
-#: models.py:27
+#: admin.py:41
+msgid "Download"
+msgstr ""
+
+#: admin.py:43
+msgid "download"
+msgstr ""
+
+#: models.py:28
 msgid "Title"
 msgstr "Title"
 
-#: models.py:29 models.py:38
+#: models.py:31 models.py:54
 msgid "Archive"
 msgstr "Archive"
 
-#: models.py:30
+#: models.py:34
+#, fuzzy
+msgid "Archive URL"
+msgstr "Archive"
+
+#: models.py:38
 msgid "Description"
 msgstr "Description"
 
-#: models.py:33
+#: models.py:41
 msgid "Source"
 msgstr ""
 
-#: models.py:55
+#: models.py:49
+msgid "You must fill archive or archive URL"
+msgstr ""
+
+#: models.py:51
+msgid "Cannot set archive and archive URL"
+msgstr ""
+
+#: models.py:71
 msgid "File"
 msgstr "File"
 
-#: models.py:56
+#: models.py:72
 msgid "Files"
 msgstr "Files"
