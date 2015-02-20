@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-08 15:59-0300\n"
+"POT-Creation-Date: 2015-02-20 20:49-0300\n"
 "PO-Revision-Date: 2013-08-05 18:24+0000\n"
 "Last-Translator: Thiago Avelino <Thiagoavelinoster@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,79 +17,100 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: __init__.py:5 models.py:86
+#: __init__.py:5 models.py:108 templates/images/all_images.html:11
+#: templates/images/list_images.html:5
 msgid "Images"
 msgstr "Images"
 
-#: admin.py:20
-msgid "User"
-msgstr "User"
-
-#: admin.py:67
+#: admin.py:26
 msgid "Identification"
 msgstr "Identification"
 
-#: admin.py:69
+#: admin.py:28
 msgid "Crop"
 msgstr "Crop"
 
-#: admin.py:73
+#: admin.py:32
 msgid "Content"
 msgstr "Content"
 
-#: admin.py:75
+#: admin.py:34
 msgid "Publication"
 msgstr "Publication"
 
-#: admin.py:92
+#: admin.py:50
 msgid "Select"
 msgstr "Select"
 
-#: admin.py:99
+#: admin.py:58
 msgid "No Image"
 msgstr "No Image"
 
-#: admin.py:100
+#: admin.py:59
 msgid "Thumbnail"
 msgstr "Thumbnail"
 
-#: admin.py:109
+#: admin.py:71
 msgid "Dimension"
 msgstr "Dimension"
 
-#: models.py:10
-msgid "Left"
-msgstr "Left"
-
-#: models.py:11
-msgid "Center"
-msgstr "Center"
-
-#: models.py:12
-msgid "Right"
-msgstr "Right"
-
-#: models.py:15
-msgid "Top"
-msgstr "Top"
-
-#: models.py:16
-msgid "Middle"
-msgstr "Middle"
-
-#: models.py:17
-msgid "Bottom"
-msgstr "Bottom"
-
-#: models.py:22
+#: forms.py:13 models.py:24
 msgid "Crop Example"
 msgstr "Crop Example"
 
-#: models.py:32
+#: forms.py:15
+#, fuzzy
+msgid "Crop X1"
+msgstr "Crop"
+
+#: forms.py:17
+#, fuzzy
+msgid "Crop X2"
+msgstr "Crop"
+
+#: forms.py:19
+#, fuzzy
+msgid "Crop Y1"
+msgstr "Crop"
+
+#: forms.py:21
+#, fuzzy
+msgid "Crop Y2"
+msgstr "Crop"
+
+#: forms.py:33
+msgid "Source"
+msgstr ""
+
+#: models.py:12
+msgid "Left"
+msgstr "Left"
+
+#: models.py:13
+msgid "Center"
+msgstr "Center"
+
+#: models.py:14
+msgid "Right"
+msgstr "Right"
+
+#: models.py:17
+msgid "Top"
+msgstr "Top"
+
+#: models.py:18
+msgid "Middle"
+msgstr "Middle"
+
+#: models.py:19
+msgid "Bottom"
+msgstr "Bottom"
+
+#: models.py:34
 msgid "Flip"
 msgstr "Flip"
 
-#: models.py:33
+#: models.py:35
 msgid ""
 "Flag that indicates that thumbor should flip horizontally (on the vertical "
 "axis) the image"
@@ -97,11 +118,11 @@ msgstr ""
 "Flag that indicates that thumbor should flip horizontally (on the vertical "
 "axis) the image"
 
-#: models.py:37
+#: models.py:39
 msgid "Flop"
 msgstr "Flop"
 
-#: models.py:38
+#: models.py:40
 msgid ""
 "Flag that indicates that thumbor should flip vertically (on the horizontal "
 "axis) the image"
@@ -109,27 +130,27 @@ msgstr ""
 "Flag that indicates that thumbor should flip vertically (on the horizontal "
 "axis) the image"
 
-#: models.py:42
+#: models.py:44
 msgid "Horizontal Align"
 msgstr "Horizontal Align"
 
-#: models.py:46
+#: models.py:48
 msgid "Horizontal alignment that thumbor should use for cropping"
 msgstr "Horizontal alignment that thumbor should use for cropping"
 
-#: models.py:48
+#: models.py:50
 msgid "Vertical Align"
 msgstr "Vertical Align"
 
-#: models.py:52
+#: models.py:54
 msgid "Vertical alignment that thumbor should use for cropping"
 msgstr "Vertical alignment that thumbor should use for cropping"
 
-#: models.py:55
+#: models.py:57
 msgid "Fit in"
 msgstr "Fit in"
 
-#: models.py:56
+#: models.py:58
 #, fuzzy
 msgid ""
 "Flag that indicates that thumbor should fit the image in the box defined by "
@@ -138,15 +159,61 @@ msgstr ""
 "flag that indicates that thumbor should fit the image in the box defined by "
 "width x height"
 
-#: models.py:61
+#: models.py:63
 msgid "Smart"
 msgstr "Smart"
 
-#: models.py:62
+#: models.py:64
 #, fuzzy
 msgid "Flag that indicates that thumbor should use smart cropping"
 msgstr "Flag that indicates thatthumbor should use smart cropping;"
 
-#: models.py:85
+#: models.py:107
 msgid "Image"
 msgstr "Image"
+
+#: templates/images/all_images.html:14 templates/images/list_images.html:8
+msgid "User"
+msgstr "User"
+
+#: templates/images/all_images.html:23 templates/images/list_images.html:17
+msgid "Published"
+msgstr ""
+
+#: templates/images/all_images.html:32 templates/images/list_images.html:30
+msgid "Search"
+msgstr ""
+
+#: templates/images/all_images.html:34 templates/images/image_add.html:11
+#: templates/images/list_images.html:32
+#, fuzzy
+msgid "Add Image"
+msgstr "Image"
+
+#: templates/images/all_images.html:46
+msgid "Insert on Editor"
+msgstr ""
+
+#: templates/images/image_add.html:30
+msgid "Add"
+msgstr ""
+
+#: templates/images/list_images.html:25
+msgid "Text"
+msgstr ""
+
+#: templates/images/popup_done.html:20
+msgid "Image added with success!"
+msgstr ""
+
+#: templatetags/images_tags.py:41
+msgid "tag requires exactly two arguments"
+msgstr ""
+
+#: templatetags/images_tags.py:44
+msgid "tag requires exactly three arguments"
+msgstr ""
+
+#: templatetags/images_tags.py:47
+msgid "second argument to tag must be 'as'"
+msgstr ""
