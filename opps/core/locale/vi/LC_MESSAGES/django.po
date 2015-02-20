@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Translators:
 # ppanhh <ppanhh@gmail.com>, 2013
@@ -9,168 +9,261 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-05 15:02-0300\n"
+"POT-Creation-Date: 2015-02-20 20:40-0300\n"
 "PO-Revision-Date: 2013-08-08 18:29+0000\n"
 "Last-Translator: ppanhh <ppanhh@gmail.com>\n"
-"Language-Team: Vietnamese (http://www.transifex.com/projects/p/opps/language/vi/)\n"
+"Language-Team: Vietnamese (http://www.transifex.com/projects/p/opps/language/"
+"vi/)\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: __init__.py:8
 msgid "Core"
 msgstr "Lõi"
 
-#: admin.py:21 models.py:85
-msgid "Channel"
-msgstr "Kênh dữ liệu"
+#: __init__.py:16
+msgid "Default"
+msgstr ""
 
-#: admin.py:42
-msgid "No channel"
-msgstr "Không có kênh dữ liệu"
+#: actions.py:33
+msgid "Export results in CSV"
+msgstr ""
 
-#: admin.py:101
+#: admin.py:49
 msgid "Publish/Unpublish"
 msgstr "Đăng bản/Bỏ đăng"
 
-#: admin.py:121
+#: admin.py:88
+#, fuzzy
+msgid "Duplicate"
+msgstr "Đăng bản"
+
+#: admin.py:107
 msgid "This item is not in a box"
 msgstr "Đối tượng này không nằm trong hộp"
 
-#: admin.py:123
+#: admin.py:109
 msgid "Article boxes"
 msgstr "Các hộp tiêu đề"
 
-#: admin.py:129
+#: admin.py:116
 msgid "No Image"
 msgstr "Không có hình ảnh"
 
-#: admin.py:130
+#: admin.py:117
 msgid "Thumbnail"
 msgstr "Hình ảnh thu nhỏ"
 
-#: admin.py:138
+#: admin.py:125
 msgid "Images"
 msgstr "Các hình ảnh"
 
-#: admin.py:145 admin.py:147
+#: admin.py:132 admin.py:134
 msgid "View on site"
 msgstr "Xem trên trang"
 
-#: admin.py:160
+#: admin.py:168
 msgid "Identification"
 msgstr "Định danh"
 
-#: admin.py:162
+#: admin.py:170
 msgid "Relationships"
 msgstr "Các mối liên hệ"
 
-#: admin.py:164
+#: admin.py:172
 msgid "Publication"
 msgstr "Đăng bản"
 
-#: models.py:20
+#: filters.py:18 models.py:123 models.py:370
+msgid "Channel"
+msgstr "Kênh dữ liệu"
+
+#: filters.py:39
+msgid "No channel"
+msgstr "Không có kênh dữ liệu"
+
+#: filters.py:91
+msgid "Child class"
+msgstr ""
+
+#: filters.py:118
+msgid "Has queryset"
+msgstr ""
+
+#: filters.py:132
+msgid "No"
+msgstr ""
+
+#: filters.py:133
+msgid "Yes"
+msgstr ""
+
+#: filters.py:153
+msgid "User"
+msgstr ""
+
+#: models.py:21
 msgid "Date insert"
 msgstr "Chèn vào ngày"
 
-#: models.py:21
+#: models.py:22
 msgid "Date update"
 msgstr "Cập nhật ngày"
 
-#: models.py:38
+#: models.py:47
 msgid "Site id"
 msgstr "Chỉ số của trang"
 
-#: models.py:43
+#: models.py:52
 msgid "Site domain"
 msgstr "Tên miền của trang"
 
-#: models.py:48
+#: models.py:60 permissions/admin.py:79
+#, fuzzy
+msgid "Mirror site"
+msgstr "Xem trên trang"
+
+#: models.py:63
 msgid "Date available"
 msgstr "Ngày tháng hiện có"
 
-#: models.py:53
+#: models.py:68
 msgid "Published"
 msgstr "Đã đăng bản"
 
-#: models.py:88
+#: models.py:100
+#, fuzzy
+msgid "Channels"
+msgstr "Kênh dữ liệu"
+
+#: models.py:111
+#, fuzzy
+msgid "Sites"
+msgstr "Chỉ số của trang"
+
+#: models.py:129
+#, fuzzy
+msgid "Mirror channel"
+msgstr "Không có kênh dữ liệu"
+
+#: models.py:132
 msgid "Channel name"
 msgstr "Tên kênh dữ liệu"
 
-#: models.py:94
+#: models.py:138
 msgid "Channel long slug"
 msgstr "Dãy chữ dài của kênh dữ liệu"
 
-#: models.py:113
+#: models.py:157
 msgid "Slug"
 msgstr "Dãy chữ"
 
-#: models.py:135
+#: models.py:187
 msgid "The URL already exists as a redirect"
 msgstr "Phần đường dẫn liên kết này đã tồn tại dưới dạng chuyển tiếp"
 
-#: models.py:180
+#: models.py:227
 msgid "Slug already exists."
 msgstr "Dãy chữ đã tồn tại."
 
-#: models.py:208
+#: models.py:255
 msgid "Main Image"
 msgstr "Hình ảnh chính"
 
-#: models.py:211
+#: models.py:258
 msgid "Main image caption"
 msgstr "Đề mục hình ảnh chính"
 
-#: models.py:279
+#: models.py:332
 msgid "App label"
 msgstr "Nhãn ứng dụng"
 
-#: models.py:287
+#: models.py:340
 msgid "Config Key Group"
 msgstr "Chỉnh cấu hình nhóm khóa dữ liệu"
 
-#: models.py:295
+#: models.py:348
 msgid "Config Key"
 msgstr "Chỉnh cấu hình khóa dữ liệu"
 
-#: models.py:301
+#: models.py:354
 msgid "Format"
 msgstr "Định dạng"
 
-#: models.py:303
+#: models.py:356
 msgid "Config Value"
 msgstr "Chỉnh cấu hình giá trị"
 
-#: models.py:304
+#: models.py:357
 msgid "Description"
 msgstr "Mô tả"
 
-#: models.py:309
+#: models.py:362
 msgid "Only published container"
 msgstr "Chỉ các tiêu đề đã đăng bản"
 
-#: models.py:342
+#: models.py:364
+msgid "Container"
+msgstr ""
+
+#: models.py:374
+#, fuzzy
+msgid "Config"
+msgstr "Chỉnh cấu hình khóa dữ liệu"
+
+#: models.py:375
+#, fuzzy
+msgid "Configs"
+msgstr "Chỉnh cấu hình khóa dữ liệu"
+
+#: models.py:399
 #, python-format
 msgid "Can't format the value to %s"
 msgstr "Không thể chỉnh định dạng giá trị thành %s"
 
-#: tags/models.py:10
+#: permissions/models.py:17
+msgid "channel recursive"
+msgstr ""
+
+#: permissions/models.py:28
+msgid "Permission"
+msgstr ""
+
+#: permissions/models.py:29
+msgid "Permissions"
+msgstr ""
+
+#: permissions/models.py:91
+msgid "group"
+msgstr ""
+
+#: permissions/models.py:94
+msgid "Permission Group"
+msgstr ""
+
+#: permissions/models.py:95
+msgid "Permissions Groups"
+msgstr ""
+
+#: tags/models.py:13
 msgid "Name"
 msgstr "Tên"
 
-#: tags/models.py:21
+#: tags/models.py:25
 msgid "Tag"
 msgstr "Thẻ đánh dấu"
 
-#: tags/models.py:22 tags/models.py:27
+#: tags/models.py:26 tags/models.py:31
 msgid "Tags"
 msgstr "Các thẻ đánh dấu"
 
-#: tags/models.py:29
+#: tags/models.py:33
 msgid "A comma-separated list of tags."
-msgstr "Cho vào dấu phẩy để tách biệt các yếu tố trong danh sách các thẻ đánh dấu"
+msgstr ""
+"Cho vào dấu phẩy để tách biệt các yếu tố trong danh sách các thẻ đánh dấu"
 
 #~ msgid "Box name"
 #~ msgstr "Box name"

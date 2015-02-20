@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opps-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 18:59-0200\n"
+"POT-Creation-Date: 2015-02-20 20:40-0300\n"
 "PO-Revision-Date: 2013-08-08 17:30+0000\n"
 "Last-Translator: Ellison Leão\n"
 "Language-Team: Portuguese (Brazil) <opps-developers@googlegroups.com>\n"
@@ -19,51 +19,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: __init__.py:7
+#: __init__.py:8
 msgid "Core"
 msgstr "Core"
 
-#: admin.py:50
+#: __init__.py:16
+msgid "Default"
+msgstr "Padrão"
+
+#: actions.py:33
+msgid "Export results in CSV"
+msgstr "Exportar resultados em CSV"
+
+#: admin.py:49
 msgid "Publish/Unpublish"
 msgstr "Publicar/Despublicar"
 
-#: admin.py:69
+#: admin.py:88
+msgid "Duplicate"
+msgstr "Duplicado"
+
+#: admin.py:107
 msgid "This item is not in a box"
 msgstr "Este item não está em um box"
 
-#: admin.py:71
+#: admin.py:109
 msgid "Article boxes"
 msgstr "Boxes de artigos"
 
-#: admin.py:77
+#: admin.py:116
 msgid "No Image"
 msgstr "Sem imagem"
 
-#: admin.py:78
+#: admin.py:117
 msgid "Thumbnail"
 msgstr "Imagem pequena"
 
-#: admin.py:86
+#: admin.py:125
 msgid "Images"
 msgstr "Imagens"
 
-#: admin.py:93 admin.py:95
+#: admin.py:132 admin.py:134
 msgid "View on site"
 msgstr "Ver no site"
 
-#: admin.py:129
+#: admin.py:168
 msgid "Identification"
 msgstr "Identificação"
 
-#: admin.py:131
+#: admin.py:170
 msgid "Relationships"
 msgstr "Relacionamentos"
 
-#: admin.py:133
+#: admin.py:172
 msgid "Publication"
 msgstr "Publicação"
 
-#: filters.py:18 models.py:101 models.py:344
+#: filters.py:18 models.py:123 models.py:370
 msgid "Channel"
 msgstr "Canal"
 
@@ -75,19 +87,19 @@ msgstr "Sem canal"
 msgid "Child class"
 msgstr "Classe filha"
 
-#: filters.py:117
+#: filters.py:118
 msgid "Has queryset"
 msgstr "Tem queryset"
 
-#: filters.py:131
+#: filters.py:132
 msgid "No"
 msgstr "Não"
 
-#: filters.py:132
+#: filters.py:133
 msgid "Yes"
 msgstr "Sim"
 
-#: filters.py:152
+#: filters.py:153
 msgid "User"
 msgstr "Usuário"
 
@@ -107,7 +119,7 @@ msgstr "ID do Site"
 msgid "Site domain"
 msgstr "Domínio do Site"
 
-#: models.py:60
+#: models.py:60 permissions/admin.py:79
 msgid "Mirror site"
 msgstr "Sites espelho"
 
@@ -119,96 +131,128 @@ msgstr "Data de publicação"
 msgid "Published"
 msgstr "Publicado"
 
-#: models.py:107
+#: models.py:100
+msgid "Channels"
+msgstr "Canal"
+
+#: models.py:111
+msgid "Sites"
+msgstr "ID do Site"
+
+#: models.py:129
 msgid "Mirror channel"
 msgstr "Canais espelho"
 
-#: models.py:110
+#: models.py:132
 msgid "Channel name"
 msgstr "Nome do canal"
 
-#: models.py:116
+#: models.py:138
 msgid "Channel long slug"
 msgstr "Retranca longa do canal"
 
-#: models.py:135
+#: models.py:157
 msgid "Slug"
 msgstr "Retranca"
 
-#: models.py:165
+#: models.py:187
 msgid "The URL already exists as a redirect"
 msgstr "Esta URL já existe para um redirecionamento"
 
-#: models.py:205
+#: models.py:227
 msgid "Slug already exists."
 msgstr "Retranca já existe"
 
-#: models.py:233
+#: models.py:255
 msgid "Main Image"
 msgstr "Imagem Principal"
 
-#: models.py:236
+#: models.py:258
 msgid "Main image caption"
 msgstr "Legenda da Imagem Principal"
 
-#: models.py:306
+#: models.py:332
 msgid "App label"
 msgstr "Nome da App"
 
-#: models.py:314
+#: models.py:340
 msgid "Config Key Group"
 msgstr "Grupo de Chave de Configuração"
 
-#: models.py:322
+#: models.py:348
 msgid "Config Key"
 msgstr "Chave de Configuração"
 
-#: models.py:328
+#: models.py:354
 msgid "Format"
 msgstr "Formato"
 
-#: models.py:330
+#: models.py:356
 msgid "Config Value"
 msgstr "Valor de configuração"
 
-#: models.py:331
+#: models.py:357
 msgid "Description"
 msgstr "Descrição"
 
-#: models.py:336
+#: models.py:362
 msgid "Only published container"
 msgstr "Apenas artigos publicados"
 
-#: models.py:338
+#: models.py:364
 msgid "Container"
 msgstr "Container"
 
-#: models.py:348
+#: models.py:374
 msgid "Config"
 msgstr "Configuração"
 
-#: models.py:349
+#: models.py:375
 msgid "Configs"
 msgstr "Configurações"
 
-#: models.py:373
+#: models.py:399
 #, python-format
 msgid "Can't format the value to %s"
 msgstr "Erro ao formatar o valor para %s"
 
-#: tags/models.py:10
+#: permissions/models.py:17
+msgid "channel recursive"
+msgstr "canal recursivo"
+
+#: permissions/models.py:28
+msgid "Permission"
+msgstr "Permissão"
+
+#: permissions/models.py:29
+msgid "Permissions"
+msgstr "Permissões"
+
+#: permissions/models.py:91
+msgid "group"
+msgstr "grupo"
+
+#: permissions/models.py:94
+msgid "Permission Group"
+msgstr "Grupo de Permissão"
+
+#: permissions/models.py:95
+msgid "Permissions Groups"
+msgstr "Grupo de Permissões"
+
+#: tags/models.py:13
 msgid "Name"
 msgstr "Nome"
 
-#: tags/models.py:21
+#: tags/models.py:25
 msgid "Tag"
 msgstr "Tag"
 
-#: tags/models.py:22 tags/models.py:27
+#: tags/models.py:26 tags/models.py:31
 msgid "Tags"
 msgstr "Tags"
 
-#: tags/models.py:29
+#: tags/models.py:33
 msgid "A comma-separated list of tags."
 msgstr "Uma lista de tags separada por vírgulas"
 
