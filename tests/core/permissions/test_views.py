@@ -32,29 +32,45 @@ class OppsAutocompleteLookupTest(TestCase):
         self.user2.save()
 
         self.site = Site.objects.all()[0]
-        self.channel_allowed = Channel.objects.create(
+        self.another_site = Site.objects.create(domain='oppsproject.org')
+        self.allowed_channel = Channel.objects.create(
             name='Home',
             slug='home',
             site=self.site,
             user=self.user
         )
-        self.channel_not_allowed = Channel.objects.create(
+        self.another_allowed_channel = Channel.objects.create(
+            name='Contact',
+            slug='contact',
+            site=self.another_site,
+            user=self.user
+        )
+        self.not_allowed_channel = Channel.objects.create(
             name='Top secret',
             slug='top-secret',
             site=self.site,
             user=self.user
         )
         self.permission = Permission.objects.create(user=self.user)
-        self.permission.channel.add(self.channel_allowed)
-        self.permission.save()
+        self.permission.channel.add(self.allowed_channel)
+        self.permission.site.add(self.another_site)
 
         self.client = Client()
 
-    def test_user_has_permission(self):
+    def test_user_has_permission_on_channel(self):
         self.client.login(username='test', password='test')
         response = self.client.get(get_url('channels', 'Channel'))
         result = json.loads(response.content)
-        pk = self.channel_allowed.pk
+        pk = self.allowed_channel.pk
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(filter(lambda x: x['value'] == pk, result)), 1)
+
+    def test_user_has_permission_on_site(self):
+        self.client.login(username='test', password='test')
+        response = self.client.get(get_url('channels', 'Channel'))
+        result = json.loads(response.content)
+        pk = self.another_allowed_channel.pk
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(filter(lambda x: x['value'] == pk, result)), 1)
@@ -63,7 +79,7 @@ class OppsAutocompleteLookupTest(TestCase):
         self.client.login(username='test', password='test')
         response = self.client.get(get_url('channels', 'Channel'))
         result = json.loads(response.content)
-        pk = self.channel_not_allowed.pk
+        pk = self.not_allowed_channel.pk
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(filter(lambda x: x['value'] == pk, result)), 0)
