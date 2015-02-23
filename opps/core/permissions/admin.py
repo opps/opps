@@ -26,13 +26,13 @@ class AdminViewPermission(admin.ModelAdmin):
 
             if db_field.name in ['site']:
                 kwargs['queryset'] = Site.objects.filter(
-                    id__in=obj.get('all_sites_id', [])
+                    id__in=obj['all_sites_id']
                 )
 
             if db_field.name in ['channel']:
                 kwargs['queryset'] = Channel.objects.filter(
-                    Q(id__in=obj.get('channels_id', [])) |
-                    Q(site_id__in=obj.get('sites_id', []))
+                    Q(id__in=obj['channels_id']) |
+                    Q(site_id__in=obj['sites_id'])
                 )
 
         return super(AdminViewPermission, self).formfield_for_foreignkey(
@@ -47,17 +47,17 @@ class AdminViewPermission(admin.ModelAdmin):
 
         if self.__class__.__name__ == 'ChannelAdmin':
             return qs.filter(
-                Q(site_id__in=obj.get('sites_id', [])) |
-                Q(id__in=obj.get('channels_id', []))
+                Q(site_id__in=obj['sites_id']) |
+                Q(id__in=obj['channels_id'])
             )
 
         filters = Q()
 
         if issubclass(qs.model, Publisher):
-            filters |= Q(site_iid__in=obj.get('sites_id', []))
+            filters |= Q(site_iid__in=obj['sites_id'])
 
         if issubclass(qs.model, Channeling):
-            filters |= Q(channel_id__in=obj.get('channels_id', []))
+            filters |= Q(channel_id__in=obj['channels_id'])
 
         return qs.filter(filters)
 
@@ -71,7 +71,7 @@ class AdminViewPermission(admin.ModelAdmin):
             if settings.OPPS_MULTISITE_ADMIN and not request.user.is_superuser:
                 qs_mirror = form.base_fields['mirror_site'].queryset
                 form.base_fields['mirror_site'].queryset = qs_mirror.filter(
-                    id__in=obj.get('all_sites_id', [])
+                    id__in=obj['all_sites_id']
                 )
                 attrs_mirror = {'disabled': 'disabled'}
 
@@ -84,8 +84,8 @@ class AdminViewPermission(admin.ModelAdmin):
             if settings.OPPS_MULTISITE_ADMIN and not request.user.is_superuser:
                 qs_channel = form.base_fields['channel'].queryset
                 form.base_fields['channel'].queryset = qs_channel.filter(
-                    Q(site_id__in=obj.get('sites_id', [])) |
-                    Q(id__in=obj.get('channels_id', []))
+                    Q(site_id__in=obj['sites_id']) |
+                    Q(id__in=obj['channels_id'])
                 )
         except:
             pass
