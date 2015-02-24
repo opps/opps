@@ -16,7 +16,7 @@ from .subclassing import SubfieldBase
 
 class JSONFormFieldBase(object):
 
-    def to_python(self, value):
+    def to_python(self, value={}):
         if isinstance(value, six.string_types):
             try:
                 return json.loads(value)
@@ -24,7 +24,7 @@ class JSONFormFieldBase(object):
                 raise ValidationError(_("Enter valid JSON"))
         return value
 
-    def clean(self, value):
+    def clean(self, value={}):
 
         if not value and not self.required:
             return None
@@ -55,7 +55,7 @@ class JSONFieldBase(six.with_metaclass(SubfieldBase, models.Field)):
 
         super(JSONFieldBase, self).__init__(*args, **kwargs)
 
-    def pre_init(self, value, obj):
+    def pre_init(self, obj, value={}):
         """Convert a string value to JSON only if it needs
         to be deserialized.
 
@@ -79,13 +79,13 @@ class JSONFieldBase(six.with_metaclass(SubfieldBase, models.Field)):
 
         return value
 
-    def to_python(self, value):
+    def to_python(self, value={}):
         """The SubfieldBase metaclass calls pre_init instead of to_python,
         however to_python
         is still necessary for Django's deserializer"""
         return value
 
-    def get_db_prep_value(self, value, connection, prepared=False):
+    def get_db_prep_value(self, connection, prepared=False, value={}):
         """Convert JSON object to a string"""
         if self.null and value is None:
             return None
@@ -101,7 +101,7 @@ class JSONFieldBase(six.with_metaclass(SubfieldBase, models.Field)):
             return None
         return self.dumps_for_display(value)
 
-    def dumps_for_display(self, value):
+    def dumps_for_display(self, value={}):
         return json.dumps(value, **self.dump_kwargs)
 
     def formfield(self, **kwargs):
@@ -148,7 +148,7 @@ class JSONField(JSONFieldBase, models.TextField):
     JSON objects"""
     form_class = JSONFormField
 
-    def dumps_for_display(self, value):
+    def dumps_for_display(self, value={}):
         kwargs = {"indent": 2}
         kwargs.update(self.dump_kwargs)
         return json.dumps(value, **kwargs)
