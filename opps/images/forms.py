@@ -3,10 +3,10 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+from opps.core.widgets import OppsEditor
+
 from .models import Image
 from .widgets import CropExample
-
-from opps.core.widgets import OppsEditor
 
 
 class ImageModelForm(forms.ModelForm):
@@ -20,6 +20,8 @@ class ImageModelForm(forms.ModelForm):
                               widget=forms.HiddenInput())
     crop_y2 = forms.CharField(label=_(u'Crop Y2'), required=False,
                               widget=forms.HiddenInput())
+
+    archive = forms.ImageField(label=_('Archive'), required=True)
 
     class Meta:
         model = Image
