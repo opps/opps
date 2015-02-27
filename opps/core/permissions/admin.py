@@ -13,7 +13,20 @@ from opps.core.models import Channeling, Publisher
 from .models import Permission, PermissionGroup
 
 
+FALLBACK_ON_CHANNEL = getattr(settings, 'OPPS_PERMISSION_FALLBACK_ON_CHANNEL',
+                              False)
+
+
 class AdminViewPermission(admin.ModelAdmin):
+
+    _site_master = None
+
+    def _get_site_master(self):
+        if self._site_master:
+            return self._site_master
+
+        self._site_master = Site.objects.order_by('id')[0]
+        return self._site_master
 
     @property
     def site_lookup(self):
@@ -30,6 +43,9 @@ class AdminViewPermission(admin.ModelAdmin):
                 )
 
             if db_field.name in ['channel']:
+                if FALLBACK_ON_CHANNEL:
+                    obj['sites_id'].add(self._get_site_master().pk)
+
                 kwargs['queryset'] = Channel.objects.filter(
                     Q(id__in=obj['channels_id']) |
                     Q(site_id__in=obj['sites_id'])
@@ -46,6 +62,9 @@ class AdminViewPermission(admin.ModelAdmin):
         obj = Permission.get_by_user(request.user)
 
         if self.__class__.__name__ == 'ChannelAdmin':
+            if FALLBACK_ON_CHANNEL:
+                obj['sites_id'].add(self._get_site_master().pk)
+
             return qs.filter(
                 Q(site_id__in=obj['sites_id']) |
                 Q(id__in=obj['channels_id'])
@@ -82,6 +101,9 @@ class AdminViewPermission(admin.ModelAdmin):
 
         try:
             if settings.OPPS_MULTISITE_ADMIN and not request.user.is_superuser:
+                if FALLBACK_ON_CHANNEL:
+                    obj['sites_id'].add(self._get_site_master().pk)
+
                 qs_channel = form.base_fields['channel'].queryset
                 form.base_fields['channel'].queryset = qs_channel.filter(
                     Q(site_id__in=obj['sites_id']) |
