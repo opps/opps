@@ -6,6 +6,13 @@ Default: `(('default', _('Default')),)`
 Define the default availables layouts for channels if no **channel.json** is
 avaiable.
 
+OPPS_CHANNEL_URL_NAME
+-----------
+
+Default: `'containers:channel'`
+
+Define the url name when calling get_absolute_url on Channel instances.
+
 OPPS_TRAVIS
 -----------
 
