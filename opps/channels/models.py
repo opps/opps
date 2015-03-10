@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
 from django.db.models.signals import post_save
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -13,6 +14,10 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 from opps.core.models import Publishable
 from opps.core.models import Slugged
+
+
+CHANNEL_URL_NAME = \
+    getattr(settings, 'OPPS_CHANNEL_URL_NAME', 'containers:channel')
 
 
 class ChannelManager(TreeManager):
@@ -77,7 +82,8 @@ class Channel(MPTTModel, Publishable, Slugged):
         return u"/{0}/".format(self.long_slug)
 
     def get_absolute_url(self):
-        return u"{0}".format(self.__unicode__())
+        url = reverse(CHANNEL_URL_NAME, args=(self.long_slug, ))
+        return url
 
     def get_thumb(self):
         return None
