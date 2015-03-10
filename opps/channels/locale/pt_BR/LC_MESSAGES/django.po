@@ -93,7 +93,7 @@ msgstr "Ordem"
 
 #: models.py:62
 msgid "Parent"
-msgstr "Pai"
+msgstr "Canal pai"
 
 #: models.py:63
 msgid "Paginate by"
