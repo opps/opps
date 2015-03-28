@@ -11,6 +11,10 @@ from opps.channels.models import Channel
 from .models import Permission
 
 
+FALLBACK_ON_CHANNEL = getattr(settings, 'OPPS_PERMISSION_FALLBACK_ON_CHANNEL',
+                              False)
+
+
 class OppsAutocompleteLookup(AutocompleteLookup):
 
     def get_queryset(self):
@@ -24,6 +28,10 @@ class OppsAutocompleteLookup(AutocompleteLookup):
         filters = Q()
 
         if self.model == Channel:
+            if FALLBACK_ON_CHANNEL:
+                site_master = Site.objects.order_by('id')[0]
+                permissions['sites_id'].add(site_master.pk)
+
             filters |= (Q(id__in=permissions['channels_id']) |
                         Q(site_id__in=permissions['sites_id']))
         elif self.model == Site:

@@ -31,11 +31,18 @@ OPPS_MIRROR_CHANNEL
 OPPS_RECOMMENDATION_RANGE_DAYS
 -----------
 
+OPPS_MULTISITE_FALLBACK
+-----------
+
 OPPS_MULTISITE_ADMIN
 -----------
 
-OPPS_MULTISITE_FALLBACK
+OPPS_PERMISSION_FALLBACK_ON_CHANNEL
 -----------
+
+Default: `False`
+
+Define if the multisites have access to channels from the main site. Used when OPPS_MULTISITE_ADMIN is active.
 
 OPPS_PAGINATE_BY
 -----------
