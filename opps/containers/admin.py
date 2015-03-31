@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import json
+
 from django.contrib import admin
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -8,14 +9,15 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 
-from .models import Container, ContainerImage, Mirror
-from .models import ContainerBox, ContainerBoxContainers, ContainerRelated
-from .forms import ContainerBoxContainersInlineForm, ContainerImageInlineForm
 from opps.core.admin import PublishableAdmin, apply_opps_rules, BaseBoxAdmin
 from opps.core.permissions.admin import AdminViewPermission
 from opps.core.filters import ChannelListFilter, HasQuerySet
 from opps.images.generate import image_url
 from opps.fields.models import Field, FieldOption
+
+from .models import Container, ContainerImage, Mirror
+from .models import ContainerBox, ContainerBoxContainers, ContainerRelated
+from .forms import ContainerBoxContainersInlineForm, ContainerImageInlineForm
 
 
 @apply_opps_rules('containers')
