@@ -10,7 +10,7 @@ from django.shortcuts import redirect
 
 from .models import Container, ContainerImage, Mirror
 from .models import ContainerBox, ContainerBoxContainers, ContainerRelated
-from .forms import ContainerBoxContainersInlineForm
+from .forms import ContainerBoxContainersInlineForm, ContainerImageInlineForm
 from opps.core.admin import PublishableAdmin, apply_opps_rules, BaseBoxAdmin
 from opps.core.permissions.admin import AdminViewPermission
 from opps.core.filters import ChannelListFilter, HasQuerySet
@@ -34,6 +34,7 @@ class ContainerRelatedInline(admin.TabularInline):
 @apply_opps_rules('containers')
 class ContainerImageInline(admin.TabularInline):
     model = ContainerImage
+    form = ContainerImageInlineForm
     fk_name = 'container'
     raw_id_fields = ['image']
     sortable_field_name = "order"
