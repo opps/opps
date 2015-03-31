@@ -8,7 +8,7 @@ from opps.db.models.fields.jsonf import JSONFormField
 from opps.fields.widgets import JSONField
 from opps.fields.models import Field, FieldOption
 
-from .models import Container, ContainerBoxContainers
+from .models import Container, ContainerBoxContainers, ContainerImage
 
 
 class ContainerBoxContainersInlineForm(forms.ModelForm):
@@ -19,6 +19,16 @@ class ContainerBoxContainersInlineForm(forms.ModelForm):
 
     class Meta:
         model = ContainerBoxContainers
+
+
+class ContainerImageInlineForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ContainerImageInlineForm,
+              self).__init__(*args, **kwargs)
+        self.fields['order'].widget.attrs['readonly'] = True
+
+    class Meta:
+        model = ContainerImage
 
 
 class ContainerAdminForm(forms.ModelForm):
