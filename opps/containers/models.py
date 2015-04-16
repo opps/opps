@@ -399,6 +399,18 @@ class ContainerBox(BaseBox):
             self.local_cache['get_queryset'] = queryset
         return queryset
 
+    def clean(self):
+        repeated = ContainerBox.objects.filter(
+                    site=self.site,
+                    slug=self.slug,
+                    channel_long_slug=self.channel.long_slug
+                ).exclude(pk=self.pk)
+
+        if repeated.exists():
+            raise ValidationError(
+                _(u"Already exists a ContainerBox with same slug and site")
+            )
+
 
 class ContainerBoxContainers(models.Model):
     URL_TARGET_CHOICES = (
