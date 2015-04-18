@@ -112,8 +112,9 @@ class Channel(MPTTModel, Publishable, Slugged):
 
     def clean(self):
         channel_is_home = Channel.objects.filter(
-            site__id=settings.SITE_ID,
+            site__id=self.site.id,
             homepage=True, published=True)
+
         if self.pk:
             channel_is_home = channel_is_home.exclude(pk=self.pk)
 
