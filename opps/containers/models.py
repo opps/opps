@@ -401,10 +401,10 @@ class ContainerBox(BaseBox):
 
     def clean(self):
         repeated = ContainerBox.objects.filter(
-                    site=self.site,
-                    slug=self.slug,
-                    channel_long_slug=self.channel.long_slug
-                ).exclude(pk=self.pk)
+            site=self.site,
+            slug=self.slug,
+            channel_long_slug=self.channel.long_slug
+        ).exclude(pk=self.pk)
 
         if repeated.exists():
             raise ValidationError(
