@@ -26,6 +26,7 @@ URL_TARGET_CHOICES = (
     ('_top', _(u'Load in the full body of the window'))
 )
 
+
 class ChannelManager(TreeManager):
 
     def get_homepage(self, site):
@@ -74,8 +75,9 @@ class Channel(MPTTModel, Publishable, Slugged):
     paginate_by = models.IntegerField(_("Paginate by"), null=True, blank=True)
 
     menu_url_target = models.CharField(_(u"Menu URL Target"), max_length=255,
-                                  choices=URL_TARGET_CHOICES, default="_self",
-                                  null=True, blank=True)
+                                       choices=URL_TARGET_CHOICES,
+                                       default="_self",
+                                       null=True, blank=True)
 
     objects = ChannelManager()
 
