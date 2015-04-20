@@ -91,7 +91,7 @@ class MassDuplicateMixin(admin.ModelAdmin):
 class PublisherAdmin(MassPublishMixin, MassDuplicateMixin):
     list_display = ['title', 'site', 'channel_long_slug',
                     'date_available', 'published', 'preview_url']
-    list_filter = ['date_available', 'published', ChildClassListFilter]
+    list_filter = ['date_available', 'published', 'site', ChildClassListFilter]
     search_fields = ['title', 'slug', 'channel_name']
 
     def in_containerboxes(self, obj):
