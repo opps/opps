@@ -6,6 +6,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from opps.core.models import Date, Publisher, Slugged, Channeling
 from opps.core.models import Imaged, Config
+from opps.channels.models import Channel
+from django.contrib.sites.models import Site
+from django.contrib.auth import get_user_model
 
 
 class DateFields(TestCase):
@@ -81,12 +84,29 @@ class ChannelingFields(TestCase):
 
 
 class SluggedTest(TestCase):
+    def setUp(self):
+        User = get_user_model()
+        self.user = User.objects.create(username=u'test', password='test')
+        self.site = Site.objects.filter(name=u'example.com').get()
+        self.slug = u'my-slug-9'
+        self.channel = Channel.objects.create(
+            name=u'Home', slug=self.slug, description=u'home page',
+            site=self.site, user=self.user
+        )
 
     def test_channel(self):
         field = Slugged._meta.get_field_by_name('slug')[0]
         self.assertEqual(field.__class__, models.SlugField)
         self.assertTrue(field.db_index)
         self.assertEqual(field.max_length, 150)
+
+    def test_slug_validation(self):
+        channel = Channel(
+            name=u'Home', slug=self.slug, description=u'home page',
+            site=self.site, user=self.user
+        )
+        channel.clean()
+        self.assertEqual(channel.slug, 'my-slug-10')
 
 
 class ImagedTest(TestCase):
