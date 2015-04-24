@@ -219,9 +219,13 @@ class Slugged(models.Model):
                 suffix = last.split('-')[-1]
                 if suffix.isdigit():
                     suffix = int(suffix) + 1
-                    self.slug = "{0}-{1}".format(self.slug, suffix)
+                    self.slug = "{0}-{1}".format(
+                        '-'.join(last.split('-')[0:-1]),
+                        suffix
+                    )
                 else:
                     self.slug = "{0}-1".format(self.slug)
+                return self.validate_slug()
         else:
             if slug_exists.exists():
                 raise ValidationError(_(u"Slug already exists."))
