@@ -2,6 +2,11 @@
 Changelog
 =========
 
+Development
+===========
+
+* Fix slug validation, #482
+
 0.2.11
 ======
 
