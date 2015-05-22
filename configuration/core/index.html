@@ -167,6 +167,9 @@
         <li class="main active"><a href="#opps_channel_layout">OPPS_CHANNEL_LAYOUT</a></li>
         
     
+        <li class="main "><a href="#opps_channel_url_name">OPPS_CHANNEL_URL_NAME</a></li>
+        
+    
         <li class="main "><a href="#opps_travis">OPPS_TRAVIS</a></li>
         
     
@@ -188,10 +191,13 @@
         <li class="main "><a href="#opps_recommendation_range_days">OPPS_RECOMMENDATION_RANGE_DAYS</a></li>
         
     
+        <li class="main "><a href="#opps_multisite_fallback">OPPS_MULTISITE_FALLBACK</a></li>
+        
+    
         <li class="main "><a href="#opps_multisite_admin">OPPS_MULTISITE_ADMIN</a></li>
         
     
-        <li class="main "><a href="#opps_multisite_fallback">OPPS_MULTISITE_FALLBACK</a></li>
+        <li class="main "><a href="#opps_permission_fallback_on_channel">OPPS_PERMISSION_FALLBACK_ON_CHANNEL</a></li>
         
     
         <li class="main "><a href="#opps_paginate_by">OPPS_PAGINATE_BY</a></li>
@@ -250,6 +256,9 @@
 <p>Default: <code>(('default', _('Default')),)</code></p>
 <p>Define the default availables layouts for channels if no <strong>channel.json</strong> is
 avaiable.</p>
+<h2 id="opps_channel_url_name">OPPS_CHANNEL_URL_NAME</h2>
+<p>Default: <code>'containers:channel'</code></p>
+<p>Define the url name when calling get_absolute_url on Channel instances.</p>
 <h2 id="opps_travis">OPPS_TRAVIS</h2>
 <h2 id="opps_containers_blacklist">OPPS_CONTAINERS_BLACKLIST</h2>
 <h2 id="opps_domain_web">OPPS_DOMAIN_WEB</h2>
@@ -259,8 +268,11 @@ avaiable.</p>
 <h2 id="opps_menu">OPPS_MENU</h2>
 <h2 id="opps_mirror_channel">OPPS_MIRROR_CHANNEL</h2>
 <h2 id="opps_recommendation_range_days">OPPS_RECOMMENDATION_RANGE_DAYS</h2>
-<h2 id="opps_multisite_admin">OPPS_MULTISITE_ADMIN</h2>
 <h2 id="opps_multisite_fallback">OPPS_MULTISITE_FALLBACK</h2>
+<h2 id="opps_multisite_admin">OPPS_MULTISITE_ADMIN</h2>
+<h2 id="opps_permission_fallback_on_channel">OPPS_PERMISSION_FALLBACK_ON_CHANNEL</h2>
+<p>Default: <code>False</code></p>
+<p>Define if the multisites have access to channels from the main site. Used when OPPS_MULTISITE_ADMIN is active.</p>
 <h2 id="opps_paginate_by">OPPS_PAGINATE_BY</h2>
 <p>Default: ``</p>
 <p>Items by page to global list views.</p>
