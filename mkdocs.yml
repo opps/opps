@@ -1,16 +1,19 @@
 site_name: Opps Project
 dev_addr: 0.0.0.0:8000
 pages:
-- ['index.md', 'Home']
-- ['documentation/getting-started.md', 'Documentation', 'Getting Started']
-- ['documentation/content_architecture.md', 'Documentation', 'Content Architecture']
-- ['documentation/packages.md', 'Documentation', 'General Packages']
-- ['documentation/opps-apps.md', 'Documentation', 'Opps Plugins']
-- ['configuration/core.md', 'Configuration', 'Core Settings']
-- ['configuration/cache.md', 'Configuration', 'Cache']
-- ['configuration/feed.md', 'Configuration', 'Feed']
-- ['configuration/customization.md', 'Configuration', 'Customization']
-- ['configuration/mobile.md', 'Configuration', 'Mobile']
-- ['contributing/how-to.md', 'Contribute', 'How to contribute']
-- ['contributing/git-tips.md', 'Contribute', 'Git tips']
-- ['contributing/team.md', 'Contribute', 'The Opps team']
+- Home: index.md
+- Documentation:
+  - Getting Started: documentation/getting-started.md
+  - Content Architecture: documentation/content_architecture.md
+  - General Packages: documentation/packages.md
+  - Opps Plugins: documentation/opps-apps.md
+- Configuration:
+  - Core Settings: configuration/core.md
+  - Cache: configuration/cache.md
+  - Feed: configuration/feed.md
+  - Customization: configuration/customization.md
+  - Mobile: configuration/mobile.md
+- Contribute:
+  - How to contribute: contributing/how-to.md
+  - Git tips: contributing/git-tips.md
+  - The Opps team: contributing/team.md
