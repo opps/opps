@@ -6,5 +6,5 @@ transifex-client
 coveralls
 tox
 django-nose
-mkdocs==0.9
+mkdocs==0.14.0
 ghp-import
