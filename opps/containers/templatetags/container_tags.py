@@ -101,7 +101,7 @@ def load_boxes(context, slugs=None, **filters):
         def ob(i, o=ordered_slugs):
             return (i.site_id != current_site, i.site_id, o.index(i.slug))
 
-        boxes = sorted(boxes, key=ob)
+        boxes = sorted(boxes, key=ob, reverse=True)
 
     for box in boxes:
         if box.queryset:
@@ -158,7 +158,7 @@ def get_containerbox(
 
     if not box:
         filters = {}
-        filters['site'] = current_site
+        filters['site_id'] = current_site.id
         filters['slug'] = slug
         filters['date_available__lte'] = timezone.now()
         filters['published'] = True
@@ -174,7 +174,7 @@ def get_containerbox(
 
         if current_site.id != master_site and \
            not box or not getattr(box, 'has_content', False):
-            filters['site'] = master_site
+            filters['site_id'] = master_site
             try:
                 box = ContainerBox.objects.get(**filters)
             except ContainerBox.DoesNotExist:
