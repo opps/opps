@@ -117,7 +117,8 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
     def get_absolute_url(self):
         if self.channel.homepage:
             return u"/{0}.html".format(self.slug)
-        return u"/{0}/{1}.html".format(self.channel_long_slug, self.slug)
+        long_slug = self.channel_long_slug or self.channel.long_slug
+        return u"/{0}/{1}.html".format(long_slug, self.slug)
 
     @classmethod
     def get_children_models(cls):
@@ -136,7 +137,7 @@ class Container(PolymorphicModel, ShowFieldContent, Publishable, Slugged,
         return _(self.child_class)
 
     def get_http_absolute_url(self):
-        return u"http://{0}{1}".format(self.site_domain,
+        return u"http://{0}{1}".format(self.site_domain or self.site.domain,
                                        self.get_absolute_url())
     get_http_absolute_url.short_description = _(u'Get HTTP Absolute URL')
 
