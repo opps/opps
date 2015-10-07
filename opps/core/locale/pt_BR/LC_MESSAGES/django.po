@@ -37,7 +37,7 @@ msgstr "Publicar/Despublicar"
 
 #: admin.py:88
 msgid "Duplicate"
-msgstr "Duplicado"
+msgstr "Duplicar"
 
 #: admin.py:107
 msgid "This item is not in a box"
