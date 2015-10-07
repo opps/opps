@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import logging
+import warnings
+from compiler.ast import flatten
 from django.db import IntegrityError
 from django.contrib import admin
 from django.utils import timezone
@@ -8,13 +11,26 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
 
-from haystack.query import SearchQuerySet
+# Conditional apps import
+try:
+    from modelclone import ClonableModelAdmin
+except ImportError:
+    pass
+
+try:
+    from haystack.query import SearchQuerySet
+except ImportError:
+    pass
+
 from django.contrib.admin.views.main import ChangeList
 
-from .models import Config
+from .models import Config, Slugged
 from .filters import ChildClassListFilter, ChannelListFilter
 
+logger = logging.getLogger(__name__)
+
 USE_HAYSTACK = getattr(settings, 'OPPS_ADMIN_USE_HAYSTACK', False)
+USE_MODELCLONE = getattr(settings, 'OPPS_ADMIN_USE_MODELCLONE', False)
 
 
 class HaystackChangeList(ChangeList):
@@ -49,6 +65,15 @@ class MassPublishMixin(admin.ModelAdmin):
     publish.short_description = _(u'Publish/Unpublish')
 
 
+class CustomClonableModelAdmin(
+        ClonableModelAdmin if USE_MODELCLONE else object):
+    pass
+
+
+class ModelCloneMixin(CustomClonableModelAdmin):
+    pass
+
+
 class MassDuplicateMixin(admin.ModelAdmin):
 
     actions = ['duplicate']
@@ -78,8 +103,8 @@ class MassDuplicateMixin(admin.ModelAdmin):
 
             snapshot['published'] = False
             snapshot['user'] = request.user
-            snapshot['title'] = "{0} - COPY :: {1}".format(snapshot['title'],
-                                                           obj.pk)
+            snapshot['title'] = u"{0} - COPY :: {1}".format(
+                snapshot['title'], obj.pk)
             try:
                 obj.__class__.objects.create(**snapshot)
             except IntegrityError:
@@ -88,7 +113,7 @@ class MassDuplicateMixin(admin.ModelAdmin):
     duplicate.short_description = _(u'Duplicate')
 
 
-class PublisherAdmin(MassPublishMixin, MassDuplicateMixin):
+class PublisherAdmin(MassPublishMixin, MassDuplicateMixin, ModelCloneMixin):
     list_display = ['title', 'site', 'channel_long_slug',
                     'date_available', 'published', 'preview_url']
     list_filter = ['date_available', 'published', 'site', ChildClassListFilter]
