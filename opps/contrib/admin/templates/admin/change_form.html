@@ -131,7 +131,6 @@
     {% if change %}
         {% if not is_popup %}
             <ul class="grp-object-tools">
-
                 {% if adminform.form.multiupload_link %}<li><a href="{{ adminform.form.multiupload_link }}{{original.pk}}/">{% trans "Upload multiple images" %}</a></li>{% endif %}
 
                 {% if adminform.model_admin.action_buttons %}
@@ -152,8 +151,6 @@
                     <li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="grp-state-focus" target="_blank">{% trans "View on site" %}</a></li>
                     {% endif%}
                 {% endblock %}
-
-
             </ul>
         {% endif %}
     {% endif %}
