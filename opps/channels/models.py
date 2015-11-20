@@ -14,6 +14,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 from opps.core.models import Publishable
 from opps.core.models import Slugged
+from opps.core.tags.models import Tagged
 
 
 CHANNEL_URL_NAME = \
@@ -37,7 +38,7 @@ class ChannelManager(TreeManager):
             return None
 
 
-class Channel(MPTTModel, Publishable, Slugged):
+class Channel(MPTTModel, Publishable, Slugged, Tagged):
 
     name = models.CharField(_(u"Name"), max_length=60)
     long_slug = models.SlugField(_(u"Path name"), max_length=250,
