@@ -6,7 +6,6 @@ from django import template
 from django.conf import settings
 from django.utils import timezone
 from django.utils.safestring import mark_safe
-from django.template.defaultfilters import linebreaksbr
 from django.core.cache import cache
 from django.contrib.sites.models import Site
 
@@ -278,9 +277,6 @@ def get_post_content(post, template_name='containers/post_related.html',
     if not hasattr(post, content_field):
         return None
     content = getattr(post, content_field, '')
-
-    # REMOVE NEW LINES
-    content = linebreaksbr(content)
 
     # Fix embed allowfullscreen
     # TinyMCE BUG
