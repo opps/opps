@@ -45,8 +45,8 @@ class Channel(MPTTModel, Publishable, Slugged, Tagged):
                                  db_index=True)
     layout = models.CharField(_(u'Layout'), max_length=250, db_index=True,
                               default="default")
-    description = models.CharField(_(u"Description"),
-                                   max_length=255, null=True, blank=True)
+    description = models.TextField(_(u"Description"),
+                                   null=True, blank=True)
     hat = models.CharField(_(u"Hat"),
                            max_length=255, null=True, blank=True)
 
