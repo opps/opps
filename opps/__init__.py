@@ -4,7 +4,7 @@ import pkg_resources
 
 pkg_resources.declare_namespace(__name__)
 
-VERSION = (0, 2, 14)
+VERSION = (0, 2, 15)
 __version__ = ".".join(map(str, VERSION))
 __status__ = "Development"
 __description__ = u"Open Source Content Management Platform - CMS for the "
