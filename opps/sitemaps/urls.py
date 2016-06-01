@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from django.conf import settings
 from django.conf.urls import patterns, url
 from django.contrib.sitemaps import views as sitemap_views
 
@@ -18,13 +19,14 @@ sitemaps_googlenews = {
 
 urlpatterns = patterns(
     '',
-    url(r'^\.xml$', cache_page(86400)(sitemap_views.index),
+    url(r'^\.xml$', cache_page(settings.OPPS_CACHE_EXPIRE)(
+        sitemap_views.index),
         {'sitemaps': sitemaps, 'sitemap_url_name': 'sitemaps'},),
     url(r'^-googlenews\.xml$',
-        cache_page(86400)(sitemap),
+        cache_page(settings.OPPS_CACHE_EXPIRE)(sitemap),
         {'sitemaps': sitemaps_googlenews,
          'template_name': 'sitemap_googlenews.xml'}),
     url(r'^-(?P<section>.+)\.xml$',
-        cache_page(86400)(sitemap_views.sitemap),
+        cache_page(settings.OPPS_CACHE_EXPIRE)(sitemap_views.sitemap),
         {'sitemaps': sitemaps}, name='sitemaps'),
 )
