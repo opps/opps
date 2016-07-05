@@ -236,11 +236,11 @@ class Slugged(models.Model):
             if self.pk is not None:
                 old_object = model.objects.get(pk=self.pk)
                 if old_object.slug != self.slug:
-                    redirect = Redirect(
+                    redirect, created = Redirect.objects.get_or_create(
                         site=self.site,
-                        old_path=old_object.get_absolute_url(),
-                        new_path=self.get_absolute_url()
+                        old_path=old_object.get_absolute_url()
                     )
+                    redirect.new_path = self.get_absolute_url()
                     redirect.save()
 
         super(Slugged, self).save(*args, **kwargs)
