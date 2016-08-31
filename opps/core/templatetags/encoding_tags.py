@@ -2,6 +2,7 @@
 from xml.parsers import expat
 from HTMLParser import HTMLParser
 from django import template
+import xml.parsers.expat
 
 register = template.Library()
 parser = HTMLParser()

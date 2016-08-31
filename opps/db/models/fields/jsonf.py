@@ -71,7 +71,7 @@ class JSONFieldBase(six.with_metaclass(SubfieldBase, models.Field)):
             # South datamigrations
             # see: https://github.com/bradjasper/django-jsonfield/issues/52
             if not hasattr(obj, "pk") or obj.pk is not None:
-                if isinstance(value, six.string_types):
+                if isinstance(value, six.string_types) and value is not u'':
                     try:
                         return json.loads(value, **self.load_kwargs)
                     except ValueError:
