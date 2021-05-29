@@ -9,4 +9,4 @@ django-coverage
 transifex-client
 coveralls
 tox
-django-nose
+django-nose==1.2
