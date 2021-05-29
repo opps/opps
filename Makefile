@@ -12,7 +12,7 @@ install:
 
 .PHONY: pep8
 pep8:
-	@flake8 opps --ignore=F403,F401 --exclude=migrations
+	@flake8 opps --ignore=F403,F401 --exclude=migrations,postgresql_psycopg2
 
 .PHONY: sdist
 sdist: test
@@ -31,7 +31,7 @@ makemessages:
 .PHONY: compilemessages
 compilemessages:
 	@sh scripts/compilemessages.sh
-		
+
 .PHONY: tx
 tx:
 	@sh scripts/tx.sh
@@ -50,6 +50,6 @@ doc-github:
 	@ghp-import site
 	@git push origin gh-pages
 
-.PHONY: doc-serve 
+.PHONY: doc-serve
 doc-serve:
 	@mkdocs serve
