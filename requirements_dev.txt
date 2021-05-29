@@ -7,6 +7,6 @@ mock
 coverage==4.1
 django-coverage
 transifex-client
-coveralls
+coveralls==0.5
 tox
 django-nose==1.2
