@@ -1,3 +1,4 @@
+tornado==4.0
 Django==1.5
 django-grappelli==2.4.12
 South==1.0.2
