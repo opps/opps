@@ -2,7 +2,7 @@ importlib-metadata==1.6.0
 importlib-resources==1.0
 typing==3.7.4
 pathlib2==2.3.3
-flake8
+flake8==2.1.0
 mock
 coverage==4.1
 django-coverage
