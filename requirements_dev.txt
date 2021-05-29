@@ -6,6 +6,5 @@ transifex-client
 coveralls
 tox
 django-nose
-tornado==4.1
 mkdocs==0.14.0
 ghp-import
