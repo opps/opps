@@ -1,10 +1,11 @@
-flake8
+importlib-metadata==1.6.0
+importlib-resources==1.0
+typing==3.7.4
+pathlib2==2.3.3
+flake8==2.1.0
 mock
-coverage==3.7.1
 django-coverage
 transifex-client
-coveralls
+coveralls==0.5
 tox
-django-nose
-mkdocs==0.14.0
-ghp-import
+django-nose==1.2
