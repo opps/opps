@@ -4,7 +4,6 @@ typing==3.7.4
 pathlib2==2.3.3
 flake8==2.1.0
 mock
-coverage==4.1
 django-coverage
 transifex-client
 coveralls==0.5
