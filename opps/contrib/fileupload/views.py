@@ -22,7 +22,6 @@ def response_mimetype(request):
     return "text/plain"
 
 
-@csrf_exempt
 @login_required(login_url='/admin/')
 def image_create(request, container_pk=None):
 
